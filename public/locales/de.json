@@ -1,0 +1,223 @@
+{
+  "ui": {
+    "name": "Loopuff",
+    "tagline": "Spielend programmieren lernen.",
+    "pilot": "KEINE VORKENNTNISSE NÖTIG",
+    "hero": "Kleine Schritte.\nRichtig verstehen.",
+    "lead": "Entdecke, was Code bedeutet. Sage Ergebnisse voraus, experimentiere und schreibe eigene Anweisungen in Tolang.",
+    "start": "Reise beginnen ↗",
+    "resume": "Reise fortsetzen ↗",
+    "guide": "Was ist Programmieren?",
+    "map": "Reiseroute",
+    "language": "Sprache",
+    "firstSignal": "Deine erste Anweisung",
+    "welcomeFoot": "Neugier genügt. Vorkenntnisse brauchst du nicht.",
+    "learningLoop": "Lesen und schreiben → Vorhersagen und erklären → Selbst gestalten",
+    "save": "Fortschritt in diesem Browser gespeichert",
+    "nosave": "Dieser Browser konnte den Fortschritt nicht speichern",
+    "routeTitle": "Was lernst du als Nächstes?",
+    "routeIntro": "Erkunde Werte, Rechnungen und Namen. Am Ende jeder Mission löst du selbst eine neue Aufgabe.",
+    "done": "Geschafft · wiederholen",
+    "open": "Bereit zum Start",
+    "locked": "Noch gesperrt",
+    "pause": "Pause",
+    "paused": "Mach kurz Pause. Dein Code bleibt hier.",
+    "resumePlay": "Weiter ↗",
+    "restart": "Mission neu starten",
+    "read": "WAS DIESER CODE BEWIRKT",
+    "assembled": "Dein bisheriges Programm",
+    "nextKey": "Nächste Taste",
+    "typeHelp": "Tippe den Abschnitt ab. Verwende die gezeigten Satzzeichen.",
+    "wrong": "Prüfe das nächste Zeichen. Mit der Rücktaste kannst du es ändern.",
+    "typeLabel": "Tastatureingabe",
+    "typePlaceholder": "Codeabschnitt eingeben…",
+    "takeTime": "Ohne Zeitdruck",
+    "mission": "Mission",
+    "fragment": "Abschnitt",
+    "noOutput": "Keine Ausgabe",
+    "predict": "Erst vorhersagen, dann ausführen",
+    "predictionPrompt": "Was wird dieses Programm anzeigen?",
+    "output": "Tatsächliche Ausgabe",
+    "modelSteps": "Schritte im Lernmodell",
+    "modelNote": "Diese Schritte gelten für das Lernmodell, nicht für TVM-Gas oder Blockchain-Gebühren.",
+    "why": "Die Idee erklären →",
+    "explain": "Warum passiert das?",
+    "practice": "Das Ergebnis verändern",
+    "valueLabel": "Neue Zahl",
+    "submit": "Mein Programm prüfen ↗",
+    "hint": "Ein kleiner Tipp",
+    "independent": "Jetzt schreibst du selbst",
+    "codeLabel": "Dein Programm",
+    "scope": "Der Einsteiger-Interpreter unterstützt Zahlen, Addition, Namen und Ausgabe. Er ist nicht der vollständige Tolang-Compiler oder die TVM.",
+    "complete": "Dein Programm funktioniert!",
+    "score": "Tipp-Punkte",
+    "accuracy": "Tippgenauigkeit",
+    "masteryNote": "Tipp-Punkte beschreiben die Eingabeübung, nicht deine Programmierkenntnisse.",
+    "next": "Nächste Mission →",
+    "home": "Zur Startseite",
+    "replay": "Noch einmal",
+    "foundationFinish": "Die erste Anweisung schreiben ↗",
+    "foundationNext": "Die nächste Idee entdecken →",
+    "error": "Sprache konnte nicht geladen werden. Bitte erneut auswählen.",
+    "numberRequired": "Gib eine ganze Zahl mit den Ziffern 0–9 ein.",
+    "goalMismatch": "Das Programm läuft, aber seine Ausgabe entspricht noch nicht dem Ziel.",
+    "conceptMissing": "Die Ausgabe stimmt. Verwende auch das in der Aufgabe genannte Konzept.",
+    "syntax": "Prüfe die Syntax bei Zeichen",
+    "nameError": "Deklariere einen Namen mit let, bevor du ihn verwendest.",
+    "limit": "Das Programm überschreitet die Grenzen des Einsteiger-Interpreters.",
+    "predictionHint": "Rechne der Reihe nach und überlege, was .log() anzeigt.",
+    "close": "Schließen",
+    "chapterNote": "Kapitel 1 · 3 Missionen. Weitere Kapitel sind in Entwicklung.",
+    "footer": "Von der ersten Frage zum ersten Programm.",
+    "launch": "Verstehen und eingeben ↗"
+  },
+  "lessons": [
+    {
+      "title": "Ein erstes Signal senden",
+      "intro": "Ein Programm ist eine präzise Anweisung. Hier ist 7 eine Zahl und .log() fordert ihre Ausgabe an.",
+      "goal": "Lies die Teile und sende die Zahl 7.",
+      "result": "Die 7 erscheint, weil das Programm ihre Ausgabe ausdrücklich anfordert.",
+      "question": "Was macht .log() hier?",
+      "remix": "Ersetze die Lücke, sodass das Programm 9 anzeigt.",
+      "remixHint": "Der Wert vor .log() wird angezeigt.",
+      "independent": "Schreibe selbst ein Programm, das 12 anzeigt. Jeder unterstützte Ausdruck ist erlaubt.",
+      "independentHint": "Behalte die Ausgabe bei und wähle einen Wert oder eine Rechnung mit dem Ergebnis 12.",
+      "learned": "Du hast eine geschriebene Anweisung mit ihrem sichtbaren Ergebnis verbunden.",
+      "answerHint": "Der Wert bleibt gleich; .log() macht ihn sichtbar.",
+      "answers": [
+        "Es zeigt den Wert vor dem Punkt an.",
+        "Es erhöht die Zahl um 1.",
+        "Es speichert eine Nachricht auf einer Blockchain."
+      ],
+      "coach": [
+        [
+          "Abschnitt",
+          "7 ist die Zahl, die wir anzeigen möchten.",
+          "Lies die Teile und sende die Zahl 7."
+        ],
+        [
+          "Abschnitt",
+          "Der Punkt verbindet den Wert mit der Ausgabeoperation log.",
+          "Lies die Teile und sende die Zahl 7."
+        ],
+        [
+          "Abschnitt",
+          "() ruft die Operation auf. Die Klammern sind leer, weil es keine zusätzlichen Argumente gibt.",
+          "Lies die Teile und sende die Zahl 7."
+        ]
+      ]
+    },
+    {
+      "title": "Eine Route berechnen",
+      "intro": "Ein Ausdruck ergibt einen Wert. + addiert zwei Zahlen. Klammern fassen die Rechnung vor der Ausgabe zusammen.",
+      "goal": "Berechne 2 + 3 und zeige das Ergebnis an.",
+      "result": "Die Addition ergibt 5. Diesen Wert zeigt das Programm an.",
+      "question": "Warum ist die Ausgabe 5?",
+      "remix": "Ersetze die Lücke, sodass (2 + ___).log() die Zahl 8 anzeigt.",
+      "remixHint": "Welche Zahl ergibt zusammen mit 2 die Summe 8?",
+      "independent": "Zeige 11 mithilfe einer Addition an. Wähle die beiden Zahlen selbst.",
+      "independentHint": "Verwende + im Ausdruck für die Ausgabe. Mehrere Zahlenpaare passen.",
+      "learned": "Du hast durch eine Rechnung einen neuen Wert erzeugt.",
+      "answerHint": "+ addiert die Zahlen. Die Klammern erhöhen den Wert nicht.",
+      "answers": [
+        "Es addiert 2 und 3 vor der Ausgabe.",
+        "Es verbindet die Ziffern zu 23.",
+        "Die Klammern addieren einen weiteren Punkt."
+      ],
+      "coach": [
+        [
+          "Abschnitt",
+          "(2 + 3) addiert die beiden Zahlen. Der Wert ist 5.",
+          "Berechne 2 + 3 und zeige das Ergebnis an."
+        ],
+        [
+          "Abschnitt",
+          "Der Punkt verbindet den Wert mit der Ausgabeoperation log.",
+          "Berechne 2 + 3 und zeige das Ergebnis an."
+        ],
+        [
+          "Abschnitt",
+          "() ruft die Operation auf. Die Klammern sind leer, weil es keine zusätzlichen Argumente gibt.",
+          "Berechne 2 + 3 und zeige das Ergebnis an."
+        ]
+      ]
+    },
+    {
+      "title": "Einem Wert einen Namen geben",
+      "intro": "let n = 5; bindet den Namen n an den Wert 5. Später verweist n auf diesen Wert. Das Semikolon beendet die Deklaration.",
+      "goal": "Nutze den Namen n in einer neuen Rechnung.",
+      "result": "n verweist auf 5, also ergibt n + 2 den Wert 7.",
+      "question": "Warum ergibt n + 2 den Wert 7?",
+      "remix": "Ändere die deklarierte Zahl, sodass 10 angezeigt wird.",
+      "remixHint": "Der deklarierte Wert muss zusammen mit 2 die Summe 10 ergeben.",
+      "independent": "Deklariere mit let einen Namen und nutze ihn in einer Addition, die 14 anzeigt.",
+      "independentHint": "Wähle einen Namen und einen Wert. Addiere bei der Ausgabe eine weitere Zahl.",
+      "learned": "Du hast einen Wert benannt und ihn in einem Ausdruck wiederverwendet.",
+      "answerHint": "Beim Lesen von n gilt die vorherige Bindung. Die Addition bindet den Namen nicht neu.",
+      "answers": [
+        "n verweist auf 5, also wird 5 + 2 berechnet.",
+        "Der Name n bedeutet immer 7.",
+        "+ ändert n dauerhaft auf 7."
+      ],
+      "coach": [
+        [
+          "Abschnitt",
+          "let n = 5; gibt dem Wert 5 den Namen n. Das Semikolon beendet die Deklaration.",
+          "Nutze den Namen n in einer neuen Rechnung."
+        ],
+        [
+          "Abschnitt",
+          "Der Zeilenumbruch macht den Code lesbarer. Er gibt keine Leerzeile aus.",
+          "Nutze den Namen n in einer neuen Rechnung."
+        ],
+        [
+          "Abschnitt",
+          "(n + 2) liest den Wert mit dem Namen n und addiert 2.",
+          "Nutze den Namen n in einer neuen Rechnung."
+        ],
+        [
+          "Abschnitt",
+          "Der Punkt verbindet den Wert mit der Ausgabeoperation log.",
+          "Nutze den Namen n in einer neuen Rechnung."
+        ],
+        [
+          "Abschnitt",
+          "() ruft die Operation auf. Die Klammern sind leer, weil es keine zusätzlichen Argumente gibt.",
+          "Nutze den Namen n in einer neuen Rechnung."
+        ]
+      ]
+    }
+  ],
+  "guide": [
+    {
+      "title": "Was ist Programmieren?",
+      "text": "Programmieren heißt, eine Aufgabe mit präzisen Anweisungen zu beschreiben. Der Computer folgt den Sprachregeln. Er errät deine Absicht nicht.",
+      "code": "7.log()",
+      "takeaway": "Hier ist das Ziel, 7 anzuzeigen. Ändere die Zahl, und die Ausgabe ändert sich."
+    },
+    {
+      "title": "Vom Text zur Aktion",
+      "text": "Ein Compiler analysiert Text und übersetzt ihn in eine ausführbare Form. Der kleine Interpreter dieses Spiels baut zuerst eine Struktur auf und wertet sie dann aus.",
+      "code": "(2 + 3).log()",
+      "takeaway": "Die Struktur bestimmt die Bedeutung: erst addieren, dann ausgeben. Das Spiel führt nicht die vollständige Tolang-Kompilierung aus."
+    },
+    {
+      "title": "Fehler geben Hinweise",
+      "text": "Syntaxregeln legen gültige Formen fest. Eine fehlende Klammer kann die Form zerstören. Auch gültiger Code kann am Ziel vorbeigehen: 8 auszugeben erfüllt keine Aufgabe, die 9 verlangt.",
+      "code": "8.log()",
+      "takeaway": "Schreibe zuerst ein gültiges Programm und prüfe dann sein tatsächliches Ergebnis."
+    },
+    {
+      "title": "Warum Arbeit zählen?",
+      "text": "Verschiedene Anweisungen können dasselbe Ergebnis mit unterschiedlichem Aufwand erzeugen. Rechnen und Speichern benötigen Ressourcen. Die Schritte hier bilden nur ein Lernmodell ab.",
+      "code": "5.log()\n(2 + 3).log()",
+      "takeaway": "Beide Zeilen zeigen 5 an. Die zweite braucht eine Addition. Diese Zahlen sagen nichts über TVM-Gas oder Transaktionsgebühren aus."
+    },
+    {
+      "title": "Tolang und die Blockchain",
+      "text": "Mit Tolang werden Programme für ALUX geschrieben. Änderungen am gemeinsamen Zustand einer Blockchain unterliegen auch Transaktionsregeln und der Einigung zwischen Knoten. Sprache und Laufzeitumgebung spielen beide eine Rolle.",
+      "code": "7.log()",
+      "takeaway": "Die Zahlenausgabe im Spiel sendet keine Blockchain-Transaktion. Diese Grundlagen helfen dir auch bei anderen Programmiersprachen."
+    }
+  ]
+}

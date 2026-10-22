@@ -8,7 +8,7 @@ Read code, predict its result, change it, and solve new problems without a templ
 
 ## Current code
 
-This repository currently contains a small teaching interpreter for numbers, addition, name bindings and display. It runs locally without a backend, external models or third-party packages. The game interface and course are under development. It is not the full Tolang compiler or TVM.
+The first chapter is playable: three missions covering values, addition and name bindings, with predictions, explanations, modifications and independent programming. The interface and course support 11 languages. Programs run locally in a small teaching interpreter without a backend or third-party packages. This is not the full Tolang compiler or TVM; later chapters are in development.
 
 ## Development
 

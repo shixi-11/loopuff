@@ -1,0 +1,223 @@
+{
+  "ui": {
+    "name": "Loopuff",
+    "tagline": "Học lập trình qua trò chơi.",
+    "pilot": "BẮT ĐẦU TỪ CON SỐ KHÔNG",
+    "hero": "Từng bước nhỏ.\nHiểu thật rõ.",
+    "lead": "Tìm hiểu ý nghĩa của mã. Dự đoán, thử nghiệm rồi tự viết lệnh bằng Tolang.",
+    "start": "Bắt đầu hành trình ↗",
+    "resume": "Tiếp tục hành trình ↗",
+    "guide": "Lập trình là gì?",
+    "map": "Hành trình",
+    "language": "Ngôn ngữ",
+    "firstSignal": "Lệnh đầu tiên của bạn",
+    "welcomeFoot": "Chỉ cần tò mò, không cần kinh nghiệm.",
+    "learningLoop": "Đọc và viết → Dự đoán và giải thích → Tự tạo",
+    "save": "Đã lưu tiến độ trong trình duyệt này",
+    "nosave": "Trình duyệt này không lưu được tiến độ",
+    "routeTitle": "Tiếp theo, bạn sẽ học gì?",
+    "routeIntro": "Khám phá giá trị, phép tính và tên. Cuối mỗi nhiệm vụ, tự giải một bài toán mới.",
+    "done": "Đã hoàn thành · chơi lại",
+    "open": "Sẵn sàng khám phá",
+    "locked": "Chưa mở khóa",
+    "pause": "Tạm dừng",
+    "paused": "Nghỉ một chút. Mã của bạn vẫn ở đây.",
+    "resumePlay": "Tiếp tục ↗",
+    "restart": "Làm lại nhiệm vụ",
+    "read": "ĐOẠN MÃ NÀY LÀM GÌ",
+    "assembled": "Chương trình đến lúc này",
+    "nextKey": "Phím tiếp theo",
+    "typeHelp": "Gõ đoạn mã được hiển thị. Dùng dấu câu tiếng Anh.",
+    "wrong": "Kiểm tra ký tự tiếp theo. Dùng Backspace để sửa.",
+    "typeLabel": "Nhập bằng bàn phím",
+    "typePlaceholder": "Gõ đoạn mã…",
+    "takeTime": "Không giới hạn thời gian",
+    "mission": "Nhiệm vụ",
+    "fragment": "Đoạn mã",
+    "noOutput": "Không có đầu ra",
+    "predict": "Dự đoán trước khi chạy",
+    "predictionPrompt": "Chương trình này sẽ hiển thị gì?",
+    "output": "Đầu ra thực tế",
+    "modelSteps": "Số bước của mô hình học tập",
+    "modelNote": "Số bước chỉ thuộc mô hình học tập, không phải gas của TVM hay phí blockchain.",
+    "why": "Giải thích ý tưởng →",
+    "explain": "Vì sao lại như vậy?",
+    "practice": "Thay đổi kết quả",
+    "valueLabel": "Số để thay thế",
+    "submit": "Kiểm tra chương trình ↗",
+    "hint": "Gợi ý nhỏ",
+    "independent": "Bây giờ hãy tự viết",
+    "codeLabel": "Chương trình của bạn",
+    "scope": "Trình thông dịch nhập môn hỗ trợ số, phép cộng, tên và hiển thị. Đây không phải toàn bộ trình biên dịch Tolang hay TVM.",
+    "complete": "Bạn đã làm chương trình chạy đúng!",
+    "score": "Điểm gõ phím",
+    "accuracy": "Độ chính xác khi gõ",
+    "masteryNote": "Điểm gõ phím ghi lại việc luyện nhập, không đo mức thành thạo lập trình.",
+    "next": "Nhiệm vụ tiếp theo →",
+    "home": "Về trang đầu",
+    "replay": "Thử lại",
+    "foundationFinish": "Viết lệnh đầu tiên ↗",
+    "foundationNext": "Khám phá ý tiếp theo →",
+    "error": "Không tải được ngôn ngữ. Hãy chọn lại.",
+    "numberRequired": "Nhập một số nguyên bằng các chữ số 0–9.",
+    "goalMismatch": "Chương trình chạy được nhưng đầu ra chưa đúng mục tiêu.",
+    "conceptMissing": "Đầu ra đã đúng. Hãy dùng cả khái niệm lập trình được yêu cầu.",
+    "syntax": "Kiểm tra cú pháp gần ký tự",
+    "nameError": "Khai báo tên bằng let trước khi dùng.",
+    "limit": "Chương trình vượt giới hạn của trình chạy nhập môn.",
+    "predictionHint": "Tính lần lượt rồi nghĩ xem .log() hiển thị gì.",
+    "close": "Đóng",
+    "chapterNote": "Chương 1 · 3 nhiệm vụ. Các chương tiếp theo đang được phát triển.",
+    "footer": "Từ câu hỏi đầu tiên đến chương trình đầu tiên.",
+    "launch": "Đọc hiểu rồi bắt đầu gõ ↗"
+  },
+  "lessons": [
+    {
+      "title": "Gửi tín hiệu đầu tiên",
+      "intro": "Chương trình là chỉ dẫn chính xác. Ở đây 7 là một số, còn .log() yêu cầu hiển thị giá trị đó.",
+      "goal": "Đọc từng phần rồi gửi số 7.",
+      "result": "Số 7 xuất hiện vì chương trình yêu cầu hiển thị nó.",
+      "question": "Ở đây .log() làm gì?",
+      "remix": "Thay chỗ trống để chương trình hiển thị 9.",
+      "remixHint": "Giá trị trước .log() là số sẽ được hiển thị.",
+      "independent": "Tự viết chương trình hiển thị 12. Có thể dùng bất kỳ biểu thức được hỗ trợ nào.",
+      "independentHint": "Giữ lệnh hiển thị và chọn giá trị hoặc phép tính cho kết quả 12.",
+      "learned": "Bạn đã nối chỉ dẫn được viết ra với kết quả nhìn thấy được.",
+      "answerHint": "Giá trị không thay đổi; .log() chỉ làm nó hiển thị.",
+      "answers": [
+        "Hiển thị giá trị đứng trước dấu chấm.",
+        "Cộng thêm 1 vào số.",
+        "Lưu thông điệp lên blockchain."
+      ],
+      "coach": [
+        [
+          "Đoạn mã",
+          "7 là số mà ta muốn hiển thị.",
+          "Đọc từng phần rồi gửi số 7."
+        ],
+        [
+          "Đoạn mã",
+          "Dấu chấm nối giá trị với thao tác hiển thị log.",
+          "Đọc từng phần rồi gửi số 7."
+        ],
+        [
+          "Đoạn mã",
+          "() gọi thao tác đó. Ngoặc rỗng vì lần gọi này không có đối số bổ sung.",
+          "Đọc từng phần rồi gửi số 7."
+        ]
+      ]
+    },
+    {
+      "title": "Tính một lộ trình",
+      "intro": "Biểu thức tạo ra giá trị. Dấu + cộng hai số; dấu ngoặc nhóm phép tính trước khi hiển thị.",
+      "goal": "Tính 2 + 3 rồi hiển thị kết quả.",
+      "result": "Phép cộng cho ra 5 và chương trình hiển thị giá trị đó.",
+      "question": "Vì sao đầu ra là 5?",
+      "remix": "Thay chỗ trống để (2 + ___).log() hiển thị 8.",
+      "remixHint": "Số nào cộng với 2 thì bằng 8?",
+      "independent": "Dùng phép cộng để hiển thị 11. Tự chọn hai số.",
+      "independentHint": "Dùng + trong biểu thức được hiển thị. Có nhiều cặp số phù hợp.",
+      "learned": "Bạn đã dùng phép tính để tạo giá trị mới.",
+      "answerHint": "+ cộng hai số; dấu ngoặc không cộng thêm giá trị.",
+      "answers": [
+        "Vì cộng 2 với 3 trước khi hiển thị.",
+        "Vì ghép các chữ số thành 23.",
+        "Vì dấu ngoặc tự cộng thêm 1."
+      ],
+      "coach": [
+        [
+          "Đoạn mã",
+          "(2 + 3) cộng hai số, cho giá trị 5.",
+          "Tính 2 + 3 rồi hiển thị kết quả."
+        ],
+        [
+          "Đoạn mã",
+          "Dấu chấm nối giá trị với thao tác hiển thị log.",
+          "Tính 2 + 3 rồi hiển thị kết quả."
+        ],
+        [
+          "Đoạn mã",
+          "() gọi thao tác đó. Ngoặc rỗng vì lần gọi này không có đối số bổ sung.",
+          "Tính 2 + 3 rồi hiển thị kết quả."
+        ]
+      ]
+    },
+    {
+      "title": "Đặt tên cho giá trị",
+      "intro": "let n = 5; gắn tên n với giá trị 5. Dùng n về sau là tham chiếu giá trị này. Dấu chấm phẩy kết thúc khai báo.",
+      "goal": "Dùng tên n trong phép tính mới.",
+      "result": "n tham chiếu 5, nên n + 2 cho ra 7.",
+      "question": "Vì sao n + 2 bằng 7?",
+      "remix": "Đổi số trong khai báo để chương trình hiển thị 10.",
+      "remixHint": "Giá trị được khai báo cộng với 2 phải bằng 10.",
+      "independent": "Dùng let để khai báo tên, rồi dùng tên đó trong phép cộng để hiển thị 14.",
+      "independentHint": "Chọn tên và giá trị, rồi cộng thêm một số khi hiển thị.",
+      "learned": "Bạn đã đặt tên cho giá trị và dùng lại nó trong biểu thức.",
+      "answerHint": "Đọc n lấy giá trị đã gắn trước đó. Phép cộng không gắn lại tên.",
+      "answers": [
+        "n tham chiếu 5, nên phép tính là 5 + 2.",
+        "Tên n lúc nào cũng có nghĩa là 7.",
+        "Dấu + đổi n thành 7 vĩnh viễn."
+      ],
+      "coach": [
+        [
+          "Đoạn mã",
+          "let n = 5; đặt tên n cho giá trị 5. Dấu chấm phẩy kết thúc khai báo.",
+          "Dùng tên n trong phép tính mới."
+        ],
+        [
+          "Đoạn mã",
+          "Xuống dòng giúp dễ đọc, không làm chương trình hiển thị dòng trống.",
+          "Dùng tên n trong phép tính mới."
+        ],
+        [
+          "Đoạn mã",
+          "(n + 2) đọc giá trị có tên n rồi cộng 2.",
+          "Dùng tên n trong phép tính mới."
+        ],
+        [
+          "Đoạn mã",
+          "Dấu chấm nối giá trị với thao tác hiển thị log.",
+          "Dùng tên n trong phép tính mới."
+        ],
+        [
+          "Đoạn mã",
+          "() gọi thao tác đó. Ngoặc rỗng vì lần gọi này không có đối số bổ sung.",
+          "Dùng tên n trong phép tính mới."
+        ]
+      ]
+    }
+  ],
+  "guide": [
+    {
+      "title": "Lập trình là gì?",
+      "text": "Lập trình là mô tả công việc bằng các chỉ dẫn chính xác. Máy tính tuân theo quy tắc của ngôn ngữ, không đoán ý định của bạn.",
+      "code": "7.log()",
+      "takeaway": "Mục tiêu ở đây là hiển thị 7. Đổi số thì kết quả hiển thị cũng đổi."
+    },
+    {
+      "title": "Từ văn bản đến hành động",
+      "text": "Trình biên dịch phân tích văn bản và chuyển nó thành dạng mà môi trường chạy thực thi được. Trình thông dịch nhỏ trong trò chơi tạo cấu trúc rồi tính theo cấu trúc đó.",
+      "code": "(2 + 3).log()",
+      "takeaway": "Cấu trúc quyết định ý nghĩa: cộng trước, hiển thị sau. Trò chơi không chạy toàn bộ quy trình biên dịch Tolang."
+    },
+    {
+      "title": "Lỗi là manh mối",
+      "text": "Quy tắc cú pháp xác định cách viết hợp lệ. Thiếu dấu ngoặc có thể phá vỡ cấu trúc. Chương trình hợp lệ vẫn có thể sai mục tiêu: hiển thị 8 không đáp ứng yêu cầu hiển thị 9.",
+      "code": "8.log()",
+      "takeaway": "Trước hết viết chương trình hợp lệ, rồi kiểm tra kết quả thực tế có đúng nhiệm vụ không."
+    },
+    {
+      "title": "Vì sao đếm công việc?",
+      "text": "Các lệnh khác nhau có thể tạo cùng kết quả nhưng cần lượng công việc khác nhau. Tính toán và lưu trữ đều dùng tài nguyên. Số bước ở đây chỉ là mô hình học tập.",
+      "code": "5.log()\n(2 + 3).log()",
+      "takeaway": "Cả hai đều hiển thị 5. Dòng thứ hai cần thêm phép cộng. Không dùng số bước này để dự đoán gas TVM hay phí giao dịch."
+    },
+    {
+      "title": "Tolang và blockchain",
+      "text": "Tolang được dùng để viết chương trình cho ALUX. Thay đổi trạng thái chung trên blockchain còn liên quan đến quy tắc giao dịch và sự đồng thuận giữa các nút. Cả ngôn ngữ lẫn môi trường chạy đều quan trọng.",
+      "code": "7.log()",
+      "takeaway": "Hiển thị số trong trò chơi không gửi giao dịch blockchain. Những khái niệm cơ bản này cũng giúp bạn học các ngôn ngữ khác."
+    }
+  ]
+}

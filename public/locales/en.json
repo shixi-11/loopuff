@@ -3,8 +3,8 @@
     "name": "Loopuff",
     "tagline": "Play your way into programming.",
     "pilot": "NO EXPERIENCE NEEDED",
-    "hero": "Small steps.\\nReal understanding.",
-    "lead": "Read what each instruction means. Predict, experiment, and write your own code in Tolang.",
+    "hero": "Small steps.\nReal understanding.",
+    "lead": "Discover what code means. Predict, experiment, and write your own instructions in Tolang.",
     "start": "Begin your journey ↗",
     "resume": "Continue your journey ↗",
     "guide": "What is programming?",
@@ -16,7 +16,7 @@
     "save": "Progress saved in this browser",
     "nosave": "This browser could not save progress",
     "routeTitle": "What will you learn next?",
-    "routeIntro": "Start with values, calculations and names. Each mission ends with a new problem to solve yourself.",
+    "routeIntro": "Explore values, calculations and names. Solve a new problem at the end of each mission.",
     "done": "Completed · replay",
     "open": "Ready to explore",
     "locked": "Not unlocked yet",
@@ -25,48 +25,199 @@
     "resumePlay": "Continue ↗",
     "restart": "Restart mission",
     "read": "WHAT THIS CODE DOES",
-    "meaning": "Meaning",
     "assembled": "Your program so far",
     "nextKey": "Next key",
-    "typeHelp": "Type the highlighted fragment. English punctuation matters.",
-    "wrong": "Check the next character; Backspace lets you correct it.",
-    "space": "Space",
-    "enter": "Enter",
-    "launch": "Read it, then write it ↗",
+    "typeHelp": "Type the fragment. Use English punctuation.",
+    "wrong": "Check the next character. Backspace lets you correct it.",
+    "typeLabel": "Your keyboard",
+    "typePlaceholder": "Type the fragment…",
+    "takeTime": "Take your time",
+    "mission": "Mission",
+    "fragment": "Fragment",
+    "noOutput": "No output",
     "predict": "Predict before you run",
     "predictionPrompt": "What will this program display?",
-    "wrongChoice": "Read the explanation, then try another answer.",
-    "run": "Run this exercise ↗",
     "output": "Your program produced",
-    "explain": "Why did that happen?",
-    "why": "Explain the idea",
-    "correct": "That explains it. Now change the program.",
-    "practice": "Try a new goal",
-    "modifyGoal": "Change the highlighted value to meet the new goal.",
-    "hint": "A small hint",
-    "submit": "Check my program ↗",
-    "independent": "Now write it yourself",
-    "independentGoal": "Write any supported program that displays the target value. Different correct programs are welcome.",
-    "complete": "You made the program work.",
-    "next": "Next mission →",
-    "replay": "Try again",
-    "score": "Typing score",
-    "accuracy": "Typing accuracy",
     "modelSteps": "Teaching-model steps",
     "modelNote": "These steps describe this learning model, not TVM gas or a blockchain fee.",
-    "scope": "Introductory runner: numbers, addition, names and display. This is a teaching interpreter, not the full Tolang compiler or TVM.",
+    "why": "Explain the idea →",
+    "explain": "Why did that happen?",
+    "practice": "Change the result",
+    "valueLabel": "Replacement number",
+    "submit": "Check my program ↗",
+    "hint": "A small hint",
+    "independent": "Now write it yourself",
+    "codeLabel": "Your program",
+    "scope": "This introductory interpreter supports numbers, addition, names and display. It is not the full Tolang compiler or TVM.",
+    "complete": "You made the program work.",
+    "score": "Typing score",
+    "accuracy": "Typing accuracy",
+    "masteryNote": "Typing scores describe practice, not programming mastery.",
+    "next": "Next mission →",
+    "home": "Back home",
+    "replay": "Try again",
+    "foundationFinish": "Write your first program ↗",
+    "foundationNext": "Explore the next idea →",
+    "error": "Could not load the language. Try switching again.",
+    "numberRequired": "Enter one whole number using digits 0–9.",
+    "goalMismatch": "Your program ran, but its output does not match the goal yet.",
+    "conceptMissing": "The output matches. Also use the programming idea named in the task.",
     "syntax": "Check the syntax near character",
     "nameError": "Declare a name with let before using it.",
-    "limit": "This exercise exceeds the introductory runner limits.",
-    "goalMismatch": "Your program ran, but the output does not match the goal yet.",
-    "learned": "You practised",
+    "limit": "This program exceeds the introductory runner limits.",
+    "predictionHint": "Follow each calculation, then consider what .log() displays.",
     "close": "Close",
-    "foundationNext": "Explore the next idea →",
-    "foundationFinish": "Write your first program ↗",
-    "home": "Back home",
-    "assist": "Includes assisted typing",
+    "chapterNote": "First chapter · 3 missions. More chapters are in development.",
     "footer": "From your first question to your first program.",
-    "error": "Could not load the lesson. Please reload.",
-    "savedProgress": "Saved missions remain available when you change language."
-  }
+    "launch": "Read it, then write it ↗"
+  },
+  "lessons": [
+    {
+      "title": "Send a signal",
+      "intro": "A program is a precise instruction. Here, 7 is a number and .log() asks for it to be displayed.",
+      "goal": "Read each part, then send the number 7.",
+      "result": "The number 7 appears because the program explicitly displays it.",
+      "question": "What does .log() do here?",
+      "remix": "Make the program display 9 by replacing the blank.",
+      "remixHint": "The value before .log() is the number to display.",
+      "independent": "Write a program that displays 12. You may use any supported expression.",
+      "independentHint": "Keep the display instruction and choose a value that gives 12.",
+      "learned": "You connected a written instruction to its visible result.",
+      "answerHint": "The value stays the same; .log() makes it visible.",
+      "answers": [
+        "It displays the value before the dot.",
+        "It adds one to the number.",
+        "It stores a message on a blockchain."
+      ],
+      "coach": [
+        [
+          "Fragment",
+          "7 is a number: the value we want to display.",
+          "Read each part, then send the number 7."
+        ],
+        [
+          "Fragment",
+          "The dot connects the value to log, the display operation.",
+          "Read each part, then send the number 7."
+        ],
+        [
+          "Fragment",
+          "() calls the operation. The parentheses are empty because this call has no extra arguments.",
+          "Read each part, then send the number 7."
+        ]
+      ]
+    },
+    {
+      "title": "Calculate a route",
+      "intro": "An expression produces a value. The + sign adds two numbers; parentheses group the calculation before display.",
+      "goal": "Calculate 2 + 3, then display the result.",
+      "result": "The addition produces 5. The program displays that value.",
+      "question": "Why is the output 5?",
+      "remix": "Replace the blank so that (2 + ___).log() displays 8.",
+      "remixHint": "Ask what number added to 2 makes 8.",
+      "independent": "Display 11 using addition. Choose your own pair of numbers.",
+      "independentHint": "Use + in the expression you display; several pairs will work.",
+      "learned": "You used a calculation to produce a new value.",
+      "answerHint": "+ adds the numbers; the parentheses do not add a value.",
+      "answers": [
+        "It adds 2 and 3 before displaying the result.",
+        "It joins the digits into 23.",
+        "The parentheses add an extra point."
+      ],
+      "coach": [
+        [
+          "Fragment",
+          "(2 + 3) adds the two numbers. Its value is 5.",
+          "Calculate 2 + 3, then display the result."
+        ],
+        [
+          "Fragment",
+          "The dot connects the value to log, the display operation.",
+          "Calculate 2 + 3, then display the result."
+        ],
+        [
+          "Fragment",
+          "() calls the operation. The parentheses are empty because this call has no extra arguments.",
+          "Calculate 2 + 3, then display the result."
+        ]
+      ]
+    },
+    {
+      "title": "Give a value a name",
+      "intro": "let n = 5; binds the name n to 5. Using n later refers to that value. The semicolon ends the declaration.",
+      "goal": "Use the name n in a new calculation.",
+      "result": "n refers to 5, so n + 2 produces 7.",
+      "question": "Why does n + 2 produce 7?",
+      "remix": "Change the declared number so that the program displays 10.",
+      "remixHint": "The declared value plus 2 must equal 10.",
+      "independent": "Declare a name with let, then use that name in an addition that displays 14.",
+      "independentHint": "Choose a name and value, then add another number when you display it.",
+      "learned": "You named a value and reused it in an expression.",
+      "answerHint": "Reading n uses the value bound earlier. The addition does not rebind it.",
+      "answers": [
+        "n refers to 5, so the calculation is 5 + 2.",
+        "The name n always means 7.",
+        "The + sign changes n permanently to 7."
+      ],
+      "coach": [
+        [
+          "Fragment",
+          "let n = 5; gives the value 5 the name n. The semicolon ends this declaration.",
+          "Use the name n in a new calculation."
+        ],
+        [
+          "Fragment",
+          "A line break makes this program easier to read. It does not display a blank line.",
+          "Use the name n in a new calculation."
+        ],
+        [
+          "Fragment",
+          "(n + 2) reads the value named n and adds 2.",
+          "Use the name n in a new calculation."
+        ],
+        [
+          "Fragment",
+          "The dot connects the value to log, the display operation.",
+          "Use the name n in a new calculation."
+        ],
+        [
+          "Fragment",
+          "() calls the operation. The parentheses are empty because this call has no extra arguments.",
+          "Use the name n in a new calculation."
+        ]
+      ]
+    }
+  ],
+  "guide": [
+    {
+      "title": "What is programming?",
+      "text": "Programming means describing a task with precise instructions. The computer follows the language rules; it does not guess your intention.",
+      "code": "7.log()",
+      "takeaway": "Here the goal is to display 7. Change the number and the displayed result changes."
+    },
+    {
+      "title": "From text to action",
+      "text": "A compiler analyses text and translates it into a form a runtime can execute. This game's small interpreter first builds a structure, then evaluates it.",
+      "code": "(2 + 3).log()",
+      "takeaway": "Meaning comes from structure: add first, then display. This game does not run the full Tolang compilation pipeline."
+    },
+    {
+      "title": "Mistakes are clues",
+      "text": "Syntax rules describe valid shapes. A missing parenthesis breaks that shape. A valid program can still do the wrong thing: displaying 8 is valid, but it does not meet a goal of 9.",
+      "code": "8.log()",
+      "takeaway": "First make the program valid, then check whether its actual result meets the task."
+    },
+    {
+      "title": "Why count work?",
+      "text": "Different instructions can produce the same result with different amounts of work. Computing and storing data use resources. The step count here is only a model for learning.",
+      "code": "5.log()\n(2 + 3).log()",
+      "takeaway": "Both display 5. The second needs an addition. These counts cannot predict TVM gas or transaction fees."
+    },
+    {
+      "title": "Tolang and a blockchain",
+      "text": "Tolang is used to write programs for ALUX. On a blockchain, changing shared state also involves transaction rules and agreement between nodes. Language and execution environment both matter.",
+      "code": "7.log()",
+      "takeaway": "Displaying a number in this game sends no blockchain transaction. These first ideas also help you learn other programming languages."
+    }
+  ]
 }

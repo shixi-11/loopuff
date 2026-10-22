@@ -8,7 +8,7 @@ Lee código, predice el resultado, modifica el programa y resuelve problemas nue
 
 ## Código actual
 
-El repositorio contiene un pequeño intérprete educativo para números, sumas, asignación de nombres y salida. Funciona localmente sin servidor, modelos externos ni paquetes adicionales. La interfaz del juego y las lecciones están en desarrollo. No es el compilador completo de Tolang ni la TVM.
+El primer capítulo ya se puede jugar: tres misiones sobre valores, sumas y vinculación de nombres, con predicciones, explicaciones, cambios y programación independiente. La interfaz y el curso admiten 11 idiomas. Un pequeño intérprete didáctico funciona en el navegador, sin servidor ni paquetes externos. No es el compilador completo de Tolang ni la TVM; los siguientes capítulos están en desarrollo.
 
 ## Desarrollo
 

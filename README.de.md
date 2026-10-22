@@ -8,7 +8,7 @@ Code lesen, Ergebnisse vorhersagen, Programme ändern und neue Aufgaben ohne Vor
 
 ## Aktueller Code
 
-Das Repository enthält einen kleinen Lerninterpreter für Zahlen, Addition, Namensbindungen und Ausgabe. Er läuft lokal ohne Backend, externe Modelle oder zusätzliche Pakete. Spieloberfläche und Lerninhalte sind in Entwicklung. Dies ist nicht der vollständige Tolang-Compiler oder die TVM.
+Das erste Kapitel ist spielbar: drei Missionen zu Werten, Addition und Namensbindungen mit Vorhersagen, Erklärungen, Änderungen und eigenen Programmen. Oberfläche und Kurs unterstützen elf Sprachen. Ein kleiner Lerninterpreter läuft direkt im Browser, ohne Backend oder externe Pakete. Er ist nicht der vollständige Tolang-Compiler oder die TVM. Weitere Kapitel sind in Entwicklung.
 
 ## Entwicklung
 

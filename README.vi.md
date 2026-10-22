@@ -8,7 +8,7 @@ Học lập trình và Tolang qua trò chơi.
 
 ## Mã hiện có
 
-Kho mã hiện có trình thông dịch phục vụ học tập, hỗ trợ số, phép cộng, gán tên và hiển thị. Chạy cục bộ, không cần máy chủ, mô hình bên ngoài hay gói phụ thuộc. Giao diện trò chơi và bài học đang được phát triển. Đây không phải trình biên dịch Tolang hay TVM đầy đủ.
+Chương đầu đã chơi được với ba nhiệm vụ về giá trị, phép cộng và gắn tên, gồm dự đoán, giải thích, sửa đổi và tự viết chương trình. Giao diện và bài học hỗ trợ 11 ngôn ngữ. Trình thông dịch nhỏ chạy ngay trong trình duyệt, không cần máy chủ hay gói bên ngoài. Đây không phải toàn bộ trình biên dịch Tolang hay TVM; các chương tiếp theo đang phát triển.
 
 ## Phát triển
 
