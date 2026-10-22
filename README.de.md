@@ -6,6 +6,8 @@ Programmieren und Tolang spielerisch lernen.
 
 Code lesen, Ergebnisse vorhersagen, Programme ändern und neue Aufgaben ohne Vorlage lösen.
 
+[shixilin.com/games/loopuff](https://shixilin.com/games/loopuff/?lang=de)
+
 ## Aktueller Code
 
 Das erste Kapitel ist spielbar: drei Missionen zu Werten, Addition und Namensbindungen mit Vorhersagen, Erklärungen, Änderungen und eigenen Programmen. Oberfläche und Kurs unterstützen elf Sprachen. Ein kleiner Lerninterpreter läuft direkt im Browser, ohne Backend oder externe Pakete. Er ist nicht der vollständige Tolang-Compiler oder die TVM. Weitere Kapitel sind in Entwicklung.

@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "homepage": "https://shixilin.com/games/loopuff/",
+  "repository": {"type":"git","url":"https://github.com/shixi-11/loopuff.git"},
   "license": "PolyForm-Noncommercial-1.0.0",
   "scripts": {
     "test": "node --test tests/*.test.js",

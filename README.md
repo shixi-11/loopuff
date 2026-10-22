@@ -6,6 +6,8 @@ A game for learning programming with Tolang.
 
 Read code, predict its result, change it, and solve new problems without a template.
 
+[shixilin.com/games/loopuff](https://shixilin.com/games/loopuff/?lang=en)
+
 ## Current code
 
 The first chapter is playable: three missions covering values, addition and name bindings, with predictions, explanations, modifications and independent programming. The interface and course support 11 languages. Programs run locally in a small teaching interpreter without a backend or third-party packages. This is not the full Tolang compiler or TVM; later chapters are in development.

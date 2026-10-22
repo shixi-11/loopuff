@@ -6,6 +6,8 @@ Học lập trình và Tolang qua trò chơi.
 
 Đọc mã, dự đoán kết quả, sửa chương trình rồi tự giải bài toán mới mà không cần mẫu.
 
+[shixilin.com/games/loopuff](https://shixilin.com/games/loopuff/?lang=vi)
+
 ## Mã hiện có
 
 Chương đầu đã chơi được với ba nhiệm vụ về giá trị, phép cộng và gắn tên, gồm dự đoán, giải thích, sửa đổi và tự viết chương trình. Giao diện và bài học hỗ trợ 11 ngôn ngữ. Trình thông dịch nhỏ chạy ngay trong trình duyệt, không cần máy chủ hay gói bên ngoài. Đây không phải toàn bộ trình biên dịch Tolang hay TVM; các chương tiếp theo đang phát triển.

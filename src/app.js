@@ -9,7 +9,7 @@ let saved={};try{saved=JSON.parse(localStorage.getItem(storageKey)||'{}');}catch
 const validLocale=id=>locales.some(([key])=>key===id);
 let lang=new URL(location.href).searchParams.get('lang')||saved.lang||(navigator.language.startsWith('zh')?'zh':'en');
 if(!validLocale(lang))lang='en';
-let messages, busy=false, guideIndex=0, mapOpen=false, notice='', lastResult=null, feedbackState=null;
+let messages, languageRequest=0, languageController, guideIndex=0, mapOpen=false, notice='', lastResult=null, feedbackState=null;
 let state={phase:'welcome',lesson:0,fragment:0,typed:'',draft:'',score:0,errors:0,keys:0,completed:[],...saved.state};
 if(!['welcome','brief','typing','predict','output','explain','remix','independent','complete','guide','pause'].includes(state.phase)) state.phase='welcome';
 if(!Number.isInteger(state.lesson)||state.lesson<0||state.lesson>=course.length)state.lesson=0;
@@ -19,12 +19,15 @@ const fragments=()=>lesson().fragments;
 function save(){try{localStorage.setItem(storageKey,JSON.stringify({lang,state}));$('save-status').textContent=ui('save');}catch{$('save-status').textContent=ui('nosave');}}
 function languageSelect(){return `<label class="language-control"><span class="sr-only">${escape(ui('language'))}</span><select data-language aria-label="${escape(ui('language'))}">${locales.map(([id,label])=>`<option value="${id}" ${id===lang?'selected':''}>${label}</option>`).join('')}</select></label>`;}
 async function changeLanguage(next){
-  if(busy||!validLocale(next))return;
-  busy=true;
+  if(!validLocale(next))return;
+  const request=++languageRequest;
+  languageController?.abort();languageController=new AbortController();
+  document.body.setAttribute('aria-busy','true');
   try{
-    const response=await fetch(new URL(`../locales/${next}.json`,import.meta.url));
+    const response=await fetch(new URL(`../locales/${next}.json`,import.meta.url),{signal:languageController.signal});
     if(!response.ok)throw Error('locale');
     const catalog=await response.json();
+    if(request!==languageRequest)return;
     messages=catalog;lang=next;
     notice=feedbackState?(feedbackState.lesson?copy()[feedbackState.key]:ui(feedbackState.key))+feedbackState.suffix:'';
     const url=new URL(location.href);url.searchParams.set('lang',lang);history.replaceState(null,'',url);
@@ -32,8 +35,13 @@ async function changeLanguage(next){
     document.documentElement.dir=lang==='ar'?'rtl':'ltr';
     document.title=`${ui('name')} · ${ui('tagline')}`;
     render();save();
-  }catch(error){$('toast').hidden=false;$('toast').textContent=messages?ui('error'):'Unable to load language. Reload to try again.';}
-  finally{busy=false;}
+    $('toast').hidden=true;
+  }catch(error){
+    if(request!==languageRequest||error.name==='AbortError')return;
+    if(messages){$('language-select').value=lang;for(const select of document.querySelectorAll('[data-language]'))select.value=lang;}
+    $('toast').hidden=false;$('toast').textContent=messages?ui('error'):'Unable to load language. Reload to try again.';
+  }
+  finally{if(request===languageRequest)document.body.removeAttribute('aria-busy');}
 }
 function applyStatic(){
   $('brand-name').textContent=ui('name');document.querySelector('.brand').setAttribute('aria-label',`${ui('name')} · ${ui('home')}`);
