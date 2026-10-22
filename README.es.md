@@ -10,9 +10,11 @@ Lee código, predice el resultado, modifica el programa y resuelve problemas nue
 
 ## Código actual
 
-El primer capítulo ya se puede jugar: tres misiones sobre valores, sumas y vinculación de nombres, con predicciones, explicaciones, cambios y programación independiente. La interfaz y el curso admiten 11 idiomas. Un pequeño intérprete didáctico funciona en el navegador, sin servidor ni paquetes externos. No es el compilador completo de Tolang ni la TVM; los siguientes capítulos están en desarrollo.
+El primer capítulo ya se puede jugar: cuatro misiones sobre valores, sumas y vinculación de nombres, con predicciones, explicaciones, cambios y programación independiente. La interfaz y el curso admiten 11 idiomas. Un pequeño intérprete didáctico funciona en el navegador, sin servidor ni paquetes externos. No es el compilador completo de Tolang ni la TVM; los siguientes capítulos están en desarrollo.
 
 Los retos de programación se evalúan sobre 100 puntos según la ejecución, la salida y los requisitos. Puedes corregir y reenviar; la velocidad al escribir y la coincidencia con el ejemplo no cuentan.
+
+En la cuarta misión, la salida del programa determina cuánto salta un robot. Ejecuta el código, observa dónde aterriza y cambia el cálculo para llegar a la isla flotante.
 
 ## Desarrollo
 

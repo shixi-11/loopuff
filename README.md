@@ -10,9 +10,11 @@ Read code, predict its result, change it, and solve new problems without a templ
 
 ## Current code
 
-The first chapter is playable: three missions covering values, addition and name bindings, with predictions, explanations, modifications and independent programming. The interface and course support 11 languages. Programs run locally in a small teaching interpreter without a backend or third-party packages. This is not the full Tolang compiler or TVM; later chapters are in development.
+The first chapter is playable: four missions covering values, addition and name bindings, with predictions, explanations, modifications and independent programming. The interface and course support 11 languages. Programs run locally in a small teaching interpreter without a backend or third-party packages. This is not the full Tolang compiler or TVM; later chapters are in development.
 
 Independent challenges include a 100-point code assessment with execution, output and requirement feedback. Revise and resubmit; typing speed and matching an example do not affect the grade.
+
+The fourth mission turns program output into a robot’s jump distance. Run a program, watch where the robot lands, then change the calculation.
 
 ## Development
 

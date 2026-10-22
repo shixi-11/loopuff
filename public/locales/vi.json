@@ -67,7 +67,7 @@
     "limit": "Chương trình vượt giới hạn của trình chạy nhập môn.",
     "predictionHint": "Tính lần lượt rồi nghĩ xem .log() hiển thị gì.",
     "close": "Đóng",
-    "chapterNote": "Chương 1 · 3 nhiệm vụ. Các chương tiếp theo đang được phát triển.",
+    "chapterNote": "Chương 1 · 4 nhiệm vụ. Các chương tiếp theo đang được phát triển.",
     "footer": "Từ câu hỏi đầu tiên đến chương trình đầu tiên.",
     "launch": "Đọc hiểu rồi bắt đầu gõ ↗",
     "navigation": "Điều hướng chính",
@@ -191,6 +191,41 @@
           "Dùng tên n trong phép tính mới."
         ]
       ]
+    },
+    {
+      "title": "Nhảy sang đảo tiếp theo",
+      "intro": "Một rô-bốt nhỏ cần đến hòn đảo đối diện. Trong nhiệm vụ này, số mà chương trình hiển thị là số ô rô-bốt sẽ nhảy tới.",
+      "goal": "Tính 2 + 3 rồi xem rô-bốt nhảy năm ô.",
+      "result": "Chương trình hiển thị 5. Trò chơi đọc kết quả đó và cho rô-bốt nhảy năm ô; .log() vẫn chỉ hiển thị một giá trị.",
+      "question": "Vì sao đầu ra là 5?",
+      "remix": "Sửa chương trình để hiển thị 7 và đáp xuống đảo cách bảy ô.",
+      "remixHint": "2 cộng với số còn thiếu phải bằng 7.",
+      "independent": "Dùng phép cộng để hiển thị 6 và đáp xuống đảo cách sáu ô. Hãy chạy thử và quan sát trước khi nộp.",
+      "independentHint": "Chọn hai số có tổng bằng 6. Bạn cũng có thể dùng lại giá trị đã đặt tên.",
+      "learned": "Bạn đã dùng đầu ra của chương trình để điều khiển hành động và kiểm tra kết quả.",
+      "answerHint": "+ cộng hai số; dấu ngoặc không cộng thêm giá trị.",
+      "answers": [
+        "Vì cộng 2 với 3 trước khi hiển thị.",
+        "Vì ghép các chữ số thành 23.",
+        "Vì dấu ngoặc tự cộng thêm 1."
+      ],
+      "coach": [
+        [
+          "Đoạn mã",
+          "(2 + 3) cộng hai số, cho giá trị 5.",
+          "Tính 2 + 3 rồi hiển thị kết quả."
+        ],
+        [
+          "Đoạn mã",
+          "Dấu chấm nối giá trị với thao tác hiển thị log.",
+          "Tính 2 + 3 rồi hiển thị kết quả."
+        ],
+        [
+          "Đoạn mã",
+          "() gọi thao tác đó. Ngoặc rỗng vì lần gọi này không có đối số bổ sung.",
+          "Tính 2 + 3 rồi hiển thị kết quả."
+        ]
+      ]
     }
   ],
   "guide": [
@@ -258,5 +293,19 @@
     "noReport": "Chưa có kết quả đánh giá",
     "noReportHint": "Viết và nộp chương trình cho bài này. Kết quả sẽ được lưu trong trình duyệt này.",
     "viewResult": "Xem kết quả"
+  },
+  "jump": {
+    "eyebrow": "MÃ → HÀNH ĐỘNG",
+    "title": "Giúp rô-bốt vượt qua",
+    "target": "Mục tiêu: {n} ô",
+    "rule": "Nhiệm vụ này dùng một số nguyên được hiển thị làm độ dài cú nhảy, từ 0 đến 12 ô.",
+    "try": "Chạy và quan sát",
+    "ready": "Sẵn sàng. Đảo cách {n} ô.",
+    "running": "Đầu ra {n} → đang nhảy…",
+    "landed": "Đã nhảy {n} ô và đáp xuống đảo.",
+    "short": "Nhảy {n} ô chưa tới. Hãy sửa mã và thử lại.",
+    "long": "Nhảy {n} ô quá xa. Hãy sửa mã và thử lại.",
+    "invalid": "Hãy chỉ hiển thị một số nguyên từ 0 đến 12.",
+    "codeError": "Mã chưa chạy được. Hãy kiểm tra chương trình trước khi nhảy."
   }
 }

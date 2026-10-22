@@ -19,6 +19,13 @@ export const course = [
     // The parser requires every name to be bound. Count using that binding once;
     // a separate 'bind' criterion would double-weight the same dependency.
     independent:{logs:['14'],require:['name','add'],example:'let energy = 10; (energy + 4).log()'}
+  },
+  {
+    id:'leap',source:'(2 + 3).log()',logs:['5'],fragments:['(2 + 3)','.log','()'],
+    prediction:['3','5','23'],predictionAnswer:1,
+    remix:{template:'(2 + ___).log()',solution:'5',source:'(2 + 5).log()',logs:['7']},
+    independent:{logs:['6'],require:['add'],example:'(2 + 4).log()'},
+    world:{kind:'jump',maximum:12}
   }
 ];
 export const locales = [

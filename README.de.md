@@ -10,9 +10,11 @@ Code lesen, Ergebnisse vorhersagen, Programme ändern und neue Aufgaben ohne Vor
 
 ## Aktueller Code
 
-Das erste Kapitel ist spielbar: drei Missionen zu Werten, Addition und Namensbindungen mit Vorhersagen, Erklärungen, Änderungen und eigenen Programmen. Oberfläche und Kurs unterstützen elf Sprachen. Ein kleiner Lerninterpreter läuft direkt im Browser, ohne Backend oder externe Pakete. Er ist nicht der vollständige Tolang-Compiler oder die TVM. Weitere Kapitel sind in Entwicklung.
+Das erste Kapitel ist spielbar: vier Missionen zu Werten, Addition und Namensbindungen mit Vorhersagen, Erklärungen, Änderungen und eigenen Programmen. Oberfläche und Kurs unterstützen elf Sprachen. Ein kleiner Lerninterpreter läuft direkt im Browser, ohne Backend oder externe Pakete. Er ist nicht der vollständige Tolang-Compiler oder die TVM. Weitere Kapitel sind in Entwicklung.
 
 Eigenständige Aufgaben werden mit bis zu 100 Punkten für Ausführung, Ausgabe und Aufgabenbedingungen bewertet. Überarbeiten und erneut einreichen ist möglich; Tipptempo und Übereinstimmung mit dem Beispiel zählen nicht.
+
+In der vierten Mission bestimmt die Programmausgabe die Sprungweite eines Roboters. Führe den Code aus, beobachte die Landung und ändere die Rechnung, um die schwebende Insel zu erreichen.
 
 ## Entwicklung
 

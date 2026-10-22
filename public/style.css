@@ -148,3 +148,31 @@ body[data-view=learning] .header-controls{justify-self:end}
 @media(max-width:1000px){body[data-view=learning] .masthead{height:auto;min-height:118px;padding-block:8px;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:60px auto;gap:0 16px}body[data-view=learning] .brand{grid-column:1;grid-row:1}body[data-view=learning] .header-controls{grid-column:2;grid-row:1}body[data-view=learning] .page-navigation{grid-column:1/-1;grid-row:2;gap:28px;padding-block:2px}.page-navigation a{font-size:14px;padding-block:7px}}
 @media(max-width:560px){body[data-view=learning] .map-long{display:none}body[data-view=learning] .map-short{display:inline}}
 @media(max-width:400px){body[data-view=learning] .masthead{column-gap:12px}body[data-view=learning] .brand{gap:6px}body[data-view=learning] .brand>span{font-size:18px}body[data-view=learning] .brand svg{width:24px}body[data-view=learning] .language-control select{max-width:88px}body[data-view=learning] .page-navigation{gap:18px}.page-navigation a{font-size:13px}}
+
+/* Emerald skies, warm stone and a small explorer: one world for play and code. */
+body[data-view=game] .welcome{top:50%;inset-inline-start:7%;inset-inline-end:auto;transform:translateY(-50%);width:min(640px,51%);text-align:start}
+body[data-view=game] .welcome h1{font-size:clamp(42px,5vw,76px);line-height:1.12;text-wrap:wrap;letter-spacing:-.035em}
+body[data-view=game] .welcome-copy{margin-inline:0;max-width:510px;color:#e1e6ce}
+body[data-view=game] .welcome-actions{justify-content:flex-start}
+body[data-view=game] .first-command{justify-content:flex-start}
+.primary{box-shadow:0 4px 20px #bbd6a919;border-color:#e7d29a66}
+.primary:hover{box-shadow:0 5px 24px #e8cc8733}
+.jump-section{margin:28px 0 32px;border-top:1px solid #c4d4ac38;padding-top:25px;min-width:0}
+.jump-section>header{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.jump-section h2{font-size:clamp(23px,3vw,32px);margin:8px 0 0;color:#f1e7c6;line-height:1.4}
+.jump-section>p{font-size:15px;line-height:1.9;color:#c9d6be;margin:14px 0 18px;max-width:780px}
+.jump-target{color:#f2dba0;border:1px solid #cfb67f66;padding:9px 14px;border-radius:24px;font-size:15px}
+.jump-lab{border:1px solid #adbf9055;border-radius:16px;overflow:hidden;background:#15332e;isolation:isolate}
+.jump-lab canvas{display:block;width:100%}
+.jump-lab [role=status]{margin:0;padding:15px 20px;min-height:58px;background:#102d29;color:#dbdec2;font-size:15px;line-height:1.8}
+.jump-lab[data-outcome=landed] [role=status]{color:#d4e9b3;border-top:1px solid #b7d19155}
+.jump-lab[data-outcome=short] [role=status],.jump-lab[data-outcome=long] [role=status]{color:#f2d0a0}
+@media(max-width:760px){body[data-view=game] .welcome{inset-inline-start:7%;inset-inline-end:7%;width:auto;max-width:none}body[data-view=game] .welcome h1{font-size:clamp(37px,8vw,56px)}body[data-view=game] .welcome-copy{max-width:480px}.jump-section{margin-block:23px}.jump-target{font-size:14px}.jump-lab [role=status]{padding:12px 15px;min-height:72px}}
+@media(prefers-reduced-motion:reduce){.primary{transition:none}}
+
+/* Keep code and the world visible together while experimenting. */
+.jump-page-body{max-width:none}.jump-workbench{display:grid;grid-template-columns:minmax(280px,.8fr) minmax(0,1.2fr);gap:48px;align-items:start}.jump-workbench .jump-section{margin-top:0}.jump-controls{min-width:0}.challenge-brief .jump-section{margin-top:30px}.jump-workbench .dialog-actions{flex-wrap:wrap}
+@media(max-width:900px){.jump-workbench{grid-template-columns:1fr;gap:20px}.jump-workbench .jump-section{margin-top:0}}
+
+.jump-independent .challenge-layout{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:44px;margin-top:24px}.jump-independent .challenge-brief{padding-top:0;border:0}.jump-independent .challenge-brief>h2{margin-bottom:10px}.jump-independent .challenge-brief>.dialog-note{margin:0 0 20px}.jump-independent .jump-section{margin-top:20px}.jump-independent #program-form>.scope-note{font-size:13px}.learning-page:has(.jump-page-body) .page-trail{margin-bottom:22px}
+@media(max-width:900px){.jump-independent .challenge-layout{grid-template-columns:1fr;gap:28px}}

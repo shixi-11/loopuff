@@ -67,7 +67,7 @@
     "limit": "Das Programm überschreitet die Grenzen des Einsteiger-Interpreters.",
     "predictionHint": "Rechne der Reihe nach und überlege, was .log() anzeigt.",
     "close": "Schließen",
-    "chapterNote": "Kapitel 1 · 3 Missionen. Weitere Kapitel sind in Entwicklung.",
+    "chapterNote": "Kapitel 1 · 4 Missionen. Weitere Kapitel sind in Entwicklung.",
     "footer": "Von der ersten Frage zum ersten Programm.",
     "launch": "Verstehen und eingeben ↗",
     "navigation": "Hauptnavigation",
@@ -191,6 +191,41 @@
           "Nutze den Namen n in einer neuen Rechnung."
         ]
       ]
+    },
+    {
+      "title": "Sprung zur nächsten Insel",
+      "intro": "Ein kleiner Roboter will zur nächsten Insel. In dieser Mission bestimmt die angezeigte Zahl, wie viele Felder er vorwärts springt.",
+      "goal": "Berechne 2 + 3 und beobachte den Sprung über fünf Felder.",
+      "result": "Das Programm zeigt 5 an. Das Spiel liest die Ausgabe und macht daraus einen Sprung über fünf Felder. .log() selbst zeigt weiterhin nur einen Wert an.",
+      "question": "Warum ist die Ausgabe 5?",
+      "remix": "Ändere das Programm so, dass es 7 ausgibt und die Insel sieben Felder weiter erreicht.",
+      "remixHint": "2 plus die fehlende Zahl muss 7 ergeben.",
+      "independent": "Gib mit einer Addition 6 aus und lande auf der Insel sechs Felder weiter. Probiere es vor der Abgabe aus.",
+      "independentHint": "Wähle zwei Zahlen mit der Summe 6. Du kannst auch einen benannten Wert verwenden.",
+      "learned": "Du hast mit einer Programmausgabe eine Bewegung gesteuert und das Ergebnis überprüft.",
+      "answerHint": "+ addiert die Zahlen. Die Klammern erhöhen den Wert nicht.",
+      "answers": [
+        "Es addiert 2 und 3 vor der Ausgabe.",
+        "Es verbindet die Ziffern zu 23.",
+        "Die Klammern addieren einen weiteren Punkt."
+      ],
+      "coach": [
+        [
+          "Abschnitt",
+          "(2 + 3) addiert die beiden Zahlen. Der Wert ist 5.",
+          "Berechne 2 + 3 und zeige das Ergebnis an."
+        ],
+        [
+          "Abschnitt",
+          "Der Punkt verbindet den Wert mit der Ausgabeoperation log.",
+          "Berechne 2 + 3 und zeige das Ergebnis an."
+        ],
+        [
+          "Abschnitt",
+          "() ruft die Operation auf. Die Klammern sind leer, weil es keine zusätzlichen Argumente gibt.",
+          "Berechne 2 + 3 und zeige das Ergebnis an."
+        ]
+      ]
     }
   ],
   "guide": [
@@ -258,5 +293,19 @@
     "noReport": "Noch kein Ergebnis",
     "noReportHint": "Schreibe ein Programm für diese Aufgabe und reiche es ein. Das Ergebnis wird in diesem Browser gespeichert.",
     "viewResult": "Ergebnis ansehen"
+  },
+  "jump": {
+    "eyebrow": "CODE → BEWEGUNG",
+    "title": "Hilf dem Roboter hinüber",
+    "target": "Ziel: {n} Felder",
+    "rule": "Diese Mission nutzt eine ausgegebene ganze Zahl als Sprungweite. Die Skala reicht von 0 bis 12.",
+    "try": "Starten und beobachten",
+    "ready": "Bereit. Die Insel ist {n} Felder entfernt.",
+    "running": "Ausgabe {n} → Sprung…",
+    "landed": "{n} Felder gesprungen und gelandet.",
+    "short": "{n} Felder sind zu kurz. Ändere den Code und versuche es erneut.",
+    "long": "{n} Felder sind zu weit. Ändere den Code und versuche es erneut.",
+    "invalid": "Gib genau eine ganze Zahl von 0 bis 12 aus.",
+    "codeError": "Der Code lief nicht. Prüfe das Programm vor dem Sprung."
   }
 }

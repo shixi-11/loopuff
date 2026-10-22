@@ -67,7 +67,7 @@
     "limit": "This program exceeds the introductory runner limits.",
     "predictionHint": "Follow each calculation, then consider what .log() displays.",
     "close": "Close",
-    "chapterNote": "First chapter · 3 missions. More chapters are in development.",
+    "chapterNote": "First chapter · 4 missions. More chapters are in development.",
     "footer": "From your first question to your first program.",
     "launch": "Read it, then write it ↗",
     "navigation": "Main navigation",
@@ -191,6 +191,41 @@
           "Use the name n in a new calculation."
         ]
       ]
+    },
+    {
+      "title": "Leap to the next island",
+      "intro": "A small robot needs to reach the next island. In this mission, the number your program displays becomes the number of spaces it jumps.",
+      "goal": "Calculate 2 + 3 and watch the robot jump five spaces.",
+      "result": "The program displays 5. The game reads that output and makes a five-space jump; .log() itself still only displays a value.",
+      "question": "Why is the output 5?",
+      "remix": "Change the program to display 7 and reach the island seven spaces away.",
+      "remixHint": "2 plus the missing number must equal 7.",
+      "independent": "Use addition to display 6 and land on the island six spaces away. Run and watch before submitting your answer.",
+      "independentHint": "Choose two numbers whose sum is 6. You can also reuse a named value.",
+      "learned": "You used a program’s output to control an action and checked the result.",
+      "answerHint": "+ adds the numbers; the parentheses do not add a value.",
+      "answers": [
+        "It adds 2 and 3 before displaying the result.",
+        "It joins the digits into 23.",
+        "The parentheses add an extra point."
+      ],
+      "coach": [
+        [
+          "Fragment",
+          "(2 + 3) adds the two numbers. Its value is 5.",
+          "Calculate 2 + 3, then display the result."
+        ],
+        [
+          "Fragment",
+          "The dot connects the value to log, the display operation.",
+          "Calculate 2 + 3, then display the result."
+        ],
+        [
+          "Fragment",
+          "() calls the operation. The parentheses are empty because this call has no extra arguments.",
+          "Calculate 2 + 3, then display the result."
+        ]
+      ]
     }
   ],
   "guide": [
@@ -258,5 +293,19 @@
     "noReport": "No assessment yet",
     "noReportHint": "Write and submit a program for this task. Your result will be saved in this browser.",
     "viewResult": "View result"
+  },
+  "jump": {
+    "eyebrow": "CODE → ACTION",
+    "title": "Help the robot across",
+    "target": "Target: {n} spaces",
+    "rule": "This mission uses one displayed whole number as the jump distance. The scale runs from 0 to 12.",
+    "try": "Run and watch",
+    "ready": "Ready. The island is {n} spaces away.",
+    "running": "Output {n} → jumping…",
+    "landed": "Jumped {n} spaces and landed.",
+    "short": "Jumped {n} spaces: too short. Change the code and try again.",
+    "long": "Jumped {n} spaces: too far. Change the code and try again.",
+    "invalid": "Display exactly one whole number from 0 to 12.",
+    "codeError": "The code did not run. Check the program before jumping."
   }
 }

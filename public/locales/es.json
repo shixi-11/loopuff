@@ -67,7 +67,7 @@
     "limit": "El programa supera los límites del intérprete inicial.",
     "predictionHint": "Calcula paso a paso y piensa qué mostrará .log().",
     "close": "Cerrar",
-    "chapterNote": "Capítulo 1 · 3 misiones. Los siguientes capítulos están en desarrollo.",
+    "chapterNote": "Capítulo 1 · 4 misiones. Los siguientes capítulos están en desarrollo.",
     "footer": "De tu primera pregunta a tu primer programa.",
     "launch": "Entiende y empieza a escribir ↗",
     "navigation": "Navegación principal",
@@ -191,6 +191,41 @@
           "Usa el nombre n en un cálculo nuevo."
         ]
       ]
+    },
+    {
+      "title": "Salta a la siguiente isla",
+      "intro": "Un pequeño robot necesita llegar a la otra isla. En esta misión, el número que muestra tu programa indica cuántas casillas salta hacia delante.",
+      "goal": "Calcula 2 + 3 y observa cómo el robot salta cinco casillas.",
+      "result": "El programa muestra 5. El juego lee esa salida y la convierte en un salto de cinco casillas; .log() sigue sirviendo solo para mostrar un valor.",
+      "question": "¿Por qué la salida es 5?",
+      "remix": "Modifica el programa para mostrar 7 y llegar a la isla situada a siete casillas.",
+      "remixHint": "2 más el número que falta debe dar 7.",
+      "independent": "Usa una suma para mostrar 6 y aterrizar en la isla a seis casillas. Ejecuta y observa antes de entregar.",
+      "independentHint": "Elige dos números que sumen 6. También puedes reutilizar un valor con nombre.",
+      "learned": "Has usado la salida de un programa para controlar una acción y comprobar el resultado.",
+      "answerHint": "+ suma los números; los paréntesis no añaden ningún valor.",
+      "answers": [
+        "Suma 2 y 3 antes de mostrar el resultado.",
+        "Une los dígitos para formar 23.",
+        "Los paréntesis añaden un punto extra."
+      ],
+      "coach": [
+        [
+          "Fragmento",
+          "(2 + 3) suma los dos números. Su valor es 5.",
+          "Calcula 2 + 3 y muestra el resultado."
+        ],
+        [
+          "Fragmento",
+          "El punto conecta el valor con la operación de salida log.",
+          "Calcula 2 + 3 y muestra el resultado."
+        ],
+        [
+          "Fragmento",
+          "() llama a la operación. Los paréntesis están vacíos porque esta llamada no tiene argumentos adicionales.",
+          "Calcula 2 + 3 y muestra el resultado."
+        ]
+      ]
     }
   ],
   "guide": [
@@ -258,5 +293,19 @@
     "noReport": "Todavía no hay resultados",
     "noReportHint": "Escribe y envía un programa para esta tarea. El resultado se guardará en este navegador.",
     "viewResult": "Ver resultado"
+  },
+  "jump": {
+    "eyebrow": "CÓDIGO → ACCIÓN",
+    "title": "Ayuda al robot a cruzar",
+    "target": "Objetivo: {n} casillas",
+    "rule": "Esta misión usa un único entero mostrado como distancia del salto. La escala va de 0 a 12.",
+    "try": "Ejecutar y observar",
+    "ready": "Listo. La isla está a {n} casillas.",
+    "running": "Salida {n} → saltando…",
+    "landed": "Ha saltado {n} casillas y aterrizado.",
+    "short": "{n} casillas no bastan. Cambia el código e inténtalo de nuevo.",
+    "long": "{n} casillas es demasiado. Cambia el código e inténtalo de nuevo.",
+    "invalid": "Muestra exactamente un entero entre 0 y 12.",
+    "codeError": "El código no se ejecutó. Revisa el programa antes de saltar."
   }
 }
