@@ -16,7 +16,9 @@ export const course = [
     id:'names',source:'let n = 5;\n(n + 2).log()',logs:['7'],fragments:['let n = 5;','\n','(n + 2)','.log','()'],
     prediction:['5','2','7'],predictionAnswer:2,
     remix:{template:'let n = ___;\n(n + 2).log()',solution:'8',source:'let n = 8;\n(n + 2).log()',logs:['10']},
-    independent:{logs:['14'],require:['bind','name','add'],example:'let energy = 10; (energy + 4).log()'}
+    // The parser requires every name to be bound. Count using that binding once;
+    // a separate 'bind' criterion would double-weight the same dependency.
+    independent:{logs:['14'],require:['name','add'],example:'let energy = 10; (energy + 4).log()'}
   }
 ];
 export const locales = [

@@ -21,6 +21,10 @@ test('partial scores separate execution, output and contributing concepts',()=>{
   assert.equal(decoy.score,70);assert.equal(decoy.ok,false);
   assert.equal(grade('let fuel = 6; (fuel+8).log()',course[2].independent).score,100);
   assert.equal(grade('let unused = 14; 14.log()',course[2].independent).score,70);
+  const nameOnly=grade('let fuel = 14; fuel.log()',course[2].independent);
+  const additionOnly=grade('(6+8).log()',course[2].independent);
+  assert.equal(nameOnly.score,85);assert.equal(nameOnly.ok,false);
+  assert.equal(additionOnly.score,85);assert.equal(additionOnly.ok,false);
 });
 test('invalid or unavailable programs receive zero with unexecuted checks',()=>{
   for(const source of ['', '12.log(', 'unknown.log()', 'fetch().log()', '1000001.log()']){
