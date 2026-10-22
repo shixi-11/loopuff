@@ -4,6 +4,10 @@ import { assess } from './assessment.js';
 
 const $ = id => document.getElementById(id);
 const escape = text => String(text).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function prose(text){
+  const pattern=/let [A-Za-z_]\w* = \d+;|\([^\)\n]+\)(?:\.log\(\))?|\.log\(\)|\b(?:[A-Za-z_]\w*|\d+) \+ \d+\b|\b(?:let|log|n|TVM|Tolang|ALUX|gas)\b|\+/g;
+  let cursor=0,result='';for(const match of String(text).matchAll(pattern)){result+=escape(text.slice(cursor,match.index))+`<bdi dir="ltr">${escape(match[0])}</bdi>`;cursor=match.index+match[0].length;}return result+escape(text.slice(cursor));
+}
 const storageKey='loopuff-v1', reduced=matchMedia('(prefers-reduced-motion: reduce)');
 let saved={};try{saved=JSON.parse(localStorage.getItem(storageKey)||'{}');}catch{}
 const validLocale=id=>locales.some(([key])=>key===id);
@@ -71,7 +75,7 @@ function begin(index){state={...state,phase:'brief',lesson:index,fragment:0,type
 function move(phase){state.phase=phase;notice='';feedbackState=null;lastResult=null;render();save();}
 function actions(buttons){return `<div class="dialog-actions">${buttons.map(([action,label,secondary])=>`<button class="${secondary?'text-button':'primary'}" data-action="${action}">${escape(label)}</button>`).join('')}</div>`;}
 function codeBlock(source){return `<pre class="exercise-code" dir="ltr">${escape(source)}</pre>`;}
-function choices(items,action){return `<div class="choices">${items.map((text,index)=>`<button class="choice" data-${action}="${index}"><span>${String(index+1).padStart(2,'0')}</span>${escape(text||ui('noOutput'))}</button>`).join('')}</div>`;}
+function choices(items,action){return `<div class="choices">${items.map((text,index)=>`<button class="choice" data-${action}="${index}"><span>${String(index+1).padStart(2,'0')}</span>${prose(text||ui('noOutput'))}</button>`).join('')}</div>`;}
 function render(){
   applyStatic();const phase=state.phase, typing=phase==='typing';
   $('universe').dataset.phase=phase;$('welcome').hidden=phase!=='welcome';$('welcome-foot').hidden=phase!=='welcome';
@@ -85,7 +89,7 @@ function renderTyping(){
   const fragment=fragments()[state.fragment]||'',typed=state.typed;
   $('mission-number').textContent=`${ui('mission')} ${String(state.lesson+1).padStart(2,'0')}`;
   $('mission-title').textContent=copy().title;$('mission-hint').textContent=copy().goal;
-  const meaning=copy().coach[state.fragment];$('meaning-title').textContent=meaning[0];$('meaning-text').textContent=meaning[1];$('meaning-connection').textContent=meaning[2];
+  const meaning=copy().coach[state.fragment];$('meaning-title').textContent=meaning[0];$('meaning-text').innerHTML=prose(meaning[1]);$('meaning-connection').innerHTML=prose(meaning[2]);
   $('fragment-label').textContent=ui('fragment');$('fragment-count').textContent=`${state.fragment+1} / ${fragments().length}`;
   $('target-word').innerHTML=[...fragment].map((c,i)=>`<span class="${i<typed.length&&typed[i]===c?'hit':i===typed.length?'active-letter':''}">${escape(c==='\n'?'↵':c)}</span>`).join('');
   $('typing-field').value=typed;$('typing-field').classList.toggle('wrong',!fragment.startsWith(typed));
@@ -107,25 +111,25 @@ function onTyping(event){
 }
 function renderDialog(){
   const c=copy(),phase=state.phase;let title='',body='';
-  if(phase==='brief'){title=c.title;body=`<p class="dialog-note">${escape(c.intro)}</p>${codeBlock(lesson().source)}<p>${escape(c.goal)}</p>${actions([['type',ui('launch')]])}`;}
+  if(phase==='brief'){title=c.title;body=`<p class="dialog-note">${prose(c.intro)}</p>${codeBlock(lesson().source)}<p>${prose(c.goal)}</p>${actions([['type',ui('launch')]])}`;}
   if(phase==='predict'){title=ui('predict');body=`<p class="dialog-note">${escape(ui('predictionPrompt'))}</p>${codeBlock(lesson().source)}${choices(lesson().prediction,'prediction')}`;}
   if(phase==='output'){
     const result=run(lesson().source);title=ui('output');
-    body=`<div class="signal" dir="ltr">${escape(result.logs.join('\n'))}</div><p class="dialog-note">${escape(c.result)}</p><p class="scope-note">${escape(ui('modelSteps'))}: ${result.steps}. ${escape(ui('modelNote'))}</p>${actions([['explain',ui('why')]])}`;
+    body=`<div class="signal" dir="ltr">${escape(result.logs.join('\n'))}</div><p class="dialog-note">${prose(c.result)}</p><p class="scope-note">${escape(ui('modelSteps'))}: ${result.steps}. ${escape(ui('modelNote'))}</p>${actions([['explain',ui('why')]])}`;
   }
-  if(phase==='explain'){title=ui('explain');body=`<p class="dialog-note">${escape(c.question)}</p>${choices(c.answers,'answer')}`;}
+  if(phase==='explain'){title=ui('explain');body=`<p class="dialog-note">${prose(c.question)}</p>${choices(c.answers,'answer')}`;}
   if(phase==='remix'){
-    title=ui('practice');body=`<p class="dialog-note">${escape(c.remix)}</p>${codeBlock(lesson().remix.template)}<form id="program-form"><label class="editor-label" for="program-editor">${escape(ui('valueLabel'))}</label><input id="program-editor" class="practice-editor value-editor" inputmode="numeric" autocomplete="off" value="${escape(state.draft)}" dir="ltr"><div class="dialog-actions"><button class="primary" type="submit">${escape(ui('submit'))}</button></div></form>${actions([['hint',ui('hint'),true]])}`;
+    title=ui('practice');body=`<p class="dialog-note">${prose(c.remix)}</p>${codeBlock(lesson().remix.template)}<form id="program-form"><label class="editor-label" for="program-editor">${escape(ui('valueLabel'))}</label><input id="program-editor" class="practice-editor value-editor" inputmode="numeric" autocomplete="off" value="${escape(state.draft)}" dir="ltr"><div class="dialog-actions"><button class="primary" type="submit">${escape(ui('submit'))}</button></div></form>${actions([['hint',ui('hint'),true]])}`;
   }
   if(phase==='independent'){
-    title=ui('independent');body=`<p class="dialog-note">${escape(c.independent)}</p><form id="program-form"><label class="editor-label" for="program-editor">${escape(ui('codeLabel'))}</label><textarea id="program-editor" class="practice-editor" rows="4" autocomplete="off" autocapitalize="off" spellcheck="false" dir="ltr">${escape(state.draft)}</textarea><div class="dialog-actions"><button class="primary" type="submit">${escape(ui('submit'))}</button></div></form><p class="scope-note">${escape(ui('scope'))}</p>${actions([['hint',ui('hint'),true]])}`;
+    title=ui('independent');body=`<p class="dialog-note">${prose(c.independent)}</p><form id="program-form"><label class="editor-label" for="program-editor">${escape(ui('codeLabel'))}</label><textarea id="program-editor" class="practice-editor" rows="4" autocomplete="off" autocapitalize="off" spellcheck="false" dir="ltr">${escape(state.draft)}</textarea><div class="dialog-actions"><button class="primary" type="submit">${escape(ui('submit'))}</button></div></form><p class="scope-note">${escape(ui('scope'))}</p>${actions([['hint',ui('hint'),true]])}`;
   }
   if(phase==='complete'){
-    title=ui('complete');body=`<div class="signal">✧ ✧ ✧</div><p class="dialog-note">${escape(c.learned)}</p><div class="score-summary"><div><small>${escape(ui('score'))}</small><strong>${state.score}</strong></div><div><small>${escape(ui('accuracy'))}</small><strong>${state.keys?Math.round(Math.max(0,1-state.errors/state.keys)*100):100}%</strong></div></div><p class="scope-note">${escape(ui('masteryNote'))}</p>${actions([[state.lesson<course.length-1?'next':'home',ui(state.lesson<course.length-1?'next':'home')],['replay',ui('replay'),true]])}`;
+    title=ui('complete');body=`<div class="signal">✧ ✧ ✧</div><p class="dialog-note">${prose(c.learned)}</p><div class="score-summary"><div><small>${escape(ui('score'))}</small><strong>${state.score}</strong></div><div><small>${escape(ui('accuracy'))}</small><strong>${state.keys?Math.round(Math.max(0,1-state.errors/state.keys)*100):100}%</strong></div></div><p class="scope-note">${escape(ui('masteryNote'))}</p>${actions([[state.lesson<course.length-1?'next':'home',ui(state.lesson<course.length-1?'next':'home')],['replay',ui('replay'),true]])}`;
   }
   if(phase==='guide'){
     const card=messages.guide[guideIndex];title=card.title;
-    body=`<p class="dialog-note">${escape(card.text)}</p>${codeBlock(card.code)}<p class="dialog-note">${escape(card.takeaway)}</p><p class="scope-note">${escape(ui('scope'))}</p>${actions([['guide-next',ui(guideIndex===messages.guide.length-1?'foundationFinish':'foundationNext')],['home',ui('home'),true]])}`;
+    body=`<p class="dialog-note">${prose(card.text)}</p>${codeBlock(card.code)}<p class="dialog-note">${prose(card.takeaway)}</p><p class="scope-note">${escape(ui('scope'))}</p>${actions([['guide-next',ui(guideIndex===messages.guide.length-1?'foundationFinish':'foundationNext')],['home',ui('home'),true]])}`;
   }
   if(phase==='pause'){title=ui('pause');body=`<p class="dialog-note">${escape(ui('paused'))}</p>${actions([['resume',ui('resumePlay')],['restart',ui('restart'),true],['home',ui('home'),true]])}`;}
   $('flow-dialog').dataset.stage=phase;
