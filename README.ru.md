@@ -6,7 +6,7 @@
 
 Читайте код, предсказывайте результат, изменяйте программу и решайте новые задачи без шаблона.
 
-[shixilin.com/games/loopuff](https://shixilin.com/games/loopuff/?lang=ru)
+[shixilin.com/games/loopuff](https://shixilin.com/games/loopuff/ru/)
 
 ## Текущий код
 

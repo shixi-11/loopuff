@@ -6,7 +6,7 @@
 
 اقرأ الشيفرة، وتوقّع نتيجتها، وعدّلها، ثم حل مسائل جديدة دون قالب جاهز.
 
-[shixilin.com/games/loopuff](https://shixilin.com/games/loopuff/?lang=ar)
+[shixilin.com/games/loopuff](https://shixilin.com/games/loopuff/ar/)
 
 ## الشيفرة الحالية
 

@@ -6,7 +6,7 @@
 
 코드를 읽고 결과를 예측한 뒤 수정해 보세요. 마지막에는 예시 없이 새로운 문제를 해결합니다.
 
-[shixilin.com/games/loopuff](https://shixilin.com/games/loopuff/?lang=ko)
+[shixilin.com/games/loopuff](https://shixilin.com/games/loopuff/ko/)
 
 ## 현재 코드
 

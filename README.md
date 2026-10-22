@@ -6,7 +6,7 @@ A game for learning programming with Tolang.
 
 Read code, predict its result, change it, and solve new problems without a template.
 
-[shixilin.com/games/loopuff](https://shixilin.com/games/loopuff/?lang=en)
+[shixilin.com/games/loopuff](https://shixilin.com/games/loopuff/en/)
 
 ## Current code
 

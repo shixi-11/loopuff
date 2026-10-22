@@ -6,7 +6,7 @@
 
 读懂代码，预测结果，修改程序，再独立解决新的问题。
 
-[shixilin.com/games/loopuff](https://shixilin.com/games/loopuff/?lang=zh)
+[shixilin.com/games/loopuff](https://shixilin.com/games/loopuff/zh/)
 
 ## 当前代码
 

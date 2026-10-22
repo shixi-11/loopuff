@@ -6,7 +6,7 @@
 
 讀懂程式碼、預測結果、修改程式，再獨立解決新的問題。
 
-[shixilin.com/games/loopuff](https://shixilin.com/games/loopuff/?lang=zh-Hant)
+[shixilin.com/games/loopuff](https://shixilin.com/games/loopuff/zh-Hant/)
 
 ## 目前程式碼
 

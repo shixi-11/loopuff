@@ -6,7 +6,7 @@ Học lập trình và Tolang qua trò chơi.
 
 Đọc mã, dự đoán kết quả, sửa chương trình rồi tự giải bài toán mới mà không cần mẫu.
 
-[shixilin.com/games/loopuff](https://shixilin.com/games/loopuff/?lang=vi)
+[shixilin.com/games/loopuff](https://shixilin.com/games/loopuff/vi/)
 
 ## Mã hiện có
 

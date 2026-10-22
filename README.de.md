@@ -6,7 +6,7 @@ Programmieren und Tolang spielerisch lernen.
 
 Code lesen, Ergebnisse vorhersagen, Programme ändern und neue Aufgaben ohne Vorlage lösen.
 
-[shixilin.com/games/loopuff](https://shixilin.com/games/loopuff/?lang=de)
+[shixilin.com/games/loopuff](https://shixilin.com/games/loopuff/de/)
 
 ## Aktueller Code
 

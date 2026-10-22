@@ -6,7 +6,7 @@ Aprende programación y Tolang jugando.
 
 Lee código, predice el resultado, modifica el programa y resuelve problemas nuevos sin una plantilla.
 
-[shixilin.com/games/loopuff](https://shixilin.com/games/loopuff/?lang=es)
+[shixilin.com/games/loopuff](https://shixilin.com/games/loopuff/es/)
 
 ## Código actual
 

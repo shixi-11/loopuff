@@ -3,5 +3,6 @@
   "buildCommand": "node scripts/build.mjs",
   "installCommand": "",
   "outputDirectory": "dist",
+  "trailingSlash": true,
   "headers": [{"source":"/(.*)","headers":[{"key":"X-Content-Type-Options","value":"nosniff"}]}]
 }

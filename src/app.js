@@ -1,6 +1,7 @@
 import { course, locales } from './course.js';
 import { run } from './runner.js';
 import { assess } from './assessment.js';
+import { selectedLocale, languageUrl } from './routing.js';
 
 const $ = id => document.getElementById(id);
 const escape = text => String(text).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -11,7 +12,7 @@ function prose(text){
 const storageKey='loopuff-v1', reduced=matchMedia('(prefers-reduced-motion: reduce)');
 let saved={};try{saved=JSON.parse(localStorage.getItem(storageKey)||'{}');}catch{}
 const validLocale=id=>locales.some(([key])=>key===id);
-let lang=new URL(location.href).searchParams.get('lang')||saved.lang||(navigator.language.startsWith('zh')?'zh':'en');
+let lang=selectedLocale(location.href,saved.lang,navigator.languages||[navigator.language]);
 if(!validLocale(lang))lang='en';
 let messages, languageRequest=0, languageController, guideIndex=0, mapOpen=false, notice='', lastResult=null, feedbackState=null;
 let state={phase:'welcome',lesson:0,fragment:0,typed:'',draft:'',score:0,errors:0,keys:0,completed:[],...saved.state};
@@ -34,7 +35,10 @@ async function changeLanguage(next){
     if(request!==languageRequest)return;
     messages=catalog;lang=next;
     notice=feedbackState?(feedbackState.lesson?copy()[feedbackState.key]:ui(feedbackState.key))+feedbackState.suffix:'';
-    const url=new URL(location.href);url.searchParams.set('lang',lang);history.replaceState(null,'',url);
+    const url=languageUrl(location.href,lang);history.replaceState(null,'',url);
+    let canonical=document.querySelector('link[rel="canonical"]');
+    if(!canonical){canonical=document.createElement('link');canonical.rel='canonical';document.head.append(canonical);}
+    canonical.href=`https://shixilin.com/games/loopuff/${lang}/`;
     document.documentElement.lang=lang==='zh'?'zh-CN':lang==='zh-Hant'?'zh-TW':lang;
     document.documentElement.dir=lang==='ar'?'rtl':'ltr';
     document.title=`${ui('name')} · ${ui('tagline')}`;

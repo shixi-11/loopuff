@@ -6,7 +6,7 @@
 
 コードを読み、結果を予測し、書き換え、最後はひな形なしで新しい課題に挑戦します。
 
-[shixilin.com/games/loopuff](https://shixilin.com/games/loopuff/?lang=ja)
+[shixilin.com/games/loopuff](https://shixilin.com/games/loopuff/ja/)
 
 ## 現在のコード
 
