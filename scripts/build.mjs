@@ -1,0 +1,10 @@
+import { cp, mkdir, rm } from 'node:fs/promises';
+import { resolve, relative, isAbsolute } from 'node:path';
+const root = resolve(import.meta.dirname, '..'), out = resolve(root, 'dist');
+const inside = relative(root, out);
+if (!inside || inside.startsWith('..') || isAbsolute(inside) || inside !== 'dist') throw Error('invalid build output');
+await rm(out, { recursive: true, force: true });
+await mkdir(out, { recursive: true });
+await cp(resolve(root, 'public'), out, { recursive: true });
+await cp(resolve(root, 'src'), resolve(out, 'src'), { recursive: true });
+console.log('Built static game in dist/');
