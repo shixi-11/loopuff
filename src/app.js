@@ -133,13 +133,13 @@ function renderDialog(){
   }
   if(phase==='pause'){title=ui('pause');body=`<p class="dialog-note">${escape(ui('paused'))}</p>${actions([['resume',ui('resumePlay')],['restart',ui('restart'),true],['home',ui('home'),true]])}`;}
   $('flow-dialog').dataset.stage=phase;
-  $('dialog-content').innerHTML=`<div class="dialog-top"><span class="eyebrow">${ui('name')} / ${String(state.lesson+1).padStart(2,'0')}</span>${languageSelect()}</div><h2 id="dialog-title">${escape(title)}</h2>${body}<p class="feedback" id="feedback" role="status" aria-live="polite">${escape(notice)}</p><div id="practice-output" class="practice-output" ${lastResult?'':'hidden'}>${lastResult?escape(ui('output'))+codeBlock(lastResult.logs.join('\n')||ui('noOutput')):''}</div>`;
+  $('dialog-content').innerHTML=`<div class="dialog-top"><span class="eyebrow">${ui('name')} / ${String(state.lesson+1).padStart(2,'0')}</span>${languageSelect()}</div><h2 id="dialog-title">${escape(title)}</h2>${body}<p class="feedback" id="feedback" role="status" aria-live="polite">${prose(notice)}</p><div id="practice-output" class="practice-output" ${lastResult?'':'hidden'}>${lastResult?escape(ui('output'))+codeBlock(lastResult.logs.join('\n')||ui('noOutput')):''}</div>`;
   if(!$('flow-dialog').open)$('flow-dialog').showModal();
   $('flow-dialog').scrollTop=0;
 }
 function feedback(key,fromLesson=false,suffix=''){
   feedbackState={key,lesson:fromLesson,suffix};notice=(fromLesson?copy()[key]:ui(key))+suffix;
-  const el=$('feedback');if(el)el.textContent=notice;
+  const el=$('feedback');if(el)el.innerHTML=prose(notice);
   const output=$('practice-output');if(output){output.hidden=!lastResult;output.innerHTML=lastResult?escape(ui('output'))+codeBlock(lastResult.logs.join('\n')||ui('noOutput')):'';}
 }
 function submitProgram(){
