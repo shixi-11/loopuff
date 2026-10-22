@@ -245,6 +245,13 @@
       "add": "Dùng phép cộng để tính kết quả",
       "bind": "Gắn giá trị với một tên",
       "name": "Dùng tên đã gắn trong kết quả"
-    }
+    },
+    "edit": "Sửa mã",
+    "yourCode": "Mã bạn đã nộp",
+    "breakdown": "Chi tiết điểm",
+    "task": "Nhiệm vụ của bạn",
+    "noReport": "Chưa có kết quả đánh giá",
+    "noReportHint": "Viết và nộp chương trình cho bài này. Kết quả sẽ được lưu trong trình duyệt này.",
+    "viewResult": "Xem kết quả"
   }
 }

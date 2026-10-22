@@ -245,6 +245,13 @@
       "add": "Eine Ausgabe durch Addition berechnen",
       "bind": "Einen Namen an einen Wert binden",
       "name": "Den gebundenen Namen für eine Ausgabe nutzen"
-    }
+    },
+    "edit": "Code bearbeiten",
+    "yourCode": "Dein eingereichter Code",
+    "breakdown": "Punkte im Detail",
+    "task": "Deine Aufgabe",
+    "noReport": "Noch kein Ergebnis",
+    "noReportHint": "Schreibe ein Programm für diese Aufgabe und reiche es ein. Das Ergebnis wird in diesem Browser gespeichert.",
+    "viewResult": "Ergebnis ansehen"
   }
 }

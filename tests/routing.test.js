@@ -4,7 +4,20 @@ import { readFile } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { locales } from '../src/course.js';
-import { pathLocale, selectedLocale, languageUrl } from '../src/routing.js';
+import { pathLocale, selectedLocale, languageUrl, parseRoute, routeUrl } from '../src/routing.js';
+
+test('lesson and result links survive language switches on both hosts',()=>{
+  for(const [locale]of locales)for(const prefix of ['', '/games/loopuff']){
+    const input=`https://example.com${prefix}/zh/learn/names/result/`;
+    const target=languageUrl(input,locale);
+    assert.equal(target.pathname,`${prefix}/${locale}/learn/names/result/`);
+    assert.deepEqual(parseRoute(target.pathname),{locale,view:'result',lessonId:'names'});
+    assert.equal(routeUrl(target.href,locale,'lesson','names').pathname,`${prefix}/${locale}/learn/names/`);
+    assert.equal(pathLocale(target.pathname),locale);
+  }
+  for(const path of ['/zh/learn/unknown/result/','/zh/learn/names/unknown/','/zh/guide/extra/'])assert.equal(parseRoute(path),null);
+  assert.throws(()=>routeUrl('https://example.com/','zh','result','unknown'),/Unknown lesson/);
+});
 test('all languages have clean paths on the official site and standalone host',()=>{
   for(const [locale]of locales)for(const prefix of ['', '/games/loopuff']){
     const url=languageUrl(`https://example.com${prefix}/?lang=en#learn`,locale);
@@ -28,5 +41,9 @@ test('build emits localized entry points with canonical metadata',async()=>{
     const html=await readFile(new URL(`../dist/${locale}/index.html`,import.meta.url),'utf8');
     assert.ok(html.includes(`https://shixilin.com/games/loopuff/${locale}/`));
     assert.ok(!html.includes('?lang='));
+    for(const suffix of ['guide/','learn/signal/','learn/names/result/']){
+      const page=await readFile(new URL(`../dist/${locale}/${suffix}index.html`,import.meta.url),'utf8');
+      assert.ok(page.includes(`https://shixilin.com/games/loopuff/${locale}/${suffix}`));
+    }
   }
 });

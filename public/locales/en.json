@@ -245,6 +245,13 @@
       "add": "Use addition to compute an output",
       "bind": "Create a name binding",
       "name": "Use the bound name in an output"
-    }
+    },
+    "edit": "Edit code",
+    "yourCode": "Your code",
+    "breakdown": "Score breakdown",
+    "task": "Your task",
+    "noReport": "No assessment yet",
+    "noReportHint": "Write and submit a program for this task. Your result will be saved in this browser.",
+    "viewResult": "View result"
   }
 }

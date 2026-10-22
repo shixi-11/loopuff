@@ -245,6 +245,13 @@
       "add": "Calcular una salida mediante una suma",
       "bind": "Vincular un nombre a un valor",
       "name": "Usar el nombre vinculado en una salida"
-    }
+    },
+    "edit": "Editar código",
+    "yourCode": "Tu código",
+    "breakdown": "Desglose de puntos",
+    "task": "Tu tarea",
+    "noReport": "Todavía no hay resultados",
+    "noReportHint": "Escribe y envía un programa para esta tarea. El resultado se guardará en este navegador.",
+    "viewResult": "Ver resultado"
   }
 }

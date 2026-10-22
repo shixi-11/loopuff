@@ -4,6 +4,7 @@
 - Chinese names: 环灵 (zh), 環靈 (zh-Hant). Every other locale uses Loopuff. Repository and URL slug: loopuff.
 - Required locales: en, zh, zh-Hant, ja, ko, vi, de, es, ru, uk, ar. Translate interface, lessons, assessments, hints and errors; never silently mix languages. Keep code and output unchanged. Arabic text is RTL; code is LTR.
 - Keep translations structurally aligned with the source content. Switching language must preserve lesson and progress. Check layouts for longer text and narrow screens.
+- Model learning as a page flow: localized home, guide, lesson and assessment-result routes. Give sustained reading and code work a full page; reserve dialogs for short menus and pause controls. Preserve drafts and grades across back/forward, reload and language changes; edited code must invalidate the old result.
 - Teach purpose, meaning, observable behavior and trade-offs. Gradually remove scaffolding and accept distinct correct programs when the task permits.
 - Grade independent code by actual execution, required output and concepts contributing to that output. Separate task scores from flight points; speed, retries and matching example text do not affect grades. Editing invalidates the displayed grade until resubmission. A task score does not certify language fluency.
 - Describe only implemented features as available. Keep incomplete curriculum plans in developer documentation. No generated marketing filler or internal work narration in player-facing text.
