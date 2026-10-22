@@ -1,6 +1,6 @@
 import { course, locales } from './course.js';
 import { run } from './runner.js';
-import { assess } from './assessment.js';
+import { assess, grade } from './assessment.js';
 import { selectedLocale, languageUrl } from './routing.js';
 
 const $ = id => document.getElementById(id);
@@ -15,7 +15,8 @@ const validLocale=id=>locales.some(([key])=>key===id);
 let lang=selectedLocale(location.href,saved.lang,navigator.languages||[navigator.language]);
 if(!validLocale(lang))lang='en';
 let messages, languageRequest=0, languageController, guideIndex=0, mapOpen=false, notice='', lastResult=null, feedbackState=null;
-let state={phase:'welcome',lesson:0,fragment:0,typed:'',draft:'',score:0,errors:0,keys:0,completed:[],...saved.state};
+let state={phase:'welcome',lesson:0,fragment:0,typed:'',draft:'',assessedSource:null,grades:{},score:0,errors:0,keys:0,completed:[],...saved.state};
+if(!state.grades||typeof state.grades!=='object'||Array.isArray(state.grades))state.grades={};
 if(!['welcome','brief','typing','predict','output','explain','remix','independent','complete','guide','pause'].includes(state.phase)) state.phase='welcome';
 if(!Number.isInteger(state.lesson)||state.lesson<0||state.lesson>=course.length)state.lesson=0;
 state.completed=Array.isArray(state.completed)?state.completed.filter(id=>course.some(l=>l.id===id)):[];
@@ -75,7 +76,7 @@ function applyStatic(){
   document.querySelector('.next-key small').textContent=ui('nextKey');$('cockpit').setAttribute('aria-label',ui('assembled'));
   $('combo-text').textContent=ui('takeTime');
 }
-function begin(index){state={...state,phase:'brief',lesson:index,fragment:0,typed:'',draft:'',score:0,errors:0,keys:0};notice='';feedbackState=null;lastResult=null;render();save();}
+function begin(index){state={...state,phase:'brief',lesson:index,fragment:0,typed:'',draft:'',assessedSource:null,score:0,errors:0,keys:0};notice='';feedbackState=null;lastResult=null;render();save();}
 function move(phase){state.phase=phase;notice='';feedbackState=null;lastResult=null;render();save();}
 function actions(buttons){return `<div class="dialog-actions">${buttons.map(([action,label,secondary])=>`<button class="${secondary?'text-button':'primary'}" data-action="${action}">${escape(label)}</button>`).join('')}</div>`;}
 function codeBlock(source){return `<pre class="exercise-code" dir="ltr">${escape(source)}</pre>`;}
@@ -113,6 +114,14 @@ function onTyping(event){
   }
   const position=input.selectionStart;renderTyping();input.setSelectionRange(Math.min(position,input.value.length),Math.min(position,input.value.length));save();
 }
+function assessmentPanel(){
+  if(state.assessedSource!==state.draft)return '';
+  const report=grade(state.draft,lesson().independent),a=messages.assessment;
+  const errorKey=report.code==='name'?'nameError':report.code;
+  const explanation=(report.ok?a.success:ui(errorKey)||ui('limit'))+(report.code==='syntax'?` ${report.position+1}.`:'');
+  const checks=report.checks.map(check=>`<li class="assessment-check" data-status="${check.status}"><div><span>${escape(a.labels[check.id])}</span><bdi dir="ltr">${check.points} / ${check.max}</bdi></div><small>${escape(a[check.status])}</small>${check.requirements?`<ul class="concept-checks">${check.requirements.map(item=>`<li><span aria-hidden="true">${check.status==='blocked'?'○':item.passed?'✓':'○'}</span> ${escape(a.concepts[item.concept])}</li>`).join('')}</ul>`:''}</li>`).join('');
+  return `<section class="assessment-report" data-score="${report.score}" data-passed="${report.ok}"><header><div><h3>${escape(a.title)}</h3><p>${escape(report.ok?a.success:a.retry)}</p></div><strong class="assessment-score"><bdi dir="ltr">${report.score}<small> / 100</small></bdi></strong></header><ul class="assessment-checks">${checks}</ul>${report.ok?'':`<p class="assessment-explanation">${prose(explanation)}</p>`}<div class="assessment-outputs"><div><small>${escape(a.expected)}</small>${codeBlock(lesson().independent.logs.join('\n'))}</div><div><small>${escape(a.actual)}</small>${codeBlock(report.result?report.result.logs.join('\n')||ui('noOutput'):a.notRun)}</div></div><p class="scope-note">${escape(a.note)}</p>${report.ok?actions([['finish-assessment',a.continue]]):''}</section>`;
+}
 function renderDialog(){
   const c=copy(),phase=state.phase;let title='',body='';
   if(phase==='brief'){title=c.title;body=`<p class="dialog-note">${prose(c.intro)}</p>${codeBlock(lesson().source)}<p>${prose(c.goal)}</p>${actions([['type',ui('launch')]])}`;}
@@ -126,10 +135,10 @@ function renderDialog(){
     title=ui('practice');body=`<p class="dialog-note">${prose(c.remix)}</p>${codeBlock(lesson().remix.template)}<form id="program-form"><label class="editor-label" for="program-editor">${escape(ui('valueLabel'))}</label><input id="program-editor" class="practice-editor value-editor" inputmode="numeric" autocomplete="off" value="${escape(state.draft)}" dir="ltr"><div class="dialog-actions"><button class="primary" type="submit">${escape(ui('submit'))}</button></div></form>${actions([['hint',ui('hint'),true]])}`;
   }
   if(phase==='independent'){
-    title=ui('independent');body=`<p class="dialog-note">${prose(c.independent)}</p><form id="program-form"><label class="editor-label" for="program-editor">${escape(ui('codeLabel'))}</label><textarea id="program-editor" class="practice-editor" rows="4" autocomplete="off" autocapitalize="off" spellcheck="false" dir="ltr">${escape(state.draft)}</textarea><div class="dialog-actions"><button class="primary" type="submit">${escape(ui('submit'))}</button></div></form><p class="scope-note">${escape(ui('scope'))}</p>${actions([['hint',ui('hint'),true]])}`;
+    title=ui('independent');body=`<p class="dialog-note">${prose(c.independent)}</p><p class="scope-note">${escape(messages.assessment.intro)}</p><form id="program-form"><label class="editor-label" for="program-editor">${escape(ui('codeLabel'))}</label><textarea id="program-editor" class="practice-editor" rows="4" autocomplete="off" autocapitalize="off" spellcheck="false" dir="ltr">${escape(state.draft)}</textarea><div class="dialog-actions"><button class="primary" type="submit">${escape(messages.assessment.submit)}</button></div></form><div id="assessment-panel" aria-live="polite">${assessmentPanel()}</div><p class="scope-note">${escape(ui('scope'))}</p>${actions([['hint',ui('hint'),true]])}`;
   }
   if(phase==='complete'){
-    title=ui('complete');body=`<div class="signal">✧ ✧ ✧</div><p class="dialog-note">${prose(c.learned)}</p><div class="score-summary"><div><small>${escape(ui('score'))}</small><strong>${state.score}</strong></div><div><small>${escape(ui('accuracy'))}</small><strong>${state.keys?Math.round(Math.max(0,1-state.errors/state.keys)*100):100}%</strong></div></div><p class="scope-note">${escape(ui('masteryNote'))}</p>${actions([[state.lesson<course.length-1?'next':'home',ui(state.lesson<course.length-1?'next':'home')],['replay',ui('replay'),true]])}`;
+    title=ui('complete');body=`<div class="signal">✧ ✧ ✧</div><p class="dialog-note">${prose(c.learned)}</p><p class="completed-grade">${escape(messages.assessment.score)} <bdi dir="ltr">${state.grades[lesson().id]?.score??100} / 100</bdi></p><div class="score-summary"><div><small>${escape(ui('score'))}</small><strong>${state.score}</strong></div><div><small>${escape(ui('accuracy'))}</small><strong>${state.keys?Math.round(Math.max(0,1-state.errors/state.keys)*100):100}%</strong></div></div><p class="scope-note">${escape(ui('masteryNote'))}</p>${actions([[state.lesson<course.length-1?'next':'home',ui(state.lesson<course.length-1?'next':'home')],['replay',ui('replay'),true]])}`;
   }
   if(phase==='guide'){
     const card=messages.guide[guideIndex];title=card.title;
@@ -147,15 +156,20 @@ function feedback(key,fromLesson=false,suffix=''){
   const output=$('practice-output');if(output){output.hidden=!lastResult;output.innerHTML=lastResult?escape(ui('output'))+codeBlock(lastResult.logs.join('\n')||ui('noOutput')):'';}
 }
 function submitProgram(){
+  if(state.phase==='independent'){
+    const report=grade(state.draft,lesson().independent),previous=state.grades[lesson().id];
+    state.assessedSource=state.draft;
+    state.grades[lesson().id]={score:report.score,best:Math.max(previous?.best||0,report.score),attempts:(previous?.attempts||0)+1};
+    lastResult=null;notice='';feedbackState=null;renderDialog();save();
+    $('assessment-panel').scrollIntoView({block:'nearest',behavior:'instant'});return;
+  }
   try{
-    const source=state.phase==='remix'?lesson().remix.template.replace('___',state.draft.trim()):state.draft;
-    if(state.phase==='remix'&&!/^\d+$/.test(state.draft.trim())){feedback('numberRequired');return;}
-    const goal=state.phase==='remix'?{logs:lesson().remix.logs,require:[]}:lesson().independent;
+    const source=lesson().remix.template.replace('___',state.draft.trim());
+    if(!/^\d+$/.test(state.draft.trim())){feedback('numberRequired');return;}
+    const goal={logs:lesson().remix.logs,require:[]};
     const check=assess(source,goal);lastResult=check.result;
     if(!check.ok){feedback(check.code);return;}
-    if(state.phase==='remix'){state.draft='';move('independent');return;}
-    if(!state.completed.includes(lesson().id))state.completed.push(lesson().id);
-    beacon=1;burst(W*.5,H*.4,28);move('complete');
+    state.draft='';state.assessedSource=null;move('independent');
   }catch(error){lastResult=null;feedback(error.code==='syntax'?'syntax':error.code==='name'?'nameError':'limit',false,error.code==='syntax'?` ${error.position+1}.`:'');}
 }
 function renderMap(){
@@ -166,7 +180,11 @@ function renderMap(){
 }
 function pause(){if(state.phase==='welcome'||state.phase==='pause')return;state.previousPhase=state.phase;move('pause');}
 document.addEventListener('change',event=>{if(event.target.matches('[data-language],#language-select'))changeLanguage(event.target.value);});
-document.addEventListener('input',event=>{if(event.target.id==='program-editor'){state.draft=event.target.value;save();}});
+document.addEventListener('input',event=>{if(event.target.id==='program-editor'){
+  state.draft=event.target.value;
+  if(state.phase==='independent'&&state.assessedSource!==null){state.assessedSource=null;$('assessment-panel').textContent=messages.assessment.changed;}
+  save();
+}});
 document.addEventListener('submit',event=>{if(event.target.id==='program-form'){event.preventDefault();submitProgram();}});
 document.addEventListener('click',event=>{
   const target=event.target.closest('button');if(!target)return;
@@ -174,6 +192,10 @@ document.addEventListener('click',event=>{
   if(target.dataset.answer!==undefined){if(Number(target.dataset.answer)===0){state.draft='';move('remix');}else feedback('answerHint',true);return;}
   if(target.dataset.lesson!==undefined){mapOpen=false;$('map-dialog').close();begin(Number(target.dataset.lesson));return;}
   const action=target.dataset.action;
+  if(action==='finish-assessment'&&state.phase==='independent'&&state.assessedSource===state.draft&&grade(state.draft,lesson().independent).ok){
+    if(!state.completed.includes(lesson().id))state.completed.push(lesson().id);
+    beacon=1;burst(W*.5,H*.4,28);move('complete');return;
+  }
   if(action==='type'){move('typing');$('typing-field').focus();}
   if(action==='explain')move('explain');
   if(action==='hint')feedback(state.phase==='remix'?'remixHint':'independentHint',true);

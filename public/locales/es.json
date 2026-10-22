@@ -50,7 +50,7 @@
     "codeLabel": "Tu programa",
     "scope": "El intérprete inicial admite números, sumas, nombres y salida. No es el compilador completo de Tolang ni la TVM.",
     "complete": "¡Tu programa funciona!",
-    "score": "Puntos al teclear",
+    "score": "Puntos de vuelo",
     "accuracy": "Precisión al teclear",
     "masteryNote": "Los puntos reflejan la práctica de escritura, no el dominio de la programación.",
     "next": "Siguiente misión →",
@@ -219,5 +219,32 @@
       "code": "7.log()",
       "takeaway": "Mostrar un número en este juego no envía ninguna transacción. Estas primeras ideas también te ayudarán a aprender otros lenguajes."
     }
-  ]
+  ],
+  "assessment": {
+    "title": "Evaluación de código",
+    "intro": "Escribe un programa completo por tu cuenta. Se puntúan la ejecución, la salida y los requisitos del ejercicio. Puedes corregirlo y volver a enviarlo.",
+    "submit": "Evaluar mi código",
+    "continue": "Completar reto",
+    "score": "Puntuación del ejercicio",
+    "pass": "Cumplido",
+    "fail": "Por corregir",
+    "blocked": "Sin comprobar",
+    "expected": "Salida esperada",
+    "actual": "Tu salida real",
+    "notRun": "El programa no se ejecutó",
+    "success": "Has cumplido todos los requisitos de este ejercicio.",
+    "retry": "Revisa lo que falta e inténtalo de nuevo.",
+    "changed": "El código ha cambiado. Envíalo de nuevo para evaluarlo.",
+    "note": "La puntuación corresponde solo a este ejercicio. Las soluciones correctas reciben los mismos puntos; la velocidad al escribir no cuenta.",
+    "labels": {
+      "execution": "Ejecución del programa",
+      "output": "Salida",
+      "concepts": "Requisitos del ejercicio"
+    },
+    "concepts": {
+      "add": "Calcular una salida mediante una suma",
+      "bind": "Vincular un nombre a un valor",
+      "name": "Usar el nombre vinculado en una salida"
+    }
+  }
 }

@@ -50,7 +50,7 @@
     "codeLabel": "Dein Programm",
     "scope": "Der Einsteiger-Interpreter unterstützt Zahlen, Addition, Namen und Ausgabe. Er ist nicht der vollständige Tolang-Compiler oder die TVM.",
     "complete": "Dein Programm funktioniert!",
-    "score": "Tipp-Punkte",
+    "score": "Flugpunkte",
     "accuracy": "Tippgenauigkeit",
     "masteryNote": "Tipp-Punkte beschreiben die Eingabeübung, nicht deine Programmierkenntnisse.",
     "next": "Nächste Mission →",
@@ -219,5 +219,32 @@
       "code": "7.log()",
       "takeaway": "Die Zahlenausgabe im Spiel sendet keine Blockchain-Transaktion. Diese Grundlagen helfen dir auch bei anderen Programmiersprachen."
     }
-  ]
+  ],
+  "assessment": {
+    "title": "Codebewertung",
+    "intro": "Schreibe selbst ein vollständiges Programm. Punkte gibt es für die Ausführung, die Ausgabe und die Aufgabenbedingungen. Du kannst es jederzeit überarbeiten und erneut einreichen.",
+    "submit": "Bewerten lassen",
+    "continue": "Aufgabe abschließen",
+    "score": "Punkte dieser Aufgabe",
+    "pass": "Erfüllt",
+    "fail": "Noch überarbeiten",
+    "blocked": "Nicht geprüft",
+    "expected": "Geforderte Ausgabe",
+    "actual": "Deine tatsächliche Ausgabe",
+    "notRun": "Programm nicht ausgeführt",
+    "success": "Du hast alle Bedingungen dieser Aufgabe erfüllt.",
+    "retry": "Prüfe, was noch fehlt, und versuche es erneut.",
+    "changed": "Code geändert. Reiche ihn für eine neue Bewertung erneut ein.",
+    "note": "Diese Punktzahl gilt nur für diese Aufgabe. Unterschiedliche richtige Lösungen erhalten dieselben Punkte; das Tipptempo zählt nicht.",
+    "labels": {
+      "execution": "Programmausführung",
+      "output": "Ausgabe",
+      "concepts": "Aufgabenbedingungen"
+    },
+    "concepts": {
+      "add": "Eine Ausgabe durch Addition berechnen",
+      "bind": "Einen Namen an einen Wert binden",
+      "name": "Den gebundenen Namen für eine Ausgabe nutzen"
+    }
+  }
 }

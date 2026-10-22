@@ -50,7 +50,7 @@
     "codeLabel": "Your program",
     "scope": "This introductory interpreter supports numbers, addition, names and display. It is not the full Tolang compiler or TVM.",
     "complete": "You made the program work.",
-    "score": "Typing score",
+    "score": "Flight points",
     "accuracy": "Typing accuracy",
     "masteryNote": "Typing scores describe practice, not programming mastery.",
     "next": "Next mission →",
@@ -219,5 +219,32 @@
       "code": "7.log()",
       "takeaway": "Displaying a number in this game sends no blockchain transaction. These first ideas also help you learn other programming languages."
     }
-  ]
+  ],
+  "assessment": {
+    "title": "Code assessment",
+    "intro": "Write a complete program on your own. Earn points for running it, matching the output and meeting the task requirements. Revise and resubmit anytime.",
+    "submit": "Submit for grading",
+    "continue": "Finish challenge",
+    "score": "Task score",
+    "pass": "Passed",
+    "fail": "Needs work",
+    "blocked": "Not checked",
+    "expected": "Required output",
+    "actual": "Your actual output",
+    "notRun": "Program did not run",
+    "success": "You met every requirement for this task.",
+    "retry": "Review what is missing, then try again.",
+    "changed": "Code changed. Submit again for a new grade.",
+    "note": "This score covers this task only. Different correct solutions earn the same points; typing speed does not affect it.",
+    "labels": {
+      "execution": "Program execution",
+      "output": "Output",
+      "concepts": "Task requirements"
+    },
+    "concepts": {
+      "add": "Use addition to compute an output",
+      "bind": "Create a name binding",
+      "name": "Use the bound name in an output"
+    }
+  }
 }

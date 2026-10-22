@@ -50,7 +50,7 @@
     "codeLabel": "Chương trình của bạn",
     "scope": "Trình thông dịch nhập môn hỗ trợ số, phép cộng, tên và hiển thị. Đây không phải toàn bộ trình biên dịch Tolang hay TVM.",
     "complete": "Bạn đã làm chương trình chạy đúng!",
-    "score": "Điểm gõ phím",
+    "score": "Điểm bay",
     "accuracy": "Độ chính xác khi gõ",
     "masteryNote": "Điểm gõ phím ghi lại việc luyện nhập, không đo mức thành thạo lập trình.",
     "next": "Nhiệm vụ tiếp theo →",
@@ -219,5 +219,32 @@
       "code": "7.log()",
       "takeaway": "Hiển thị số trong trò chơi không gửi giao dịch blockchain. Những khái niệm cơ bản này cũng giúp bạn học các ngôn ngữ khác."
     }
-  ]
+  ],
+  "assessment": {
+    "title": "Chấm bài lập trình",
+    "intro": "Tự viết một chương trình hoàn chỉnh. Điểm dựa trên việc chạy được, kết quả đầu ra và yêu cầu của bài. Bạn có thể sửa rồi nộp lại.",
+    "submit": "Nộp bài chấm điểm",
+    "continue": "Hoàn thành thử thách",
+    "score": "Điểm bài này",
+    "pass": "Đạt",
+    "fail": "Cần sửa",
+    "blocked": "Chưa kiểm tra",
+    "expected": "Kết quả cần đạt",
+    "actual": "Kết quả thực tế",
+    "notRun": "Chương trình chưa chạy",
+    "success": "Bạn đã đáp ứng mọi yêu cầu của bài này.",
+    "retry": "Xem phần còn thiếu rồi thử lại nhé.",
+    "changed": "Mã đã thay đổi. Hãy nộp lại để chấm điểm.",
+    "note": "Điểm chỉ dành cho bài này. Các cách giải đúng được chấm như nhau; tốc độ gõ không ảnh hưởng đến điểm.",
+    "labels": {
+      "execution": "Chạy chương trình",
+      "output": "Kết quả đầu ra",
+      "concepts": "Yêu cầu của bài"
+    },
+    "concepts": {
+      "add": "Dùng phép cộng để tính kết quả",
+      "bind": "Gắn giá trị với một tên",
+      "name": "Dùng tên đã gắn trong kết quả"
+    }
+  }
 }

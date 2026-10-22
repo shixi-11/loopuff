@@ -12,6 +12,8 @@ Code lesen, Ergebnisse vorhersagen, Programme ändern und neue Aufgaben ohne Vor
 
 Das erste Kapitel ist spielbar: drei Missionen zu Werten, Addition und Namensbindungen mit Vorhersagen, Erklärungen, Änderungen und eigenen Programmen. Oberfläche und Kurs unterstützen elf Sprachen. Ein kleiner Lerninterpreter läuft direkt im Browser, ohne Backend oder externe Pakete. Er ist nicht der vollständige Tolang-Compiler oder die TVM. Weitere Kapitel sind in Entwicklung.
 
+Eigenständige Aufgaben werden mit bis zu 100 Punkten für Ausführung, Ausgabe und Aufgabenbedingungen bewertet. Überarbeiten und erneut einreichen ist möglich; Tipptempo und Übereinstimmung mit dem Beispiel zählen nicht.
+
 ## Entwicklung
 
 ```sh

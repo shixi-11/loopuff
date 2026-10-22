@@ -12,6 +12,8 @@ Học lập trình và Tolang qua trò chơi.
 
 Chương đầu đã chơi được với ba nhiệm vụ về giá trị, phép cộng và gắn tên, gồm dự đoán, giải thích, sửa đổi và tự viết chương trình. Giao diện và bài học hỗ trợ 11 ngôn ngữ. Trình thông dịch nhỏ chạy ngay trong trình duyệt, không cần máy chủ hay gói bên ngoài. Đây không phải toàn bộ trình biên dịch Tolang hay TVM; các chương tiếp theo đang phát triển.
 
+Bài tự viết được chấm trên thang 100 điểm theo khả năng chạy, kết quả và yêu cầu của bài. Có thể sửa rồi nộp lại; tốc độ gõ hay việc giống mã mẫu không ảnh hưởng đến điểm.
+
 ## Phát triển
 
 ```sh

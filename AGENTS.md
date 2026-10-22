@@ -5,6 +5,7 @@
 - Required locales: en, zh, zh-Hant, ja, ko, vi, de, es, ru, uk, ar. Translate interface, lessons, assessments, hints and errors; never silently mix languages. Keep code and output unchanged. Arabic text is RTL; code is LTR.
 - Keep translations structurally aligned with the source content. Switching language must preserve lesson and progress. Check layouts for longer text and narrow screens.
 - Teach purpose, meaning, observable behavior and trade-offs. Gradually remove scaffolding and accept distinct correct programs when the task permits.
+- Grade independent code by actual execution, required output and concepts contributing to that output. Separate task scores from flight points; speed, retries and matching example text do not affect grades. Editing invalidates the displayed grade until resubmission. A task score does not certify language fluency.
 - Describe only implemented features as available. Keep incomplete curriculum plans in developer documentation. No generated marketing filler or internal work narration in player-facing text.
 - The introductory interpreter supports only its documented subset. Never label it the complete Tolang compiler or TVM. Validate new teaching semantics before publishing them.
 - Do not add non-public upstream source, compiler binaries, private research, credentials or private repository history. The public project has its own Git history.
