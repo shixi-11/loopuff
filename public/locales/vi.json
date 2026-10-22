@@ -69,7 +69,12 @@
     "close": "Đóng",
     "chapterNote": "Chương 1 · 3 nhiệm vụ. Các chương tiếp theo đang được phát triển.",
     "footer": "Từ câu hỏi đầu tiên đến chương trình đầu tiên.",
-    "launch": "Đọc hiểu rồi bắt đầu gõ ↗"
+    "launch": "Đọc hiểu rồi bắt đầu gõ ↗",
+    "navigation": "Điều hướng chính",
+    "navHome": "Trang chủ",
+    "navCourse": "Khóa học",
+    "navGuide": "Lập trình cơ bản",
+    "mapShort": "Bản đồ"
   },
   "lessons": [
     {

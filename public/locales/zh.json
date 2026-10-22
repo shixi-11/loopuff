@@ -69,7 +69,12 @@
     "close": "关闭",
     "chapterNote": "第一章 · 3 个航程，后续章节正在开发。",
     "footer": "从第一个疑问，到第一段程序。",
-    "launch": "读懂了，开始输入 ↗"
+    "launch": "读懂了，开始输入 ↗",
+    "navigation": "主导航",
+    "navHome": "首页",
+    "navCourse": "课程",
+    "navGuide": "编程入门",
+    "mapShort": "航线"
   },
   "lessons": [
     {

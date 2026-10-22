@@ -69,7 +69,12 @@
     "close": "關閉",
     "chapterNote": "第一章 · 3 個航程，後續章節正在開發。",
     "footer": "從第一個疑問，到第一段程式。",
-    "launch": "讀懂了，開始輸入 ↗"
+    "launch": "讀懂了，開始輸入 ↗",
+    "navigation": "主導覽",
+    "navHome": "首頁",
+    "navCourse": "課程",
+    "navGuide": "程式設計入門",
+    "mapShort": "航線"
   },
   "lessons": [
     {

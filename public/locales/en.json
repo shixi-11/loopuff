@@ -69,7 +69,12 @@
     "close": "Close",
     "chapterNote": "First chapter · 3 missions. More chapters are in development.",
     "footer": "From your first question to your first program.",
-    "launch": "Read it, then write it ↗"
+    "launch": "Read it, then write it ↗",
+    "navigation": "Main navigation",
+    "navHome": "Home",
+    "navCourse": "Course",
+    "navGuide": "Programming basics",
+    "mapShort": "Map"
   },
   "lessons": [
     {

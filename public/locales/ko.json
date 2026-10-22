@@ -69,7 +69,12 @@
     "close": "닫기",
     "chapterNote": "1장 · 미션 3개. 다음 장은 개발 중입니다.",
     "footer": "첫 질문에서 첫 프로그램까지.",
-    "launch": "이해했다면 입력해 봐요 ↗"
+    "launch": "이해했다면 입력해 봐요 ↗",
+    "navigation": "주 메뉴",
+    "navHome": "홈",
+    "navCourse": "학습 과정",
+    "navGuide": "프로그래밍 기초",
+    "mapShort": "항로"
   },
   "lessons": [
     {

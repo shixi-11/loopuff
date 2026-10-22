@@ -69,7 +69,12 @@
     "close": "Cerrar",
     "chapterNote": "Capítulo 1 · 3 misiones. Los siguientes capítulos están en desarrollo.",
     "footer": "De tu primera pregunta a tu primer programa.",
-    "launch": "Entiende y empieza a escribir ↗"
+    "launch": "Entiende y empieza a escribir ↗",
+    "navigation": "Navegación principal",
+    "navHome": "Inicio",
+    "navCourse": "Curso",
+    "navGuide": "Conceptos básicos",
+    "mapShort": "Mapa"
   },
   "lessons": [
     {

@@ -24,7 +24,7 @@ function readRoute(){
   const route=parseRoute(location.pathname),previousLesson=state.lesson;
   if(route?.lessonId){state.lesson=course.findIndex(item=>item.id===route.lessonId);if(previousLesson!==state.lesson){state.draft='';state.assessedSource=null;}}
   if(route?.view==='result')state.phase='result';
-  else if(route?.view==='guide')state.phase='guide';
+  else if(route?.view==='guide'){if(!['guide','welcome','pause'].includes(state.phase))state.resumePhase=state.phase;state.phase='guide';}
   else if(route?.view==='lesson'){
     if(previousLesson!==state.lesson){state.phase='brief';state.draft='';state.assessedSource=null;}
     else if(state.phase==='result')state.phase='independent';
@@ -74,8 +74,12 @@ function applyStatic(){
   document.querySelector('.edition').textContent=ui('tagline');
   $('language-label').textContent=ui('language');$('language-select').setAttribute('aria-label',ui('language'));
   $('language-select').innerHTML=locales.map(([id,label])=>`<option value="${id}">${label}</option>`).join('');$('language-select').value=lang;
-  $('map-button').innerHTML=`✧ ${escape(ui('map'))} <b id="map-count">${state.completed.length} / ${course.length}</b>`;
-  $('pause-button').textContent=`Ⅱ ${ui('pause')}`;$('pause-button').setAttribute('aria-label',ui('pause'));document.querySelector('nav').setAttribute('aria-label',ui('map'));
+  $('map-button').innerHTML=`✧ <span class="map-long">${escape(ui('map'))}</span><span class="map-short">${escape(ui('mapShort'))}</span> <b id="map-count">${state.completed.length} / ${course.length}</b>`;
+  $('map-button').setAttribute('aria-label',`${ui('map')} ${state.completed.length} / ${course.length}`);
+  $('pause-button').textContent=`Ⅱ ${ui('pause')}`;$('pause-button').setAttribute('aria-label',ui('pause'));document.querySelector('.header-controls').setAttribute('aria-label',ui('map'));
+  const navigation=$('page-navigation'),onPage=!['welcome','typing','pause'].includes(state.phase);
+  navigation.hidden=!onPage;navigation.setAttribute('aria-label',ui('navigation'));
+  navigation.innerHTML=`<a data-action="home" href="${routeUrl(location.href,lang,'home').pathname}">${escape(ui('navHome'))}</a><a data-action="resume-course" href="${routeUrl(location.href,lang,'lesson',lesson().id).pathname}" ${state.phase!=='guide'?'aria-current="page"':''}>${escape(ui('navCourse'))}</a><a data-action="open-guide" href="${routeUrl(location.href,lang,'guide').pathname}" ${state.phase==='guide'?'aria-current="page"':''}>${escape(ui('navGuide'))}</a>`;
   $('universe').setAttribute('aria-label',ui('map'));document.querySelector('.coordinate').textContent='LOOPUFF / 01';
   document.querySelector('.welcome .eyebrow').textContent=ui('pilot');
   document.querySelector('.welcome h1').innerHTML=ui('hero').split(/\\n|\n/).map(escape).join('<br>');
@@ -229,6 +233,8 @@ document.addEventListener('click',event=>{
   if(target.dataset.answer!==undefined){if(Number(target.dataset.answer)===0){state.draft='';move('remix');}else feedback('answerHint',true);return;}
   if(target.dataset.lesson!==undefined){mapOpen=false;$('map-dialog').close();begin(Number(target.dataset.lesson));return;}
   const action=target.dataset.action;
+  if(action==='open-guide'){if(!['welcome','guide','pause'].includes(state.phase))state.resumePhase=state.phase;guideIndex=0;move('guide');return;}
+  if(action==='resume-course'){if(state.phase==='guide')move(state.resumePhase==='result'?'independent':state.resumePhase||'brief');else if(state.phase==='result')move('independent');return;}
   if(action==='edit-assessment'){move('independent');$('program-editor')?.focus();return;}
   if(action==='view-result'&&state.assessedSource!==null&&state.assessedSource===state.draft){move('result');return;}
   if(action==='finish-assessment'&&state.phase==='result'&&state.assessedSource===state.draft&&grade(state.draft,lesson().independent).ok){

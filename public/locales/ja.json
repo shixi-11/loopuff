@@ -69,7 +69,12 @@
     "close": "閉じる",
     "chapterNote": "第1章 · 3 ミッション。続く章は開発中です。",
     "footer": "最初の疑問から、最初のプログラムへ。",
-    "launch": "読んだら書いてみよう ↗"
+    "launch": "読んだら書いてみよう ↗",
+    "navigation": "メインナビゲーション",
+    "navHome": "ホーム",
+    "navCourse": "コース",
+    "navGuide": "プログラミング入門",
+    "mapShort": "航路"
   },
   "lessons": [
     {
