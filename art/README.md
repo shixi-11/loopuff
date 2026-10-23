@@ -1,5 +1,13 @@
 # Aircraft
 
+The approved aircraft source remains preserved in this folder as the earlier selected 2.5D concept. The current game draws its small triangular spacecraft directly with Canvas paths in `src/plane.js`, so it remains crisp at every screen size and loads without a separate sprite. This runtime drawing is an original 2D illustration; it has no limbs or facial features.
+
+The approved world art, centered home headline, and green planet accent remain unchanged. The craft uses the same ivory, sage, and warm brass palette as the retained concept, with restrained hovering and engine movement.
+
+`aircraft.png` is the retained 1536 × 1024 RGBA master. `public/assets/aircraft.webp` is its 512 × 341 runtime derivative; these files remain available as source history and are no longer used by the current runtime drawing.
+
+## Retained source provenance
+
 The owner selected this original aircraft on 2026-10-23. `aircraft.png` is the approved 1536 × 1024 RGBA master, generated using the built-in image tool. It is an illustrated 2.5D sprite, not an editable 3D model or native 4K image.
 
 Master SHA-256: `bccef50f1ee28dcc61bee1e330ac890c231fb39c6f44f86a8270b3ff5561b424`.

@@ -117,7 +117,7 @@ body{background:var(--night);color:var(--cream)}
 .flight-hud{padding:116px 5% 0}.coordinate{top:100px;right:5%}.universe:not([data-phase=welcome]) .coordinate{display:none}
 .code-coach{top:228px;left:50%;transform:translateX(-50%);width:min(700px,calc(100% - 88px))}
 .cockpit{bottom:48px;left:max(5%,calc((100% - 1200px)/2));right:max(5%,calc((100% - 1200px)/2))}
-.universe[data-phase=welcome]::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% 48%,#10292b85,transparent 75%)}
+.universe[data-phase=welcome]::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% 48%,#10292b66,transparent 75%)}
 #flow-dialog[data-stage=complete]{width:min(680px,calc(100% - 36px));background:transparent;border:0;box-shadow:none;text-align:center;padding:34px}
 #flow-dialog[data-stage=complete] .step-dots{justify-content:center}
 #flow-dialog[data-stage=complete] .signal{margin:15px 0;font-size:76px;line-height:1.3}
@@ -187,3 +187,15 @@ body[data-view=game] .first-command{justify-content:center}
 /* Orbit and aircraft form one mark; the scene artwork stays unchanged. */
 .brand .orbit-mark{width:44px;height:44px;flex:none;overflow:visible}.brand .mark-orbit{fill:none;stroke:var(--cream);stroke-width:1.6}.brand .mark-plane{fill:var(--cream)}.brand .mark-cockpit{fill:var(--night)}.brand .mark-star{fill:var(--mint)}.hero-accent{color:var(--mint)}
 @media(max-width:560px){.brand .orbit-mark{width:34px;height:34px}}
+
+/* Homepage decoration and supporting labels remain readable over the artwork. */
+.universe[data-phase=welcome] .coordinate{display:none}
+.welcome-foot{padding:14px 0;border-top-color:#d9e4ce55;color:#e0e6d4;text-shadow:0 1px 5px #071a19}
+.welcome-foot b{color:#bfd0a9}
+.first-command{color:#d4decf}
+#typing-field::placeholder{color:#c1cdbbd9}
+.page-foot{color:#d2ddce;text-shadow:0 1px 5px #071a19}
+.page-foot code{color:#e7e8d2;text-shadow:0 1px 5px #071a19}
+.masthead .page-navigation a{color:#d6e0d0}
+.language-control{color:#d6e0d0}
+@media(max-width:560px){.welcome-foot{padding:10px 0}}
