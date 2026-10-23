@@ -8,6 +8,8 @@ Lee código, predice el resultado, modifica el programa y resuelve problemas nue
 
 [shixilin.com/games/loopuff](https://shixilin.com/games/loopuff/es/)
 
+[La cámara estelar](https://shixilin.com/games/loopuff/es/play/vault/) incluye tres mecanismos conectados. Abre cerrojos con cálculos, prueba nombres y envía señales en orden. Puedes volver a jugar con pistas nuevas; se guardan tu código y tres sellos.
+
 ## Código actual
 
 El primer capítulo ya se puede jugar: cuatro misiones sobre valores, sumas y vinculación de nombres, con predicciones, explicaciones, cambios y programación independiente. La interfaz y el curso admiten 11 idiomas. Un pequeño intérprete didáctico funciona en el navegador, sin servidor ni paquetes externos. No es el compilador completo de Tolang ni la TVM; los siguientes capítulos están en desarrollo.

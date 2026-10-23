@@ -72,7 +72,7 @@
     "launch": "Entiende y empieza a escribir ↗",
     "navigation": "Navegación principal",
     "navHome": "Inicio",
-    "navCourse": "Jugar",
+    "navCourse": "Lecciones",
     "navGuide": "Conceptos básicos",
     "mapShort": "Mapa",
     "heroAccent": "planetas"
@@ -308,5 +308,64 @@
     "long": "{n} casillas es demasiado. Cambia el código e inténtalo de nuevo.",
     "invalid": "Muestra exactamente un entero entre 0 y 12.",
     "codeError": "El código no se ejecutó. Revisa el programa antes de volar."
+  },
+  "vault": {
+    "arcade": "Zona de juegos",
+    "arcadeTitle": "Abre nuevos caminos con código.",
+    "arcadeIntro": "Observa el mecanismo, prueba una idea y mira cómo tu programa cambia el mundo del juego.",
+    "browse": "Explorar juegos →",
+    "eyebrow": "BANCO ESTELAR / MISIÓN CÁMARA ACORAZADA",
+    "title": "La cámara estelar",
+    "intro": "Tres mecanismos. Un núcleo estelar. Escribe las señales que abren el camino por el banco estelar.",
+    "collection": "Sellos de mecanismos",
+    "scene": "Cámara y receptores de señales",
+    "bank": "BANCO ESTELAR · ÓRBITA 07",
+    "receivers": "Señales recibidas por orden de ejecución",
+    "editor": "Tu programa de control",
+    "signalRule": "Cada .log() muestra un número. En este juego, la cámara lee esos números en orden.",
+    "keyboard": "Usa signos de puntuación ingleses. Puedes escribir la siguiente instrucción en otra línea.",
+    "run": "Ejecutar señales",
+    "reset": "Restablecer código",
+    "ready": "La cámara espera una señal",
+    "consequence": "Cambia un valor, ejecuta de nuevo y observa qué recibe el receptor.",
+    "output": "Tu salida",
+    "next": "Siguiente mecanismo",
+    "replay": "Nuevas pistas, otra partida",
+    "allDone": "Los tres mecanismos están abiertos. Prueba otra solución con pistas nuevas; conservarás tus sellos.",
+    "help": "¿Necesitas una pista?",
+    "meaning": "let da un nombre a un valor, + suma números y .log() muestra el resultado.",
+    "practiceNote": "Prueba sin prisas: no hay cuenta atrás. Los sellos registran retos del juego, no dominio de programación. Solo se ejecuta el subconjunto inicial de números, suma y asociación de nombres.",
+    "running": "Enviando señales…",
+    "complete": "Núcleo estelar recuperado",
+    "opened": "Cerrojo abierto",
+    "mismatch": "Las señales aún no coinciden",
+    "fixCode": "Revisa primero tu código",
+    "compare": "La salida necesaria, en orden, es {expected}. Compárala con lo que ha enviado tu programa.",
+    "noOutput": "Sin salida",
+    "changed": "El código ha cambiado. Ejecútalo para comprobarlo.",
+    "noSave": "Este navegador no ha podido guardar tu progreso.",
+    "puzzleTag": "PUZLE · 3 MECANISMOS",
+    "jumpTag": "VUELO · CÓDIGO Y DISTANCIA",
+    "enter": "Jugar",
+    "stages": [
+      {
+        "title": "El sello exterior",
+        "task": "El cerrojo necesita la suma de A y B. Cambia el programa para que envíe ese número.",
+        "hint": "Sustituye 0 por B. Los paréntesis calculan primero y .log() muestra la suma.",
+        "learned": "Tu cálculo se ha convertido en una señal que el mecanismo puede leer."
+      },
+      {
+        "title": "La puerta de energía",
+        "task": "Empieza con A de energía y añade B. Prueba a dar un nombre al valor inicial y úsalo en el cálculo.",
+        "hint": "let energy = A; asocia A al nombre energy. Calcula energy + B al mostrar el resultado.",
+        "learned": "Un nombre permite reutilizar un valor. Cambiar su asociación cambia los cálculos posteriores."
+      },
+      {
+        "title": "La sala del núcleo",
+        "task": "Envía tres señales: A, después A + B y después A + B + C. El receptor sigue ese orden exacto. Esta vez escribe el programa por tu cuenta.",
+        "hint": "Usa tres instrucciones .log(). Puedes dar un nombre a A con let y reutilizarlo.",
+        "learned": "Los mismos números en distinto orden cambian el resultado. El orden de ejecución forma parte del programa."
+      }
+    ]
   }
 }

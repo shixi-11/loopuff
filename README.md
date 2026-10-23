@@ -8,6 +8,8 @@ Read code, predict its result, change it, and solve new problems without a templ
 
 [shixilin.com/games/loopuff](https://shixilin.com/games/loopuff/en/)
 
+[The Vault Run](https://shixilin.com/games/loopuff/en/play/vault/) adds three connected puzzles. Use numeric output to release locks, try variables and send signals in order. Fresh clues, saved drafts and three collectible stamps support another run.
+
 ## Current code
 
 The first chapter is playable: four missions covering values, addition and name bindings, with predictions, explanations, modifications and independent programming. The interface and course support 11 languages. Programs run locally in a small teaching interpreter without a backend or third-party packages. This is not the full Tolang compiler or TVM; later chapters are in development.

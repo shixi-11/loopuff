@@ -72,7 +72,7 @@
     "launch": "Read it, then write it ↗",
     "navigation": "Main navigation",
     "navHome": "Home",
-    "navCourse": "Play",
+    "navCourse": "Lessons",
     "navGuide": "Programming basics",
     "mapShort": "Map",
     "heroAccent": "planets"
@@ -308,5 +308,64 @@
     "long": "Flew {n} spaces: too far. Change the code and try again.",
     "invalid": "Display exactly one whole number from 0 to 12.",
     "codeError": "The code did not run. Check the program before taking off."
+  },
+  "vault": {
+    "arcade": "Play",
+    "arcadeTitle": "A little code. A new way through.",
+    "arcadeIntro": "Read the scene, try an idea, and watch your program change the world.",
+    "browse": "Explore games →",
+    "eyebrow": "STAR BANK / VAULT RUN",
+    "title": "The Vault Run",
+    "intro": "Three locks. One star core. Write the signals that open a path through the star bank.",
+    "collection": "Mechanism stamps",
+    "scene": "Vault and signal receivers",
+    "bank": "STAR BANK · ORBIT 07",
+    "receivers": "Received signals, in execution order",
+    "editor": "Your control program",
+    "signalRule": "Each .log() outputs one number. In this game, the vault reads those numbers in order.",
+    "keyboard": "Use English punctuation. New lines separate your instructions.",
+    "run": "Run signals",
+    "reset": "Reset code",
+    "ready": "The vault is waiting",
+    "consequence": "Change a value, run again, and watch what reaches the receiver.",
+    "output": "Your output",
+    "next": "Next mechanism",
+    "replay": "New clues, another run",
+    "allDone": "All three mechanisms are open. Fresh clues let you try another solution; your stamps stay with you.",
+    "help": "Need a starting point?",
+    "meaning": "let gives a value a name. + adds numbers. .log() sends the result to the output.",
+    "practiceNote": "Take your time: there is no countdown. Stamps record these game challenges, not programming mastery. Only the introductory number, addition and binding subset runs here.",
+    "running": "Sending signals…",
+    "complete": "Star core recovered",
+    "opened": "Lock released",
+    "mismatch": "The signals do not match yet",
+    "fixCode": "Check your code first",
+    "compare": "The required output, in order, is {expected}. Compare it with what your program sent.",
+    "noOutput": "No output",
+    "changed": "Code changed. Run to test it.",
+    "noSave": "This browser could not save your progress.",
+    "puzzleTag": "PUZZLE · 3 MECHANISMS",
+    "jumpTag": "FLIGHT · CODE AND DISTANCE",
+    "enter": "Play",
+    "stages": [
+      {
+        "title": "The outer seal",
+        "task": "The lock needs the sum of A and B. Change the program so it sends that number.",
+        "hint": "Replace the 0 with B. Parentheses calculate first; .log() outputs the sum.",
+        "learned": "Your calculation became a signal the device could read."
+      },
+      {
+        "title": "The energy gate",
+        "task": "Start with A energy and add B. Try giving the starting value a name, then use that name in the calculation.",
+        "hint": "let energy = A; stores A under the name energy. Use energy + B in the output.",
+        "learned": "A name lets you reuse a value without repeating it. Changing its binding changes later calculations."
+      },
+      {
+        "title": "The core chamber",
+        "task": "Send three signals: A, then A + B, then A + B + C. The receiver reads exactly that order. Write the program yourself.",
+        "hint": "Use three .log() instructions. You can name A with let and reuse that name.",
+        "learned": "The same numbers in a different order produce a different result. Execution order is part of your program."
+      }
+    ]
   }
 }

@@ -72,7 +72,7 @@
     "launch": "Verstehen und eingeben ↗",
     "navigation": "Hauptnavigation",
     "navHome": "Startseite",
-    "navCourse": "Spielen",
+    "navCourse": "Lektionen",
     "navGuide": "Programmiergrundlagen",
     "mapShort": "Karte",
     "heroAccent": "Planeten"
@@ -308,5 +308,64 @@
     "long": "{n} Felder sind zu weit. Ändere den Code und versuche es erneut.",
     "invalid": "Gib genau eine ganze Zahl von 0 bis 12 aus.",
     "codeError": "Der Code lief nicht. Prüfe das Programm vor dem Flug."
+  },
+  "vault": {
+    "arcade": "Spielplatz",
+    "arcadeTitle": "Mit Code neue Wege öffnen.",
+    "arcadeIntro": "Beobachte die Mechanik, probiere eine Idee aus und sieh, wie dein Programm die Spielwelt verändert.",
+    "browse": "Spiele entdecken →",
+    "eyebrow": "STERNENBANK / TRESORMISSION",
+    "title": "Die Tresormission",
+    "intro": "Drei Mechanismen. Ein Sternenkern. Schreibe die Signale, die den Weg durch die Sternenbank öffnen.",
+    "collection": "Mechanik-Stempel",
+    "scene": "Tresor und Signalempfänger",
+    "bank": "STERNENBANK · UMLAUFBAHN 07",
+    "receivers": "Empfangene Signale in Ausführungsreihenfolge",
+    "editor": "Dein Steuerprogramm",
+    "signalRule": "Jedes .log() gibt eine Zahl aus. In diesem Spiel liest der Tresor diese Zahlen der Reihe nach.",
+    "keyboard": "Verwende englische Satzzeichen. Neue Anweisungen können in einer neuen Zeile stehen.",
+    "run": "Signale ausführen",
+    "reset": "Code zurücksetzen",
+    "ready": "Der Tresor wartet auf ein Signal",
+    "consequence": "Ändere einen Wert, starte erneut und beobachte, was am Empfänger ankommt.",
+    "output": "Deine Ausgabe",
+    "next": "Nächster Mechanismus",
+    "replay": "Neue Hinweise, neuer Versuch",
+    "allDone": "Alle drei Mechanismen sind offen. Probiere mit neuen Hinweisen einen anderen Lösungsweg. Deine Stempel bleiben erhalten.",
+    "help": "Brauchst du einen Hinweis?",
+    "meaning": "let gibt einem Wert einen Namen, + addiert Zahlen und .log() gibt das Ergebnis aus.",
+    "practiceNote": "Ohne Zeitdruck ausprobieren. Stempel dokumentieren Spielaufgaben, keine Programmierkenntnisse. Hier läuft nur der Einstiegsumfang aus Zahlen, Addition und Namensbindung.",
+    "running": "Signale werden gesendet…",
+    "complete": "Sternenkern geborgen",
+    "opened": "Schloss geöffnet",
+    "mismatch": "Die Signale stimmen noch nicht",
+    "fixCode": "Prüfe zuerst deinen Code",
+    "compare": "Die benötigte Ausgabe lautet der Reihe nach {expected}. Vergleiche sie mit der Ausgabe deines Programms.",
+    "noOutput": "Keine Ausgabe",
+    "changed": "Code geändert. Starte ihn zum Prüfen.",
+    "noSave": "Dieser Browser konnte deinen Fortschritt nicht speichern.",
+    "puzzleTag": "RÄTSEL · 3 MECHANISMEN",
+    "jumpTag": "FLUG · CODE UND DISTANZ",
+    "enter": "Spielen",
+    "stages": [
+      {
+        "title": "Das äußere Siegel",
+        "task": "Das Schloss braucht die Summe aus A und B. Ändere das Programm so, dass es diese Zahl sendet.",
+        "hint": "Ersetze 0 durch B. Die Klammern berechnen zuerst; .log() gibt die Summe aus.",
+        "learned": "Deine Berechnung wurde zu einem Signal, das der Mechanismus lesen kann."
+      },
+      {
+        "title": "Das Energietor",
+        "task": "Starte mit A Energie und addiere B. Gib dem Anfangswert einen Namen und verwende ihn in der Berechnung.",
+        "hint": "let energy = A; bindet A an den Namen energy. Berechne für die Ausgabe energy + B.",
+        "learned": "Mit einem Namen kannst du einen Wert wiederverwenden. Eine andere Bindung verändert spätere Berechnungen."
+      },
+      {
+        "title": "Die Kernkammer",
+        "task": "Sende drei Signale: A, dann A + B, dann A + B + C. Der Empfänger liest genau diese Reihenfolge. Schreibe das Programm diesmal selbst.",
+        "hint": "Nutze drei .log()-Anweisungen. Du kannst A mit let einen Namen geben und ihn wiederverwenden.",
+        "learned": "Dieselben Zahlen in anderer Reihenfolge ändern das Ergebnis. Die Ausführungsreihenfolge gehört zum Programm."
+      }
+    ]
   }
 }

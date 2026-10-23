@@ -4,7 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#14282a"><title>环灵 · 玩着学会编程</title>
 <script>const base=document.createElement('base');base.href=/^\/games\/loopuff(?:\/|$)/.test(location.pathname)?'/games/loopuff/':'/';document.head.append(base);</script>
-<link rel="icon" type="image/svg+xml" href="./assets/mark.svg"><link rel="stylesheet" href="./style.css"><script type="module" src="./src/app.js"></script>
+<link rel="icon" type="image/svg+xml" href="./assets/mark.svg"><link rel="stylesheet" href="./style.css"><link rel="stylesheet" href="./vault.css"><script type="module" src="./src/app.js"></script>
 </head>
 <body>
 <div class="shell">
@@ -21,7 +21,7 @@
 <div class="eyebrow"><i></i>零基础飞行员，准备出发</div>
 <h1>敲下代码，<br>去更远的<span class="hero-accent">星球</span>。</h1>
 <p class="welcome-copy">读懂代码为什么这样写，再亲手改变结果。<br>从数字、名字和循环开始，逐步学会 Tolang。</p>
-<div class="welcome-actions"><button id="start" class="primary">开始第一航程 <span>↗</span></button><button id="how-button" class="text-button">怎么玩 →</button></div>
+<div class="welcome-actions"><button id="start" class="primary">开始第一航程 <span>↗</span></button><button id="play-button" class="text-button">去闯关 →</button><button id="how-button" class="text-button">怎么玩 →</button></div>
 <div class="first-command"><span>你的第一条信号</span><code>7.log()</code><svg viewBox="0 0 64 18" aria-hidden="true"><path d="M0 9H60M52 2l9 7-9 7"/></svg><strong>7</strong></div>
 </section>
 <div id="flight-hud" class="flight-hud" hidden><div class="mission"><span id="mission-number" class="eyebrow">航程 01</span><h2 id="mission-title">发出第一条信号</h2><p id="mission-hint">照着目标敲，飞船会自动发射。</p></div><div class="flight-stats"><div><small>本次得分</small><strong id="score">0000</strong></div><div id="shield-box" hidden><small>护盾</small><strong id="shields" aria-label="护盾剩余 3">◇ ◇ ◇</strong></div></div></div>

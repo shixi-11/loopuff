@@ -72,7 +72,7 @@
     "launch": "Đọc hiểu rồi bắt đầu gõ ↗",
     "navigation": "Điều hướng chính",
     "navHome": "Trang chủ",
-    "navCourse": "Chơi",
+    "navCourse": "Bài học",
     "navGuide": "Lập trình cơ bản",
     "mapShort": "Bản đồ",
     "heroAccent": "hành tinh"
@@ -308,5 +308,64 @@
     "long": "Bay {n} ô quá xa. Hãy sửa mã và thử lại.",
     "invalid": "Hãy chỉ hiển thị một số nguyên từ 0 đến 12.",
     "codeError": "Mã chưa chạy được. Hãy kiểm tra chương trình trước khi bay."
+  },
+  "vault": {
+    "arcade": "Khu trò chơi",
+    "arcadeTitle": "Dùng mã lệnh, mở lối mới.",
+    "arcadeIntro": "Quan sát cơ chế, thử ý tưởng và xem chương trình thay đổi thế giới trước mắt.",
+    "browse": "Khám phá trò chơi →",
+    "eyebrow": "NGÂN HÀNG VŨ TRỤ / PHI VỤ KHO BÁU",
+    "title": "Phi vụ kho báu",
+    "intro": "Ba cơ chế, một lõi sao. Viết tín hiệu để mở đường vào kho của ngân hàng vũ trụ.",
+    "collection": "Dấu ấn cơ chế",
+    "scene": "Kho báu và bộ nhận tín hiệu",
+    "bank": "NGÂN HÀNG VŨ TRỤ · QUỸ ĐẠO 07",
+    "receivers": "Tín hiệu nhận theo thứ tự thực thi",
+    "editor": "Chương trình điều khiển",
+    "signalRule": "Mỗi .log() xuất một số. Trong trò chơi này, kho đọc các số đó lần lượt.",
+    "keyboard": "Dùng dấu câu tiếng Anh. Có thể xuống dòng để viết lệnh tiếp theo.",
+    "run": "Chạy tín hiệu",
+    "reset": "Đặt lại mã",
+    "ready": "Kho đang chờ tín hiệu",
+    "consequence": "Đổi giá trị, chạy lại và xem bộ nhận thực sự nhận được gì.",
+    "output": "Kết quả của bạn",
+    "next": "Cơ chế tiếp theo",
+    "replay": "Đổi manh mối, chơi lại",
+    "allDone": "Cả ba cơ chế đã mở. Thử cách viết khác với manh mối mới; dấu ấn đã nhận vẫn được giữ lại.",
+    "help": "Cần gợi ý?",
+    "meaning": "let đặt tên cho giá trị, + cộng các số, .log() xuất kết quả.",
+    "practiceNote": "Cứ thử thoải mái, không có đếm ngược. Dấu ấn ghi nhận thử thách trò chơi, không chứng nhận trình độ lập trình. Chỉ hỗ trợ phần nhập môn về số, phép cộng và gán tên.",
+    "running": "Đang gửi tín hiệu…",
+    "complete": "Đã lấy được lõi sao",
+    "opened": "Đã mở khóa",
+    "mismatch": "Tín hiệu chưa khớp",
+    "fixCode": "Kiểm tra mã trước nhé",
+    "compare": "Kết quả cần có theo thứ tự là {expected}. Hãy so sánh với kết quả chương trình gửi.",
+    "noOutput": "Không có kết quả",
+    "changed": "Mã đã thay đổi. Chạy để kiểm tra.",
+    "noSave": "Trình duyệt này không lưu được tiến trình.",
+    "puzzleTag": "GIẢI ĐỐ · 3 CƠ CHẾ",
+    "jumpTag": "BAY · MÃ VÀ KHOẢNG CÁCH",
+    "enter": "Bắt đầu",
+    "stages": [
+      {
+        "title": "Ấn khóa ngoài",
+        "task": "Khóa cần tổng của A và B. Sửa chương trình để gửi con số đó.",
+        "hint": "Thay 0 bằng B. Dấu ngoặc tính trước, .log() xuất tổng sau.",
+        "learned": "Phép tính của bạn đã trở thành tín hiệu mà thiết bị đọc được."
+      },
+      {
+        "title": "Cổng năng lượng",
+        "task": "Bắt đầu với A năng lượng rồi thêm B. Thử đặt tên cho giá trị ban đầu và dùng tên đó để tính.",
+        "hint": "let energy = A; gắn A với tên energy. Khi xuất, tính energy + B.",
+        "learned": "Tên cho phép dùng lại giá trị. Đổi giá trị được gắn sẽ thay đổi các phép tính phía sau."
+      },
+      {
+        "title": "Phòng lõi sao",
+        "task": "Gửi ba tín hiệu: A, rồi A + B, rồi A + B + C. Bộ nhận đọc đúng thứ tự này. Lần này hãy tự viết chương trình.",
+        "hint": "Dùng ba lệnh .log(). Có thể dùng let đặt tên cho A rồi dùng lại tên đó.",
+        "learned": "Cùng các số nhưng khác thứ tự sẽ cho kết quả khác. Thứ tự thực thi là một phần của chương trình."
+      }
+    ]
   }
 }

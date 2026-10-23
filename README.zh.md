@@ -8,6 +8,8 @@
 
 [shixilin.com/games/loopuff](https://shixilin.com/games/loopuff/zh/)
 
+[保险库行动](https://shixilin.com/games/loopuff/zh/play/vault/)包含三道相连的机关。用计算结果开锁、尝试变量，再按顺序发送信号。支持更换线索重玩，保留草稿与三枚机关印记。
+
 ## 当前代码
 
 第一章已可游玩：4 个航程学习数值、加法和名字绑定，每关包含预测、解释、修改和自主编程。界面与课程支持 11 种语言。程序在浏览器内通过小型教学解释器运行，无需后端或第三方依赖。它不是完整的 Tolang 编译器或 TVM，后续章节仍在开发。

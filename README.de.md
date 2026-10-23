@@ -8,6 +8,8 @@ Code lesen, Ergebnisse vorhersagen, Programme ändern und neue Aufgaben ohne Vor
 
 [shixilin.com/games/loopuff](https://shixilin.com/games/loopuff/de/)
 
+[Die Tresormission](https://shixilin.com/games/loopuff/de/play/vault/) bietet drei verbundene Rätsel. Öffne Schlösser mit Rechenergebnissen, nutze Namen und sende Signale in der richtigen Reihenfolge. Neue Hinweise, gespeicherter Code und drei Stempel ermöglichen weitere Versuche.
+
 ## Aktueller Code
 
 Das erste Kapitel ist spielbar: vier Missionen zu Werten, Addition und Namensbindungen mit Vorhersagen, Erklärungen, Änderungen und eigenen Programmen. Oberfläche und Kurs unterstützen elf Sprachen. Ein kleiner Lerninterpreter läuft direkt im Browser, ohne Backend oder externe Pakete. Er ist nicht der vollständige Tolang-Compiler oder die TVM. Weitere Kapitel sind in Entwicklung.

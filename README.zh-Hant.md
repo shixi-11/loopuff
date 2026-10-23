@@ -8,6 +8,8 @@
 
 [shixilin.com/games/loopuff](https://shixilin.com/games/loopuff/zh-Hant/)
 
+[保險庫行動](https://shixilin.com/games/loopuff/zh-Hant/play/vault/)包含三道相連的機關。用計算結果開鎖、嘗試變數，再按順序發送訊號。支援更換線索重玩，保留草稿與三枚機關印記。
+
 ## 目前程式碼
 
 第一章已可遊玩：4 個航程學習數值、加法和名稱綁定，每關包含預測、解釋、修改和自主編寫。介面與課程支援 11 種語言。程式透過瀏覽器內的小型教學直譯器執行，無需後端或第三方依賴。它不是完整的 Tolang 編譯器或 TVM，後續章節仍在開發。

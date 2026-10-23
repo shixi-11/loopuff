@@ -8,6 +8,8 @@ Học lập trình và Tolang qua trò chơi.
 
 [shixilin.com/games/loopuff](https://shixilin.com/games/loopuff/vi/)
 
+[Phi vụ kho báu](https://shixilin.com/games/loopuff/vi/play/vault/) có ba cơ chế nối tiếp. Dùng kết quả tính để mở khóa, thử đặt tên cho giá trị và gửi tín hiệu theo thứ tự. Có manh mối mới để chơi lại, lưu mã và ba dấu ấn.
+
 ## Mã hiện có
 
 Chương đầu đã chơi được với bốn nhiệm vụ về giá trị, phép cộng và gắn tên, gồm dự đoán, giải thích, sửa đổi và tự viết chương trình. Giao diện và bài học hỗ trợ 11 ngôn ngữ. Trình thông dịch nhỏ chạy ngay trong trình duyệt, không cần máy chủ hay gói bên ngoài. Đây không phải toàn bộ trình biên dịch Tolang hay TVM; các chương tiếp theo đang phát triển.
