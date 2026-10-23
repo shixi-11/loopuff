@@ -199,3 +199,23 @@ body[data-view=game] .first-command{justify-content:center}
 .masthead .page-navigation a{color:#d6e0d0}
 .language-control{color:#d6e0d0}
 @media(max-width:560px){.welcome-foot{padding:10px 0}}
+
+/* The aircraft has its own clear space beside the first instruction. */
+.universe[data-phase=welcome]{display:flex;flex-direction:column;height:auto;min-height:100dvh;padding:clamp(132px,16vh,184px) 0 58px}
+body[data-view=game] .universe[data-phase=welcome] .welcome{position:relative;inset:auto;margin:auto;transform:none;width:min(900px,88%);max-width:none}
+.first-flight{display:flex;align-items:center;justify-content:center;gap:70px;margin:18px auto 0;direction:ltr}
+.first-flight .first-command{margin:0;flex-wrap:wrap}
+#home-plane-slot{width:160px;height:180px;flex:none}
+.home-plane{position:absolute;z-index:2;width:160px;height:180px;padding:0;transform:translate(-50%,-50%);background:transparent;border:1px solid transparent;border-radius:50%;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
+.home-plane:hover{border-color:#d7e5bc66}
+.home-plane:focus-visible{outline:2px dashed #c9dfb3;outline-offset:5px}
+.home-plane[data-dragging]{cursor:grabbing;border-color:#d7e5bc99}
+.universe[data-phase=welcome] .welcome-foot{position:relative;inset:auto;width:87%;margin:26px auto 0}
+@media(max-width:1000px){.universe[data-phase=welcome]{padding-top:170px}}
+@media(max-width:560px){
+ .universe[data-phase=welcome]{padding-top:160px;padding-bottom:56px}
+ .first-flight{gap:12px;flex-wrap:wrap;margin-top:22px}
+ .first-flight .first-command{width:100%;gap:12px}
+ #home-plane-slot,.home-plane{width:136px;height:156px}
+ .universe[data-phase=welcome] .welcome-foot{margin-top:16px}
+}

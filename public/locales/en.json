@@ -10,6 +10,7 @@
     "guide": "What is programming?",
     "map": "Your journey",
     "language": "Language",
+    "movePlane": "Drag to fly. Arrow keys move; Home or Enter resets.",
     "firstSignal": "Your first instruction",
     "welcomeFoot": "Start with curiosity. No experience required.",
     "learningLoop": "Read & write → Predict & explain → Create",

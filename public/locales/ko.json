@@ -10,6 +10,7 @@
     "guide": "프로그래밍이란?",
     "map": "항로",
     "language": "언어",
+    "movePlane": "드래그해서 날아 보세요. 방향키로 이동하고 Home 또는 Enter로 제자리로 돌아갑니다.",
     "firstSignal": "나의 첫 명령",
     "welcomeFoot": "호기심만 있으면 됩니다. 경험은 필요 없어요.",
     "learningLoop": "읽고 쓰기 → 예상하고 설명하기 → 직접 만들기",

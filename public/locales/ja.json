@@ -10,6 +10,7 @@
     "guide": "プログラミングって何？",
     "map": "航路",
     "language": "言語",
+    "movePlane": "ドラッグして飛行。矢印キーで移動、Home または Enter で元の位置へ。",
     "firstSignal": "最初の命令",
     "welcomeFoot": "好奇心があれば大丈夫。経験はいりません。",
     "learningLoop": "読んで書く → 予想して説明 → 自分で作る",

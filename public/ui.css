@@ -17,7 +17,7 @@ body[data-view=learning] .brand .mark-cockpit{fill:#f7f6ec}
 body[data-view=learning] .brand .mark-star{fill:#8ca880}
 body[data-view=learning] .masthead .page-navigation a{color:#456358}
 body[data-view=learning] .masthead .page-navigation a[aria-current]{color:#23493f;border-color:#72996a}
-body[data-view=learning] .language-control select{background:#f7f6ec;color:#23493f;border-color:#a9bdab}
+body[data-view=learning] .language-control select{background-color:#f7f6ec;color:#23493f;border-color:#a9bdab}
 body[data-view=learning] .nav-button{background:#e5ecd9;color:#23493f;border-color:#b2c5aa}
 body[data-view=learning] .nav-button:hover{background:#d8e5c9}
 body[data-view=learning] .page-foot{border-color:#c6d2c0;color:#5a7165;text-shadow:none}
@@ -148,4 +148,48 @@ body[data-view=learning] .course-progress{color:#365c45;border-color:#abc0a1;bac
  .masthead .page-navigation,body[data-view=learning] .masthead .page-navigation{gap:4px;align-items:stretch}
  .masthead .page-navigation a{overflow-wrap:normal;align-content:center}
  .nav-label-full{display:none}.nav-label-short{display:inline}
+}
+
+/* Keep the locale picker native while giving its text and chevron a stable box. */
+.language-control select{
+ appearance:none;
+ -webkit-appearance:none;
+ width:136px;
+ max-width:100%;
+ min-height:44px;
+ padding:8px 32px 8px 11px;
+ border:1px solid #a5c09c88;
+ border-radius:7px;
+ background-color:#153031;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='m1 1 5 5 5-5' fill='none' stroke='%23c5d8bb' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5'/%3E%3C/svg%3E");
+ background-position:right 10px center;
+ background-repeat:no-repeat;
+ background-size:12px 8px;
+ color:var(--cream);
+ line-height:1.3;
+ text-overflow:ellipsis;
+}
+.language-control select:focus-visible{
+ border-color:#c9dfb3;
+}
+html[dir=rtl] .language-control select{
+ direction:rtl;
+ padding-inline:11px 32px;
+ background-position:left 10px center;
+ text-align:start;
+}
+@media(max-width:560px){
+ .language-control select{
+  width:136px;
+  padding-inline:9px 30px;
+ }
+ html[dir=rtl] .language-control select{padding-inline:9px 30px}
+ .header-controls:has(#pause-button:not([hidden])) .language-control select{width:100px}
+ #pause-button{min-width:44px}
+ .masthead:has(#pause-button:not([hidden])) .brand{gap:6px}
+ .masthead:has(#pause-button:not([hidden])) .brand>span{font-size:18px;letter-spacing:1px}
+ .masthead:has(#pause-button:not([hidden])) .brand .orbit-mark{width:28px;height:28px}
+}
+@media(max-width:400px){
+ body[data-view=learning] .language-control select{max-width:136px}
 }

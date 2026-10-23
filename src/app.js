@@ -3,6 +3,7 @@ import { run } from './runner.js';
 import { assess, grade } from './assessment.js';
 import { mountJumpLab } from './jump.js';
 import { drawPlane } from './plane.js';
+import { mountHomePlane } from './home-plane.js';
 import { mountVault } from './vault-ui.js';
 import { arcadeArt } from './arcade-art.js';
 import { selectedLocale, languageUrl, parseRoute, routeUrl } from './routing.js';
@@ -87,7 +88,8 @@ function applyStatic(){
   document.querySelector('.edition').textContent=ui('tagline');
   $('language-label').textContent=ui('language');$('language-select').setAttribute('aria-label',ui('language'));
   $('language-select').innerHTML=locales.map(([id,label])=>`<option value="${id}">${label}</option>`).join('');$('language-select').value=lang;
-  $('pause-button').textContent=`Ⅱ ${ui('pause')}`;$('pause-button').setAttribute('aria-label',ui('pause'));document.querySelector('.header-controls').setAttribute('aria-label',ui('navigation'));
+  $('home-plane').setAttribute('aria-label',ui('movePlane'));$('home-plane').title=ui('movePlane');
+  $('pause-button').innerHTML=`<span aria-hidden="true">Ⅱ</span> <span class="pause-word">${escape(ui('pause'))}</span>`;$('pause-button').setAttribute('aria-label',ui('pause'));document.querySelector('.header-controls').setAttribute('aria-label',ui('navigation'));
   const navigation=$('page-navigation');
   navigation.hidden=false;navigation.setAttribute('aria-label',ui('navigation'));
   navigation.innerHTML=`<a data-action="home" href="${routeUrl(location.href,lang,'home').pathname}" ${state.phase==='welcome'?'aria-current="page"':''}>${escape(ui('navHome'))}</a><a data-action="open-levels" href="${routeUrl(location.href,lang,'levels').pathname}" ${!['welcome','guide','play','vault'].includes(state.phase)?'aria-current="true"':''}>${escape(ui('navCourse'))}<span class="course-progress"><bdi dir="ltr">${state.completed.length}/${course.length}</bdi></span></a><a data-action="open-play" href="${routeUrl(location.href,lang,'play').pathname}" ${['play','vault'].includes(state.phase)?'aria-current="page"':''}>${escape(messages.vault.arcade)}</a><a data-action="open-guide" aria-label="${escape(ui('navGuide'))}" href="${routeUrl(location.href,lang,'guide').pathname}" ${state.phase==='guide'?'aria-current="page"':''}><span class="nav-label-full">${escape(ui('navGuide'))}</span><span class="nav-label-short">${escape(ui('navGuideShort'))}</span></a>`;
@@ -129,6 +131,7 @@ function render(){
   $('universe').hidden=page;$('learning-page').hidden=!page;
   if(!page&&document.readyState==='complete')upgradeWorld();
   $('universe').dataset.phase=phase;$('welcome').hidden=phase!=='welcome';$('welcome-foot').hidden=phase!=='welcome';
+  $('home-plane').hidden=phase!=='welcome';
   for(const id of ['flight-hud','code-coach','target','cockpit'])$(id).hidden=!typing;
   $('pause-button').hidden=!typing;
   if(phase!=='pause'){$('flow-dialog').close();$('dialog-content').textContent='';}
@@ -139,7 +142,7 @@ function render(){
   let robots=document.querySelector('meta[name="robots"]');
   if(view==='result'){if(!robots){robots=document.createElement('meta');robots.name='robots';document.head.append(robots);}robots.content='noindex,follow';}else robots?.remove();
   attachJumpScene();
-  requestAnimationFrame(refreshGeometry);
+  requestAnimationFrame(()=>{refreshGeometry();homePlane.refresh();});
 }
 function renderTyping(){
   const fragment=fragments()[state.fragment]||'',typed=state.typed;
@@ -331,10 +334,11 @@ function refreshGeometry(){if(state.phase!=='typing')return;const world=$('unive
 // The original scene is intentionally independent of course text and locale.
 // Canvas world: cached planet/orbits, moving ship, beams and collectible debris.
 const canvas=$('space'),ctx=canvas.getContext('2d'),back=document.createElement('canvas'),bg=back.getContext('2d');
+const homePlane=mountHomePlane($('universe'),$('home-plane'),$('home-plane-slot'));
 let W=1000,H=800,DPR=1,last=performance.now(),clock=0,beacon=0,effects=[];
 let seed=41;const rnd=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296;};
 const stars=Array.from({length:145},()=>({x:rnd(),y:rnd(),r:.45+rnd()*1.2,p:rnd()*6.28}));
-function resize(){const r=$('universe').getBoundingClientRect();if(!r.width||!r.height)return;W=r.width;H=r.height;DPR=Math.min(devicePixelRatio||1,1.6);canvas.width=Math.round(W*DPR);canvas.height=Math.round(H*DPR);back.width=canvas.width;back.height=canvas.height;ctx.setTransform(DPR,0,0,DPR,0,0);bg.setTransform(DPR,0,0,DPR,0,0);background();refreshGeometry();}
+function resize(){const r=$('universe').getBoundingClientRect();if(!r.width||!r.height)return;W=r.width;H=r.height;DPR=Math.min(devicePixelRatio||1,1.6);canvas.width=Math.round(W*DPR);canvas.height=Math.round(H*DPR);back.width=canvas.width;back.height=canvas.height;ctx.setTransform(DPR,0,0,DPR,0,0);bg.setTransform(DPR,0,0,DPR,0,0);background();refreshGeometry();homePlane.refresh();}
 let fullWorldRequested=false;
 let worldArt=new Image();worldArt.decoding='async';worldArt.onload=()=>background();worldArt.src=new URL('../assets/world-preview.webp',import.meta.url).href;
 // Same-composition preview first; a slow detailed image cannot hold the page load event.
@@ -360,15 +364,15 @@ function background(){
  for(let n=0;n<4;n++){const x=W*(.56+n*.08),y=H*(.78-n*.045);bg.strokeStyle='#b6cda64d';bg.beginPath();bg.arc(x,y,2.5,0,Math.PI*2);bg.stroke();}
  if(mobile){bg.fillStyle='#14292b65';bg.fillRect(0,0,W,H);}
 }
-function shipX(){return state.phase==='welcome'?W*(W<1100?.84:.76):W*.5;}
-function shipY(){return state.phase==='welcome'?H*.79:shipAnchor;}
+function shipX(){return state.phase==='welcome'?(homePlane.position?.x??W*.76):W*.5;}
+function shipY(){return state.phase==='welcome'?(homePlane.position?.y??H*.79):shipAnchor;}
 function shoot(){effects.push({kind:'beam',x:shipX(),y:shipY()-30,tx:W*.5,ty:targetY,life:.17,max:.17});}
 function burst(x,y,count){if(reduced.matches)count=Math.min(count,7);for(let i=0;i<count;i++){const a=Math.random()*Math.PI*2,speed=20+Math.random()*100;effects.push({kind:'spark',x,y,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,life:.45+Math.random()*.4,max:.85});}}
 function drawShip(t){
  const calm=reduced.matches,home=state.phase==='welcome';
- const x=shipX(),y=shipY()+(calm?0:Math.sin(t*1.8)*4);
+ const x=shipX(),y=shipY()+(calm||homePlane.dragging?0:Math.sin(t*1.8)*4);
  const bank=home ? .18 : 0;
- const size=home?Math.min(200,W*.27):115;
+ const size=home?(W<=560?116:140):115;
  drawPlane(ctx,x,y,size,calm?0:t,bank-(home?.13:0)+(calm?0:Math.sin(t*.85)*.045));
 }
 function frame(now){

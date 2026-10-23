@@ -23,8 +23,9 @@
 <h1>敲下代码，<br>去更远的<span class="hero-accent">星球</span>。</h1>
 <p class="welcome-copy">读懂代码为什么这样写，再亲手改变结果。<br>从数字、名字和循环开始，逐步学会 Tolang。</p>
 <div class="welcome-actions"><button id="start" class="primary">开始第一航程 <span>↗</span></button><button id="play-button" class="text-button">去闯关 →</button><button id="how-button" class="text-button">怎么玩 →</button></div>
-<div class="first-command"><span>你的第一条信号</span><code>7.log()</code><svg viewBox="0 0 64 18" aria-hidden="true"><path d="M0 9H60M52 2l9 7-9 7"/></svg><strong>7</strong></div>
+<div class="first-flight"><div class="first-command"><span>你的第一条信号</span><code>7.log()</code><svg viewBox="0 0 64 18" aria-hidden="true"><path d="M0 9H60M52 2l9 7-9 7"/></svg><strong>7</strong></div><div id="home-plane-slot" aria-hidden="true"></div></div>
 </section>
+<button id="home-plane" class="home-plane" aria-keyshortcuts="ArrowUp ArrowDown ArrowLeft ArrowRight Home Enter" hidden></button>
 <div id="flight-hud" class="flight-hud" hidden><div class="mission"><span id="mission-number" class="eyebrow">航程 01</span><h2 id="mission-title">发出第一条信号</h2><p id="mission-hint">照着目标敲，飞船会自动发射。</p></div><div class="flight-stats"><div><small>本次得分</small><strong id="score">0000</strong></div><div id="shield-box" hidden><small>护盾</small><strong id="shields" aria-label="护盾剩余 3">◇ ◇ ◇</strong></div></div></div>
 <aside id="code-coach" class="code-coach" aria-label="当前代码的意思" hidden><div><span class="coach-label">这段在做什么</span><strong id="meaning-title"></strong></div><p id="meaning-text"></p><span class="meaning-connection" id="meaning-connection"></span></aside>
 <div id="target" class="target" hidden><div class="target-label"><span id="fragment-label">数值</span><span id="fragment-count">01 / 03</span></div><div class="target-word" id="target-word" aria-hidden="true"></div><div class="target-tail" aria-hidden="true"></div></div>
