@@ -14,7 +14,7 @@ The first chapter is playable: four missions covering values, addition and name 
 
 Independent challenges include a 100-point code assessment with execution, output and requirement feedback. Revise and resubmit; typing speed and matching an example do not affect the grade.
 
-The fourth mission turns program output into a robot’s jump distance. Run a program, watch where the robot lands, then change the calculation.
+The fourth mission turns program output into a plane’s flight distance. Run a program, watch where the plane lands, then change the calculation.
 
 ## Development
 

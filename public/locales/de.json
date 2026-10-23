@@ -72,7 +72,7 @@
     "launch": "Verstehen und eingeben ↗",
     "navigation": "Hauptnavigation",
     "navHome": "Startseite",
-    "navCourse": "Kurs",
+    "navCourse": "Spielen",
     "navGuide": "Programmiergrundlagen",
     "mapShort": "Karte"
   },
@@ -193,10 +193,10 @@
       ]
     },
     {
-      "title": "Sprung zur nächsten Insel",
-      "intro": "Ein kleiner Roboter will zur nächsten Insel. In dieser Mission bestimmt die angezeigte Zahl, wie viele Felder er vorwärts springt.",
-      "goal": "Berechne 2 + 3 und beobachte den Sprung über fünf Felder.",
-      "result": "Das Programm zeigt 5 an. Das Spiel liest die Ausgabe und macht daraus einen Sprung über fünf Felder. .log() selbst zeigt weiterhin nur einen Wert an.",
+      "title": "Flug zur nächsten Insel",
+      "intro": "Ein kleiner Flieger will zur nächsten Insel. In dieser Mission bestimmt die angezeigte Zahl, wie viele Felder er vorwärts fliegt.",
+      "goal": "Berechne 2 + 3 und beobachte den Flug über fünf Felder.",
+      "result": "Das Programm zeigt 5 an. Das Spiel liest die Ausgabe und macht daraus einen Flug über fünf Felder. .log() selbst zeigt weiterhin nur einen Wert an.",
       "question": "Warum ist die Ausgabe 5?",
       "remix": "Ändere das Programm so, dass es 7 ausgibt und die Insel sieben Felder weiter erreicht.",
       "remixHint": "2 plus die fehlende Zahl muss 7 ergeben.",
@@ -296,16 +296,16 @@
   },
   "jump": {
     "eyebrow": "CODE → BEWEGUNG",
-    "title": "Hilf dem Roboter hinüber",
+    "title": "Hilf dem Flieger hinüber",
     "target": "Ziel: {n} Felder",
-    "rule": "Diese Mission nutzt eine ausgegebene ganze Zahl als Sprungweite. Die Skala reicht von 0 bis 12.",
+    "rule": "Diese Mission nutzt eine ausgegebene ganze Zahl als Flugstrecke. Die Skala reicht von 0 bis 12.",
     "try": "Starten und beobachten",
     "ready": "Bereit. Die Insel ist {n} Felder entfernt.",
-    "running": "Ausgabe {n} → Sprung…",
-    "landed": "{n} Felder gesprungen und gelandet.",
+    "running": "Ausgabe {n} → Flug…",
+    "landed": "{n} Felder geflogen und gelandet.",
     "short": "{n} Felder sind zu kurz. Ändere den Code und versuche es erneut.",
     "long": "{n} Felder sind zu weit. Ändere den Code und versuche es erneut.",
     "invalid": "Gib genau eine ganze Zahl von 0 bis 12 aus.",
-    "codeError": "Der Code lief nicht. Prüfe das Programm vor dem Sprung."
+    "codeError": "Der Code lief nicht. Prüfe das Programm vor dem Flug."
   }
 }

@@ -72,7 +72,7 @@
     "launch": "Entiende y empieza a escribir ↗",
     "navigation": "Navegación principal",
     "navHome": "Inicio",
-    "navCourse": "Curso",
+    "navCourse": "Jugar",
     "navGuide": "Conceptos básicos",
     "mapShort": "Mapa"
   },
@@ -193,10 +193,10 @@
       ]
     },
     {
-      "title": "Salta a la siguiente isla",
-      "intro": "Un pequeño robot necesita llegar a la otra isla. En esta misión, el número que muestra tu programa indica cuántas casillas salta hacia delante.",
-      "goal": "Calcula 2 + 3 y observa cómo el robot salta cinco casillas.",
-      "result": "El programa muestra 5. El juego lee esa salida y la convierte en un salto de cinco casillas; .log() sigue sirviendo solo para mostrar un valor.",
+      "title": "Vuela a la siguiente isla",
+      "intro": "Un pequeño avión necesita llegar a la otra isla. En esta misión, el número que muestra tu programa indica cuántas casillas vuela hacia delante.",
+      "goal": "Calcula 2 + 3 y observa cómo el avión vuela cinco casillas.",
+      "result": "El programa muestra 5. El juego lee esa salida y la convierte en un vuelo de cinco casillas; .log() sigue sirviendo solo para mostrar un valor.",
       "question": "¿Por qué la salida es 5?",
       "remix": "Modifica el programa para mostrar 7 y llegar a la isla situada a siete casillas.",
       "remixHint": "2 más el número que falta debe dar 7.",
@@ -296,16 +296,16 @@
   },
   "jump": {
     "eyebrow": "CÓDIGO → ACCIÓN",
-    "title": "Ayuda al robot a cruzar",
+    "title": "Ayuda al avión a cruzar",
     "target": "Objetivo: {n} casillas",
-    "rule": "Esta misión usa un único entero mostrado como distancia del salto. La escala va de 0 a 12.",
+    "rule": "Esta misión usa un único entero mostrado como distancia del vuelo. La escala va de 0 a 12.",
     "try": "Ejecutar y observar",
     "ready": "Listo. La isla está a {n} casillas.",
-    "running": "Salida {n} → saltando…",
-    "landed": "Ha saltado {n} casillas y aterrizado.",
+    "running": "Salida {n} → volando…",
+    "landed": "Ha volado {n} casillas y aterrizado.",
     "short": "{n} casillas no bastan. Cambia el código e inténtalo de nuevo.",
     "long": "{n} casillas es demasiado. Cambia el código e inténtalo de nuevo.",
     "invalid": "Muestra exactamente un entero entre 0 y 12.",
-    "codeError": "El código no se ejecutó. Revisa el programa antes de saltar."
+    "codeError": "El código no se ejecutó. Revisa el programa antes de volar."
   }
 }

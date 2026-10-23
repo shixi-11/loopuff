@@ -72,7 +72,7 @@
     "launch": "Đọc hiểu rồi bắt đầu gõ ↗",
     "navigation": "Điều hướng chính",
     "navHome": "Trang chủ",
-    "navCourse": "Khóa học",
+    "navCourse": "Chơi",
     "navGuide": "Lập trình cơ bản",
     "mapShort": "Bản đồ"
   },
@@ -193,10 +193,10 @@
       ]
     },
     {
-      "title": "Nhảy sang đảo tiếp theo",
-      "intro": "Một rô-bốt nhỏ cần đến hòn đảo đối diện. Trong nhiệm vụ này, số mà chương trình hiển thị là số ô rô-bốt sẽ nhảy tới.",
-      "goal": "Tính 2 + 3 rồi xem rô-bốt nhảy năm ô.",
-      "result": "Chương trình hiển thị 5. Trò chơi đọc kết quả đó và cho rô-bốt nhảy năm ô; .log() vẫn chỉ hiển thị một giá trị.",
+      "title": "Bay sang đảo tiếp theo",
+      "intro": "Một máy bay nhỏ cần đến hòn đảo đối diện. Trong nhiệm vụ này, số mà chương trình hiển thị là số ô máy bay sẽ bay tới.",
+      "goal": "Tính 2 + 3 rồi xem máy bay bay năm ô.",
+      "result": "Chương trình hiển thị 5. Trò chơi đọc kết quả đó và cho máy bay bay năm ô; .log() vẫn chỉ hiển thị một giá trị.",
       "question": "Vì sao đầu ra là 5?",
       "remix": "Sửa chương trình để hiển thị 7 và đáp xuống đảo cách bảy ô.",
       "remixHint": "2 cộng với số còn thiếu phải bằng 7.",
@@ -296,16 +296,16 @@
   },
   "jump": {
     "eyebrow": "MÃ → HÀNH ĐỘNG",
-    "title": "Giúp rô-bốt vượt qua",
+    "title": "Giúp máy bay vượt qua",
     "target": "Mục tiêu: {n} ô",
-    "rule": "Nhiệm vụ này dùng một số nguyên được hiển thị làm độ dài cú nhảy, từ 0 đến 12 ô.",
+    "rule": "Nhiệm vụ này dùng một số nguyên được hiển thị làm độ dài chuyến bay, từ 0 đến 12 ô.",
     "try": "Chạy và quan sát",
     "ready": "Sẵn sàng. Đảo cách {n} ô.",
-    "running": "Đầu ra {n} → đang nhảy…",
-    "landed": "Đã nhảy {n} ô và đáp xuống đảo.",
-    "short": "Nhảy {n} ô chưa tới. Hãy sửa mã và thử lại.",
-    "long": "Nhảy {n} ô quá xa. Hãy sửa mã và thử lại.",
+    "running": "Đầu ra {n} → đang bay…",
+    "landed": "Đã bay {n} ô và đáp xuống đảo.",
+    "short": "Bay {n} ô chưa tới. Hãy sửa mã và thử lại.",
+    "long": "Bay {n} ô quá xa. Hãy sửa mã và thử lại.",
     "invalid": "Hãy chỉ hiển thị một số nguyên từ 0 đến 12.",
-    "codeError": "Mã chưa chạy được. Hãy kiểm tra chương trình trước khi nhảy."
+    "codeError": "Mã chưa chạy được. Hãy kiểm tra chương trình trước khi bay."
   }
 }

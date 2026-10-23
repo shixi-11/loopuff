@@ -12,11 +12,11 @@ const html=await readFile(resolve(out,'index.html'),'utf8');
 for(const [locale] of locales){
   const messages=JSON.parse(await readFile(resolve(root,`public/locales/${locale}.json`),'utf8'));
   const lang=locale==='zh'?'zh-CN':locale==='zh-Hant'?'zh-TW':locale;
-  const entries=['','guide/',...course.flatMap(lesson=>[`learn/${lesson.id}/`,`learn/${lesson.id}/result/`])];
+  const entries=['','levels/','guide/',...course.flatMap(lesson=>[`learn/${lesson.id}/`,`learn/${lesson.id}/result/`])];
   for(const entry of entries){
   const canonical=`https://shixilin.com/games/loopuff/${locale}/${entry}`;
   const lessonIndex=course.findIndex(lesson=>entry.startsWith(`learn/${lesson.id}/`));
-  const title=entry.endsWith('/result/')?messages.assessment.title:entry==='guide/'?messages.ui.guide:lessonIndex>=0?messages.lessons[lessonIndex].title:messages.ui.tagline;
+  const title=entry.endsWith('/result/')?messages.assessment.title:entry==='levels/'?messages.ui.navCourse:entry==='guide/'?messages.ui.guide:lessonIndex>=0?messages.lessons[lessonIndex].title:messages.ui.tagline;
   const page=html.replace('<html lang="zh-CN">',`<html lang="${lang}" dir="${locale==='ar'?'rtl':'ltr'}">`)
     .replace('<body>',`<body${entry?' data-entry="learning"':''}>`)
     .replace(/<title>[^<]*<\/title>/,`<title>${messages.ui.name} · ${title}</title><link rel="canonical" href="${canonical}">${entry.endsWith('/result/')?'<meta name="robots" content="noindex,follow">':''}`);

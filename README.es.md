@@ -14,7 +14,7 @@ El primer capítulo ya se puede jugar: cuatro misiones sobre valores, sumas y vi
 
 Los retos de programación se evalúan sobre 100 puntos según la ejecución, la salida y los requisitos. Puedes corregir y reenviar; la velocidad al escribir y la coincidencia con el ejemplo no cuentan.
 
-En la cuarta misión, la salida del programa determina cuánto salta un robot. Ejecuta el código, observa dónde aterriza y cambia el cálculo para llegar a la isla flotante.
+En la cuarta misión, la salida del programa determina cuánto salta un plane. Ejecuta el código, observa dónde aterriza y cambia el cálculo para llegar a la isla flotante.
 
 ## Desarrollo
 

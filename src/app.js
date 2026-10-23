@@ -1,7 +1,7 @@
 import { course, locales } from './course.js';
 import { run } from './runner.js';
 import { assess, grade } from './assessment.js';
-import { mountJumpLab, drawExplorer } from './jump.js';
+import { mountJumpLab } from './jump.js';
 import { selectedLocale, languageUrl, parseRoute, routeUrl } from './routing.js';
 
 const $ = id => document.getElementById(id);
@@ -19,19 +19,20 @@ let jumpLab=null;
 let messages, languageRequest=0, languageController, guideIndex=0, mapOpen=false, notice='', lastResult=null, feedbackState=null;
 let state={phase:'welcome',lesson:0,fragment:0,typed:'',draft:'',assessedSource:null,grades:{},score:0,errors:0,keys:0,completed:[],...saved.state};
 if(!state.grades||typeof state.grades!=='object'||Array.isArray(state.grades))state.grades={};
-if(!['welcome','brief','typing','predict','output','explain','remix','independent','result','complete','guide','pause'].includes(state.phase)) state.phase='welcome';
+if(!['welcome','levels','brief','typing','predict','output','explain','remix','independent','result','complete','guide','pause'].includes(state.phase)) state.phase='welcome';
 if(!Number.isInteger(state.lesson)||state.lesson<0||state.lesson>=course.length)state.lesson=0;
 state.completed=Array.isArray(state.completed)?state.completed.filter(id=>course.some(l=>l.id===id)):[];
 function readRoute(){
   const route=parseRoute(location.pathname),previousLesson=state.lesson;
   if(route?.lessonId){state.lesson=course.findIndex(item=>item.id===route.lessonId);if(previousLesson!==state.lesson){state.draft='';state.assessedSource=null;}}
   if(route?.view==='result')state.phase='result';
+  else if(route?.view==='levels')state.phase='levels';
   else if(route?.view==='guide'){if(!['guide','welcome','pause'].includes(state.phase))state.resumePhase=state.phase;state.phase='guide';}
   else if(route?.view==='lesson'){
     if(previousLesson!==state.lesson){state.phase='brief';state.draft='';state.assessedSource=null;}
     else if(state.phase==='result')state.phase='independent';
     else if(state.phase==='pause')state.phase=state.previousPhase||'brief';
-    else if(['welcome','guide'].includes(state.phase))state.phase=['brief','typing','predict','output','explain','remix','independent','complete'].includes(state.resumePhase)?state.resumePhase:'brief';
+    else if(['welcome','levels','guide'].includes(state.phase))state.phase=['brief','typing','predict','output','explain','remix','independent','complete'].includes(state.resumePhase)?state.resumePhase:'brief';
   }else{
     if(!['welcome','pause','guide'].includes(state.phase))state.resumePhase=state.phase;
     state.phase='welcome';
@@ -79,9 +80,9 @@ function applyStatic(){
   $('map-button').innerHTML=`✧ <span class="map-long">${escape(ui('map'))}</span><span class="map-short">${escape(ui('mapShort'))}</span> <b id="map-count">${state.completed.length} / ${course.length}</b>`;
   $('map-button').setAttribute('aria-label',`${ui('map')} ${state.completed.length} / ${course.length}`);
   $('pause-button').textContent=`Ⅱ ${ui('pause')}`;$('pause-button').setAttribute('aria-label',ui('pause'));document.querySelector('.header-controls').setAttribute('aria-label',ui('map'));
-  const navigation=$('page-navigation'),onPage=!['welcome','typing','pause'].includes(state.phase);
-  navigation.hidden=!onPage;navigation.setAttribute('aria-label',ui('navigation'));
-  navigation.innerHTML=`<a data-action="home" href="${routeUrl(location.href,lang,'home').pathname}">${escape(ui('navHome'))}</a><a data-action="resume-course" href="${routeUrl(location.href,lang,'lesson',lesson().id).pathname}" ${state.phase!=='guide'?'aria-current="page"':''}>${escape(ui('navCourse'))}</a><a data-action="open-guide" href="${routeUrl(location.href,lang,'guide').pathname}" ${state.phase==='guide'?'aria-current="page"':''}>${escape(ui('navGuide'))}</a>`;
+  const navigation=$('page-navigation');
+  navigation.hidden=false;navigation.setAttribute('aria-label',ui('navigation'));
+  navigation.innerHTML=`<a data-action="home" href="${routeUrl(location.href,lang,'home').pathname}" ${state.phase==='welcome'?'aria-current="page"':''}>${escape(ui('navHome'))}</a><a data-action="open-levels" href="${routeUrl(location.href,lang,'levels').pathname}" ${!['welcome','guide'].includes(state.phase)?'aria-current="true"':''}>${escape(ui('navCourse'))}</a><a data-action="open-guide" href="${routeUrl(location.href,lang,'guide').pathname}" ${state.phase==='guide'?'aria-current="page"':''}>${escape(ui('navGuide'))}</a>`;
   $('universe').setAttribute('aria-label',ui('map'));document.querySelector('.coordinate').textContent='LOOPUFF / 01';
   document.querySelector('.welcome .eyebrow').textContent=ui('pilot');
   document.querySelector('.welcome h1').innerHTML=ui('hero').split(/\\n|\n/).map(escape).join('<br>');
@@ -101,7 +102,7 @@ function applyStatic(){
 }
 function syncRoute(){
   if(state.phase==='pause')return;
-  const view=state.phase==='welcome'?'home':state.phase==='guide'?'guide':state.phase==='result'?'result':'lesson';
+  const view=state.phase==='welcome'?'home':state.phase==='levels'?'levels':state.phase==='guide'?'guide':state.phase==='result'?'result':'lesson';
   const url=routeUrl(location.href,lang,view,lesson().id);url.hash='';
   if(location.pathname!==url.pathname)history.pushState(null,'',url);
 }
@@ -122,7 +123,7 @@ function render(){
   if(phase!=='pause'){$('flow-dialog').close();$('dialog-content').textContent='';}
   if(typing)renderTyping();else if(phase!=='welcome')renderDialog();
   const view=parseRoute(location.pathname)?.view||'home';
-  document.title=`${ui('name')} · ${view==='result'?messages.assessment.title:view==='guide'?ui('guide'):view==='lesson'?copy().title:ui('tagline')}`;
+  document.title=`${ui('name')} · ${view==='result'?messages.assessment.title:view==='levels'?ui('navCourse'):view==='guide'?ui('guide'):view==='lesson'?copy().title:ui('tagline')}`;
   document.querySelector('link[rel="canonical"]').href=routeUrl('https://shixilin.com/games/loopuff/',lang,view,lesson().id).href;
   let robots=document.querySelector('meta[name="robots"]');
   if(view==='result'){if(!robots){robots=document.createElement('meta');robots.name='robots';document.head.append(robots);}robots.content='noindex,follow';}else robots?.remove();
@@ -165,6 +166,10 @@ function assessmentPanel(){
 }
 function renderDialog(){
   const c=copy(),phase=state.phase;let title='',body='';
+  if(phase==='levels'){
+    $('learning-page').dataset.stage=phase;
+    $('learning-content').innerHTML=`<section class="levels-page"><span class="eyebrow">${escape(ui('name'))}</span><h1 id="learning-title">${escape(ui('routeTitle'))}</h1><p class="levels-intro">${escape(ui('routeIntro'))}</p><div class="level-grid">${course.map((l,i)=>`<button class="level-card" data-lesson="${i}"><span class="level-number">${String(i+1).padStart(2,'0')}</span><span class="level-copy"><strong>${escape(messages.lessons[i].title)}</strong><span>${escape(messages.lessons[i].goal)}</span><small>${escape(ui(state.completed.includes(l.id)?'done':'open'))}</small></span><span aria-hidden="true">↗</span></button>`).join('')}</div><p class="scope-note">${escape(ui('chapterNote'))}</p></section>`;return;
+  }
   if(phase==='brief'){title=c.title;body=`<p class="dialog-note">${prose(c.intro)}</p>${codeBlock(lesson().source)}<p>${prose(c.goal)}</p>${actions([['type',ui('launch')]])}`;}
   if(phase==='predict'){title=ui('predict');body=`<p class="dialog-note">${escape(ui('predictionPrompt'))}</p>${codeBlock(lesson().source)}${choices(lesson().prediction,'prediction')}`;}
   if(phase==='output'){
@@ -275,6 +280,7 @@ document.addEventListener('click',event=>{
   if(target.dataset.lesson!==undefined){mapOpen=false;$('map-dialog').close();begin(Number(target.dataset.lesson));return;}
   const action=target.dataset.action;
   if(action==='try-jump'){tryJump();return;}
+  if(action==='open-levels'){move('levels');return;}
   if(action==='open-guide'){if(!['welcome','guide','pause'].includes(state.phase))state.resumePhase=state.phase;guideIndex=0;move('guide');return;}
   if(action==='resume-course'){if(state.phase==='guide')move(state.resumePhase==='result'?'independent':state.resumePhase||'brief');else if(state.phase==='result')move('independent');return;}
   if(action==='edit-assessment'){move('independent');$('program-editor')?.focus();return;}
@@ -296,7 +302,7 @@ $('start').onclick=()=>{if(['brief','typing','predict','output','explain','remix
 $('how-button').onclick=()=>{guideIndex=0;move('guide');};
 $('pause-button').onclick=pause;
 $('typing-field').addEventListener('input',onTyping);$('typing-field').addEventListener('compositionend',onTyping);
-$('map-button').onclick=()=>{if(state.phase==='typing')pause();mapOpen=true;renderMap();$('map-dialog').showModal();};
+$('map-button').onclick=()=>move('levels');
 $('map-close').onclick=()=>{mapOpen=false;$('map-dialog').close();};
 $('map-dialog').addEventListener('close',()=>{mapOpen=false;});
 $('flow-dialog').addEventListener('cancel',event=>{event.preventDefault();if(state.phase==='pause')move(state.previousPhase||'typing');else pause();});
@@ -332,11 +338,19 @@ function background(){
  for(let n=0;n<4;n++){const x=W*(.56+n*.08),y=H*(.78-n*.045);bg.strokeStyle='#b6cda64d';bg.beginPath();bg.arc(x,y,2.5,0,Math.PI*2);bg.stroke();}
  if(mobile){bg.fillStyle='#14292b65';bg.fillRect(0,0,W,H);}
 }
-function shipX(){return state.phase==='welcome'?W*.73:W*.5;}
+function shipX(){return state.phase==='welcome'?W*.72:W*.5;}
 function shipY(){return state.phase==='welcome'?H*.79:shipAnchor;}
 function shoot(){effects.push({kind:'beam',x:shipX(),y:shipY()-30,tx:W*.5,ty:targetY,life:.17,max:.17});}
 function burst(x,y,count){if(reduced.matches)count=Math.min(count,7);for(let i=0;i<count;i++){const a=Math.random()*Math.PI*2,speed=20+Math.random()*100;effects.push({kind:'spark',x,y,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,life:.45+Math.random()*.4,max:.85});}}
-function drawShip(t){drawExplorer(ctx,shipX(),shipY()+(reduced.matches?0:Math.sin(t*1.8)*4),state.phase==='welcome'?82:58,t,false);}
+function drawShip(t){
+ const x=shipX(),y=shipY()+(reduced.matches?0:Math.sin(t*1.8)*4);
+ ctx.save();ctx.translate(x,y);if(state.phase==='welcome')ctx.rotate(.2);
+ const glow=ctx.createRadialGradient(0,22,2,0,28,49);glow.addColorStop(0,'#e7b77155');glow.addColorStop(1,'#e7b77100');ctx.fillStyle=glow;ctx.fillRect(-50,-5,100,90);
+ ctx.fillStyle='#edbb78';ctx.beginPath();ctx.moveTo(-8,22);ctx.lineTo(0,47+(reduced.matches?0:Math.sin(t*22)*6));ctx.lineTo(8,22);ctx.closePath();ctx.fill();
+ ctx.fillStyle='#bdcdb7';ctx.beginPath();ctx.moveTo(0,-43);ctx.lineTo(38,21);ctx.lineTo(12,15);ctx.lineTo(0,26);ctx.lineTo(-12,15);ctx.lineTo(-38,21);ctx.closePath();ctx.fill();
+ ctx.fillStyle='#ede7d2';ctx.beginPath();ctx.moveTo(0,-43);ctx.lineTo(12,17);ctx.lineTo(0,25);ctx.lineTo(-12,17);ctx.closePath();ctx.fill();
+ ctx.fillStyle='#345d5b';ctx.beginPath();ctx.ellipse(0,-9,6,14,0,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#92b7a0';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(-22,12);ctx.lineTo(-12,-7);ctx.moveTo(22,12);ctx.lineTo(12,-7);ctx.stroke();ctx.restore();
+}
 function frame(now){
  const dt=Math.min((now-last)/1000,.05);last=now;clock+=dt;
  if($('universe').hidden){requestAnimationFrame(frame);return;}

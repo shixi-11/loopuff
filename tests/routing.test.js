@@ -41,9 +41,18 @@ test('build emits localized entry points with canonical metadata',async()=>{
     const html=await readFile(new URL(`../dist/${locale}/index.html`,import.meta.url),'utf8');
     assert.ok(html.includes(`https://shixilin.com/games/loopuff/${locale}/`));
     assert.ok(!html.includes('?lang='));
-    for(const suffix of ['guide/','learn/signal/','learn/names/result/']){
+    for(const suffix of ['levels/','guide/','learn/signal/','learn/names/result/']){
       const page=await readFile(new URL(`../dist/${locale}/${suffix}index.html`,import.meta.url),'utf8');
       assert.ok(page.includes(`https://shixilin.com/games/loopuff/${locale}/${suffix}`));
     }
+  }
+});
+
+test('level selection has a full localized page and survives language switches',()=>{
+  for(const [locale]of locales)for(const prefix of ['', '/games/loopuff']){
+    const url=routeUrl(`https://example.com${prefix}/zh/learn/signal/`,locale,'levels');
+    assert.equal(url.pathname,`${prefix}/${locale}/levels/`);
+    assert.deepEqual(parseRoute(url.pathname),{locale,view:'levels'});
+    assert.equal(languageUrl(url.href,'en').pathname,`${prefix}/en/levels/`);
   }
 });

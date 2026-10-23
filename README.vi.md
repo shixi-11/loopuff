@@ -14,7 +14,7 @@ Chương đầu đã chơi được với bốn nhiệm vụ về giá trị, ph
 
 Bài tự viết được chấm trên thang 100 điểm theo khả năng chạy, kết quả và yêu cầu của bài. Có thể sửa rồi nộp lại; tốc độ gõ hay việc giống mã mẫu không ảnh hưởng đến điểm.
 
-Ở nhiệm vụ thứ tư, kết quả chương trình quyết định khoảng cách nhảy của robot. Chạy mã, quan sát điểm đáp rồi sửa phép tính để đến hòn đảo nổi.
+Ở nhiệm vụ thứ tư, kết quả chương trình quyết định khoảng cách nhảy của plane. Chạy mã, quan sát điểm đáp rồi sửa phép tính để đến hòn đảo nổi.
 
 ## Phát triển
 

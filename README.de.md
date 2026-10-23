@@ -14,7 +14,7 @@ Das erste Kapitel ist spielbar: vier Missionen zu Werten, Addition und Namensbin
 
 Eigenständige Aufgaben werden mit bis zu 100 Punkten für Ausführung, Ausgabe und Aufgabenbedingungen bewertet. Überarbeiten und erneut einreichen ist möglich; Tipptempo und Übereinstimmung mit dem Beispiel zählen nicht.
 
-In der vierten Mission bestimmt die Programmausgabe die Sprungweite eines Roboters. Führe den Code aus, beobachte die Landung und ändere die Rechnung, um die schwebende Insel zu erreichen.
+In der vierten Mission bestimmt die Programmausgabe die Sprungweite eines Fliegers. Führe den Code aus, beobachte die Landung und ändere die Rechnung, um die schwebende Insel zu erreichen.
 
 ## Entwicklung
 

@@ -1,3 +1,4 @@
+import { drawPlane } from './plane.js';
 // The game interprets one displayed integer as a jump distance. It is not a
 // Tolang built-in operation and never changes the runner's language semantics.
 export function jumpOutcome(logs,target,maximum=12){
@@ -13,24 +14,9 @@ export function jumpPosition(progress,distance){
 }
 
 export function drawExplorer(ctx,x,y,size,time=0,jumping=false){
-  ctx.save();ctx.translate(x,y);ctx.scale(size/64,size/64);
-  const shell=ctx.createLinearGradient(-28,-35,28,30);
-  shell.addColorStop(0,'#fff6d9');shell.addColorStop(.55,'#d8e5c6');shell.addColorStop(1,'#789b83');
-  ctx.fillStyle='#325d50';ctx.beginPath();ctx.ellipse(-15,29,12,7,0,0,Math.PI*2);ctx.ellipse(15,29,12,7,0,0,Math.PI*2);ctx.fill();
-  ctx.fillStyle=shell;ctx.strokeStyle='#f8e7b1';ctx.lineWidth=1.5;
-  ctx.beginPath();ctx.roundRect(-29,-31,58,61,23);ctx.fill();ctx.stroke();
-  ctx.fillStyle='#102d32';ctx.beginPath();ctx.roundRect(-22,-20,44,31,13);ctx.fill();
-  ctx.fillStyle='#ffe1a1';
-  for(const eye of [-10,10]){ctx.beginPath();ctx.roundRect(eye-3,-13,6,16,3);ctx.fill();}
-  ctx.strokeStyle='#b9d5a6';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(0,-29);ctx.quadraticCurveTo(-1,-40,5,-47);ctx.stroke();
-  ctx.fillStyle='#abd3a1';ctx.beginPath();ctx.ellipse(-3,-44,12,6,-.55,0,Math.PI*2);ctx.fill();
-  ctx.fillStyle='#e0edb4';ctx.beginPath();ctx.ellipse(9,-47,10,5,-1,0,Math.PI*2);ctx.fill();
-  ctx.fillStyle='#b1c8a3';ctx.beginPath();ctx.roundRect(-36,jumping?-19:-3,8,23,4);ctx.roundRect(28,jumping?-19:-3,8,23,4);ctx.fill();
-  ctx.fillStyle='#e7bc73';ctx.beginPath();ctx.arc(0,21,3,0,Math.PI*2);ctx.fill();ctx.restore();
+  drawPlane(ctx,x,y,size,time,jumping?Math.PI/3:0);
 }
 
-// One owner, one animation loop. Disposal prevents a detached lesson retaining
-// a running scene. Reduced-motion mode presents the exact final state directly.
 export function mountJumpLab(root,{target,text,reduced}){
   const canvas=root.querySelector('canvas'),ctx=canvas.getContext('2d'),status=root.querySelector('[role=status]');
   let width=800,height=320,frameId=0,disposed=false,outcome=null,start=null,lastProgress=0;
