@@ -371,7 +371,7 @@ function background(){
  for(let n=0;n<4;n++){const x=W*(.56+n*.08),y=H*(.78-n*.045);bg.strokeStyle='#b6cda64d';bg.beginPath();bg.arc(x,y,2.5,0,Math.PI*2);bg.stroke();}
  if(mobile){bg.fillStyle='#14292b65';bg.fillRect(0,0,W,H);}
 }
-function shipX(){return state.phase==='welcome'?W*.72:W*.5;}
+function shipX(){return state.phase==='welcome'?W*(W<1100?.84:.76):W*.5;}
 function shipY(){return state.phase==='welcome'?H*.79:shipAnchor;}
 function shoot(){effects.push({kind:'beam',x:shipX(),y:shipY()-30,tx:W*.5,ty:targetY,life:.17,max:.17});}
 function burst(x,y,count){if(reduced.matches)count=Math.min(count,7);for(let i=0;i<count;i++){const a=Math.random()*Math.PI*2,speed=20+Math.random()*100;effects.push({kind:'spark',x,y,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,life:.45+Math.random()*.4,max:.85});}}
@@ -379,7 +379,7 @@ function drawShip(t){
  const calm=reduced.matches,home=state.phase==='welcome';
  const x=shipX(),y=shipY()+(calm?0:Math.sin(t*1.8)*4);
  const bank=home ? .18 : 0;
- const size=home?Math.min(200,W*.31):115;
+ const size=home?Math.min(200,W*.27):115;
  drawPlane(ctx,x,y,size,calm?0:t,bank-(home?2.15:0)+(calm?0:Math.sin(t*.85)*.045));
 }
 function frame(now){
