@@ -129,6 +129,7 @@ function render(){
   const page=!['welcome','typing','pause'].includes(phase);
   document.body.dataset.view=page?'learning':'game';
   $('universe').hidden=page;$('learning-page').hidden=!page;
+  if(!page&&document.readyState==='complete')upgradeWorld();
   $('universe').dataset.phase=phase;$('welcome').hidden=phase!=='welcome';$('welcome-foot').hidden=phase!=='welcome';
   for(const id of ['flight-hud','code-coach','target','cockpit'])$(id).hidden=!typing;
   $('pause-button').hidden=!typing;
@@ -345,7 +346,16 @@ let W=1000,H=800,DPR=1,last=performance.now(),clock=0,beacon=0,effects=[];
 let seed=41;const rnd=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296;};
 const stars=Array.from({length:145},()=>({x:rnd(),y:rnd(),r:.45+rnd()*1.2,p:rnd()*6.28}));
 function resize(){const r=$('universe').getBoundingClientRect();if(!r.width||!r.height)return;W=r.width;H=r.height;DPR=Math.min(devicePixelRatio||1,1.6);canvas.width=Math.round(W*DPR);canvas.height=Math.round(H*DPR);back.width=canvas.width;back.height=canvas.height;ctx.setTransform(DPR,0,0,DPR,0,0);bg.setTransform(DPR,0,0,DPR,0,0);background();refreshGeometry();}
-const worldArt=new Image();worldArt.decoding='async';worldArt.fetchPriority='high';worldArt.onload=()=>background();worldArt.src=new URL('../assets/world-flight-90.webp',import.meta.url).href;
+let fullWorldRequested=false;
+let worldArt=new Image();worldArt.decoding='async';worldArt.onload=()=>background();worldArt.src=new URL('../assets/world-preview.webp',import.meta.url).href;
+// Same-composition preview first; a slow detailed image cannot hold the page load event.
+function upgradeWorld(){
+ if(fullWorldRequested||$('universe').hidden)return;
+ fullWorldRequested=true;
+ const full=new Image();full.decoding='async';full.fetchPriority='low';
+ full.onload=()=>{worldArt=full;background();};full.src=new URL('../assets/world-flight-90.webp',import.meta.url).href;
+}
+if(document.readyState==='complete')upgradeWorld();else window.addEventListener('load',upgradeWorld,{once:true});
 function background(){
  if(worldArt.complete&&worldArt.naturalWidth){const scale=Math.max(W/worldArt.naturalWidth,H/worldArt.naturalHeight);bg.drawImage(worldArt,(W-worldArt.naturalWidth*scale)/2,(H-worldArt.naturalHeight*scale)/2,worldArt.naturalWidth*scale,worldArt.naturalHeight*scale);const shade=bg.createLinearGradient(0,0,W,0);shade.addColorStop(0,'#0b2729e6');shade.addColorStop(.65,'#0b27296b');shade.addColorStop(1,'#0b272911');bg.fillStyle=shade;bg.fillRect(0,0,W,H);return;}
  const g=bg.createLinearGradient(0,0,W,H);g.addColorStop(0,'#173131');g.addColorStop(.6,'#14292b');g.addColorStop(1,'#203a33');bg.fillStyle=g;bg.fillRect(0,0,W,H);
@@ -369,7 +379,8 @@ function drawShip(t){
  const calm=reduced.matches,home=state.phase==='welcome';
  const x=shipX(),y=shipY()+(calm?0:Math.sin(t*1.8)*4);
  const bank=home ? .18 : 0;
- drawPlane(ctx,x,y,home?103:86,calm?0:t,bank+(calm?0:Math.sin(t*.85)*.045));
+ const size=home?Math.min(200,W*.31):115;
+ drawPlane(ctx,x,y,size,calm?0:t,bank-(home?2.15:0)+(calm?0:Math.sin(t*.85)*.045));
 }
 function frame(now){
  const dt=Math.min((now-last)/1000,.05);last=now;clock+=dt;

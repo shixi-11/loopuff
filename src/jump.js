@@ -1,4 +1,4 @@
-import { drawPlane } from './plane.js';
+import { drawPlane, whenPlaneReady } from './plane.js';
 // The game interprets one displayed integer as a jump distance. It is not a
 // Tolang built-in operation and never changes the runner's language semantics.
 export function jumpOutcome(logs,target,maximum=12){
@@ -20,7 +20,7 @@ export function drawExplorer(ctx,x,y,size,time=0,jumping=false){
 export function mountJumpLab(root,{target,text,reduced}){
   const canvas=root.querySelector('canvas'),ctx=canvas.getContext('2d'),status=root.querySelector('[role=status]');
   let width=800,height=320,frameId=0,disposed=false,outcome=null,start=null,lastProgress=0;
-  const image=new Image();image.src=new URL('../assets/world.png',import.meta.url).href;
+  const image=new Image();image.src=new URL('../assets/world-flight-90.webp',import.meta.url).href;
   const fill=(key,number)=>text[key].replace('{n}',String(number));
   const position=n=>36+(width-72)*n/12;
   function platform(at,goal=false){
@@ -67,6 +67,7 @@ export function mountJumpLab(root,{target,text,reduced}){
     const dpr=Math.min(devicePixelRatio||1,1.6);canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);canvas.style.height=height+'px';ctx.setTransform(dpr,0,0,dpr,0,0);draw(lastProgress);
   }
   const observer=new ResizeObserver(resize);observer.observe(root);image.onload=()=>draw(lastProgress);
+  const detachPlane=whenPlaneReady(()=>draw(lastProgress));
   const onMotion=()=>{if(reduced.matches&&outcome){cancelAnimationFrame(frameId);draw(1);status.textContent=fill(outcome.direction,outcome.distance);}};
   reduced.addEventListener('change',onMotion);status.textContent=fill('ready',target);resize();
   return {
@@ -79,6 +80,6 @@ export function mountJumpLab(root,{target,text,reduced}){
       root.dataset.outcome=next.direction;root.dataset.distance=String(next.distance);return next;
     },
     error(){cancelAnimationFrame(frameId);outcome=null;draw();status.textContent=text.codeError;delete root.dataset.outcome;delete root.dataset.distance;},
-    dispose(){disposed=true;cancelAnimationFrame(frameId);observer.disconnect();reduced.removeEventListener('change',onMotion);image.onload=null;}
+    dispose(){disposed=true;cancelAnimationFrame(frameId);observer.disconnect();reduced.removeEventListener('change',onMotion);image.onload=null;detachPlane();}
   };
 }
