@@ -151,7 +151,7 @@ body[data-view=learning] .header-controls{justify-self:end}
 
 /* Emerald skies, warm stone and a small explorer: one world for play and code. */
 body[data-view=game] .welcome{top:48%;inset-inline:0;left:0;right:0;margin-inline:auto;transform:translateY(-50%);width:min(900px,88%);text-align:center}
-body[data-view=game] .welcome h1{font-size:clamp(42px,5vw,76px);line-height:1.12;text-wrap:wrap;letter-spacing:-.035em}
+body[data-view=game] .welcome h1{font-size:clamp(42px,5vw,76px);line-height:1.28;text-wrap:wrap;letter-spacing:-.035em}
 body[data-view=game] .welcome-copy{margin-inline:auto;max-width:610px;color:#e1e6ce}
 body[data-view=game] .welcome-actions{justify-content:center}
 body[data-view=game] .first-command{justify-content:center}
