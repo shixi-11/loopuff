@@ -3,8 +3,8 @@
     "name": "Loopuff",
     "tagline": "Spielend programmieren lernen.",
     "pilot": "KEINE VORKENNTNISSE NÖTIG",
-    "hero": "Kleine Schritte.\nRichtig verstehen.",
-    "lead": "Entdecke, was Code bedeutet. Sage Ergebnisse voraus, experimentiere und schreibe eigene Anweisungen in Tolang.",
+    "hero": "Schreib Code.\nEntdecke ferne Planeten.",
+    "lead": "Starte ohne Vorkenntnisse. Verstehe Code, experimentiere und schreibe eigene Programme in Tolang.",
     "start": "Reise beginnen ↗",
     "resume": "Reise fortsetzen ↗",
     "guide": "Was ist Programmieren?",
@@ -74,7 +74,8 @@
     "navHome": "Startseite",
     "navCourse": "Spielen",
     "navGuide": "Programmiergrundlagen",
-    "mapShort": "Karte"
+    "mapShort": "Karte",
+    "heroAccent": "Planeten"
   },
   "lessons": [
     {

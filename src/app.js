@@ -2,6 +2,7 @@ import { course, locales } from './course.js';
 import { run } from './runner.js';
 import { assess, grade } from './assessment.js';
 import { mountJumpLab } from './jump.js';
+import { drawPlane } from './plane.js';
 import { selectedLocale, languageUrl, parseRoute, routeUrl } from './routing.js';
 
 const $ = id => document.getElementById(id);
@@ -85,7 +86,7 @@ function applyStatic(){
   navigation.innerHTML=`<a data-action="home" href="${routeUrl(location.href,lang,'home').pathname}" ${state.phase==='welcome'?'aria-current="page"':''}>${escape(ui('navHome'))}</a><a data-action="open-levels" href="${routeUrl(location.href,lang,'levels').pathname}" ${!['welcome','guide'].includes(state.phase)?'aria-current="true"':''}>${escape(ui('navCourse'))}</a><a data-action="open-guide" href="${routeUrl(location.href,lang,'guide').pathname}" ${state.phase==='guide'?'aria-current="page"':''}>${escape(ui('navGuide'))}</a>`;
   $('universe').setAttribute('aria-label',ui('map'));document.querySelector('.coordinate').textContent='LOOPUFF / 01';
   document.querySelector('.welcome .eyebrow').textContent=ui('pilot');
-  document.querySelector('.welcome h1').innerHTML=ui('hero').split(/\\n|\n/).map(escape).join('<br>');
+  document.querySelector('.welcome h1').innerHTML=ui('hero').split(/\\n|\n/).map(line=>{const accent=ui('heroAccent'),at=line.indexOf(accent);return at<0?escape(line):escape(line.slice(0,at))+`<span class="hero-accent">${escape(accent)}</span>`+escape(line.slice(at+accent.length));}).join('<br>');
   document.querySelector('.welcome-copy').textContent=ui('lead');
   $('start').textContent=ui(state.completed.length||state.resumePhase?'resume':'start');$('how-button').textContent=ui('guide');
   document.querySelector('.first-command>span').textContent=ui('firstSignal');
@@ -343,13 +344,10 @@ function shipY(){return state.phase==='welcome'?H*.79:shipAnchor;}
 function shoot(){effects.push({kind:'beam',x:shipX(),y:shipY()-30,tx:W*.5,ty:targetY,life:.17,max:.17});}
 function burst(x,y,count){if(reduced.matches)count=Math.min(count,7);for(let i=0;i<count;i++){const a=Math.random()*Math.PI*2,speed=20+Math.random()*100;effects.push({kind:'spark',x,y,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,life:.45+Math.random()*.4,max:.85});}}
 function drawShip(t){
- const x=shipX(),y=shipY()+(reduced.matches?0:Math.sin(t*1.8)*4);
- ctx.save();ctx.translate(x,y);if(state.phase==='welcome')ctx.rotate(.2);
- const glow=ctx.createRadialGradient(0,22,2,0,28,49);glow.addColorStop(0,'#e7b77155');glow.addColorStop(1,'#e7b77100');ctx.fillStyle=glow;ctx.fillRect(-50,-5,100,90);
- ctx.fillStyle='#edbb78';ctx.beginPath();ctx.moveTo(-8,22);ctx.lineTo(0,47+(reduced.matches?0:Math.sin(t*22)*6));ctx.lineTo(8,22);ctx.closePath();ctx.fill();
- ctx.fillStyle='#bdcdb7';ctx.beginPath();ctx.moveTo(0,-43);ctx.lineTo(38,21);ctx.lineTo(12,15);ctx.lineTo(0,26);ctx.lineTo(-12,15);ctx.lineTo(-38,21);ctx.closePath();ctx.fill();
- ctx.fillStyle='#ede7d2';ctx.beginPath();ctx.moveTo(0,-43);ctx.lineTo(12,17);ctx.lineTo(0,25);ctx.lineTo(-12,17);ctx.closePath();ctx.fill();
- ctx.fillStyle='#345d5b';ctx.beginPath();ctx.ellipse(0,-9,6,14,0,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#92b7a0';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(-22,12);ctx.lineTo(-12,-7);ctx.moveTo(22,12);ctx.lineTo(12,-7);ctx.stroke();ctx.restore();
+ const calm=reduced.matches,home=state.phase==='welcome';
+ const x=shipX(),y=shipY()+(calm?0:Math.sin(t*1.8)*4);
+ const bank=home ? .18 : 0;
+ drawPlane(ctx,x,y,home?103:86,calm?0:t,bank+(calm?0:Math.sin(t*.85)*.045));
 }
 function frame(now){
  const dt=Math.min((now-last)/1000,.05);last=now;clock+=dt;

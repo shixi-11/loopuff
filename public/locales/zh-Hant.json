@@ -3,8 +3,8 @@
     "name": "環靈",
     "tagline": "在遊戲中學會程式設計。",
     "pilot": "沒有經驗，也能出發",
-    "hero": "從一小步，\n讀懂程式的世界。",
-    "lead": "弄懂程式碼的意思，預測結果，動手實驗，再用 Tolang 寫出自己的指令。",
+    "hero": "敲下程式碼，\n去更遠的星球。",
+    "lead": "從零開始，讀懂程式碼、動手實驗，用 Tolang 寫出自己的程式。",
     "start": "開始第一航程 ↗",
     "resume": "繼續你的航程 ↗",
     "guide": "什麼是程式設計？",
@@ -74,7 +74,8 @@
     "navHome": "首頁",
     "navCourse": "關卡",
     "navGuide": "程式設計入門",
-    "mapShort": "航線"
+    "mapShort": "航線",
+    "heroAccent": "星球"
   },
   "lessons": [
     {

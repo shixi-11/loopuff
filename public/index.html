@@ -4,12 +4,12 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#14282a"><title>环灵 · 玩着学会编程</title>
 <script>const base=document.createElement('base');base.href=/^\/games\/loopuff(?:\/|$)/.test(location.pathname)?'/games/loopuff/':'/';document.head.append(base);</script>
-<link rel="stylesheet" href="./style.css"><script type="module" src="./src/app.js"></script>
+<link rel="icon" type="image/svg+xml" href="./assets/mark.svg"><link rel="stylesheet" href="./style.css"><script type="module" src="./src/app.js"></script>
 </head>
 <body>
 <div class="shell">
 <header class="masthead">
-<a class="brand" href="./" aria-label="环灵首页"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 2 25 15 38 20 25 25 20 38 15 25 2 20 15 15Z"/><circle cx="20" cy="20" r="5"/></svg><span><span id="brand-name">Loopuff</span><small>TOLANG</small></span></a>
+<a class="brand" href="./" aria-label="环灵首页"><svg viewBox="0 0 48 48" aria-hidden="true" class="orbit-mark"><ellipse class="mark-orbit" cx="24" cy="25" rx="21" ry="11" transform="rotate(-32 24 25)"/><path class="mark-plane" d="M25 5 37 35 28 31 25 38 22 31 12 35Z"/><ellipse class="mark-cockpit" cx="25" cy="22" rx="3" ry="6"/><circle class="mark-star" cx="6" cy="32" r="2"/></svg><span><span id="brand-name">Loopuff</span><small>TOLANG</small></span></a>
 <span class="edition">从零开始，读懂并写出代码。</span>
 <nav id="page-navigation" class="page-navigation" aria-label="主导航" hidden></nav>
 <nav class="header-controls" aria-label="游戏操作"><label class="language-control"><span class="sr-only" id="language-label">Language</span><select id="language-select" aria-label="Language"></select></label><button id="map-button" class="nav-button">✧ 航线 <b id="map-count">0 / 4</b></button><button id="pause-button" class="nav-button" hidden aria-label="暂停游戏">Ⅱ <span class="pause-word">暂停</span></button></nav>
@@ -19,7 +19,7 @@
 <div class="coordinate" aria-hidden="true">ORBIT 01 <span>·</span> HELLO, UNIVERSE</div>
 <section id="welcome" class="welcome">
 <div class="eyebrow"><i></i>零基础飞行员，准备出发</div>
-<h1>敲下代码，<br>去更远的<span>星球。</span></h1>
+<h1>敲下代码，<br>去更远的<span class="hero-accent">星球</span>。</h1>
 <p class="welcome-copy">读懂代码为什么这样写，再亲手改变结果。<br>从数字、名字和循环开始，逐步学会 Tolang。</p>
 <div class="welcome-actions"><button id="start" class="primary">开始第一航程 <span>↗</span></button><button id="how-button" class="text-button">怎么玩 →</button></div>
 <div class="first-command"><span>你的第一条信号</span><code>7.log()</code><svg viewBox="0 0 64 18" aria-hidden="true"><path d="M0 9H60M52 2l9 7-9 7"/></svg><strong>7</strong></div>

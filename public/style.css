@@ -183,3 +183,7 @@ body[data-view=game] .first-command{justify-content:center}
 @media(max-width:640px){.level-grid{grid-template-columns:1fr;margin-block:25px}.levels-intro{font-size:16px}.level-copy strong{font-size:21px}.masthead .nav-button b{margin:0}.map-long,.map-short{display:none!important}.welcome{max-width:88%}body[data-view=game] .welcome h1{font-size:clamp(34px,8vw,48px)}body[data-view=game] .welcome-copy{font-size:17px}.welcome-actions{margin-block:24px}.first-command{margin-top:20px}}
 
 @media(max-width:1000px){.flight-hud{padding-top:140px}.code-coach{top:255px}}
+
+/* Orbit and aircraft form one mark; the scene artwork stays unchanged. */
+.brand .orbit-mark{width:44px;height:44px;flex:none;overflow:visible}.brand .mark-orbit{fill:none;stroke:var(--cream);stroke-width:1.6}.brand .mark-plane{fill:var(--cream)}.brand .mark-cockpit{fill:var(--night)}.brand .mark-star{fill:var(--mint)}.hero-accent{color:var(--mint)}
+@media(max-width:560px){.brand .orbit-mark{width:34px;height:34px}}

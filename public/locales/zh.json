@@ -3,8 +3,8 @@
     "name": "环灵",
     "tagline": "玩着学会编程。",
     "pilot": "没有经验，也能出发",
-    "hero": "从一小步，\n读懂代码的世界。",
-    "lead": "弄懂代码的意思，预测结果，动手实验，再用 Tolang 写出自己的指令。",
+    "hero": "敲下代码，\n去更远的星球。",
+    "lead": "从零开始，读懂代码、动手实验，用 Tolang 写出自己的程序。",
     "start": "开始第一航程 ↗",
     "resume": "继续你的航程 ↗",
     "guide": "什么是编程？",
@@ -74,7 +74,8 @@
     "navHome": "首页",
     "navCourse": "关卡",
     "navGuide": "编程入门",
-    "mapShort": "航线"
+    "mapShort": "航线",
+    "heroAccent": "星球"
   },
   "lessons": [
     {

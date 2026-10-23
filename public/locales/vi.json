@@ -3,8 +3,8 @@
     "name": "Loopuff",
     "tagline": "Học lập trình qua trò chơi.",
     "pilot": "BẮT ĐẦU TỪ CON SỐ KHÔNG",
-    "hero": "Từng bước nhỏ.\nHiểu thật rõ.",
-    "lead": "Tìm hiểu ý nghĩa của mã. Dự đoán, thử nghiệm rồi tự viết lệnh bằng Tolang.",
+    "hero": "Viết mã,\nđến những hành tinh xa hơn.",
+    "lead": "Bắt đầu từ con số không. Hiểu mã, thử nghiệm và tự viết chương trình bằng Tolang.",
     "start": "Bắt đầu hành trình ↗",
     "resume": "Tiếp tục hành trình ↗",
     "guide": "Lập trình là gì?",
@@ -74,7 +74,8 @@
     "navHome": "Trang chủ",
     "navCourse": "Chơi",
     "navGuide": "Lập trình cơ bản",
-    "mapShort": "Bản đồ"
+    "mapShort": "Bản đồ",
+    "heroAccent": "hành tinh"
   },
   "lessons": [
     {

@@ -3,8 +3,8 @@
     "name": "Loopuff",
     "tagline": "Play your way into programming.",
     "pilot": "NO EXPERIENCE NEEDED",
-    "hero": "Small steps.\nReal understanding.",
-    "lead": "Discover what code means. Predict, experiment, and write your own instructions in Tolang.",
+    "hero": "Write code.\nReach new planets.",
+    "lead": "Start from zero. Understand code, experiment, and write your own programs in Tolang.",
     "start": "Begin your journey ↗",
     "resume": "Continue your journey ↗",
     "guide": "What is programming?",
@@ -74,7 +74,8 @@
     "navHome": "Home",
     "navCourse": "Play",
     "navGuide": "Programming basics",
-    "mapShort": "Map"
+    "mapShort": "Map",
+    "heroAccent": "planets"
   },
   "lessons": [
     {
