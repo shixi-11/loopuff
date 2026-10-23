@@ -206,10 +206,9 @@ body[data-view=game] .universe[data-phase=welcome] .welcome{position:relative;in
 .first-flight{display:flex;align-items:center;justify-content:center;gap:70px;margin:18px auto 0;direction:ltr}
 .first-flight .first-command{margin:0;flex-wrap:wrap}
 #home-plane-slot{width:160px;height:180px;flex:none}
-.home-plane{position:absolute;z-index:2;width:160px;height:180px;padding:0;transform:translate(-50%,-50%);background:transparent;border:1px solid transparent;border-radius:50%;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
-.home-plane:hover{border-color:#d7e5bc66}
-.home-plane:focus-visible{outline:2px dashed #c9dfb3;outline-offset:5px}
-.home-plane[data-dragging]{cursor:grabbing;border-color:#d7e5bc99}
+.home-plane{position:absolute;z-index:2;width:160px;height:180px;padding:0;transform:translate(-50%,-50%);background:transparent;border:0;border-radius:0;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
+.home-plane:focus-visible{outline:none;background:linear-gradient(#c9dfb3,#c9dfb3) center bottom 4px/24px 2px no-repeat}
+.home-plane[data-dragging]{cursor:grabbing}
 .universe[data-phase=welcome] .welcome-foot{position:relative;inset:auto;width:87%;margin:26px auto 0}
 @media(max-width:1000px){.universe[data-phase=welcome]{padding-top:170px}}
 @media(max-width:560px){

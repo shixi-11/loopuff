@@ -23,4 +23,6 @@ The transparent aircraft control supports pointer capture, touch dragging and ar
 
 The language picker remains a native select with a consistent chevron, text padding and a 44px target. Arabic mirrors the chevron and spacing. The narrow typing header uses an icon-only pause control with its full accessible name.
 
+The home and typing-game aircraft now render the user's approved transparent PNG, `public/assets/aircraft-2d.png`, rather than the simplified canvas paths. The source is copied byte for byte (SHA-256 `4387e91ea4a75568716daaedf05dcf891435e4c95913551c4ad27b4e7e9901e4`), preserving its eyes, colors and alpha. Hovering and dragging do not draw an enclosing circle. Keyboard focus uses a small underline; pointer capture, movement and reset behavior are retained.
+
 Validation: 28 automated checks, real desktop mouse drag/drop over controls, keyboard movement/reset, all eleven locales at 320 CSS pixels, and a narrow typing-page header check. Browser emulation does not substitute for a physical touch-device test.
