@@ -13,7 +13,7 @@
 <a class="brand" href="./" aria-label="环灵首页"><svg viewBox="0 0 48 48" aria-hidden="true" class="orbit-mark"><ellipse class="mark-orbit" cx="24" cy="25" rx="21" ry="11" transform="rotate(-32 24 25)"/><path class="mark-plane" d="M25 5 37 35 28 31 25 38 22 31 12 35Z"/><ellipse class="mark-cockpit" cx="25" cy="22" rx="3" ry="6"/><circle class="mark-star" cx="6" cy="32" r="2"/></svg><span><span id="brand-name">Loopuff</span><small>TOLANG</small></span></a>
 <span class="edition">从零开始，读懂并写出代码。</span>
 <nav id="page-navigation" class="page-navigation" aria-label="主导航" hidden></nav>
-<nav class="header-controls" aria-label="游戏操作"><label class="language-control"><span class="sr-only" id="language-label">Language</span><select id="language-select" aria-label="Language"></select></label><button id="map-button" class="nav-button">✧ 航线 <b id="map-count">0 / 4</b></button><button id="pause-button" class="nav-button" hidden aria-label="暂停游戏">Ⅱ <span class="pause-word">暂停</span></button></nav>
+<div class="header-controls" role="group" aria-label="游戏操作"><label class="language-control"><span class="sr-only" id="language-label">Language</span><select id="language-select" aria-label="Language"></select></label><button id="pause-button" class="nav-button" hidden aria-label="暂停游戏">Ⅱ <span class="pause-word">暂停</span></button></div>
 </header>
 <main class="universe" id="universe" aria-label="打字飞行场">
 <canvas id="space" aria-hidden="true"></canvas><div class="scene-grain" aria-hidden="true"></div>
@@ -40,6 +40,5 @@
 <footer class="page-foot"><span>一场从 <code>Hello</code> 之前就开始的旅程。</span><span id="save-status">通关后自动保存航线</span></footer>
 </div>
 <dialog id="flow-dialog" aria-labelledby="dialog-title"><div id="dialog-content"></div></dialog>
-<dialog id="map-dialog" aria-labelledby="map-title"><div class="dialog-top"><span class="eyebrow">你的探索航线</span><span id="map-locale"></span><button id="map-close" class="icon-button" aria-label="关闭航线">×</button></div><h2 id="map-title">下一站，学会什么？</h2><p class="dialog-note">探索数值、计算和名字，独立解决新的问题。</p><div id="route-list" class="route-list"></div></dialog>
 <div class="toast" id="toast" role="status" hidden></div>
 </body></html>

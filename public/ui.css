@@ -126,3 +126,26 @@ body[data-view=learning] .page-foot code{color:#345a4b;text-shadow:none}
  .arcade-game h2{font-size:24px}
 }
 @media(prefers-reduced-motion:reduce){.arcade-game{transition:none}.arcade-game:hover{transform:none}}
+
+/* One course entry carries progress; the other destinations stay distinct. */
+.header-controls{display:flex;align-items:center;gap:12px}
+.masthead .page-navigation a{display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px}
+.course-progress{display:inline-flex;align-items:center;padding:2px 7px;border:1px solid #d5e4c860;border-radius:5px;color:#e4edda;font:11px/1.6 var(--mono);letter-spacing:0}
+body[data-view=learning] .course-progress{color:#365c45;border-color:#abc0a1;background:#e6eddb}
+@media(max-width:1000px){
+ .masthead .page-navigation{width:100%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+ .masthead .page-navigation a{white-space:normal;text-align:center;line-height:1.45;padding:8px 3px;overflow-wrap:anywhere;flex-wrap:wrap;column-gap:5px;row-gap:2px}
+ .header-controls{gap:8px}
+}
+@media(max-width:560px){
+ .masthead .page-navigation{gap:4px}
+ .masthead .page-navigation a{font-size:13px}
+ .course-progress{font-size:10px;padding:1px 4px}
+}
+
+.nav-label-short{display:none}
+@media(max-width:560px){
+ .masthead .page-navigation,body[data-view=learning] .masthead .page-navigation{gap:4px;align-items:stretch}
+ .masthead .page-navigation a{overflow-wrap:normal;align-content:center}
+ .nav-label-full{display:none}.nav-label-short{display:inline}
+}

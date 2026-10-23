@@ -19,7 +19,7 @@ const validLocale=id=>locales.some(([key])=>key===id);
 let lang=selectedLocale(location.href,saved.lang,navigator.languages||[navigator.language]);
 if(!validLocale(lang))lang='en';
 let jumpLab=null,vaultGame=null;
-let messages, languageRequest=0, languageController, guideIndex=0, mapOpen=false, notice='', lastResult=null, feedbackState=null;
+let messages, languageRequest=0, languageController, guideIndex=0, notice='', lastResult=null, feedbackState=null;
 const initialCatalog=document.getElementById('initial-catalog');
 const catalogs=new Map(initialCatalog?[[initialCatalog.dataset.locale,JSON.parse(initialCatalog.textContent)]]:[]);
 let state={phase:'welcome',lesson:0,fragment:0,typed:'',draft:'',assessedSource:null,grades:{},score:0,errors:0,keys:0,completed:[],...saved.state};
@@ -48,7 +48,6 @@ readRoute();
 const ui=key=>messages.ui[key], lesson=()=>course[state.lesson], copy=()=>messages.lessons[state.lesson];
 const fragments=()=>lesson().fragments;
 function save(){try{localStorage.setItem(storageKey,JSON.stringify({lang,state}));$('save-status').textContent=ui('save');}catch{$('save-status').textContent=ui('nosave');}}
-function languageSelect(){return `<label class="language-control"><span class="sr-only">${escape(ui('language'))}</span><select data-language aria-label="${escape(ui('language'))}">${locales.map(([id,label])=>`<option value="${id}" ${id===lang?'selected':''}>${label}</option>`).join('')}</select></label>`;}
 async function changeLanguage(next){
   if(!validLocale(next))return;
   const request=++languageRequest;
@@ -88,12 +87,10 @@ function applyStatic(){
   document.querySelector('.edition').textContent=ui('tagline');
   $('language-label').textContent=ui('language');$('language-select').setAttribute('aria-label',ui('language'));
   $('language-select').innerHTML=locales.map(([id,label])=>`<option value="${id}">${label}</option>`).join('');$('language-select').value=lang;
-  $('map-button').innerHTML=`✧ <span class="map-long">${escape(ui('map'))}</span><span class="map-short">${escape(ui('mapShort'))}</span> <b id="map-count">${state.completed.length} / ${course.length}</b>`;
-  $('map-button').setAttribute('aria-label',`${ui('map')} ${state.completed.length} / ${course.length}`);
-  $('pause-button').textContent=`Ⅱ ${ui('pause')}`;$('pause-button').setAttribute('aria-label',ui('pause'));document.querySelector('.header-controls').setAttribute('aria-label',ui('map'));
+  $('pause-button').textContent=`Ⅱ ${ui('pause')}`;$('pause-button').setAttribute('aria-label',ui('pause'));document.querySelector('.header-controls').setAttribute('aria-label',ui('navigation'));
   const navigation=$('page-navigation');
   navigation.hidden=false;navigation.setAttribute('aria-label',ui('navigation'));
-  navigation.innerHTML=`<a data-action="home" href="${routeUrl(location.href,lang,'home').pathname}" ${state.phase==='welcome'?'aria-current="page"':''}>${escape(ui('navHome'))}</a><a data-action="open-levels" href="${routeUrl(location.href,lang,'levels').pathname}" ${!['welcome','guide','play','vault'].includes(state.phase)?'aria-current="true"':''}>${escape(ui('navCourse'))}</a><a data-action="open-play" href="${routeUrl(location.href,lang,'play').pathname}" ${['play','vault'].includes(state.phase)?'aria-current="page"':''}>${escape(messages.vault.arcade)}</a><a data-action="open-guide" href="${routeUrl(location.href,lang,'guide').pathname}" ${state.phase==='guide'?'aria-current="page"':''}>${escape(ui('navGuide'))}</a>`;
+  navigation.innerHTML=`<a data-action="home" href="${routeUrl(location.href,lang,'home').pathname}" ${state.phase==='welcome'?'aria-current="page"':''}>${escape(ui('navHome'))}</a><a data-action="open-levels" href="${routeUrl(location.href,lang,'levels').pathname}" ${!['welcome','guide','play','vault'].includes(state.phase)?'aria-current="true"':''}>${escape(ui('navCourse'))}<span class="course-progress"><bdi dir="ltr">${state.completed.length}/${course.length}</bdi></span></a><a data-action="open-play" href="${routeUrl(location.href,lang,'play').pathname}" ${['play','vault'].includes(state.phase)?'aria-current="page"':''}>${escape(messages.vault.arcade)}</a><a data-action="open-guide" aria-label="${escape(ui('navGuide'))}" href="${routeUrl(location.href,lang,'guide').pathname}" ${state.phase==='guide'?'aria-current="page"':''}><span class="nav-label-full">${escape(ui('navGuide'))}</span><span class="nav-label-short">${escape(ui('navGuideShort'))}</span></a>`;
   $('universe').setAttribute('aria-label',ui('map'));document.querySelector('.coordinate').textContent='LOOPUFF / 01';
   document.querySelector('.welcome .eyebrow').textContent=ui('pilot');
   document.querySelector('.welcome h1').innerHTML=ui('hero').split(/\\n|\n/).map(line=>{const accent=ui('heroAccent'),at=line.indexOf(accent);return at<0?escape(line):escape(line.slice(0,at))+`<span class="hero-accent">${escape(accent)}</span>`+escape(line.slice(at+accent.length));}).join('<br>');
@@ -142,7 +139,6 @@ function render(){
   let robots=document.querySelector('meta[name="robots"]');
   if(view==='result'){if(!robots){robots=document.createElement('meta');robots.name='robots';document.head.append(robots);}robots.content='noindex,follow';}else robots?.remove();
   attachJumpScene();
-  if(mapOpen)renderMap();
   requestAnimationFrame(refreshGeometry);
 }
 function renderTyping(){
@@ -184,14 +180,14 @@ function renderDialog(){
     $('learning-page').dataset.stage=phase;
     const v=messages.vault;
     const trail=`<nav class="page-trail" aria-label="${escape(ui('navigation'))}"><a data-action="home" href="${routeUrl(location.href,lang,'home').pathname}">${escape(ui('navHome'))}</a><span aria-hidden="true">/</span>${phase==='vault'?`<a data-action="open-play" href="${routeUrl(location.href,lang,'play').pathname}">${escape(v.arcade)}</a><span aria-hidden="true">/</span><span aria-current="page">${escape(v.title)}</span>`:`<span aria-current="page">${escape(v.arcade)}</span>`}</nav>`;
-    $('learning-content').innerHTML=trail+(phase==='vault'?'<div id="vault-game"></div>':`<section class="arcade-page"><span class="eyebrow">${escape(ui('name'))}</span><h1 id="learning-title">${escape(v.arcadeTitle)}</h1><p class="levels-intro">${escape(v.arcadeIntro)}</p><div class="arcade-games"><a class="arcade-game vault-entry" data-action="open-vault" href="${routeUrl(location.href,lang,'vault').pathname}"><div class="arcade-vault-art" aria-hidden="true">${arcadeArt('vault')}</div><div><span class="eyebrow">${escape(v.puzzleTag)}</span><h2>${escape(v.title)}</h2><p>${escape(v.intro)}</p><strong>${escape(v.enter)} ↗</strong></div></a><button class="arcade-game jump-entry" data-lesson="3"><div class="arcade-jump-art" aria-hidden="true">${arcadeArt('jump')}</div><div><span class="eyebrow">${escape(v.jumpTag)}</span><h2>${escape(messages.jump.title)}</h2><p>${escape(messages.lessons[3].goal)}</p><strong>${escape(v.enter)} ↗</strong></div></button></div></section>`);
+    $('learning-content').innerHTML=trail+(phase==='vault'?'<div id="vault-game"></div>':`<section class="arcade-page"><span class="eyebrow">${escape(ui('name'))}</span><h1 id="learning-title">${escape(v.arcadeTitle)}</h1><p class="levels-intro">${escape(v.arcadeIntro)}</p><div class="arcade-games"><a class="arcade-game vault-entry" data-action="open-vault" href="${routeUrl(location.href,lang,'vault').pathname}"><div class="arcade-vault-art" aria-hidden="true">${arcadeArt('vault')}</div><div><span class="eyebrow">${escape(v.puzzleTag)}</span><h2>${escape(v.title)}</h2><p>${escape(v.intro)}</p><strong>${escape(v.enter)} ↗</strong></div></a><a class="arcade-game jump-entry" href="${routeUrl(location.href,lang,'lesson',course[3].id).pathname}" data-lesson="3"><div class="arcade-jump-art" aria-hidden="true">${arcadeArt('jump')}</div><div><span class="eyebrow">${escape(v.jumpTag)}</span><h2>${escape(messages.jump.title)}</h2><p>${escape(messages.lessons[3].goal)}</p><strong>${escape(v.enter)} ↗</strong></div></a></div></section>`);
     if(phase==='vault')vaultGame=mountVault($('vault-game'),{text:v,errors:messages.ui,reduced});
     return;
   }
   if(phase==='levels'){
     $('learning-page').dataset.stage=phase;
     const nextLesson=course.findIndex(l=>!state.completed.includes(l.id));
-    $('learning-content').innerHTML=`<section class="levels-page"><span class="eyebrow">${escape(ui('name'))}</span><h1 id="learning-title">${escape(ui('routeTitle'))}</h1><p class="levels-intro">${escape(ui('routeIntro'))}</p><div class="level-grid">${course.map((l,i)=>`<button class="level-card" data-state="${state.completed.includes(l.id)?'done':i===nextLesson?'next':'available'}" data-lesson="${i}"><span class="level-number">${String(i+1).padStart(2,'0')}</span><span class="level-copy"><strong>${escape(messages.lessons[i].title)}</strong><span>${escape(messages.lessons[i].goal)}</span><small>${escape(ui(state.completed.includes(l.id)?'done':i===nextLesson?(i===0?'start':'next'):'open'))}</small></span><span aria-hidden="true">↗</span></button>`).join('')}</div><p class="scope-note">${escape(ui('chapterNote'))}</p></section>`;return;
+    $('learning-content').innerHTML=`<section class="levels-page"><span class="eyebrow">${escape(ui('name'))}</span><h1 id="learning-title">${escape(ui('routeTitle'))}</h1><p class="levels-intro">${escape(ui('routeIntro'))}</p><div class="level-grid">${course.map((l,i)=>`<a class="level-card" href="${routeUrl(location.href,lang,'lesson',l.id).pathname}" data-state="${state.completed.includes(l.id)?'done':i===nextLesson?'next':'available'}" data-lesson="${i}"><span class="level-number">${String(i+1).padStart(2,'0')}</span><span class="level-copy"><strong>${escape(messages.lessons[i].title)}</strong><span>${escape(messages.lessons[i].goal)}</span><small>${escape(ui(state.completed.includes(l.id)?'done':i===nextLesson?(i===0?'start':'next'):'open'))}</small></span><span aria-hidden="true">↗</span></a>`).join('')}</div><p class="scope-note">${escape(ui('chapterNote'))}</p></section>`;return;
   }
   if(phase==='brief'){title=c.title;body=`<p class="dialog-note">${prose(c.intro)}</p>${codeBlock(lesson().source)}<p>${prose(c.goal)}</p>${actions([['type',ui('launch')]])}`;}
   if(phase==='predict'){title=ui('predict');body=`<p class="dialog-note">${escape(ui('predictionPrompt'))}</p>${codeBlock(lesson().source)}${choices(lesson().prediction,'prediction')}`;}
@@ -280,12 +276,6 @@ function submitProgram(){
     state.draft='';state.assessedSource=null;move('independent');
   }catch(error){lastResult=null;feedback(error.code==='syntax'?'syntax':error.code==='name'?'nameError':'limit',false,error.code==='syntax'?` ${error.position+1}.`:'');}
 }
-function renderMap(){
-  $('map-title').textContent=ui('routeTitle');$('map-close').setAttribute('aria-label',ui('close'));
-  $('map-dialog').querySelector('.eyebrow').textContent=ui('map');$('map-dialog').querySelector('.dialog-note').textContent=ui('routeIntro');
-  $('map-locale').innerHTML=languageSelect();
-  $('route-list').innerHTML=course.map((l,i)=>`<button class="route-item" data-lesson="${i}" ${i>0&&!state.completed.includes(course[i-1].id)?'disabled':''}><b>${String(i+1).padStart(2,'0')}</b><span>${escape(messages.lessons[i].title)}<small>${escape(ui(state.completed.includes(l.id)?'done':i===0||state.completed.includes(course[i-1].id)?'open':'locked'))}</small></span><span>↗</span></button>`).join('')+`<p class="scope-note">${escape(ui('chapterNote'))}</p>`;
-}
 function pause(){if(state.phase==='welcome'||state.phase==='pause')return;state.previousPhase=state.phase;move('pause');}
 document.addEventListener('change',event=>{if(event.target.matches('[data-language],#language-select'))changeLanguage(event.target.value);});
 document.addEventListener('input',event=>{if(event.target.id==='program-editor'){
@@ -296,11 +286,11 @@ document.addEventListener('input',event=>{if(event.target.id==='program-editor')
 }});
 document.addEventListener('submit',event=>{if(event.target.id==='program-form'){event.preventDefault();submitProgram();}});
 document.addEventListener('click',event=>{
-  const target=event.target.closest('button,a[data-action]');if(!target)return;
+  const target=event.target.closest('button,a[data-action],a[data-lesson]');if(!target)return;
   if(target.tagName==='A'){if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;event.preventDefault();}
   if(target.dataset.prediction!==undefined){if(Number(target.dataset.prediction)===lesson().predictionAnswer)move('output');else feedback('predictionHint');return;}
   if(target.dataset.answer!==undefined){if(Number(target.dataset.answer)===0){state.draft='';move('remix');}else feedback('answerHint',true);return;}
-  if(target.dataset.lesson!==undefined){mapOpen=false;$('map-dialog').close();begin(Number(target.dataset.lesson));return;}
+  if(target.dataset.lesson!==undefined){begin(Number(target.dataset.lesson));return;}
   const action=target.dataset.action;
   if(action==='try-jump'){tryJump();return;}
   if(action==='open-play'){move('play');return;}
@@ -328,9 +318,6 @@ $('how-button').onclick=()=>{guideIndex=0;move('guide');};
 $('play-button').onclick=()=>move('play');
 $('pause-button').onclick=pause;
 $('typing-field').addEventListener('input',onTyping);$('typing-field').addEventListener('compositionend',onTyping);
-$('map-button').onclick=()=>move('levels');
-$('map-close').onclick=()=>{mapOpen=false;$('map-dialog').close();};
-$('map-dialog').addEventListener('close',()=>{mapOpen=false;});
 $('flow-dialog').addEventListener('cancel',event=>{event.preventDefault();if(state.phase==='pause')move(state.previousPhase||'typing');else pause();});
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&state.phase==='typing')pause();});
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&state.phase==='typing')pause();});
