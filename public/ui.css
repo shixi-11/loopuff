@@ -1,0 +1,128 @@
+/* The quiet learning workbench shares the aircraft's ivory and sage palette. */
+body[data-entry=learning]:not([data-view=game]),body[data-view=learning]{
+ --work-ink:#23493f;
+ --work-muted:#536f63;
+ --work-line:#b9cbb8;
+ background:#f2f3e9;
+ color:var(--work-ink);
+}
+body[data-view=learning] .masthead{
+ background:#f7f6ecf5;
+ border-color:#ccd7c5;
+ backdrop-filter:blur(10px);
+}
+body[data-view=learning] .brand .mark-orbit{stroke:var(--work-ink)}
+body[data-view=learning] .brand .mark-plane{fill:var(--work-ink)}
+body[data-view=learning] .brand .mark-cockpit{fill:#f7f6ec}
+body[data-view=learning] .brand .mark-star{fill:#8ca880}
+body[data-view=learning] .masthead .page-navigation a{color:#456358}
+body[data-view=learning] .masthead .page-navigation a[aria-current]{color:#23493f;border-color:#72996a}
+body[data-view=learning] .language-control select{background:#f7f6ec;color:#23493f;border-color:#a9bdab}
+body[data-view=learning] .nav-button{background:#e5ecd9;color:#23493f;border-color:#b2c5aa}
+body[data-view=learning] .nav-button:hover{background:#d8e5c9}
+body[data-view=learning] .page-foot{border-color:#c6d2c0;color:#5a7165;text-shadow:none}
+body[data-view=learning] .page-foot code{color:#345a4b;text-shadow:none}
+.learning-page{
+ background:radial-gradient(ellipse at 100% 0,#d7e5c86b,transparent 60%),#f2f3e9;
+}
+.learning-content{padding-top:30px}
+.learning-page h1,.learning-page h2{color:var(--work-ink)}
+.learning-page h1{font-weight:650;letter-spacing:0}
+.learning-page .eyebrow,.learning-page .levels-intro,.learning-page .scope-note{color:var(--work-muted)}
+.learning-page .dialog-note{color:#315747}
+.learning-page .page-trail{color:#526d5e;margin-bottom:28px}
+.learning-page .page-trail a{color:#315b4c}
+.learning-page .text-button{color:#345f4b}
+.learning-page .primary{background:#c9dfb3;color:#254936;border-color:#abc993}
+.learning-page .primary:hover{background:#bcd5a2}
+.learning-page .editor-label{color:#3f6653}
+.learning-page .practice-editor{border-color:#8eac8f;background:#173632;color:#f2efd9}
+.learning-page .exercise-code{background:#e3eadb;border-color:#8ba87a;color:#284b3d}
+.learning-page .signal{color:#3d6a4c}
+.learning-page .choice{background:#faf9f0;border-color:#b7cbb0;color:#294f40}
+.learning-page .choice:hover{background:#e5efd9;border-color:#77976b}
+.learning-page .choice>span:first-child{color:#5d7e49}
+.learning-page .concept-path,.learning-page .concept-question{color:#315747}
+.learning-page .step-dots i{background:#b6c6ac}
+.learning-page .step-dots i.active{background:#4f7d57}
+.learning-page .challenge-brief{border-color:var(--work-line)}
+.learning-page .practice-output{color:#365f43}
+.learning-page .feedback{color:#3d6a4c}
+.learning-page .feedback[data-kind=error]{color:#875437}
+.learning-page .result-hero p{color:#496854}
+.learning-page .result-toolbar,.learning-page .result-work{border-color:var(--work-line)}
+.learning-page .result-breakdown .assessment-check{border-color:#8aab77}
+.learning-page .result-breakdown .assessment-check[data-status=pass]{border-color:#6f9862}
+.learning-page .result-breakdown .assessment-check[data-status=fail]{border-color:#b57b4d}
+.learning-page .result-breakdown .assessment-check bdi{color:#315747}
+.learning-page .assessment-check>small,.learning-page .concept-checks,.learning-page .assessment-outputs small{color:#55705c}
+.learning-page .assessment-explanation{color:#825736}
+.learning-page .score-orbit>div{background:#2b5446;color:#f4f0da}
+.learning-page .score-orbit span{color:#d4e3c1}
+.learning-page .score-summary{border-color:var(--work-line)}
+.learning-page .score-summary small{color:#55705c}
+.learning-page .score-summary strong,.learning-page .completed-grade{color:#315747}
+
+/* The next step is a visible invitation; every lesson remains available. */
+.level-card{min-height:154px;align-items:center;padding:26px;background:#faf9f0;color:#294f40;border-color:#bacdb1;box-shadow:none}
+.level-card:hover{background:#e8efde;border-color:#8cab7d}
+.level-card[data-state=next]{background:#dce9cf;border-color:#7fa36c}
+.level-number{display:grid;place-items:center;flex:none;width:48px;height:48px;border-radius:50%;background:#e8eddf;color:#507442;font-size:19px}
+.level-card[data-state=next] .level-number{background:#426b4b;color:#f4efda}
+.level-card[data-state=done] .level-number{background:#d5e3c6;color:#426b4b}
+.level-card .level-copy>span{color:#506d58;line-height:1.75}
+.level-card .level-copy small{color:#4d7040;font-weight:600}
+.level-card>span:last-child{align-self:center;color:#4b7442;font-size:24px}
+
+/* Compact, illustrated game invitations keep their action in the first view. */
+.arcade-games{grid-template-columns:1fr 1fr;gap:24px;margin:30px 0}
+.arcade-game{display:grid;grid-template-columns:minmax(130px,.85fr) minmax(0,1.25fr);gap:0;align-items:stretch;min-height:270px;padding:0;border-color:#b9cbb0;background:#faf9ef;color:#294f40;border-radius:12px}
+.arcade-game>div:last-child{display:flex;flex-direction:column;align-items:flex-start;padding:24px}
+.arcade-game h2{font-size:25px;line-height:1.4;margin:8px 0 12px}
+.arcade-game p{font-size:15px;line-height:1.8;color:#506d58;margin:0 0 18px}
+.arcade-game strong{font-size:15px;margin-top:auto;color:#315d43;padding-bottom:2px;border-bottom:1px solid #91ad7a}
+.arcade-game .eyebrow{font-size:12px;letter-spacing:0}
+.arcade-vault-art,.arcade-jump-art{height:auto;min-height:260px;background:#d6e1ca;display:flex;align-items:center;justify-content:center}
+.arcade-jump-art{background:#c8dccc}
+.arcade-game svg{display:block;width:100%;height:auto;overflow:visible}
+.arcade-game:hover{border-color:#7e9e70;transform:translateY(-3px)}
+
+.learning-page .vault-heading p,.learning-page .vault-footnote{color:#506d58}
+.learning-page .vault-stamps{color:#476c40;border-color:#b9cbb0}
+.learning-page .vault-path li{color:#536f5b;border-color:#ccd7c2}
+.learning-page .vault-path li[aria-current]{color:#466b36;border-color:#6b9255}
+.learning-page .vault-path li[data-cleared=true]{color:#466b36;border-color:#8eae7d}
+.learning-page .vault-brief,.learning-page .vault-console p{color:#315747}
+.learning-page .vault-clue,.learning-page .vault-feedback,.learning-page .vault-help{color:#315747;border-color:#bccdb2;background:#e7eddf}
+.learning-page .vault-help summary{color:#365f43}
+.learning-page .vault-help pre{background:#d6e1cb;color:#284b3d}
+.learning-page .vault-feedback strong{color:#315d43}
+.learning-page .vault-feedback[data-kind=retry] strong{color:#865536}
+.learning-page .vault-feedback code{color:#315d43}
+.learning-page .vault-brief p,.learning-page .vault-console label{color:#315747}
+.learning-page .vault-console small,.learning-page .vault-clues small{color:#55705c}
+.learning-page .vault-clues>span{color:#385d3e}
+.learning-page .vault-feedback [data-vault-output]>span{color:#55705c}
+.learning-page .vault-receivers small{color:#bfd0ad}
+.learning-page .vault-next p{color:#4c6f43}
+.learning-page .jump-section header h2,.learning-page .jump-section>p{color:#315747}
+.learning-page .jump-target{color:#4b6d3c;border-color:#a9bf92;background:#e5ecd9}
+
+@media(max-width:1050px){
+ .arcade-games{grid-template-columns:1fr}
+ .arcade-game{grid-template-columns:minmax(150px,.7fr) minmax(0,1.3fr);min-height:210px}
+ .arcade-vault-art,.arcade-jump-art{min-height:210px}
+ .arcade-game svg{max-width:290px}
+}
+@media(max-width:560px){
+ .learning-page h1{font-size:30px;line-height:1.4;letter-spacing:0}
+ .learning-content{padding:22px 22px 40px}
+ .level-card{padding:20px;min-height:130px;gap:15px}
+ .level-number{width:38px;height:38px;font-size:16px}
+ .arcade-game{grid-template-columns:1fr;min-height:0}
+ .arcade-vault-art,.arcade-jump-art{height:150px;min-height:150px;overflow:hidden}
+ .arcade-game svg{height:180px;width:auto;max-width:none}
+ .arcade-game>div:last-child{padding:22px}
+ .arcade-game h2{font-size:24px}
+}
+@media(prefers-reduced-motion:reduce){.arcade-game{transition:none}.arcade-game:hover{transform:none}}

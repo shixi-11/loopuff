@@ -14,7 +14,7 @@ const bundled=await build({entryPoints:[resolve(root,'src/app.js')],bundle:true,
 const script=bundled.outputFiles[0].text;
 const scriptName=`app-${createHash('sha256').update(script).digest('hex').slice(0,12)}.js`;
 await writeFile(resolve(out,'src',scriptName),script);
-const css=(await transform(await readFile(resolve(out,'style.css'),'utf8')+'\n'+await readFile(resolve(out,'vault.css'),'utf8'),{loader:'css',minify:true})).code;
+const css=(await transform(await readFile(resolve(out,'style.css'),'utf8')+'\n'+await readFile(resolve(out,'vault.css'),'utf8')+'\n'+await readFile(resolve(out,'ui.css'),'utf8'),{loader:'css',minify:true})).code;
 const cssName=`style-${createHash('sha256').update(css).digest('hex').slice(0,12)}.css`;
 await writeFile(resolve(out,cssName),css);
 const html=(await readFile(resolve(out,'index.html'),'utf8'))
