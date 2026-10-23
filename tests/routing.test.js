@@ -44,6 +44,17 @@ test('build emits localized entry points with canonical metadata',async()=>{
     for(const suffix of ['levels/','guide/','play/','play/vault/','learn/signal/','learn/names/result/']){
       const page=await readFile(new URL(`../dist/${locale}/${suffix}index.html`,import.meta.url),'utf8');
       assert.ok(page.includes(`https://shixilin.com/games/loopuff/${locale}/${suffix}`));
+      const base=page.match(/<base href="([^"]+)"/)[1];
+      for(const prefix of ['', '/games/loopuff']){
+        const resolved=new URL(base,`https://example.com${prefix}/${locale}/${suffix}`);
+        assert.equal(new URL('./src/app.js',resolved).pathname,`${prefix}/src/app.js`);
+        assert.equal(new URL('./assets/world-flight-90.webp',resolved).pathname,`${prefix}/assets/world-flight-90.webp`);
+      }
+      const initial=page.match(/<script id="initial-catalog" type="application\/json" data-locale="([^"]+)">([\s\S]*?)<\/script>/);
+      assert.equal(initial[1],locale);
+      const catalog=JSON.parse(initial[2]);
+      assert.ok(page.includes(`<span id="brand-name">${catalog.ui.name}</span>`));
+      assert.ok(page.includes(`value="${locale}" selected`));
     }
   }
 });

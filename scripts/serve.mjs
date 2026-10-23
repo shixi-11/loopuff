@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve, extname, relative, isAbsolute } from 'node:path';
 import { parseRoute, gamePrefix } from '../src/routing.js';
 const root = resolve(import.meta.dirname, '../dist'), port = Number(process.env.PORT || 8770);
-const types = { '.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.svg':'image/svg+xml','.png':'image/png' };
+const types = { '.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.svg':'image/svg+xml','.png':'image/png','.webp':'image/webp' };
 createServer(async(req,res)=>{
   try {
     const url = new URL(req.url,'http://127.0.0.1');

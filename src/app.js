@@ -19,6 +19,8 @@ let lang=selectedLocale(location.href,saved.lang,navigator.languages||[navigator
 if(!validLocale(lang))lang='en';
 let jumpLab=null,vaultGame=null;
 let messages, languageRequest=0, languageController, guideIndex=0, mapOpen=false, notice='', lastResult=null, feedbackState=null;
+const initialCatalog=document.getElementById('initial-catalog');
+const catalogs=new Map(initialCatalog?[[initialCatalog.dataset.locale,JSON.parse(initialCatalog.textContent)]]:[]);
 let state={phase:'welcome',lesson:0,fragment:0,typed:'',draft:'',assessedSource:null,grades:{},score:0,errors:0,keys:0,completed:[],...saved.state};
 if(!state.grades||typeof state.grades!=='object'||Array.isArray(state.grades))state.grades={};
 if(!['welcome','levels','brief','typing','predict','output','explain','remix','independent','result','complete','guide','pause','play','vault'].includes(state.phase)) state.phase='welcome';
@@ -50,11 +52,16 @@ async function changeLanguage(next){
   if(!validLocale(next))return;
   const request=++languageRequest;
   languageController?.abort();languageController=new AbortController();
+  const controller=languageController;
+  const timeout=setTimeout(()=>controller.abort(),10000);
   document.body.setAttribute('aria-busy','true');
   try{
-    const response=await fetch(new URL(`../locales/${next}.json`,import.meta.url),{signal:languageController.signal});
-    if(!response.ok)throw Error('locale');
-    const catalog=await response.json();
+    let catalog=catalogs.get(next);
+    if(!catalog){
+      const response=await fetch(new URL(`../locales/${next}.json`,import.meta.url),{signal:controller.signal});
+      if(!response.ok)throw Error('locale');
+      catalog=await response.json();catalogs.set(next,catalog);
+    }
     if(request!==languageRequest)return;
     messages=catalog;lang=next;
     notice=feedbackState?(feedbackState.lesson?copy()[feedbackState.key]:ui(feedbackState.key))+feedbackState.suffix:'';
@@ -68,11 +75,11 @@ async function changeLanguage(next){
     render();save();
     $('toast').hidden=true;
   }catch(error){
-    if(request!==languageRequest||error.name==='AbortError')return;
+    if(request!==languageRequest)return;
     if(messages){$('language-select').value=lang;for(const select of document.querySelectorAll('[data-language]'))select.value=lang;}
     $('toast').hidden=false;$('toast').textContent=messages?ui('error'):'Unable to load language. Reload to try again.';
   }
-  finally{if(request===languageRequest)document.body.removeAttribute('aria-busy');}
+  finally{clearTimeout(timeout);if(request===languageRequest)document.body.removeAttribute('aria-busy');}
 }
 function applyStatic(){
   $('brand-name').textContent=ui('name');document.querySelector('.brand').setAttribute('aria-label',`${ui('name')} · ${ui('home')}`);
@@ -338,7 +345,7 @@ let W=1000,H=800,DPR=1,last=performance.now(),clock=0,beacon=0,effects=[];
 let seed=41;const rnd=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296;};
 const stars=Array.from({length:145},()=>({x:rnd(),y:rnd(),r:.45+rnd()*1.2,p:rnd()*6.28}));
 function resize(){const r=$('universe').getBoundingClientRect();if(!r.width||!r.height)return;W=r.width;H=r.height;DPR=Math.min(devicePixelRatio||1,1.6);canvas.width=Math.round(W*DPR);canvas.height=Math.round(H*DPR);back.width=canvas.width;back.height=canvas.height;ctx.setTransform(DPR,0,0,DPR,0,0);bg.setTransform(DPR,0,0,DPR,0,0);background();refreshGeometry();}
-const worldArt=new Image();worldArt.src=new URL('../assets/world.png',import.meta.url).href;worldArt.onload=()=>background();
+const worldArt=new Image();worldArt.decoding='async';worldArt.fetchPriority='high';worldArt.onload=()=>background();worldArt.src=new URL('../assets/world-flight-90.webp',import.meta.url).href;
 function background(){
  if(worldArt.complete&&worldArt.naturalWidth){const scale=Math.max(W/worldArt.naturalWidth,H/worldArt.naturalHeight);bg.drawImage(worldArt,(W-worldArt.naturalWidth*scale)/2,(H-worldArt.naturalHeight*scale)/2,worldArt.naturalWidth*scale,worldArt.naturalHeight*scale);const shade=bg.createLinearGradient(0,0,W,0);shade.addColorStop(0,'#0b2729e6');shade.addColorStop(.65,'#0b27296b');shade.addColorStop(1,'#0b272911');bg.fillStyle=shade;bg.fillRect(0,0,W,H);return;}
  const g=bg.createLinearGradient(0,0,W,H);g.addColorStop(0,'#173131');g.addColorStop(.6,'#14292b');g.addColorStop(1,'#203a33');bg.fillStyle=g;bg.fillRect(0,0,W,H);
