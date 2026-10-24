@@ -7,6 +7,7 @@ import { mountHomePlane } from './home-plane.js';
 import { mountVault, loadVault } from './vault-ui.js';
 import { rememberLesson, lessonWork, explorationProgress } from './progress.js';
 import { arcadeArt } from './arcade-art.js';
+import { createAccountClient, mountAccount } from './account.js';
 import { selectedLocale, languageUrl, parseRoute, routeUrl } from './routing.js';
 
 const $ = id => document.getElementById(id);
@@ -20,13 +21,14 @@ let saved={};try{saved=JSON.parse(localStorage.getItem(storageKey)||'{}');}catch
 const validLocale=id=>locales.some(([key])=>key===id);
 let lang=selectedLocale(location.href,saved.lang,navigator.languages||[navigator.language]);
 if(!validLocale(lang))lang='en';
-let jumpLab=null,vaultGame=null;
+let jumpLab=null,vaultGame=null,accountPage=null;
+const account=createAccountClient({url:location.href,onChange:()=>{if(messages){updateAccountEntry();accountPage?.refresh();}}});
 let messages, languageRequest=0, languageController, guideIndex=0, notice='', lastResult=null, feedbackState=null;
 const initialCatalog=document.getElementById('initial-catalog');
 const catalogs=new Map(initialCatalog?[[initialCatalog.dataset.locale,JSON.parse(initialCatalog.textContent)]]:[]);
 let state={phase:'welcome',lesson:0,fragment:0,typed:'',draft:'',assessedSource:null,grades:{},score:0,errors:0,keys:0,completed:[],...saved.state};
 if(!state.grades||typeof state.grades!=='object'||Array.isArray(state.grades))state.grades={};
-if(!['welcome','levels','brief','typing','predict','output','explain','remix','independent','result','complete','guide','pause','play','vault'].includes(state.phase)) state.phase='welcome';
+if(!['welcome','levels','brief','typing','predict','output','explain','remix','independent','result','complete','guide','pause','play','vault','account'].includes(state.phase)) state.phase='welcome';
 if(!Number.isInteger(state.lesson)||state.lesson<0||state.lesson>=course.length)state.lesson=0;
 state.completed=[...new Set(Array.isArray(state.completed)?state.completed.filter(id=>course.some(l=>l.id===id)):[])];
 rememberLesson(state,course[state.lesson].id);
@@ -38,7 +40,7 @@ function readRoute(){
     const index=course.findIndex(item=>item.id===route.lessonId);
     if(previousLesson!==index){rememberLesson(state,course[previousLesson].id);state.lesson=index;Object.assign(state,lessonWork(state,course[index].id)||{phase:'brief',fragment:0,typed:'',draft:'',assessedSource:null,score:0,errors:0,keys:0});}
   }
-  if(route?.view==='play'||route?.view==='vault')state.phase=route.view;
+  if(route?.view==='play'||route?.view==='vault'||route?.view==='account')state.phase=route.view;
   else if(route?.view==='result')state.phase='result';
   else if(route?.view==='levels')state.phase='levels';
   else if(route?.view==='guide'){if(!['guide','welcome','pause'].includes(state.phase))state.resumePhase=state.phase;state.phase='guide';}
@@ -46,7 +48,7 @@ function readRoute(){
     if(previousLesson!==state.lesson){if(state.phase==='result')state.phase='independent';}
     else if(state.phase==='result')state.phase='independent';
     else if(state.phase==='pause')state.phase=state.previousPhase||'brief';
-    else if(['welcome','levels','guide','play','vault'].includes(state.phase))Object.assign(state,lessonWork(state,course[state.lesson].id)||{phase:'brief'});
+    else if(['welcome','levels','guide','play','vault','account'].includes(state.phase))Object.assign(state,lessonWork(state,course[state.lesson].id)||{phase:'brief'});
   }else{
     if(!['welcome','pause','guide'].includes(state.phase))state.resumePhase=state.phase;
     state.phase='welcome';
@@ -89,7 +91,9 @@ async function changeLanguage(next){
   }
   finally{clearTimeout(timeout);if(request===languageRequest)document.body.removeAttribute('aria-busy');}
 }
+function updateAccountEntry(){const link=$('account-entry');if(!link)return;link.textContent=messages.account[account.user?'signed':'entry'];link.href=routeUrl(location.href,lang,'account').pathname;link.setAttribute('aria-current',state.phase==='account'?'page':'false');}
 function applyStatic(){
+  updateAccountEntry();
   $('brand-name').textContent=ui('name');document.querySelector('.brand').setAttribute('aria-label',`${ui('name')} · ${ui('home')}`);
   document.querySelector('.brand').href=routeUrl(location.href,lang,'home').pathname;
   document.querySelector('.edition').textContent=ui('tagline');
@@ -99,7 +103,7 @@ function applyStatic(){
   $('pause-button').innerHTML=`<span aria-hidden="true">Ⅱ</span> <span class="pause-word">${escape(ui('pause'))}</span>`;$('pause-button').setAttribute('aria-label',ui('pause'));document.querySelector('.header-controls').setAttribute('aria-label',ui('navigation'));
   const navigation=$('page-navigation');
   navigation.hidden=false;navigation.setAttribute('aria-label',ui('navigation'));
-  navigation.innerHTML=`<a data-action="home" href="${routeUrl(location.href,lang,'home').pathname}" ${state.phase==='welcome'?'aria-current="page"':''}>${escape(ui('navHome'))}</a><a data-action="open-levels" href="${routeUrl(location.href,lang,'levels').pathname}" ${!['welcome','guide','play','vault'].includes(state.phase)?'aria-current="true"':''}>${escape(ui('navCourse'))}<span class="course-progress"><bdi dir="ltr">${state.completed.length}/${course.length}</bdi></span></a><a data-action="open-play" href="${routeUrl(location.href,lang,'play').pathname}" ${['play','vault'].includes(state.phase)?'aria-current="page"':''}>${escape(messages.vault.arcade)}</a><a data-action="open-guide" aria-label="${escape(ui('navGuide'))}" href="${routeUrl(location.href,lang,'guide').pathname}" ${state.phase==='guide'?'aria-current="page"':''}><span class="nav-label-full">${escape(ui('navGuide'))}</span><span class="nav-label-short">${escape(ui('navGuideShort'))}</span></a>`;
+  navigation.innerHTML=`<a data-action="home" href="${routeUrl(location.href,lang,'home').pathname}" ${state.phase==='welcome'?'aria-current="page"':''}>${escape(ui('navHome'))}</a><a data-action="open-levels" href="${routeUrl(location.href,lang,'levels').pathname}" ${!['welcome','guide','play','vault','account'].includes(state.phase)?'aria-current="true"':''}>${escape(ui('navCourse'))}<span class="course-progress"><bdi dir="ltr">${state.completed.length}/${course.length}</bdi></span></a><a data-action="open-play" href="${routeUrl(location.href,lang,'play').pathname}" ${['play','vault'].includes(state.phase)?'aria-current="page"':''}>${escape(messages.vault.arcade)}</a><a data-action="open-guide" aria-label="${escape(ui('navGuide'))}" href="${routeUrl(location.href,lang,'guide').pathname}" ${state.phase==='guide'?'aria-current="page"':''}><span class="nav-label-full">${escape(ui('navGuide'))}</span><span class="nav-label-short">${escape(ui('navGuideShort'))}</span></a>`;
   $('universe').setAttribute('aria-label',ui('map'));document.querySelector('.coordinate').textContent='LOOPUFF / 01';
   document.querySelector('.welcome .eyebrow').textContent=ui('pilot');
   document.querySelector('.welcome h1').innerHTML=ui('hero').split(/\\n|\n/).map(line=>{const accent=ui('heroAccent'),at=line.indexOf(accent);return at<0?escape(line):escape(line.slice(0,at))+`<span class="hero-accent">${escape(accent)}</span>`+escape(line.slice(at+accent.length));}).join('<br>');
@@ -120,7 +124,7 @@ function applyStatic(){
 }
 function syncRoute(){
   if(state.phase==='pause')return;
-  const view=state.phase==='welcome'?'home':['levels','guide','result','play','vault'].includes(state.phase)?state.phase:'lesson';
+  const view=state.phase==='welcome'?'home':['levels','guide','result','play','vault','account'].includes(state.phase)?state.phase:'lesson';
   const url=routeUrl(location.href,lang,view,lesson().id);url.hash='';
   if(location.pathname!==url.pathname)history.pushState(null,'',url);
 }
@@ -138,11 +142,13 @@ function choices(items,action){return `<div class="choices">${items.map((text,in
 function render(){
   jumpLab?.dispose();jumpLab=null;
   vaultGame?.dispose();vaultGame=null;
+  accountPage?.dispose();accountPage=null;
   applyStatic();const phase=state.phase, typing=phase==='typing';
   const page=!['welcome','typing','pause'].includes(phase);
   document.body.dataset.view=page?'learning':'game';
+  document.body.dataset.phase=phase;
   $('universe').hidden=page;$('learning-page').hidden=!page;
-  if(!page&&document.readyState==='complete')upgradeWorld();
+  if(phase==='typing')upgradeWorld();
   $('universe').dataset.phase=phase;$('welcome').hidden=phase!=='welcome';$('welcome-foot').hidden=phase!=='welcome';
   $('home-plane').hidden=phase!=='welcome';
   for(const id of ['flight-hud','code-coach','target','cockpit'])$(id).hidden=!typing;
@@ -150,7 +156,7 @@ function render(){
   if(phase!=='pause'){$('flow-dialog').close();$('dialog-content').textContent='';}
   if(typing)renderTyping();else if(phase!=='welcome')renderDialog();
   const view=parseRoute(location.pathname)?.view||'home';
-  document.title=`${ui('name')} · ${view==='vault'?messages.vault.title:view==='play'?messages.vault.arcade:view==='result'?messages.assessment.title:view==='levels'?ui('navCourse'):view==='guide'?ui('guide'):view==='lesson'?copy().title:ui('tagline')}`;
+  document.title=`${ui('name')} · ${view==='account'?messages.account.entry:view==='vault'?messages.vault.title:view==='play'?messages.vault.arcade:view==='result'?messages.assessment.title:view==='levels'?ui('navCourse'):view==='guide'?ui('guide'):view==='lesson'?copy().title:ui('tagline')}`;
   document.querySelector('link[rel="canonical"]').href=routeUrl('https://shixilin.com/games/loopuff/',lang,view,lesson().id).href;
   let robots=document.querySelector('meta[name="robots"]');
   if(view==='result'){if(!robots){robots=document.createElement('meta');robots.name='robots';document.head.append(robots);}robots.content='noindex,follow';}else robots?.remove();
@@ -200,6 +206,7 @@ function journeyPanel(){
 }
 function renderDialog(){
   const c=copy(),phase=state.phase;let title='',body='';
+  if(phase==='account'){$('learning-content').innerHTML='<div id="account-page"></div>';accountPage=mountAccount($('account-page'),{client:account,text:messages.account,locale:lang,saveNote:ui('save'),homeUrl:routeUrl(location.href,lang,'home').pathname});return;}
   if(phase==='play'||phase==='vault'){
     $('learning-page').dataset.stage=phase;
     const v=messages.vault;
@@ -317,6 +324,7 @@ document.addEventListener('click',event=>{
   if(target.dataset.lesson!==undefined){enterLesson(Number(target.dataset.lesson));return;}
   const action=target.dataset.action;
   if(action==='try-jump'){tryJump();return;}
+  if(action==='open-account'){move('account');return;}
   if(action==='open-play'){move('play');return;}
   if(action==='open-vault'){move('vault');return;}
   if(action==='open-levels'){move('levels');return;}
@@ -361,10 +369,11 @@ let seed=41;const rnd=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/429496
 const stars=Array.from({length:145},()=>({x:rnd(),y:rnd(),r:.45+rnd()*1.2,p:rnd()*6.28}));
 function resize(){const r=$('universe').getBoundingClientRect();if(!r.width||!r.height)return;W=r.width;H=r.height;DPR=Math.min(devicePixelRatio||1,1.6);canvas.width=Math.round(W*DPR);canvas.height=Math.round(H*DPR);back.width=canvas.width;back.height=canvas.height;ctx.setTransform(DPR,0,0,DPR,0,0);bg.setTransform(DPR,0,0,DPR,0,0);background();refreshGeometry();homePlane.refresh();}
 let fullWorldRequested=false;
-let worldArt=new Image();worldArt.decoding='async';worldArt.onload=()=>background();worldArt.src=new URL('../assets/world-preview.webp',import.meta.url).href;
+let worldArt=new Image();worldArt.decoding='async';worldArt.onload=()=>background();
 // Same-composition preview first; a slow detailed image cannot hold the page load event.
 function upgradeWorld(){
- if(fullWorldRequested||$('universe').hidden)return;
+ if(fullWorldRequested||state.phase!=='typing')return;
+ worldArt.src=new URL('../assets/world-preview.webp',import.meta.url).href;
  fullWorldRequested=true;
  const full=new Image();full.decoding='async';full.fetchPriority='low';
  full.onload=()=>{worldArt=full;background();};full.src=new URL('../assets/world-flight-90.webp',import.meta.url).href;
@@ -398,7 +407,7 @@ function drawShip(t){
 }
 function frame(now){
  const dt=Math.min((now-last)/1000,.05);last=now;clock+=dt;
- if($('universe').hidden){requestAnimationFrame(frame);return;}
+ if($('universe').hidden||state.phase==='welcome'){requestAnimationFrame(frame);return;}
  ctx.clearRect(0,0,W,H);ctx.drawImage(back,0,0,back.width,back.height,0,0,W,H);
  for(const s of stars){ctx.globalAlpha=.28+(reduced.matches?.2:(Math.sin(clock*.65+s.p)+1)*.22);ctx.fillStyle='#e7e2c4';ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);ctx.fill();}ctx.globalAlpha=1;
 
@@ -411,3 +420,4 @@ new ResizeObserver(resize).observe($('universe'));resize();requestAnimationFrame
 
 
 await changeLanguage(lang);
+account.load();

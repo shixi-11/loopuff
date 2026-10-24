@@ -377,5 +377,27 @@
     "lessons": "Course missions",
     "next": "Up next",
     "rule": "First clear: +100 per mission, +50 per mechanism stamp. Replays keep your points."
+  },
+  "account": {
+    "entry": "Log in / Sign up",
+    "eyebrow": "PILOT PASS",
+    "loginTitle": "Welcome back.",
+    "registerTitle": "Your next adventure awaits.",
+    "signed": "My account",
+    "intro": "Log in with your email and password, or create a pilot account.",
+    "login": "Log in",
+    "register": "Sign up",
+    "email": "Email address",
+    "logout": "Log out",
+    "guest": "Explore as a guest",
+    "unavailable": "Account service is temporarily unavailable. Please try again later.",
+    "invalidEmail": "Enter a valid email address.",
+    "rate": "Too many requests. Please try again later.",
+    "network": "Connection failed. Check your network and try again.",
+    "busy": "Working…",
+    "password": "Password",
+    "passwordHint": "Use at least 10 characters.",
+    "invalidCredentials": "Check your email address and password.",
+    "emailTaken": "This email is already registered. Try logging in."
   }
 }

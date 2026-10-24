@@ -17,6 +17,7 @@ export function parseRoute(pathname){
   const locale=localeId(suffix[0]);if(!locale)return null;
   if(suffix.length===1)return {locale,view:'home'};
   if(suffix.length===2&&suffix[1]==='levels')return {locale,view:'levels'};
+  if(suffix.length===2&&suffix[1]==='account')return {locale,view:'account'};
   if(suffix.length===2&&suffix[1]==='guide')return {locale,view:'guide'};
   if(suffix.length===2&&suffix[1]==='play')return {locale,view:'play'};
   if(suffix.length===3&&suffix[1]==='play'&&suffix[2]==='vault')return {locale,view:'vault'};
@@ -37,9 +38,9 @@ export function languageUrl(input,locale){
 }
 export function routeUrl(input,locale,view='home',lessonId){
   const id=localeId(locale);if(!id)throw Error('Unsupported language');
-  if(!['home','levels','guide','lesson','result','play','vault'].includes(view))throw Error('Unsupported page');
+  if(!['home','levels','guide','lesson','result','play','vault','account'].includes(view))throw Error('Unsupported page');
   if(['lesson','result'].includes(view)&&!course.some(lesson=>lesson.id===lessonId))throw Error('Unknown lesson');
-  const url=new URL(input),suffix=view==='levels'?'levels/':view==='guide'?'guide/':view==='play'?'play/':view==='vault'?'play/vault/':['lesson','result'].includes(view)?`learn/${lessonId}/${view==='result'?'result/':''}`:'';
+  const url=new URL(input),suffix=view==='account'?'account/':view==='levels'?'levels/':view==='guide'?'guide/':view==='play'?'play/':view==='vault'?'play/vault/':['lesson','result'].includes(view)?`learn/${lessonId}/${view==='result'?'result/':''}`:'';
   url.pathname=`${gamePrefix(url.pathname)}/${id}/${suffix}`;
   url.searchParams.delete('lang');return url;
 }

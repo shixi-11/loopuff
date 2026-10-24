@@ -1,0 +1,16 @@
+{
+  "name": "loopuff-account-service",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.15.0"
+  },
+  "scripts": {
+    "start": "node account-service.mjs",
+    "test": "node --test account-service.test.mjs"
+  },
+  "dependencies": {
+    "better-auth": "1.7.12"
+  }
+}

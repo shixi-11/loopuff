@@ -4,7 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#14282a"><title>环灵 · 玩着学会编程</title>
 <base href="./">
-<link rel="preload" as="image" href="./assets/world-preview.webp" fetchpriority="high">
+<link rel="preload" as="image" href="./assets/aircraft-2d.png" fetchpriority="high">
 <link rel="icon" type="image/svg+xml" href="./assets/mark.svg"><link rel="stylesheet" href="./style.css"><link rel="stylesheet" href="./vault.css"><script type="module" src="./src/app.js"></script>
 </head>
 <body>
@@ -13,10 +13,11 @@
 <a class="brand" href="./" aria-label="环灵首页"><svg viewBox="0 0 48 48" aria-hidden="true" class="orbit-mark"><ellipse class="mark-orbit" cx="24" cy="25" rx="21" ry="11" transform="rotate(-32 24 25)"/><path class="mark-plane" d="M25 5 37 35 28 31 25 38 22 31 12 35Z"/><ellipse class="mark-cockpit" cx="25" cy="22" rx="3" ry="6"/><circle class="mark-star" cx="6" cy="32" r="2"/></svg><span><span id="brand-name">Loopuff</span><small>TOLANG</small></span></a>
 <span class="edition">从零开始，读懂并写出代码。</span>
 <nav id="page-navigation" class="page-navigation" aria-label="主导航" hidden></nav>
-<div class="header-controls" role="group" aria-label="游戏操作"><label class="language-control"><span class="sr-only" id="language-label">Language</span><select id="language-select" aria-label="Language"></select></label><button id="pause-button" class="nav-button" hidden aria-label="暂停游戏">Ⅱ <span class="pause-word">暂停</span></button></div>
+<div class="header-controls" role="group" aria-label="游戏操作"><a id="account-entry" class="account-entry" data-action="open-account" href="./zh/account/">登录 / 注册</a><label class="language-control"><span class="sr-only" id="language-label">Language</span><select id="language-select" aria-label="Language"></select></label><button id="pause-button" class="nav-button" hidden aria-label="暂停游戏">Ⅱ <span class="pause-word">暂停</span></button></div>
 </header>
 <main class="universe" id="universe" aria-label="打字飞行场">
 <canvas id="space" aria-hidden="true"></canvas><div class="scene-grain" aria-hidden="true"></div>
+<img class="home-terrain" src="./assets/flight-map.svg" alt="" aria-hidden="true" draggable="false">
 <div class="coordinate" aria-hidden="true">ORBIT 01 <span>·</span> HELLO, UNIVERSE</div>
 <section id="welcome" class="welcome">
 <div class="eyebrow"><i></i>零基础飞行员，准备出发</div>
@@ -25,7 +26,7 @@
 <div class="welcome-actions"><button id="start" class="primary">开始第一航程 <span>↗</span></button><button id="play-button" class="text-button">去闯关 →</button><button id="how-button" class="text-button">怎么玩 →</button></div>
 <div class="first-flight"><div class="first-command"><span>你的第一条信号</span><code>7.log()</code><svg viewBox="0 0 64 18" aria-hidden="true"><path d="M0 9H60M52 2l9 7-9 7"/></svg><strong>7</strong></div><div id="home-plane-slot" aria-hidden="true"></div></div>
 </section>
-<button id="home-plane" class="home-plane" aria-keyshortcuts="ArrowUp ArrowDown ArrowLeft ArrowRight Home Enter" hidden></button>
+<button id="home-plane" class="home-plane" aria-keyshortcuts="ArrowUp ArrowDown ArrowLeft ArrowRight Home Enter" hidden><img src="./assets/aircraft-2d.png" alt="" draggable="false"></button>
 <div id="flight-hud" class="flight-hud" hidden><div class="mission"><span id="mission-number" class="eyebrow">航程 01</span><h2 id="mission-title">发出第一条信号</h2><p id="mission-hint">照着目标敲，飞船会自动发射。</p></div><div class="flight-stats"><div><small>本次得分</small><strong id="score">0000</strong></div><div id="shield-box" hidden><small>护盾</small><strong id="shields" aria-label="护盾剩余 3">◇ ◇ ◇</strong></div></div></div>
 <aside id="code-coach" class="code-coach" aria-label="当前代码的意思" hidden><div><span class="coach-label">这段在做什么</span><strong id="meaning-title"></strong></div><p id="meaning-text"></p><span class="meaning-connection" id="meaning-connection"></span></aside>
 <div id="target" class="target" hidden><div class="target-label"><span id="fragment-label">数值</span><span id="fragment-count">01 / 03</span></div><div class="target-word" id="target-word" aria-hidden="true"></div><div class="target-tail" aria-hidden="true"></div></div>

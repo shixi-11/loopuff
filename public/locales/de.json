@@ -377,5 +377,27 @@
     "lessons": "Lernmissionen",
     "next": "Als Nächstes",
     "rule": "Beim ersten Abschluss: +100 je Mission, +50 je Mechanismus-Stempel. Wiederholungen geben keine doppelten Punkte."
+  },
+  "account": {
+    "entry": "Anmelden / Registrieren",
+    "eyebrow": "PILOTENPASS",
+    "loginTitle": "Willkommen zurück.",
+    "registerTitle": "Dein nächstes Abenteuer wartet.",
+    "signed": "Mein Konto",
+    "intro": "Melde dich mit E-Mail und Passwort an oder erstelle ein Pilotenkonto.",
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "email": "E-Mail-Adresse",
+    "logout": "Abmelden",
+    "guest": "Als Gast erkunden",
+    "unavailable": "Der Kontodienst ist vorübergehend nicht verfügbar. Bitte versuche es später erneut.",
+    "invalidEmail": "Gib eine gültige E-Mail-Adresse ein.",
+    "rate": "Zu viele Anfragen. Bitte versuche es später erneut.",
+    "network": "Verbindung fehlgeschlagen. Prüfe dein Netzwerk.",
+    "busy": "Wird bearbeitet…",
+    "password": "Passwort",
+    "passwordHint": "Verwende mindestens 10 Zeichen.",
+    "invalidCredentials": "Prüfe deine E-Mail-Adresse und dein Passwort.",
+    "emailTaken": "Diese E-Mail ist bereits registriert. Melde dich an."
   }
 }

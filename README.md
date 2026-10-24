@@ -26,6 +26,8 @@ npm run build
 npm run dev
 ```
 
+Optional accounts use an isolated Better Auth service on the owner's Mac mini. Games and learning progress remain local to the browser. See the [deployment and reuse plan](docs/mac-mini-account.md) for setup, validation and current limits.
+
 ## Language rules
 
 The interface, lessons, questions, hints and errors use the selected language. Chinese names are 环灵 and 環靈; all other languages use Loopuff. Code identifiers and punctuation stay unchanged. Arabic text uses right-to-left layout, while code remains left-to-right.

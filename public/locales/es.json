@@ -377,5 +377,27 @@
     "lessons": "Misiones del curso",
     "next": "Tu próximo reto",
     "rule": "Primera victoria: +100 por misión, +50 por sello de mecanismo. Repetir no suma puntos otra vez."
+  },
+  "account": {
+    "entry": "Entrar / Registrarse",
+    "eyebrow": "PASE DE PILOTO",
+    "loginTitle": "Te damos la bienvenida de nuevo.",
+    "registerTitle": "Tu próxima aventura te espera.",
+    "signed": "Mi cuenta",
+    "intro": "Entra con tu correo y contraseña o crea una cuenta de piloto.",
+    "login": "Entrar",
+    "register": "Registrarse",
+    "email": "Correo electrónico",
+    "logout": "Cerrar sesión",
+    "guest": "Explorar como visitante",
+    "unavailable": "El servicio de cuentas no está disponible. Inténtalo más tarde.",
+    "invalidEmail": "Introduce un correo válido.",
+    "rate": "Demasiadas solicitudes. Inténtalo más tarde.",
+    "network": "Error de conexión. Revisa tu red e inténtalo de nuevo.",
+    "busy": "Procesando…",
+    "password": "Contraseña",
+    "passwordHint": "Usa al menos 10 caracteres.",
+    "invalidCredentials": "Revisa tu correo y contraseña.",
+    "emailTaken": "Este correo ya está registrado. Inicia sesión."
   }
 }

@@ -377,5 +377,27 @@
     "lessons": "课程关卡",
     "next": "接下来试试",
     "rule": "每关首次完成 +100，每种机关印记 +50。重复挑战保留积分，不重复加分。"
+  },
+  "account": {
+    "entry": "登录 / 注册",
+    "eyebrow": "飞行员通行证",
+    "loginTitle": "欢迎回来。",
+    "registerTitle": "准备好，加入航程。",
+    "signed": "我的账号",
+    "intro": "用邮箱和密码登录，或创建一个飞行员账号。",
+    "login": "登录",
+    "register": "注册",
+    "email": "邮箱地址",
+    "logout": "退出登录",
+    "guest": "先以访客身份探索",
+    "unavailable": "账号服务暂时不可用，请稍后再试。",
+    "invalidEmail": "请输入有效的邮箱地址。",
+    "rate": "发送次数较多，请稍后再试。",
+    "network": "连接失败，请检查网络后重试。",
+    "busy": "正在处理……",
+    "password": "密码",
+    "passwordHint": "密码至少 10 位。",
+    "invalidCredentials": "请核对邮箱地址和密码。",
+    "emailTaken": "这个邮箱已注册，请直接登录。"
   }
 }

@@ -1,0 +1,62 @@
+/* The opening view is one flight world, with a quiet, readable center. */
+body[data-phase=welcome]{--home-ink:#23493f;--home-green:#54835e;--home-muted:#5c7265;background:#f2f3e9;color:var(--home-ink)}
+body[data-phase=welcome] .masthead{position:relative;background:#f7f6ec;border-bottom:1px solid #d2ddcb;backdrop-filter:none}
+body[data-phase=welcome] .brand .mark-orbit{stroke:var(--home-ink)}
+body[data-phase=welcome] .brand .mark-plane{fill:var(--home-ink)}
+body[data-phase=welcome] .brand .mark-cockpit{fill:#f7f6ec}
+body[data-phase=welcome] .brand .mark-star{fill:#8ca880}
+body[data-phase=welcome] .masthead .page-navigation a{color:#496456}
+body[data-phase=welcome] .masthead .page-navigation a[aria-current]{color:#23493f;border-color:#72996a}
+body[data-phase=welcome] .course-progress{color:#365c45;border-color:#abc0a1;background:#e6eddb}
+body[data-phase=welcome] .language-control select{background-color:#f7f6ec;color:#23493f;border-color:#a9bdab}
+.universe[data-phase=welcome]{min-height:max(800px,calc(100svh - 88px));padding:clamp(48px,7vh,100px) 0 78px;display:flex;align-items:center;justify-content:center;background:#f2f3e9;color:#23493f;overflow:hidden}
+.universe[data-phase=welcome]::after{display:none}
+.universe[data-phase=welcome] #space,.universe[data-phase=welcome] .scene-grain{display:none}
+.home-terrain{display:none}
+.universe[data-phase=welcome] .home-terrain{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;z-index:0}
+body[data-phase=welcome] .universe[data-phase=welcome] .welcome{margin:0 auto;position:relative;z-index:1;width:min(1040px,88%)}
+body[data-phase=welcome] .welcome,body[data-phase=welcome] .welcome *{text-shadow:none}
+body[data-phase=welcome] .welcome .eyebrow{color:#5c7265;font-family:var(--sans);letter-spacing:1px;font-size:13px}
+body[data-phase=welcome] .welcome .eyebrow i{background:#86a874}
+body[data-phase=welcome] .welcome h1{font-size:clamp(48px,5.5vw,84px);font-weight:650;line-height:1.25;letter-spacing:-.035em;margin:20px 0 18px;color:#23493f}
+body[data-phase=welcome] .welcome h1 .hero-accent{color:#54835e}
+body[data-phase=welcome] .welcome-copy{color:#5c7265;font-size:17px;line-height:1.9;max-width:590px;margin:0 auto}
+body[data-phase=welcome] .welcome-actions{margin:28px 0 0;gap:24px}
+body[data-phase=welcome] .welcome-actions .primary{min-width:190px;background:#315c45;color:#f8f5e7;border:1px solid #315c45;border-radius:7px;padding:14px 24px;box-shadow:none}
+body[data-phase=welcome] .welcome-actions .primary:hover{background:#244c38;transform:translateY(-1px)}
+body[data-phase=welcome] .welcome-actions .text-button{color:#3b6249;font-size:15px;padding:12px 0;border-bottom:1px solid #a9bd9a;border-radius:0}
+body[data-phase=welcome] .first-flight{position:relative;isolation:isolate;width:100%;margin:46px auto 0;min-height:230px;gap:66px;padding:0}
+body[data-phase=welcome] .first-command{position:relative;z-index:1;color:#526d5e;background:#f8f7ed;border:1px solid #c5d3bc;border-bottom:2px solid #a3ba90;border-radius:6px;padding:20px 24px;box-shadow:none;gap:18px}
+body[data-phase=welcome] .first-command>span{font-family:var(--sans);font-size:12px;width:100%;text-align:start;color:#60755e}
+body[data-phase=welcome] .first-command code{color:#315c45;font-size:23px}
+body[data-phase=welcome] .first-command svg{stroke:#8fa77d}
+body[data-phase=welcome] .first-command strong{color:#947033;font-size:28px}
+.home-plane>img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none;user-select:none}
+body[data-phase=welcome] .home-plane{filter:drop-shadow(0 10px 5px #56795018)}
+body[data-phase=welcome] .home-plane,body[data-phase=welcome] #home-plane-slot{width:180px;height:205px}
+body[data-phase=welcome] .home-plane:focus-visible{background:linear-gradient(#54835e,#54835e) center bottom 4px/24px 2px no-repeat}
+.universe[data-phase=welcome] .welcome-foot{position:absolute;z-index:1;bottom:18px;left:6%;right:6%;width:auto;margin:0;padding:10px 0;border-top:0;justify-content:center;color:#5c7265;text-shadow:none;font-size:12px;letter-spacing:.2px}
+.universe[data-phase=welcome] .welcome-foot>span:first-child{display:none}
+body[data-phase=welcome] .page-foot{position:static;margin:0 auto;padding:16px 0;width:min(1120px,88%);color:#5c7265;text-shadow:none;border-top:0}
+body[data-phase=welcome] .page-foot code{color:#42644c;text-shadow:none}
+@media(max-width:1000px){
+ .universe[data-phase=welcome]{min-height:max(800px,calc(100svh - 112px));padding-top:48px}
+ body[data-phase=welcome] .welcome h1{font-size:clamp(44px,7.6vw,68px)}
+}
+@media(max-width:560px){
+ .universe[data-phase=welcome]{min-height:calc(100svh - 112px);padding:34px 0 66px}
+ body[data-phase=welcome] .welcome h1{font-size:clamp(36px,8.6vw,46px);line-height:1.32;letter-spacing:-.045em;margin-block:16px}
+ body[data-phase=welcome] .welcome-copy{font-size:15px;max-width:340px}
+ body[data-phase=welcome] .welcome-actions{gap:14px 22px;margin-top:24px}
+ body[data-phase=welcome] .welcome-actions .primary{width:100%;min-height:52px}
+ body[data-phase=welcome] .welcome-actions .text-button{font-size:14px}
+ body[data-phase=welcome] .first-flight{min-height:240px;margin:24px auto 0;display:flex;flex-wrap:nowrap;gap:12px;align-items:center}
+ body[data-phase=welcome] .first-flight .first-command{width:auto;max-width:220px;min-width:0;flex:1;padding:14px;gap:12px}
+ body[data-phase=welcome] .first-command code{font-size:19px}
+ body[data-phase=welcome] .first-command svg{width:34px}
+ body[data-phase=welcome] .home-plane,body[data-phase=welcome] #home-plane-slot{width:118px;height:142px;flex:none}
+ .universe[data-phase=welcome] .home-terrain{opacity:.7;object-position:48% center}
+ .universe[data-phase=welcome] .welcome-foot{bottom:10px;font-size:11px;gap:10px;flex-wrap:wrap;text-align:center;padding-block:16px}
+ body[data-phase=welcome] .page-foot{display:flex;justify-content:center;font-size:11px;text-align:center}
+ body[data-phase=welcome] .page-foot>span:first-child{display:none}
+}

@@ -377,5 +377,27 @@
     "lessons": "Nhiệm vụ học tập",
     "next": "Thử tiếp",
     "rule": "Hoàn thành lần đầu: +100 mỗi nhiệm vụ, +50 mỗi dấu cơ chế. Chơi lại không cộng điểm trùng."
+  },
+  "account": {
+    "entry": "Đăng nhập / Đăng ký",
+    "eyebrow": "THẺ PHI CÔNG",
+    "loginTitle": "Chào mừng trở lại.",
+    "registerTitle": "Sẵn sàng cho hành trình mới.",
+    "signed": "Tài khoản",
+    "intro": "Đăng nhập bằng email và mật khẩu, hoặc tạo tài khoản phi công.",
+    "login": "Đăng nhập",
+    "register": "Đăng ký",
+    "email": "Địa chỉ email",
+    "logout": "Đăng xuất",
+    "guest": "Khám phá với tư cách khách",
+    "unavailable": "Dịch vụ tài khoản tạm thời không khả dụng. Hãy thử lại sau.",
+    "invalidEmail": "Nhập địa chỉ email hợp lệ.",
+    "rate": "Quá nhiều yêu cầu. Hãy thử lại sau.",
+    "network": "Kết nối thất bại. Kiểm tra mạng rồi thử lại.",
+    "busy": "Đang xử lý…",
+    "password": "Mật khẩu",
+    "passwordHint": "Dùng ít nhất 10 ký tự.",
+    "invalidCredentials": "Kiểm tra email và mật khẩu.",
+    "emailTaken": "Email này đã được đăng ký. Hãy đăng nhập."
   }
 }
