@@ -369,5 +369,13 @@
         "learned": "Dieselben Zahlen in anderer Reihenfolge ändern das Ergebnis. Die Ausführungsreihenfolge gehört zum Programm."
       }
     ]
+  },
+  "journey": {
+    "title": "Dein Flugbuch",
+    "local": "In diesem Browser gespeichert",
+    "points": "Entdeckerpunkte",
+    "lessons": "Lernmissionen",
+    "next": "Als Nächstes",
+    "rule": "Beim ersten Abschluss: +100 je Mission, +50 je Mechanismus-Stempel. Wiederholungen geben keine doppelten Punkte."
   }
 }

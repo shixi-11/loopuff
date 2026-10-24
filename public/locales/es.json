@@ -369,5 +369,13 @@
         "learned": "Los mismos números en distinto orden cambian el resultado. El orden de ejecución forma parte del programa."
       }
     ]
+  },
+  "journey": {
+    "title": "Tu diario de vuelo",
+    "local": "Guardado en este navegador",
+    "points": "Puntos de exploración",
+    "lessons": "Misiones del curso",
+    "next": "Tu próximo reto",
+    "rule": "Primera victoria: +100 por misión, +50 por sello de mecanismo. Repetir no suma puntos otra vez."
   }
 }

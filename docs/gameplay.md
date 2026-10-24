@@ -37,6 +37,28 @@ The first two mechanisms provide editable starting code. The third starts empty.
 
 Drafts, clue seed, stage, submitted source and stamps persist across reload and language changes. Deleted drafts remain empty. The first pass is untimed; motion can be reduced. One mounted controller owns its timers and removes listeners on navigation. No account or cloud state is implied.
 
+## Exploration records and lesson recovery
+
+The lesson selector and playground share a browser-local flight log: completed
+course missions, distinct vault mechanism stamps and exploration points. Each
+unique completed course mission contributes 100 points and each unique stamp 50;
+the current content therefore has a 550-point ceiling. Repeating a mission or
+changing vault clues cannot farm additional points. Existing completions count
+when this version first opens. Flight typing points and assessment grades are
+separate and do not contribute to this total.
+
+Each course mission now owns its own draft, learning step and submitted source.
+Navigation, reload and language changes restore that mission's work. An explicit
+replay restarts only the selected mission; completed-mission rewards remain.
+The previous single-mission save migrates in place. Changing a submitted program
+invalidates its assessment, including after restoring the mission. Playground
+cards show saved progress, and the next-mission link targets the first unfinished
+course mission, then the vault when its stamps are incomplete.
+
+These records remain local to this browser. They are not accounts, a cloud save,
+a verified leaderboard or a measurement of programming mastery. Account-backed
+features require a separately configured service and remain queued.
+
 ## Queued game directions
 
 These remain concepts, not playable releases:

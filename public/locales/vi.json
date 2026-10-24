@@ -369,5 +369,13 @@
         "learned": "Cùng các số nhưng khác thứ tự sẽ cho kết quả khác. Thứ tự thực thi là một phần của chương trình."
       }
     ]
+  },
+  "journey": {
+    "title": "Nhật ký khám phá",
+    "local": "Lưu trong trình duyệt này",
+    "points": "Điểm khám phá",
+    "lessons": "Nhiệm vụ học tập",
+    "next": "Thử tiếp",
+    "rule": "Hoàn thành lần đầu: +100 mỗi nhiệm vụ, +50 mỗi dấu cơ chế. Chơi lại không cộng điểm trùng."
   }
 }

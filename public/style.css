@@ -218,3 +218,27 @@ body[data-view=game] .universe[data-phase=welcome] .welcome{position:relative;in
  #home-plane-slot,.home-plane{width:136px;height:156px}
  .universe[data-phase=welcome] .welcome-foot{margin-top:16px}
 }
+/* Exploration records: compact, readable, and separate from task grades. */
+.journey-panel{margin:28px 0 38px;border:1px solid #c9d7c4;background:#eaf0e4;border-radius:16px;padding:24px 28px;color:#24463f}
+.journey-heading{display:flex;align-items:baseline;justify-content:space-between;gap:16px}
+.learning-page .journey-heading h2{font-size:18px;margin:0;color:#24463f}
+.journey-heading>span{font-size:12px;color:#526d61}
+.journey-totals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:22px 0;gap:24px}
+.journey-totals>div+div{border-inline-start:1px solid #c3d2bd;padding-inline-start:24px}
+.journey-totals dt{font-size:13px;color:#526d61;margin-bottom:4px}
+.journey-totals dd{margin:0;display:flex;gap:10px;align-items:center;font-size:30px;font-weight:650;line-height:1.4;letter-spacing:-.8px}
+.journey-totals dd>span{font-size:19px;color:#947133}
+.journey-next{border-top:1px solid #c3d2bd;padding-top:17px;display:flex;justify-content:space-between;gap:22px;align-items:center}
+.journey-next>a{display:flex;flex-direction:column;gap:2px;flex-shrink:0;padding:3px 0}
+.journey-next>a>span{font-size:12px;color:#526d61}
+.journey-next strong{font-size:16px;line-height:1.6;color:#24463f}
+.journey-next a:hover strong{text-decoration:underline;text-underline-offset:4px}
+.journey-next p{font-size:12px;max-width:350px;margin:0!important;color:#526d61;line-height:1.8}
+.game-record{display:block;font-size:12px;line-height:1.6;color:#526d61;margin:0 0 14px}
+@media(max-width:600px){
+ .journey-panel{padding:20px;margin:24px 0 30px}
+ .journey-heading{display:block}.journey-heading>span{display:block;margin-top:3px}
+ .journey-totals{gap:12px;margin:20px 0}.journey-totals>div+div{padding-inline-start:12px}
+ .journey-totals dt{font-size:11px}.journey-totals dd{font-size:24px;gap:5px}
+ .journey-next{display:block}.journey-next p{margin-top:12px!important;max-width:none}
+}

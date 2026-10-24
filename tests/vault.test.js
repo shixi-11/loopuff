@@ -13,7 +13,9 @@ test('vault challenge accepts executed solutions across changing clues and all s
       // Different valid programs are accepted, not just the example's text.
       const literal=puzzle.goal.logs.map(n=>`${n}.log()`).join('\n');
       assert.ok(inspectVault(state,puzzle.example).ok);
-      assert.ok(submitVault(state,literal).ok);
+      const success=submitVault(state,literal);
+      assert.ok(success.ok);assert.equal(success.earned,50);
+      assert.equal(submitVault(state,literal).earned,0);
       assert.equal(state.stamps.length,i+1);
       if(i<2)assert.ok(advanceVault(state));else assert.equal(advanceVault(state),false);
     }

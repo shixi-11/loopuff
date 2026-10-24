@@ -44,6 +44,7 @@ export function submitVault(state,source) {
   // Stamps describe three completed game mechanisms, never language mastery.
   // Replaying a stage or generating fresh clues cannot award the same stamp twice.
   if(report.ok){
+    report.earned=state.stamps.includes(state.stage)?0:50;
     if(!state.cleared.includes(state.stage))state.cleared.push(state.stage);
     if(!state.stamps.includes(state.stage))state.stamps.push(state.stage);
   }

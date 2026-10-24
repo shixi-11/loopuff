@@ -369,5 +369,13 @@
         "learned": "The same numbers in a different order produce a different result. Execution order is part of your program."
       }
     ]
+  },
+  "journey": {
+    "title": "Your flight log",
+    "local": "Saved in this browser",
+    "points": "Exploration points",
+    "lessons": "Course missions",
+    "next": "Up next",
+    "rule": "First clear: +100 per mission, +50 per mechanism stamp. Replays keep your points."
   }
 }

@@ -4,7 +4,8 @@ import { assess, grade } from './assessment.js';
 import { mountJumpLab } from './jump.js';
 import { drawPlane } from './plane.js';
 import { mountHomePlane } from './home-plane.js';
-import { mountVault } from './vault-ui.js';
+import { mountVault, loadVault } from './vault-ui.js';
+import { rememberLesson, lessonWork, explorationProgress } from './progress.js';
 import { arcadeArt } from './arcade-art.js';
 import { selectedLocale, languageUrl, parseRoute, routeUrl } from './routing.js';
 
@@ -27,19 +28,25 @@ let state={phase:'welcome',lesson:0,fragment:0,typed:'',draft:'',assessedSource:
 if(!state.grades||typeof state.grades!=='object'||Array.isArray(state.grades))state.grades={};
 if(!['welcome','levels','brief','typing','predict','output','explain','remix','independent','result','complete','guide','pause','play','vault'].includes(state.phase)) state.phase='welcome';
 if(!Number.isInteger(state.lesson)||state.lesson<0||state.lesson>=course.length)state.lesson=0;
-state.completed=Array.isArray(state.completed)?state.completed.filter(id=>course.some(l=>l.id===id)):[];
+state.completed=[...new Set(Array.isArray(state.completed)?state.completed.filter(id=>course.some(l=>l.id===id)):[])];
+rememberLesson(state,course[state.lesson].id);
+// Migrate the previous single-lesson save even when it was left on a menu.
+if(!lessonWork(state,course[state.lesson].id))rememberLesson(state,course[state.lesson].id,state.resumePhase);
 function readRoute(){
   const route=parseRoute(location.pathname),previousLesson=state.lesson;
-  if(route?.lessonId){state.lesson=course.findIndex(item=>item.id===route.lessonId);if(previousLesson!==state.lesson){state.draft='';state.assessedSource=null;}}
+  if(route?.lessonId){
+    const index=course.findIndex(item=>item.id===route.lessonId);
+    if(previousLesson!==index){rememberLesson(state,course[previousLesson].id);state.lesson=index;Object.assign(state,lessonWork(state,course[index].id)||{phase:'brief',fragment:0,typed:'',draft:'',assessedSource:null,score:0,errors:0,keys:0});}
+  }
   if(route?.view==='play'||route?.view==='vault')state.phase=route.view;
   else if(route?.view==='result')state.phase='result';
   else if(route?.view==='levels')state.phase='levels';
   else if(route?.view==='guide'){if(!['guide','welcome','pause'].includes(state.phase))state.resumePhase=state.phase;state.phase='guide';}
   else if(route?.view==='lesson'){
-    if(previousLesson!==state.lesson){state.phase='brief';state.draft='';state.assessedSource=null;}
+    if(previousLesson!==state.lesson){if(state.phase==='result')state.phase='independent';}
     else if(state.phase==='result')state.phase='independent';
     else if(state.phase==='pause')state.phase=state.previousPhase||'brief';
-    else if(['welcome','levels','guide','play','vault'].includes(state.phase))state.phase=['brief','typing','predict','output','explain','remix','independent','complete'].includes(state.resumePhase)?state.resumePhase:'brief';
+    else if(['welcome','levels','guide','play','vault'].includes(state.phase))Object.assign(state,lessonWork(state,course[state.lesson].id)||{phase:'brief'});
   }else{
     if(!['welcome','pause','guide'].includes(state.phase))state.resumePhase=state.phase;
     state.phase='welcome';
@@ -48,7 +55,7 @@ function readRoute(){
 readRoute();
 const ui=key=>messages.ui[key], lesson=()=>course[state.lesson], copy=()=>messages.lessons[state.lesson];
 const fragments=()=>lesson().fragments;
-function save(){try{localStorage.setItem(storageKey,JSON.stringify({lang,state}));$('save-status').textContent=ui('save');}catch{$('save-status').textContent=ui('nosave');}}
+function save(){rememberLesson(state,lesson().id);try{localStorage.setItem(storageKey,JSON.stringify({lang,state}));$('save-status').textContent=ui('save');}catch{$('save-status').textContent=ui('nosave');}}
 async function changeLanguage(next){
   if(!validLocale(next))return;
   const request=++languageRequest;
@@ -117,8 +124,14 @@ function syncRoute(){
   const url=routeUrl(location.href,lang,view,lesson().id);url.hash='';
   if(location.pathname!==url.pathname)history.pushState(null,'',url);
 }
-function begin(index){state={...state,phase:'brief',lesson:index,fragment:0,typed:'',draft:'',assessedSource:null,score:0,errors:0,keys:0};notice='';feedbackState=null;lastResult=null;syncRoute();render();save();window.scrollTo(0,0);}
-function move(phase){if(phase==='welcome'&&['brief','typing','predict','output','explain','remix','independent','result','complete'].includes(state.phase))state.resumePhase=state.phase;state.phase=phase;notice='';feedbackState=null;lastResult=null;syncRoute();render();save();window.scrollTo(0,0);if(!$('learning-page').hidden)$('learning-page').focus({preventScroll:true});}
+function begin(index){rememberLesson(state,lesson().id);state={...state,phase:'brief',lesson:index,fragment:0,typed:'',draft:'',assessedSource:null,score:0,errors:0,keys:0};notice='';feedbackState=null;lastResult=null;syncRoute();render();save();window.scrollTo(0,0);}
+function enterLesson(index){
+  rememberLesson(state,lesson().id);const work=lessonWork(state,course[index].id);
+  if(!work){begin(index);return;}
+  Object.assign(state,work,{lesson:index});notice='';feedbackState=null;lastResult=null;
+  syncRoute();render();save();window.scrollTo(0,0);
+}
+function move(phase){rememberLesson(state,lesson().id);if(phase==='welcome'&&['brief','typing','predict','output','explain','remix','independent','result','complete'].includes(state.phase))state.resumePhase=state.phase;state.phase=phase;notice='';feedbackState=null;lastResult=null;syncRoute();render();save();window.scrollTo(0,0);if(!$('learning-page').hidden)$('learning-page').focus({preventScroll:true});}
 function actions(buttons){return `<div class="dialog-actions">${buttons.map(([action,label,secondary])=>`<button class="${secondary?'text-button':'primary'}" data-action="${action}">${escape(label)}</button>`).join('')}</div>`;}
 function codeBlock(source){return `<pre class="exercise-code" dir="ltr">${escape(source)}</pre>`;}
 function choices(items,action){return `<div class="choices">${items.map((text,index)=>`<button class="choice" data-${action}="${index}"><span>${String(index+1).padStart(2,'0')}</span>${prose(text||ui('noOutput'))}</button>`).join('')}</div>`;}
@@ -177,20 +190,28 @@ function assessmentPanel(){
   const checks=report.checks.map(check=>`<li class="assessment-check" data-status="${check.status}"><div><span>${escape(a.labels[check.id])}</span><bdi dir="ltr">${check.points} / ${check.max}</bdi></div><small>${escape(a[check.status])}</small>${check.requirements?`<ul class="concept-checks">${check.requirements.map(item=>`<li><span aria-hidden="true">${check.status==='blocked'?'○':item.passed?'✓':'○'}</span> ${escape(a.concepts[item.concept])}</li>`).join('')}</ul>`:''}</li>`).join('');
   return `<section class="result-report" data-score="${report.score}" data-passed="${report.ok}"><header class="result-hero"><div><span class="eyebrow">${escape(ui('mission'))} ${String(state.lesson+1).padStart(2,'0')} · ${escape(copy().title)}</span><h1 id="learning-title">${escape(a.title)}</h1><p>${escape(report.ok?a.success:a.retry)}</p></div><div class="score-orbit" style="--score:${report.score}%"><div><strong><bdi dir="ltr">${report.score}</bdi></strong><span>${escape(a.score)} <bdi dir="ltr">/ 100</bdi></span></div></div></header><div class="result-toolbar">${actions(report.ok?[['finish-assessment',a.continue],['edit-assessment',a.edit,true]]:[['edit-assessment',a.edit]])}<p class="scope-note">${escape(a.note)}</p></div><section class="result-breakdown"><h2>${escape(a.breakdown)}</h2><ul class="assessment-checks">${checks}</ul>${report.ok?'':`<p class="assessment-explanation" role="status">${prose(explanation)}</p>`}</section><div class="result-work"><section><h2>${escape(a.yourCode)}</h2>${codeBlock(state.assessedSource)}</section><section><h2>${escape(ui('output'))}</h2><div class="assessment-outputs"><div><small>${escape(a.expected)}</small>${codeBlock(lesson().independent.logs.join('\n'))}</div><div><small>${escape(a.actual)}</small>${codeBlock(report.result?report.result.logs.join('\n')||ui('noOutput'):a.notRun)}</div></div></section></div></section>`;
 }
+function journeyPanel(){
+  const t=messages.journey,p=explorationProgress(state,loadVault(),course.map(l=>l.id));
+  const next=p.next>=0?p.next:p.stamps<3?'vault':0;
+  const destination=next==='vault'?routeUrl(location.href,lang,'vault'):routeUrl(location.href,lang,'lesson',course[next].id);
+  const target=next==='vault'?messages.vault.title:messages.lessons[next].title;
+  const action=next==='vault'?'data-action="open-vault"':`data-lesson="${next}"`;
+  return `<section class="journey-panel" aria-label="${escape(t.title)}"><div class="journey-heading"><h2>${escape(t.title)}</h2><span>${escape(t.local)}</span></div><dl class="journey-totals"><div><dt>${escape(t.points)}</dt><dd><bdi dir="ltr">${p.points}</bdi><span aria-hidden="true">✦</span></dd></div><div><dt>${escape(t.lessons)}</dt><dd><bdi dir="ltr">${p.completed} / ${course.length}</bdi></dd></div><div><dt>${escape(messages.vault.collection)}</dt><dd><bdi dir="ltr">${p.stamps} / 3</bdi></dd></div></dl><div class="journey-next"><a ${action} href="${destination.pathname}"><span>${escape(t.next)}</span><strong>${escape(target)} <span aria-hidden="true">↗</span></strong></a><p>${escape(t.rule)}</p></div></section>`;
+}
 function renderDialog(){
   const c=copy(),phase=state.phase;let title='',body='';
   if(phase==='play'||phase==='vault'){
     $('learning-page').dataset.stage=phase;
     const v=messages.vault;
     const trail=`<nav class="page-trail" aria-label="${escape(ui('navigation'))}"><a data-action="home" href="${routeUrl(location.href,lang,'home').pathname}">${escape(ui('navHome'))}</a><span aria-hidden="true">/</span>${phase==='vault'?`<a data-action="open-play" href="${routeUrl(location.href,lang,'play').pathname}">${escape(v.arcade)}</a><span aria-hidden="true">/</span><span aria-current="page">${escape(v.title)}</span>`:`<span aria-current="page">${escape(v.arcade)}</span>`}</nav>`;
-    $('learning-content').innerHTML=trail+(phase==='vault'?'<div id="vault-game"></div>':`<section class="arcade-page"><span class="eyebrow">${escape(ui('name'))}</span><h1 id="learning-title">${escape(v.arcadeTitle)}</h1><p class="levels-intro">${escape(v.arcadeIntro)}</p><div class="arcade-games"><a class="arcade-game vault-entry" data-action="open-vault" href="${routeUrl(location.href,lang,'vault').pathname}"><div class="arcade-vault-art" aria-hidden="true">${arcadeArt('vault')}</div><div><span class="eyebrow">${escape(v.puzzleTag)}</span><h2>${escape(v.title)}</h2><p>${escape(v.intro)}</p><strong>${escape(v.enter)} ↗</strong></div></a><a class="arcade-game jump-entry" href="${routeUrl(location.href,lang,'lesson',course[3].id).pathname}" data-lesson="3"><div class="arcade-jump-art" aria-hidden="true">${arcadeArt('jump')}</div><div><span class="eyebrow">${escape(v.jumpTag)}</span><h2>${escape(messages.jump.title)}</h2><p>${escape(messages.lessons[3].goal)}</p><strong>${escape(v.enter)} ↗</strong></div></a></div></section>`);
+    $('learning-content').innerHTML=trail+(phase==='vault'?'<div id="vault-game"></div>':`<section class="arcade-page"><span class="eyebrow">${escape(ui('name'))}</span><h1 id="learning-title">${escape(v.arcadeTitle)}</h1><p class="levels-intro">${escape(v.arcadeIntro)}</p>${journeyPanel()}<div class="arcade-games"><a class="arcade-game vault-entry" data-action="open-vault" href="${routeUrl(location.href,lang,'vault').pathname}"><div class="arcade-vault-art" aria-hidden="true">${arcadeArt('vault')}</div><div><span class="eyebrow">${escape(v.puzzleTag)}</span><h2>${escape(v.title)}</h2><p>${escape(v.intro)}</p><span class="game-record">${escape(v.collection)} <bdi dir="ltr">${loadVault().stamps.length} / 3</bdi></span><strong>${escape((loadVault().stage||loadVault().submitted?ui('resume'):v.enter).replace(/\s*↗$/,''))} ↗</strong></div></a><a class="arcade-game jump-entry" href="${routeUrl(location.href,lang,'lesson',course[3].id).pathname}" data-lesson="3"><div class="arcade-jump-art" aria-hidden="true">${arcadeArt('jump')}</div><div><span class="eyebrow">${escape(v.jumpTag)}</span><h2>${escape(messages.jump.title)}</h2><p>${escape(messages.lessons[3].goal)}</p><span class="game-record">${escape(state.completed.includes(course[3].id)?ui('done'):lessonWork(state,course[3].id)?ui('resume'):ui('open'))}</span><strong>${escape((lessonWork(state,course[3].id)?ui('resume'):v.enter).replace(/\s*↗$/,''))} ↗</strong></div></a></div></section>`);
     if(phase==='vault')vaultGame=mountVault($('vault-game'),{text:v,errors:messages.ui,reduced});
     return;
   }
   if(phase==='levels'){
     $('learning-page').dataset.stage=phase;
     const nextLesson=course.findIndex(l=>!state.completed.includes(l.id));
-    $('learning-content').innerHTML=`<section class="levels-page"><span class="eyebrow">${escape(ui('name'))}</span><h1 id="learning-title">${escape(ui('routeTitle'))}</h1><p class="levels-intro">${escape(ui('routeIntro'))}</p><div class="level-grid">${course.map((l,i)=>`<a class="level-card" href="${routeUrl(location.href,lang,'lesson',l.id).pathname}" data-state="${state.completed.includes(l.id)?'done':i===nextLesson?'next':'available'}" data-lesson="${i}"><span class="level-number">${String(i+1).padStart(2,'0')}</span><span class="level-copy"><strong>${escape(messages.lessons[i].title)}</strong><span>${escape(messages.lessons[i].goal)}</span><small>${escape(ui(state.completed.includes(l.id)?'done':i===nextLesson?(i===0?'start':'next'):'open'))}</small></span><span aria-hidden="true">↗</span></a>`).join('')}</div><p class="scope-note">${escape(ui('chapterNote'))}</p></section>`;return;
+    $('learning-content').innerHTML=`<section class="levels-page"><span class="eyebrow">${escape(ui('name'))}</span><h1 id="learning-title">${escape(ui('routeTitle'))}</h1><p class="levels-intro">${escape(ui('routeIntro'))}</p>${journeyPanel()}<div class="level-grid">${course.map((l,i)=>`<a class="level-card" href="${routeUrl(location.href,lang,'lesson',l.id).pathname}" data-state="${state.completed.includes(l.id)?'done':i===nextLesson?'next':'available'}" data-lesson="${i}"><span class="level-number">${String(i+1).padStart(2,'0')}</span><span class="level-copy"><strong>${escape(messages.lessons[i].title)}</strong><span>${escape(messages.lessons[i].goal)}</span><small>${escape(ui(state.completed.includes(l.id)?'done':lessonWork(state,l.id)?'resume':i===nextLesson?(i===0?'start':'next'):'open'))}</small></span><span aria-hidden="true">↗</span></a>`).join('')}</div><p class="scope-note">${escape(ui('chapterNote'))}</p></section>`;return;
   }
   if(phase==='brief'){title=c.title;body=`<p class="dialog-note">${prose(c.intro)}</p>${codeBlock(lesson().source)}<p>${prose(c.goal)}</p>${actions([['type',ui('launch')]])}`;}
   if(phase==='predict'){title=ui('predict');body=`<p class="dialog-note">${escape(ui('predictionPrompt'))}</p>${codeBlock(lesson().source)}${choices(lesson().prediction,'prediction')}`;}
@@ -293,14 +314,14 @@ document.addEventListener('click',event=>{
   if(target.tagName==='A'){if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;event.preventDefault();}
   if(target.dataset.prediction!==undefined){if(Number(target.dataset.prediction)===lesson().predictionAnswer)move('output');else feedback('predictionHint');return;}
   if(target.dataset.answer!==undefined){if(Number(target.dataset.answer)===0){state.draft='';move('remix');}else feedback('answerHint',true);return;}
-  if(target.dataset.lesson!==undefined){begin(Number(target.dataset.lesson));return;}
+  if(target.dataset.lesson!==undefined){enterLesson(Number(target.dataset.lesson));return;}
   const action=target.dataset.action;
   if(action==='try-jump'){tryJump();return;}
   if(action==='open-play'){move('play');return;}
   if(action==='open-vault'){move('vault');return;}
   if(action==='open-levels'){move('levels');return;}
   if(action==='open-guide'){if(!['welcome','guide','pause'].includes(state.phase))state.resumePhase=state.phase;guideIndex=0;move('guide');return;}
-  if(action==='resume-course'){if(state.phase==='guide')move(state.resumePhase==='result'?'independent':state.resumePhase||'brief');else if(state.phase==='result')move('independent');return;}
+  if(action==='resume-course'){if(state.phase==='guide')enterLesson(state.lesson);else if(state.phase==='result')move('independent');return;}
   if(action==='edit-assessment'){move('independent');$('program-editor')?.focus();return;}
   if(action==='view-result'&&state.assessedSource!==null&&state.assessedSource===state.draft){move('result');return;}
   if(action==='finish-assessment'&&state.phase==='result'&&state.assessedSource===state.draft&&grade(state.draft,lesson().independent).ok){
@@ -310,13 +331,13 @@ document.addEventListener('click',event=>{
   if(action==='type'){state.fragment=0;state.typed='';state.score=0;state.keys=0;state.errors=0;move('typing');$('typing-field').focus();}
   if(action==='explain')move('explain');
   if(action==='hint')feedback(state.phase==='remix'?'remixHint':'independentHint',true);
-  if(action==='next')begin(state.lesson+1);
+  if(action==='next')enterLesson(state.lesson+1);
   if(action==='replay'||action==='restart')begin(state.lesson);
   if(action==='home'){move('welcome');}
   if(action==='resume')move(state.previousPhase||'typing');
-  if(action==='guide-next'){if(guideIndex===messages.guide.length-1)begin(0);else{guideIndex++;renderDialog();}}
+  if(action==='guide-next'){if(guideIndex===messages.guide.length-1)enterLesson(0);else{guideIndex++;renderDialog();}}
 });
-$('start').onclick=()=>{if(['brief','typing','predict','output','explain','remix','independent','result','complete'].includes(state.resumePhase))move(state.resumePhase);else begin(Math.min(state.completed.length,course.length-1));};
+$('start').onclick=()=>{if(lessonWork(state,lesson().id))enterLesson(state.lesson);else enterLesson(Math.max(0,course.findIndex(l=>!state.completed.includes(l.id))));};
 $('how-button').onclick=()=>{guideIndex=0;move('guide');};
 $('play-button').onclick=()=>move('play');
 $('pause-button').onclick=pause;

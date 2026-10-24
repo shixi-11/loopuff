@@ -34,7 +34,7 @@ export function mountVault(root,{text:t,errors,reduced}){
     const finish=()=>{
       if(disposed)return;
       scene.dataset.state=report.ok?'open':'retry';feedback.dataset.kind=report.ok?'success':'retry';
-      status.textContent=report.ok?(state.stage===2?t.complete:t.opened):report.result?t.mismatch:t.fixCode;
+      status.textContent=(report.ok?(state.stage===2?t.complete:t.opened):report.result?t.mismatch:t.fixCode)+(report.earned?` · +${report.earned} ✦`:'');
       detail.textContent=report.ok?t.stages[state.stage].learned:report.result?t.compare.replace('{expected}', '\u2066'+report.expected.join(' → ')+'\u2069'):errors[report.code==='name'?'nameError':report.code]||errors.limit;
       root.querySelector('[data-vault-next]').hidden=!report.ok;
       root.querySelector('[data-vault-run]').disabled=false;
@@ -47,6 +47,7 @@ export function mountVault(root,{text:t,errors,reduced}){
       if(receiver){receiver.querySelector('b').textContent=value;receiver.dataset.match=String(value===report.expected[i]);}
     }
     if(animate&&!reduced.matches&&frames.length){
+      root.querySelector('[data-vault-next]').hidden=true;
       scene.dataset.state='running';status.textContent=t.running;detail.textContent=t.consequence;root.querySelector('[data-vault-run]').disabled=true;
       frames.forEach((value,i)=>timers.push(setTimeout(()=>frame(value,i),250+i*550)));
       timers.push(setTimeout(finish,350+frames.length*550));
