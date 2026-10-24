@@ -8,8 +8,8 @@ test('account routes and endpoint retain the official game prefix',async()=>{
   assert.deepEqual(parseRoute(new URL(url).pathname),{locale:'zh',view:'account'});
   assert.equal(languageUrl(url,'ar').pathname,`${prefix}/ar/account/`);
   assert.equal(routeUrl(url,'en','account').pathname,`${prefix}/en/account/`);
-  const client=createAccountClient({url,fetchImpl:async(endpoint,options)=>{assert.equal(endpoint.pathname,`${prefix}/api/account`);assert.equal(options.credentials,'same-origin');return Response.json({available:false,user:null});}});
-  await client.load();assert.equal(client.available,false);assert.equal(client.user,null);
+  let called;const client=createAccountClient({url,fetchImpl:async(endpoint,options)=>{called={endpoint,options};return Response.json({available:true,user:null});}});
+  await client.load();assert.equal(called.endpoint.pathname,`${prefix}/api/account/`);assert.equal(called.options.credentials,'same-origin');assert.equal(client.available,true);assert.equal(client.user,null);
  }
 });
 test('account client clears credentials after successful register and logout',async()=>{

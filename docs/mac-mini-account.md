@@ -36,7 +36,7 @@ flowchart LR
 | 参数 | 环灵取值 |
 | --- | --- |
 | 正式前端 | `https://shixilin.com/games/loopuff/` |
-| 浏览器接口 | `/games/loopuff/api/account` |
+| 浏览器接口 | `/games/loopuff/api/account/` |
 | Mac 服务端口 | `127.0.0.1:8793` |
 | Funnel 路径 | `/loopuff`，与现有游戏路径并存 |
 | 运行目录 | Mac 当前用户的 `~/loopuff` |
@@ -74,7 +74,8 @@ flowchart LR
 - `node backup.mjs` 使用 SQLite 一致性备份，执行完整性检查。
 - 备份复制到临时数据库后，通过账号服务恢复同一会话；测试未覆盖线上库。
 - 11 种语言的账号表单已检查 480 CSS px 窄屏尺寸；未发现横向溢出。
-- 正式域名发布与最终验证结果在交付前补记。
+- 正式首页已匹配本次构建。官网转发需要接口末尾斜杠，客户端固定为 `/api/account/`，避免重定向时丢失游戏前缀。
+- 正式域名的真实注册、登录、错误密码拒绝、退出、进程重启会话恢复、临时备份库会话恢复均已通过。测试使用专用 `.invalid` 账号，不向真实邮箱发信。
 
 备份位于 `~/loopuff-backups/YYYY-MM-DD/accounts.sqlite`。当前备份与服务在同一台
 Mac，不代表异地容灾；定时备份已配置，本轮实际手动运行并验证。

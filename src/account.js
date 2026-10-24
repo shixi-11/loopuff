@@ -1,7 +1,7 @@
 import { gamePrefix } from './routing.js';
 
 export function createAccountClient({url,fetchImpl=fetch,onChange=()=>{}}){
-  const endpoint=new URL(`${gamePrefix(new URL(url).pathname)}/api/account`,url);
+  const endpoint=new URL(`${gamePrefix(new URL(url).pathname)}/api/account/`,url);
   const client={available:null,user:null,form:{mode:'login',email:'',password:''}};
   async function request(action,body){
     let response;
