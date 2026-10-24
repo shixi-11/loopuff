@@ -363,7 +363,7 @@ function refreshGeometry(){if(state.phase!=='typing')return;const world=$('unive
 // The original scene is intentionally independent of course text and locale.
 // Canvas world: cached planet/orbits, moving ship, beams and collectible debris.
 const canvas=$('space'),ctx=canvas.getContext('2d'),back=document.createElement('canvas'),bg=back.getContext('2d');
-const homePlane=mountHomePlane($('universe'),$('home-plane'),$('home-plane-slot'));
+const homePlane=mountHomePlane($('home-flight-field'),$('home-plane'),$('home-plane-slot'));
 let W=1000,H=800,DPR=1,last=performance.now(),clock=0,beacon=0,effects=[];
 let seed=41;const rnd=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296;};
 const stars=Array.from({length:145},()=>({x:rnd(),y:rnd(),r:.45+rnd()*1.2,p:rnd()*6.28}));
