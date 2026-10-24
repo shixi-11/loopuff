@@ -1,0 +1,147 @@
+/* Light paper-and-sage surfaces for active and paused flight practice. */
+body:is([data-phase=typing],[data-phase=pause]){
+ --flight-bg:#eaf0e6;
+ --flight-panel:#faf8ef;
+ --flight-panel-raised:#fffdf6;
+ --flight-ink:#23493f;
+ --flight-muted:#536f63;
+ --flight-line:#b9cbb8;
+ --flight-green:#466c4d;
+ --flight-gold:#85612e;
+ --flight-focus:#315f43;
+ background:var(--flight-bg);
+ color:var(--flight-ink);
+}
+body:is([data-phase=typing],[data-phase=pause]) .universe{
+ background:var(--flight-bg);
+ color:var(--flight-ink);
+ box-shadow:none;
+}
+body:is([data-phase=typing],[data-phase=pause]) .scene-grain{display:none}
+body:is([data-phase=typing],[data-phase=pause]) .masthead,
+body:is([data-phase=typing],[data-phase=pause]) .page-foot,
+body:is([data-phase=typing],[data-phase=pause]) .flight-hud,
+body:is([data-phase=typing],[data-phase=pause]) .flight-hud *,
+body:is([data-phase=typing],[data-phase=pause]) .code-coach,
+body:is([data-phase=typing],[data-phase=pause]) .code-coach *,
+body:is([data-phase=typing],[data-phase=pause]) .target,
+body:is([data-phase=typing],[data-phase=pause]) .target *,
+body:is([data-phase=typing],[data-phase=pause]) .cockpit,
+body:is([data-phase=typing],[data-phase=pause]) .cockpit *,
+body:is([data-phase=typing],[data-phase=pause]) #flow-dialog,
+body:is([data-phase=typing],[data-phase=pause]) #flow-dialog *{text-shadow:none}
+
+body:is([data-phase=typing],[data-phase=pause]) .brand svg{fill:var(--flight-ink)}
+body:is([data-phase=typing],[data-phase=pause]) .brand svg circle{fill:var(--flight-bg)}
+body:is([data-phase=typing],[data-phase=pause]) .brand .mark-orbit{stroke:var(--flight-ink)}
+body:is([data-phase=typing],[data-phase=pause]) .brand .mark-plane{fill:var(--flight-ink)}
+body:is([data-phase=typing],[data-phase=pause]) .brand .mark-cockpit{fill:var(--flight-bg)}
+body:is([data-phase=typing],[data-phase=pause]) .brand .mark-star{fill:var(--flight-green)}
+body:is([data-phase=typing],[data-phase=pause]) .edition,
+body:is([data-phase=typing],[data-phase=pause]) .page-navigation a,
+body:is([data-phase=typing],[data-phase=pause]) .language-control{color:var(--flight-muted)}
+body:is([data-phase=typing],[data-phase=pause]) .nav-button,
+body:is([data-phase=typing],[data-phase=pause]) .language-control select{
+ color:var(--flight-ink);background-color:var(--flight-panel);border-color:var(--flight-line)
+}
+body:is([data-phase=typing],[data-phase=pause]) .nav-button:hover{background:#e1eadc}
+body:is([data-phase=typing],[data-phase=pause]) .language-control select{
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='m1 1 5 5 5-5' fill='none' stroke='%23536f63' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5'/%3E%3C/svg%3E")
+}
+
+body:is([data-phase=typing],[data-phase=pause]) .flight-hud .eyebrow,
+body:is([data-phase=typing],[data-phase=pause]) .coach-label{color:var(--flight-green)}
+body:is([data-phase=typing],[data-phase=pause]) .flight-hud .mission h2{color:var(--flight-ink)}
+body:is([data-phase=typing],[data-phase=pause]) .flight-hud .mission p{color:var(--flight-muted)}
+body:is([data-phase=typing],[data-phase=pause]) .flight-stats small{color:var(--flight-muted)}
+body:is([data-phase=typing],[data-phase=pause]) .flight-stats strong{color:var(--flight-gold)}
+body:is([data-phase=typing],[data-phase=pause]) #shields{color:var(--flight-green)}
+body:is([data-phase=typing],[data-phase=pause]) .code-coach{
+ color:var(--flight-ink);background:var(--flight-panel);border:1px solid var(--flight-line);
+ box-shadow:none
+}
+body:is([data-phase=typing],[data-phase=pause]) .code-coach strong,
+body:is([data-phase=typing],[data-phase=pause]) .code-coach p{color:var(--flight-ink)}
+body:is([data-phase=typing],[data-phase=pause]) .meaning-connection{color:var(--flight-muted)}
+body:is([data-phase=typing],[data-phase=pause]) .target{filter:none}
+body:is([data-phase=typing],[data-phase=pause]) .target-label{color:var(--flight-muted)}
+body:is([data-phase=typing],[data-phase=pause]) .target-word{
+ color:var(--flight-ink);background:var(--flight-panel-raised);border-color:var(--flight-line);box-shadow:none
+}
+body:is([data-phase=typing],[data-phase=pause]) .target-word .hit{color:var(--flight-green)}
+body:is([data-phase=typing],[data-phase=pause]) .target-word .active-letter{text-decoration-color:var(--flight-gold)}
+body:is([data-phase=typing],[data-phase=pause]) .target.error{filter:none}
+body:is([data-phase=typing],[data-phase=pause]) .target-tail{background:linear-gradient(var(--flight-line),transparent)}
+body:is([data-phase=typing],[data-phase=pause]) .combo-pop{color:var(--flight-green)}
+
+body:is([data-phase=typing],[data-phase=pause]) .cockpit{
+ color:var(--flight-ink);background:var(--flight-panel);border-color:var(--flight-line);box-shadow:none
+}
+body:is([data-phase=typing],[data-phase=pause]) .code-rail{border-color:var(--flight-line)}
+body:is([data-phase=typing],[data-phase=pause]) .rail-label,
+body:is([data-phase=typing],[data-phase=pause]) .code-rail>span:last-child,
+body:is([data-phase=typing],[data-phase=pause]) .input-label,
+body:is([data-phase=typing],[data-phase=pause]) .next-key small{color:var(--flight-muted)}
+body:is([data-phase=typing],[data-phase=pause]) .input-label i{background:var(--flight-green)}
+body:is([data-phase=typing],[data-phase=pause]) .code-rail pre{color:var(--flight-ink)}
+body:is([data-phase=typing],[data-phase=pause]) #typing-field{color:var(--flight-ink);caret-color:var(--flight-green)}
+body:is([data-phase=typing],[data-phase=pause]) #typing-field::placeholder{color:var(--flight-muted)}
+body:is([data-phase=typing],[data-phase=pause]) #typing-field.wrong{color:#875437}
+body:is([data-phase=typing],[data-phase=pause]) .next-key kbd{color:var(--flight-green);border-color:#86a78a}
+body:is([data-phase=typing],[data-phase=pause]) .cockpit-foot{color:var(--flight-muted)}
+body:is([data-phase=typing],[data-phase=pause]) .cockpit-foot>span{color:var(--flight-gold)}
+body:is([data-phase=typing],[data-phase=pause]) .page-foot{color:var(--flight-muted)}
+body:is([data-phase=typing],[data-phase=pause]) .page-foot code{color:var(--flight-ink)}
+
+body:is([data-phase=typing],[data-phase=pause]) #flow-dialog{
+ color:var(--flight-ink);background:var(--flight-panel);border:1px solid var(--flight-line);box-shadow:0 20px 54px #23493f24
+}
+body:is([data-phase=typing],[data-phase=pause]) #flow-dialog::backdrop{background:#23493f55;backdrop-filter:blur(3px)}
+body:is([data-phase=typing],[data-phase=pause]) #flow-dialog h2,
+body:is([data-phase=typing],[data-phase=pause]) #flow-dialog .dialog-top,
+body:is([data-phase=typing],[data-phase=pause]) #flow-dialog .dialog-top>*{color:var(--flight-ink)}
+body:is([data-phase=typing],[data-phase=pause]) #flow-dialog .dialog-note,
+body:is([data-phase=typing],[data-phase=pause]) #flow-dialog .mode-select{color:var(--flight-muted)}
+body:is([data-phase=typing],[data-phase=pause]) #flow-dialog .icon-button{color:var(--flight-muted);background:#eaf0e6}
+body:is([data-phase=typing],[data-phase=pause]) #flow-dialog .icon-button:hover{background:#dfe9dc}
+body:is([data-phase=typing],[data-phase=pause]) #flow-dialog .choice,
+body:is([data-phase=typing],[data-phase=pause]) #flow-dialog .route-item{color:var(--flight-ink);background:var(--flight-panel-raised);border-color:var(--flight-line)}
+body:is([data-phase=typing],[data-phase=pause]) #flow-dialog .choice:hover,
+body:is([data-phase=typing],[data-phase=pause]) #flow-dialog .route-item:hover{background:#eaf0e6;border-color:#86a78a}
+body:is([data-phase=typing],[data-phase=pause]) #flow-dialog .choice b,
+body:is([data-phase=typing],[data-phase=pause]) #flow-dialog .route-item small{color:var(--flight-muted)}
+body:is([data-phase=typing],[data-phase=pause]) #flow-dialog .route-item>strong,
+body:is([data-phase=typing],[data-phase=pause]) #flow-dialog .medal{color:var(--flight-gold)}
+body:is([data-phase=typing],[data-phase=pause]) #flow-dialog .choice.retry{border-color:#b9895a}
+body:is([data-phase=typing],[data-phase=pause]) #flow-dialog .feedback{color:#875437}
+body:is([data-phase=typing],[data-phase=pause]) #flow-dialog .feedback[data-kind=success]{color:var(--flight-green)}
+body:is([data-phase=typing],[data-phase=pause]) #flow-dialog .exercise-code{color:var(--flight-ink);background:#e9eee2;border-inline-start-color:var(--flight-green)}
+body:is([data-phase=typing],[data-phase=pause]) #flow-dialog .step-dots span{background:#c6d3c1}
+body:is([data-phase=typing],[data-phase=pause]) #flow-dialog .step-dots .on{background:var(--flight-green)}
+body:is([data-phase=typing],[data-phase=pause]) #flow-dialog .signal{color:var(--flight-green)}
+body:is([data-phase=typing],[data-phase=pause]) #flow-dialog .score-summary{border-color:var(--flight-line)}
+body:is([data-phase=typing],[data-phase=pause]) #flow-dialog .score-summary small{color:var(--flight-muted)}
+body:is([data-phase=typing],[data-phase=pause]) #flow-dialog .score-summary strong{color:var(--flight-ink)}
+body:is([data-phase=typing],[data-phase=pause]) #flow-dialog select{color:var(--flight-ink);background:var(--flight-panel-raised);border-color:var(--flight-line)}
+body:is([data-phase=typing],[data-phase=pause]) .primary{background:var(--flight-green);color:#fffdf6}
+body:is([data-phase=typing],[data-phase=pause]) .primary:hover{background:#426e4c}
+body:is([data-phase=typing],[data-phase=pause]) .text-button,
+body:is([data-phase=typing],[data-phase=pause]) .hint-button{color:#315f43}
+body:is([data-phase=typing],[data-phase=pause]) .text-button:hover,
+body:is([data-phase=typing],[data-phase=pause]) .hint-button:hover{color:var(--flight-ink)}
+
+body:is([data-phase=typing],[data-phase=pause]) :is(button,a,input,textarea,select,[tabindex]):focus-visible{
+ outline:2px solid var(--flight-focus);outline-offset:3px
+}
+body:is([data-phase=typing],[data-phase=pause]) #typing-field:focus-visible{
+ outline:2px solid var(--flight-focus);outline-offset:3px;border-radius:3px
+}
+
+body:is([data-phase=typing],[data-phase=pause]) .masthead{background:#f7f6ecf5;border-bottom:1px solid var(--flight-line);backdrop-filter:none}
+body:is([data-phase=typing],[data-phase=pause]) .page-navigation a[aria-current]{color:var(--flight-ink);border-color:#72996a}
+body:is([data-phase=typing],[data-phase=pause]) .course-progress{color:#365c45;border-color:#abc0a1;background:#e6eddb}
+body:is([data-phase=typing],[data-phase=pause]) .code-coach{border-inline-start:3px solid #91ad85;border-radius:7px}
+body:is([data-phase=typing],[data-phase=pause]) .primary{background:#315c45}
+
+body:is([data-phase=typing],[data-phase=pause]) .universe{min-height:max(760px,var(--flight-min-height,0px))}
+@media(max-width:560px){body:is([data-phase=typing],[data-phase=pause]) .universe{min-height:max(800px,var(--flight-min-height,0px))}}

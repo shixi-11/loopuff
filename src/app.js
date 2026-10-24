@@ -148,7 +148,6 @@ function render(){
   document.body.dataset.view=page?'learning':'game';
   document.body.dataset.phase=phase;
   $('universe').hidden=page;$('learning-page').hidden=!page;
-  if(phase==='typing')upgradeWorld();
   $('universe').dataset.phase=phase;$('welcome').hidden=phase!=='welcome';$('welcome-foot').hidden=phase!=='welcome';
   $('home-plane').hidden=phase!=='welcome';
   for(const id of ['flight-hud','code-coach','target','cockpit'])$(id).hidden=!typing;
@@ -161,7 +160,7 @@ function render(){
   let robots=document.querySelector('meta[name="robots"]');
   if(view==='result'){if(!robots){robots=document.createElement('meta');robots.name='robots';document.head.append(robots);}robots.content='noindex,follow';}else robots?.remove();
   attachJumpScene();
-  requestAnimationFrame(()=>{refreshGeometry();homePlane.refresh();});
+  requestAnimationFrame(()=>{refreshGeometry();if(state.phase==='typing')background();homePlane.refresh();});
 }
 function renderTyping(){
   const fragment=fragments()[state.fragment]||'',typed=state.typed;
@@ -358,41 +357,52 @@ window.addEventListener('popstate',()=>{readRoute();notice='';feedbackState=null
 
 // Geometry is measured after layout changes, not on each animation frame.
 let flightTop=380,flightBottom=500,targetY=420,shipAnchor=600;
-function refreshGeometry(){if(state.phase!=='typing')return;const world=$('universe').getBoundingClientRect(),coach=$('code-coach').getBoundingClientRect(),cockpit=$('cockpit').getBoundingClientRect();flightTop=coach.bottom-world.top+55;flightBottom=cockpit.top-world.top-95;targetY=(flightTop+Math.max(flightTop,flightBottom))/2;shipAnchor=cockpit.top-world.top-36;$('target').style.top=targetY+'px';}
+function refreshGeometry(){
+ if(state.phase!=='typing')return;
+ const field=$('universe'),coach=$('code-coach'),target=$('target'),word=$('target-word');
+ let world=field.getBoundingClientRect();
+ const hud=$('flight-hud').getBoundingClientRect();
+ coach.style.top=Math.ceil(hud.bottom-world.top+22)+'px';
+ const note=coach.getBoundingClientRect(),card=word.getBoundingClientRect(),targetBox=target.getBoundingClientRect();
+ let cockpit=$('cockpit').getBoundingClientRect();
+ const noteBottom=note.bottom-world.top,wordOffset=card.top-targetBox.top,planeHalfHeight=115*1.15/2;
+ const bottomInset=world.bottom-cockpit.bottom;
+ // Make room for the actual translated note, code card and full aircraft.
+ const required=Math.ceil(noteBottom+48+card.height+85+planeHalfHeight+8+cockpit.height+bottomInset);
+ if(field.style.getPropertyValue('--flight-min-height')!==required+'px')field.style.setProperty('--flight-min-height',required+'px');
+ world=field.getBoundingClientRect();cockpit=$('cockpit').getBoundingClientRect();
+ shipAnchor=cockpit.top-world.top-85;
+ flightTop=noteBottom+24;flightBottom=shipAnchor-planeHalfHeight-8-24-card.height;
+ const cardTop=(flightTop+Math.max(flightTop,flightBottom))/2;
+ targetY=cardTop-wordOffset+targetBox.height/2;
+ target.style.top=targetY+'px';
+}
 
-// The original scene is intentionally independent of course text and locale.
-// Canvas world: cached planet/orbits, moving ship, beams and collectible debris.
+
+// A cached 2D sky follows the rendered teaching panels in each locale.
+// Aircraft, beams and collectible debris are drawn over that quiet backdrop.
 const canvas=$('space'),ctx=canvas.getContext('2d'),back=document.createElement('canvas'),bg=back.getContext('2d');
 const homePlane=mountHomePlane($('home-flight-field'),$('home-plane'),$('home-plane-slot'));
 let W=1000,H=800,DPR=1,last=performance.now(),clock=0,beacon=0,effects=[];
 let seed=41;const rnd=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296;};
-const stars=Array.from({length:145},()=>({x:rnd(),y:rnd(),r:.45+rnd()*1.2,p:rnd()*6.28}));
-function resize(){const r=$('universe').getBoundingClientRect();if(!r.width||!r.height)return;W=r.width;H=r.height;DPR=Math.min(devicePixelRatio||1,1.6);canvas.width=Math.round(W*DPR);canvas.height=Math.round(H*DPR);back.width=canvas.width;back.height=canvas.height;ctx.setTransform(DPR,0,0,DPR,0,0);bg.setTransform(DPR,0,0,DPR,0,0);background();refreshGeometry();homePlane.refresh();}
-let fullWorldRequested=false;
-let worldArt=new Image();worldArt.decoding='async';worldArt.onload=()=>background();
-// Same-composition preview first; a slow detailed image cannot hold the page load event.
-function upgradeWorld(){
- if(fullWorldRequested||state.phase!=='typing')return;
- worldArt.src=new URL('../assets/world-preview.webp',import.meta.url).href;
- fullWorldRequested=true;
- const full=new Image();full.decoding='async';full.fetchPriority='low';
- full.onload=()=>{worldArt=full;background();};full.src=new URL('../assets/world-flight-90.webp',import.meta.url).href;
-}
-if(document.readyState==='complete')upgradeWorld();else window.addEventListener('load',upgradeWorld,{once:true});
+const stars=Array.from({length:36},()=>({x:rnd(),y:rnd(),r:.4+rnd()*.65,p:rnd()*6.28}));
+function resize(){const r=$('universe').getBoundingClientRect();if(!r.width||!r.height)return;W=r.width;H=r.height;DPR=Math.min(devicePixelRatio||1,1.6);canvas.width=Math.round(W*DPR);canvas.height=Math.round(H*DPR);back.width=canvas.width;back.height=canvas.height;ctx.setTransform(DPR,0,0,DPR,0,0);bg.setTransform(DPR,0,0,DPR,0,0);refreshGeometry();background();homePlane.refresh();}
+// A light, flat scene; decorative bodies stay in the open flight lane.
 function background(){
- if(worldArt.complete&&worldArt.naturalWidth){const scale=Math.max(W/worldArt.naturalWidth,H/worldArt.naturalHeight);bg.drawImage(worldArt,(W-worldArt.naturalWidth*scale)/2,(H-worldArt.naturalHeight*scale)/2,worldArt.naturalWidth*scale,worldArt.naturalHeight*scale);const shade=bg.createLinearGradient(0,0,W,0);shade.addColorStop(0,'#123a3b99');shade.addColorStop(.65,'#143b3d55');shade.addColorStop(1,'#123a3b0d');bg.fillStyle=shade;bg.fillRect(0,0,W,H);return;}
- const g=bg.createLinearGradient(0,0,W,H);g.addColorStop(0,'#173131');g.addColorStop(.6,'#14292b');g.addColorStop(1,'#203a33');bg.fillStyle=g;bg.fillRect(0,0,W,H);
- const mobile=W<600,px=W*(mobile?.88:.79),py=H*(mobile?.38:.32),r=Math.min(W*.23,H*.235);
- bg.save();bg.translate(px,py);bg.rotate(-.4);bg.strokeStyle='#d9c5a549';bg.lineWidth=1;bg.beginPath();bg.ellipse(0,0,r*1.48,r*.32,0,0,Math.PI*2);bg.stroke();bg.restore();
- const halo=bg.createRadialGradient(px,py,r*.8,px,py,r*1.65);halo.addColorStop(0,'#d8aa6121');halo.addColorStop(1,'#d8aa6100');bg.fillStyle=halo;bg.fillRect(px-r*1.7,py-r*1.7,r*3.4,r*3.4);
- bg.save();bg.beginPath();bg.arc(px,py,r,0,Math.PI*2);bg.clip();
- const p=bg.createRadialGradient(px-r*.45,py-r*.5,r*.05,px+r*.35,py+r*.25,r*1.45);p.addColorStop(0,'#e5b582');p.addColorStop(.48,'#bd8159');p.addColorStop(.8,'#79533f');p.addColorStop(1,'#302f2b');bg.fillStyle=p;bg.fillRect(px-r,py-r,r*2,r*2);
- for(let i=0;i<23;i++){const y=py-r+i*r*.095;bg.strokeStyle=i%3?'#ebc59016':'#563d3424';bg.lineWidth=3+(i%4)*6;bg.beginPath();bg.moveTo(px-r*1.3,y);bg.bezierCurveTo(px-r*.5,y-r*.15,px+r*.2,y+r*.3,px+r*1.25,y-r*.07);bg.stroke();}
- const shade=bg.createLinearGradient(px-r,py-r,px+r,py+r);shade.addColorStop(0,'#f4d6a311');shade.addColorStop(.7,'#122c2a00');shade.addColorStop(1,'#10292b99');bg.fillStyle=shade;bg.fillRect(px-r,py-r,r*2,r*2);bg.restore();
- bg.save();bg.translate(px,py);bg.rotate(-.4);bg.strokeStyle='#ecd3a6a1';bg.lineWidth=1.3;bg.beginPath();bg.ellipse(0,0,r*1.48,r*.32,0,0,Math.PI);bg.stroke();bg.restore();
- bg.strokeStyle='#afc7a52e';bg.setLineDash([3,9]);bg.beginPath();bg.moveTo(W*.21,H*.78);bg.bezierCurveTo(W*.28,H*.56,W*.68,H*.86,W*.82,H*.57);bg.stroke();bg.setLineDash([]);
- for(let n=0;n<4;n++){const x=W*(.56+n*.08),y=H*(.78-n*.045);bg.strokeStyle='#b6cda64d';bg.beginPath();bg.arc(x,y,2.5,0,Math.PI*2);bg.stroke();}
- if(mobile){bg.fillStyle='#14292b65';bg.fillRect(0,0,W,H);}
+ const wash=bg.createLinearGradient(0,0,W,H);wash.addColorStop(0,'#edf2e9');wash.addColorStop(.55,'#e8efe6');wash.addColorStop(1,'#e2ece5');bg.fillStyle=wash;bg.fillRect(0,0,W,H);
+ const world=$('universe').getBoundingClientRect(),coach=$('code-coach').getBoundingClientRect(),cockpit=$('cockpit').getBoundingClientRect();
+ const top=Math.max(140,coach.bottom-world.top+18),bottom=Math.min(H-60,cockpit.top-world.top-18);
+ const r=Math.min(76,W*.072,Math.max(0,bottom-top)*.25),px=W*.87,py=(top+bottom)/2;
+ if(r>10){
+  bg.save();bg.translate(px,py);bg.rotate(-.32);bg.strokeStyle='#b8c9b6';bg.lineWidth=1;bg.beginPath();bg.ellipse(0,0,r*1.48,r*.3,0,0,Math.PI*2);bg.stroke();bg.restore();
+  bg.save();bg.beginPath();bg.arc(px,py,r,0,Math.PI*2);bg.clip();bg.fillStyle='#e2d9c0';bg.fillRect(px-r,py-r,r*2,r*2);
+  bg.fillStyle='#d8cfb7';bg.beginPath();bg.ellipse(px+r*.72,py+r*.1,r*.58,r*1.14,-.2,0,Math.PI*2);bg.fill();
+  bg.strokeStyle='#c9bea2';bg.lineWidth=1;for(const offset of [-.3,.26]){bg.beginPath();bg.moveTo(px-r,py+r*offset);bg.bezierCurveTo(px-r*.2,py+r*(offset+.15),px+r*.4,py+r*(offset-.13),px+r,py+r*offset);bg.stroke();}bg.restore();
+ }
+ if(bottom>top){
+  const y=top+(bottom-top)*.8;bg.strokeStyle='#b7cdb9';bg.lineWidth=1;bg.setLineDash([2,10]);bg.beginPath();bg.moveTo(W*.12,y);bg.bezierCurveTo(W*.3,y-28,W*.58,y+26,W*.78,y-14);bg.stroke();bg.setLineDash([]);
+  for(let n=0;n<3;n++){bg.fillStyle='#a5bda1';bg.beginPath();bg.arc(W*(.17+n*.16),y+(n===1?-6:3),2,0,Math.PI*2);bg.fill();}
+ }
 }
 function shipX(){return state.phase==='welcome'?(homePlane.position?.x??W*.76):W*.5;}
 function shipY(){return state.phase==='welcome'?(homePlane.position?.y??H*.79):shipAnchor;}
@@ -409,14 +419,17 @@ function frame(now){
  const dt=Math.min((now-last)/1000,.05);last=now;clock+=dt;
  if($('universe').hidden||state.phase==='welcome'){requestAnimationFrame(frame);return;}
  ctx.clearRect(0,0,W,H);ctx.drawImage(back,0,0,back.width,back.height,0,0,W,H);
- for(const s of stars){ctx.globalAlpha=.28+(reduced.matches?.2:(Math.sin(clock*.65+s.p)+1)*.22);ctx.fillStyle='#e7e2c4';ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);ctx.fill();}ctx.globalAlpha=1;
+ for(const s of stars){ctx.globalAlpha=reduced.matches?.22:.15+(Math.sin(clock*.45+s.p)+1)*.06;ctx.fillStyle='#789b80';ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);ctx.fill();}ctx.globalAlpha=1;
 
  drawShip(clock);
- for(const e of effects){e.life-=dt;if(e.kind==='beam'){ctx.strokeStyle='#c8e8ae';ctx.lineWidth=2;ctx.globalAlpha=Math.max(0,e.life/e.max);ctx.beginPath();ctx.moveTo(e.x-6,e.y);ctx.lineTo(e.tx,e.ty+25);ctx.moveTo(e.x+6,e.y);ctx.lineTo(e.tx,e.ty+25);ctx.stroke();}else{e.x+=e.vx*dt;e.y+=e.vy*dt;ctx.globalAlpha=Math.max(0,e.life/e.max);ctx.fillStyle=e.vx>0?'#e9b275':'#c8e8ae';ctx.fillRect(e.x,e.y,2.5,2.5);}}ctx.globalAlpha=1;effects=effects.filter(e=>e.life>0);
- if(beacon>0){beacon=Math.max(0,beacon-dt*.2);ctx.strokeStyle='#c8e8ae';ctx.globalAlpha=beacon*.6;ctx.lineWidth=2;ctx.beginPath();ctx.arc(W*.78,H*.3,15+(1-beacon)*80,0,Math.PI*2);ctx.stroke();ctx.globalAlpha=1;}
+ for(const e of effects){e.life-=dt;if(e.kind==='beam'){ctx.strokeStyle='#547b61';ctx.lineWidth=2;ctx.globalAlpha=Math.max(0,e.life/e.max);ctx.beginPath();ctx.moveTo(e.x-6,e.y);ctx.lineTo(e.tx,e.ty+25);ctx.moveTo(e.x+6,e.y);ctx.lineTo(e.tx,e.ty+25);ctx.stroke();}else{e.x+=e.vx*dt;e.y+=e.vy*dt;ctx.globalAlpha=Math.max(0,e.life/e.max);ctx.fillStyle=e.vx>0?'#b4894b':'#6a8f66';ctx.fillRect(e.x,e.y,2.5,2.5);}}ctx.globalAlpha=1;effects=effects.filter(e=>e.life>0);
+ if(beacon>0){beacon=Math.max(0,beacon-dt*.2);ctx.strokeStyle='#547b61';ctx.globalAlpha=beacon*.6;ctx.lineWidth=2;ctx.beginPath();ctx.arc(W*.78,H*.3,15+(1-beacon)*80,0,Math.PI*2);ctx.stroke();ctx.globalAlpha=1;}
  requestAnimationFrame(frame);
 }
-new ResizeObserver(resize).observe($('universe'));resize();requestAnimationFrame(frame);
+new ResizeObserver(resize).observe($('universe'));
+const flightPanels=new ResizeObserver(()=>{if(state.phase==='typing'){refreshGeometry();background();}});
+for(const id of ['code-coach','target-word','cockpit'])flightPanels.observe($(id));
+resize();requestAnimationFrame(frame);
 
 
 await changeLanguage(lang);
