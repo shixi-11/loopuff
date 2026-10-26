@@ -47,6 +47,7 @@ test('movement follows printed order, roadblock landings, capture and escape pri
   assert.equal(hopped.frames[1].police,4);assert.equal(hopped.frames[1].blocked,false);
   const caught=inspectChase('police',0,'3.log();3.log();1.log()');
   assert.equal(caught.outcome,'caught');assert.equal(caught.frames.length,2);
+  assert.equal(caught.frames.at(-1).police,caught.frames.at(-1).thief,'capture stops at the interception point');
   const escape=inspectChase('thief',0,code([3,3,3,3,2]));
   assert.ok(escape.ok);assert.equal(escape.frames.at(-1).police,4);
   const a=inspectChase('police',1,code([3,2,3]));

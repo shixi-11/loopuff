@@ -29,7 +29,9 @@ export function inspectChase(role, stage, source) {
     const current = role === 'police' ? police : thief;
     const target = Math.min(p.finish, current + Number(signal));
     const blocked = p.blocks.includes(target);
-    if (!blocked) { if (role === 'police') police = target; else thief = target; }
+    // Capture ends the movement at the interception point, rather than leaving
+    // the officer beyond the person they have already caught.
+    if (!blocked) { if (role === 'police') police = Math.min(target,thief); else thief = target; }
     // The controlled actor moves first. The rival then advances one space,
     // except when capture or escape has already ended this turn.
     if (police >= thief) outcome = 'caught';
