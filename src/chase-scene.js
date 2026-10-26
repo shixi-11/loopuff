@@ -14,12 +14,12 @@ function loadAssets(){
   if(assetPromise)return assetPromise;
   const controller=new AbortController(),images=[];let timer;
   const pending=Promise.all([
-    fetch(new URL('../assets/chase-sprites.json',import.meta.url),{signal:controller.signal}).then(r=>{if(!r.ok)throw Error('atlas');return r.json();}),
+    fetch(new URL('../assets/chase-sprites.json',import.meta.url),{signal:controller.signal,priority:'high'}).then(r=>{if(!r.ok)throw Error('atlas');return r.json();}),
     ...Object.values(assets).map(file=>new Promise((resolve,reject)=>{
-      const img=new Image();images.push(img);img.onload=()=>resolve(img);img.onerror=()=>reject(Error(file));img.src=new URL(`../assets/${file}`,import.meta.url).href;
+      const img=new Image();images.push(img);img.fetchPriority='high';img.decoding='async';img.onload=()=>resolve(img);img.onerror=()=>reject(Error(file));img.src=new URL(`../assets/${file}`,import.meta.url).href;
     }))
   ]).then(([atlas,police,thief,props,street])=>validateChaseArt({atlas,police,thief,props,street}));
-  const timeout=new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('Chase assets timed out')),20000);});
+  const timeout=new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('Chase assets timed out')),45000);});
   assetPromise=Promise.race([pending,timeout]).catch(error=>{
     controller.abort();for(const img of images){img.onload=img.onerror=null;img.src='';}assetPromise=null;throw error;
   }).finally(()=>clearTimeout(timer));
