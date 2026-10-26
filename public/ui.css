@@ -237,3 +237,5 @@ body[data-view=learning] .learning-page{background:radial-gradient(ellipse at 10
 .journey-heading>span,.journey-totals dt,.journey-next>a>span,.journey-next p{color:#adb9d2}
 .journey-totals>div+div,.journey-next{border-color:#344263}
 .journey-totals dd>span{color:#edc88f}
+
+.arcade-game .game-record{color:#adb9d2}
