@@ -87,7 +87,7 @@ export function mountChaseScene(root,{role,puzzle,reduced,text,onError=()=>{}}){
       const actorScale=targetHeight/art.atlas[kind].frames[0][3];
       const lift=kind===role?state.lift*targetHeight*.55:0;
       const captured=state.poses.police===7&&state.poses.thief===6;
-      const sx=x(state[kind])+(captured?(kind==='police'?-.22:.15)*targetHeight:0);
+      const sx=x(state[kind])+(captured?(kind==='police'?-.4:.4)*targetHeight:0);
       ctx.fillStyle='#090f1b66';ctx.beginPath();ctx.ellipse(sx,ground+3,targetHeight*.19*(1-lift/targetHeight*.4),4,0,0,Math.PI*2);ctx.fill();
       sprite(kind,state.poses[kind],sx,ground-lift,actorScale);
       ctx.fillStyle=kind===role?'#fff0bc':'#d6e4ff';ctx.font='600 12px system-ui,sans-serif';
