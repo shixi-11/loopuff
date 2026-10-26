@@ -451,6 +451,18 @@
       "One printed value caused one move. Changing the value changed the chase.",
       "The same total distance can follow different routes. Order and landing positions matter.",
       "You wrote and tested a complete plan. Try the other role: the starting position and goal change."
-    ]
+    ],
+    "sceneControls": "Chase scene. In practice, press 1, 2 or 3 to move.",
+    "loading": "Opening the street…",
+    "practice": "Try the route yourself",
+    "moveButton": "Move {n} spaces",
+    "practiceHint": "Start a practice run, then use 1, 2, 3 or the buttons. Each action moves your character first; your rival follows. Larger steps leap across the street.",
+    "copyPlan": "Put this route in the editor",
+    "retryArt": "Reload the street",
+    "rulesTitle": "Street rules",
+    "artError": "The street could not load. Try loading it again.",
+    "practiceDone": "Your practice route",
+    "practiceReview": "Practice lets you explore. Put the route in the editor and run its code to complete the mission.",
+    "practiceReady": "Choose a move: 1, 2 or 3. Watch your landing spots."
   }
 }

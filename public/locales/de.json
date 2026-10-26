@@ -417,7 +417,19 @@
     "noSave": "Dieser Browser konnte deinen Entwurf nicht speichern. Lass diese Seite geöffnet und kopiere deinen Code, bevor du sie verlässt.",
     "stages": ["Offene Straße", "Bezirk mit Straßensperren", "Deine eigene Route"],
     "hints": ["Versuche, eine größere Zahl auszugeben. Jeder .log() ist eine Bewegung, und dein Gegner ist danach einmal am Zug. Für eine längere Strecke füge weitere Signale hinzu.", "Prüfe, wo deine Rolle startet und wo jedes Signal landet. Verwende einen benannten Wert oder eine Addition erneut und vermeide blockierte Landepunkte.", "Beginne mit einem leeren Editor. Gib deiner Schrittweite einen Namen und kombiniere dann 1, 2 und 3, um eine Route zu planen. Wenn du dieselbe Bewegung wiederholst, triffst du möglicherweise auf eine Straßensperre."],
-    "learned": ["Ein ausgegebener Wert verursachte eine Bewegung. Eine Änderung des Werts änderte die Jagd.", "Dieselbe Gesamtstrecke kann über verschiedene Routen verlaufen. Reihenfolge und Landepositionen sind entscheidend.", "Du hast einen vollständigen Plan geschrieben und getestet. Probiere die andere Rolle: Startposition und Ziel ändern sich."]
+    "learned": ["Ein ausgegebener Wert verursachte eine Bewegung. Eine Änderung des Werts änderte die Jagd.", "Dieselbe Gesamtstrecke kann über verschiedene Routen verlaufen. Reihenfolge und Landepositionen sind entscheidend.", "Du hast einen vollständigen Plan geschrieben und getestet. Probiere die andere Rolle: Startposition und Ziel ändern sich."],
+    "sceneControls": "Verfolgungsszene. Drücke beim Üben 1, 2 oder 3, um dich zu bewegen.",
+    "loading": "Die Straße wird geöffnet…",
+    "practice": "Route selbst ausprobieren",
+    "moveButton": "{n} Felder bewegen",
+    "practiceHint": "Starte eine Übungsrunde und verwende dann 1, 2, 3 oder die Schaltflächen. Jede Aktion bewegt deine Figur zuerst; dein Gegner folgt. Größere Schritte springen über die Straße.",
+    "copyPlan": "Diese Route in den Editor übernehmen",
+    "retryArt": "Straße neu laden",
+    "rulesTitle": "Straßenregeln",
+    "artError": "Die Straße konnte nicht geladen werden. Versuche, sie erneut zu laden.",
+    "practiceDone": "Deine Übungsroute",
+    "practiceReview": "Beim Üben kannst du erkunden. Übernimm die Route in den Editor und führe den Code aus, um die Mission abzuschließen.",
+    "practiceReady": "Wähle eine Bewegung: 1, 2 oder 3. Achte auf deine Landepunkte."
   },
   "account": {
     "entry": "Anmelden / Registrieren",

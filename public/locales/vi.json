@@ -439,6 +439,18 @@
     "noSave": "Trình duyệt này không thể lưu bản nháp. Hãy giữ trang mở và sao chép mã trước khi rời đi.",
     "stages": ["Con phố rộng", "Khu phố có chướng ngại", "Tuyến đường của bạn"],
     "hints": ["Hãy thử in một số lớn hơn. Mỗi .log() là một bước đi, rồi đối thủ được đi một lượt. Muốn đi xa hơn, hãy thêm tín hiệu.", "Kiểm tra vị trí bắt đầu của vai mình và nơi mỗi tín hiệu đáp xuống. Dùng lại một giá trị đã đặt tên hoặc phép cộng, đồng thời tránh đáp vào chướng ngại.", "Bắt đầu với trình soạn thảo trống. Đặt tên cho độ dài bước, rồi kết hợp 1, 2 và 3 để lên kế hoạch. Lặp lại cùng một bước có thể khiến bạn gặp chướng ngại."],
-    "learned": ["Một giá trị được in ra tạo thành một bước đi. Đổi giá trị sẽ đổi cuộc truy đuổi.", "Cùng một tổng khoảng cách vẫn có thể đi theo các tuyến khác nhau. Thứ tự và điểm đáp đều quan trọng.", "Bạn đã viết và thử nghiệm một kế hoạch hoàn chỉnh. Hãy thử vai còn lại: vị trí bắt đầu và mục tiêu sẽ thay đổi."]
+    "learned": ["Một giá trị được in ra tạo thành một bước đi. Đổi giá trị sẽ đổi cuộc truy đuổi.", "Cùng một tổng khoảng cách vẫn có thể đi theo các tuyến khác nhau. Thứ tự và điểm đáp đều quan trọng.", "Bạn đã viết và thử nghiệm một kế hoạch hoàn chỉnh. Hãy thử vai còn lại: vị trí bắt đầu và mục tiêu sẽ thay đổi."],
+    "sceneControls": "Cảnh truy đuổi. Khi luyện tập, nhấn 1, 2 hoặc 3 để di chuyển.",
+    "loading": "Đang mở con phố…",
+    "practice": "Tự thử tuyến đường",
+    "moveButton": "Di chuyển {n} ô",
+    "practiceHint": "Bắt đầu lượt luyện tập, rồi dùng 1, 2, 3 hoặc các nút. Mỗi hành động đưa nhân vật của bạn đi trước, sau đó đối thủ đi theo. Bước lớn sẽ giúp bạn nhảy qua con phố.",
+    "copyPlan": "Đưa tuyến này vào trình soạn thảo",
+    "retryArt": "Tải lại con phố",
+    "rulesTitle": "Luật trên phố",
+    "artError": "Không thể tải con phố. Hãy thử tải lại.",
+    "practiceDone": "Tuyến đường luyện tập của bạn",
+    "practiceReview": "Luyện tập cho phép bạn khám phá. Đưa tuyến đường vào trình soạn thảo rồi chạy mã để hoàn thành nhiệm vụ.",
+    "practiceReady": "Chọn một bước: 1, 2 hoặc 3. Hãy quan sát các điểm đáp."
   }
 }

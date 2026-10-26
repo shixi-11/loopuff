@@ -417,7 +417,19 @@
     "noSave": "Este navegador no pudo guardar tu borrador. Mantén abierta esta página y copia tu código antes de salir.",
     "stages": ["Calle abierta", "Distrito de barreras", "Tu propia ruta"],
     "hints": ["Prueba a imprimir un número mayor. Cada .log() es un movimiento y tu rival tiene un turno después. Para una ruta más larga, añade más señales.", "Comprueba dónde empieza tu rol y dónde aterriza cada señal. Reutiliza un valor con nombre o una suma y evita los puntos de aterrizaje bloqueados.", "Empieza con el editor vacío. Ponle nombre al tamaño de tu paso y combina 1, 2 y 3 para planificar una ruta. Repetir el mismo movimiento puede llevarte a una barrera."],
-    "learned": ["Cada valor impreso provocó un movimiento. Cambiar el valor cambió la persecución.", "La misma distancia total puede seguir rutas distintas. El orden y las posiciones de aterrizaje importan.", "Has escrito y probado un plan completo. Prueba el otro rol: cambian la posición inicial y el objetivo."]
+    "learned": ["Cada valor impreso provocó un movimiento. Cambiar el valor cambió la persecución.", "La misma distancia total puede seguir rutas distintas. El orden y las posiciones de aterrizaje importan.", "Has escrito y probado un plan completo. Prueba el otro rol: cambian la posición inicial y el objetivo."],
+    "sceneControls": "Escena de persecución. Durante la práctica, pulsa 1, 2 o 3 para moverte.",
+    "loading": "Abriendo la calle…",
+    "practice": "Prueba la ruta tú mismo",
+    "moveButton": "Avanzar {n} espacios",
+    "practiceHint": "Inicia una ronda de práctica y usa 1, 2, 3 o los botones. Cada acción mueve primero a tu personaje; después avanza tu rival. Los pasos grandes saltan por la calle.",
+    "copyPlan": "Pasar esta ruta al editor",
+    "retryArt": "Volver a cargar la calle",
+    "rulesTitle": "Reglas de la calle",
+    "artError": "No se pudo cargar la calle. Intenta cargarla de nuevo.",
+    "practiceDone": "Tu ruta de práctica",
+    "practiceReview": "La práctica te permite explorar. Pasa la ruta al editor y ejecuta su código para completar la misión.",
+    "practiceReady": "Elige un movimiento: 1, 2 o 3. Observa dónde aterrizas."
   },
   "account": {
     "entry": "Entrar / Registrarse",
