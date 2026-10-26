@@ -1,6 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {rememberLesson,lessonWork,explorationProgress} from '../src/progress.js';
+import {rememberLesson,lessonWork,explorationProgress,readSession} from '../src/progress.js';
+test('invalid session roots cannot crash startup or erase a valid saved session',()=>{
+  for(const raw of ['null','[]','7','"text"','bad',''])assert.deepEqual(readSession(raw),{});
+  const saved={lang:'zh',state:{completed:['signal'],lessonWork:{signal:{draft:'12.log()'}}}};
+  assert.deepEqual(readSession(JSON.stringify(saved)),saved);
+});
 test('lesson snapshots keep independent drafts and invalidate changed assessments',()=>{
   const state={phase:'independent',draft:'(2 + 4).log()',assessedSource:'(2 + 4).log()',fragment:2,typed:'',score:400,errors:1,keys:50};
   rememberLesson(state,'leap');

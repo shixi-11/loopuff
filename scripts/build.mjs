@@ -14,7 +14,7 @@ const bundled=await build({entryPoints:[resolve(root,'src/app.js')],bundle:true,
 const script=bundled.outputFiles[0].text;
 const scriptName=`app-${createHash('sha256').update(script).digest('hex').slice(0,12)}.js`;
 await writeFile(resolve(out,'src',scriptName),script);
-const css=(await transform(await readFile(resolve(out,'style.css'),'utf8')+'\n'+await readFile(resolve(out,'vault.css'),'utf8')+'\n'+await readFile(resolve(out,'ui.css'),'utf8')+'\n'+await readFile(resolve(out,'home.css'),'utf8')+'\n'+await readFile(resolve(out,'flight.css'),'utf8'),{loader:'css',minify:true})).code;
+const css=(await transform(await readFile(resolve(out,'style.css'),'utf8')+'\n'+await readFile(resolve(out,'vault.css'),'utf8')+'\n'+await readFile(resolve(out,'ui.css'),'utf8')+'\n'+await readFile(resolve(out,'home.css'),'utf8')+'\n'+await readFile(resolve(out,'flight.css'),'utf8')+'\n'+await readFile(resolve(out,'chase.css'),'utf8'),{loader:'css',minify:true})).code;
 const cssName=`style-${createHash('sha256').update(css).digest('hex').slice(0,12)}.css`;
 await writeFile(resolve(out,cssName),css);
 const html=(await readFile(resolve(out,'index.html'),'utf8'))
@@ -26,11 +26,11 @@ const escape=text=>String(text).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','
 for(const [locale] of locales){
   const messages=JSON.parse(await readFile(resolve(root,`public/locales/${locale}.json`),'utf8'));
   const lang=locale==='zh'?'zh-CN':locale==='zh-Hant'?'zh-TW':locale;
-  const entries=['','levels/','guide/','account/','play/','play/vault/',...course.flatMap(lesson=>[`learn/${lesson.id}/`,`learn/${lesson.id}/result/`])];
+  const entries=['','levels/','guide/','account/','play/','play/vault/','play/chase/',...course.flatMap(lesson=>[`learn/${lesson.id}/`,`learn/${lesson.id}/result/`])];
   for(const entry of entries){
   const canonical=`https://shixilin.com/games/loopuff/${locale}/${entry}`;
   const lessonIndex=course.findIndex(lesson=>entry.startsWith(`learn/${lesson.id}/`));
-  const title=entry.endsWith('/result/')?messages.assessment.title:entry==='account/'?messages.account.entry:entry==='play/'?messages.vault.arcade:entry==='play/vault/'?messages.vault.title:entry==='levels/'?messages.ui.navCourse:entry==='guide/'?messages.ui.guide:lessonIndex>=0?messages.lessons[lessonIndex].title:messages.ui.tagline;
+  const title=entry==='play/chase/'?messages.chase.title:entry.endsWith('/result/')?messages.assessment.title:entry==='account/'?messages.account.entry:entry==='play/'?messages.vault.arcade:entry==='play/vault/'?messages.vault.title:entry==='levels/'?messages.ui.navCourse:entry==='guide/'?messages.ui.guide:lessonIndex>=0?messages.lessons[lessonIndex].title:messages.ui.tagline;
   const page=html.replace('<html lang="zh-CN">',`<html lang="${lang}" dir="${locale==='ar'?'rtl':'ltr'}">`)
     .replace('<base href="./">',`<base href="${'../'.repeat(1+entry.split('/').filter(Boolean).length)}">`)
     .replace('</head>',`<script id="initial-catalog" type="application/json" data-locale="${locale}">${JSON.stringify(messages).replace(/</g,'\\u003c')}</script></head>`)

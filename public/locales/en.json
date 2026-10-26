@@ -399,5 +399,58 @@
     "passwordHint": "Use at least 10 characters.",
     "invalidCredentials": "Check your email address and password.",
     "emailTaken": "This email is already registered. Try logging in."
+  },
+  "chase": {
+    "title": "Starport Chase",
+    "tag": "Two roles · One code-powered chase",
+    "intro": "Be the police or the thief. Read the street, write a plan and watch every signal change the chase.",
+    "choose": "Choose your role",
+    "police": "Police",
+    "thief": "Thief",
+    "policeGoal": "Catch the thief before the exit",
+    "thiefGoal": "Reach the exit before you are caught",
+    "rules": "You move first, then your rival moves one space. Land on a roadblock and you stay put, but your rival still moves. You can jump over a roadblock. The thief escapes at space 18; the police catch them by reaching or passing their position.",
+    "blocks": "Roadblocks",
+    "clue": "Look at the numbered positions. Plan the landing spots, not just the total distance.",
+    "signalRule": "Each output must be an integer from 1 to 3: the number of spaces you move. Print 1–8 signals in order. A chase ends as soon as someone is caught or escapes; later signals are not used.",
+    "editor": "Your movement plan",
+    "keyboard": "Write the code here, then run it. Typing speed does not change the chase.",
+    "run": "Run the plan",
+    "reset": "Reset this draft",
+    "ready": "The street is waiting for your plan.",
+    "changed": "Plan changed. Run it again to see what happens.",
+    "running": "Following your signals…",
+    "pause": "Pause",
+    "resume": "Resume",
+    "watch": "Watch again",
+    "won": "Mission complete",
+    "caught": "The thief was caught",
+    "escaped": "The thief escaped",
+    "unfinished": "Your signals ran out",
+    "fix": "Check your code",
+    "retry": "Trace each landing and try another plan. Retrying costs nothing.",
+    "step": "Signal {n}: move {move} spaces",
+    "blocked": "Roadblock — this move was stopped",
+    "next": "Next district",
+    "replay": "Start again",
+    "help": "Need a clue?",
+    "meaning": "let gives a value a name; + adds values; .log() prints a value. This game reads each printed number as a move. The same code can control different things in another game.",
+    "local": "Both roles’ drafts and completed districts stay in this browser. Login does not sync them. These missions are untimed.",
+    "noSave": "This browser could not save your draft. Keep this page open and copy your code before leaving.",
+    "stages": [
+      "Open street",
+      "Roadblock district",
+      "Your own route"
+    ],
+    "hints": [
+      "Try printing a larger number. Every .log() is one move, and your rival gets one turn after it. For a longer route, add more signals.",
+      "Check where your role starts and where every signal lands. Reuse a named value or an addition, and avoid blocked landing spots.",
+      "Start with an empty editor. Give your step size a name, then combine 1, 2 and 3 to plan a route. Repeating the same move may hit a roadblock."
+    ],
+    "learned": [
+      "One printed value caused one move. Changing the value changed the chase.",
+      "The same total distance can follow different routes. Order and landing positions matter.",
+      "You wrote and tested a complete plan. Try the other role: the starting position and goal change."
+    ]
   }
 }

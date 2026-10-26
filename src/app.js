@@ -5,7 +5,8 @@ import { mountJumpLab } from './jump.js';
 import { drawPlane } from './plane.js';
 import { mountHomePlane } from './home-plane.js';
 import { mountVault, loadVault } from './vault-ui.js';
-import { rememberLesson, lessonWork, explorationProgress } from './progress.js';
+import { mountChase, loadChase } from './chase-ui.js';
+import { rememberLesson, lessonWork, explorationProgress, readSession } from './progress.js';
 import { arcadeArt } from './arcade-art.js';
 import { createAccountClient, mountAccount } from './account.js';
 import { selectedLocale, languageUrl, parseRoute, routeUrl } from './routing.js';
@@ -17,18 +18,18 @@ function prose(text){
   let cursor=0,result='';for(const match of String(text).matchAll(pattern)){result+=escape(text.slice(cursor,match.index))+`<bdi dir="ltr">${escape(match[0])}</bdi>`;cursor=match.index+match[0].length;}return result+escape(text.slice(cursor));
 }
 const storageKey='loopuff-v1', reduced=matchMedia('(prefers-reduced-motion: reduce)');
-let saved={};try{saved=JSON.parse(localStorage.getItem(storageKey)||'{}');}catch{}
+let saved={};try{saved=readSession(localStorage.getItem(storageKey));}catch{}
 const validLocale=id=>locales.some(([key])=>key===id);
 let lang=selectedLocale(location.href,saved.lang,navigator.languages||[navigator.language]);
 if(!validLocale(lang))lang='en';
-let jumpLab=null,vaultGame=null,accountPage=null;
+let jumpLab=null,vaultGame=null,chaseGame=null,accountPage=null;
 const account=createAccountClient({url:location.href,onChange:()=>{if(messages){updateAccountEntry();accountPage?.refresh();}}});
 let messages, languageRequest=0, languageController, guideIndex=0, notice='', lastResult=null, feedbackState=null;
 const initialCatalog=document.getElementById('initial-catalog');
 const catalogs=new Map(initialCatalog?[[initialCatalog.dataset.locale,JSON.parse(initialCatalog.textContent)]]:[]);
 let state={phase:'welcome',lesson:0,fragment:0,typed:'',draft:'',assessedSource:null,grades:{},score:0,errors:0,keys:0,completed:[],...saved.state};
 if(!state.grades||typeof state.grades!=='object'||Array.isArray(state.grades))state.grades={};
-if(!['welcome','levels','brief','typing','predict','output','explain','remix','independent','result','complete','guide','pause','play','vault','account'].includes(state.phase)) state.phase='welcome';
+if(!['welcome','levels','brief','typing','predict','output','explain','remix','independent','result','complete','guide','pause','play','vault','chase','account'].includes(state.phase)) state.phase='welcome';
 if(!Number.isInteger(state.lesson)||state.lesson<0||state.lesson>=course.length)state.lesson=0;
 state.completed=[...new Set(Array.isArray(state.completed)?state.completed.filter(id=>course.some(l=>l.id===id)):[])];
 rememberLesson(state,course[state.lesson].id);
@@ -40,7 +41,7 @@ function readRoute(){
     const index=course.findIndex(item=>item.id===route.lessonId);
     if(previousLesson!==index){rememberLesson(state,course[previousLesson].id);state.lesson=index;Object.assign(state,lessonWork(state,course[index].id)||{phase:'brief',fragment:0,typed:'',draft:'',assessedSource:null,score:0,errors:0,keys:0});}
   }
-  if(route?.view==='play'||route?.view==='vault'||route?.view==='account')state.phase=route.view;
+  if(['play','vault','chase','account'].includes(route?.view))state.phase=route.view;
   else if(route?.view==='result')state.phase='result';
   else if(route?.view==='levels')state.phase='levels';
   else if(route?.view==='guide'){if(!['guide','welcome','pause'].includes(state.phase))state.resumePhase=state.phase;state.phase='guide';}
@@ -48,7 +49,7 @@ function readRoute(){
     if(previousLesson!==state.lesson){if(state.phase==='result')state.phase='independent';}
     else if(state.phase==='result')state.phase='independent';
     else if(state.phase==='pause')state.phase=state.previousPhase||'brief';
-    else if(['welcome','levels','guide','play','vault','account'].includes(state.phase))Object.assign(state,lessonWork(state,course[state.lesson].id)||{phase:'brief'});
+    else if(['welcome','levels','guide','play','vault','chase','account'].includes(state.phase))Object.assign(state,lessonWork(state,course[state.lesson].id)||{phase:'brief'});
   }else{
     if(!['welcome','pause','guide'].includes(state.phase))state.resumePhase=state.phase;
     state.phase='welcome';
@@ -103,7 +104,7 @@ function applyStatic(){
   $('pause-button').innerHTML=`<span aria-hidden="true">Ⅱ</span> <span class="pause-word">${escape(ui('pause'))}</span>`;$('pause-button').setAttribute('aria-label',ui('pause'));document.querySelector('.header-controls').setAttribute('aria-label',ui('navigation'));
   const navigation=$('page-navigation');
   navigation.hidden=false;navigation.setAttribute('aria-label',ui('navigation'));
-  navigation.innerHTML=`<a data-action="home" href="${routeUrl(location.href,lang,'home').pathname}" ${state.phase==='welcome'?'aria-current="page"':''}>${escape(ui('navHome'))}</a><a data-action="open-levels" href="${routeUrl(location.href,lang,'levels').pathname}" ${!['welcome','guide','play','vault','account'].includes(state.phase)?'aria-current="true"':''}>${escape(ui('navCourse'))}<span class="course-progress"><bdi dir="ltr">${state.completed.length}/${course.length}</bdi></span></a><a data-action="open-play" href="${routeUrl(location.href,lang,'play').pathname}" ${['play','vault'].includes(state.phase)?'aria-current="page"':''}>${escape(messages.vault.arcade)}</a><a data-action="open-guide" aria-label="${escape(ui('navGuide'))}" href="${routeUrl(location.href,lang,'guide').pathname}" ${state.phase==='guide'?'aria-current="page"':''}><span class="nav-label-full">${escape(ui('navGuide'))}</span><span class="nav-label-short">${escape(ui('navGuideShort'))}</span></a>`;
+  navigation.innerHTML=`<a data-action="home" href="${routeUrl(location.href,lang,'home').pathname}" ${state.phase==='welcome'?'aria-current="page"':''}>${escape(ui('navHome'))}</a><a data-action="open-levels" href="${routeUrl(location.href,lang,'levels').pathname}" ${!['welcome','guide','play','vault','chase','account'].includes(state.phase)?'aria-current="true"':''}>${escape(ui('navCourse'))}<span class="course-progress"><bdi dir="ltr">${state.completed.length}/${course.length}</bdi></span></a><a data-action="open-play" href="${routeUrl(location.href,lang,'play').pathname}" ${['play','vault','chase'].includes(state.phase)?'aria-current="page"':''}>${escape(messages.vault.arcade)}</a><a data-action="open-guide" aria-label="${escape(ui('navGuide'))}" href="${routeUrl(location.href,lang,'guide').pathname}" ${state.phase==='guide'?'aria-current="page"':''}><span class="nav-label-full">${escape(ui('navGuide'))}</span><span class="nav-label-short">${escape(ui('navGuideShort'))}</span></a>`;
   $('universe').setAttribute('aria-label',ui('map'));document.querySelector('.coordinate').textContent='LOOPUFF / 01';
   document.querySelector('.welcome .eyebrow').textContent=ui('pilot');
   document.querySelector('.welcome h1').innerHTML=ui('hero').split(/\\n|\n/).map(line=>{const accent=ui('heroAccent'),at=line.indexOf(accent);return at<0?escape(line):escape(line.slice(0,at))+`<span class="hero-accent">${escape(accent)}</span>`+escape(line.slice(at+accent.length));}).join('<br>');
@@ -124,7 +125,7 @@ function applyStatic(){
 }
 function syncRoute(){
   if(state.phase==='pause')return;
-  const view=state.phase==='welcome'?'home':['levels','guide','result','play','vault','account'].includes(state.phase)?state.phase:'lesson';
+  const view=state.phase==='welcome'?'home':['levels','guide','result','play','vault','chase','account'].includes(state.phase)?state.phase:'lesson';
   const url=routeUrl(location.href,lang,view,lesson().id);url.hash='';
   if(location.pathname!==url.pathname)history.pushState(null,'',url);
 }
@@ -142,6 +143,7 @@ function choices(items,action){return `<div class="choices">${items.map((text,in
 function render(){
   jumpLab?.dispose();jumpLab=null;
   vaultGame?.dispose();vaultGame=null;
+  chaseGame?.dispose();chaseGame=null;
   accountPage?.dispose();accountPage=null;
   applyStatic();const phase=state.phase, typing=phase==='typing';
   const page=!['welcome','typing','pause'].includes(phase);
@@ -155,7 +157,7 @@ function render(){
   if(phase!=='pause'){$('flow-dialog').close();$('dialog-content').textContent='';}
   if(typing)renderTyping();else if(phase!=='welcome')renderDialog();
   const view=parseRoute(location.pathname)?.view||'home';
-  document.title=`${ui('name')} · ${view==='account'?messages.account.entry:view==='vault'?messages.vault.title:view==='play'?messages.vault.arcade:view==='result'?messages.assessment.title:view==='levels'?ui('navCourse'):view==='guide'?ui('guide'):view==='lesson'?copy().title:ui('tagline')}`;
+  document.title=`${ui('name')} · ${view==='chase'?messages.chase.title:view==='account'?messages.account.entry:view==='vault'?messages.vault.title:view==='play'?messages.vault.arcade:view==='result'?messages.assessment.title:view==='levels'?ui('navCourse'):view==='guide'?ui('guide'):view==='lesson'?copy().title:ui('tagline')}`;
   document.querySelector('link[rel="canonical"]').href=routeUrl('https://shixilin.com/games/loopuff/',lang,view,lesson().id).href;
   let robots=document.querySelector('meta[name="robots"]');
   if(view==='result'){if(!robots){robots=document.createElement('meta');robots.name='robots';document.head.append(robots);}robots.content='noindex,follow';}else robots?.remove();
@@ -205,6 +207,11 @@ function journeyPanel(){
 }
 function renderDialog(){
   const c=copy(),phase=state.phase;let title='',body='';
+  if(phase==='chase'){
+    $('learning-page').dataset.stage=phase;
+    $('learning-content').innerHTML=`<nav class="page-trail" aria-label="${escape(ui('navigation'))}"><a data-action="home" href="${routeUrl(location.href,lang,'home').pathname}">${escape(ui('navHome'))}</a><span aria-hidden="true">/</span><a data-action="open-play" href="${routeUrl(location.href,lang,'play').pathname}">${escape(messages.vault.arcade)}</a><span aria-hidden="true">/</span><span aria-current="page">${escape(messages.chase.title)}</span></nav><div id="chase-game"></div>`;
+    chaseGame=mountChase($('chase-game'),{text:messages.chase,errors:messages.ui,reduced});return;
+  }
   if(phase==='account'){$('learning-content').innerHTML='<div id="account-page"></div>';accountPage=mountAccount($('account-page'),{client:account,text:messages.account,locale:lang,saveNote:ui('save'),homeUrl:routeUrl(location.href,lang,'home').pathname});return;}
   if(phase==='play'||phase==='vault'){
     $('learning-page').dataset.stage=phase;
@@ -212,6 +219,7 @@ function renderDialog(){
     const trail=`<nav class="page-trail" aria-label="${escape(ui('navigation'))}"><a data-action="home" href="${routeUrl(location.href,lang,'home').pathname}">${escape(ui('navHome'))}</a><span aria-hidden="true">/</span>${phase==='vault'?`<a data-action="open-play" href="${routeUrl(location.href,lang,'play').pathname}">${escape(v.arcade)}</a><span aria-hidden="true">/</span><span aria-current="page">${escape(v.title)}</span>`:`<span aria-current="page">${escape(v.arcade)}</span>`}</nav>`;
     $('learning-content').innerHTML=trail+(phase==='vault'?'<div id="vault-game"></div>':`<section class="arcade-page"><span class="eyebrow">${escape(ui('name'))}</span><h1 id="learning-title">${escape(v.arcadeTitle)}</h1><p class="levels-intro">${escape(v.arcadeIntro)}</p>${journeyPanel()}<div class="arcade-games"><a class="arcade-game vault-entry" data-action="open-vault" href="${routeUrl(location.href,lang,'vault').pathname}"><div class="arcade-vault-art" aria-hidden="true">${arcadeArt('vault')}</div><div><span class="eyebrow">${escape(v.puzzleTag)}</span><h2>${escape(v.title)}</h2><p>${escape(v.intro)}</p><span class="game-record">${escape(v.collection)} <bdi dir="ltr">${loadVault().stamps.length} / 3</bdi></span><strong>${escape((loadVault().stage||loadVault().submitted?ui('resume'):v.enter).replace(/\s*↗$/,''))} ↗</strong></div></a><a class="arcade-game jump-entry" href="${routeUrl(location.href,lang,'lesson',course[3].id).pathname}" data-lesson="3"><div class="arcade-jump-art" aria-hidden="true">${arcadeArt('jump')}</div><div><span class="eyebrow">${escape(v.jumpTag)}</span><h2>${escape(messages.jump.title)}</h2><p>${escape(messages.lessons[3].goal)}</p><span class="game-record">${escape(state.completed.includes(course[3].id)?ui('done'):lessonWork(state,course[3].id)?ui('resume'):ui('open'))}</span><strong>${escape((lessonWork(state,course[3].id)?ui('resume'):v.enter).replace(/\s*↗$/,''))} ↗</strong></div></a></div></section>`);
     if(phase==='vault')vaultGame=mountVault($('vault-game'),{text:v,errors:messages.ui,reduced});
+    else {const chase=loadChase();document.querySelector('.arcade-games').insertAdjacentHTML('beforeend',`<a class="arcade-game chase-entry" data-action="open-chase" href="${routeUrl(location.href,lang,'chase').pathname}"><div class="chase-card-art" aria-hidden="true"><span>◇ <b>●</b></span></div><div><span class="eyebrow">${escape(messages.chase.tag)}</span><h2>${escape(messages.chase.title)}</h2><p>${escape(messages.chase.intro)}</p><span class="game-record">${escape(messages.chase.police)} <bdi dir="ltr">${chase.work.police.cleared.length} / 3</bdi> · ${escape(messages.chase.thief)} <bdi dir="ltr">${chase.work.thief.cleared.length} / 3</bdi></span><strong>${escape(v.enter.replace(/\s*↗$/,''))} ↗</strong></div></a>`);}
     return;
   }
   if(phase==='levels'){
@@ -326,6 +334,7 @@ document.addEventListener('click',event=>{
   if(action==='open-account'){move('account');return;}
   if(action==='open-play'){move('play');return;}
   if(action==='open-vault'){move('vault');return;}
+  if(action==='open-chase'){move('chase');return;}
   if(action==='open-levels'){move('levels');return;}
   if(action==='open-guide'){if(!['welcome','guide','pause'].includes(state.phase))state.resumePhase=state.phase;guideIndex=0;move('guide');return;}
   if(action==='resume-course'){if(state.phase==='guide')enterLesson(state.lesson);else if(state.phase==='result')move('independent');return;}

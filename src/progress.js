@@ -1,4 +1,8 @@
 // Course work is local to each lesson. Rewards describe exploration, not grades.
+export function readSession(raw){
+  try{const value=JSON.parse(raw);return value&&typeof value==='object'&&!Array.isArray(value)?value:{};}
+  catch{return {};}
+}
 const phases=['brief','typing','predict','output','explain','remix','independent','result','complete'];
 export function rememberLesson(state,id,phase=state.phase==='pause'?state.previousPhase:state.phase){
   if(!phases.includes(phase))return;
