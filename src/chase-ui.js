@@ -2,7 +2,7 @@ import { chaseRoles, chasePuzzle, newChase, restoreChase, inspectChase, submitCh
 import { mountChaseScene } from './chase-scene.js';
 const key='loopuff-chase-v1';
 const html=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const asset=name=>new URL(`../assets/chase-${name}-idle.png`,import.meta.url).href;
+const asset=name=>new URL(`../assets/chase-${name}-idle.webp`,import.meta.url).href;
 const plan=moves=>moves.map(n=>`${n}.log()`).join(';\n');
 export function loadChase(){try{return restoreChase(JSON.parse(localStorage.getItem(key)));}catch{return newChase();}}
 export function mountChase(root,{text:t,errors,reduced}){

@@ -44,7 +44,7 @@ test('the complete scene draws registered assets and cancels paused or disposed 
   const saved=new Map(),frames=new Map(),draws=[],placements=[];let id=0,disconnected=false;
   function set(name,value){saved.set(name,Object.getOwnPropertyDescriptor(globalThis,name));Object.defineProperty(globalThis,name,{value,writable:true,configurable:true});}
   t.after(()=>{for(const [name,descriptor] of saved){if(descriptor)Object.defineProperty(globalThis,name,descriptor);else delete globalThis[name];}});
-  set('Image',class{set src(url){this.source=url;this.width=url.endsWith('chase-street.webp')?1672:1774;this.height=url.endsWith('chase-street.webp')?940:887;queueMicrotask(()=>this.onload?.());}});
+  set('Image',class{set src(url){this.source=url;this.width=url.includes('chase-street.webp')?1672:1774;this.height=url.includes('chase-street.webp')?940:887;queueMicrotask(()=>this.onload?.());}});
   let release;
   const catalog=new Promise(resolve=>{release=resolve;});
   set('fetch',async()=>catalog);
@@ -62,7 +62,7 @@ test('the complete scene draws registered assets and cancels paused or disposed 
   await Promise.resolve();assert.equal(frames.size,0,'pause during resource loading stays paused');
   scene.pause(false);assert.equal(frames.size,1);scene.reset();assert.equal(await waiting,false);
   assert.ok(draws.length>=7,'street, gate, barricades and both actors were drawn');
-  for(const file of ['chase-police.webp','chase-thief.webp','chase-props.webp','chase-street.webp'])assert.ok(draws.some(args=>args[0].source.endsWith(file)),file);
+  for(const file of ['chase-police.webp','chase-thief.webp','chase-props.webp','chase-street.webp'])assert.ok(draws.some(args=>args[0].source.split('?')[0].endsWith(file)),file);
   const cancelledBeforeStart=scene.play(from,to);scene.reset();assert.equal(await cancelledBeforeStart,false);assert.equal(frames.size,0);
   const pending=scene.play(from,to);await Promise.resolve();assert.equal(frames.size,1);
   scene.pause(true);assert.equal(frames.size,0);
@@ -94,7 +94,7 @@ test('a hanging asset request times out, exposes the error and can load successf
   const saved=new Map(),timers=new Map();let successful=false,id=0;
   const set=(name,value)=>{saved.set(name,Object.getOwnPropertyDescriptor(globalThis,name));Object.defineProperty(globalThis,name,{value,writable:true,configurable:true});};
   t.after(()=>{for(const [name,d] of saved){if(d)Object.defineProperty(globalThis,name,d);else delete globalThis[name];}});
-  set('Image',class{set src(url){this.width=url.endsWith('chase-street.webp')?1672:1774;this.height=url.endsWith('chase-street.webp')?940:887;if(successful&&url)queueMicrotask(()=>this.onload?.());}});
+  set('Image',class{set src(url){this.width=url.includes('chase-street.webp')?1672:1774;this.height=url.includes('chase-street.webp')?940:887;if(successful&&url)queueMicrotask(()=>this.onload?.());}});
   set('fetch',async()=>successful?{ok:true,json:async()=>atlas}:new Promise(()=>{}));
   set('devicePixelRatio',1);set('ResizeObserver',class{observe(){}disconnect(){}});
   set('setTimeout',(cb,ms)=>{assert.equal(ms,45000);timers.set(++id,cb);return id;});set('clearTimeout',n=>timers.delete(n));

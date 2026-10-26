@@ -1,6 +1,6 @@
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 const ease=t=>t*t*(3-2*t);
-const assets={police:'chase-police.webp',thief:'chase-thief.webp',props:'chase-props.webp',street:'chase-street.webp'};
+const assets={police:'chase-police.webp?v=39bc4f5601',thief:'chase-thief.webp?v=9403edfa76',props:'chase-props.webp?v=b6866b67ec',street:'chase-street.webp?v=195a74ab0d'};
 let assetPromise;
 export function validateChaseArt(art){
   for(const [kind,count] of [['police',8],['thief',8],['props',2]]){

@@ -6,12 +6,14 @@
 
 | 母版（本目录） | 原生尺寸 | 运行文件（public/assets） | 处理 |
 | --- | --- | --- | --- |
-| police.png | 1774×887 RGBA | chase-police.webp | 4列2行8姿态；无损WebP，解码RGBA逐字节相同 |
-| thief.png | 1774×887 RGBA | chase-thief.webp | 4列2行8姿态；无损WebP，解码RGBA逐字节相同 |
-| props.png | 1774×887 RGBA | chase-props.webp | 路障与出口；无损WebP，解码RGBA逐字节相同 |
-| street.png | 1672×940 RGB | chase-street.webp | 同尺寸WebP，quality 90 / method 6的运行压缩 |
+| police.png | 1774×887 RGBA | chase-police.webp | 4列2行8姿态；同尺寸WebP，quality 82 / alpha 100 |
+| thief.png | 1774×887 RGBA | chase-thief.webp | 4列2行8姿态；同尺寸WebP，quality 82 / alpha 100 |
+| props.png | 1774×887 RGBA | chase-props.webp | 路障与出口；同尺寸WebP，quality 82 / alpha 100 |
+| street.png | 1672×940 RGB | chase-street.webp | 同尺寸WebP，quality 82 / method 6的运行压缩 |
 
-本轮使用内置 image_gen。该入口只提供提示词，不能锁定 size / quality 参数；提示词请求最高原生质量与原生4K优先，实际尺寸以上表为准。没有升格、放大、拉伸或转4K JPG。透明PNG原件完整保留；`chase-*-idle.png` 是站立帧的原尺寸运行裁片，未缩放。
+本轮使用内置 image_gen。该入口只提供提示词，不能锁定 size / quality 参数；提示词请求最高原生质量与原生4K优先，实际尺寸以上表为准。没有升格、放大、拉伸或转4K JPG。透明PNG原件完整保留；`police-idle.png`、`thief-idle.png` 是站立帧的原尺寸裁片，运行时编码为同尺寸的 `chase-*-idle.webp`（quality 85 / alpha 100）。
+
+首次上线使用解码RGBA完全相同的无损WebP，当前浏览器网络下仍触发等待超时，因此运行版改为上述有损颜色编码；透明Alpha逐像素不变，不能再把运行版称为RGB无损。已在深色底和实际人物尺寸复核。完整游戏主体图片从约255万字节降到约93万字节，另有约4.6万字节的角色入口裁片；这是文件体积变化，不是固定加载时长承诺。人物、道具和场景URL带内容版本，避免继续读取旧大文件缓存。
 
 `chase-sprites.json` 登记每个姿态的实际原图矩形。生成图的排布并非精确等分网格，所以运行时消费登记矩形，不机械等分裁断手脚；同一角色所有姿态使用同一像素缩放比例，不把每个姿态强拉成同样宽高。角色脚底与背景原图70%高度处的行走线对齐。透明边缘、脸、手、脚与姿态必须同时在原图和真实游戏显示中检查。
 
