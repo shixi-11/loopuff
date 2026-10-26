@@ -20,13 +20,12 @@ export function drawExplorer(ctx,x,y,size,time=0,jumping=false){
 export function mountJumpLab(root,{target,text,reduced}){
   const canvas=root.querySelector('canvas'),ctx=canvas.getContext('2d'),status=root.querySelector('[role=status]');
   let width=800,height=320,frameId=0,disposed=false,outcome=null,start=null,lastProgress=0;
-  const image=new Image();image.src=new URL('../assets/world-flight-90.webp',import.meta.url).href;
   const fill=(key,number)=>text[key].replace('{n}',String(number));
   const position=n=>36+(width-72)*n/12;
   function platform(at,goal=false){
     const x=position(at),y=height*.72,w=Math.min(84,width*.14);
-    ctx.fillStyle='#284a3c';ctx.beginPath();ctx.moveTo(x-w/2,y);ctx.lineTo(x+w/2,y);ctx.lineTo(x+w*.28,y+32);ctx.lineTo(x-w*.16,y+53);ctx.lineTo(x-w*.44,y+27);ctx.closePath();ctx.fill();
-    const top=ctx.createLinearGradient(x-w/2,y-8,x+w/2,y+6);top.addColorStop(0,goal?'#e8cf87':'#9eb590');top.addColorStop(1,'#52785d');
+    ctx.fillStyle='#2a3858';ctx.beginPath();ctx.moveTo(x-w/2,y);ctx.lineTo(x+w/2,y);ctx.lineTo(x+w*.28,y+32);ctx.lineTo(x-w*.16,y+53);ctx.lineTo(x-w*.44,y+27);ctx.closePath();ctx.fill();
+    const top=ctx.createLinearGradient(x-w/2,y-8,x+w/2,y+6);top.addColorStop(0,goal?'#e8cf87':'#8da3c9');top.addColorStop(1,'#4b638d');
     ctx.fillStyle=top;ctx.beginPath();ctx.ellipse(x,y,w/2,10,0,0,Math.PI*2);ctx.fill();
     if(goal){ctx.strokeStyle='#edd68d';ctx.lineWidth=2;ctx.beginPath();ctx.ellipse(x,y-4,w*.28,5,0,0,Math.PI*2);ctx.stroke();}
   }
@@ -34,14 +33,13 @@ export function mountJumpLab(root,{target,text,reduced}){
     if(disposed)return;
     lastProgress=progress;
     ctx.clearRect(0,0,width,height);
-    if(image.complete&&image.naturalWidth){
-      const scale=Math.max(width/image.naturalWidth,height/image.naturalHeight);
-      ctx.drawImage(image,(width-image.naturalWidth*scale)/2,(height-image.naturalHeight*scale)/2,image.naturalWidth*scale,image.naturalHeight*scale);
-    }else{ctx.fillStyle='#153c38';ctx.fillRect(0,0,width,height);}
-    ctx.fillStyle='#0e302b88';ctx.fillRect(0,0,width,height);
+    const sky=ctx.createLinearGradient(0,0,width,height);sky.addColorStop(0,'#0c142b');sky.addColorStop(1,'#252747');
+    ctx.fillStyle=sky;ctx.fillRect(0,0,width,height);
+    ctx.fillStyle='#bed1f099';
+    for(let i=0;i<22;i++){const x=((i*137+43)%997)/997*width,y=((i*71+19)%211)/211*height;ctx.beginPath();ctx.arc(x,y,i%5===0?1.2:.65,0,Math.PI*2);ctx.fill();}
     const ground=height*.72;
-    ctx.strokeStyle='#b6d4a352';ctx.setLineDash([3,7]);ctx.beginPath();ctx.moveTo(position(0),ground+65);ctx.lineTo(position(12),ground+65);ctx.stroke();ctx.setLineDash([]);
-    ctx.textAlign='center';ctx.font='12px monospace';ctx.fillStyle='#d7e2c4';
+    ctx.strokeStyle='#a7beeb52';ctx.setLineDash([3,7]);ctx.beginPath();ctx.moveTo(position(0),ground+65);ctx.lineTo(position(12),ground+65);ctx.stroke();ctx.setLineDash([]);
+    ctx.textAlign='center';ctx.font='12px monospace';ctx.fillStyle='#d7e0f3';
     for(let n=0;n<=12;n++){const x=position(n);ctx.fillText(String(n),x,ground+84);}
     platform(0);platform(target,true);
     ctx.fillStyle='#f3d99f';ctx.font='600 15px monospace';ctx.fillText(String(target),position(target),ground-25);
@@ -66,7 +64,7 @@ export function mountJumpLab(root,{target,text,reduced}){
     width=root.clientWidth;height=width<500?290:340;
     const dpr=Math.min(devicePixelRatio||1,1.6);canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);canvas.style.height=height+'px';ctx.setTransform(dpr,0,0,dpr,0,0);draw(lastProgress);
   }
-  const observer=new ResizeObserver(resize);observer.observe(root);image.onload=()=>draw(lastProgress);
+  const observer=new ResizeObserver(resize);observer.observe(root);
   const detachPlane=whenPlaneReady(()=>draw(lastProgress));
   const onMotion=()=>{if(reduced.matches&&outcome){cancelAnimationFrame(frameId);draw(1);status.textContent=fill(outcome.direction,outcome.distance);}};
   reduced.addEventListener('change',onMotion);status.textContent=fill('ready',target);resize();
@@ -80,6 +78,6 @@ export function mountJumpLab(root,{target,text,reduced}){
       root.dataset.outcome=next.direction;root.dataset.distance=String(next.distance);return next;
     },
     error(){cancelAnimationFrame(frameId);outcome=null;draw();status.textContent=text.codeError;delete root.dataset.outcome;delete root.dataset.distance;},
-    dispose(){disposed=true;cancelAnimationFrame(frameId);observer.disconnect();reduced.removeEventListener('change',onMotion);image.onload=null;detachPlane();}
+    dispose(){disposed=true;cancelAnimationFrame(frameId);observer.disconnect();reduced.removeEventListener('change',onMotion);detachPlane();}
   };
 }

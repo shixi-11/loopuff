@@ -1,45 +1,45 @@
-/* Read first, then fly: the aircraft has its own bounded strip below the copy. */
-body[data-phase=welcome]{--home-ink:#23493f;--home-green:#54835e;--home-muted:#607365;background:#f2f3e9;color:var(--home-ink)}
-body[data-phase=welcome] .masthead{position:relative;background:#f7f6ec;border-bottom:1px solid #d2ddcb;backdrop-filter:none}
+/* Indigo night: read first, then fly: the aircraft has its own bounded strip below the copy. */
+body[data-phase=welcome]{--home-ink:#f2f1ed;--home-green:#a6dab6;--home-muted:#adb9d2;background:#0f1325;color:var(--home-ink)}
+body[data-phase=welcome] .masthead{position:relative;background:#0f1324;border-bottom:1px solid #344265;backdrop-filter:none}
 body[data-phase=welcome] .brand .mark-orbit{stroke:var(--home-ink)}
 body[data-phase=welcome] .brand .mark-plane{fill:var(--home-ink)}
-body[data-phase=welcome] .brand .mark-cockpit{fill:#f7f6ec}
-body[data-phase=welcome] .brand .mark-star{fill:#8ca880}
-body[data-phase=welcome] .masthead .page-navigation a{color:#496456}
-body[data-phase=welcome] .masthead .page-navigation a[aria-current]{color:#23493f;border-color:#72996a}
-body[data-phase=welcome] .course-progress{color:#365c45;border-color:#abc0a1;background:#e6eddb}
-body[data-phase=welcome] .language-control select{background-color:#f7f6ec;color:#23493f;border-color:#a9bdab}
-.universe[data-phase=welcome]{height:auto;max-height:none;min-height:calc(100svh - 138px);padding:clamp(32px,5svh,64px) 0 18px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#f2f3e9;color:#23493f;overflow:hidden}
+body[data-phase=welcome] .brand .mark-cockpit{fill:#0d142b}
+body[data-phase=welcome] .brand .mark-star{fill:#b0bbd1}
+body[data-phase=welcome] .masthead .page-navigation a{color:#bec7d9}
+body[data-phase=welcome] .masthead .page-navigation a[aria-current]{color:#c6cedd;border-color:#344265}
+body[data-phase=welcome] .course-progress{color:#c1cadb;border-color:#344265;background:#101527}
+body[data-phase=welcome] .language-control select{background-color:#0f1324;color:#c6cedd;border-color:#344265}
+.universe[data-phase=welcome]{height:auto;max-height:none;min-height:calc(100svh - 138px);padding:clamp(32px,5svh,64px) 0 18px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#0f1325;color:#c6cedd;overflow:hidden}
 .universe[data-phase=welcome]::after{display:none}
 .universe[data-phase=welcome] #space,.universe[data-phase=welcome] .scene-grain{display:none}
 body[data-phase=welcome] .universe[data-phase=welcome] .welcome{position:relative;inset:auto;transform:none;flex:none;margin:0 auto;width:min(1040px,calc(100% - 48px));text-align:center}
 body[data-phase=welcome] .welcome,body[data-phase=welcome] .welcome *{text-shadow:none}
-body[data-phase=welcome] .welcome .eyebrow{color:#607365;font-family:var(--sans);letter-spacing:1px;font-size:12px}
-body[data-phase=welcome] .welcome .eyebrow i{background:#86a874}
-body[data-phase=welcome] .welcome h1{font-size:clamp(42px,4.5vw,64px);font-weight:650;line-height:1.28;letter-spacing:-.035em;margin:18px 0;color:#23493f}
-body[data-phase=welcome] .welcome h1 .hero-accent{color:#54835e}
-body[data-phase=welcome] .welcome-copy{color:#607365;font-size:17px;line-height:1.85;max-width:620px;margin:0 auto}
+body[data-phase=welcome] .welcome .eyebrow{color:#bac4d7;font-family:var(--sans);letter-spacing:1px;font-size:12px}
+body[data-phase=welcome] .welcome .eyebrow i{background:#a6bcec}
+body[data-phase=welcome] .welcome h1{font-size:clamp(42px,4.5vw,64px);font-weight:650;line-height:1.28;letter-spacing:-.035em;margin:18px 0;color:var(--home-ink)}
+body[data-phase=welcome] .welcome h1 .hero-accent{color:var(--home-green)}
+body[data-phase=welcome] .welcome-copy{color:#bac4d7;font-size:17px;line-height:1.85;max-width:620px;margin:0 auto}
 body[data-phase=welcome] .welcome-actions{margin:24px 0 0;gap:24px;justify-content:center}
-body[data-phase=welcome] .welcome-actions .primary{min-width:190px;min-height:52px;background:#315c45;color:#f8f5e7;border:1px solid #315c45;border-radius:7px;padding:13px 24px;box-shadow:none}
-body[data-phase=welcome] .welcome-actions .primary:hover{background:#244c38;transform:translateY(-1px)}
-body[data-phase=welcome] .welcome-actions .text-button{color:#3b6249;font-size:15px;padding:12px 0;border:0;border-radius:0}
-body[data-phase=welcome] .welcome-actions .text-button:hover{color:#23493f;text-decoration:underline;text-underline-offset:5px}
-body[data-phase=welcome] .first-command{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;width:max-content;max-width:100%;gap:16px;margin:25px auto 0;padding:0;color:#526d5e;direction:ltr;background:none;border:0;border-radius:0;box-shadow:none}
-body[data-phase=welcome] .first-command>span{font-family:var(--sans);font-size:12px;color:#71816d;unicode-bidi:plaintext}
-body[data-phase=welcome] .first-command code{color:#315c45;font-size:20px}
-body[data-phase=welcome] .first-command svg{width:40px;stroke:#8fa77d}
-body[data-phase=welcome] .first-command strong{color:#947033;font-size:24px}
+body[data-phase=welcome] .welcome-actions .primary{min-width:190px;min-height:52px;background:#b3c6f6;color:#10182d;border:1px solid #b3c6f6;border-radius:7px;padding:13px 24px;box-shadow:none}
+body[data-phase=welcome] .welcome-actions .primary:hover{background:#c7d5fa;transform:translateY(-1px)}
+body[data-phase=welcome] .welcome-actions .text-button{color:#c0c9da;font-size:15px;padding:12px 0;border:0;border-radius:0}
+body[data-phase=welcome] .welcome-actions .text-button:hover{color:#c6cedd;text-decoration:underline;text-underline-offset:5px}
+body[data-phase=welcome] .first-command{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;width:max-content;max-width:100%;gap:16px;margin:25px auto 0;padding:0;color:#bcc6d8;direction:ltr;background:none;border:0;border-radius:0;box-shadow:none}
+body[data-phase=welcome] .first-command>span{font-family:var(--sans);font-size:12px;color:#b7c1d5;unicode-bidi:plaintext}
+body[data-phase=welcome] .first-command code{color:#c2cbdb;font-size:20px}
+body[data-phase=welcome] .first-command svg{width:40px;stroke:#344265}
+body[data-phase=welcome] .first-command strong{color:#e4d0af;font-size:24px}
 .home-flight-field{display:none}
 .universe[data-phase=welcome] .home-flight-field{display:block;position:relative;isolation:isolate;contain:layout paint;overflow:hidden;flex:none;width:100%;height:clamp(190px,24svh,280px);margin:18px auto 0}
 .home-flight-field .home-terrain{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none;z-index:0}
 .home-flight-field #home-plane-slot{position:absolute;left:50%;top:50%;width:132px;height:152px;transform:translate(-50%,-50%)}
 .home-plane>img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none;user-select:none}
 body[data-phase=welcome] .home-plane{width:132px;height:152px;filter:none}
-body[data-phase=welcome] .home-plane:focus-visible{background:linear-gradient(#54835e,#54835e) center bottom 4px/24px 2px no-repeat}
-.universe[data-phase=welcome] .welcome-foot{position:relative;inset:auto;flex:none;width:min(960px,88%);margin:0 auto;padding:6px 0;border-top:0;justify-content:center;color:#607365;text-shadow:none;font-size:11px;letter-spacing:.2px}
+body[data-phase=welcome] .home-plane:focus-visible{background:linear-gradient(#212950,#212950) center bottom 4px/24px 2px no-repeat}
+.universe[data-phase=welcome] .welcome-foot{position:relative;inset:auto;flex:none;width:min(960px,88%);margin:0 auto;padding:6px 0;border-top:0;justify-content:center;color:#bac4d7;text-shadow:none;font-size:11px;letter-spacing:.2px}
 .universe[data-phase=welcome] .welcome-foot>span:first-child{display:none}
-body[data-phase=welcome] .page-foot{position:static;margin:0 auto;padding:16px 0;width:min(1120px,88%);color:#607365;text-shadow:none;border-top:0}
-body[data-phase=welcome] .page-foot code{color:#42644c;text-shadow:none}
+body[data-phase=welcome] .page-foot{position:static;margin:0 auto;padding:16px 0;width:min(1120px,88%);color:#bac4d7;text-shadow:none;border-top:0}
+body[data-phase=welcome] .page-foot code{color:#bfc8da;text-shadow:none}
 @media(max-width:1000px){
  .universe[data-phase=welcome]{min-height:calc(100svh - 162px);padding-top:36px}
  body[data-phase=welcome] .welcome h1{font-size:clamp(40px,6.2vw,56px)}
@@ -61,3 +61,16 @@ body[data-phase=welcome] .page-foot code{color:#42644c;text-shadow:none}
  body[data-phase=welcome] .page-foot{display:flex;justify-content:center;font-size:11px;text-align:center}
  body[data-phase=welcome] .page-foot>span:first-child{display:none}
 }
+
+/* Sparse stars and distant blue-violet haze stay behind the reading area. */
+.universe[data-phase=welcome]{background:
+ radial-gradient(circle at 9% 19%,#bfcff5aa 0 1px,transparent 1.6px),
+ radial-gradient(circle at 23% 47%,#e8d6a97a 0 1px,transparent 1.7px),
+ radial-gradient(circle at 38% 12%,#a4bce766 0 1px,transparent 1.5px),
+ radial-gradient(circle at 64% 8%,#d3dfff88 0 1px,transparent 1.8px),
+ radial-gradient(circle at 84% 24%,#bbcdf6aa 0 1px,transparent 1.6px),
+ radial-gradient(circle at 91% 63%,#f2d6a199 0 1px,transparent 1.8px),
+ radial-gradient(circle at 6% 81%,#bbcdf677 0 1px,transparent 1.6px),
+ radial-gradient(circle at 74% 87%,#aebbf466 0 1px,transparent 1.6px),
+ radial-gradient(ellipse at 82% 68%,#36346755,transparent 48%),
+ radial-gradient(ellipse at 13% 44%,#1b3b6655,transparent 50%),#0d142b}
