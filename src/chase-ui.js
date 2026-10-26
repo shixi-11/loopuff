@@ -50,6 +50,8 @@ export function mountChase(root,{text:t,errors,reduced}){
   function trace(frame,index){el('[data-chase-trace]').textContent=t.step.replace('{n}',index+1).replace('{move}',frame.signal)+(frame.blocked?` · ${t.blocked}`:'');}
   async function play(current,start=0){
     const token=++generation;playing=true;paused=false;report=current;controls();
+    const beginning=start?current.frames[start-1]:initial();
+    scene.show(beginning);positions(beginning);
     action('next').hidden=true;action('watch').hidden=true;action('copy-plan').hidden=true;
     el('[data-chase-status]').textContent=t.running;el('[data-chase-detail]').textContent='';el('[data-chase-output]').textContent=current.logs.join(' → ');
     for(let i=start;i<current.frames.length;i++){
