@@ -185,7 +185,7 @@ body[data-view=game] .first-command{justify-content:center}
 @media(max-width:1000px){.flight-hud{padding-top:140px}.code-coach{top:255px}}
 
 /* Orbit and aircraft form one mark; the scene artwork stays unchanged. */
-.brand .orbit-mark{width:44px;height:44px;flex:none;overflow:visible}.brand .mark-orbit{fill:none;stroke:var(--cream);stroke-width:1.6}.brand .mark-plane{fill:var(--cream)}.brand .mark-cockpit{fill:var(--night)}.brand .mark-star{fill:var(--mint)}.hero-accent{color:var(--mint)}
+.brand .orbit-mark{width:44px;height:44px;flex:none;overflow:visible}.brand .mark-orbit{fill:none;stroke:#eff3fc;stroke-width:2.2}.brand .mark-plane{fill:#eff3fc}.brand .mark-cockpit{fill:var(--night)}.brand .mark-star{fill:#b3c6f6}.hero-accent{color:var(--mint)}
 @media(max-width:560px){.brand .orbit-mark{width:34px;height:34px}}
 
 /* Homepage decoration and supporting labels remain readable over the artwork. */

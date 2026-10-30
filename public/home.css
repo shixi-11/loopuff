@@ -1,5 +1,5 @@
 /* Indigo night: read first, then fly: the aircraft has its own bounded strip below the copy. */
-body[data-phase=welcome]{--home-ink:#f2f1ed;--home-green:#a6dab6;--home-muted:#adb9d2;background:#0f1325;color:var(--home-ink)}
+body[data-phase=welcome]{--home-ink:#eff3fc;--home-accent:#b3c6f6;--mint:#b3c6f6;--home-muted:#adb9d2;background:#0f1325;color:var(--home-ink)}
 body[data-phase=welcome] .masthead{position:relative;background:#0f1324;border-bottom:1px solid #344265;backdrop-filter:none}
 body[data-phase=welcome] .brand .mark-orbit{stroke:var(--home-ink)}
 body[data-phase=welcome] .brand .mark-plane{fill:var(--home-ink)}
@@ -17,7 +17,7 @@ body[data-phase=welcome] .welcome,body[data-phase=welcome] .welcome *{text-shado
 body[data-phase=welcome] .welcome .eyebrow{color:#bac4d7;font-family:var(--sans);letter-spacing:1px;font-size:12px}
 body[data-phase=welcome] .welcome .eyebrow i{background:#a6bcec}
 body[data-phase=welcome] .welcome h1{font-size:clamp(42px,4.5vw,64px);font-weight:650;line-height:1.28;letter-spacing:-.035em;margin:18px 0;color:var(--home-ink)}
-body[data-phase=welcome] .welcome h1 .hero-accent{color:var(--home-green)}
+body[data-phase=welcome] .welcome h1 .hero-accent{color:var(--home-accent)}
 body[data-phase=welcome] .welcome-copy{color:#bac4d7;font-size:17px;line-height:1.85;max-width:620px;margin:0 auto}
 body[data-phase=welcome] .welcome-actions{margin:24px 0 0;gap:24px;justify-content:center}
 body[data-phase=welcome] .welcome-actions .primary{min-width:190px;min-height:52px;background:#b3c6f6;color:#10182d;border:1px solid #b3c6f6;border-radius:7px;padding:13px 24px;box-shadow:none}
@@ -28,7 +28,7 @@ body[data-phase=welcome] .first-command{position:relative;display:flex;flex-wrap
 body[data-phase=welcome] .first-command>span{font-family:var(--sans);font-size:12px;color:#b7c1d5;unicode-bidi:plaintext}
 body[data-phase=welcome] .first-command code{color:#c2cbdb;font-size:20px}
 body[data-phase=welcome] .first-command svg{width:40px;stroke:#344265}
-body[data-phase=welcome] .first-command strong{color:#e4d0af;font-size:24px}
+body[data-phase=welcome] .first-command strong{color:#b3c6f6;font-size:24px}
 .home-flight-field{display:none}
 .universe[data-phase=welcome] .home-flight-field{display:block;position:relative;isolation:isolate;contain:layout paint;overflow:hidden;flex:none;width:100%;height:clamp(190px,24svh,280px);margin:18px auto 0}
 .home-flight-field .home-terrain{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none;z-index:0}
@@ -65,11 +65,11 @@ body[data-phase=welcome] .page-foot code{color:#bfc8da;text-shadow:none}
 /* Sparse stars and distant blue-violet haze stay behind the reading area. */
 .universe[data-phase=welcome]{background:
  radial-gradient(circle at 9% 19%,#bfcff5aa 0 1px,transparent 1.6px),
- radial-gradient(circle at 23% 47%,#e8d6a97a 0 1px,transparent 1.7px),
+ radial-gradient(circle at 23% 47%,#aebff47a 0 1px,transparent 1.7px),
  radial-gradient(circle at 38% 12%,#a4bce766 0 1px,transparent 1.5px),
  radial-gradient(circle at 64% 8%,#d3dfff88 0 1px,transparent 1.8px),
  radial-gradient(circle at 84% 24%,#bbcdf6aa 0 1px,transparent 1.6px),
- radial-gradient(circle at 91% 63%,#f2d6a199 0 1px,transparent 1.8px),
+ radial-gradient(circle at 91% 63%,#c0ccf299 0 1px,transparent 1.8px),
  radial-gradient(circle at 6% 81%,#bbcdf677 0 1px,transparent 1.6px),
  radial-gradient(circle at 74% 87%,#aebbf466 0 1px,transparent 1.6px),
  radial-gradient(ellipse at 82% 68%,#36346755,transparent 48%),
