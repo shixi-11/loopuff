@@ -2,7 +2,7 @@
 const aircraft=typeof Image==='undefined'?null:new Image();
 if(aircraft){
  aircraft.decoding='async';
- aircraft.src=new URL('../assets/aircraft-2d.png?v=b229b4da7676',import.meta.url).href;
+ aircraft.src=new URL('../assets/aircraft-2d.png?v=6fa6af1aeee1',import.meta.url).href;
 }
 export function whenPlaneReady(redraw){
  if(aircraft?.complete&&aircraft.naturalWidth){redraw();return ()=>{};}
