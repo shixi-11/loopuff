@@ -11,7 +11,7 @@ export function assess(source, goal) {
   const outputMax=requirements.length?50:80;
   const matched=goal.logs.filter((value,index)=>value===result.logs[index]).length;
   const checks=[{id:'execution',points:20,max:20,status:'pass'},
-    {id:'output',points:Math.floor(outputMax*matched/Math.max(goal.logs.length,result.logs.length,1)),
+    {id:'output',points:outputCorrect?outputMax:Math.floor(outputMax*matched/Math.max(goal.logs.length,result.logs.length,1)),
       max:outputMax,status:outputCorrect?'pass':'fail',expected:goal.logs,actual:result.logs}];
   if(requirements.length)checks.push({id:'concepts',points:Math.floor(30*requirements.filter(item=>item.passed).length/requirements.length),
     max:30,status:conceptsCorrect?'pass':'fail',requirements});

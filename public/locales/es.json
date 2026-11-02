@@ -932,5 +932,71 @@
     "passwordHint": "Usa al menos 10 caracteres.",
     "invalidCredentials": "Revisa tu correo y contraseña.",
     "emailTaken": "Este correo ya está registrado. Inicia sesión."
+  },
+  "dispatch": {
+    "title": "Despacho del puerto estelar",
+    "tag": "Un programa · Carga cambiante",
+    "intro": "Escribe un programa que gestione cada lote de entrega. Observa lo que envía, compara los resultados y ajusta tu plan.",
+    "entry": "Dirige la carga con condiciones, bucles, funciones y mensajes que cooperan. Cada ronda nueva trae nuevos datos de despacho.",
+    "editor": "Tu programa de despacho",
+    "inputs": "Entradas de este lote",
+    "inputNote": "La estación proporciona estas entradas.",
+    "run": "Ejecutar todos los lotes",
+    "batch": "Lote de entrega",
+    "preview": "Vista previa de la entrega",
+    "previewNote": "Elige un lote para revisar sus entradas, salidas y entrega. El mismo programa debe funcionar con todos los lotes.",
+    "expected": "Señales necesarias",
+    "actual": "Tus señales",
+    "pending": "Esperando tu programa",
+    "success": "Todos los lotes llegaron a su destino.",
+    "retry": "Algunos lotes todavía necesitan atención.",
+    "changed": "El programa cambió. Vuelve a ejecutarlo para actualizar los resultados de entrega.",
+    "summary": "{passed} de {total} lotes entregados",
+    "passed": "Entregado",
+    "failed": "Necesita ajustes",
+    "noOutput": "Sin señales",
+    "rules": "Requisitos del programa",
+    "details": "Revisar todos los lotes",
+    "code": "Código ejecutado",
+    "names": "Valores en esta señal",
+    "help": "Mostrar una pista",
+    "learn": "Repasar la lección",
+    "reset": "Restaurar el código inicial de esta misión",
+    "newRound": "Nueva ronda de despacho",
+    "newRoundNote": "Actualiza los datos de despacho y borra las entregas de esta ronda. Tu código y las insignias conseguidas se conservan.",
+    "rounds": "Rondas completadas",
+    "badges": "Insignias de despacho",
+    "local": "El código y los registros de despacho se quedan en este navegador. Iniciar sesión no los sincroniza. No hay límite de tiempo.",
+    "noSave": "Este navegador no pudo guardar tu código. Mantén la página abierta y cópialo antes de salir.",
+    "replay": "Repetir este lote",
+    "origin": "Estación de carga",
+    "dock": "Muelle",
+    "idle": "Revisa las entradas y luego ejecuta tu programa.",
+    "missions": [
+      {
+        "title": "Elige un muelle",
+        "brief": "Envía la señal 1 cuando cargo sea menor que threshold; si no, envía la señal 2. Cada lote necesita exactamente una señal.",
+        "hint": "Compara cargo con threshold dentro de if. Revisa el lote en el que cargo es igual a threshold, además de los lotes justo por encima y por debajo.",
+        "learned": "Tu condición dirige cargas distintas sin cambiar el programa."
+      },
+      {
+        "title": "Sigue el manifiesto",
+        "brief": "Usa for para leer docks en orden. Suma offset a cada número de muelle y muestra el nuevo destino. Un manifiesto vacío no necesita señales.",
+        "hint": "Usa el elemento actual del bucle en la suma. Los números de muelle repetidos siguen siendo entregas distintas.",
+        "learned": "Tu bucle procesa en orden manifiestos vacíos, cortos y con repeticiones."
+      },
+      {
+        "title": "Calcula el combustible",
+        "brief": "Define fuel(cargo, reserve) y devuelve la suma de sus dos parámetros. La estación llama a tu función con distintas cargas y reservas, y luego muestra su valor de retorno. Tu código solo necesita la definición de la función.",
+        "hint": "Usa un return explícito. Puedes elegir los nombres de los parámetros, pero mantén el nombre de función fuel para que la estación pueda llamarla. Aquí no necesitas .log().",
+        "learned": "Una sola función reutilizable calcula el combustible para distintas cargas y reservas."
+      },
+      {
+        "title": "Combina los informes",
+        "brief": "La estación envía informes por west y east. Recíbelos juntos y combina los valores recibidos en una función sync. Si el total supera threshold, suma reserve. Muestra solo el total resultante.",
+        "hint": "Usa & para la recepción conjunta. Ambos valores recibidos deben llegar al resultado de tu función, y ese resultado debe llegar al cálculo que se muestra.",
+        "learned": "Ahora los mensajes, una función y una condición cooperan con distintos informes."
+      }
+    ]
   }
 }

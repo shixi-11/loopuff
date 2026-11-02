@@ -932,5 +932,71 @@
     "traceEmpty": "Chưa có tín hiệu nào được thực hiện nên cả hai nhân vật vẫn chưa di chuyển.",
     "traceBindings": "Tên và giá trị trước đầu ra này",
     "traceRival": "Sau đó đối thủ di chuyển một ô."
+  },
+  "dispatch": {
+    "title": "Điều phối Cảng sao",
+    "tag": "Một chương trình · Hàng hóa luôn thay đổi",
+    "intro": "Viết một chương trình xử lý mọi lô giao hàng. Xem chương trình gửi đi những gì, so sánh kết quả và điều chỉnh kế hoạch của bạn.",
+    "entry": "Định tuyến hàng hóa bằng điều kiện, vòng lặp, hàm và các tin nhắn phối hợp với nhau. Mỗi vòng mới mang đến dữ liệu điều phối mới.",
+    "editor": "Chương trình điều phối của bạn",
+    "inputs": "Dữ liệu vào của lô này",
+    "inputNote": "Trạm cung cấp các dữ liệu vào này.",
+    "run": "Chạy tất cả các lô",
+    "batch": "Lô giao hàng",
+    "preview": "Xem trước giao hàng",
+    "previewNote": "Chọn một lô để xem dữ liệu vào, dữ liệu ra và quá trình giao hàng. Cùng một chương trình phải chạy đúng với mọi lô.",
+    "expected": "Tín hiệu cần có",
+    "actual": "Tín hiệu của bạn",
+    "pending": "Đang chờ chương trình của bạn",
+    "success": "Mọi lô đều đã đến đích.",
+    "retry": "Vẫn còn một số lô cần xử lý.",
+    "changed": "Chương trình đã thay đổi. Hãy chạy lại để cập nhật kết quả giao hàng.",
+    "summary": "Đã giao {passed}/{total} lô",
+    "passed": "Đã giao",
+    "failed": "Cần điều chỉnh",
+    "noOutput": "Không có tín hiệu",
+    "rules": "Yêu cầu của chương trình",
+    "details": "Xem tất cả các lô",
+    "code": "Mã đã chạy",
+    "names": "Giá trị tại tín hiệu này",
+    "help": "Xem gợi ý",
+    "learn": "Ôn lại bài học",
+    "reset": "Khôi phục mã ban đầu của nhiệm vụ này",
+    "newRound": "Vòng điều phối mới",
+    "newRoundNote": "Làm mới dữ liệu điều phối và xóa các lượt giao hàng của vòng này. Mã và huy hiệu bạn đã thu thập vẫn được giữ lại.",
+    "rounds": "Số vòng đã hoàn thành",
+    "badges": "Huy hiệu điều phối",
+    "local": "Mã và hồ sơ điều phối chỉ được lưu trong trình duyệt này. Đăng nhập không đồng bộ chúng. Không có giới hạn thời gian.",
+    "noSave": "Trình duyệt này không lưu được mã của bạn. Hãy giữ trang mở và sao chép mã trước khi rời đi.",
+    "replay": "Phát lại lô này",
+    "origin": "Trạm hàng hóa",
+    "dock": "Bến",
+    "idle": "Xem dữ liệu vào, rồi chạy chương trình của bạn.",
+    "missions": [
+      {
+        "title": "Chọn bến",
+        "brief": "Gửi tín hiệu 1 khi cargo nhỏ hơn threshold; ngược lại, gửi tín hiệu 2. Mỗi lô cần đúng một tín hiệu.",
+        "hint": "So sánh cargo với threshold trong if. Kiểm tra cả lô có cargo bằng threshold lẫn các lô ở hai bên.",
+        "learned": "Điều kiện của bạn định tuyến các lượng hàng khác nhau mà không cần sửa chương trình."
+      },
+      {
+        "title": "Theo danh sách hàng",
+        "brief": "Dùng for để đọc docks theo thứ tự. Cộng offset vào từng số bến và hiển thị điểm đến mới. Danh sách hàng trống thì không cần tín hiệu nào.",
+        "hint": "Dùng phần tử hiện tại của vòng lặp trong phép cộng. Số bến lặp lại vẫn là những lượt giao hàng riêng biệt.",
+        "learned": "Vòng lặp của bạn xử lý theo thứ tự các danh sách hàng trống, ngắn và có số lặp lại."
+      },
+      {
+        "title": "Tính nhiên liệu",
+        "brief": "Định nghĩa fuel(cargo, reserve) và trả về tổng hai tham số của nó. Trạm sẽ gọi hàm của bạn với các lượng hàng và lượng dự trữ khác nhau, rồi hiển thị giá trị trả về. Mã của bạn chỉ cần phần định nghĩa hàm.",
+        "hint": "Dùng return một cách rõ ràng. Bạn tự đặt tên tham số, nhưng hãy giữ tên hàm là fuel để trạm có thể gọi. Ở đây không cần .log().",
+        "learned": "Một hàm dùng lại được tính nhiên liệu cho các lượng hàng và lượng dự trữ khác nhau."
+      },
+      {
+        "title": "Gộp các báo cáo",
+        "brief": "Trạm gửi báo cáo qua west và east. Nhận cả hai cùng lúc và gộp các giá trị nhận được trong hàm sync. Nếu tổng vượt quá threshold, cộng thêm reserve. Chỉ hiển thị tổng cuối cùng.",
+        "hint": "Dùng & để nhận đồng thời. Cả hai giá trị nhận được phải đi vào kết quả của hàm, và kết quả đó phải đi vào phép tính được hiển thị.",
+        "learned": "Giờ đây tin nhắn, hàm và điều kiện phối hợp với nhau qua nhiều báo cáo khác nhau."
+      }
+    ]
   }
 }

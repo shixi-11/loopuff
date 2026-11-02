@@ -932,5 +932,71 @@
     "passwordHint": "Verwende mindestens 10 Zeichen.",
     "invalidCredentials": "Prüfe deine E-Mail-Adresse und dein Passwort.",
     "emailTaken": "Diese E-Mail ist bereits registriert. Melde dich an."
+  },
+  "dispatch": {
+    "title": "Raumhafen-Disposition",
+    "tag": "Ein Programm · Wechselnde Fracht",
+    "intro": "Schreibe ein Programm, das jede Lieferung bearbeitet. Beobachte, was es sendet, vergleiche die Ergebnisse und passe deinen Plan an.",
+    "entry": "Leite Fracht mit Bedingungen, Schleifen, Funktionen und zusammenarbeitenden Nachrichten. Neue Runden bringen neue Dispositionsdaten.",
+    "editor": "Dein Dispositionsprogramm",
+    "inputs": "Eingaben für diese Lieferung",
+    "inputNote": "Diese Eingaben liefert die Station.",
+    "run": "Alle Lieferungen ausführen",
+    "batch": "Lieferung",
+    "preview": "Lieferungsvorschau",
+    "previewNote": "Wähle eine Lieferung, um ihre Eingaben, Ausgaben und Zustellung zu prüfen. Dasselbe Programm muss für alle Lieferungen funktionieren.",
+    "expected": "Benötigte Signale",
+    "actual": "Deine Signale",
+    "pending": "Wartet auf dein Programm",
+    "success": "Jede Lieferung hat ihr Ziel erreicht.",
+    "retry": "Einige Lieferungen brauchen noch Aufmerksamkeit.",
+    "changed": "Programm geändert. Führe es erneut aus, um die Lieferergebnisse zu aktualisieren.",
+    "summary": "{passed} von {total} Lieferungen zugestellt",
+    "passed": "Zugestellt",
+    "failed": "Anpassung nötig",
+    "noOutput": "Keine Signale",
+    "rules": "Anforderungen an das Programm",
+    "details": "Alle Lieferungen prüfen",
+    "code": "Ausgeführter Code",
+    "names": "Werte bei diesem Signal",
+    "help": "Tipp anzeigen",
+    "learn": "Lektion wiederholen",
+    "reset": "Startcode dieser Mission wiederherstellen",
+    "newRound": "Neue Dispositionsrunde",
+    "newRoundNote": "Lädt neue Dispositionsdaten und löscht die Zustellungen dieser Runde. Dein Code und gesammelte Abzeichen bleiben erhalten.",
+    "rounds": "Abgeschlossene Runden",
+    "badges": "Dispositionsabzeichen",
+    "local": "Code und Dispositionsdaten bleiben in diesem Browser. Beim Anmelden werden sie nicht synchronisiert. Es gibt kein Zeitlimit.",
+    "noSave": "Dieser Browser konnte deinen Code nicht speichern. Lass die Seite geöffnet und kopiere den Code, bevor du sie verlässt.",
+    "replay": "Diese Lieferung erneut abspielen",
+    "origin": "Frachtstation",
+    "dock": "Dock",
+    "idle": "Prüfe die Eingaben und führe dann dein Programm aus.",
+    "missions": [
+      {
+        "title": "Ein Dock wählen",
+        "brief": "Sende Signal 1, wenn cargo kleiner als threshold ist; sonst sende Signal 2. Jede Lieferung braucht genau ein Signal.",
+        "hint": "Vergleiche cargo in if mit threshold. Prüfe die Lieferung, bei der cargo gleich threshold ist, und auch die Lieferungen knapp darunter und darüber.",
+        "learned": "Deine Bedingung leitet unterschiedliche Ladungen, ohne dass du das Programm ändern musst."
+      },
+      {
+        "title": "Der Frachtliste folgen",
+        "brief": "Lies docks mit for der Reihe nach. Addiere offset zu jeder Docknummer und zeige das neue Ziel an. Eine leere Frachtliste braucht keine Signale.",
+        "hint": "Verwende in der Addition das aktuelle Element der Schleife. Wiederholte Docknummern stehen trotzdem für getrennte Zustellungen.",
+        "learned": "Deine Schleife bearbeitet leere, kurze und wiederholte Frachtlisten der Reihe nach."
+      },
+      {
+        "title": "Treibstoff berechnen",
+        "brief": "Definiere fuel(cargo, reserve) und gib die Summe der beiden Parameter zurück. Die Station ruft deine Funktion mit verschiedenen Frachtmengen und Reserven auf und zeigt dann ihren Rückgabewert an. Dein Code braucht nur die Funktionsdefinition.",
+        "hint": "Verwende ein ausdrückliches return. Die Parameternamen darfst du selbst wählen, aber der Funktionsname muss fuel bleiben, damit die Station sie aufrufen kann. .log() brauchst du hier nicht.",
+        "learned": "Eine wiederverwendbare Funktion berechnet Treibstoff für verschiedene Frachtmengen und Reserven."
+      },
+      {
+        "title": "Berichte zusammenführen",
+        "brief": "Die Station sendet Berichte über west und east. Empfange beide gemeinsam und kombiniere ihre empfangenen Werte in einer sync-Funktion. Wenn die Summe threshold überschreitet, addiere reserve. Zeige nur die resultierende Summe an.",
+        "hint": "Verwende & für den gemeinsamen Empfang. Beide empfangenen Werte müssen in das Ergebnis deiner Funktion einfließen, und dieses Ergebnis muss in die angezeigte Berechnung gelangen.",
+        "learned": "Nachrichten, eine Funktion und eine Bedingung arbeiten jetzt über verschiedene Berichte hinweg zusammen."
+      }
+    ]
   }
 }

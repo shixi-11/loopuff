@@ -10,6 +10,8 @@ Read code, predict its result, change it, and solve new problems without a templ
 
 [The Vault Run](https://shixilin.com/games/loopuff/en/play/vault/) adds three connected puzzles. Use numeric output to release locks, try variables and send signals in order. Fresh clues, saved drafts and three collectible stamps support another run.
 
+[Starport Dispatch](https://shixilin.com/games/loopuff/en/play/dispatch/): Route cargo with conditions, loops, functions and cooperating messages. New rounds bring new dispatch data.
+
 ## Current code
 
 Thirteen missions cover programming foundations, Tolang conditions, loops, functions and replies, then messages and joint receives. Each mission includes prediction, explanation, modification and an independent task; the original four also retain their flight exercises. The course and interface support 11 languages. Programs run locally in a bounded teaching interpreter, not the full Tolang compiler or TVM. Independent tasks check actual output and the requested concepts that contribute to it; typing speed does not affect grades.

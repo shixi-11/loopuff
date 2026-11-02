@@ -944,5 +944,71 @@
     "traceEmpty": "No signals have moved either character yet.",
     "traceBindings": "Names before this output",
     "traceRival": "Your rival then moved one space."
+  },
+  "dispatch": {
+    "title": "Starport Dispatch",
+    "tag": "One program · Changing cargo",
+    "intro": "Write a program that handles every delivery batch. Watch what it sends, compare the results and adjust your plan.",
+    "entry": "Route cargo with conditions, loops, functions and cooperating messages. New rounds bring new dispatch data.",
+    "editor": "Your dispatch program",
+    "inputs": "Inputs for this batch",
+    "inputNote": "The station supplies these inputs.",
+    "run": "Run all batches",
+    "batch": "Delivery batch",
+    "preview": "Delivery preview",
+    "previewNote": "Choose a batch to inspect its inputs, outputs and delivery. The same program must work for all batches.",
+    "expected": "Required signals",
+    "actual": "Your signals",
+    "pending": "Waiting for your program",
+    "success": "Every batch reached its target.",
+    "retry": "Some batches still need attention.",
+    "changed": "Program changed. Run again to update the delivery results.",
+    "summary": "{passed} of {total} batches delivered",
+    "passed": "Delivered",
+    "failed": "Needs adjustment",
+    "noOutput": "No signals",
+    "rules": "Program requirements",
+    "details": "Inspect all batches",
+    "code": "Executed code",
+    "names": "Values at this signal",
+    "help": "Show a hint",
+    "learn": "Review the lesson",
+    "reset": "Restore this mission’s starting code",
+    "newRound": "New dispatch round",
+    "newRoundNote": "Refresh the dispatch data and clear this round’s deliveries. Your code and collected badges stay.",
+    "rounds": "Completed rounds",
+    "badges": "Dispatch badges",
+    "local": "Code and dispatch records stay in this browser. Signing in does not sync them. There is no timer.",
+    "noSave": "This browser could not save your code. Keep the page open and copy it before leaving.",
+    "replay": "Replay this batch",
+    "origin": "Cargo station",
+    "dock": "Dock",
+    "idle": "Inspect the inputs, then run your program.",
+    "missions": [
+      {
+        "title": "Choose a dock",
+        "brief": "Send signal 1 when cargo is below threshold; otherwise send signal 2. Each batch needs exactly one signal.",
+        "hint": "Compare cargo with threshold in if. Check the batch where cargo equals threshold as well as the batches on either side.",
+        "learned": "Your condition routes different loads without changing the program."
+      },
+      {
+        "title": "Follow the manifest",
+        "brief": "Use for to read docks in order. Add offset to each dock number and display the new destination. An empty manifest needs no signals.",
+        "hint": "Use the current loop item in the addition. Repeated dock numbers still represent separate deliveries.",
+        "learned": "Your loop handles empty, short and repeated manifests in order."
+      },
+      {
+        "title": "Calculate fuel",
+        "brief": "Define fuel(cargo, reserve) and return the sum of its two parameters. The station calls your function with different cargo loads and reserves, then displays its return value. Your code only needs the function definition.",
+        "hint": "Use an explicit return. Choose your own parameter names, but keep the function name fuel so the station can call it. You do not need .log() here.",
+        "learned": "One reusable function calculates fuel for different cargo loads and reserves."
+      },
+      {
+        "title": "Combine the reports",
+        "brief": "The station sends reports through west and east. Receive both together and combine their received values in a sync function. If the total exceeds threshold, add reserve. Display only the resulting total.",
+        "hint": "Use & for the joint receive. Both received values must reach your function result, and that result must reach the displayed calculation.",
+        "learned": "Messages, a function and a condition now cooperate across different reports."
+      }
+    ]
   }
 }
