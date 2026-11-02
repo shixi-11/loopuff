@@ -11,7 +11,7 @@ export function mountPursuitScene(root,{getState,text,roles,onError=()=>{}}){
   const a=state.actors[role],lift=pursuitJumpHeight(a)*targetHeight*.32;
   const pose=state.outcome==='caught'?(role==='police'?7:6):state.outcome==='escaped'&&role==='thief'?7:a.delayMs?6:a.jumpMs?5:state.status==='running'?1+Math.floor(a.travelled*2)%4:0;
   ctx.fillStyle='#070f1f77';ctx.beginPath();ctx.ellipse(x,ground+3,targetHeight*.17,5,0,0,Math.PI*2);ctx.fill();sprite(role,pose,x,ground-lift,targetHeight/art.atlas[role].frames[0][3],a.direction===-1);
-  if(label){ctx.fillStyle=role===state.role?'#f4d888':'#c7dbff';ctx.font=`600 ${width<600?12:14}px system-ui,sans-serif`;ctx.textAlign='center';ctx.shadowColor='#081120';ctx.shadowBlur=5;ctx.fillText(roles[role],x,Math.max(22,ground-targetHeight-lift-14));ctx.shadowBlur=0;}
+  if(label&&state.status!=='finished'){ctx.fillStyle=role===state.role?'#f4d888':'#c7dbff';ctx.font=`600 ${width<600?12:14}px system-ui,sans-serif`;ctx.textAlign='center';ctx.shadowColor='#081120';ctx.shadowBlur=5;ctx.fillText(roles[role],x,Math.max(22,ground-targetHeight-lift-14));ctx.shadowBlur=0;}
  }
  function draw(){
   if(disposed||!width)return;ctx.clearRect(0,0,width,height);if(!art)return;
