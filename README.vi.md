@@ -12,7 +12,7 @@ Học lập trình và Tolang qua trò chơi.
 
 ## Mã hiện có
 
-Chương đầu đã chơi được với bốn nhiệm vụ về giá trị, phép cộng và gắn tên, gồm dự đoán, giải thích, sửa đổi và tự viết chương trình. Giao diện và bài học hỗ trợ 11 ngôn ngữ. Trình thông dịch nhỏ chạy ngay trong trình duyệt, không cần máy chủ hay gói bên ngoài. Đây không phải toàn bộ trình biên dịch Tolang hay TVM; các chương tiếp theo đang phát triển.
+Mười ba nhiệm vụ bao quát kiến thức lập trình nền tảng, điều kiện, vòng lặp, hàm và phản hồi trong Tolang, sau đó đến thông điệp và cơ chế nhận kết hợp. Mỗi nhiệm vụ đều có phần dự đoán, giải thích, chỉnh sửa và một bài tập tự làm; bốn nhiệm vụ ban đầu vẫn giữ các bài luyện bay. Khóa học và giao diện hỗ trợ 11 ngôn ngữ. Chương trình chạy cục bộ trong một trình thông dịch phục vụ giảng dạy có giới hạn, không phải trình biên dịch Tolang đầy đủ hay TVM. Các bài tập tự làm kiểm tra đầu ra thực tế và việc vận dụng những khái niệm được yêu cầu để tạo ra đầu ra đó; tốc độ gõ không ảnh hưởng đến điểm số.
 
 Bài tự viết được chấm trên thang 100 điểm theo khả năng chạy, kết quả và yêu cầu của bài. Có thể sửa rồi nộp lại; tốc độ gõ hay việc giống mã mẫu không ảnh hưởng đến điểm.
 

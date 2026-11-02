@@ -49,7 +49,7 @@
     "hint": "Gợi ý nhỏ",
     "independent": "Bây giờ hãy tự viết",
     "codeLabel": "Chương trình của bạn",
-    "scope": "Trình thông dịch nhập môn hỗ trợ số, phép cộng, tên và hiển thị. Đây không phải toàn bộ trình biên dịch Tolang hay TVM.",
+    "scope": "Trình thông dịch dùng để học này hỗ trợ số nguyên trong phạm vi giới hạn, giá trị luận lý, danh sách, phép tính, tên, điều kiện, vòng lặp, hàm, thông điệp và nhận kết hợp. Đây không phải là trình biên dịch Tolang đầy đủ hay TVM.",
     "complete": "Bạn đã làm chương trình chạy đúng!",
     "score": "Điểm bay",
     "accuracy": "Độ chính xác khi gõ",
@@ -68,7 +68,7 @@
     "limit": "Chương trình vượt giới hạn của trình chạy nhập môn.",
     "predictionHint": "Tính lần lượt rồi nghĩ xem .log() hiển thị gì.",
     "close": "Đóng",
-    "chapterNote": "Chương 1 · 4 nhiệm vụ. Các chương tiếp theo đang được phát triển.",
+    "chapterNote": "13 nhiệm vụ · Nền tảng lập trình, Tolang và phối hợp",
     "footer": "Từ câu hỏi đầu tiên đến chương trình đầu tiên.",
     "launch": "Đọc hiểu rồi bắt đầu gõ ↗",
     "navigation": "Điều hướng chính",
@@ -77,7 +77,19 @@
     "navGuide": "Lập trình cơ bản",
     "navGuideShort": "Nhập môn",
     "mapShort": "Bản đồ",
-    "heroAccent": "hành tinh"
+    "heroAccent": "hành tinh",
+    "observeProgram": "Dự đoán và chạy",
+    "practiceInChase": "Thử ý tưởng trong Truy đuổi tại cảng sao",
+    "trackBeginner": "Nền tảng lập trình",
+    "trackTolang": "Thực hành Tolang",
+    "trackAdvanced": "Thông điệp và phối hợp",
+    "subset": "Cấu trúc này nằm ngoài phần ngôn ngữ mà trình chạy bài tập hỗ trợ. Hãy dùng các cấu trúc được giới thiệu trong bài học.",
+    "type": "Các giá trị này không phù hợp với phép toán. Điều kiện cần true hoặc false; phép toán số học cần số nguyên.",
+    "arity": "Lời gọi này truyền nhiều giá trị hơn số lượng hàm chấp nhận.",
+    "zeroDivision": "Số chia trong phép chia và phép lấy dư không thể bằng 0.",
+    "waiting": "Chương trình đang chờ phản hồi hoặc các thông điệp chưa đến.",
+    "bindingScope": "Không thể liên kết lại tên này ở đây. Hãy kiểm tra phạm vi của nhánh điều kiện hoặc phần tử vòng lặp.",
+    "replyUsed": "Hàm này đã phản hồi. Cùng một lần gọi không thể sử dụng kênh phản hồi của nó lần thứ hai."
   },
   "lessons": [
     {
@@ -229,6 +241,426 @@
           "Tính 2 + 3 rồi hiển thị kết quả."
         ]
       ]
+    },
+    {
+      "title": "Kiểm tra nhiên liệu",
+      "intro": "Phép so sánh đặt câu hỏi về hai giá trị. > cho ra true khi giá trị bên trái lớn hơn, và false trong các trường hợp còn lại.",
+      "goal": "Kiểm tra xem giá trị fuel có lớn hơn 4 không.",
+      "result": "6 lớn hơn 4, nên kết quả hiển thị là true.",
+      "question": "fuel > 4 cho ra gì?",
+      "remix": "Đổi giá trị fuel để phép so sánh hiển thị false.",
+      "remixHint": "Chọn một giá trị không lớn hơn 4.",
+      "independent": "Hiển thị true, rồi false bằng các phép so sánh cho ra hai kết quả đó.",
+      "independentHint": "Thử hai phép so sánh khác nhau, hoặc so sánh một giá trị đã đặt tên với hai giới hạn.",
+      "learned": "Bạn đã dùng phép so sánh để biến các giá trị thành kết quả có hoặc không.",
+      "answerHint": "Phép so sánh cho ra giá trị luận lý, không hiển thị lượng nhiên liệu.",
+      "answers": [
+        "Giá trị luận lý: true.",
+        "Lượng nhiên liệu: 6.",
+        "Số 4."
+      ],
+      "coach": [
+        [
+          "Đoạn mã",
+          "Đặt tên cho giá trị nhiên liệu để biểu thức tiếp theo dùng được.",
+          "Kiểm tra xem giá trị fuel có lớn hơn 4 không."
+        ],
+        [
+          "Đoạn mã",
+          "So sánh fuel với 4. Biểu thức cho ra true hoặc false.",
+          "Kiểm tra xem giá trị fuel có lớn hơn 4 không."
+        ],
+        [
+          "Đoạn mã",
+          "Hiển thị kết quả so sánh.",
+          "Kiểm tra xem giá trị fuel có lớn hơn 4 không."
+        ]
+      ]
+    },
+    {
+      "title": "Chọn tín hiệu khởi hành",
+      "intro": "if dùng một giá trị luận lý để chọn một nhánh. Nhánh còn lại không chạy. Ở đây, 1 và 2 là hai tín hiệu khởi hành.",
+      "goal": "Dùng kết quả kiểm tra nhiên liệu để chọn một tín hiệu.",
+      "result": "Điều kiện là true, nên chỉ nhánh then hiển thị 1.",
+      "question": "Vì sao chỉ có 1 được hiển thị?",
+      "remix": "Đổi giá trị fuel để nhánh else hiển thị 2.",
+      "remixHint": "Làm cho fuel > 4 có giá trị false.",
+      "independent": "Đặt tên cho một giá trị, so sánh nó trong điều kiện if và để nhánh được chọn chỉ hiển thị 2.",
+      "independentHint": "Bạn có thể đổi tên, phép so sánh, các giá trị và nội dung các nhánh. Hãy để điều kiện quyết định lệnh hiển thị nào chạy.",
+      "learned": "Bạn đã giúp chương trình chọn hành động dựa trên một điều kiện.",
+      "answerHint": "if chọn một nhánh, không chạy cả hai nhánh.",
+      "answers": [
+        "Điều kiện true chọn nhánh then.",
+        "Cả hai nhánh đều chạy, nhưng 2 bị ẩn.",
+        "if luôn chọn nhánh đầu tiên."
+      ],
+      "coach": [
+        [
+          "Đoạn mã",
+          "Gắn giá trị dùng trong điều kiện với một tên.",
+          "Dùng kết quả kiểm tra nhiên liệu để chọn một tín hiệu."
+        ],
+        [
+          "Đoạn mã",
+          "Điều kiện true dẫn vào nhánh này.",
+          "Dùng kết quả kiểm tra nhiên liệu để chọn một tín hiệu."
+        ],
+        [
+          "Đoạn mã",
+          "Đây là lệnh hiển thị của nhánh khi điều kiện true.",
+          "Dùng kết quả kiểm tra nhiên liệu để chọn một tín hiệu."
+        ],
+        [
+          "Đoạn mã",
+          "else mở đầu nhánh dành cho điều kiện false.",
+          "Dùng kết quả kiểm tra nhiên liệu để chọn một tín hiệu."
+        ],
+        [
+          "Đoạn mã",
+          "Lệnh hiển thị này chỉ chạy khi điều kiện là false.",
+          "Dùng kết quả kiểm tra nhiên liệu để chọn một tín hiệu."
+        ],
+        [
+          "Đoạn mã",
+          "Đóng cấu trúc chọn nhánh.",
+          "Dùng kết quả kiểm tra nhiên liệu để chọn một tín hiệu."
+        ]
+      ]
+    },
+    {
+      "title": "Ghé các bến tàu",
+      "intro": "for lần lượt lấy từng phần tử từ một danh sách. Tên dùng trong vòng lặp chỉ phần tử hiện tại.",
+      "goal": "Hiển thị số của từng bến tàu theo thứ tự trong danh sách.",
+      "result": "Vòng lặp đọc 2, rồi 4, rồi 6 và hiển thị từng giá trị.",
+      "question": "Vì sao ba số khác nhau được hiển thị?",
+      "remix": "Thay bến tàu cuối để kết quả là 2, 4, rồi 8.",
+      "remixHint": "Danh sách quyết định các giá trị mà dock nhận.",
+      "independent": "Dùng for để hiển thị 3, 5, rồi 7. Mỗi lần hiển thị phải dùng phần tử hiện tại của vòng lặp.",
+      "independentHint": "Chọn trực tiếp danh sách phù hợp, hoặc tính giá trị mới từ từng phần tử.",
+      "learned": "Bạn đã lặp lại một lệnh trên một dãy giá trị.",
+      "answerHint": "Vòng lặp thay đổi phần tử trong danh sách mà tên đó chỉ đến.",
+      "answers": [
+        "Mỗi lượt, dock chỉ đến một phần tử khác trong danh sách.",
+        "log tự động cộng thêm 2.",
+        "Chỉ phần tử cuối được chạy."
+      ],
+      "coach": [
+        [
+          "Đoạn mã",
+          "Lần lượt lấy từng giá trị dock từ danh sách.",
+          "Hiển thị số của từng bến tàu theo thứ tự trong danh sách."
+        ],
+        [
+          "Đoạn mã",
+          "Hiển thị phần tử của lượt này.",
+          "Hiển thị số của từng bến tàu theo thứ tự trong danh sách."
+        ],
+        [
+          "Đoạn mã",
+          "Quay lại để lấy phần tử tiếp theo; kết thúc khi hết danh sách.",
+          "Hiển thị số của từng bến tàu theo thứ tự trong danh sách."
+        ]
+      ]
+    },
+    {
+      "title": "Đếm các lượt kiểm tra phóng",
+      "intro": "while kiểm tra điều kiện trước mỗi lượt. Cập nhật tick ở cuối lượt giúp lần kiểm tra tiếp theo thấy một giá trị mới.",
+      "goal": "Hiển thị 1, 2 và 3, rồi dừng trước 4.",
+      "result": "Sau khi hiển thị 3, tick trở thành 4. Điều kiện tiếp theo là false, nên vòng lặp kết thúc.",
+      "question": "Vì sao 4 không được hiển thị?",
+      "remix": "Đổi giới hạn để chương trình hiển thị cả 4.",
+      "remixHint": "Phép so sánh được kiểm tra trước khi thân vòng lặp chạy.",
+      "independent": "Dùng while để hiển thị 2, 3, rồi 4. Cập nhật bộ đếm ở cuối mỗi lượt để vòng lặp dừng lại.",
+      "independentHint": "Chọn giá trị bắt đầu và giới hạn. Bạn có thể hiển thị bộ đếm hoặc tính toán từ nó.",
+      "learned": "Bạn đã điều khiển việc lặp bằng một giá trị thay đổi và một điều kiện dừng.",
+      "answerHint": "Bộ đếm được cập nhật sau khi hiển thị và trước lần kiểm tra điều kiện tiếp theo.",
+      "answers": [
+        "Khi tick đạt 4, điều kiện tiếp theo là false.",
+        "Vòng lặp ẩn kết quả hiển thị cuối cùng.",
+        "while luôn chạy đúng ba lần."
+      ],
+      "coach": [
+        [
+          "Đoạn mã",
+          "Cho bộ đếm bắt đầu từ 1.",
+          "Hiển thị 1, 2 và 3, rồi dừng trước 4."
+        ],
+        [
+          "Đoạn mã",
+          "Kiểm tra bộ đếm hiện tại trước khi vào thân vòng lặp.",
+          "Hiển thị 1, 2 và 3, rồi dừng trước 4."
+        ],
+        [
+          "Đoạn mã",
+          "Hiển thị giá trị hiện tại.",
+          "Hiển thị 1, 2 và 3, rồi dừng trước 4."
+        ],
+        [
+          "Đoạn mã",
+          "Cập nhật bộ đếm cho lần kiểm tra điều kiện tiếp theo.",
+          "Hiển thị 1, 2 và 3, rồi dừng trước 4."
+        ],
+        [
+          "Đoạn mã",
+          "Quay lại kiểm tra điều kiện.",
+          "Hiển thị 1, 2 và 3, rồi dừng trước 4."
+        ]
+      ]
+    },
+    {
+      "title": "Dùng lại phép tính hàng hóa",
+      "intro": "Hàm sync nhận đối số và trả về một giá trị. Lệnh return tường minh gửi kết quả tính toán về nơi gọi hàm.",
+      "goal": "Gọi combine và hiển thị giá trị trả về.",
+      "result": "Các đối số trở thành a = 3 và b = 4. Hàm trả về 7, rồi giá trị đó được hiển thị qua load.",
+      "question": "load nhận 7 bằng cách nào?",
+      "remix": "Đổi đối số thứ hai để tổng hàng hóa trả về là 9.",
+      "remixHint": "Đối số thứ nhất vẫn là 3; chọn đối số thứ hai để tổng bằng 9.",
+      "independent": "Định nghĩa một hàm sync có lệnh return tường minh và phép cộng. Gọi hàm rồi hiển thị giá trị trả về là 12.",
+      "independentHint": "Bạn có thể dùng hai đối số, hoặc cộng một giá trị cố định vào một đối số. Giá trị hiển thị phải đến từ lời gọi hàm.",
+      "learned": "Bạn đã gói một phép tính vào hàm và dùng giá trị trả về ở nơi khác.",
+      "answerHint": "Hàm thực hiện phép cộng khi được gọi; chỉ định nghĩa hàm thì chưa hiển thị gì.",
+      "answers": [
+        "Lời gọi trả về a + b, và giá trị đó được gắn với load.",
+        "Đặt tên hàm sẽ tự động hiển thị 7.",
+        "Dấu chấm phẩy cộng các đối số."
+      ],
+      "coach": [
+        [
+          "Đoạn mã",
+          "Định nghĩa một hàm đồng bộ có hai tham số.",
+          "Gọi combine và hiển thị giá trị trả về."
+        ],
+        [
+          "Đoạn mã",
+          "Trả tổng về nơi gọi hàm.",
+          "Gọi combine và hiển thị giá trị trả về."
+        ],
+        [
+          "Đoạn mã",
+          "Đóng phần định nghĩa hàm.",
+          "Gọi combine và hiển thị giá trị trả về."
+        ],
+        [
+          "Đoạn mã",
+          "Gọi hàm và đặt tên cho giá trị trả về.",
+          "Gọi combine và hiển thị giá trị trả về."
+        ],
+        [
+          "Đoạn mã",
+          "Hiển thị giá trị mà lời gọi trả về.",
+          "Gọi combine và hiển thị giá trị trả về."
+        ]
+      ]
+    },
+    {
+      "title": "Chờ phản hồi từ hàm",
+      "intro": "return ! gửi phản hồi của hàm. Nơi gọi hàm có thể dùng phản hồi đó trong một phép tính. Ở đây, boost nhận load, cộng thêm 2 rồi phản hồi bằng kết quả.",
+      "goal": "Theo dõi một giá trị đi vào hàm và quay lại qua phản hồi.",
+      "result": "boost nhận 5 và phản hồi bằng 7; result là tên của phản hồi đó.",
+      "question": "Điều gì giúp result.log() hiển thị 7?",
+      "remix": "Đổi đầu vào của boost để phản hồi của hàm hiển thị 10.",
+      "remixHint": "Hàm cộng thêm 2 vào đầu vào.",
+      "independent": "Viết một hàm phản hồi bằng kết quả phép cộng, rồi hiển thị phản hồi là 12. Dùng tên và số do bạn tự chọn.",
+      "independentHint": "Dùng return ! để phản hồi, rồi dùng kết quả gọi hàm đó.",
+      "learned": "Bạn đã dùng phản hồi của hàm làm dữ liệu cho nơi gọi hàm.",
+      "answerHint": "Thân hàm không tự động trả về biểu thức cuối cùng. Hàm này phản hồi tường minh.",
+      "answers": [
+        "boost phản hồi bằng 5 mà không thay đổi giá trị.",
+        "return ! phản hồi bằng 5 + 2; nơi gọi dùng giá trị đó.",
+        "Nơi gọi luôn thay phản hồi bị thiếu bằng 0."
+      ],
+      "coach": [
+        [
+          "Hàm",
+          "boost nhận một giá trị có tên load.",
+          "Theo dõi một giá trị đi vào hàm và quay lại qua phản hồi."
+        ],
+        [
+          "Phản hồi",
+          "return ! phản hồi bằng load + 2. Cách này khác với trả về qua ngăn xếp trong hàm sync.",
+          "Theo dõi một giá trị đi vào hàm và quay lại qua phản hồi."
+        ],
+        [
+          "Định nghĩa",
+          "Dấu ngoặc nhọn đóng kết thúc phần định nghĩa hàm.",
+          "Theo dõi một giá trị đi vào hàm và quay lại qua phản hồi."
+        ],
+        [
+          "Lời gọi",
+          "Nơi gọi truyền 5 và đặt tên phản hồi là result.",
+          "Theo dõi một giá trị đi vào hàm và quay lại qua phản hồi."
+        ],
+        [
+          "Hiển thị",
+          "Hiển thị phản hồi mà result chỉ đến.",
+          "Theo dõi một giá trị đi vào hàm và quay lại qua phản hồi."
+        ]
+      ]
+    },
+    {
+      "title": "Chuyển thông điệp hàng hóa",
+      "intro": "let parcel; tạo một kênh. ! gửi một giá trị; mẫu nhận gắn giá trị đến với một tên. | đặt các hoạt động này cạnh nhau để thực hiện đồng thời.",
+      "goal": "Gửi 7 và hiển thị giá trị nhận được từ parcel.",
+      "result": "Mẫu nhận lấy thông điệp 7 và đặt tên là value. Phần thân hiển thị giá trị đó.",
+      "question": "value lấy số của mình từ đâu?",
+      "remix": "Đổi thông điệp gửi đi để bên nhận hiển thị 9.",
+      "remixHint": "Đổi giá trị sau !, không đổi tên trong mẫu nhận.",
+      "independent": "Gửi một số qua kênh, nhận số đó và dùng giá trị nhận được để hiển thị 11.",
+      "independentHint": "Gửi thẳng 11, hoặc biến đổi một số khác nhận được thành 11.",
+      "learned": "Bạn đã truyền một giá trị từ bên gửi đến bên nhận.",
+      "answerHint": "Tên trong mẫu nhận được gắn với thông điệp đến. Nó không phải bộ đếm tự động.",
+      "answers": [
+        "Nó được gắn với thông điệp nhận từ parcel.",
+        "Nó luôn là 7, bất kể giá trị được gửi.",
+        "Tên kênh được chuyển thành một số."
+      ],
+      "coach": [
+        [
+          "Đoạn mã",
+          "Tạo kênh mà không gán giá trị số.",
+          "Gửi 7 và hiển thị giá trị nhận được từ parcel."
+        ],
+        [
+          "Đoạn mã",
+          "Gửi số 7 qua parcel.",
+          "Gửi 7 và hiển thị giá trị nhận được từ parcel."
+        ],
+        [
+          "Đoạn mã",
+          "Nhận từ parcel và gắn thông điệp với value.",
+          "Gửi 7 và hiển thị giá trị nhận được từ parcel."
+        ],
+        [
+          "Đoạn mã",
+          "Hiển thị giá trị nhận được.",
+          "Gửi 7 và hiển thị giá trị nhận được từ parcel."
+        ],
+        [
+          "Đoạn mã",
+          "Đóng thân bên nhận và nhóm thực hiện đồng thời.",
+          "Gửi 7 và hiển thị giá trị nhận được từ parcel."
+        ]
+      ]
+    },
+    {
+      "title": "Chờ cả hai báo cáo hàng hóa",
+      "intro": "Phép nhận kết hợp dùng & để chờ một thông điệp trên mỗi kênh được nêu tên. Phần thân chỉ chạy khi cả hai thông điệp đều có sẵn.",
+      "goal": "Nhận cả hai báo cáo và hiển thị tổng.",
+      "result": "Phần thân nhận a = 4 và b = 6, rồi hiển thị tổng là 10.",
+      "question": "Nếu east chưa nhận được thông điệp thì sao?",
+      "remix": "Đổi báo cáo east để tổng bằng 12.",
+      "remixHint": "Báo cáo west vẫn là 4. Hãy chọn phần còn lại của tổng.",
+      "independent": "Nhận kết hợp hai thông điệp và dùng cả hai giá trị trong phép cộng để hiển thị 15.",
+      "independentHint": "Chọn hai giá trị gửi đi; bạn cũng có thể cộng thêm một mức điều chỉnh cố định sau khi nhận cả hai.",
+      "learned": "Bạn đã phối hợp hai đầu vào trước khi tính kết quả.",
+      "answerHint": "& cần cả hai thông điệp. Nó không chọn thông điệp đến trước.",
+      "answers": [
+        "Bên nhận tiếp tục chờ; phần thân chưa chạy.",
+        "Phần thân dùng 0 thay cho thông điệp còn thiếu.",
+        "Thông điệp đầu tiên được cộng hai lần."
+      ],
+      "coach": [
+        [
+          "Đoạn mã",
+          "Tạo một kênh cho mỗi báo cáo.",
+          "Nhận cả hai báo cáo và hiển thị tổng."
+        ],
+        [
+          "Đoạn mã",
+          "Gửi báo cáo west.",
+          "Nhận cả hai báo cáo và hiển thị tổng."
+        ],
+        [
+          "Đoạn mã",
+          "Gửi báo cáo east.",
+          "Nhận cả hai báo cáo và hiển thị tổng."
+        ],
+        [
+          "Đoạn mã",
+          "Chờ một thông điệp trên mỗi kênh và gắn cả hai giá trị với tên.",
+          "Nhận cả hai báo cáo và hiển thị tổng."
+        ],
+        [
+          "Đoạn mã",
+          "Cộng hai giá trị nhận được và hiển thị kết quả.",
+          "Nhận cả hai báo cáo và hiển thị tổng."
+        ],
+        [
+          "Đoạn mã",
+          "Đóng bên nhận kết hợp và nhóm thực hiện đồng thời.",
+          "Nhận cả hai báo cáo và hiển thị tổng."
+        ]
+      ]
+    },
+    {
+      "title": "Phối hợp báo cáo phóng",
+      "intro": "Kết hợp những gì đã học: thu thập hai báo cáo, tính tổng bằng một hàm sync, rồi chọn cách tính tín hiệu cuối cùng. Các số này là dữ liệu thực hành cho báo cáo phóng.",
+      "goal": "Nhận kết hợp cả hai báo cáo, gọi total và chỉ cộng thêm 5 khi tổng lớn hơn 12.",
+      "result": "Tổng hai báo cáo là 13. Điều kiện là true, nên chương trình hiển thị 13 + 5 = 18.",
+      "question": "Luồng thực hiện nào cho ra kết quả cuối cùng là 18?",
+      "remix": "Đổi báo cáo east để cùng chương trình đó hiển thị 19.",
+      "remixHint": "Tính ngược từ bước cộng thêm 5 ở cuối, đồng thời giữ điều kiện là true.",
+      "independent": "Tự xây dựng chương trình phóng dùng hai báo cáo và chỉ hiển thị 18. Nhận kết hợp cả hai thông điệp, kết hợp hai giá trị nhận được trong một hàm sync, so sánh kết quả của hàm trong if và tính đầu ra được chọn từ kết quả đó.",
+      "independentHint": "Chọn giá trị báo cáo, ngưỡng và mức điều chỉnh. Cả hai thông điệp phải ảnh hưởng đến kết quả hàm, và nhánh được chọn phải tính toán từ kết quả đó.",
+      "learned": "Bạn đã kết nối việc trao đổi thông điệp, phép tính dùng lại và quyết định theo điều kiện trong một chương trình.",
+      "answerHint": "Theo dõi các giá trị: báo cáo nhận được → kết quả hàm → điều kiện → phép tính được chọn.",
+      "answers": [
+        "Tổng hai báo cáo là 13; nhánh khi điều kiện true cộng thêm 5.",
+        "Bên nhận luôn hiển thị 18 bất kể thông điệp.",
+        "Mỗi bên trong hai bên gửi đều hiển thị 9."
+      ],
+      "coach": [
+        [
+          "Đoạn mã",
+          "Định nghĩa phép tính báo cáo có thể dùng lại.",
+          "Nhận kết hợp cả hai báo cáo, gọi total và chỉ cộng thêm 5 khi tổng lớn hơn 12."
+        ],
+        [
+          "Đoạn mã",
+          "Trả về tổng phụ thuộc vào cả hai đầu vào.",
+          "Nhận kết hợp cả hai báo cáo, gọi total và chỉ cộng thêm 5 khi tổng lớn hơn 12."
+        ],
+        [
+          "Đoạn mã",
+          "Hoàn tất hàm và tạo hai kênh báo cáo.",
+          "Nhận kết hợp cả hai báo cáo, gọi total và chỉ cộng thêm 5 khi tổng lớn hơn 12."
+        ],
+        [
+          "Đoạn mã",
+          "Gửi một báo cáo trên mỗi kênh.",
+          "Nhận kết hợp cả hai báo cáo, gọi total và chỉ cộng thêm 5 khi tổng lớn hơn 12."
+        ],
+        [
+          "Đoạn mã",
+          "Chờ cả hai báo cáo và đặt tên cho các giá trị.",
+          "Nhận kết hợp cả hai báo cáo, gọi total và chỉ cộng thêm 5 khi tổng lớn hơn 12."
+        ],
+        [
+          "Đoạn mã",
+          "Truyền cả hai giá trị nhận được vào hàm.",
+          "Nhận kết hợp cả hai báo cáo, gọi total và chỉ cộng thêm 5 khi tổng lớn hơn 12."
+        ],
+        [
+          "Đoạn mã",
+          "So sánh tổng đã tính để chọn một nhánh.",
+          "Nhận kết hợp cả hai báo cáo, gọi total và chỉ cộng thêm 5 khi tổng lớn hơn 12."
+        ],
+        [
+          "Đoạn mã",
+          "Tính đầu ra này từ tổng được trả về.",
+          "Nhận kết hợp cả hai báo cáo, gọi total và chỉ cộng thêm 5 khi tổng lớn hơn 12."
+        ],
+        [
+          "Đoạn mã",
+          "Nếu không, hiển thị tổng chưa điều chỉnh.",
+          "Nhận kết hợp cả hai báo cáo, gọi total và chỉ cộng thêm 5 khi tổng lớn hơn 12."
+        ],
+        [
+          "Đoạn mã",
+          "Đóng bên nhận và nhóm thực hiện đồng thời.",
+          "Nhận kết hợp cả hai báo cáo, gọi total và chỉ cộng thêm 5 khi tổng lớn hơn 12."
+        ]
+      ]
     }
   ],
   "guide": [
@@ -261,6 +693,24 @@
       "text": "Tolang được dùng để viết chương trình cho ALUX. Thay đổi trạng thái chung trên blockchain còn liên quan đến quy tắc giao dịch và sự đồng thuận giữa các nút. Cả ngôn ngữ lẫn môi trường chạy đều quan trọng.",
       "code": "7.log()",
       "takeaway": "Hiển thị số trong trò chơi không gửi giao dịch blockchain. Những khái niệm cơ bản này cũng giúp bạn học các ngôn ngữ khác."
+    },
+    {
+      "title": "Chọn và lặp",
+      "text": "Phép so sánh cho ra true hoặc false. if chọn một nhánh; for duyệt danh sách hoặc khoảng giá trị, còn while lặp khi điều kiện vẫn là true. Trong Tolang, and và or tính cả hai vế, nên không ngăn được phép chia cho 0 ở vế còn lại.",
+      "code": "for dock in [2, 4, 6] { dock.log() }",
+      "takeaway": "Hãy dự đoán cả các giá trị hiển thị lẫn số lần hiển thị. Số lượt lặp khác đi có thể làm thay đổi kế hoạch di chuyển."
+    },
+    {
+      "title": "Trả về giá trị hoặc gửi phản hồi",
+      "text": "sync fn với return value tạo kết quả qua ngăn xếp lời gọi. return ! value gửi phản hồi của hàm. Hãy viết lệnh trả về tường minh: hàm không tự động trả về biểu thức cuối cùng. Thiếu phản hồi có thể khiến nơi gọi tiếp tục chờ.",
+      "code": "fn boost(load) { return ! (load + 2) };\nboost(5).log()",
+      "takeaway": "Truyền ít đối số hơn có thể tạo một hàm được áp dụng một phần. Truyền quá nhiều đối số không tạo thêm tham số."
+    },
+    {
+      "title": "Phối hợp thông điệp",
+      "text": "let parcel; tạo một tên dùng để giao tiếp. ! gửi và ? nhận. Phép nhận kết hợp dùng & để chờ đến khi có đủ mọi thông điệp khớp mẫu. | kết hợp các công việc đồng thời; sự có mặt của nó không đảm bảo đầu ra nào xuất hiện trước.",
+      "code": "let a; let b;\n{ a ! 4 | b ! 6 | ?(x <- a & y <- b) { (x + y).log() } }",
+      "takeaway": "Nếu thiếu một thông điệp, phép nhận tiếp tục chờ. Dùng phép nhận kết hợp khi công việc tiếp theo cần cả hai giá trị."
     }
   ],
   "assessment": {
@@ -287,7 +737,17 @@
     "concepts": {
       "add": "Dùng phép cộng để tính kết quả",
       "bind": "Gắn giá trị với một tên",
-      "name": "Dùng tên đã gắn trong kết quả"
+      "name": "Dùng tên đã gắn trong kết quả",
+      "compare": "So sánh các giá trị ảnh hưởng đến đầu ra",
+      "if": "Dùng điều kiện để chọn nhánh được chạy",
+      "for": "Dùng for để tạo đầu ra",
+      "while": "Dùng while để tạo đầu ra",
+      "call": "Dùng lời gọi hàm có ảnh hưởng đến đầu ra",
+      "reply": "Dùng phản hồi tường minh của hàm",
+      "send": "Gửi thông điệp có ảnh hưởng đến đầu ra",
+      "receive": "Nhận thông điệp có ảnh hưởng đến đầu ra",
+      "join": "Chờ nhiều thông điệp cùng lúc",
+      "loop": "Truyền trạng thái qua các lượt của một vòng lặp tường minh"
     },
     "edit": "Sửa mã",
     "yourCode": "Mã bạn đã nộp",
@@ -336,7 +796,7 @@
     "allDone": "Cả ba cơ chế đã mở. Thử cách viết khác với manh mối mới; dấu ấn đã nhận vẫn được giữ lại.",
     "help": "Cần gợi ý?",
     "meaning": "let đặt tên cho giá trị, + cộng các số, .log() xuất kết quả.",
-    "practiceNote": "Cứ thử thoải mái, không có đếm ngược. Dấu ấn ghi nhận thử thách trò chơi, không chứng nhận trình độ lập trình. Chỉ hỗ trợ phần nhập môn về số, phép cộng và gán tên.",
+    "practiceNote": "Cứ thử thoải mái, không có đếm ngược. Dấu ấn ghi nhận thử thách trò chơi, không chứng nhận trình độ lập trình.",
     "running": "Đang gửi tín hiệu…",
     "complete": "Đã lấy được lõi sao",
     "opened": "Đã mở khóa",

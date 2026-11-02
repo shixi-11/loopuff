@@ -49,7 +49,7 @@
     "hint": "Una pequeña pista",
     "independent": "Ahora escribe por tu cuenta",
     "codeLabel": "Tu programa",
-    "scope": "El intérprete inicial admite números, sumas, nombres y salida. No es el compilador completo de Tolang ni la TVM.",
+    "scope": "Este intérprete de aprendizaje admite enteros con un rango limitado, booleanos, listas, cálculos, nombres, condiciones, bucles, funciones, mensajes y recepciones conjuntas. No es el compilador completo de Tolang ni la TVM.",
     "complete": "¡Tu programa funciona!",
     "score": "Puntos de vuelo",
     "accuracy": "Precisión al teclear",
@@ -68,7 +68,7 @@
     "limit": "El programa supera los límites del intérprete inicial.",
     "predictionHint": "Calcula paso a paso y piensa qué mostrará .log().",
     "close": "Cerrar",
-    "chapterNote": "Capítulo 1 · 4 misiones. Los siguientes capítulos están en desarrollo.",
+    "chapterNote": "13 misiones · Fundamentos de programación, Tolang y coordinación",
     "footer": "De tu primera pregunta a tu primer programa.",
     "launch": "Entiende y empieza a escribir ↗",
     "navigation": "Navegación principal",
@@ -77,7 +77,19 @@
     "navGuide": "Conceptos básicos",
     "navGuideShort": "Aprender",
     "mapShort": "Mapa",
-    "heroAccent": "planetas"
+    "heroAccent": "planetas",
+    "observeProgram": "Predice y ejecuta",
+    "practiceInChase": "Prueba tus ideas en Persecución en el puerto espacial",
+    "trackBeginner": "Fundamentos de programación",
+    "trackTolang": "Tolang en la práctica",
+    "trackAdvanced": "Mensajes y coordinación",
+    "subset": "Esta forma no pertenece al subconjunto admitido por el ejecutor de ejercicios. Usa las formas que se muestran en las lecciones.",
+    "type": "Estos valores no son válidos para esta operación. Las condiciones requieren true o false; la aritmética requiere números enteros.",
+    "arity": "Esta llamada pasa más valores de los que acepta la función.",
+    "zeroDivision": "La división y el resto no admiten un divisor igual a 0.",
+    "waiting": "El programa espera una respuesta o mensajes que aún no han llegado.",
+    "bindingScope": "No se puede volver a vincular este nombre aquí. Comprueba el ámbito de la rama condicional o del elemento del bucle.",
+    "replyUsed": "Esta función ya ha respondido. Una misma llamada no puede usar su canal de respuesta por segunda vez."
   },
   "lessons": [
     {
@@ -229,6 +241,426 @@
           "Calcula 2 + 3 y muestra el resultado."
         ]
       ]
+    },
+    {
+      "title": "Comprueba el combustible",
+      "intro": "Una comparación plantea una pregunta sobre dos valores. > produce true si el valor de la izquierda es mayor y false en caso contrario.",
+      "goal": "Comprueba si el valor del combustible es mayor que 4.",
+      "result": "6 es mayor que 4, así que la salida es true.",
+      "question": "¿Qué produce fuel > 4?",
+      "remix": "Cambia el valor del combustible para que la comparación muestre false.",
+      "remixHint": "Elige un valor que no sea mayor que 4.",
+      "independent": "Muestra true y luego false mediante comparaciones que produzcan ambos resultados.",
+      "independentHint": "Prueba dos comparaciones distintas o compara un mismo valor con nombre con dos límites.",
+      "learned": "Has usado comparaciones para convertir valores en respuestas de sí o no.",
+      "answerHint": "La comparación produce un booleano; no muestra la cantidad de combustible.",
+      "answers": [
+        "Un booleano: true.",
+        "La cantidad de combustible: 6.",
+        "El número 4."
+      ],
+      "coach": [
+        [
+          "Fragmento",
+          "Asigna un nombre al valor del combustible para que la siguiente expresión pueda usarlo.",
+          "Comprueba si el valor del combustible es mayor que 4."
+        ],
+        [
+          "Fragmento",
+          "Compara fuel con 4. La expresión produce true o false.",
+          "Comprueba si el valor del combustible es mayor que 4."
+        ],
+        [
+          "Fragmento",
+          "Muestra el resultado de la comparación.",
+          "Comprueba si el valor del combustible es mayor que 4."
+        ]
+      ]
+    },
+    {
+      "title": "Elige una señal de salida",
+      "intro": "if usa un booleano para elegir una rama. La otra rama no se ejecuta. Aquí, 1 y 2 representan dos señales de salida.",
+      "goal": "Usa la comprobación del combustible para elegir una señal.",
+      "result": "La condición es true, así que solo la rama then muestra 1.",
+      "question": "¿Por qué solo se muestra 1?",
+      "remix": "Cambia el valor del combustible para que la rama else muestre 2.",
+      "remixHint": "Haz que fuel > 4 produzca false.",
+      "independent": "Asigna un nombre a un valor, compáralo en una condición if y haz que la rama elegida muestre solo 2.",
+      "independentHint": "Puedes cambiar el nombre, la comparación, los valores y el contenido de las ramas. Deja que la condición decida qué salida se ejecuta.",
+      "learned": "Has hecho que un programa elija una acción a partir de una condición.",
+      "answerHint": "if selecciona una rama; no ejecuta ambas.",
+      "answers": [
+        "La condición true selecciona la rama then.",
+        "Se ejecutan ambas ramas, pero 2 queda oculto.",
+        "if siempre elige la primera rama."
+      ],
+      "coach": [
+        [
+          "Fragmento",
+          "Vincula a un nombre el valor que usa la condición.",
+          "Usa la comprobación del combustible para elegir una señal."
+        ],
+        [
+          "Fragmento",
+          "Si la condición es true, se entra en esta rama.",
+          "Usa la comprobación del combustible para elegir una señal."
+        ],
+        [
+          "Fragmento",
+          "Esta es la salida de la rama para true.",
+          "Usa la comprobación del combustible para elegir una señal."
+        ],
+        [
+          "Fragmento",
+          "else introduce la rama para una condición false.",
+          "Usa la comprobación del combustible para elegir una señal."
+        ],
+        [
+          "Fragmento",
+          "Esta salida solo se ejecuta si la condición es false.",
+          "Usa la comprobación del combustible para elegir una señal."
+        ],
+        [
+          "Fragmento",
+          "Cierra la estructura de selección de ramas.",
+          "Usa la comprobación del combustible para elegir una señal."
+        ]
+      ]
+    },
+    {
+      "title": "Visita los muelles",
+      "intro": "for toma un elemento de una lista en cada iteración. El nombre del bucle se refiere al elemento actual.",
+      "goal": "Muestra cada número de muelle en el orden de la lista.",
+      "result": "El bucle lee 2, luego 4 y después 6, y muestra cada valor.",
+      "question": "¿Por qué se muestran tres números distintos?",
+      "remix": "Sustituye el último muelle para que la salida sea 2, 4 y luego 8.",
+      "remixHint": "La lista determina qué valores recibe dock.",
+      "independent": "Usa for para mostrar 3, 5 y luego 7. Cada salida debe usar el elemento actual del bucle.",
+      "independentHint": "Elige la lista directamente o calcula un nuevo valor a partir de cada elemento.",
+      "learned": "Has repetido una instrucción para una secuencia de valores.",
+      "answerHint": "El bucle cambia el elemento de la lista al que se refiere el nombre.",
+      "answers": [
+        "dock se refiere a un elemento distinto de la lista en cada iteración.",
+        "log suma 2 automáticamente.",
+        "Solo se procesa el último elemento."
+      ],
+      "coach": [
+        [
+          "Fragmento",
+          "Toma cada valor de muelle de la lista en orden.",
+          "Muestra cada número de muelle en el orden de la lista."
+        ],
+        [
+          "Fragmento",
+          "Muestra el elemento de esta iteración.",
+          "Muestra cada número de muelle en el orden de la lista."
+        ],
+        [
+          "Fragmento",
+          "Vuelve para tomar el siguiente elemento; termina cuando no queden más.",
+          "Muestra cada número de muelle en el orden de la lista."
+        ]
+      ]
+    },
+    {
+      "title": "Cuenta las comprobaciones de despegue",
+      "intro": "while comprueba su condición antes de cada iteración. Actualizar tick al final permite que la siguiente comprobación use un valor nuevo.",
+      "goal": "Muestra 1, 2 y 3, y detente antes de 4.",
+      "result": "Después de mostrar 3, tick pasa a valer 4. La siguiente condición es false, así que el bucle termina.",
+      "question": "¿Por qué no se muestra 4?",
+      "remix": "Cambia el límite para que el programa también muestre 4.",
+      "remixHint": "La comparación se comprueba antes de ejecutar el cuerpo.",
+      "independent": "Usa while para mostrar 2, 3 y luego 4. Actualiza el contador al final de cada iteración para que el bucle termine.",
+      "independentHint": "Elige un valor inicial y un límite. Puedes mostrar el contador o calcular un valor a partir de él.",
+      "learned": "Has controlado la repetición con un valor que cambia y una condición de parada.",
+      "answerHint": "El contador se actualiza después de mostrar el valor y antes de la siguiente comprobación de la condición.",
+      "answers": [
+        "Cuando tick llega a 4, la siguiente condición es false.",
+        "El bucle oculta su última salida.",
+        "while siempre se ejecuta exactamente tres veces."
+      ],
+      "coach": [
+        [
+          "Fragmento",
+          "Inicia el contador en 1.",
+          "Muestra 1, 2 y 3, y detente antes de 4."
+        ],
+        [
+          "Fragmento",
+          "Comprueba el contador actual antes de entrar en el cuerpo.",
+          "Muestra 1, 2 y 3, y detente antes de 4."
+        ],
+        [
+          "Fragmento",
+          "Muestra el valor actual.",
+          "Muestra 1, 2 y 3, y detente antes de 4."
+        ],
+        [
+          "Fragmento",
+          "Actualiza el contador para la siguiente comprobación de la condición.",
+          "Muestra 1, 2 y 3, y detente antes de 4."
+        ],
+        [
+          "Fragmento",
+          "Vuelve a la condición.",
+          "Muestra 1, 2 y 3, y detente antes de 4."
+        ]
+      ]
+    },
+    {
+      "title": "Reutiliza un cálculo de carga",
+      "intro": "Una función sync recibe argumentos y devuelve un valor. Un return explícito devuelve el resultado del cálculo a quien llama a la función.",
+      "goal": "Llama a combine y muestra el valor que devuelve.",
+      "result": "Los argumentos pasan a ser a = 3 y b = 4. La función devuelve 7, y load muestra ese valor.",
+      "question": "¿Cómo recibe load el valor 7?",
+      "remix": "Cambia el segundo argumento para que el total de carga devuelto sea 9.",
+      "remixHint": "El primer argumento sigue siendo 3; elige el segundo para que la suma sea 9.",
+      "independent": "Define una función sync con un return explícito y una suma. Llámala y muestra 12 como valor devuelto.",
+      "independentHint": "Puedes usar dos argumentos o sumar un valor fijo a un argumento. El valor mostrado debe proceder de la llamada.",
+      "learned": "Has agrupado un cálculo en una función y usado su valor de retorno en otra parte.",
+      "answerHint": "La función realiza la suma cuando se la llama; definirla no muestra nada por sí solo.",
+      "answers": [
+        "La llamada devuelve a + b, y ese valor se vincula a load.",
+        "Asignar un nombre a la función muestra 7 automáticamente.",
+        "El punto y coma suma los argumentos."
+      ],
+      "coach": [
+        [
+          "Fragmento",
+          "Define una función síncrona con dos parámetros.",
+          "Llama a combine y muestra el valor que devuelve."
+        ],
+        [
+          "Fragmento",
+          "Devuelve la suma a quien llama a la función.",
+          "Llama a combine y muestra el valor que devuelve."
+        ],
+        [
+          "Fragmento",
+          "Cierra la definición de la función.",
+          "Llama a combine y muestra el valor que devuelve."
+        ],
+        [
+          "Fragmento",
+          "Llama a la función y asigna un nombre a su valor de retorno.",
+          "Llama a combine y muestra el valor que devuelve."
+        ],
+        [
+          "Fragmento",
+          "Muestra el valor devuelto por la llamada.",
+          "Llama a combine y muestra el valor que devuelve."
+        ]
+      ]
+    },
+    {
+      "title": "Espera la respuesta de una función",
+      "intro": "return ! envía una respuesta de función. Quien la llama puede usar esa respuesta en un cálculo. Aquí, boost recibe load, suma 2 y responde con el resultado.",
+      "goal": "Sigue el recorrido de un valor hasta una función y su vuelta como respuesta.",
+      "result": "boost recibe 5 y responde con 7; result es el nombre de esa respuesta.",
+      "question": "¿Qué permite que result.log() muestre 7?",
+      "remix": "Cambia la entrada de boost para que su respuesta se muestre como 10.",
+      "remixHint": "La función suma 2 a su entrada.",
+      "independent": "Escribe una función que responda con una suma y muestra su respuesta como 12. Usa tus propios nombres y números.",
+      "independentHint": "Usa return ! para la respuesta y después utiliza el resultado de llamar a esa función.",
+      "learned": "Has usado una respuesta de función como dato para quien la llama.",
+      "answerHint": "El cuerpo de una función no devuelve automáticamente su última expresión. Esta función responde de forma explícita.",
+      "answers": [
+        "boost responde con 5 sin modificarlo.",
+        "return ! responde con 5 + 2; quien llama a la función usa ese valor.",
+        "Quien llama a la función siempre sustituye una respuesta ausente por 0."
+      ],
+      "coach": [
+        [
+          "Función",
+          "boost recibe un valor llamado load.",
+          "Sigue el recorrido de un valor hasta una función y su vuelta como respuesta."
+        ],
+        [
+          "Respuesta",
+          "return ! responde con load + 2. Es distinto del retorno por la pila de llamadas de una función sync.",
+          "Sigue el recorrido de un valor hasta una función y su vuelta como respuesta."
+        ],
+        [
+          "Definición",
+          "La llave de cierre termina la definición de la función.",
+          "Sigue el recorrido de un valor hasta una función y su vuelta como respuesta."
+        ],
+        [
+          "Llamada",
+          "Quien llama pasa 5 y asigna a la respuesta el nombre result.",
+          "Sigue el recorrido de un valor hasta una función y su vuelta como respuesta."
+        ],
+        [
+          "Salida",
+          "Muestra la respuesta a la que se refiere result.",
+          "Sigue el recorrido de un valor hasta una función y su vuelta como respuesta."
+        ]
+      ]
+    },
+    {
+      "title": "Entrega un mensaje de carga",
+      "intro": "let parcel; crea un canal. ! envía un valor; un patrón de recepción vincula el valor que llega a un nombre. | dispone estas actividades de forma concurrente.",
+      "goal": "Envía 7 y muestra el valor recibido de parcel.",
+      "result": "El patrón de recepción toma el mensaje 7 y le asigna el nombre value. El cuerpo muestra ese valor.",
+      "question": "¿De dónde obtiene value su número?",
+      "remix": "Cambia el mensaje enviado para que el receptor muestre 9.",
+      "remixHint": "Cambia el valor que sigue a !, no el nombre del patrón de recepción.",
+      "independent": "Envía un número por un canal, recíbelo y usa el valor recibido para mostrar 11.",
+      "independentHint": "Envía 11 directamente o transforma otro número recibido en 11.",
+      "learned": "Has pasado un valor de un emisor a un receptor.",
+      "answerHint": "El nombre del patrón de recepción se vincula al mensaje que llega. No es un contador automático.",
+      "answers": [
+        "Se vincula al mensaje recibido de parcel.",
+        "Siempre vale 7, se envíe lo que se envíe.",
+        "El nombre del canal se convierte en un número."
+      ],
+      "coach": [
+        [
+          "Fragmento",
+          "Crea el canal sin asignarle un valor numérico.",
+          "Envía 7 y muestra el valor recibido de parcel."
+        ],
+        [
+          "Fragmento",
+          "Envía el número 7 por parcel.",
+          "Envía 7 y muestra el valor recibido de parcel."
+        ],
+        [
+          "Fragmento",
+          "Recibe de parcel y vincula el mensaje a value.",
+          "Envía 7 y muestra el valor recibido de parcel."
+        ],
+        [
+          "Fragmento",
+          "Muestra el valor recibido.",
+          "Envía 7 y muestra el valor recibido de parcel."
+        ],
+        [
+          "Fragmento",
+          "Cierra el cuerpo del receptor y el grupo paralelo.",
+          "Envía 7 y muestra el valor recibido de parcel."
+        ]
+      ]
+    },
+    {
+      "title": "Espera los dos informes de carga",
+      "intro": "Una recepción conjunta usa & para esperar un mensaje en cada canal indicado. Su cuerpo solo se ejecuta cuando ambos mensajes están disponibles.",
+      "goal": "Recibe ambos informes y muestra su suma.",
+      "result": "El cuerpo recibe a = 4 y b = 6, y después muestra su suma, 10.",
+      "question": "¿Qué ocurre si east aún no ha recibido ningún mensaje?",
+      "remix": "Cambia el informe de east para que el total sea 12.",
+      "remixHint": "El informe de west sigue siendo 4. Elige la otra parte del total.",
+      "independent": "Recibe dos mensajes conjuntamente y usa ambos valores en una suma que muestre 15.",
+      "independentHint": "Elige dos valores para enviar; también puedes sumar un ajuste fijo tras recibir ambos.",
+      "learned": "Has coordinado dos entradas antes de calcular un resultado.",
+      "answerHint": "& requiere ambos mensajes. No elige el que llegue primero.",
+      "answers": [
+        "El receptor espera; su cuerpo aún no se ejecuta.",
+        "El cuerpo usa 0 en lugar del mensaje que falta.",
+        "El primer mensaje se suma dos veces."
+      ],
+      "coach": [
+        [
+          "Fragmento",
+          "Crea un canal para cada informe.",
+          "Recibe ambos informes y muestra su suma."
+        ],
+        [
+          "Fragmento",
+          "Envía el informe por west.",
+          "Recibe ambos informes y muestra su suma."
+        ],
+        [
+          "Fragmento",
+          "Envía el informe por east.",
+          "Recibe ambos informes y muestra su suma."
+        ],
+        [
+          "Fragmento",
+          "Espera un mensaje en cada canal y vincula ambos valores a nombres.",
+          "Recibe ambos informes y muestra su suma."
+        ],
+        [
+          "Fragmento",
+          "Suma los dos valores recibidos y muestra el resultado.",
+          "Recibe ambos informes y muestra su suma."
+        ],
+        [
+          "Fragmento",
+          "Cierra el receptor conjunto y el grupo paralelo.",
+          "Recibe ambos informes y muestra su suma."
+        ]
+      ]
+    },
+    {
+      "title": "Coordina un informe de despegue",
+      "intro": "Combina lo aprendido: recoge dos informes, súmalos con una función sync y después elige cómo calcular la señal final. Estos números son datos de práctica para un informe de despegue.",
+      "goal": "Recibe ambos informes conjuntamente, llama a total y suma 5 solo si el total es mayor que 12.",
+      "result": "Los informes suman 13. La condición es true, así que el programa muestra 13 + 5 = 18.",
+      "question": "¿Qué recorrido produce el 18 final?",
+      "remix": "Cambia el informe de east para que el mismo programa muestre 19.",
+      "remixHint": "Calcula hacia atrás a partir del ajuste final de 5 y mantén la condición en true.",
+      "independent": "Crea tu propio programa de despegue con dos informes que muestre solo 18. Recibe ambos mensajes conjuntamente, combina ambos valores recibidos en una función sync, compara su resultado en if y calcula la salida elegida a partir de ese resultado.",
+      "independentHint": "Elige los valores de los informes, un umbral y un ajuste. Ambos mensajes deben influir en el resultado de la función, y la rama elegida debe calcular su salida a partir de ese resultado.",
+      "learned": "Has conectado comunicación, cálculos reutilizables y una decisión condicional en un mismo programa.",
+      "answerHint": "Sigue los valores: informes recibidos → resultado de la función → condición → cálculo elegido.",
+      "answers": [
+        "Ambos informes suman 13; la rama para true suma 5.",
+        "El receptor siempre muestra 18, sin importar sus mensajes.",
+        "Los dos emisores muestran 9 cada uno."
+      ],
+      "coach": [
+        [
+          "Fragmento",
+          "Define el cálculo reutilizable para los informes.",
+          "Recibe ambos informes conjuntamente, llama a total y suma 5 solo si el total es mayor que 12."
+        ],
+        [
+          "Fragmento",
+          "Devuelve una suma que dependa de ambas entradas.",
+          "Recibe ambos informes conjuntamente, llama a total y suma 5 solo si el total es mayor que 12."
+        ],
+        [
+          "Fragmento",
+          "Termina la función y crea dos canales para los informes.",
+          "Recibe ambos informes conjuntamente, llama a total y suma 5 solo si el total es mayor que 12."
+        ],
+        [
+          "Fragmento",
+          "Envía un informe por cada canal.",
+          "Recibe ambos informes conjuntamente, llama a total y suma 5 solo si el total es mayor que 12."
+        ],
+        [
+          "Fragmento",
+          "Espera ambos informes y asigna nombres a sus valores.",
+          "Recibe ambos informes conjuntamente, llama a total y suma 5 solo si el total es mayor que 12."
+        ],
+        [
+          "Fragmento",
+          "Pasa ambos valores recibidos a la función.",
+          "Recibe ambos informes conjuntamente, llama a total y suma 5 solo si el total es mayor que 12."
+        ],
+        [
+          "Fragmento",
+          "Compara el total calculado para elegir una rama.",
+          "Recibe ambos informes conjuntamente, llama a total y suma 5 solo si el total es mayor que 12."
+        ],
+        [
+          "Fragmento",
+          "Calcula esta salida a partir del total devuelto.",
+          "Recibe ambos informes conjuntamente, llama a total y suma 5 solo si el total es mayor que 12."
+        ],
+        [
+          "Fragmento",
+          "En caso contrario, muestra el total sin ajustar.",
+          "Recibe ambos informes conjuntamente, llama a total y suma 5 solo si el total es mayor que 12."
+        ],
+        [
+          "Fragmento",
+          "Cierra el receptor y el grupo paralelo.",
+          "Recibe ambos informes conjuntamente, llama a total y suma 5 solo si el total es mayor que 12."
+        ]
+      ]
     }
   ],
   "guide": [
@@ -261,6 +693,24 @@
       "text": "Tolang se usa para escribir programas para ALUX. En una blockchain, cambiar el estado compartido también requiere reglas de transacción y acuerdo entre nodos. Importan tanto el lenguaje como el entorno de ejecución.",
       "code": "7.log()",
       "takeaway": "Mostrar un número en este juego no envía ninguna transacción. Estas primeras ideas también te ayudarán a aprender otros lenguajes."
+    },
+    {
+      "title": "Elegir y repetir",
+      "text": "Una comparación produce true o false. if elige una rama; for recorre una lista o un rango, y while repite mientras su condición sea true. and y or de Tolang evalúan ambos lados, por lo que no evitan una división por 0 en el otro lado.",
+      "code": "for dock in [2, 4, 6] { dock.log() }",
+      "takeaway": "Predice tanto los valores mostrados como el número de salidas. Un número distinto de iteraciones puede cambiar un plan de movimiento."
+    },
+    {
+      "title": "Devolver un valor o responder",
+      "text": "sync fn con return value devuelve un resultado por la pila de llamadas. return ! value envía una respuesta de función. Escribe el retorno explícitamente: una función no devuelve automáticamente su última expresión. Si falta una respuesta, quien llama puede quedarse esperando.",
+      "code": "fn boost(load) { return ! (load + 2) };\nboost(5).log()",
+      "takeaway": "Pasar menos argumentos puede crear una función aplicada parcialmente. Pasar demasiados argumentos no crea parámetros adicionales."
+    },
+    {
+      "title": "Coordinar mensajes",
+      "text": "let parcel; crea un nombre de comunicación. ! envía y ? recibe. Una recepción conjunta usa & para esperar hasta que estén disponibles todos los mensajes correspondientes. | combina tareas concurrentes; su presencia no garantiza qué salida aparece primero.",
+      "code": "let a; let b;\n{ a ! 4 | b ! 6 | ?(x <- a & y <- b) { (x + y).log() } }",
+      "takeaway": "Si falta un mensaje, la recepción sigue esperando. Usa una recepción conjunta cuando el trabajo posterior necesite ambos valores."
     }
   ],
   "assessment": {
@@ -287,7 +737,17 @@
     "concepts": {
       "add": "Calcular una salida mediante una suma",
       "bind": "Vincular un nombre a un valor",
-      "name": "Usar el nombre vinculado en una salida"
+      "name": "Usar el nombre vinculado en una salida",
+      "compare": "Comparar valores que influyan en la salida",
+      "if": "Usar una condición para elegir la rama que se ejecuta",
+      "for": "Usar for para generar la salida",
+      "while": "Usar while para generar la salida",
+      "call": "Usar una llamada a función que influya en la salida",
+      "reply": "Usar una respuesta explícita de función",
+      "send": "Enviar un mensaje que influya en la salida",
+      "receive": "Recibir un mensaje que influya en la salida",
+      "join": "Esperar varios mensajes conjuntamente",
+      "loop": "Mantener y actualizar el estado mediante un bucle explícito"
     },
     "edit": "Editar código",
     "yourCode": "Tu código",
@@ -336,7 +796,7 @@
     "allDone": "Los tres mecanismos están abiertos. Prueba otra solución con pistas nuevas; conservarás tus sellos.",
     "help": "¿Necesitas una pista?",
     "meaning": "let da un nombre a un valor, + suma números y .log() muestra el resultado.",
-    "practiceNote": "Prueba sin prisas: no hay cuenta atrás. Los sellos registran retos del juego, no dominio de programación. Solo se ejecuta el subconjunto inicial de números, suma y asociación de nombres.",
+    "practiceNote": "Prueba sin prisas: no hay cuenta atrás. Los sellos registran retos del juego, no dominio de programación.",
     "running": "Enviando señales…",
     "complete": "Núcleo estelar recuperado",
     "opened": "Cerrojo abierto",

@@ -12,7 +12,7 @@ Code lesen, Ergebnisse vorhersagen, Programme ändern und neue Aufgaben ohne Vor
 
 ## Aktueller Code
 
-Das erste Kapitel ist spielbar: vier Missionen zu Werten, Addition und Namensbindungen mit Vorhersagen, Erklärungen, Änderungen und eigenen Programmen. Oberfläche und Kurs unterstützen elf Sprachen. Ein kleiner Lerninterpreter läuft direkt im Browser, ohne Backend oder externe Pakete. Er ist nicht der vollständige Tolang-Compiler oder die TVM. Weitere Kapitel sind in Entwicklung.
+Dreizehn Missionen behandeln die Grundlagen der Programmierung sowie Bedingungen, Schleifen, Funktionen und Antworten in Tolang, anschließend Nachrichten und den kombinierten Empfang mehrerer Nachrichten. Jede Mission umfasst Vorhersagen, Erklärungen, Änderungen am Code und eine eigenständig zu lösende Aufgabe; die ursprünglichen vier enthalten weiterhin ihre Flugübungen. Kurs und Benutzeroberfläche unterstützen 11 Sprachen. Programme laufen lokal in einem Lehrinterpreter mit begrenztem Funktionsumfang und festgelegten Ausführungsgrenzen, nicht im vollständigen Tolang-Compiler oder in der TVM. Bei eigenständigen Aufgaben werden die tatsächliche Ausgabe und der Einsatz der geforderten Konzepte geprüft, die zu dieser Ausgabe beitragen; die Tippgeschwindigkeit hat keinen Einfluss auf die Bewertung.
 
 Eigenständige Aufgaben werden mit bis zu 100 Punkten für Ausführung, Ausgabe und Aufgabenbedingungen bewertet. Überarbeiten und erneut einreichen ist möglich; Tipptempo und Übereinstimmung mit dem Beispiel zählen nicht.
 

@@ -49,7 +49,7 @@
     "hint": "Ein kleiner Tipp",
     "independent": "Jetzt schreibst du selbst",
     "codeLabel": "Dein Programm",
-    "scope": "Der Einsteiger-Interpreter unterstützt Zahlen, Addition, Namen und Ausgabe. Er ist nicht der vollständige Tolang-Compiler oder die TVM.",
+    "scope": "Dieser Lerninterpreter unterstützt Ganzzahlen mit begrenztem Wertebereich, Wahrheitswerte, Listen, Berechnungen, Namen, Bedingungen, Schleifen, Funktionen, Nachrichten und den gemeinsamen Empfang mehrerer Nachrichten. Er ist weder der vollständige Tolang-Compiler noch die TVM.",
     "complete": "Dein Programm funktioniert!",
     "score": "Flugpunkte",
     "accuracy": "Tippgenauigkeit",
@@ -68,7 +68,7 @@
     "limit": "Das Programm überschreitet die Grenzen des Einsteiger-Interpreters.",
     "predictionHint": "Rechne der Reihe nach und überlege, was .log() anzeigt.",
     "close": "Schließen",
-    "chapterNote": "Kapitel 1 · 4 Missionen. Weitere Kapitel sind in Entwicklung.",
+    "chapterNote": "13 Missionen · Programmiergrundlagen, Tolang und Koordination",
     "footer": "Von der ersten Frage zum ersten Programm.",
     "launch": "Verstehen und eingeben ↗",
     "navigation": "Hauptnavigation",
@@ -77,7 +77,19 @@
     "navGuide": "Programmiergrundlagen",
     "navGuideShort": "Einstieg",
     "mapShort": "Karte",
-    "heroAccent": "Planeten"
+    "heroAccent": "Planeten",
+    "observeProgram": "Vorhersagen und ausführen",
+    "practiceInChase": "Teste deine Ideen in der Raumhafen-Jagd",
+    "trackBeginner": "Programmiergrundlagen",
+    "trackTolang": "Tolang in der Praxis",
+    "trackAdvanced": "Nachrichten und Koordination",
+    "subset": "Diese Form gehört nicht zum unterstützten Sprachumfang dieser Übungsumgebung. Verwende die in den Lektionen gezeigten Formen.",
+    "type": "Diese Werte passen nicht zu dieser Operation. Bedingungen benötigen true oder false; Rechenoperationen benötigen ganze Zahlen.",
+    "arity": "Dieser Aufruf übergibt mehr Werte, als die Funktion annimmt.",
+    "zeroDivision": "Bei Division und Restberechnung darf der Divisor nicht 0 sein.",
+    "waiting": "Das Programm wartet auf eine Antwort oder auf noch nicht eingetroffene Nachrichten.",
+    "bindingScope": "Dieser Name kann hier nicht erneut gebunden werden. Prüfe den Gültigkeitsbereich des Bedingungszweigs oder des Schleifenelements.",
+    "replyUsed": "Diese Funktion hat bereits geantwortet. Derselbe Aufruf kann seinen Antwortkanal nicht ein zweites Mal verwenden."
   },
   "lessons": [
     {
@@ -229,6 +241,426 @@
           "Berechne 2 + 3 und zeige das Ergebnis an."
         ]
       ]
+    },
+    {
+      "title": "Prüfe den Treibstoff",
+      "intro": "Ein Vergleich stellt eine Frage zu zwei Werten. > ergibt true, wenn der linke Wert größer ist, andernfalls false.",
+      "goal": "Prüfe, ob der Treibstoffwert größer als 4 ist.",
+      "result": "6 ist größer als 4, daher lautet die Ausgabe true.",
+      "question": "Was ergibt fuel > 4?",
+      "remix": "Ändere den Treibstoffwert so, dass der Vergleich false ausgibt.",
+      "remixHint": "Wähle einen Wert, der nicht größer als 4 ist.",
+      "independent": "Gib erst true, dann false aus. Verwende Vergleiche, die diese beiden Ergebnisse liefern.",
+      "independentHint": "Probiere zwei verschiedene Vergleiche aus oder vergleiche einen benannten Wert mit zwei Grenzwerten.",
+      "learned": "Du hast mit Vergleichen Werte in Ja-oder-Nein-Ergebnisse umgewandelt.",
+      "answerHint": "Der Vergleich ergibt einen Wahrheitswert; er gibt nicht die Treibstoffzahl aus.",
+      "answers": [
+        "Einen Wahrheitswert: true.",
+        "Die Treibstoffzahl: 6.",
+        "Die Zahl 4."
+      ],
+      "coach": [
+        [
+          "Ausschnitt",
+          "Gib dem Treibstoffwert einen Namen, damit der nächste Ausdruck ihn verwenden kann.",
+          "Prüfe, ob der Treibstoffwert größer als 4 ist."
+        ],
+        [
+          "Ausschnitt",
+          "Vergleiche fuel mit 4. Der Ausdruck ergibt true oder false.",
+          "Prüfe, ob der Treibstoffwert größer als 4 ist."
+        ],
+        [
+          "Ausschnitt",
+          "Gib das Vergleichsergebnis aus.",
+          "Prüfe, ob der Treibstoffwert größer als 4 ist."
+        ]
+      ]
+    },
+    {
+      "title": "Wähle ein Abflugsignal",
+      "intro": "if wählt anhand eines Wahrheitswerts einen Zweig aus. Der andere Zweig wird nicht ausgeführt. Hier stehen 1 und 2 für zwei Abflugsignale.",
+      "goal": "Wähle mit der Treibstoffprüfung ein Signal aus.",
+      "result": "Die Bedingung ist true, daher gibt nur der then-Zweig 1 aus.",
+      "question": "Warum wird nur 1 ausgegeben?",
+      "remix": "Ändere den Treibstoffwert so, dass der else-Zweig 2 ausgibt.",
+      "remixHint": "Sorge dafür, dass fuel > 4 false ergibt.",
+      "independent": "Gib einem Wert einen Namen, vergleiche ihn in einer if-Bedingung und lass den gewählten Zweig nur 2 ausgeben.",
+      "independentHint": "Du darfst den Namen, den Vergleich, die Werte und die Zweiginhalte ändern. Lass die Bedingung entscheiden, welche Ausgabe ausgeführt wird.",
+      "learned": "Du hast ein Programm anhand einer Bedingung eine Aktion auswählen lassen.",
+      "answerHint": "if wählt einen Zweig aus; es führt nicht beide Zweige aus.",
+      "answers": [
+        "Die Bedingung true wählt den then-Zweig aus.",
+        "Beide Zweige werden ausgeführt, aber 2 wird ausgeblendet.",
+        "if wählt immer den ersten Zweig."
+      ],
+      "coach": [
+        [
+          "Ausschnitt",
+          "Binde den Wert, den die Bedingung verwendet, an einen Namen.",
+          "Wähle mit der Treibstoffprüfung ein Signal aus."
+        ],
+        [
+          "Ausschnitt",
+          "Bei einer Bedingung mit dem Wert true wird dieser Zweig betreten.",
+          "Wähle mit der Treibstoffprüfung ein Signal aus."
+        ],
+        [
+          "Ausschnitt",
+          "Dies ist die Ausgabe des Zweigs für true.",
+          "Wähle mit der Treibstoffprüfung ein Signal aus."
+        ],
+        [
+          "Ausschnitt",
+          "else leitet den Zweig für eine Bedingung mit dem Wert false ein.",
+          "Wähle mit der Treibstoffprüfung ein Signal aus."
+        ],
+        [
+          "Ausschnitt",
+          "Diese Ausgabe wird nur ausgeführt, wenn die Bedingung false ist.",
+          "Wähle mit der Treibstoffprüfung ein Signal aus."
+        ],
+        [
+          "Ausschnitt",
+          "Schließe die Verzweigungsstruktur ab.",
+          "Wähle mit der Treibstoffprüfung ein Signal aus."
+        ]
+      ]
+    },
+    {
+      "title": "Besuche die Docks",
+      "intro": "for nimmt nacheinander jeweils ein Element aus einer Liste. Der Schleifenname verweist auf das aktuelle Element.",
+      "goal": "Gib jede Docknummer in der Reihenfolge der Liste aus.",
+      "result": "Die Schleife liest erst 2, dann 4, dann 6 und gibt jeden Wert aus.",
+      "question": "Warum werden drei verschiedene Zahlen ausgegeben?",
+      "remix": "Ersetze das letzte Dock, sodass die Ausgabe 2, 4, dann 8 lautet.",
+      "remixHint": "Die Liste bestimmt, welche Werte dock erhält.",
+      "independent": "Gib mit for erst 3, dann 5, dann 7 aus. Jede Ausgabe muss das aktuelle Schleifenelement verwenden.",
+      "independentHint": "Wähle die Liste direkt oder berechne aus jedem Element einen neuen Wert.",
+      "learned": "Du hast eine Anweisung für eine Folge von Werten wiederholt.",
+      "answerHint": "Die Schleife ändert, auf welches Listenelement der Name verweist.",
+      "answers": [
+        "dock verweist in jedem Durchlauf auf ein anderes Listenelement.",
+        "log addiert automatisch 2.",
+        "Nur das letzte Element wird verarbeitet."
+      ],
+      "coach": [
+        [
+          "Ausschnitt",
+          "Nimm jeden Dockwert der Reihe nach aus der Liste.",
+          "Gib jede Docknummer in der Reihenfolge der Liste aus."
+        ],
+        [
+          "Ausschnitt",
+          "Gib das Element dieses Durchlaufs aus.",
+          "Gib jede Docknummer in der Reihenfolge der Liste aus."
+        ],
+        [
+          "Ausschnitt",
+          "Fahre mit dem nächsten Element fort; beende die Schleife, wenn alle Elemente verarbeitet sind.",
+          "Gib jede Docknummer in der Reihenfolge der Liste aus."
+        ]
+      ]
+    },
+    {
+      "title": "Zähle die Startprüfungen",
+      "intro": "while prüft seine Bedingung vor jedem Durchlauf. Wird tick am Ende aktualisiert, verwendet die nächste Prüfung den neuen Wert.",
+      "goal": "Gib 1, 2 und 3 aus und höre vor 4 auf.",
+      "result": "Nach der Ausgabe von 3 wird tick zu 4. Die nächste Bedingung ist false, daher endet die Schleife.",
+      "question": "Warum wird 4 nicht ausgegeben?",
+      "remix": "Ändere den Grenzwert so, dass das Programm auch 4 ausgibt.",
+      "remixHint": "Der Vergleich wird geprüft, bevor der Schleifenrumpf ausgeführt wird.",
+      "independent": "Gib mit while erst 2, dann 3, dann 4 aus. Aktualisiere den Zähler am Ende jedes Durchlaufs, damit die Schleife endet.",
+      "independentHint": "Wähle einen Startwert und einen Grenzwert. Du kannst den Zähler ausgeben oder daraus einen Wert berechnen.",
+      "learned": "Du hast Wiederholungen mit einem veränderlichen Wert und einer Abbruchbedingung gesteuert.",
+      "answerHint": "Der Zähler wird nach der Ausgabe und vor der nächsten Bedingungsprüfung aktualisiert.",
+      "answers": [
+        "Wenn tick 4 erreicht, ergibt die nächste Bedingungsprüfung false.",
+        "Die Schleife blendet ihre letzte Ausgabe aus.",
+        "while wird immer genau dreimal ausgeführt."
+      ],
+      "coach": [
+        [
+          "Ausschnitt",
+          "Starte den Zähler bei 1.",
+          "Gib 1, 2 und 3 aus und höre vor 4 auf."
+        ],
+        [
+          "Ausschnitt",
+          "Prüfe den aktuellen Zähler, bevor der Schleifenrumpf ausgeführt wird.",
+          "Gib 1, 2 und 3 aus und höre vor 4 auf."
+        ],
+        [
+          "Ausschnitt",
+          "Gib den aktuellen Wert aus.",
+          "Gib 1, 2 und 3 aus und höre vor 4 auf."
+        ],
+        [
+          "Ausschnitt",
+          "Aktualisiere den Zähler für die nächste Bedingungsprüfung.",
+          "Gib 1, 2 und 3 aus und höre vor 4 auf."
+        ],
+        [
+          "Ausschnitt",
+          "Kehre zur Bedingung zurück.",
+          "Gib 1, 2 und 3 aus und höre vor 4 auf."
+        ]
+      ]
+    },
+    {
+      "title": "Verwende eine Frachtberechnung erneut",
+      "intro": "Eine sync-Funktion erhält Argumente und gibt einen Wert zurück. Ein ausdrückliches return gibt das Berechnungsergebnis an den Aufrufer zurück.",
+      "goal": "Rufe combine auf und gib den Rückgabewert aus.",
+      "result": "Die Argumente werden zu a = 3 und b = 4. Die Funktion gibt 7 zurück; load gibt diesen Wert anschließend aus.",
+      "question": "Wie erhält load den Wert 7?",
+      "remix": "Ändere das zweite Argument so, dass die zurückgegebene Frachtsumme 9 ist.",
+      "remixHint": "Das erste Argument bleibt 3; wähle das zweite so, dass die Summe 9 ergibt.",
+      "independent": "Definiere eine sync-Funktion mit einem ausdrücklichen return und einer Addition. Rufe sie auf und gib ihren Rückgabewert als 12 aus.",
+      "independentHint": "Du kannst zwei Argumente verwenden oder zu einem Argument einen festen Wert addieren. Der ausgegebene Wert muss aus dem Aufruf stammen.",
+      "learned": "Du hast eine Berechnung in einer Funktion gebündelt und ihren Rückgabewert an anderer Stelle verwendet.",
+      "answerHint": "Die Funktion addiert beim Aufruf; ihre Definition allein gibt nichts aus.",
+      "answers": [
+        "Der Aufruf gibt a + b zurück, und dieser Wert wird an load gebunden.",
+        "Das Benennen der Funktion gibt automatisch 7 aus.",
+        "Das Semikolon addiert die Argumente."
+      ],
+      "coach": [
+        [
+          "Ausschnitt",
+          "Definiere eine synchrone Funktion mit zwei Parametern.",
+          "Rufe combine auf und gib den Rückgabewert aus."
+        ],
+        [
+          "Ausschnitt",
+          "Gib die Summe an den Aufrufer zurück.",
+          "Rufe combine auf und gib den Rückgabewert aus."
+        ],
+        [
+          "Ausschnitt",
+          "Schließe die Funktionsdefinition ab.",
+          "Rufe combine auf und gib den Rückgabewert aus."
+        ],
+        [
+          "Ausschnitt",
+          "Rufe die Funktion auf und gib ihrem Rückgabewert einen Namen.",
+          "Rufe combine auf und gib den Rückgabewert aus."
+        ],
+        [
+          "Ausschnitt",
+          "Gib den vom Aufruf zurückgegebenen Wert aus.",
+          "Rufe combine auf und gib den Rückgabewert aus."
+        ]
+      ]
+    },
+    {
+      "title": "Warte auf eine Funktionsantwort",
+      "intro": "return ! sendet eine Funktionsantwort. Der Aufrufer kann diese Antwort in einer Berechnung verwenden. Hier erhält boost den Wert load, addiert 2 und antwortet mit dem Ergebnis.",
+      "goal": "Verfolge, wie ein Wert in eine Funktion gelangt und als Antwort zurückkommt.",
+      "result": "boost erhält 5 und antwortet mit 7; result ist der Name dieser Antwort.",
+      "question": "Wodurch kann result.log() den Wert 7 ausgeben?",
+      "remix": "Ändere die Eingabe für boost so, dass die Antwort als 10 ausgegeben wird.",
+      "remixHint": "Die Funktion addiert 2 zu ihrer Eingabe.",
+      "independent": "Schreibe eine Funktion, die mit dem Ergebnis einer Addition antwortet, und gib ihre Antwort als 12 aus. Verwende eigene Namen und Zahlen.",
+      "independentHint": "Verwende return ! für die Antwort und nutze dann das Ergebnis des Funktionsaufrufs.",
+      "learned": "Du hast eine Funktionsantwort als Daten für den Aufrufer verwendet.",
+      "answerHint": "Ein Funktionsrumpf gibt seinen letzten Ausdruck nicht automatisch zurück. Diese Funktion antwortet ausdrücklich.",
+      "answers": [
+        "boost antwortet unverändert mit 5.",
+        "return ! antwortet mit 5 + 2; der Aufrufer verwendet diesen Wert.",
+        "Der Aufrufer ersetzt eine fehlende Antwort immer durch 0."
+      ],
+      "coach": [
+        [
+          "Funktion",
+          "boost erhält einen Wert namens load.",
+          "Verfolge, wie ein Wert in eine Funktion gelangt und als Antwort zurückkommt."
+        ],
+        [
+          "Antwort",
+          "return ! antwortet mit load + 2. Das unterscheidet sich von der Rückgabe über den Aufrufstapel einer sync-Funktion.",
+          "Verfolge, wie ein Wert in eine Funktion gelangt und als Antwort zurückkommt."
+        ],
+        [
+          "Definition",
+          "Die schließende geschweifte Klammer beendet die Funktionsdefinition.",
+          "Verfolge, wie ein Wert in eine Funktion gelangt und als Antwort zurückkommt."
+        ],
+        [
+          "Aufruf",
+          "Der Aufrufer übergibt 5 und nennt die Antwort result.",
+          "Verfolge, wie ein Wert in eine Funktion gelangt und als Antwort zurückkommt."
+        ],
+        [
+          "Ausgabe",
+          "Gib die Antwort aus, auf die result verweist.",
+          "Verfolge, wie ein Wert in eine Funktion gelangt und als Antwort zurückkommt."
+        ]
+      ]
+    },
+    {
+      "title": "Übermittle eine Frachtnachricht",
+      "intro": "let parcel; erstellt einen Kanal. ! sendet einen Wert; ein Empfangsmuster bindet den eingehenden Wert an einen Namen. | ordnet diese Abläufe nebenläufig an.",
+      "goal": "Sende 7 und gib den von parcel empfangenen Wert aus.",
+      "result": "Das Empfangsmuster übernimmt die Nachricht 7 und nennt sie value. Der Rumpf gibt diesen Wert aus.",
+      "question": "Woher erhält value seine Zahl?",
+      "remix": "Ändere die gesendete Nachricht so, dass der Empfänger 9 ausgibt.",
+      "remixHint": "Ändere den Wert nach !, nicht den Namen im Empfangsmuster.",
+      "independent": "Sende eine Zahl durch einen Kanal, empfange sie und verwende den empfangenen Wert, um 11 auszugeben.",
+      "independentHint": "Sende direkt 11 oder rechne eine andere empfangene Zahl in 11 um.",
+      "learned": "Du hast einen Wert von einem Sender an einen Empfänger übergeben.",
+      "answerHint": "Der Name im Empfangsmuster wird an die eingehende Nachricht gebunden. Er ist kein automatischer Zähler.",
+      "answers": [
+        "value wird an die von parcel empfangene Nachricht gebunden.",
+        "value ist immer 7, unabhängig von der gesendeten Nachricht.",
+        "Der Kanalname wird in eine Zahl umgewandelt."
+      ],
+      "coach": [
+        [
+          "Ausschnitt",
+          "Erstelle den Kanal, ohne ihm einen Zahlenwert zuzuweisen.",
+          "Sende 7 und gib den von parcel empfangenen Wert aus."
+        ],
+        [
+          "Ausschnitt",
+          "Sende die Zahl 7 über parcel.",
+          "Sende 7 und gib den von parcel empfangenen Wert aus."
+        ],
+        [
+          "Ausschnitt",
+          "Empfange eine Nachricht von parcel und binde sie an value.",
+          "Sende 7 und gib den von parcel empfangenen Wert aus."
+        ],
+        [
+          "Ausschnitt",
+          "Gib den empfangenen Wert aus.",
+          "Sende 7 und gib den von parcel empfangenen Wert aus."
+        ],
+        [
+          "Ausschnitt",
+          "Schließe den Empfängerrumpf und die nebenläufige Gruppe ab.",
+          "Sende 7 und gib den von parcel empfangenen Wert aus."
+        ]
+      ]
+    },
+    {
+      "title": "Warte auf beide Frachtberichte",
+      "intro": "Ein gemeinsamer Empfang verwendet &, um auf jedem benannten Kanal auf eine Nachricht zu warten. Sein Rumpf wird erst ausgeführt, wenn beide Nachrichten verfügbar sind.",
+      "goal": "Empfange beide Berichte und gib ihre Summe aus.",
+      "result": "Der Rumpf erhält a = 4 und b = 6 und gibt anschließend ihre Summe 10 aus.",
+      "question": "Was passiert, wenn auf east noch keine Nachricht eingegangen ist?",
+      "remix": "Ändere den Bericht auf east so, dass die Gesamtsumme 12 ergibt.",
+      "remixHint": "Der Bericht auf west bleibt 4. Wähle den anderen Teil der Summe.",
+      "independent": "Empfange zwei Nachrichten gemeinsam und verwende beide Werte in einer Addition, die 15 ausgibt.",
+      "independentHint": "Wähle zwei Sendewerte; nach dem Empfang beider Werte darfst du auch eine feste Zahl addieren.",
+      "learned": "Du hast zwei Eingaben koordiniert, bevor du ein Ergebnis berechnet hast.",
+      "answerHint": "& benötigt beide Nachrichten. Es wählt nicht einfach die zuerst eingetroffene aus.",
+      "answers": [
+        "Der Empfänger wartet; sein Rumpf wird noch nicht ausgeführt.",
+        "Der Rumpf verwendet 0 für die fehlende Nachricht.",
+        "Die erste Nachricht wird zweimal addiert."
+      ],
+      "coach": [
+        [
+          "Ausschnitt",
+          "Erstelle für jeden Bericht einen Kanal.",
+          "Empfange beide Berichte und gib ihre Summe aus."
+        ],
+        [
+          "Ausschnitt",
+          "Sende den Bericht auf west.",
+          "Empfange beide Berichte und gib ihre Summe aus."
+        ],
+        [
+          "Ausschnitt",
+          "Sende den Bericht auf east.",
+          "Empfange beide Berichte und gib ihre Summe aus."
+        ],
+        [
+          "Ausschnitt",
+          "Warte auf eine Nachricht auf jedem Kanal und binde beide Werte an Namen.",
+          "Empfange beide Berichte und gib ihre Summe aus."
+        ],
+        [
+          "Ausschnitt",
+          "Addiere die beiden empfangenen Werte und gib das Ergebnis aus.",
+          "Empfange beide Berichte und gib ihre Summe aus."
+        ],
+        [
+          "Ausschnitt",
+          "Schließe den gemeinsamen Empfänger und die nebenläufige Gruppe ab.",
+          "Empfange beide Berichte und gib ihre Summe aus."
+        ]
+      ]
+    },
+    {
+      "title": "Koordiniere einen Startbericht",
+      "intro": "Verbinde das Gelernte: Sammle zwei Berichte, addiere sie mit einer sync-Funktion und entscheide dann, wie das endgültige Signal berechnet wird. Diese Zahlen sind Übungsdaten für einen Startbericht.",
+      "goal": "Empfange beide Berichte gemeinsam, rufe total auf und addiere 5 nur dann, wenn die Summe größer als 12 ist.",
+      "result": "Die Berichte ergeben zusammen 13. Die Bedingung ist true, daher gibt das Programm 13 + 5 = 18 aus.",
+      "question": "Welcher Ablauf führt zur endgültigen 18?",
+      "remix": "Ändere den Bericht auf east so, dass dasselbe Programm 19 ausgibt.",
+      "remixHint": "Rechne von der abschließenden Addition von 5 rückwärts und sorge dafür, dass die Bedingung true bleibt.",
+      "independent": "Erstelle ein eigenes Startprogramm mit zwei Berichten, das nur 18 ausgibt. Empfange beide Nachrichten gemeinsam, kombiniere beide empfangenen Werte in einer sync-Funktion, vergleiche deren Ergebnis in if und berechne daraus die Ausgabe des gewählten Zweigs.",
+      "independentHint": "Wähle Berichtswerte, einen Grenzwert und eine Anpassung. Beide Nachrichten müssen das Funktionsergebnis beeinflussen, und der gewählte Zweig muss daraus seine Ausgabe berechnen.",
+      "learned": "Du hast Kommunikation, wiederverwendbare Berechnungen und eine bedingte Entscheidung in einem Programm verbunden.",
+      "answerHint": "Verfolge die Werte: empfangene Berichte → Funktionsergebnis → Bedingung → gewählte Berechnung.",
+      "answers": [
+        "Beide Berichte ergeben zusammen 13; der Zweig für true addiert 5.",
+        "Der Empfänger gibt unabhängig von seinen Nachrichten immer 18 aus.",
+        "Die beiden Sender geben jeweils 9 aus."
+      ],
+      "coach": [
+        [
+          "Ausschnitt",
+          "Definiere die wiederverwendbare Berechnung für die Berichte.",
+          "Empfange beide Berichte gemeinsam, rufe total auf und addiere 5 nur dann, wenn die Summe größer als 12 ist."
+        ],
+        [
+          "Ausschnitt",
+          "Gib eine Summe zurück, die von beiden Eingaben abhängt.",
+          "Empfange beide Berichte gemeinsam, rufe total auf und addiere 5 nur dann, wenn die Summe größer als 12 ist."
+        ],
+        [
+          "Ausschnitt",
+          "Schließe die Funktion ab und erstelle zwei Berichtskanäle.",
+          "Empfange beide Berichte gemeinsam, rufe total auf und addiere 5 nur dann, wenn die Summe größer als 12 ist."
+        ],
+        [
+          "Ausschnitt",
+          "Sende einen Bericht auf jedem Kanal.",
+          "Empfange beide Berichte gemeinsam, rufe total auf und addiere 5 nur dann, wenn die Summe größer als 12 ist."
+        ],
+        [
+          "Ausschnitt",
+          "Warte auf beide Berichte und gib ihren Werten Namen.",
+          "Empfange beide Berichte gemeinsam, rufe total auf und addiere 5 nur dann, wenn die Summe größer als 12 ist."
+        ],
+        [
+          "Ausschnitt",
+          "Übergib beide empfangenen Werte an die Funktion.",
+          "Empfange beide Berichte gemeinsam, rufe total auf und addiere 5 nur dann, wenn die Summe größer als 12 ist."
+        ],
+        [
+          "Ausschnitt",
+          "Vergleiche die berechnete Summe, um einen Zweig auszuwählen.",
+          "Empfange beide Berichte gemeinsam, rufe total auf und addiere 5 nur dann, wenn die Summe größer als 12 ist."
+        ],
+        [
+          "Ausschnitt",
+          "Berechne diese Ausgabe aus der zurückgegebenen Summe.",
+          "Empfange beide Berichte gemeinsam, rufe total auf und addiere 5 nur dann, wenn die Summe größer als 12 ist."
+        ],
+        [
+          "Ausschnitt",
+          "Gib andernfalls die unveränderte Summe aus.",
+          "Empfange beide Berichte gemeinsam, rufe total auf und addiere 5 nur dann, wenn die Summe größer als 12 ist."
+        ],
+        [
+          "Ausschnitt",
+          "Schließe den Empfänger und die nebenläufige Gruppe ab.",
+          "Empfange beide Berichte gemeinsam, rufe total auf und addiere 5 nur dann, wenn die Summe größer als 12 ist."
+        ]
+      ]
     }
   ],
   "guide": [
@@ -261,6 +693,24 @@
       "text": "Mit Tolang werden Programme für ALUX geschrieben. Änderungen am gemeinsamen Zustand einer Blockchain unterliegen auch Transaktionsregeln und der Einigung zwischen Knoten. Sprache und Laufzeitumgebung spielen beide eine Rolle.",
       "code": "7.log()",
       "takeaway": "Die Zahlenausgabe im Spiel sendet keine Blockchain-Transaktion. Diese Grundlagen helfen dir auch bei anderen Programmiersprachen."
+    },
+    {
+      "title": "Auswählen und wiederholen",
+      "text": "Ein Vergleich ergibt true oder false. if wählt einen Zweig; for durchläuft eine Liste oder einen Wertebereich, und while wiederholt, solange seine Bedingung true ist. Tolangs and und or werten beide Seiten aus. Sie verhindern daher keine Division durch 0 auf der jeweils anderen Seite.",
+      "code": "for dock in [2, 4, 6] { dock.log() }",
+      "takeaway": "Sage sowohl die ausgegebenen Werte als auch die Anzahl der Ausgaben voraus. Eine andere Anzahl von Durchläufen kann einen Bewegungsplan verändern."
+    },
+    {
+      "title": "Einen Wert zurückgeben oder antworten",
+      "text": "sync fn mit return value liefert ein Ergebnis über den Aufrufstapel zurück. return ! value sendet eine Funktionsantwort. Schreibe die Rückgabe ausdrücklich hin: Eine Funktion gibt ihren letzten Ausdruck nicht automatisch zurück. Bei einer fehlenden Antwort kann der Aufrufer warten bleiben.",
+      "code": "fn boost(load) { return ! (load + 2) };\nboost(5).log()",
+      "takeaway": "Weniger Argumente können eine partiell angewendete Funktion erzeugen. Zu viele Argumente erzeugen keine zusätzlichen Parameter."
+    },
+    {
+      "title": "Nachrichten koordinieren",
+      "text": "let parcel; erstellt einen Namen für die Kommunikation. ! sendet und ? empfängt. Ein gemeinsamer Empfang wartet mit &, bis alle passenden Nachrichten verfügbar sind. | verbindet nebenläufige Abläufe; seine Verwendung garantiert keine Reihenfolge der Ausgaben.",
+      "code": "let a; let b;\n{ a ! 4 | b ! 6 | ?(x <- a & y <- b) { (x + y).log() } }",
+      "takeaway": "Fehlt eine Nachricht, wartet der Empfang weiter. Verwende einen gemeinsamen Empfang, wenn spätere Schritte beide Werte benötigen."
     }
   ],
   "assessment": {
@@ -287,7 +737,17 @@
     "concepts": {
       "add": "Eine Ausgabe durch Addition berechnen",
       "bind": "Einen Namen an einen Wert binden",
-      "name": "Den gebundenen Namen für eine Ausgabe nutzen"
+      "name": "Den gebundenen Namen für eine Ausgabe nutzen",
+      "compare": "Werte vergleichen, die die Ausgabe beeinflussen",
+      "if": "Mit einer Bedingung den auszuführenden Zweig wählen",
+      "for": "Die Ausgabe mit for erzeugen",
+      "while": "Die Ausgabe mit while erzeugen",
+      "call": "Einen Funktionsaufruf verwenden, der die Ausgabe beeinflusst",
+      "reply": "Eine ausdrückliche Funktionsantwort verwenden",
+      "send": "Eine Nachricht senden, die die Ausgabe beeinflusst",
+      "receive": "Eine Nachricht empfangen, die die Ausgabe beeinflusst",
+      "join": "Gemeinsam auf mehrere Nachrichten warten",
+      "loop": "Zustand durch eine ausdrücklich angelegte Schleife weiterführen"
     },
     "edit": "Code bearbeiten",
     "yourCode": "Dein eingereichter Code",
@@ -336,7 +796,7 @@
     "allDone": "Alle drei Mechanismen sind offen. Probiere mit neuen Hinweisen einen anderen Lösungsweg. Deine Stempel bleiben erhalten.",
     "help": "Brauchst du einen Hinweis?",
     "meaning": "let gibt einem Wert einen Namen, + addiert Zahlen und .log() gibt das Ergebnis aus.",
-    "practiceNote": "Ohne Zeitdruck ausprobieren. Stempel dokumentieren Spielaufgaben, keine Programmierkenntnisse. Hier läuft nur der Einstiegsumfang aus Zahlen, Addition und Namensbindung.",
+    "practiceNote": "Ohne Zeitdruck ausprobieren. Stempel dokumentieren Spielaufgaben, keine Programmierkenntnisse.",
     "running": "Signale werden gesendet…",
     "complete": "Sternenkern geborgen",
     "opened": "Schloss geöffnet",

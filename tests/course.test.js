@@ -18,6 +18,11 @@ test('eleven complete catalogs cover the same course and controls', async()=>{
     assert.equal(data.ui.name,id==='zh'?'环灵':id==='zh-Hant'?'環靈':'Loopuff');
     assert.equal(data.lessons.length,course.length);
     data.lessons.forEach((lesson,index)=>assert.equal(lesson.coach.length,course[index].fragments.length));
+    for(const lesson of course){
+      for(const concept of lesson.independent.require)assert.ok(data.assessment.concepts[concept],`${id} missing concept ${concept}`);
+      assert.ok((lesson.independent.dataRequire||[]).every(concept=>lesson.independent.require.includes(concept)),lesson.id);
+    }
+    for(const key of ['subset','type','arity','zeroDivision','bindingScope','replyUsed','waiting','trackBeginner','trackTolang','trackAdvanced'])assert.ok(data.ui[key],`${id} missing ${key}`);
     function check(value){if(typeof value==='string')assert.ok(value.trim()&&!/undefined|TODO|TBD/.test(value),id);else if(Array.isArray(value))value.forEach(check);else Object.values(value).forEach(check);}
     check(data);
   }

@@ -14,7 +14,7 @@ import { selectedLocale, languageUrl, parseRoute, routeUrl } from './routing.js'
 const $ = id => document.getElementById(id);
 const escape = text => String(text).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function prose(text){
-  const pattern=/let [A-Za-z_]\w* = \d+;|\([^\)\n]+\)(?:\.log\(\))?|\.log\(\)|\b(?:[A-Za-z_]\w*|\d+) \+ \d+\b|\b(?:let|log|n|TVM|Tolang|ALUX|gas)\b|\+/g;
+  const pattern=/let [A-Za-z_]\w* = \d+;|\([^\)\n]+\)(?:\.log\(\))?|\.log\(\)|\b(?:[A-Za-z_]\w*|\d+) \+ \d+\b|return\s*!|\bsync fn\b|\b(?:let|log|n|TVM|Tolang|ALUX|gas|return|fn|if|then|else|for|while|in|true|false|and|or)\b|\+/g;
   let cursor=0,result='';for(const match of String(text).matchAll(pattern)){result+=escape(text.slice(cursor,match.index))+`<bdi dir="ltr">${escape(match[0])}</bdi>`;cursor=match.index+match[0].length;}return result+escape(text.slice(cursor));
 }
 const storageKey='loopuff-v1', reduced=matchMedia('(prefers-reduced-motion: reduce)');
@@ -192,7 +192,7 @@ function assessmentPanel(){
   const a=messages.assessment;
   if(state.assessedSource!==state.draft||state.assessedSource===null)return `<div class="empty-report"><h1 id="learning-title">${escape(a.noReport)}</h1><p>${escape(a.noReportHint)}</p>${actions([['edit-assessment',a.edit]])}</div>`;
   const report=grade(state.draft,lesson().independent);
-  const errorKey=report.code==='name'?'nameError':report.code;
+  const errorKey=report.result?.waiting&&!report.ok?'waiting':report.code==='name'?'nameError':report.code;
   const explanation=(report.ok?a.success:ui(errorKey)||ui('limit'))+(report.code==='syntax'?` ${report.position+1}.`:'');
   const checks=report.checks.map(check=>`<li class="assessment-check" data-status="${check.status}"><div><span>${escape(a.labels[check.id])}</span><bdi dir="ltr">${check.points} / ${check.max}</bdi></div><small>${escape(a[check.status])}</small>${check.requirements?`<ul class="concept-checks">${check.requirements.map(item=>`<li><span aria-hidden="true">${check.status==='blocked'?'○':item.passed?'✓':'○'}</span> ${escape(a.concepts[item.concept])}</li>`).join('')}</ul>`:''}</li>`).join('');
   return `<section class="result-report" data-score="${report.score}" data-passed="${report.ok}"><header class="result-hero"><div><span class="eyebrow">${escape(ui('mission'))} ${String(state.lesson+1).padStart(2,'0')} · ${escape(copy().title)}</span><h1 id="learning-title">${escape(a.title)}</h1><p>${escape(report.ok?a.success:a.retry)}</p></div><div class="score-orbit" style="--score:${report.score}%"><div><strong><bdi dir="ltr">${report.score}</bdi></strong><span>${escape(a.score)} <bdi dir="ltr">/ 100</bdi></span></div></div></header><div class="result-toolbar">${actions(report.ok?[['finish-assessment',a.continue],['edit-assessment',a.edit,true]]:[['edit-assessment',a.edit]])}<p class="scope-note">${escape(a.note)}</p></div><section class="result-breakdown"><h2>${escape(a.breakdown)}</h2><ul class="assessment-checks">${checks}</ul>${report.ok?'':`<p class="assessment-explanation" role="status">${prose(explanation)}</p>`}</section><div class="result-work"><section><h2>${escape(a.yourCode)}</h2>${codeBlock(state.assessedSource)}</section><section><h2>${escape(ui('output'))}</h2><div class="assessment-outputs"><div><small>${escape(a.expected)}</small>${codeBlock(lesson().independent.logs.join('\n'))}</div><div><small>${escape(a.actual)}</small>${codeBlock(report.result?report.result.logs.join('\n')||ui('noOutput'):a.notRun)}</div></div></section></div></section>`;
@@ -225,9 +225,14 @@ function renderDialog(){
   if(phase==='levels'){
     $('learning-page').dataset.stage=phase;
     const nextLesson=course.findIndex(l=>!state.completed.includes(l.id));
-    $('learning-content').innerHTML=`<section class="levels-page"><span class="eyebrow">${escape(ui('name'))}</span><h1 id="learning-title">${escape(ui('routeTitle'))}</h1><p class="levels-intro">${escape(ui('routeIntro'))}</p>${journeyPanel()}<div class="level-grid">${course.map((l,i)=>`<a class="level-card" href="${routeUrl(location.href,lang,'lesson',l.id).pathname}" data-state="${state.completed.includes(l.id)?'done':i===nextLesson?'next':'available'}" data-lesson="${i}"><span class="level-number">${String(i+1).padStart(2,'0')}</span><span class="level-copy"><strong>${escape(messages.lessons[i].title)}</strong><span>${escape(messages.lessons[i].goal)}</span><small>${escape(ui(state.completed.includes(l.id)?'done':lessonWork(state,l.id)?'resume':i===nextLesson?(i===0?'start':'next'):'open'))}</small></span><span aria-hidden="true">↗</span></a>`).join('')}</div><p class="scope-note">${escape(ui('chapterNote'))}</p></section>`;return;
+    const tracks=[['beginner','trackBeginner'],['tolang','trackTolang'],['advanced','trackAdvanced']];
+    const sections=tracks.map(([track,label])=>{
+      const items=course.map((l,i)=>({l,i})).filter(({l})=>(l.track||'beginner')===track);
+      return `<section class="course-track" aria-labelledby="track-${track}"><header><h2 id="track-${track}">${escape(ui(label))}</h2><bdi dir="ltr">${items.filter(({l})=>state.completed.includes(l.id)).length} / ${items.length}</bdi></header><div class="level-grid">${items.map(({l,i})=>`<a class="level-card" href="${routeUrl(location.href,lang,'lesson',l.id).pathname}" data-state="${state.completed.includes(l.id)?'done':i===nextLesson?'next':'available'}" data-lesson="${i}"><span class="level-number">${String(i+1).padStart(2,'0')}</span><span class="level-copy"><strong>${escape(messages.lessons[i].title)}</strong><span>${escape(messages.lessons[i].goal)}</span><small>${escape(ui(state.completed.includes(l.id)?'done':lessonWork(state,l.id)?'resume':i===nextLesson?(i===0?'start':'next'):'open'))}</small></span><span aria-hidden="true">↗</span></a>`).join('')}</div></section>`;
+    }).join('');
+    $('learning-content').innerHTML=`<section class="levels-page"><span class="eyebrow">${escape(ui('name'))}</span><h1 id="learning-title">${escape(ui('routeTitle'))}</h1><p class="levels-intro">${escape(ui('routeIntro'))}</p>${journeyPanel()}${sections}<p class="scope-note">${escape(ui('chapterNote'))}</p></section>`;return;
   }
-  if(phase==='brief'){title=c.title;body=`<p class="dialog-note">${prose(c.intro)}</p>${codeBlock(lesson().source)}<p>${prose(c.goal)}</p>${actions([['type',ui('launch')]])}`;}
+  if(phase==='brief'){title=c.title;body=`<p class="dialog-note">${prose(c.intro)}</p>${codeBlock(lesson().source)}<p>${prose(c.goal)}</p>${actions([[lesson().mode==='lab'?'observe-program':'type',ui(lesson().mode==='lab'?'observeProgram':'launch')]])}`;}
   if(phase==='predict'){title=ui('predict');body=`<p class="dialog-note">${escape(ui('predictionPrompt'))}</p>${codeBlock(lesson().source)}${choices(lesson().prediction,'prediction')}`;}
   if(phase==='output'){
     const result=run(lesson().source);title=ui('output');
@@ -242,7 +247,7 @@ function renderDialog(){
     title=ui('independent');body=`<div class="challenge-layout"><section class="challenge-brief"><h2>${escape(a.task)}</h2><p class="dialog-note">${prose(c.independent)}</p><p class="scope-note">${escape(a.intro)}</p>${actions([['hint',ui('hint'),true]])}<p class="scope-note">${escape(ui('scope'))}</p></section><form id="program-form"><label class="editor-label" for="program-editor">${escape(ui('codeLabel'))}</label><textarea id="program-editor" class="practice-editor" rows="8" autocomplete="off" autocapitalize="off" spellcheck="false" dir="ltr">${escape(state.draft)}</textarea><div class="dialog-actions"><button class="primary" type="submit">${escape(a.submit)}</button>${state.assessedSource!==null&&state.assessedSource===state.draft?`<button class="text-button" data-action="view-result" type="button">${escape(a.viewResult)}</button>`:''}</div><p id="assessment-status" class="scope-note" aria-live="polite"></p></form></div>`;
   }
   if(phase==='complete'){
-    title=ui('complete');body=`<div class="signal">✧ ✧ ✧</div><p class="dialog-note">${prose(c.learned)}</p><p class="completed-grade">${escape(messages.assessment.score)} <bdi dir="ltr">${state.grades[lesson().id]?.score??100} / 100</bdi></p><div class="score-summary"><div><small>${escape(ui('score'))}</small><strong>${state.score}</strong></div><div><small>${escape(ui('accuracy'))}</small><strong>${state.keys?Math.round(Math.max(0,1-state.errors/state.keys)*100):100}%</strong></div></div><p class="scope-note">${escape(ui('masteryNote'))}</p>${actions([[state.lesson<course.length-1?'next':'home',ui(state.lesson<course.length-1?'next':'home')],['replay',ui('replay'),true]])}`;
+    title=ui('complete');body=`<div class="signal">✧ ✧ ✧</div><p class="dialog-note">${prose(c.learned)}</p><p class="completed-grade">${escape(messages.assessment.score)} <bdi dir="ltr">${state.grades[lesson().id]?.score??100} / 100</bdi></p>${lesson().mode==='lab'?'':`<div class="score-summary"><div><small>${escape(ui('score'))}</small><strong>${state.score}</strong></div><div><small>${escape(ui('accuracy'))}</small><strong>${state.keys?Math.round(Math.max(0,1-state.errors/state.keys)*100):100}%</strong></div></div>`}<p class="scope-note">${escape(lesson().mode==='lab'?messages.assessment.note:ui('masteryNote'))}</p>${actions([[state.lesson<course.length-1?'next':'home',ui(state.lesson<course.length-1?'next':'home')],['open-chase',ui('practiceInChase'),true],['replay',ui('replay'),true]])}`;
   }
   if(phase==='guide'){
     const card=messages.guide[guideIndex];title=card.title;
@@ -327,9 +332,10 @@ document.addEventListener('click',event=>{
   const target=event.target.closest('button,a[data-action],a[data-lesson]');if(!target)return;
   if(target.tagName==='A'){if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;event.preventDefault();}
   if(target.dataset.prediction!==undefined){if(Number(target.dataset.prediction)===lesson().predictionAnswer)move('output');else feedback('predictionHint');return;}
-  if(target.dataset.answer!==undefined){if(Number(target.dataset.answer)===0){state.draft='';move('remix');}else feedback('answerHint',true);return;}
+  if(target.dataset.answer!==undefined){if(Number(target.dataset.answer)===(lesson().explanationAnswer??0)){state.draft='';move('remix');}else feedback('answerHint',true);return;}
   if(target.dataset.lesson!==undefined){enterLesson(Number(target.dataset.lesson));return;}
   const action=target.dataset.action;
+  if(action==='observe-program'){move('predict');return;}
   if(action==='try-jump'){tryJump();return;}
   if(action==='open-account'){move('account');return;}
   if(action==='open-play'){move('play');return;}

@@ -64,6 +64,10 @@ body[data-view=learning] .page-foot code{color:#c2cadb;text-shadow:none}
 .learning-page .score-summary strong,.learning-page .completed-grade{color:#c3cbdc}
 
 /* The next step is a visible invitation; every lesson remains available. */
+.course-track{margin-block:32px}
+.course-track>header{display:flex;align-items:baseline;justify-content:space-between;gap:18px;margin-bottom:16px}
+.course-track h2{margin:0;font-size:22px;color:#dbe3f3}
+.course-track>header bdi{color:#adb9d2;font-size:14px}
 .level-card{min-height:154px;align-items:center;padding:26px;background:#0e1223;color:#c4cddd;border-color:#344265;box-shadow:none}
 .level-card:hover{background:#101427;border-color:#344265}
 .level-card[data-state=next]{background:#11162a;border-color:#344265}

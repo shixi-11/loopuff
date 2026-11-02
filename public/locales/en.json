@@ -49,7 +49,7 @@
     "hint": "A small hint",
     "independent": "Now write it yourself",
     "codeLabel": "Your program",
-    "scope": "This introductory interpreter supports numbers, addition, names and display. It is not the full Tolang compiler or TVM.",
+    "scope": "This learning interpreter supports bounded integers, booleans, lists, calculations, names, conditions, loops, functions, messages and joint receives. It is not the full Tolang compiler or TVM.",
     "complete": "You made the program work.",
     "score": "Flight points",
     "accuracy": "Typing accuracy",
@@ -68,7 +68,7 @@
     "limit": "This program exceeds the introductory runner limits.",
     "predictionHint": "Follow each calculation, then consider what .log() displays.",
     "close": "Close",
-    "chapterNote": "First chapter · 4 missions. More chapters are in development.",
+    "chapterNote": "13 missions · Programming foundations, Tolang and coordination",
     "footer": "From your first question to your first program.",
     "launch": "Read it, then write it ↗",
     "navigation": "Main navigation",
@@ -77,7 +77,19 @@
     "navGuide": "Programming basics",
     "navGuideShort": "Basics",
     "mapShort": "Map",
-    "heroAccent": "planets"
+    "heroAccent": "planets",
+    "observeProgram": "Predict and run",
+    "practiceInChase": "Try your ideas in Starport Chase",
+    "trackBeginner": "Programming foundations",
+    "trackTolang": "Tolang in practice",
+    "trackAdvanced": "Messages and coordination",
+    "subset": "This form is outside this exercise runner’s supported subset. Use the forms shown in the lessons.",
+    "type": "These values do not fit this operation. Conditions require true or false; arithmetic requires integers.",
+    "arity": "This call supplies more values than the function accepts.",
+    "zeroDivision": "Division and remainder cannot use a zero divisor.",
+    "waiting": "The program is waiting for a reply or for messages that have not arrived.",
+    "bindingScope": "This name cannot be rebound here. Check the scope of the conditional arm or loop element.",
+    "replyUsed": "This function has already replied. The same call cannot use its reply channel a second time."
   },
   "lessons": [
     {
@@ -229,6 +241,426 @@
           "Calculate 2 + 3, then display the result."
         ]
       ]
+    },
+    {
+      "title": "Check the fuel",
+      "intro": "A comparison asks a question about two values. > produces true when the left value is greater, and false otherwise.",
+      "goal": "Check whether the fuel value is greater than 4.",
+      "result": "6 is greater than 4, so the output is true.",
+      "question": "What does fuel > 4 produce?",
+      "remix": "Change the fuel value so the comparison displays false.",
+      "remixHint": "Choose a value that is not greater than 4.",
+      "independent": "Display true, then false, using comparisons that produce both results.",
+      "independentHint": "Try two different comparisons, or compare one named value against two limits.",
+      "learned": "You used comparisons to turn values into yes-or-no results.",
+      "answerHint": "The comparison produces a boolean; it does not display the fuel number.",
+      "answers": [
+        "A boolean: true.",
+        "The fuel number: 6.",
+        "The number 4."
+      ],
+      "coach": [
+        [
+          "Fragment",
+          "Name the fuel value so the next expression can use it.",
+          "Check whether the fuel value is greater than 4."
+        ],
+        [
+          "Fragment",
+          "Compare fuel with 4. The expression produces true or false.",
+          "Check whether the fuel value is greater than 4."
+        ],
+        [
+          "Fragment",
+          "Display the comparison result.",
+          "Check whether the fuel value is greater than 4."
+        ]
+      ]
+    },
+    {
+      "title": "Choose a departure signal",
+      "intro": "if uses a boolean to choose one branch. The other branch does not run. Here, 1 and 2 are two departure signals.",
+      "goal": "Use the fuel check to choose one signal.",
+      "result": "The condition is true, so only the then branch displays 1.",
+      "question": "Why is only 1 displayed?",
+      "remix": "Change the fuel value so the else branch displays 2.",
+      "remixHint": "Make fuel > 4 false.",
+      "independent": "Name a value, compare it in an if condition, and make the chosen branch display only 2.",
+      "independentHint": "You may change the name, comparison, values, and branch contents. Let the condition decide which output runs.",
+      "learned": "You made a program choose an action from a condition.",
+      "answerHint": "if selects a branch; it does not run both branches.",
+      "answers": [
+        "The true condition selects the then branch.",
+        "Both branches run, but 2 is hidden.",
+        "if always chooses the first branch."
+      ],
+      "coach": [
+        [
+          "Fragment",
+          "Bind the value used by the condition.",
+          "Use the fuel check to choose one signal."
+        ],
+        [
+          "Fragment",
+          "A true condition enters this branch.",
+          "Use the fuel check to choose one signal."
+        ],
+        [
+          "Fragment",
+          "This is the output for the true branch.",
+          "Use the fuel check to choose one signal."
+        ],
+        [
+          "Fragment",
+          "else introduces the branch for a false condition.",
+          "Use the fuel check to choose one signal."
+        ],
+        [
+          "Fragment",
+          "This output runs only when the condition is false.",
+          "Use the fuel check to choose one signal."
+        ],
+        [
+          "Fragment",
+          "Close the selected-branch structure.",
+          "Use the fuel check to choose one signal."
+        ]
+      ]
+    },
+    {
+      "title": "Visit the docks",
+      "intro": "for takes one item at a time from a list. The loop name refers to the current item.",
+      "goal": "Display each dock number in list order.",
+      "result": "The loop reads 2, then 4, then 6 and displays each value.",
+      "question": "Why are three different numbers displayed?",
+      "remix": "Replace the final dock so the output is 2, 4, then 8.",
+      "remixHint": "The list decides which values dock receives.",
+      "independent": "Use for to display 3, 5, then 7. Each output must use the current loop item.",
+      "independentHint": "Choose the list directly, or calculate a new value from each item.",
+      "learned": "You repeated an instruction across a sequence of values.",
+      "answerHint": "The loop changes which list item the name refers to.",
+      "answers": [
+        "dock refers to a different list item on each turn.",
+        "log adds 2 automatically.",
+        "Only the final item runs."
+      ],
+      "coach": [
+        [
+          "Fragment",
+          "Take each dock value from the list in order.",
+          "Display each dock number in list order."
+        ],
+        [
+          "Fragment",
+          "Display the item for this turn.",
+          "Display each dock number in list order."
+        ],
+        [
+          "Fragment",
+          "Return for the next item; finish when the list is exhausted.",
+          "Display each dock number in list order."
+        ]
+      ]
+    },
+    {
+      "title": "Count launch checks",
+      "intro": "while checks its condition before each turn. Updating tick at the end lets the next check see a new value.",
+      "goal": "Display 1, 2, and 3, then stop before 4.",
+      "result": "After displaying 3, tick becomes 4. The next condition is false, so the loop ends.",
+      "question": "Why is 4 not displayed?",
+      "remix": "Change the limit so the program also displays 4.",
+      "remixHint": "The comparison is checked before the body runs.",
+      "independent": "Use while to display 2, 3, then 4. Update the counter at the end of each turn so the loop stops.",
+      "independentHint": "Choose a starting value and limit. You may display the counter or calculate from it.",
+      "learned": "You controlled repetition with a changing value and a stopping condition.",
+      "answerHint": "The counter update happens after display and before the next condition check.",
+      "answers": [
+        "When tick reaches 4, the next condition is false.",
+        "The loop hides its last output.",
+        "while always runs exactly three times."
+      ],
+      "coach": [
+        [
+          "Fragment",
+          "Start the counter at 1.",
+          "Display 1, 2, and 3, then stop before 4."
+        ],
+        [
+          "Fragment",
+          "Check the current counter before entering the body.",
+          "Display 1, 2, and 3, then stop before 4."
+        ],
+        [
+          "Fragment",
+          "Display the current value.",
+          "Display 1, 2, and 3, then stop before 4."
+        ],
+        [
+          "Fragment",
+          "Update the counter for the next condition check.",
+          "Display 1, 2, and 3, then stop before 4."
+        ],
+        [
+          "Fragment",
+          "Return to the condition.",
+          "Display 1, 2, and 3, then stop before 4."
+        ]
+      ]
+    },
+    {
+      "title": "Reuse a cargo calculation",
+      "intro": "A sync function receives arguments and returns a value. An explicit return sends the calculation result back to the caller.",
+      "goal": "Call combine and display its returned value.",
+      "result": "The arguments become a = 3 and b = 4. The function returns 7, which load then displays.",
+      "question": "How does load receive 7?",
+      "remix": "Change the second argument so the returned cargo total is 9.",
+      "remixHint": "The first argument stays 3; choose the second to make the sum 9.",
+      "independent": "Define a sync function with an explicit return and addition. Call it and display its returned value as 12.",
+      "independentHint": "You can use two arguments, or add a fixed value to one argument. The displayed value must come from the call.",
+      "learned": "You packaged a calculation and used its return value elsewhere.",
+      "answerHint": "The function does the addition when called; defining it alone does not display anything.",
+      "answers": [
+        "The call returns a + b, and that value is bound to load.",
+        "Naming the function automatically displays 7.",
+        "The semicolon adds the arguments."
+      ],
+      "coach": [
+        [
+          "Fragment",
+          "Define a synchronous function with two parameters.",
+          "Call combine and display its returned value."
+        ],
+        [
+          "Fragment",
+          "Return the sum to the caller.",
+          "Call combine and display its returned value."
+        ],
+        [
+          "Fragment",
+          "Close the function definition.",
+          "Call combine and display its returned value."
+        ],
+        [
+          "Fragment",
+          "Call the function and name its return value.",
+          "Call combine and display its returned value."
+        ],
+        [
+          "Fragment",
+          "Display the value returned by the call.",
+          "Call combine and display its returned value."
+        ]
+      ]
+    },
+    {
+      "title": "Wait for a function reply",
+      "intro": "return ! sends a function reply. The caller can use that reply in a calculation. Here boost receives load, adds 2 and replies with the result.",
+      "goal": "Follow a value into a function and back through its reply.",
+      "result": "boost receives 5 and replies with 7; result names that reply.",
+      "question": "What allows result.log() to display 7?",
+      "remix": "Change the input to boost so that its reply displays 10.",
+      "remixHint": "The function adds 2 to its input.",
+      "independent": "Write a function that replies with an addition, then display its reply as 12. Use your own names and numbers.",
+      "independentHint": "Use return ! for the reply, then use the result of calling that function.",
+      "learned": "You used a function reply as data for the caller.",
+      "answerHint": "A function body does not automatically return its last expression. This function replies explicitly.",
+      "answers": [
+        "boost replies with 5 without changing it.",
+        "return ! replies with 5 + 2; the caller uses that value.",
+        "The caller always substitutes 0 for a missing reply."
+      ],
+      "coach": [
+        [
+          "Function",
+          "boost receives a value named load.",
+          "Follow a value into a function and back through its reply."
+        ],
+        [
+          "Reply",
+          "return ! replies with load + 2. It differs from the stack return used in a sync function.",
+          "Follow a value into a function and back through its reply."
+        ],
+        [
+          "Definition",
+          "The closing brace finishes the function definition.",
+          "Follow a value into a function and back through its reply."
+        ],
+        [
+          "Call",
+          "The caller passes 5 and names the reply result.",
+          "Follow a value into a function and back through its reply."
+        ],
+        [
+          "Display",
+          "Display the reply that result refers to.",
+          "Follow a value into a function and back through its reply."
+        ]
+      ]
+    },
+    {
+      "title": "Deliver a cargo message",
+      "intro": "let parcel; creates a channel. ! sends a value; a receive pattern binds the arriving value. | places these activities alongside one another.",
+      "goal": "Send 7 and display the value received from parcel.",
+      "result": "The receive pattern takes the message 7 and names it value. The body displays that value.",
+      "question": "Where does value get its number?",
+      "remix": "Change the sent message so the receiver displays 9.",
+      "remixHint": "Change the value after !, not the receive name.",
+      "independent": "Send a number through a channel, receive it, and use the received value to display 11.",
+      "independentHint": "Send 11 directly, or transform another received number into 11.",
+      "learned": "You passed a value between a sender and a receiver.",
+      "answerHint": "The receive name is bound by the arriving message. It is not an automatic counter.",
+      "answers": [
+        "It is bound to the message received from parcel.",
+        "It is always 7, whatever is sent.",
+        "The channel name is converted into a number."
+      ],
+      "coach": [
+        [
+          "Fragment",
+          "Create the channel without assigning a numeric value.",
+          "Send 7 and display the value received from parcel."
+        ],
+        [
+          "Fragment",
+          "Send the number 7 on parcel.",
+          "Send 7 and display the value received from parcel."
+        ],
+        [
+          "Fragment",
+          "Receive from parcel and bind the message to value.",
+          "Send 7 and display the value received from parcel."
+        ],
+        [
+          "Fragment",
+          "Display the received value.",
+          "Send 7 and display the value received from parcel."
+        ],
+        [
+          "Fragment",
+          "Close the receiver body and the parallel group.",
+          "Send 7 and display the value received from parcel."
+        ]
+      ]
+    },
+    {
+      "title": "Wait for both cargo reports",
+      "intro": "A joined receive uses & to wait for a message on each named channel. Its body runs only when both messages are available.",
+      "goal": "Receive both reports and display their sum.",
+      "result": "The body receives a = 4 and b = 6, then displays their sum, 10.",
+      "question": "What if east has not received a message yet?",
+      "remix": "Change the east report so the combined total is 12.",
+      "remixHint": "The west report stays 4. Choose the other part of the total.",
+      "independent": "Join two received messages and use both values in an addition that displays 15.",
+      "independentHint": "Choose two sent values; you may also add a fixed adjustment after receiving both.",
+      "learned": "You coordinated two inputs before computing a result.",
+      "answerHint": "& requires both messages. It does not choose whichever one arrives first.",
+      "answers": [
+        "The receiver waits; its body does not run yet.",
+        "The body uses 0 for the missing message.",
+        "The first message is added twice."
+      ],
+      "coach": [
+        [
+          "Fragment",
+          "Create a channel for each report.",
+          "Receive both reports and display their sum."
+        ],
+        [
+          "Fragment",
+          "Send the west report.",
+          "Receive both reports and display their sum."
+        ],
+        [
+          "Fragment",
+          "Send the east report.",
+          "Receive both reports and display their sum."
+        ],
+        [
+          "Fragment",
+          "Wait for one message on each channel and bind both values.",
+          "Receive both reports and display their sum."
+        ],
+        [
+          "Fragment",
+          "Add the two received values and display the result.",
+          "Receive both reports and display their sum."
+        ],
+        [
+          "Fragment",
+          "Close the joined receiver and the parallel group.",
+          "Receive both reports and display their sum."
+        ]
+      ]
+    },
+    {
+      "title": "Coordinate a launch report",
+      "intro": "Combine what you have learned: collect two reports, total them with a sync function, then choose how to calculate the final signal. These numbers are practice data for a launch report.",
+      "goal": "Join both reports, call total, and add 5 only when the total is greater than 12.",
+      "result": "The reports total 13. The condition is true, so the program displays 13 + 5 = 18.",
+      "question": "Which path produces the final 18?",
+      "remix": "Change the east report so the same program displays 19.",
+      "remixHint": "Work backward from the final adjustment of 5, keeping the condition true.",
+      "independent": "Build your own two-report launch program that displays only 18. Join both messages, combine both received values in a sync function, compare its result in if, and calculate the selected output from that result.",
+      "independentHint": "Choose report values, a threshold, and an adjustment. Both messages must affect the function result, and the selected branch must calculate from that result.",
+      "learned": "You connected communication, reusable calculation, and a conditional decision in one program.",
+      "answerHint": "Follow the values: received reports → function result → condition → selected calculation.",
+      "answers": [
+        "Both reports total 13; the true branch adds 5.",
+        "The receiver always displays 18 regardless of its messages.",
+        "The two senders each display 9."
+      ],
+      "coach": [
+        [
+          "Fragment",
+          "Define the reusable report calculation.",
+          "Join both reports, call total, and add 5 only when the total is greater than 12."
+        ],
+        [
+          "Fragment",
+          "Return a sum that depends on both inputs.",
+          "Join both reports, call total, and add 5 only when the total is greater than 12."
+        ],
+        [
+          "Fragment",
+          "Finish the function and create two report channels.",
+          "Join both reports, call total, and add 5 only when the total is greater than 12."
+        ],
+        [
+          "Fragment",
+          "Send one report on each channel.",
+          "Join both reports, call total, and add 5 only when the total is greater than 12."
+        ],
+        [
+          "Fragment",
+          "Wait for both reports and name their values.",
+          "Join both reports, call total, and add 5 only when the total is greater than 12."
+        ],
+        [
+          "Fragment",
+          "Pass both received values to the function.",
+          "Join both reports, call total, and add 5 only when the total is greater than 12."
+        ],
+        [
+          "Fragment",
+          "Compare the computed total to select a branch.",
+          "Join both reports, call total, and add 5 only when the total is greater than 12."
+        ],
+        [
+          "Fragment",
+          "Calculate this output from the returned total.",
+          "Join both reports, call total, and add 5 only when the total is greater than 12."
+        ],
+        [
+          "Fragment",
+          "Otherwise, display the unadjusted total.",
+          "Join both reports, call total, and add 5 only when the total is greater than 12."
+        ],
+        [
+          "Fragment",
+          "Close the receiver and the parallel group.",
+          "Join both reports, call total, and add 5 only when the total is greater than 12."
+        ]
+      ]
     }
   ],
   "guide": [
@@ -261,6 +693,24 @@
       "text": "Tolang is used to write programs for ALUX. On a blockchain, changing shared state also involves transaction rules and agreement between nodes. Language and execution environment both matter.",
       "code": "7.log()",
       "takeaway": "Displaying a number in this game sends no blockchain transaction. These first ideas also help you learn other programming languages."
+    },
+    {
+      "title": "Choose and repeat",
+      "text": "A comparison produces true or false. if chooses a branch; for traverses a list or range, and while repeats while its condition is true. Tolang’s and and or evaluate both sides, so they do not protect a division by zero on the other side.",
+      "code": "for dock in [2, 4, 6] { dock.log() }",
+      "takeaway": "Predict both the displayed values and the number of outputs. A different iteration count can change a movement plan."
+    },
+    {
+      "title": "Return a value or reply",
+      "text": "sync fn with return value produces a call-stack result. return ! value sends a function reply. Write the return explicitly: a function does not automatically return its last expression. A missing reply can leave its caller waiting.",
+      "code": "fn boost(load) { return ! (load + 2) };\nboost(5).log()",
+      "takeaway": "Fewer arguments can create a partially applied function. Too many arguments do not create extra parameters."
+    },
+    {
+      "title": "Coordinate messages",
+      "text": "let parcel; creates a communication name. ! sends and ? receives. A joint receive uses & to wait until all matching messages are available. | composes concurrent work; its appearance does not promise which output comes first.",
+      "code": "let a; let b;\n{ a ! 4 | b ! 6 | ?(x <- a & y <- b) { (x + y).log() } }",
+      "takeaway": "If one message is missing, the receive stays waiting. Use a joint receive when later work requires both values."
     }
   ],
   "assessment": {
@@ -287,7 +737,17 @@
     "concepts": {
       "add": "Use addition to compute an output",
       "bind": "Create a name binding",
-      "name": "Use the bound name in an output"
+      "name": "Use the bound name in an output",
+      "compare": "Compare values that affect the output",
+      "if": "Use a condition to choose the executed branch",
+      "for": "Use for to generate the output",
+      "while": "Use while to generate the output",
+      "call": "Use a function call that affects the output",
+      "reply": "Use an explicit function reply",
+      "send": "Send a message that affects the output",
+      "receive": "Receive a message that affects the output",
+      "join": "Wait for multiple messages together",
+      "loop": "Carry state through an explicit loop"
     },
     "edit": "Edit code",
     "yourCode": "Your code",
@@ -336,7 +796,7 @@
     "allDone": "All three mechanisms are open. Fresh clues let you try another solution; your stamps stay with you.",
     "help": "Need a starting point?",
     "meaning": "let gives a value a name. + adds numbers. .log() sends the result to the output.",
-    "practiceNote": "Take your time: there is no countdown. Stamps record these game challenges, not programming mastery. Only the introductory number, addition and binding subset runs here.",
+    "practiceNote": "Take your time: there is no countdown. Stamps record these game challenges, not programming mastery.",
     "running": "Sending signals…",
     "complete": "Star core recovered",
     "opened": "Lock released",
