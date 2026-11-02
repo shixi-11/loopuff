@@ -220,6 +220,68 @@
 .chase-page [data-chase-save] {
   color: #edc88f;
 }
+.chase-trace {
+  margin: 0 22px 20px;
+  padding: 16px;
+  border: 1px solid #405476;
+  border-radius: 10px;
+  background: #141f38;
+}
+.chase-trace[hidden] {
+  display: none;
+}
+.chase-trace summary {
+  cursor: pointer;
+  color: #e9edf5;
+  font-weight: 650;
+}
+.chase-trace p,
+.chase-trace dt,
+.chase-trace small {
+  color: #adb9d2;
+}
+.chase-trace .dialog-actions {
+  flex-wrap: wrap;
+}
+.chase-trace-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 0;
+  max-height: 24rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.chase-trace-list li {
+  padding-block: 14px;
+  border-top: 1px solid #344263;
+}
+.chase-trace-list li[aria-current=step] > strong {
+  color: #c2d1fa;
+}
+.chase-trace-list dl {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, .7fr) minmax(0, 1.2fr);
+  gap: 12px 20px;
+  margin-bottom: 0;
+}
+.chase-trace-list dt {
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+.chase-trace-list dd {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.chase-trace-list code,
+.chase-trace-list small {
+  display: block;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.chase-trace-list small {
+  margin-top: 8px;
+}
 .chase-card-art {
   height: 220px;
   position: relative;
@@ -271,6 +333,13 @@
   .chase-controls-note,
   .chase-move {
     margin-inline: 15px;
+  }
+  .chase-trace {
+    margin-inline: 15px;
+    padding: 14px;
+  }
+  .chase-trace-list dl {
+    grid-template-columns: minmax(0, 1fr);
   }
   .chase-moves button {
     padding: 8px;

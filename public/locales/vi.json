@@ -451,6 +451,26 @@
     "artError": "Không thể tải con phố. Hãy thử tải lại.",
     "practiceDone": "Tuyến đường luyện tập của bạn",
     "practiceReview": "Luyện tập cho phép bạn khám phá. Đưa tuyến đường vào trình soạn thảo rồi chạy mã để hoàn thành nhiệm vụ.",
-    "practiceReady": "Chọn một bước: 1, 2 hoặc 3. Hãy quan sát các điểm đáp."
+    "practiceReady": "Chọn một bước: 1, 2 hoặc 3. Hãy quan sát các điểm đáp.",
+    "debug": "Xem từng bước",
+    "debugTitle": "Theo dõi từng bước trong kế hoạch",
+    "debugHint": "Thực hiện từng tín hiệu một. Bạn có thể quay lại để xem ô đích, hoặc sửa mã rồi bắt đầu theo dõi lại từ đầu.",
+    "debugReady": "Đã sẵn sàng ở vị trí xuất phát",
+    "debugNext": "Tín hiệu tiếp theo",
+    "debugBack": "Tín hiệu trước",
+    "debugRestart": "Về điểm xuất phát",
+    "debugCount": "Tín hiệu {n} trên {total}",
+    "traceSignal": "Tín hiệu",
+    "traceCode": "Mã → đầu ra",
+    "tracePositions": "Vị trí",
+    "traceEvent": "Điều đã xảy ra",
+    "traceMove": "Bạn đến ô {target}.",
+    "traceBlocked": "Ô đích {target} có chướng ngại. Bạn ở lại ô {from}.",
+    "traceCaught": "Cảnh sát bắt được kẻ trộm ở ô {target}. Cuộc truy đuổi kết thúc.",
+    "traceEscaped": "Kẻ trộm đến lối thoát ở ô {target}. Cuộc truy đuổi kết thúc.",
+    "traceUnused": "Cuộc truy đuổi đã kết thúc nên {n} đầu ra tiếp theo không được sử dụng.",
+    "traceEmpty": "Chưa có tín hiệu nào được thực hiện nên cả hai nhân vật vẫn chưa di chuyển.",
+    "traceBindings": "Tên và giá trị trước đầu ra này",
+    "traceRival": "Sau đó đối thủ di chuyển một ô."
   }
 }

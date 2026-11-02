@@ -41,10 +41,11 @@ export function inspectChase(role, stage, source) {
       if (police >= thief) outcome = 'caught';
       else if (thief >= p.finish) outcome = 'escaped';
     }
-    frames.push({ police, thief, signal:Number(signal), blocked, outcome });
+    frames.push({ police, thief, signal:Number(signal), blocked, outcome,
+      from:current, target, output:result.outputs[frames.length] });
     if (outcome !== 'unfinished') break;
   }
-  return { ok:outcome === (role === 'police' ? 'caught' : 'escaped'), code:null, logs, frames, outcome };
+  return { ok:outcome === (role === 'police' ? 'caught' : 'escaped'), code:null, source, logs, frames, outcome };
 }
 
 export function newChase() {

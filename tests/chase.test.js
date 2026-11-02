@@ -55,6 +55,23 @@ test('movement follows printed order, roadblock landings, capture and escape pri
   assert.equal(a.ok,false);assert.equal(b.ok,true);
   assert.equal(inspectChase('police',0,code(Array(8).fill(1))).outcome,'unfinished');
 });
+
+test('each movement trace keeps its actual output, attempted landing and pre-move position',()=>{
+  const source='let step = 1;\n(step + 2).log();\n(step + 1).log();';
+  const report=inspectChase('police',1,source);
+  assert.equal(report.source,source);
+  const [blocked,moved]=report.frames;
+  assert.deepEqual([blocked.from,blocked.target,blocked.police,blocked.blocked],[0,3,0,true]);
+  assert.deepEqual([moved.from,moved.target,moved.police,moved.blocked],[0,2,2,false]);
+  assert.equal(source.slice(blocked.output.start,blocked.output.end),'(step + 2).log();');
+  assert.equal(source.slice(moved.output.start,moved.output.end),'(step + 1).log();');
+  assert.deepEqual(blocked.output.names,{step:1});
+  assert.equal(blocked.output.value,String(blocked.signal));
+  const ended=inspectChase('police',0,'3.log();3.log();1.log()');
+  assert.equal(ended.logs.length,3);assert.equal(ended.frames.length,2);
+  assert.equal(ended.frames[1].target,6);assert.equal(ended.frames[1].police,5);
+  assert.equal(ended.source.slice(ended.frames[1].output.start,ended.frames[1].output.end),'3.log();');
+});
 test('invalid or oversized plans never move an actor, even after an early winning signal',()=>{
   for(const source of [undefined, null, {}, '', '0.log()', '4.log()', 'missing.log()', 'fetch(1)', 'let x = 1;', code(Array(9).fill(3)), '3.log();3.log();0.log()']) {
     const r=inspectChase('police',0,source);assert.equal(r.ok,false,source);assert.equal(r.frames.length,0,source);
@@ -92,5 +109,8 @@ test('chase routes, language destinations and player instructions cover every lo
     for(const key of ['stages','hints','learned'])assert.equal(t[key].length,3,`${locale} ${key}`);
     assert.ok(t.step.includes('{n}')&&t.step.includes('{move}'),locale);
     assert.ok(t.meaning.includes('let')&&t.meaning.includes('.log()'),locale);
+    for(const key of Object.keys(english)){
+      assert.deepEqual((t[key]?.match?.(/\{\w+\}/g)||[]).sort(),(english[key]?.match?.(/\{\w+\}/g)||[]).sort(),`${locale} ${key}`);
+    }
   }
 });

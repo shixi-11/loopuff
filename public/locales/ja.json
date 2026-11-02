@@ -451,6 +451,26 @@
     "artError": "通りを読み込めませんでした。もう一度読み込んでください。",
     "practiceDone": "あなたの練習ルート",
     "practiceReview": "練習では自由に試せます。ルートをエディターに入れ、コードを実行してミッションを完了しよう。",
-    "practiceReady": "移動を選ぼう：1、2、3。着地点を見てみよう。"
+    "practiceReady": "移動を選ぼう：1、2、3。着地点を見てみよう。",
+    "debug": "一歩ずつ確認",
+    "debugTitle": "作戦を一歩ずつ確認しよう",
+    "debugHint": "シグナルを1つずつ実行しよう。前に戻って着地点を確認したり、コードを書き換えて最初からやり直したりできます。",
+    "debugReady": "スタート位置で準備完了",
+    "debugNext": "次のシグナル",
+    "debugBack": "前のシグナル",
+    "debugRestart": "スタートに戻る",
+    "debugCount": "シグナル {n} / {total}",
+    "traceSignal": "シグナル",
+    "traceCode": "コード → 出力",
+    "tracePositions": "位置",
+    "traceEvent": "起きたこと",
+    "traceMove": "{target}に着地しました。",
+    "traceBlocked": "着地点の{target}には障害物があります。あなたは{from}にとどまりました。",
+    "traceCaught": "警察が{target}で泥棒を捕まえました。追跡は終了です。",
+    "traceEscaped": "泥棒が出口の{target}に到着しました。追跡は終了です。",
+    "traceUnused": "追跡が終了したため、その後の出力{n}回は使われませんでした。",
+    "traceEmpty": "まだシグナルを実行していないので、どちらのキャラクターも動いていません。",
+    "traceBindings": "この出力の前の名前と値",
+    "traceRival": "その後、相手が1マス進みました。"
   }
 }

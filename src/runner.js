@@ -40,6 +40,7 @@ export function compile(source) {
   }
   const statements = [];
   while (cursor < tokens.length) {
+    const start = tokens[cursor].position;
     if (peek() === 'let') {
       take('let'); const name = peek();
       if (!/^[A-Za-z_]\w*$/.test(name || '') || ['let','log'].includes(name) || names.has(name)) fail('syntax');
@@ -50,13 +51,15 @@ export function compile(source) {
       statements.push({ type: 'log', expr });
       if (peek() === ';') take(';');
     }
+    const last = tokens[cursor - 1];
+    statements.at(-1).span = { start, end: last.position + last.value.length };
     if (statements.length > 64) fail('limit');
   }
   if (!statements.length) fail('syntax');
   return statements;
 }
 export function run(source) {
-  const program = compile(source), env = new Map(), logs = []; let steps = 0;
+  const program = compile(source), env = new Map(), logs = [], outputs = []; let steps = 0;
   function evaluate(node) {
     if (++steps > 2048) throw new LessonError('limit');
     if (node.type === 'number') return node.value;
@@ -69,7 +72,10 @@ export function run(source) {
     steps++;
     const result = evaluate(statement.expr);
     if (statement.type === 'bind') env.set(statement.name, result);
-    else logs.push(String(result));
+    else {
+      logs.push(String(result));
+      outputs.push({ ...statement.span, value: String(result), names: Object.fromEntries(env) });
+    }
   }
-  return { logs, steps, statementCount: program.length };
+  return { logs, outputs, steps, statementCount: program.length };
 }

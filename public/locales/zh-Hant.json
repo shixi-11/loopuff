@@ -463,6 +463,26 @@
     "artError": "街區未能載入，請重新試一次。",
     "practiceDone": "你的試跑軌跡",
     "practiceReview": "試跑可以先探索路線。將路線放進編輯器，再執行程式碼完成挑戰。",
-    "practiceReady": "按1、2、3選擇步長，留意每一步的落點。"
+    "practiceReady": "按1、2、3選擇步長，留意每一步的落點。",
+    "debug": "逐步除錯",
+    "debugTitle": "逐步查看你的計畫",
+    "debugHint": "一次執行一條訊號。可以退回查看落點，也可以修改程式碼，重新開始。",
+    "debugReady": "已在起點準備就緒",
+    "debugNext": "下一條訊號",
+    "debugBack": "上一條訊號",
+    "debugRestart": "回到起點",
+    "debugCount": "第{n}條訊號，共{total}條",
+    "traceSignal": "訊號",
+    "traceCode": "程式碼 → 輸出",
+    "tracePositions": "位置",
+    "traceEvent": "發生了什麼",
+    "traceMove": "落在第{target}格。",
+    "traceBlocked": "落點第{target}格有路障，你留在第{from}格。",
+    "traceCaught": "警察在第{target}格追上小偷，追逐結束。",
+    "traceEscaped": "小偷抵達第{target}格的出口，追逐結束。",
+    "traceUnused": "追逐已結束，後續{n}次輸出未使用。",
+    "traceEmpty": "尚未執行任何訊號，兩個角色都還沒移動。",
+    "traceBindings": "本次輸出前的名稱與數值",
+    "traceRival": "隨後對手前進一格。"
   }
 }

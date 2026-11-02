@@ -463,6 +463,26 @@
     "artError": "街区未能载入，请重新试一次。",
     "practiceDone": "你的试跑轨迹",
     "practiceReview": "试跑可以先探索路线。将路线放进编辑器，再运行代码完成挑战。",
-    "practiceReady": "按1、2、3选择步长，留意每一步的落点。"
+    "practiceReady": "按1、2、3选择步长，留意每一步的落点。",
+    "debug": "逐步调试",
+    "debugTitle": "逐步查看行动计划",
+    "debugHint": "一次执行一条信号。可以退回查看落点，也可以修改代码，重新开始调试。",
+    "debugReady": "双方已在起点，准备查看第一条信号",
+    "debugNext": "下一条信号",
+    "debugBack": "上一条信号",
+    "debugRestart": "回到起点",
+    "debugCount": "已执行{n}条信号，共{total}条",
+    "traceSignal": "信号",
+    "traceCode": "代码 → 输出",
+    "tracePositions": "双方位置",
+    "traceEvent": "发生了什么",
+    "traceMove": "落在第{target}格。",
+    "traceBlocked": "落点第{target}格有路障，你留在第{from}格。",
+    "traceCaught": "警察在第{target}格追上小偷，追逐结束。",
+    "traceEscaped": "小偷抵达第{target}格的出口，追逐结束。",
+    "traceUnused": "追逐已结束，后续{n}次输出没有用于移动。",
+    "traceEmpty": "尚未执行信号，双方都还在起点。",
+    "traceBindings": "本次输出前的名字与数值",
+    "traceRival": "随后，对手前进一格。"
   }
 }

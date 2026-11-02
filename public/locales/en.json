@@ -463,6 +463,26 @@
     "artError": "The street could not load. Try loading it again.",
     "practiceDone": "Your practice route",
     "practiceReview": "Practice lets you explore. Put the route in the editor and run its code to complete the mission.",
-    "practiceReady": "Choose a move: 1, 2 or 3. Watch your landing spots."
+    "practiceReady": "Choose a move: 1, 2 or 3. Watch your landing spots.",
+    "debug": "Step through",
+    "debugTitle": "Trace your plan",
+    "debugHint": "Move one signal at a time. Go back to inspect a landing, or change the code and start a new trace.",
+    "debugReady": "Ready at the starting positions",
+    "debugNext": "Next signal",
+    "debugBack": "Previous signal",
+    "debugRestart": "Back to the start",
+    "debugCount": "Signal {n} of {total}",
+    "traceSignal": "Signal",
+    "traceCode": "Code → output",
+    "tracePositions": "Positions",
+    "traceEvent": "What happened",
+    "traceMove": "Landed on space {target}.",
+    "traceBlocked": "Landing space {target} has a roadblock. You stayed at space {from}.",
+    "traceCaught": "The police caught the thief at space {target}. The chase ended.",
+    "traceEscaped": "The thief reached exit {target}. The chase ended.",
+    "traceUnused": "Later outputs not used because the chase had ended: {n}.",
+    "traceEmpty": "No signals have moved either character yet.",
+    "traceBindings": "Names before this output",
+    "traceRival": "Your rival then moved one space."
   }
 }

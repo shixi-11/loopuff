@@ -27,3 +27,13 @@ test('source, integer and nesting limits are enforced', () => {
 test('teaching step counts describe this model only', () => {
   assert.ok(run('(2 + 3).log()').steps > run('5.log()').steps);
 });
+
+test('output traces identify the executed expression and the names visible at that output', () => {
+  const code='  let n = 1;\n  (n + 1).log(); let later = 3;\n later.log()';
+  const result=run(code);
+  assert.deepEqual(result.logs,['2','3']);
+  assert.deepEqual(result.outputs.map(output=>code.slice(output.start,output.end)),['(n + 1).log();','later.log()']);
+  assert.deepEqual(result.outputs.map(output=>output.value),result.logs);
+  assert.deepEqual(result.outputs.map(output=>output.names),[{n:1},{n:1,later:3}]);
+  assert.notEqual(result.outputs[0].names,result.outputs[1].names);
+});
