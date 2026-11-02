@@ -1,18 +1,11 @@
-import { compile, run, LessonError } from './runner.js';
+import { run, LessonError } from './runner.js';
 export function assess(source, goal) {
-  const program = compile(source), result = run(source);
+  const result = run(source);
   // Count concepts that actually contribute to the displayed value. An unused
   // declaration or calculation must not satisfy the task by coincidence.
-  const bindings=new Map(), outputConcepts=new Set();
-  function concepts(node){
-    const used=new Set([node.type]);
-    if(node.type==='name'){
-      used.add('bind');for(const item of bindings.get(node.name)||[])used.add(item);
-    }else if(node.type==='add')for(const child of [node.left,node.right])for(const item of concepts(child))used.add(item);
-    return used;
-  }
-  for(const node of program){const used=concepts(node.expr);if(node.type==='bind')bindings.set(node.name,used);else for(const item of used)outputConcepts.add(item);}
-  const requirements=goal.require.map(concept=>({concept,passed:outputConcepts.has(concept)}));
+  const outputConcepts=new Set(result.outputs.flatMap(output=>output.concepts));
+  const dataConcepts=new Set(result.outputs.flatMap(output=>output.dataConcepts));
+  const requirements=goal.require.map(concept=>({concept,passed:(goal.dataRequire?.includes(concept)?dataConcepts:outputConcepts).has(concept)}));
   const outputCorrect=JSON.stringify(result.logs)===JSON.stringify(goal.logs);
   const conceptsCorrect=requirements.every(item=>item.passed);
   const outputMax=requirements.length?50:80;

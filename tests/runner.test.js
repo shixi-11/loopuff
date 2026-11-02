@@ -13,8 +13,12 @@ test('different correct programs may meet the same target', () => {
     assert.deepEqual(run(code).logs, ['10']);
 });
 test('structure and undeclared names fail before execution', () => {
-  for (const code of ['7.log(', 'n.log()', 'let n = n; n.log()', '7.log(); n.log()', '7;'])
+  for (const code of ['7.log(', 'n.log()', 'let n = n; n.log()', '7.log(); n.log()'])
     assert.throws(() => compile(code), LessonError);
+});
+
+test('a discarded value is valid but produces no display output',()=>{
+  assert.deepEqual(run('7;').logs,[]);
 });
 test('unsupported syntax and ambient capabilities are rejected', () => {
   for (const code of ['fetch(7)', 'window.log()', 'while 1 {}', '1 / 0', 'eval(7)', '7.log(1)'])
