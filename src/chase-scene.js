@@ -10,7 +10,7 @@ export function validateChaseArt(art){
   }
   return art;
 }
-function loadAssets(){
+export function loadChaseAssets(){
   if(assetPromise)return assetPromise;
   const controller=new AbortController(),images=[];let timer;
   const pending=Promise.all([
@@ -47,7 +47,7 @@ export function mountChaseScene(root,{role,puzzle,reduced,text,onError=()=>{}}){
   const canvas=root.querySelector('canvas'),ctx=canvas.getContext('2d');
   let art=null,width=0,height=0,raf=0,disposed=false,paused=false,animation=null,playVersion=0;
   let state={police:0,thief:puzzle.gap,poses:{police:0,thief:0},lift:0};
-  const ready=loadAssets().then(value=>{if(disposed)return false;art=value;root.dataset.scene='ready';draw();return true;}).catch(()=>{if(!disposed){root.dataset.scene='error';onError();}return false;});
+  const ready=loadChaseAssets().then(value=>{if(disposed)return false;art=value;root.dataset.scene='ready';draw();return true;}).catch(()=>{if(!disposed){root.dataset.scene='error';onError();}return false;});
   function size(){
     width=Math.max(1,root.clientWidth);height=clamp(width*.43,290,470);
     const dpr=Math.min(devicePixelRatio||1,2);canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);

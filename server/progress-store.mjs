@@ -16,6 +16,9 @@ export function createProgressStore(db,{now=Date.now}={}){
   put(userId,expectedRevision,snapshot){
    if(!Number.isSafeInteger(expectedRevision)||expectedRevision<0||expectedRevision>=Number.MAX_SAFE_INTEGER)throw new SaveError();
    const normalized=normalizeSave(snapshot),encoded=JSON.stringify(normalized),timestamp=now();
+   // A still-open v1 client cannot erase a domain it does not understand, even
+   // if it somehow obtained a matching revision. Never downgrade GET responses.
+   if(snapshot.version===1){const current=read.get(userId);if(current&&current.revision!==expectedRevision)throw new SaveError('SAVE_CONFLICT');if(current&&parseSave(current.snapshot).data.pursuit!==null)throw new SaveError('SAVE_VERSION');}
    const row=expectedRevision===0?insert.get(userId,encoded,timestamp):update.get(encoded,timestamp,userId,expectedRevision);
    if(!row)throw new SaveError('SAVE_CONFLICT');
    return {revision:row.revision,updatedAt:row.updatedAt};

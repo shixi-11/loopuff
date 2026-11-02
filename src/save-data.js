@@ -11,7 +11,7 @@ export function captureSave(storage){
  for(const [domain,key] of Object.entries(saveKeys)){
   try{data[domain]=baseline[key]===null?null:JSON.parse(baseline[key]);}catch{fail('SAVE_INVALID');}
  }
- return {baseline,snapshot:supportedSave({format:'loopuff-save',version:1,data})};
+ return {baseline,snapshot:supportedSave({format:'loopuff-save',version:2,data})};
 }
 export function readOwner(storage){
  const raw=storage.getItem(ownerKey);if(raw===null)return null;
@@ -22,7 +22,7 @@ export function readOwner(storage){
 function journal(storage){
  const raw=storage.getItem(journalKey);if(raw===null)return null;
  let value;try{value=JSON.parse(raw);}catch{fail('SAVE_RECOVERY_REQUIRED');}
- if(value?.version!==1||!Array.isArray(value.entries)||value.entries.length>5||!Number.isInteger(value.attempted)||value.attempted<0||value.attempted>value.entries.length||Object.keys(value).some(key=>!['version','entries','attempted'].includes(key)))fail('SAVE_RECOVERY_REQUIRED');
+ if(value?.version!==1||!Array.isArray(value.entries)||value.entries.length>transactionKeys.length||!Number.isInteger(value.attempted)||value.attempted<0||value.attempted>value.entries.length||Object.keys(value).some(key=>!['version','entries','attempted'].includes(key)))fail('SAVE_RECOVERY_REQUIRED');
  const seen=new Set();
  for(const item of value.entries){
   if(!item||!transactionKeys.includes(item.key)||seen.has(item.key)||Object.keys(item).some(key=>!['key','before','after'].includes(key))||![item.before,item.after].every(s=>s===null||typeof s==='string'&&s.length<=1024*1024))fail('SAVE_RECOVERY_REQUIRED');

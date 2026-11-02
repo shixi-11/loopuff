@@ -1,6 +1,7 @@
 // Shared, host-independent save contract. No account or credential data belongs here.
+import {normalizePursuit} from './pursuit-format.mjs';
 export const saveLimit=256*1024;
-export const saveKeys=Object.freeze({course:'loopuff-v1',vault:'loopuff-vault-v1',chase:'loopuff-chase-v1',dispatch:'loopuff-dispatch-v1'});
+export const saveKeys=Object.freeze({course:'loopuff-v1',vault:'loopuff-vault-v1',chase:'loopuff-chase-v1',dispatch:'loopuff-dispatch-v1',pursuit:'loopuff-pursuit-v1'});
 export class SaveError extends Error{constructor(code='SAVE_INVALID'){super(code);this.code=code;}}
 const fail=()=>{throw new SaveError();};
 const own=(value,key)=>Object.prototype.hasOwnProperty.call(value,key);
@@ -80,10 +81,11 @@ function dispatch(value){
 }
 export function normalizeSave(value){
  record(value,['format','version','data'],['format','version','data']);
- if(value.format!=='loopuff-save'||value.version!==1)throw new SaveError('SAVE_VERSION');
- const domains={course,vault,chase,dispatch};record(value.data,Object.keys(domains),Object.keys(domains));
- const data=Object.fromEntries(Object.entries(domains).map(([key,check])=>[key,value.data[key]===null?null:check(value.data[key])]));
- const result={format:'loopuff-save',version:1,data};
+ if(value.format!=='loopuff-save'||![1,2].includes(value.version))throw new SaveError('SAVE_VERSION');
+ const domains={course,vault,chase,dispatch,pursuit:value=>{try{return normalizePursuit(value);}catch{fail();}}};
+ const fields=value.version===1?['course','vault','chase','dispatch']:Object.keys(domains);record(value.data,fields,fields);
+ const data=Object.fromEntries(Object.entries(domains).map(([key,check])=>[key,value.version===1&&key==='pursuit'||value.data[key]===null?null:check(value.data[key])]));
+ const result={format:'loopuff-save',version:2,data};
  if(new TextEncoder().encode(JSON.stringify(result)).length>saveLimit)throw new SaveError('SAVE_TOO_LARGE');
  return result;
 }
@@ -93,4 +95,4 @@ export function parseSave(raw){
  let value;try{value=JSON.parse(raw);}catch{throw new SaveError('SAVE_INVALID');}
  return normalizeSave(value);
 }
-export function emptySave(){return {format:'loopuff-save',version:1,data:{course:null,vault:null,chase:null,dispatch:null}};}
+export function emptySave(){return {format:'loopuff-save',version:2,data:{course:null,vault:null,chase:null,dispatch:null,pursuit:null}};}

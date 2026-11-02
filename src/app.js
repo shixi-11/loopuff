@@ -6,6 +6,7 @@ import { drawPlane, aircraftUrl } from './plane.js';
 import { mountHomePlane } from './home-plane.js';
 import { mountVault, loadVault } from './vault-ui.js';
 import { mountChase, loadChase } from './chase-ui.js';
+import { mountPursuit } from './pursuit-ui.js';
 import { mountDispatch, loadDispatch } from './dispatch-ui.js';
 import { rememberLesson, lessonWork, explorationProgress, readSession } from './progress.js';
 import { arcadeArt } from './arcade-art.js';
@@ -29,10 +30,12 @@ let saved={};try{saved=readSession(localStorage.getItem(storageKey));}catch{}
 const validLocale=id=>locales.some(([key])=>key===id);
 let lang=selectedLocale(location.href,saved.lang,navigator.languages||[navigator.language]);
 if(!validLocale(lang))lang='en';
-let jumpLab=null,vaultGame=null,chaseGame=null,dispatchGame=null,accountPage=null,savesPage=null,guidePage=null;
+let jumpLab=null,vaultGame=null,chaseGame=null,pursuitGame=null,dispatchGame=null,accountPage=null,savesPage=null,guidePage=null;
 const savesModel={};
 const guideModel={selected:saved.state?.guideSelected,drafts:readGuideWork(saved.state?.guideWork)};
+const pursuitModel={};
 let guideView='guide';
+let chaseLab=new URL(location.href).searchParams.get('mode')==='lab';
 const account=createAccountClient({url:location.href,onChange:()=>{if(messages){updateAccountEntry();accountPage?.refresh();savesPage?.refresh();}}});
 let messages, languageRequest=0, languageController, notice='', lastResult=null, feedbackState=null;
 const initialCatalog=document.getElementById('initial-catalog');
@@ -47,6 +50,7 @@ rememberLesson(state,course[state.lesson].id);
 if(!lessonWork(state,course[state.lesson].id))rememberLesson(state,course[state.lesson].id,state.resumePhase);
 function readRoute(){
   const route=parseRoute(location.pathname),previousLesson=state.lesson;
+  if(route?.view==='chase')chaseLab=new URL(location.href).searchParams.get('mode')==='lab';
   if(route?.lessonId){
     const index=course.findIndex(item=>item.id===route.lessonId);
     if(previousLesson!==index){rememberLesson(state,course[previousLesson].id);state.lesson=index;Object.assign(state,lessonWork(state,course[index].id)||{phase:'brief',fragment:0,typed:'',draft:'',assessedSource:null,score:0,errors:0,keys:0});}
@@ -137,7 +141,8 @@ function syncRoute(){
   if(state.phase==='pause')return;
   const view=state.phase==='welcome'?'home':state.phase==='guide'?guideView:['levels','result','play','vault','chase','dispatch','account','saves'].includes(state.phase)?state.phase:'lesson';
   const url=routeUrl(location.href,lang,view,lesson().id);url.hash='';
-  if(location.pathname!==url.pathname)history.pushState(null,'',url);
+  if(view==='chase'&&chaseLab)url.searchParams.set('mode','lab');else url.searchParams.delete('mode');
+  if(location.pathname!==url.pathname||location.search!==url.search)history.pushState(null,'',url);
 }
 function begin(index){rememberLesson(state,lesson().id);state={...state,phase:'brief',lesson:index,fragment:0,typed:'',draft:'',assessedSource:null,score:0,errors:0,keys:0};notice='';feedbackState=null;lastResult=null;syncRoute();render();save();window.scrollTo(0,0);}
 function enterLesson(index){
@@ -162,6 +167,7 @@ function render(){
   jumpLab?.dispose();jumpLab=null;
   vaultGame?.dispose();vaultGame=null;
   chaseGame?.dispose();chaseGame=null;
+  pursuitGame?.dispose();pursuitGame=null;
   accountPage?.dispose();accountPage=null;
   savesPage?.dispose();savesPage=null;
   dispatchGame?.dispose();dispatchGame=null;
@@ -237,12 +243,14 @@ function renderDialog(){
   if(phase==='chase'){
     $('learning-page').dataset.stage=phase;
     $('learning-content').innerHTML=`<nav class="page-trail" aria-label="${escape(ui('navigation'))}"><a data-action="home" href="${routeUrl(location.href,lang,'home').pathname}">${escape(ui('navHome'))}</a><span aria-hidden="true">/</span><a data-action="open-play" href="${routeUrl(location.href,lang,'play').pathname}">${escape(messages.vault.arcade)}</a><span aria-hidden="true">/</span><span aria-current="page">${escape(messages.chase.title)}</span></nav><div id="chase-game"></div>`;
-    chaseGame=mountChase($('chase-game'),{text:messages.chase,errors:messages.ui,reduced});return;
+    $('chase-game').insertAdjacentHTML('beforebegin',`<div class="chase-modes" role="group" aria-label="${escape(messages.chase.title)}"><button type="button" data-action="chase-continuous" aria-pressed="${!chaseLab}">${escape(messages.pursuit.continuous)}</button><button type="button" data-action="chase-lab" aria-pressed="${chaseLab}">${escape(messages.pursuit.lab)}</button></div>`);
+    if(chaseLab)chaseGame=mountChase($('chase-game'),{text:messages.chase,errors:messages.ui,reduced});
+    else pursuitGame=mountPursuit($('chase-game'),{text:messages.pursuit,roles:messages.chase,errors:messages.ui,reduced,saveUrl:routeUrl(location.href,lang,'saves').pathname,saveLabel:messages.saves.title,model:pursuitModel});return;
   }
   if(phase==='account'){$('learning-content').innerHTML='<div id="account-page"></div>';accountPage=mountAccount($('account-page'),{client:account,text:messages.account,locale:lang,saveNote:ui('save'),homeUrl:routeUrl(location.href,lang,'home').pathname,savesUrl:routeUrl(location.href,lang,'saves').pathname,saveLabel:messages.saves.title});return;}
   if(phase==='saves'){
    $('learning-page').dataset.stage=phase;$('learning-content').innerHTML='<div id="saves-page"></div>';
-   savesPage=mountSaves($('saves-page'),{text:messages.saves,topics:{course:ui('navCourse'),guide:ui('navGuide'),vault:messages.vault.title,chase:messages.chase.title,dispatch:messages.dispatch.title,police:messages.chase.police,thief:messages.chase.thief,dispatchTasks:messages.dispatch.missions.map(m=>m.title)},lessons:messages.lessons,phases:{brief:ui('mission'),typing:ui('assembled'),predict:ui('predict'),output:ui('output'),explain:ui('explain'),remix:ui('practice'),independent:ui('independent'),result:messages.assessment.title,complete:ui('complete')},account,locale:lang,name:ui('name'),urls:{account:routeUrl(location.href,lang,'account').pathname},model:savesModel});return;
+   savesPage=mountSaves($('saves-page'),{text:messages.saves,topics:{course:ui('navCourse'),guide:ui('navGuide'),vault:messages.vault.title,chase:messages.chase.title,dispatch:messages.dispatch.title,pursuit:messages.pursuit.title,police:messages.chase.police,thief:messages.chase.thief,dispatchTasks:messages.dispatch.missions.map(m=>m.title)},pursuitText:messages.pursuit,lessons:messages.lessons,phases:{brief:ui('mission'),typing:ui('assembled'),predict:ui('predict'),output:ui('output'),explain:ui('explain'),remix:ui('practice'),independent:ui('independent'),result:messages.assessment.title,complete:ui('complete')},account,locale:lang,name:ui('name'),urls:{account:routeUrl(location.href,lang,'account').pathname},model:savesModel});return;
   }
   if(phase==='dispatch'){
     $('learning-page').dataset.stage=phase;
@@ -257,7 +265,7 @@ function renderDialog(){
     const trail=`<nav class="page-trail" aria-label="${escape(ui('navigation'))}"><a data-action="home" href="${routeUrl(location.href,lang,'home').pathname}">${escape(ui('navHome'))}</a><span aria-hidden="true">/</span>${phase==='vault'?`<a data-action="open-play" href="${routeUrl(location.href,lang,'play').pathname}">${escape(v.arcade)}</a><span aria-hidden="true">/</span><span aria-current="page">${escape(v.title)}</span>`:`<span aria-current="page">${escape(v.arcade)}</span>`}</nav>`;
     $('learning-content').innerHTML=trail+(phase==='vault'?'<div id="vault-game"></div>':`<section class="arcade-page"><span class="eyebrow">${escape(ui('name'))}</span><h1 id="learning-title">${escape(v.arcadeTitle)}</h1><p class="levels-intro">${escape(v.arcadeIntro)}</p>${journeyPanel()}<div class="arcade-games"><a class="arcade-game vault-entry" data-action="open-vault" href="${routeUrl(location.href,lang,'vault').pathname}"><div class="arcade-vault-art" aria-hidden="true">${arcadeArt('vault')}</div><div><span class="eyebrow">${escape(v.puzzleTag)}</span><h2>${escape(v.title)}</h2><p>${escape(v.intro)}</p><span class="game-record">${escape(v.collection)} <bdi dir="ltr">${loadVault().stamps.length} / 3</bdi></span><strong>${escape((loadVault().stage||loadVault().submitted?ui('resume'):v.enter).replace(/\s*↗$/,''))} ↗</strong></div></a><a class="arcade-game jump-entry" href="${routeUrl(location.href,lang,'lesson',course[3].id).pathname}" data-lesson="3"><div class="arcade-jump-art" aria-hidden="true">${arcadeArt('jump')}</div><div><span class="eyebrow">${escape(v.jumpTag)}</span><h2>${escape(messages.jump.title)}</h2><p>${escape(messages.lessons[3].goal)}</p><span class="game-record">${escape(state.completed.includes(course[3].id)?ui('done'):lessonWork(state,course[3].id)?ui('resume'):ui('open'))}</span><strong>${escape((lessonWork(state,course[3].id)?ui('resume'):v.enter).replace(/\s*↗$/,''))} ↗</strong></div></a></div></section>`);
     if(phase==='vault')vaultGame=mountVault($('vault-game'),{text:v,errors:messages.ui,reduced});
-    else {const chase=loadChase();document.querySelector('.arcade-games').insertAdjacentHTML('beforeend',`<a class="arcade-game chase-entry" data-action="open-chase" href="${routeUrl(location.href,lang,'chase').pathname}"><div class="chase-card-art" aria-hidden="true"><img src="${new URL('../assets/chase-police-idle.webp',import.meta.url).href}" alt=""><img src="${new URL('../assets/chase-thief-idle.webp',import.meta.url).href}" alt=""></div><div><span class="eyebrow">${escape(messages.chase.tag)}</span><h2>${escape(messages.chase.title)}</h2><p>${escape(messages.chase.intro)}</p><span class="game-record">${escape(messages.chase.police)} <bdi dir="ltr">${chase.work.police.cleared.length} / 3</bdi> · ${escape(messages.chase.thief)} <bdi dir="ltr">${chase.work.thief.cleared.length} / 3</bdi></span><strong>${escape(v.enter.replace(/\s*↗$/,''))} ↗</strong></div></a>`);}
+    else {const chase=loadChase();document.querySelector('.arcade-games').insertAdjacentHTML('beforeend',`<a class="arcade-game chase-entry" data-action="open-chase" href="${routeUrl(location.href,lang,'chase').pathname}"><div class="chase-card-art" aria-hidden="true"><img src="${new URL('../assets/chase-police-idle.webp',import.meta.url).href}" alt=""><img src="${new URL('../assets/chase-thief-idle.webp',import.meta.url).href}" alt=""></div><div><span class="eyebrow">${escape(messages.chase.tag)}</span><h2>${escape(messages.chase.title)}</h2><p>${escape(messages.pursuit.intro)}</p><span class="game-record">${escape(messages.pursuit.lab)}: ${escape(messages.chase.police)} <bdi dir="ltr">${chase.work.police.cleared.length} / 3</bdi> · ${escape(messages.chase.thief)} <bdi dir="ltr">${chase.work.thief.cleared.length} / 3</bdi></span><strong>${escape(v.enter.replace(/\s*↗$/,''))} ↗</strong></div></a>`);}
     if(phase==='play'){
       const dispatch=loadDispatch(),d=messages.dispatch;
       document.querySelector('.arcade-games').insertAdjacentHTML('beforeend',`<a class="arcade-game dispatch-entry" data-action="open-dispatch" href="${routeUrl(location.href,lang,'dispatch').pathname}"><div class="dispatch-card-art" aria-hidden="true"><img src="${aircraftUrl}" alt=""></div><div><span class="eyebrow">${escape(d.tag)}</span><h2>${escape(d.title)}</h2><p>${escape(d.entry)}</p><span class="game-record">${escape(d.badges)} <bdi dir="ltr">${dispatch.stamps.length} / 4</bdi></span><strong>${escape(v.enter.replace(/\s*↗$/,''))} ↗</strong></div></a>`);
@@ -371,7 +379,8 @@ document.addEventListener('click',event=>{
   if(action==='open-play'){move('play');return;}
   if(action==='open-dispatch'){move('dispatch');return;}
   if(action==='open-vault'){move('vault');return;}
-  if(action==='open-chase'){move('chase');return;}
+  if(action==='open-chase'){chaseLab=false;move('chase');return;}
+  if(action==='chase-continuous'||action==='chase-lab'){chaseLab=action==='chase-lab';move('chase');return;}
   if(action==='open-levels'){move('play');return;}
   if(action==='open-guide'||action==='open-compare'){if(!['welcome','guide','pause'].includes(state.phase))state.resumePhase=state.phase;guideView=action==='open-compare'?'compare':'guide';move('guide');return;}
   if(action==='resume-course'){if(state.phase==='guide')enterLesson(state.lesson);else if(state.phase==='result')move('independent');return;}

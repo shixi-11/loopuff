@@ -29,7 +29,7 @@ test('save files preserve all four legacy formats, intentionally empty work and 
  assert.deepEqual(parseSave(JSON.stringify(emptySave())),emptySave());
 });
 test('save validation rejects future, oversized and unrelated data before any application',()=>{
- for(const invalid of [null,[],{}, {...emptySave(),version:2},{...emptySave(),password:'private'}, {...emptySave(),data:{course:null,vault:null,chase:null,dispatch:null,account:{}}}])assert.throws(()=>normalizeSave(invalid),SaveError);
+ for(const invalid of [null,[],{}, {...emptySave(),version:3},{...emptySave(),password:'private'}, {...emptySave(),data:{course:null,vault:null,chase:null,dispatch:null,account:{}}}])assert.throws(()=>normalizeSave(invalid),SaveError);
  const oversized=fixture();oversized.data.chase.work.police.drafts[0]='x'.repeat(4097);
  assert.throws(()=>normalizeSave(oversized),SaveError);
  const secret=fixture();secret.data.course.state.form={password:'private'};

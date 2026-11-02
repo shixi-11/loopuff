@@ -41,7 +41,7 @@ test('progress writes use both account identity and compare-and-swap revisions',
 test('invalid or oversized progress cannot replace an existing snapshot',async t=>{
  const service=await serviceFor(t),a=await account(service,'progress-a'),input={expectedAccountId:a.id,expectedRevision:0,snapshot:emptySave()};
  await request(service,'POST',input,a.cookies);
- assert.equal((await request(service,'POST',{...input,expectedRevision:1,snapshot:{...emptySave(),version:2}},a.cookies)).status,400);
+ assert.equal((await request(service,'POST',{...input,expectedRevision:1,snapshot:{...emptySave(),version:3}},a.cookies)).status,400);
  assert.equal((await request(service,'POST',{...input,expectedRevision:1},a.cookies,{'Content-Length':'999999'})).status,413);
  const final=await (await request(service,'GET',null,a.cookies)).json();assert.equal(final.revision,1);assert.deepEqual(final.snapshot,emptySave());
 });
@@ -52,4 +52,17 @@ test('saved progress and the same account session survive service restart',async
  await request(service,'POST',{expectedAccountId:a.id,expectedRevision:0,snapshot},a.cookies);service.close();
  service=await createAccountService({databasePath,baseURL,secret});t.after(()=>service.close());
  const response=await request(service,'GET',null,a.cookies);assert.equal(response.status,200);const result=await response.json();assert.equal(result.revision,1);assert.deepEqual(result.snapshot,snapshot);
+});
+
+test('v1 cloud writes migrate safely and cannot erase a pursuit even with the current revision',async t=>{
+ const service=await serviceFor(t),a=await account(service,'progress-v2');
+ const legacy={format:'loopuff-save',version:1,data:{course:null,vault:null,chase:null,dispatch:null}},input={expectedAccountId:a.id,expectedRevision:0,snapshot:legacy};
+ assert.equal((await request(service,'POST',input,a.cookies)).status,200);
+ const migrated=await (await request(service,'GET',null,a.cookies)).json();assert.equal(migrated.revision,1);assert.equal(migrated.snapshot.version,2);assert.equal(migrated.snapshot.data.pursuit,null);
+ const actor=road=>({road,section:0,distance:0,path:0,direction:1,energy:100,delayMs:0,jumpMs:0,cooldownMs:0,recoverJump:false,pendingJump:false,obstacle:0,collected:[],travelled:0,collisions:0,clears:0});
+ const snapshot=emptySave();snapshot.data.pursuit={version:1,current:{version:1,seed:7,id:'test-7',role:'police',difficulty:'standard',status:'ready',activeMs:0,remainderMs:0,nextRoute:0,actors:{police:actor('police'),thief:actor('thief')},strategy:'1.log()',draft:'1.log()',queue:[],mode:1,nextDecisionMs:0,events:[],eventSerial:0,outcome:null},history:[]};
+ assert.equal((await request(service,'POST',{...input,expectedRevision:1,snapshot},a.cookies)).status,200);
+ const refused=await request(service,'POST',{...input,expectedRevision:2},a.cookies);assert.equal(refused.status,400);assert.equal((await refused.json()).error.code,'SAVE_VERSION');
+ assert.equal((await request(service,'POST',{...input,expectedRevision:1},a.cookies)).status,409);
+ const final=await (await request(service,'GET',null,a.cookies)).json();assert.equal(final.revision,2);assert.deepEqual(final.snapshot,snapshot);
 });

@@ -16,7 +16,7 @@ function download(value,filename){
  const url=URL.createObjectURL(new Blob([JSON.stringify(value,null,2)],{type:'application/json'}));
  const link=document.createElement('a');link.href=url;link.download=filename;document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
-export function mountSaves(root,{text:t,topics,lessons,phases,account,urls,locale,name,model={}}){
+export function mountSaves(root,{text:t,topics,lessons,phases,account,urls,locale,name,pursuitText,model={}}){
  let disposed=false,busy=false,local=null,localError=null,recovery=null,focusComparison=false;
  setSaveAccount(model,account.user?.id??null);
  const access=progressStorage(),cloud=createCloudProgress({url:location.href,getAccount:()=>account.user});
@@ -31,10 +31,14 @@ export function mountSaves(root,{text:t,topics,lessons,phases,account,urls,local
    ['course',`${d.course?.state?.completed?.length??0} / ${course.length}`],
    ['vault',`${d.vault?.stamps.length??0} / 3`],
    ['chase',`${(d.chase?.work.police.cleared.length??0)+(d.chase?.work.thief.cleared.length??0)} / 6`],
-   ['dispatch',`${d.dispatch?.stamps.length??0} / 4`]
+   ['dispatch',`${d.dispatch?.stamps.length??0} / 4`],
+   ['pursuit',d.pursuit?`${topics[d.pursuit.current.role]} · ${Math.floor(d.pursuit.current.activeMs/60000)}:${String(Math.floor(d.pursuit.current.activeMs/1000)%60).padStart(2,'0')}`:'']
   ].map(([domain,count])=>`<div><dt>${html(domainName(domain))}</dt><dd>${d[domain]===null?html(t.noProgress):`<bdi dir="ltr">${count}</bdi>`}</dd></div>`).join('')}</dl>`;
  }
  function previewValue(item,value){
+  if(item.domain==='pursuit'){
+   const s=value.current;return `<p>${html(t.currentRun)}: ${html(topics[s.role])} · <bdi dir="ltr">${Math.floor(s.activeMs/60000)}:${String(Math.floor(s.activeMs/1000)%60).padStart(2,'0')}</bdi></p><p>${html(pursuitText.round)}: <bdi dir="ltr">${s.actors[s.role].section+1}</bdi> · ${html(pursuitText.history)}: <bdi dir="ltr">${value.history.length}</bdi></p>${code(s.draft||t.emptyDraft)}`;
+  }
   if(item.kind==='lesson'){
    const w=value.work;
    return `<p>${html(t.phase)}: ${html(phases[w.phase]||t.phase)}</p>${code(w.draft||t.emptyDraft)}${w.typed?`<p>${html(t.step.replace('{number}',(w.fragment??0)+1))}</p>${code(w.typed)}`:''}${value.score!==null?`<p>${html(t.score)}: <bdi dir="ltr">${value.score} / 100</bdi></p>`:''}`;
@@ -58,7 +62,7 @@ export function mountSaves(root,{text:t,topics,lessons,phases,account,urls,local
   return `<section class="save-comparison" aria-labelledby="save-compare-title"><header><h2 id="save-compare-title" tabindex="-1">${html(t.comparison)}</h2><p>${html(p.mode==='upload'?t.uploadNote:t.restoreNote)}</p>${p.mode!=='file'?`<p class="save-account-email" dir="ltr">${html(p.base.account.email)}</p>`:''}</header>
    <div class="save-comparison-overview"><section><h3>${html(t.localVersion)}</h3>${summary(p.plan.local)}</section><section><h3>${html(incoming)}</h3>${summary(p.plan.incoming)}</section></div>
    ${p.plan.conflicts.length?`<p>${html(t.chooseAll)}</p>`:`<p>${html(t.noConflicts)}</p>`}
-   ${p.plan.conflicts.map((item,i)=>`<fieldset class="save-conflict"><legend>${html(conflictTitle(item))}</legend><div class="save-versions">${['local','incoming'].map(side=>`<label class="save-version" data-selected="${model.choices?.[item.id]===side}"><span class="save-choice"><input type="radio" name="save-choice-${i}" data-save-choice="${html(item.id)}" value="${side}"${model.choices?.[item.id]===side?' checked':''}><strong>${html(side==='local'?t.keepLocal:t.keepIncoming)}</strong></span><span class="save-version-body">${previewValue(item,item[side])}</span></label>`).join('')}</div></fieldset>`).join('')}
+   ${p.plan.conflicts.map((item,i)=>`<fieldset class="save-conflict"><legend>${html(conflictTitle(item))}</legend>${item.domain==='pursuit'?`<p>${html(pursuitText.saveChoice)}</p>`:''}<div class="save-versions">${['local','incoming'].map(side=>`<label class="save-version" data-selected="${model.choices?.[item.id]===side}"><span class="save-choice"><input type="radio" name="save-choice-${i}" data-save-choice="${html(item.id)}" value="${side}"${model.choices?.[item.id]===side?' checked':''}><strong>${html(side==='local'?t.keepLocal:t.keepIncoming)}</strong></span><span class="save-version-body">${previewValue(item,item[side])}</span></label>`).join('')}</div></fieldset>`).join('')}
    ${p.mode==='upload'&&p.owner!==p.base.account.id?`<label class="save-adopt"><input type="checkbox" data-save-copy${model.allowCopy?' checked':''}> <span>${html(p.owner?t.copyOther:t.copyGuest)}</span></label>`:''}
    <div class="dialog-actions"><button class="primary" type="button" data-save-action="confirm"${!ready()?' disabled':''}>${html(p.mode==='upload'?t.upload:t.apply)}</button><button class="text-button" type="button" data-save-action="cancel">${html(t.cancel)}</button></div></section>`;
  }
@@ -68,7 +72,7 @@ export function mountSaves(root,{text:t,topics,lessons,phases,account,urls,local
   const previousFocus=root.querySelector(':focus')?.dataset.saveAction;
   root.innerHTML=`<section class="saves-page"><header class="saves-heading"><span class="eyebrow">${html(name)}</span><h1 id="learning-title">${html(t.title)}</h1><p>${html(t.intro)}</p></header>
    ${recovery?`<section class="save-recovery"><h2>${html(t.recovery)}</h2><p>${html(t.recoveryNote)}</p><button type="button" class="text-button" data-save-action="recovery-download">${html(t.downloadRecovery)}</button><label class="save-adopt"><input type="checkbox" data-save-recovery-confirm${model.recoveryConfirmed?' checked':''}><span>${html(t.recoveryConfirm)}</span></label><button type="button" class="primary" data-save-action="keep-current"${!model.recoveryConfirmed?' disabled':''}>${html(t.keepCurrent)}</button></section>`:''}
-   <div class="save-options"><section class="save-card"><h2>${html(t.local)}</h2>${local?summary(local.snapshot):`<p>${html(t.errors[localError]||t.busy)}</p>`}<button type="button" class="primary" data-save-action="download"${!local?' disabled':''}>${html(t.download)}</button><div class="save-import"><label for="save-import-file">${html(t.selectFile)}</label><input id="save-import-file" type="file" accept="application/json,.json" aria-describedby="save-file-hint"${recovery?' disabled':''}><p id="save-file-hint">${html(t.fileHint)}</p></div></section>
+   <div class="save-options"><section class="save-card"><h2>${html(t.local)}</h2>${local?summary(local.snapshot):`<p>${html(t.errors[localError]||t.busy)}</p>`}<button type="button" class="primary" data-save-action="download"${!local?' disabled':''}>${html(t.download)}</button>${localError&&!recovery?`<p>${html(t.rawRecoveryNote)}</p><button type="button" class="text-button" data-save-action="recovery-download">${html(t.downloadRecovery)}</button>`:''}<div class="save-import"><label for="save-import-file">${html(t.selectFile)}</label><input id="save-import-file" type="file" accept="application/json,.json" aria-describedby="save-file-hint"${recovery?' disabled':''}><p id="save-file-hint">${html(t.fileHint)}</p></div></section>
    <section class="save-card"><h2>${html(t.cloud)}</h2><p>${html(t.manual)}</p>${account.user?`<p class="save-account-email" dir="ltr">${html(account.user.email)}</p><button type="button" class="text-button" data-save-action="read">${html(t.readCloud)}</button>${model.cloud?`${model.cloud.snapshot?`<p>${html(t.updated.replace('{date}',new Intl.DateTimeFormat(locale,{dateStyle:'medium',timeStyle:'short'}).format(new Date(model.cloud.updatedAt))))}</p>${summary(model.cloud.snapshot)}`:`<p>${html(t.noCloud)}</p>`}<div class="dialog-actions"><button type="button" class="primary" data-save-action="preview-upload"${!local||recovery?' disabled':''}>${html(t.saveCloud)}</button>${model.cloud.snapshot?`<button type="button" class="text-button" data-save-action="preview-cloud"${!local||recovery?' disabled':''}>${html(t.restoreCloud)}</button>`:''}</div>`:`<p>${html(t.notRead)}</p>`}`:`<a data-action="open-account" href="${html(urls.account)}">${html(t.signIn)} <span aria-hidden="true">↗</span></a>`}</section></div>
    <p class="save-status" data-error="${!!model.error}" role="status" aria-live="polite">${html(busy?t.busy:message())}</p>${comparison()}</section>`;
   if(busy)for(const control of root.querySelectorAll('button,input'))control.disabled=true;
@@ -129,7 +133,7 @@ export function mountSaves(root,{text:t,topics,lessons,phases,account,urls,local
    if(action==='preview-upload')await begin('upload',model.cloud.snapshot||emptySave(),model.cloud);
    if(action==='preview-cloud')await begin('cloud',model.cloud.snapshot,model.cloud);
    if(action==='confirm')await confirm();
-   if(action==='recovery-download')download({format:'loopuff-recovery',version:1,journal:recovery.raw,current:readBaseline(localStorage)},filename('recovery'));
+   if(action==='recovery-download')download({format:'loopuff-recovery',version:1,journal:localStorage.getItem(journalKey),current:readBaseline(localStorage)},filename('recovery'));
    if(action==='keep-current'){if(!model.recoveryConfirmed)fail('SAVE_CHOICES_REQUIRED');await access.keep(recovery.baseline,recovery.raw,{isCurrent:()=>!disposed});if(!disposed)location.reload();}
   });
  };
