@@ -1254,5 +1254,35 @@
       "escaped": "Ausgang passiert",
       "route-tired": "Nicht genug Energie; weiter über die Hauptstraße"
     }
+  },
+  "learningMap": {
+    "title": "Begriffslandkarte der Programmierung",
+    "tag": "Finde deinen Einstieg",
+    "intro": "Beginne mit einem einzelnen Ausgabesignal und entdecke, wie Entscheidungen, Schleifen, Funktionen und Nachrichten zusammenspielen. Wähle ein Konzept, erkunde seine Grundlagen oder gehe direkt zu einer eigenständigen Programmieraufgabe.",
+    "compare": "Mit anderen Programmiersprachen vergleichen",
+    "completed": "Aufgabe abgeschlossen",
+    "available": "Frei erkundbar",
+    "arrows": "Verbindungen zeigen eine empfohlene Lernreihenfolge",
+    "scroll": "Scrolle seitlich durch die Karte. Alle Konzepte sind frei zugänglich; du musst sie nicht der Reihe nach freischalten.",
+    "lanes": [
+      "Ein Signal senden",
+      "Aktionen steuern",
+      "Programme strukturieren",
+      "Nachrichten koordinieren"
+    ],
+    "selected": "Dein Schwerpunkt",
+    "before": "Hilfreiche Grundlagen",
+    "after": "Hier anwenden",
+    "first": "Beginne hier. Du brauchst keine Programmiererfahrung.",
+    "transfer": "Wende diese Ideen auf konkrete Aufgaben in der Programmierumgebung an.",
+    "practice": "An der Aufgabe lernen",
+    "tryDirect": "Selbstständig ausprobieren",
+    "start": "Beginne mit: {concept}",
+    "progressNote": "Markierungen zeigen abgeschlossene Lernaufgaben. Probiere eine eigenständige Programmieraufgabe aus, um dein Verständnis zu überprüfen.",
+    "example": "So sieht es im Code aus",
+    "run": "Beispiel ausführen",
+    "ready": "Führe dieses Programm aus, um zu sehen, was es tatsächlich ausgibt.",
+    "error": "Das Programm wurde nicht zu Ende ausgeführt",
+    "noOutput": "Das Programm wurde ohne Ausgabe ausgeführt."
   }
 }

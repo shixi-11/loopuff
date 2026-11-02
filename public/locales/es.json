@@ -1254,5 +1254,35 @@
       "escaped": "Salida cruzada",
       "route-tired": "Energía insuficiente; tomando la calle principal"
     }
+  },
+  "learningMap": {
+    "title": "Mapa de conceptos de programación",
+    "tag": "Encuentra tu punto de partida",
+    "intro": "Empieza con una sola señal de salida y descubre cómo se relacionan las decisiones, los bucles, las funciones y los mensajes. Elige un concepto, explora sus fundamentos o ve directamente a una tarea de programación independiente.",
+    "compare": "Comparar con otros lenguajes",
+    "completed": "Tarea completada",
+    "available": "Disponible para explorar",
+    "arrows": "Las conexiones muestran un orden de aprendizaje sugerido",
+    "scroll": "Desplázate horizontalmente por el mapa. Todos los conceptos están disponibles; no tienes que desbloquearlos en orden.",
+    "lanes": [
+      "Enviar una señal",
+      "Controlar acciones",
+      "Organizar programas",
+      "Coordinar mensajes"
+    ],
+    "selected": "Tu foco de atención",
+    "before": "Fundamentos útiles",
+    "after": "Aplicarlo en",
+    "first": "Empieza aquí. No necesitas experiencia en programación.",
+    "transfer": "Aplica estas ideas a tareas reales en el entorno de práctica.",
+    "practice": "Aprender con la tarea",
+    "tryDirect": "Probar por tu cuenta",
+    "start": "Empieza con: {concept}",
+    "progressNote": "Los indicadores muestran las tareas de aprendizaje completadas. Para comprobar tu comprensión, intenta resolver una tarea de programación por tu cuenta.",
+    "example": "Cómo se ve en el código",
+    "run": "Ejecutar ejemplo",
+    "ready": "Ejecuta este programa para ver qué salida produce realmente.",
+    "error": "El programa no terminó de ejecutarse",
+    "noOutput": "El programa se ejecutó sin producir ninguna salida."
   }
 }

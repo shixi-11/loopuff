@@ -1266,5 +1266,35 @@
       "escaped": "Passed the exit",
       "route-tired": "Not enough energy; taking the main road"
     }
+  },
+  "learningMap": {
+    "title": "Programming concept map",
+    "tag": "Find your starting point",
+    "intro": "Start with one output signal and see how decisions, loops, functions and messages fit together. Choose a concept, follow its foundations, or go straight to an independent task.",
+    "compare": "Compare with other languages",
+    "completed": "Task completed",
+    "available": "Open to explore",
+    "arrows": "Connections show suggested learning order",
+    "scroll": "Scroll across the map. Every concept is open; you do not have to unlock them in order.",
+    "lanes": [
+      "Send a signal",
+      "Control actions",
+      "Organize programs",
+      "Coordinate messages"
+    ],
+    "selected": "Your focus",
+    "before": "Useful foundations",
+    "after": "Use it in",
+    "first": "Start here. No programming experience needed.",
+    "transfer": "Apply these ideas to real tasks in the playground.",
+    "practice": "Learn with the task",
+    "tryDirect": "Try independently",
+    "start": "Start with: {concept}",
+    "progressNote": "Markers show completed learning tasks. To check your understanding, try an independent task.",
+    "example": "What it looks like in code",
+    "run": "Run example",
+    "ready": "Run this program to see what it actually outputs.",
+    "error": "The program did not finish",
+    "noOutput": "The program ran without output."
   }
 }

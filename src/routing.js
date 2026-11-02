@@ -21,6 +21,7 @@ export function parseRoute(pathname){
   if(suffix.length===2&&suffix[1]==='saves')return {locale,view:'saves'};
   if(suffix.length===2&&suffix[1]==='guide')return {locale,view:'guide'};
   if(suffix.length===3&&suffix[1]==='guide'&&suffix[2]==='compare')return {locale,view:'compare'};
+  if(suffix.length===3&&suffix[1]==='guide'&&suffix[2]==='map')return {locale,view:'map'};
   if(suffix.length===2&&suffix[1]==='play')return {locale,view:'play'};
   if(suffix.length===3&&suffix[1]==='play'&&suffix[2]==='vault')return {locale,view:'vault'};
   if(suffix.length===3&&suffix[1]==='play'&&suffix[2]==='chase')return {locale,view:'chase'};
@@ -42,9 +43,9 @@ export function languageUrl(input,locale){
 }
 export function routeUrl(input,locale,view='home',lessonId){
   const id=localeId(locale);if(!id)throw Error('Unsupported language');
-  if(!['home','levels','guide','compare','lesson','result','play','vault','chase','dispatch','account','saves'].includes(view))throw Error('Unsupported page');
+  if(!['home','levels','guide','compare','map','lesson','result','play','vault','chase','dispatch','account','saves'].includes(view))throw Error('Unsupported page');
   if(['lesson','result'].includes(view)&&!course.some(lesson=>lesson.id===lessonId))throw Error('Unknown lesson');
-  const url=new URL(input),suffix=view==='compare'?'guide/compare/':view==='saves'?'saves/':view==='dispatch'?'play/dispatch/':view==='chase'?'play/chase/':view==='account'?'account/':view==='levels'?'levels/':view==='guide'?'guide/':view==='play'?'play/':view==='vault'?'play/vault/':['lesson','result'].includes(view)?`learn/${lessonId}/${view==='result'?'result/':''}`:'';
+  const url=new URL(input),suffix=view==='map'?'guide/map/':view==='compare'?'guide/compare/':view==='saves'?'saves/':view==='dispatch'?'play/dispatch/':view==='chase'?'play/chase/':view==='account'?'account/':view==='levels'?'levels/':view==='guide'?'guide/':view==='play'?'play/':view==='vault'?'play/vault/':['lesson','result'].includes(view)?`learn/${lessonId}/${view==='result'?'result/':''}`:'';
   url.pathname=`${gamePrefix(url.pathname)}/${id}/${suffix}`;
   url.searchParams.delete('lang');return url;
 }

@@ -1254,5 +1254,35 @@
       "escaped": "Đã vượt qua lối ra",
       "route-tired": "Không đủ thể lực; chuyển sang đường lớn"
     }
+  },
+  "learningMap": {
+    "title": "Bản đồ khái niệm lập trình",
+    "tag": "Tìm điểm bắt đầu",
+    "intro": "Bắt đầu với một tín hiệu đầu ra để xem cách rẽ nhánh, vòng lặp, hàm và thông điệp kết hợp với nhau. Chọn một khái niệm, học từ những kiến thức nền tảng liên quan hoặc chuyển thẳng đến bài lập trình tự làm.",
+    "compare": "So sánh với các ngôn ngữ lập trình khác",
+    "completed": "Đã hoàn thành bài tập",
+    "available": "Có thể tự do khám phá",
+    "arrows": "Các đường nối thể hiện thứ tự học gợi ý",
+    "scroll": "Cuộn ngang để xem bản đồ. Bạn có thể mở mọi khái niệm mà không cần mở khóa theo thứ tự.",
+    "lanes": [
+      "Gửi tín hiệu",
+      "Điều khiển hành động",
+      "Tổ chức chương trình",
+      "Phối hợp thông điệp"
+    ],
+    "selected": "Khái niệm đang xem",
+    "before": "Kiến thức nền tảng hữu ích",
+    "after": "Vận dụng trong",
+    "first": "Bắt đầu từ đây. Không cần kinh nghiệm lập trình.",
+    "transfer": "Vận dụng những ý tưởng này vào các bài tập thực tế trong khu thực hành.",
+    "practice": "Học qua bài tập",
+    "tryDirect": "Tự làm bài lập trình",
+    "start": "Bắt đầu với: {concept}",
+    "progressNote": "Các dấu đánh dấu cho biết những bài tập học tập đã hoàn thành. Để kiểm tra mức độ hiểu bài, hãy thử tự làm một bài tập.",
+    "example": "Cách thể hiện bằng mã",
+    "run": "Chạy ví dụ",
+    "ready": "Chạy chương trình này để xem kết quả đầu ra thực tế.",
+    "error": "Chương trình chưa chạy xong",
+    "noOutput": "Chương trình đã chạy nhưng không có đầu ra."
   }
 }
