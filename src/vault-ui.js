@@ -1,4 +1,5 @@
 import { newVault, restoreVault, vaultPuzzle, inspectVault, submitVault, advanceVault, replayVault } from './vault.js';
+import {progressStorage} from './save-data.js';
 
 const key='loopuff-vault-v1';
 const html=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -6,7 +7,7 @@ const freshSeed=()=>crypto.getRandomValues(new Uint32Array(1))[0];
 export function loadVault(){try{return restoreVault(JSON.parse(localStorage.getItem(key)),freshSeed());}catch{return newVault(freshSeed());}}
 export function mountVault(root,{text:t,errors,reduced}){
   const state=loadVault();let timers=[],disposed=false;
-  const persist=()=>{try{localStorage.setItem(key,JSON.stringify(state));}catch{const status=root.querySelector('[data-vault-status]');if(status)status.textContent=t.noSave;}};
+  const persist=async()=>{try{const raw=JSON.stringify(state);await progressStorage().write(()=>localStorage.setItem(key,raw));}catch{const status=root.querySelector('[data-vault-status]');if(status)status.textContent=t.noSave;}};
   const cancel=()=>{for(const timer of timers)clearTimeout(timer);timers=[];};
   function render(){
     cancel();

@@ -26,13 +26,14 @@ export function createAccountClient({url,fetchImpl=fetch,onChange=()=>{}}){
 }
 
 const html=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-export function mountAccount(root,{client,text:t,locale,saveNote,homeUrl}){
+export function mountAccount(root,{client,text:t,locale,saveNote,homeUrl,savesUrl,saveLabel}){
   let disposed=false,busy=false,message='',isError=false;
   const f=client.form;
   function render(){
     if(disposed)return;
     const signed=!!client.user;
     root.innerHTML=`<section class="account-page"><header><span class="eyebrow">${html(t.eyebrow)}</span><h1 id="learning-title">${html(signed?t.signed:f.mode==='register'?t.registerTitle:t.loginTitle)}</h1><p>${html(t.intro)}</p></header><div class="account-workspace"><aside class="account-story"><img src="${new URL('../assets/aircraft-2d.png?v=6fa6af1aeee1',import.meta.url).href}" alt="" aria-hidden="true"><p>${html(saveNote)}</p><a data-action="home" href="${html(homeUrl)}">${html(t.guest)} <span aria-hidden="true">↗</span></a></aside><div class="account-form-area">${signed?`<p class="account-email" dir="ltr">${html(client.user.email||'')}</p><button type="button" class="text-button" data-account-action="logout">${html(t.logout)}</button>`:`<div class="account-tabs" role="group" aria-label="${html(t.entry)}"><button type="button" data-account-mode="login" aria-pressed="${f.mode==='login'}">${html(t.login)}</button><button type="button" data-account-mode="register" aria-pressed="${f.mode==='register'}">${html(t.register)}</button></div><form data-account-form><label for="account-email">${html(t.email)}</label><input id="account-email" type="email" name="email" autocomplete="email" maxlength="254" required dir="ltr" value="${html(f.email)}"><label for="account-password">${html(t.password)}</label><input id="account-password" type="password" name="password" autocomplete="${f.mode==='register'?'new-password':'current-password'}" minlength="${f.mode==='register'?10:1}" maxlength="128" required dir="ltr" value=""><small>${html(f.mode==='register'?t.passwordHint:'')}</small><button class="primary" type="submit">${html(f.mode==='register'?t.register:t.login)}</button></form>`}<p class="account-status" role="status" aria-live="polite" data-error="${isError}">${html(message||(!signed&&client.available===false?t.unavailable:''))}</p></div></div></section>`;
+    if(savesUrl)root.querySelector('.account-story').insertAdjacentHTML('beforeend',`<a data-action="open-saves" href="${html(savesUrl)}">${html(saveLabel)} <span aria-hidden="true">↗</span></a>`);
     const password=root.querySelector('#account-password');if(password)password.value=f.password;
     for(const control of root.querySelectorAll('button,input'))control.disabled=busy;
   }

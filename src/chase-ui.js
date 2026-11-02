@@ -1,5 +1,6 @@
 import { chaseRoles, chasePuzzle, newChase, restoreChase, inspectChase, submitChase, advanceChase } from './chase.js';
 import { mountChaseScene } from './chase-scene.js';
+import {progressStorage} from './save-data.js';
 const key='loopuff-chase-v1';
 const html=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const asset=name=>new URL(`../assets/chase-${name}-idle.webp`,import.meta.url).href;
@@ -11,7 +12,7 @@ export function mountChase(root,{text:t,errors,reduced}){
   const el=selector=>root.querySelector(selector);
   const action=name=>el(`[data-chase-action="${name}"]`);
   const initial=()=>({police:0,thief:chasePuzzle(work().stage).gap,signal:1,outcome:'unfinished'});
-  const persist=()=>{try{localStorage.setItem(key,JSON.stringify(state));saveFailed=false;}catch{saveFailed=true;}const status=el('[data-chase-save]');if(status)status.textContent=saveFailed?t.noSave:'';};
+  const persist=async()=>{try{const raw=JSON.stringify(state);await progressStorage().write(()=>localStorage.setItem(key,raw));saveFailed=false;}catch{saveFailed=true;}const status=el('[data-chase-save]');if(status)status.textContent=saveFailed?t.noSave:'';};
   function cancel(){generation++;playing=false;paused=false;scene?.reset();}
   function render(){
     cancel();scene?.dispose();practiceMode=false;practiceMoves=[];debugMode=false;debugCursor=0;

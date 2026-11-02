@@ -6,10 +6,14 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { betterAuth } from 'better-auth';
 import { getMigrations } from 'better-auth/db/migration';
+import {createProgressStore} from './progress-store.mjs';
+import {saveLimit,SaveError} from './save-format.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const cookiePrefix = 'loopuff';
 const maxBodyBytes = 4 * 1024;
+const progressBodyBytes = saveLimit + 4096;
+const progressPaths = new Set(['/api/progress','/loopuff/api/progress']);
 const passwordMin = 10;
 const passwordMax = 128;
 const ipWindowSeconds = 60;
@@ -82,9 +86,9 @@ function validateBaseURL(value) {
   return url;
 }
 
-async function parseLimitedJSON(request) {
+async function parseLimitedJSON(request,limit=maxBodyBytes) {
   const declared = Number(request.headers.get('content-length'));
-  if (Number.isFinite(declared) && declared > maxBodyBytes) throw failure(413, 'BODY_TOO_LARGE');
+  if (Number.isFinite(declared) && declared > limit) throw failure(413, 'BODY_TOO_LARGE');
   if (!request.body) return {};
   const reader = request.body.getReader();
   const chunks = [];
@@ -94,7 +98,7 @@ async function parseLimitedJSON(request) {
       const { done, value } = await reader.read();
       if (done) break;
       size += value.byteLength;
-      if (size > maxBodyBytes) {
+      if (size > limit) {
         await reader.cancel().catch(() => {});
         throw failure(413, 'BODY_TOO_LARGE');
       }
@@ -193,6 +197,7 @@ export async function createAccountService({ databasePath, secret, baseURL, fetc
     logger: { disabled: true },
   });
 
+  let progress;
   try {
     const migrations = await getMigrations(auth.options);
     await migrations.runMigrations();
@@ -203,6 +208,7 @@ export async function createAccountService({ databasePath, secret, baseURL, fetc
       hits INTEGER NOT NULL,
       PRIMARY KEY (bucket, key_hash)
     )`);
+    progress=createProgressStore(db);
   } catch {
     db.close();
     throw failure(500, 'DATABASE_INIT_FAILED');
@@ -238,9 +244,33 @@ export async function createAccountService({ databasePath, secret, baseURL, fetc
   }
 
   const origins = originSet(resolvedBase.origin);
+  async function handleProgress(request){
+    if(!['GET','POST'].includes(request.method))return json(405,{error:{code:'METHOD_NOT_ALLOWED'}});
+    const origin=request.headers.get('origin');
+    if((request.method==='POST'&&!origin)||(origin&&!origins.has(origin)))return json(403,{error:{code:'FORBIDDEN'}});
+    try{
+      limiter('progress-ip',requestAddress(request),60,60);
+      const result=await auth.api.getSession({headers:request.headers,returnHeaders:true});
+      const session=result&&typeof result==='object'&&'response' in result?result.response:result;
+      const account=cleanUser(session?.user);
+      if(!account)return json(401,{error:{code:'AUTH_REQUIRED'}});
+      const cookies=setCookiesFrom(result?.headers);
+      if(request.method==='GET')return json(200,{account,...progress.get(account.id)},cookies);
+      const input=await parseLimitedJSON(request,progressBodyBytes);
+      if(!input||typeof input!=='object'||Array.isArray(input)||Object.keys(input).some(key=>!['expectedRevision','expectedAccountId','snapshot'].includes(key)))throw new SaveError();
+      // A revision from account A must never authorize a write after switching to B.
+      if(input.expectedAccountId!==account.id)return json(409,{error:{code:'ACCOUNT_CHANGED'}});
+      limiter('progress-user',account.id,60,30);
+      return json(200,{account,...progress.put(account.id,input.expectedRevision,input.snapshot)},cookies);
+    }catch(error){
+      const status=error.code==='SAVE_CONFLICT'?409:error.code==='SAVE_TOO_LARGE'||error.status===413?413:error instanceof SaveError||error.status===400?400:error.status===429?429:503;
+      return json(status,{error:{code:status===503?'SAVE_UNAVAILABLE':error.code||'SAVE_INVALID'}});
+    }
+  }
   const handler = async request => {
     if (!(request instanceof Request)) return json(400, { error: { code: 'INVALID_REQUEST' } });
     const url = new URL(request.url);
+    if(progressPaths.has(url.pathname))return handleProgress(request);
     if (request.method === 'GET' && ['/healthz', '/loopuff/healthz'].includes(url.pathname)) return json(200, { ok: true });
     if (request.method === 'GET' && ['/api/account', '/loopuff/api/account'].includes(url.pathname)) {
       try {
@@ -295,6 +325,7 @@ function nodeRequestToWeb(request) {
     else if (value !== undefined) headers.set(key, value);
   }
   const url = new URL(request.url || '/', 'http://127.0.0.1:8793');
+  const bodyLimit=progressPaths.has(url.pathname)?progressBodyBytes:maxBodyBytes;
   if (request.method === 'GET' || request.method === 'HEAD') return new Request(url, { method: request.method, headers });
   return (async () => {
     const chunks = [];
@@ -302,7 +333,7 @@ function nodeRequestToWeb(request) {
     for await (const chunk of request) {
       const data = Buffer.from(chunk);
       size += data.byteLength;
-      if (size > maxBodyBytes) return null;
+      if (size > bodyLimit) return null;
       chunks.push(data);
     }
     return new Request(url, { method: request.method, headers, body: Buffer.concat(chunks), duplex: 'half' });

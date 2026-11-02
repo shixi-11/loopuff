@@ -10,6 +10,10 @@ import { mountDispatch, loadDispatch } from './dispatch-ui.js';
 import { rememberLesson, lessonWork, explorationProgress, readSession } from './progress.js';
 import { arcadeArt } from './arcade-art.js';
 import { createAccountClient, mountAccount } from './account.js';
+import { progressStorage } from './save-data.js';
+import { mountSaves } from './saves-ui.js';
+import { mountGuide } from './guide-ui.js';
+import { readGuideWork } from './guide.js';
 import { selectedLocale, languageUrl, parseRoute, routeUrl } from './routing.js';
 
 const $ = id => document.getElementById(id);
@@ -19,18 +23,23 @@ function prose(text){
   let cursor=0,result='';for(const match of String(text).matchAll(pattern)){result+=escape(text.slice(cursor,match.index))+`<bdi dir="ltr">${escape(match[0])}</bdi>`;cursor=match.index+match[0].length;}return result+escape(text.slice(cursor));
 }
 const storageKey='loopuff-v1', reduced=matchMedia('(prefers-reduced-motion: reduce)');
+// Finish any interrupted restore before legacy loaders read their separate keys.
+try{if((await progressStorage().recover()).status==='recovered')location.reload();}catch{}
 let saved={};try{saved=readSession(localStorage.getItem(storageKey));}catch{}
 const validLocale=id=>locales.some(([key])=>key===id);
 let lang=selectedLocale(location.href,saved.lang,navigator.languages||[navigator.language]);
 if(!validLocale(lang))lang='en';
-let jumpLab=null,vaultGame=null,chaseGame=null,dispatchGame=null,accountPage=null;
-const account=createAccountClient({url:location.href,onChange:()=>{if(messages){updateAccountEntry();accountPage?.refresh();}}});
-let messages, languageRequest=0, languageController, guideIndex=0, notice='', lastResult=null, feedbackState=null;
+let jumpLab=null,vaultGame=null,chaseGame=null,dispatchGame=null,accountPage=null,savesPage=null,guidePage=null;
+const savesModel={};
+const guideModel={selected:saved.state?.guideSelected,drafts:readGuideWork(saved.state?.guideWork)};
+let guideView='guide';
+const account=createAccountClient({url:location.href,onChange:()=>{if(messages){updateAccountEntry();accountPage?.refresh();savesPage?.refresh();}}});
+let messages, languageRequest=0, languageController, notice='', lastResult=null, feedbackState=null;
 const initialCatalog=document.getElementById('initial-catalog');
 const catalogs=new Map(initialCatalog?[[initialCatalog.dataset.locale,JSON.parse(initialCatalog.textContent)]]:[]);
 let state={phase:'welcome',lesson:0,fragment:0,typed:'',draft:'',assessedSource:null,grades:{},score:0,errors:0,keys:0,completed:[],...saved.state};
 if(!state.grades||typeof state.grades!=='object'||Array.isArray(state.grades))state.grades={};
-if(!['welcome','levels','brief','typing','predict','output','explain','remix','independent','result','complete','guide','pause','play','vault','chase','dispatch','account'].includes(state.phase)) state.phase='welcome';
+if(!['welcome','levels','brief','typing','predict','output','explain','remix','independent','result','complete','guide','pause','play','vault','chase','dispatch','account','saves'].includes(state.phase)) state.phase='welcome';
 if(!Number.isInteger(state.lesson)||state.lesson<0||state.lesson>=course.length)state.lesson=0;
 state.completed=[...new Set(Array.isArray(state.completed)?state.completed.filter(id=>course.some(l=>l.id===id)):[])];
 rememberLesson(state,course[state.lesson].id);
@@ -42,15 +51,15 @@ function readRoute(){
     const index=course.findIndex(item=>item.id===route.lessonId);
     if(previousLesson!==index){rememberLesson(state,course[previousLesson].id);state.lesson=index;Object.assign(state,lessonWork(state,course[index].id)||{phase:'brief',fragment:0,typed:'',draft:'',assessedSource:null,score:0,errors:0,keys:0});}
   }
-  if(['play','vault','chase','dispatch','account'].includes(route?.view))state.phase=route.view;
+  if(['play','vault','chase','dispatch','account','saves'].includes(route?.view))state.phase=route.view;
   else if(route?.view==='result')state.phase='result';
-  else if(route?.view==='levels')state.phase='levels';
-  else if(route?.view==='guide'){if(!['guide','welcome','pause'].includes(state.phase))state.resumePhase=state.phase;state.phase='guide';}
+  else if(route?.view==='levels'){state.phase='play';const target=routeUrl(location.href,lang,'play');target.hash='missions';history.replaceState(null,'',target);}
+  else if(['guide','compare'].includes(route?.view)){if(!['guide','welcome','pause'].includes(state.phase))state.resumePhase=state.phase;state.phase='guide';guideView=route.view;}
   else if(route?.view==='lesson'){
     if(previousLesson!==state.lesson){if(state.phase==='result')state.phase='independent';}
     else if(state.phase==='result')state.phase='independent';
     else if(state.phase==='pause')state.phase=state.previousPhase||'brief';
-    else if(['welcome','levels','guide','play','vault','chase','dispatch','account'].includes(state.phase))Object.assign(state,lessonWork(state,course[state.lesson].id)||{phase:'brief'});
+    else if(['welcome','levels','guide','play','vault','chase','dispatch','account','saves'].includes(state.phase))Object.assign(state,lessonWork(state,course[state.lesson].id)||{phase:'brief'});
   }else{
     if(!['welcome','pause','guide'].includes(state.phase))state.resumePhase=state.phase;
     state.phase='welcome';
@@ -59,7 +68,7 @@ function readRoute(){
 readRoute();
 const ui=key=>messages.ui[key], lesson=()=>course[state.lesson], copy=()=>messages.lessons[state.lesson];
 const fragments=()=>lesson().fragments;
-function save(){rememberLesson(state,lesson().id);try{localStorage.setItem(storageKey,JSON.stringify({lang,state}));$('save-status').textContent=ui('save');}catch{$('save-status').textContent=ui('nosave');}}
+async function save(){rememberLesson(state,lesson().id);try{const raw=JSON.stringify({lang,state});await progressStorage().write(()=>localStorage.setItem(storageKey,raw));$('save-status').textContent=ui('save');await savesPage?.localSaved();}catch{$('save-status').textContent=ui('nosave');}}
 async function changeLanguage(next){
   if(!validLocale(next))return;
   const request=++languageRequest;
@@ -105,7 +114,7 @@ function applyStatic(){
   $('pause-button').innerHTML=`<span aria-hidden="true">Ⅱ</span> <span class="pause-word">${escape(ui('pause'))}</span>`;$('pause-button').setAttribute('aria-label',ui('pause'));document.querySelector('.header-controls').setAttribute('aria-label',ui('navigation'));
   const navigation=$('page-navigation');
   navigation.hidden=false;navigation.setAttribute('aria-label',ui('navigation'));
-  navigation.innerHTML=`<a data-action="home" href="${routeUrl(location.href,lang,'home').pathname}" ${state.phase==='welcome'?'aria-current="page"':''}>${escape(ui('navHome'))}</a><a data-action="open-levels" href="${routeUrl(location.href,lang,'levels').pathname}" ${!['welcome','guide','play','vault','chase','dispatch','account'].includes(state.phase)?'aria-current="true"':''}>${escape(ui('navCourse'))}<span class="course-progress"><bdi dir="ltr">${state.completed.length}/${course.length}</bdi></span></a><a data-action="open-play" href="${routeUrl(location.href,lang,'play').pathname}" ${['play','vault','chase','dispatch'].includes(state.phase)?'aria-current="page"':''}>${escape(messages.vault.arcade)}</a><a data-action="open-guide" aria-label="${escape(ui('navGuide'))}" href="${routeUrl(location.href,lang,'guide').pathname}" ${state.phase==='guide'?'aria-current="page"':''}><span class="nav-label-full">${escape(ui('navGuide'))}</span><span class="nav-label-short">${escape(ui('navGuideShort'))}</span></a>`;
+  navigation.innerHTML=`<a data-action="home" href="${routeUrl(location.href,lang,'home').pathname}" ${state.phase==='welcome'?'aria-current="page"':''}>${escape(ui('navHome'))}</a><a data-action="open-play" href="${routeUrl(location.href,lang,'play').pathname}" ${!['welcome','guide','account','saves'].includes(state.phase)?'aria-current="page"':''}>${escape(messages.vault.arcade)}</a><a data-action="open-guide" aria-label="${escape(ui('navGuide'))}" href="${routeUrl(location.href,lang,'guide').pathname}" ${state.phase==='guide'?'aria-current="page"':''}><span class="nav-label-full">${escape(ui('navGuide'))}</span><span class="nav-label-short">${escape(ui('navGuideShort'))}</span></a>`;
   $('universe').setAttribute('aria-label',ui('map'));document.querySelector('.coordinate').textContent='LOOPUFF / 01';
   document.querySelector('.welcome .eyebrow').textContent=ui('pilot');
   document.querySelector('.welcome h1').innerHTML=ui('hero').split(/\\n|\n/).map(line=>{const accent=ui('heroAccent'),at=line.indexOf(accent);return at<0?escape(line):escape(line.slice(0,at))+`<span class="hero-accent">${escape(accent)}</span>`+escape(line.slice(at+accent.length));}).join('<br>');
@@ -126,7 +135,7 @@ function applyStatic(){
 }
 function syncRoute(){
   if(state.phase==='pause')return;
-  const view=state.phase==='welcome'?'home':['levels','guide','result','play','vault','chase','dispatch','account'].includes(state.phase)?state.phase:'lesson';
+  const view=state.phase==='welcome'?'home':state.phase==='guide'?guideView:['levels','result','play','vault','chase','dispatch','account','saves'].includes(state.phase)?state.phase:'lesson';
   const url=routeUrl(location.href,lang,view,lesson().id);url.hash='';
   if(location.pathname!==url.pathname)history.pushState(null,'',url);
 }
@@ -140,13 +149,23 @@ function enterLesson(index){
 function move(phase){rememberLesson(state,lesson().id);if(phase==='welcome'&&['brief','typing','predict','output','explain','remix','independent','result','complete'].includes(state.phase))state.resumePhase=state.phase;state.phase=phase;notice='';feedbackState=null;lastResult=null;syncRoute();render();save();window.scrollTo(0,0);if(!$('learning-page').hidden)$('learning-page').focus({preventScroll:true});}
 function actions(buttons){return `<div class="dialog-actions">${buttons.map(([action,label,secondary])=>`<button class="${secondary?'text-button':'primary'}" data-action="${action}">${escape(label)}</button>`).join('')}</div>`;}
 function codeBlock(source){return `<pre class="exercise-code" dir="ltr">${escape(source)}</pre>`;}
+function arcadeMissions(){
+ const next=course.findIndex(l=>!state.completed.includes(l.id)),active=course[next]?.track||'beginner';
+ const tracks=[['beginner','trackBeginner',messages.vault.title,'vault'],['tolang','trackTolang',messages.dispatch.title,'dispatch'],['advanced','trackAdvanced',messages.dispatch.missions[3].title,'dispatch']];
+ return `<section id="missions" class="arcade-missions" aria-label="${escape(ui('routeTitle'))}"><header><h2>${escape(ui('routeTitle'))}</h2><p>${escape(ui('routeIntro'))}</p></header>${tracks.map(([track,label,station,view])=>{
+  const items=course.map((l,i)=>({l,i})).filter(({l})=>(l.track||'beginner')===track),completed=items.filter(({l})=>state.completed.includes(l.id)).length;
+  return `<details class="arcade-track"${track===active?' open':''}><summary><span><small>${escape(station)}</small><strong>${escape(ui(label))}</strong></span><bdi dir="ltr">${completed} / ${items.length}</bdi></summary><ol>${items.map(({l,i})=>`<li data-state="${state.completed.includes(l.id)?'done':i===next?'next':'available'}"><a href="${routeUrl(location.href,lang,'lesson',l.id).pathname}" data-lesson="${i}"><span class="mission-number" aria-hidden="true">${state.completed.includes(l.id)?'✓':String(i+1).padStart(2,'0')}</span><span><strong>${escape(messages.lessons[i].title)}</strong><span>${escape(messages.lessons[i].goal)}</span></span><small>${escape(ui(state.completed.includes(l.id)?'done':lessonWork(state,l.id)?'resume':i===next?'next':'open'))}</small></a></li>`).join('')}</ol><a class="mission-destination" data-action="open-${view}" href="${routeUrl(location.href,lang,view).pathname}">${escape(station)} <span aria-hidden="true">↗</span></a></details>`;
+ }).join('')}</section>`;
+}
 function choices(items,action){return `<div class="choices">${items.map((text,index)=>`<button class="choice" data-${action}="${index}"><span>${String(index+1).padStart(2,'0')}</span>${prose(text||ui('noOutput'))}</button>`).join('')}</div>`;}
 function render(){
   jumpLab?.dispose();jumpLab=null;
   vaultGame?.dispose();vaultGame=null;
   chaseGame?.dispose();chaseGame=null;
   accountPage?.dispose();accountPage=null;
+  savesPage?.dispose();savesPage=null;
   dispatchGame?.dispose();dispatchGame=null;
+  guidePage?.dispose();guidePage=null;
   applyStatic();const phase=state.phase, typing=phase==='typing';
   const page=!['welcome','typing','pause'].includes(phase);
   document.body.dataset.view=page?'learning':'game';
@@ -158,8 +177,9 @@ function render(){
   $('pause-button').hidden=!typing;
   if(phase!=='pause'){$('flow-dialog').close();$('dialog-content').textContent='';}
   if(typing)renderTyping();else if(phase!=='welcome')renderDialog();
+  if(['levels','play'].includes(phase))document.querySelector('.journey-panel')?.insertAdjacentHTML('beforeend',`<a class="journey-backup" data-action="open-saves" href="${routeUrl(location.href,lang,'saves').pathname}">${escape(messages.saves.title)} <span aria-hidden="true">↗</span></a>`);
   const view=parseRoute(location.pathname)?.view||'home';
-  document.title=`${ui('name')} · ${view==='dispatch'?messages.dispatch.title:view==='chase'?messages.chase.title:view==='account'?messages.account.entry:view==='vault'?messages.vault.title:view==='play'?messages.vault.arcade:view==='result'?messages.assessment.title:view==='levels'?ui('navCourse'):view==='guide'?ui('guide'):view==='lesson'?copy().title:ui('tagline')}`;
+  document.title=`${ui('name')} · ${view==='compare'?messages.guideStudio.compareTitle:view==='saves'?messages.saves.title:view==='dispatch'?messages.dispatch.title:view==='chase'?messages.chase.title:view==='account'?messages.account.entry:view==='vault'?messages.vault.title:view==='play'?messages.vault.arcade:view==='result'?messages.assessment.title:view==='levels'?ui('navCourse'):view==='guide'?ui('guide'):view==='lesson'?copy().title:ui('tagline')}`;
   document.querySelector('link[rel="canonical"]').href=routeUrl('https://shixilin.com/games/loopuff/',lang,view,lesson().id).href;
   let robots=document.querySelector('meta[name="robots"]');
   if(view==='result'){if(!robots){robots=document.createElement('meta');robots.name='robots';document.head.append(robots);}robots.content='noindex,follow';}else robots?.remove();
@@ -205,16 +225,25 @@ function journeyPanel(){
   const destination=next==='vault'?routeUrl(location.href,lang,'vault'):routeUrl(location.href,lang,'lesson',course[next].id);
   const target=next==='vault'?messages.vault.title:messages.lessons[next].title;
   const action=next==='vault'?'data-action="open-vault"':`data-lesson="${next}"`;
-  return `<section class="journey-panel" aria-label="${escape(t.title)}"><div class="journey-heading"><h2>${escape(t.title)}</h2><span>${escape(t.local)}</span></div><dl class="journey-totals"><div><dt>${escape(t.points)}</dt><dd><bdi dir="ltr">${p.points}</bdi><span aria-hidden="true">✦</span></dd></div><div><dt>${escape(t.lessons)}</dt><dd><bdi dir="ltr">${p.completed} / ${course.length}</bdi></dd></div><div><dt>${escape(messages.vault.collection)}</dt><dd><bdi dir="ltr">${p.stamps} / 3</bdi></dd></div></dl><div class="journey-next"><a ${action} href="${destination.pathname}"><span>${escape(t.next)}</span><strong>${escape(target)} <span aria-hidden="true">↗</span></strong></a><p>${escape(t.rule)}</p></div></section>`;
+  return `<section class="journey-panel journey-compact" aria-label="${escape(t.title)}"><div class="journey-next"><a ${action} href="${destination.pathname}"><span>${escape(t.next)}</span><strong>${escape(target)} <span aria-hidden="true">↗</span></strong></a></div><details class="journey-records"><summary>${escape(t.title)} <bdi dir="ltr">${p.completed} / ${course.length}</bdi></summary><dl class="journey-totals"><div><dt>${escape(t.points)}</dt><dd><bdi dir="ltr">${p.points}</bdi><span aria-hidden="true">✦</span></dd></div><div><dt>${escape(t.lessons)}</dt><dd><bdi dir="ltr">${p.completed} / ${course.length}</bdi></dd></div><div><dt>${escape(messages.vault.collection)}</dt><dd><bdi dir="ltr">${p.stamps} / 3</bdi></dd></div></dl><p>${escape(t.rule)}</p><small>${escape(t.local)}</small></details></section>`;
 }
 function renderDialog(){
+  if(state.phase==='guide'){
+    $('learning-page').dataset.stage='guide';$('learning-content').innerHTML='<div id="guide-studio"></div>';
+    guidePage=mountGuide($('guide-studio'),{text:messages.guideStudio,legacy:messages.guide,errors:messages.ui,ui:messages.ui,model:guideModel,compare:guideView==='compare',reduced,onChange:()=>{state.guideWork={...guideModel.drafts};state.guideSelected=guideModel.selected;save();},urls:{home:routeUrl(location.href,lang,'home').pathname,guide:routeUrl(location.href,lang,'guide').pathname,compare:routeUrl(location.href,lang,'compare').pathname,dispatch:routeUrl(location.href,lang,'dispatch').pathname,lesson:id=>routeUrl(location.href,lang,'lesson',id).pathname}});
+    return;
+  }
   const c=copy(),phase=state.phase;let title='',body='';
   if(phase==='chase'){
     $('learning-page').dataset.stage=phase;
     $('learning-content').innerHTML=`<nav class="page-trail" aria-label="${escape(ui('navigation'))}"><a data-action="home" href="${routeUrl(location.href,lang,'home').pathname}">${escape(ui('navHome'))}</a><span aria-hidden="true">/</span><a data-action="open-play" href="${routeUrl(location.href,lang,'play').pathname}">${escape(messages.vault.arcade)}</a><span aria-hidden="true">/</span><span aria-current="page">${escape(messages.chase.title)}</span></nav><div id="chase-game"></div>`;
     chaseGame=mountChase($('chase-game'),{text:messages.chase,errors:messages.ui,reduced});return;
   }
-  if(phase==='account'){$('learning-content').innerHTML='<div id="account-page"></div>';accountPage=mountAccount($('account-page'),{client:account,text:messages.account,locale:lang,saveNote:ui('save'),homeUrl:routeUrl(location.href,lang,'home').pathname});return;}
+  if(phase==='account'){$('learning-content').innerHTML='<div id="account-page"></div>';accountPage=mountAccount($('account-page'),{client:account,text:messages.account,locale:lang,saveNote:ui('save'),homeUrl:routeUrl(location.href,lang,'home').pathname,savesUrl:routeUrl(location.href,lang,'saves').pathname,saveLabel:messages.saves.title});return;}
+  if(phase==='saves'){
+   $('learning-page').dataset.stage=phase;$('learning-content').innerHTML='<div id="saves-page"></div>';
+   savesPage=mountSaves($('saves-page'),{text:messages.saves,topics:{course:ui('navCourse'),guide:ui('navGuide'),vault:messages.vault.title,chase:messages.chase.title,dispatch:messages.dispatch.title,police:messages.chase.police,thief:messages.chase.thief,dispatchTasks:messages.dispatch.missions.map(m=>m.title)},lessons:messages.lessons,phases:{brief:ui('mission'),typing:ui('assembled'),predict:ui('predict'),output:ui('output'),explain:ui('explain'),remix:ui('practice'),independent:ui('independent'),result:messages.assessment.title,complete:ui('complete')},account,locale:lang,name:ui('name'),urls:{account:routeUrl(location.href,lang,'account').pathname},model:savesModel});return;
+  }
   if(phase==='dispatch'){
     $('learning-page').dataset.stage=phase;
     $('learning-content').innerHTML='<div id="dispatch-game"></div>';
@@ -232,18 +261,9 @@ function renderDialog(){
     if(phase==='play'){
       const dispatch=loadDispatch(),d=messages.dispatch;
       document.querySelector('.arcade-games').insertAdjacentHTML('beforeend',`<a class="arcade-game dispatch-entry" data-action="open-dispatch" href="${routeUrl(location.href,lang,'dispatch').pathname}"><div class="dispatch-card-art" aria-hidden="true"><img src="${aircraftUrl}" alt=""></div><div><span class="eyebrow">${escape(d.tag)}</span><h2>${escape(d.title)}</h2><p>${escape(d.entry)}</p><span class="game-record">${escape(d.badges)} <bdi dir="ltr">${dispatch.stamps.length} / 4</bdi></span><strong>${escape(v.enter.replace(/\s*↗$/,''))} ↗</strong></div></a>`);
+      document.querySelector('.arcade-page').insertAdjacentHTML('beforeend',arcadeMissions());
     }
     return;
-  }
-  if(phase==='levels'){
-    $('learning-page').dataset.stage=phase;
-    const nextLesson=course.findIndex(l=>!state.completed.includes(l.id));
-    const tracks=[['beginner','trackBeginner'],['tolang','trackTolang'],['advanced','trackAdvanced']];
-    const sections=tracks.map(([track,label])=>{
-      const items=course.map((l,i)=>({l,i})).filter(({l})=>(l.track||'beginner')===track);
-      return `<section class="course-track" aria-labelledby="track-${track}"><header><h2 id="track-${track}">${escape(ui(label))}</h2><bdi dir="ltr">${items.filter(({l})=>state.completed.includes(l.id)).length} / ${items.length}</bdi></header><div class="level-grid">${items.map(({l,i})=>`<a class="level-card" href="${routeUrl(location.href,lang,'lesson',l.id).pathname}" data-state="${state.completed.includes(l.id)?'done':i===nextLesson?'next':'available'}" data-lesson="${i}"><span class="level-number">${String(i+1).padStart(2,'0')}</span><span class="level-copy"><strong>${escape(messages.lessons[i].title)}</strong><span>${escape(messages.lessons[i].goal)}</span><small>${escape(ui(state.completed.includes(l.id)?'done':lessonWork(state,l.id)?'resume':i===nextLesson?(i===0?'start':'next'):'open'))}</small></span><span aria-hidden="true">↗</span></a>`).join('')}</div></section>`;
-    }).join('');
-    $('learning-content').innerHTML=`<section class="levels-page"><span class="eyebrow">${escape(ui('name'))}</span><h1 id="learning-title">${escape(ui('routeTitle'))}</h1><p class="levels-intro">${escape(ui('routeIntro'))}</p>${journeyPanel()}${sections}<p class="scope-note">${escape(ui('chapterNote'))}</p></section>`;return;
   }
   if(phase==='brief'){title=c.title;body=`<p class="dialog-note">${prose(c.intro)}</p>${codeBlock(lesson().source)}<p>${prose(c.goal)}</p>${actions([[lesson().mode==='lab'?'observe-program':'type',ui(lesson().mode==='lab'?'observeProgram':'launch')]])}`;}
   if(phase==='predict'){title=ui('predict');body=`<p class="dialog-note">${escape(ui('predictionPrompt'))}</p>${codeBlock(lesson().source)}${choices(lesson().prediction,'prediction')}`;}
@@ -261,10 +281,6 @@ function renderDialog(){
   }
   if(phase==='complete'){
     title=ui('complete');body=`<div class="signal">✧ ✧ ✧</div><p class="dialog-note">${prose(c.learned)}</p><p class="completed-grade">${escape(messages.assessment.score)} <bdi dir="ltr">${state.grades[lesson().id]?.score??100} / 100</bdi></p>${lesson().mode==='lab'?'':`<div class="score-summary"><div><small>${escape(ui('score'))}</small><strong>${state.score}</strong></div><div><small>${escape(ui('accuracy'))}</small><strong>${state.keys?Math.round(Math.max(0,1-state.errors/state.keys)*100):100}%</strong></div></div>`}<p class="scope-note">${escape(lesson().mode==='lab'?messages.assessment.note:ui('masteryNote'))}</p>${actions([[state.lesson<course.length-1?'next':'home',ui(state.lesson<course.length-1?'next':'home')],...(lesson().mode==='lab'?[['open-dispatch',messages.dispatch.title,true]]:[]),['open-chase',ui('practiceInChase'),true],['replay',ui('replay'),true]])}`;
-  }
-  if(phase==='guide'){
-    const card=messages.guide[guideIndex];title=card.title;
-    body=`<p class="dialog-note">${prose(card.text)}</p>${codeBlock(card.code)}<p class="dialog-note">${prose(card.takeaway)}</p><p class="scope-note">${escape(ui('scope'))}</p>${actions([['guide-next',ui(guideIndex===messages.guide.length-1?'foundationFinish':'foundationNext')],['home',ui('home'),true]])}`;
   }
   if(phase==='pause'){title=ui('pause');body=`<p class="dialog-note">${escape(ui('paused'))}</p>${actions([['resume',ui('resumePlay')],['restart',ui('restart'),true],['home',ui('home'),true]])}`;}
   if(phase==='pause'){
@@ -346,17 +362,18 @@ document.addEventListener('click',event=>{
   if(target.tagName==='A'){if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;event.preventDefault();}
   if(target.dataset.prediction!==undefined){if(Number(target.dataset.prediction)===lesson().predictionAnswer)move('output');else feedback('predictionHint');return;}
   if(target.dataset.answer!==undefined){if(Number(target.dataset.answer)===(lesson().explanationAnswer??0)){state.draft='';move('remix');}else feedback('answerHint',true);return;}
-  if(target.dataset.lesson!==undefined){enterLesson(Number(target.dataset.lesson));return;}
+  if(target.dataset.lesson!==undefined){enterLesson(Number(target.dataset.lesson));if(target.dataset.practice==='true')move('independent');return;}
   const action=target.dataset.action;
   if(action==='observe-program'){move('predict');return;}
   if(action==='try-jump'){tryJump();return;}
   if(action==='open-account'){move('account');return;}
+  if(action==='open-saves'){move('saves');return;}
   if(action==='open-play'){move('play');return;}
   if(action==='open-dispatch'){move('dispatch');return;}
   if(action==='open-vault'){move('vault');return;}
   if(action==='open-chase'){move('chase');return;}
-  if(action==='open-levels'){move('levels');return;}
-  if(action==='open-guide'){if(!['welcome','guide','pause'].includes(state.phase))state.resumePhase=state.phase;guideIndex=0;move('guide');return;}
+  if(action==='open-levels'){move('play');return;}
+  if(action==='open-guide'||action==='open-compare'){if(!['welcome','guide','pause'].includes(state.phase))state.resumePhase=state.phase;guideView=action==='open-compare'?'compare':'guide';move('guide');return;}
   if(action==='resume-course'){if(state.phase==='guide')enterLesson(state.lesson);else if(state.phase==='result')move('independent');return;}
   if(action==='edit-assessment'){move('independent');$('program-editor')?.focus();return;}
   if(action==='view-result'&&state.assessedSource!==null&&state.assessedSource===state.draft){move('result');return;}
@@ -371,10 +388,9 @@ document.addEventListener('click',event=>{
   if(action==='replay'||action==='restart')begin(state.lesson);
   if(action==='home'){move('welcome');}
   if(action==='resume')move(state.previousPhase||'typing');
-  if(action==='guide-next'){if(guideIndex===messages.guide.length-1)enterLesson(0);else{guideIndex++;renderDialog();}}
 });
 $('start').onclick=()=>{if(lessonWork(state,lesson().id))enterLesson(state.lesson);else enterLesson(Math.max(0,course.findIndex(l=>!state.completed.includes(l.id))));};
-$('how-button').onclick=()=>{guideIndex=0;move('guide');};
+$('how-button').onclick=()=>{guideView='guide';move('guide');};
 $('play-button').onclick=()=>move('play');
 $('pause-button').onclick=pause;
 $('typing-field').addEventListener('input',onTyping);$('typing-field').addEventListener('compositionend',onTyping);

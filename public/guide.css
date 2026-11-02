@@ -1,0 +1,62 @@
+/* The guide is a working signal desk; global page scale remains unchanged. */
+.guide-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;margin-bottom:30px}
+.guide-heading>div{max-width:760px}.guide-heading h1{margin-block:12px 18px;line-height:1.25}
+.guide-heading p{font-size:18px;color:#b9c5dd;margin:0;max-width:680px}
+.guide-crosslink{flex:none;max-width:230px;color:#c0d1fa;text-decoration:none;border-bottom:1px solid #64779e;padding:12px 0;line-height:1.7}
+.guide-concepts{display:flex;flex-wrap:wrap;gap:4px;border-block:1px solid #344263;margin-bottom:30px;padding:7px 0}
+.guide-concepts button{display:flex;align-items:center;gap:9px;color:#b1bfd7;background:transparent;border:0;border-radius:5px;padding:12px 14px;min-height:48px;font-size:15px;line-height:1.4}
+.guide-concepts button>span{font-size:11px;color:#8397be;font-family:var(--mono)}
+.guide-concepts button[aria-pressed=true]{color:#edf3ff;background:#293957}.guide-concepts button:hover{background:#1d2c49}
+.guide-workbench{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);border:1px solid #344263;border-radius:12px;overflow:hidden;background:#111a30}
+.guide-observation{min-width:0;padding:28px 30px;background:radial-gradient(ellipse at 45% 42%,#304c752e,transparent 65%),#111b30}
+.guide-observation h2{font-size:27px;font-weight:550;margin:10px 0 12px;color:#edf0f8}
+.guide-observation header>p{color:#bcc9e1;font-size:17px;margin:0;min-height:3.7em}
+.guide-world{position:relative;height:215px;margin-block:20px;isolation:isolate}
+.guide-orbit{position:absolute;left:4%;right:4%;top:51%;height:60px;border:1px solid #667fa164;border-radius:50%;transform:rotate(-8deg);z-index:-1}
+.guide-orbit:after{content:'';position:absolute;inset:16px -3%;border-top:1px dashed #8cadd459;transform:rotate(11deg)}
+.guide-aircraft{position:absolute;width:132px;height:158px;object-fit:contain;inset-inline-start:2%;top:15px;filter:drop-shadow(0 9px 20px #03081666);transition:transform .7s ease}
+.guide-aircraft.has-signal{transform:translateY(-7px) rotate(5deg)}
+.guide-beacons{position:absolute;left:30%;right:0;top:64px;display:flex;justify-content:space-evenly;gap:10px;align-items:center}
+.guide-beacon{position:relative;text-align:center;min-width:45px}
+.guide-beacon>span{display:grid;place-items:center;border:1px solid #6987b5;border-radius:50%;width:clamp(44px,5vw,64px);height:clamp(44px,5vw,64px);font:500 22px var(--mono);background:#172743;color:#a9bddc;overflow-wrap:anywhere}
+.guide-beacon[data-active=true]>span{background:#c2d3fb;color:#13223f;border-color:#e1ecff;box-shadow:0 0 30px #94b7ff36}
+.guide-beacon>small{display:block;margin-top:12px;color:#849abd;font:11px var(--mono)}
+.guide-world-caption{position:absolute;left:0;right:0;bottom:5px;font-size:12px;color:#90a6c9;text-align:center}
+.guide-log-controls{display:flex;justify-content:space-between;gap:12px;align-items:center;border-top:1px solid #344263;padding-top:18px}
+.guide-log-controls h3{font-size:14px;font-weight:500;margin:0;color:#b9c8e3}.guide-log-controls>div{display:flex;gap:7px;align-items:center}
+.guide-log-controls button{background:#1a2b47;color:#c8d6ee;border:1px solid #3e5577;border-radius:5px;min-height:40px;min-width:36px;padding:7px 9px;font-size:13px}
+.guide-log-controls button:disabled{opacity:.4;cursor:default}.guide-log-controls bdi{font:12px var(--mono);color:#9bb2d5;min-width:42px;text-align:center}
+.guide-log{display:flex;flex-wrap:wrap;gap:7px;margin:15px 0 0;padding:0;list-style:none;max-height:180px;overflow:auto}
+.guide-log button{display:flex;gap:10px;align-items:center;min-height:38px;color:#d1ddf2;background:#17243c;padding:7px 12px;border:1px solid #385172;border-radius:5px}
+.guide-log button>span{font:10px var(--mono);color:#88a0c5}.guide-log button[aria-current=step]{border-color:#b2caff;background:#293d5f}
+.guide-state{font-size:13px;color:#a8c0e7;margin:15px 0 0;min-height:1.85em;overflow-wrap:anywhere}
+.guide-code{padding:24px 28px 28px;min-width:0;background:#0d1527;border-inline-start:1px solid #344263}
+.guide-code-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;min-height:40px}
+.guide-code-heading label{font-size:15px;color:#bdcde7}.guide-code-heading .text-button{padding:8px 0;font-size:12px;min-height:40px}
+.guide-code textarea{width:100%;max-width:100%;min-height:160px;background:#0a1121;border:1px solid #344b70;border-radius:7px;color:#e5edff;padding:19px;font:17px/1.85 var(--mono);resize:vertical;tab-size:2;box-sizing:border-box}
+.guide-code textarea:focus{outline:2px solid #a1bfff;outline-offset:2px}.guide-run-row{display:flex;align-items:center;gap:18px;margin-top:18px;flex-wrap:wrap}
+.guide-run-row .primary{padding:13px 23px;min-height:48px;font-size:15px;background:#bdcef7;color:#102143;border:0;display:flex;gap:18px;align-items:center}
+.guide-run-row>span{color:#92a8cb;font-size:12px}.guide-try{font-size:15px;color:#bdcde7;margin:24px 0}
+.guide-execution{border-block:1px solid #2c4265;padding-block:12px}.guide-execution summary{font-size:13px;color:#aabfdf;cursor:pointer;min-height:28px}
+.guide-source,.language-columns pre,.guide-background pre{max-width:100%;overflow:auto;padding:18px;background:#0a1121;color:#bdcff2;border-radius:5px;font:14px/1.8 var(--mono);white-space:pre;unicode-bidi:plaintext}
+.guide-source mark{background:#385b8a;color:#fff;border-radius:2px}.guide-practice{display:inline-block;margin-top:22px;color:#c2d4fc;text-decoration:none;border-bottom:1px solid #59729b;padding-bottom:5px;font-size:14px;line-height:1.8}
+.guide-next{display:flex;justify-content:space-between;align-items:flex-start;gap:36px;margin-block:28px}.guide-next p{margin:0;max-width:740px;color:#bac9e2;font-size:16px}.guide-next a{color:#b4cdfb;font-size:14px;flex:none;max-width:260px;line-height:1.8}
+.guide-background{border-top:1px solid #344263;margin-top:35px;padding-top:20px;color:#aabddc}.guide-background summary{cursor:pointer;min-height:44px;line-height:1.8}.guide-background article{max-width:780px;margin:24px 0 36px}.guide-background h2{font-size:22px;color:#dce6f8;margin:0}.guide-background p{font-size:15px}
+.language-comparison{margin-top:40px}.language-comparison>header h2{font-size:28px;color:#e1eafa}.language-comparison>header p{color:#b9c9e5;max-width:870px;font-size:16px}.language-comparison .scope-note{max-width:900px;font-size:13px}
+.language-columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:24px}.language-columns article{min-width:0;border-top:1px solid #536c94;padding-top:18px}.language-columns h3{font-size:18px;font-weight:500;color:#d7e4fa;margin:0 0 14px}.language-columns pre{height:calc(100% - 95px);min-height:180px;margin:0 0 14px;box-sizing:border-box}.language-columns a{font-size:12px;color:#a9c0e8}
+.guide-difference{border-inline-start:3px solid #829ac6;padding-inline-start:20px;margin-top:30px;max-width:900px}.guide-difference h3{font-size:15px;color:#c8d9f8;margin:0}.guide-difference p,.guide-message-note{font-size:16px;color:#b9c9e5;line-height:1.9}
+@media(max-width:900px){.guide-heading{display:block}.guide-crosslink{display:inline-block;margin-top:12px;max-width:none;font-size:14px}.guide-workbench{grid-template-columns:1fr}.guide-observation header>p{min-height:0}.guide-code{border-inline-start:0;border-top:1px solid #344263}.guide-world{height:180px}.guide-aircraft{width:115px;height:135px;left:8%}.guide-beacons{left:35%;right:7%;top:50px}.guide-next{display:block}.guide-next a{display:inline-block;margin-top:14px;max-width:none}.language-columns{grid-template-columns:1fr}.language-columns pre{height:auto;min-height:0}.guide-beacon>span{width:54px;height:54px}}
+@media(max-width:560px){.guide-heading h1{font-size:32px;letter-spacing:-.5px}.guide-heading p{font-size:16px}.guide-concepts{gap:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));padding:6px 0;margin-bottom:22px}.guide-concepts button{padding:11px 9px;font-size:14px;gap:7px;overflow-wrap:anywhere}.guide-concepts button>span{font-size:10px}.guide-observation,.guide-code{padding:21px 18px}.guide-observation h2{font-size:24px}.guide-observation header>p{font-size:16px}.guide-world{height:190px}.guide-aircraft{left:0;width:100px;height:120px;top:20px}.guide-beacons{left:30%;right:0;gap:5px;top:56px}.guide-beacon{min-width:34px}.guide-beacon>span{width:38px;height:38px;font-size:16px}.guide-beacon>small{font-size:10px}.guide-code textarea{font-size:15px;padding:14px;min-height:150px}.guide-log-controls{flex-wrap:wrap}.guide-log-controls>div{gap:5px}.guide-log-controls button{min-height:44px}.guide-log button{min-height:44px}.guide-crosslink{line-height:1.8}.guide-world-caption{font-size:11px}.guide-source{font-size:12px}.language-comparison>header h2{font-size:24px}}
+@media(prefers-reduced-motion:reduce){.guide-aircraft{transition:none}}
+@media(max-width:560px){
+ .guide-studio .guide-heading{margin-bottom:20px}.guide-heading>.guide-crosslink{margin-top:8px;padding-block:8px}
+ #guide-studio>.page-trail{margin-bottom:22px}.guide-heading .eyebrow{display:none}
+ .guide-concepts{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:4px;padding:6px 0;scrollbar-width:thin}
+ .guide-concepts button{flex:none;padding:11px 13px;white-space:nowrap}
+ .guide-workbench{display:flex;flex-direction:column}.guide-code{order:0;border:0}.guide-observation{order:1;border-top:1px solid #344263;scroll-margin-top:125px}
+ .guide-code textarea{min-height:130px}.guide-code-heading{margin-bottom:8px}.guide-run-row{margin-top:14px}.guide-try{margin-block:18px}
+}
+[dir=rtl] .guide-studio .eyebrow{letter-spacing:0}
+.comparison-output{color:#bdcff1;font-size:14px}.comparison-output bdi{font-family:var(--mono);margin-inline-start:10px}
+@media(min-width:1101px){.language-columns{grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}}
+@media(min-width:901px) and (max-width:1100px){.language-columns{grid-template-columns:repeat(2,minmax(0,1fr))}}

@@ -3,18 +3,21 @@ import { readFile } from 'node:fs/promises';
 import { resolve, extname, relative, isAbsolute } from 'node:path';
 import { parseRoute, gamePrefix } from '../src/routing.js';
 import account from '../api/account.js';
+import progress from '../api/progress.js';
 const root = resolve(import.meta.dirname, '../dist'), port = Number(process.env.PORT || 8770);
-const types = { '.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.svg':'image/svg+xml','.png':'image/png','.webp':'image/webp' };
+const types = { '.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.svg':'image/svg+xml','.png':'image/png','.webp':'image/webp' };
 createServer(async(req,res)=>{
   try {
     const url = new URL(req.url,'http://127.0.0.1');
     let pathname = decodeURIComponent(url.pathname).slice(gamePrefix(url.pathname).length)||'/';
-    if(pathname.replace(/\/$/,'')==='/api/account'){
-      let body='';for await(const part of req){body+=part.toString();if(Buffer.byteLength(body)>4096){res.writeHead(413,{'Content-Type':'application/json'});return res.end(JSON.stringify({error:{code:'BODY_TOO_LARGE'}}));}}
+    const apiPath=pathname.replace(/\/$/,'');
+    if(['/api/account','/api/progress'].includes(apiPath)){
+      const limit=apiPath==='/api/progress'?256*1024+4096:4096;
+      let body='';for await(const part of req){body+=part.toString();if(Buffer.byteLength(body)>limit){res.writeHead(413,{'Content-Type':'application/json'});return res.end(JSON.stringify({error:{code:'BODY_TOO_LARGE'}}));}}
       req.body=body;
       res.status=code=>{res.statusCode=code;return res;};
       res.json=value=>{res.setHeader('Content-Type','application/json');res.end(JSON.stringify(value));};
-      return await account(req,res);
+      return await (apiPath==='/api/progress'?progress:account)(req,res);
     }
     if(parseRoute(url.pathname))pathname=pathname.replace(/\/?$/,'/index.html');
     if (pathname === '/') pathname = '/index.html';

@@ -41,9 +41,11 @@ test('build emits localized entry points with canonical metadata',async()=>{
     const html=await readFile(new URL(`../dist/${locale}/index.html`,import.meta.url),'utf8');
     assert.ok(html.includes(`https://shixilin.com/games/loopuff/${locale}/`));
     assert.ok(!html.includes('?lang='));
-    for(const suffix of ['levels/','guide/','play/','play/vault/','play/chase/','play/dispatch/','learn/signal/','learn/names/result/']){
+    for(const suffix of ['levels/','guide/','guide/compare/','saves/','play/','play/vault/','play/chase/','play/dispatch/','learn/signal/','learn/names/result/']){
       const page=await readFile(new URL(`../dist/${locale}/${suffix}index.html`,import.meta.url),'utf8');
-      assert.ok(page.includes(`https://shixilin.com/games/loopuff/${locale}/${suffix}`));
+      assert.ok(page.includes(`https://shixilin.com/games/loopuff/${locale}/${suffix==='levels/'?'play/':suffix}`));
+      const navigation=page.match(/<nav id="page-navigation"[^>]*>([\s\S]*?)<\/nav>/)[1];
+      assert.equal((navigation.match(/<a /g)||[]).length,3);assert.ok(!navigation.includes('/levels/'));assert.ok(!navigation.includes('course-progress'));
       const base=page.match(/<base href="([^"]+)"/)[1];
       for(const prefix of ['', '/games/loopuff']){
         const resolved=new URL(base,`https://example.com${prefix}/${locale}/${suffix}`);
@@ -59,7 +61,7 @@ test('build emits localized entry points with canonical metadata',async()=>{
   }
 });
 
-test('level selection has a full localized page and survives language switches',()=>{
+test('legacy level URLs remain parseable for the arcade mission compatibility entry',()=>{
   for(const [locale]of locales)for(const prefix of ['', '/games/loopuff']){
     const url=routeUrl(`https://example.com${prefix}/zh/learn/signal/`,locale,'levels');
     assert.equal(url.pathname,`${prefix}/${locale}/levels/`);

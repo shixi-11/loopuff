@@ -1,4 +1,5 @@
 import { aircraftUrl } from './plane.js';
+import {progressStorage} from './save-data.js';
 import {dispatchIds,dispatchSourceLimit,dispatchPuzzle,inspectDispatch,restoreDispatch,editDispatch,submitDispatch,nextDispatchRound} from './dispatch.js';
 const key='loopuff-dispatch-v1';
 const html=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
@@ -11,7 +12,7 @@ export function mountDispatch(root,{text:t,errors,concepts,reduced,urls,format=h
  let state=loadDispatch(),index=3,report=null,saveFailed=false;
  const puzzle=()=>dispatchPuzzle(state.seed,state.selected),mission=()=>t.missions[dispatchIds.indexOf(state.selected)];
  const code=source=>`<pre class="exercise-code" dir="ltr">${html(source)}</pre>`;
- function persist(){try{localStorage.setItem(key,JSON.stringify(state));saveFailed=false;}catch{saveFailed=true;}const note=root.querySelector('[data-dispatch-save]');if(note)note.textContent=saveFailed?t.noSave:t.local;}
+ async function persist(){try{const raw=JSON.stringify(state);await progressStorage().write(()=>localStorage.setItem(key,raw));saveFailed=false;}catch{saveFailed=true;}const note=root.querySelector('[data-dispatch-save]');if(note)note.textContent=saveFailed?t.noSave:t.local;}
  function restoreReport(){const source=state.submitted[state.selected];report=source!==null&&source===state.drafts[state.selected]?inspectDispatch(state.seed,state.selected,source):null;}
  function scene(){
   const p=puzzle(),sample=p.cases[index],current=report?.cases[index],outputs=current?.result?.logs||[];

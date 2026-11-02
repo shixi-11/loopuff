@@ -137,7 +137,7 @@ body[data-view=learning] .page-foot code{color:#c2cadb;text-shadow:none}
 .course-progress{display:inline-flex;align-items:center;padding:2px 7px;border:1px solid #34426560;border-radius:5px;color:#dce1eb;font:11px/1.6 var(--mono);letter-spacing:0}
 body[data-view=learning] .course-progress{color:#c1cadb;border-color:#344265;background:#101527}
 @media(max-width:1000px){
- .masthead .page-navigation{width:100%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+ .masthead .page-navigation{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
  .masthead .page-navigation a{white-space:normal;text-align:center;line-height:1.45;padding:8px 3px;overflow-wrap:anywhere;flex-wrap:wrap;column-gap:5px;row-gap:2px}
  .header-controls{gap:8px}
 }
@@ -244,3 +244,48 @@ body[data-view=learning] .learning-page{background:radial-gradient(ellipse at 10
 .journey-totals dd>span{color:#edc88f}
 
 .arcade-game .game-record{color:#adb9d2}
+
+/* Learning stations live inside the arcade, alongside their playable uses. */
+body[data-phase=play] .arcade-page>h1{font-size:clamp(34px,4vw,46px);margin-block:12px 18px}
+body[data-phase=play] .arcade-page>.levels-intro{margin-block:0 22px}
+.journey-panel.journey-compact{display:flex;align-items:center;flex-wrap:wrap;gap:12px 32px;padding:18px 24px;margin-block:26px;background:#151e35}
+.journey-compact .journey-next{border:0;padding:0;flex:1;min-width:180px}
+.journey-compact .journey-next strong{font-size:17px}
+.journey-compact .journey-backup{margin:0;font-size:13px;min-height:44px;display:flex;align-items:center}
+.journey-records>summary{min-height:44px;display:flex;align-items:center;gap:16px;color:#adb9d2;font-size:13px;cursor:pointer;list-style:none}
+.journey-records>summary::-webkit-details-marker{display:none}
+.journey-records>summary::after{content:'⌄';color:#adc5f7}
+.journey-records[open]{flex-basis:100%;order:4;border-block-start:1px solid var(--work-line);padding-block-start:10px}
+.journey-records[open]>summary::after{content:'⌃'}
+.journey-records>summary>bdi{color:#edf0f8;font:14px var(--mono)}
+.journey-records>p,.journey-records>small{color:#adb9d2;line-height:1.75;font-size:13px}
+body[data-phase=play] .arcade-game{min-height:235px}
+body[data-phase=play] .arcade-vault-art,body[data-phase=play] .arcade-jump-art{min-height:235px}
+.arcade-missions{margin-block:48px 24px;scroll-margin-top:140px}
+.arcade-missions>header{margin-block-end:24px;max-width:760px}
+.arcade-missions>header h2{font-size:clamp(23px,3vw,30px);margin-block:0 12px}
+.arcade-missions>header p{line-height:1.8;color:var(--work-muted)}
+.arcade-track{border-block-start:1px solid var(--work-line);padding-block:8px}
+.arcade-track:last-child{border-block-end:1px solid var(--work-line)}
+.arcade-track>summary{display:flex;align-items:center;gap:20px;padding:20px 0;cursor:pointer;list-style:none;min-height:72px}
+.arcade-track>summary::-webkit-details-marker{display:none}
+.arcade-track>summary::before{content:'+';font:24px var(--mono);color:#adc5f7;width:22px;flex-shrink:0}
+.arcade-track[open]>summary::before{content:'−'}
+.arcade-track>summary>span{flex:1;display:grid;gap:5px}
+.arcade-track>summary small{font-size:12px;color:#adb9d2}
+.arcade-track>summary strong{font-size:19px;font-weight:600;color:#edf0f8}
+.arcade-track>summary>bdi{color:#adb9d2;font:14px var(--mono)}
+.arcade-track>ol{list-style:none;margin:0;padding:0 0 0 42px}
+[dir=rtl] .arcade-track>ol{padding:0 42px 0 0}
+.arcade-track li+li{border-block-start:1px solid #26324e}
+.arcade-track li>a{display:grid;grid-template-columns:32px minmax(0,1fr) auto;align-items:center;gap:18px;padding:18px 0;color:#edf0f8;text-decoration:none;min-height:72px}
+.arcade-track li>a:hover strong{color:#b4cbfb}
+.arcade-track .mission-number{color:#adc5f7;font:14px var(--mono);align-self:start;padding-block-start:3px}
+.arcade-track li>a>span:nth-child(2){display:grid;gap:7px}
+.arcade-track li strong{font-size:17px;font-weight:550;line-height:1.5}
+.arcade-track li>a>span>span{color:#adb9d2;font-size:14px;line-height:1.75}
+.arcade-track li small{font-size:12px;color:#adb9d2;max-width:140px;line-height:1.5}
+.arcade-track li[data-state=next] .mission-number,.arcade-track li[data-state=next] small{color:#edc88f}
+.mission-destination{display:inline-block;margin:16px 0 20px 42px;color:#b4cbfb;font-size:14px;text-decoration:none}
+[dir=rtl] .mission-destination{margin:16px 42px 20px 0}
+@media(max-width:640px){.arcade-missions{margin-block-start:36px}.arcade-track>summary{gap:12px}.arcade-track>summary strong{font-size:17px}.arcade-track>ol,[dir=rtl] .arcade-track>ol{padding:0}.arcade-track li>a{grid-template-columns:28px minmax(0,1fr);gap:8px 12px}.arcade-track li small{grid-column:2;max-width:none}.arcade-track li>a>span>span{font-size:13px}.mission-destination,[dir=rtl] .mission-destination{margin-inline:40px 0}}
