@@ -1626,5 +1626,28 @@
         "hint": "Sigue los valores en orden: dos mensajes, el resultado de la función, la condición y, por último, el valor que muestra la rama elegida."
       }
     }
+  },
+  "diagnosticFeedback": {
+    "title": "Qué probar a continuación",
+    "case": "Mira el grupo de entrada {number}.",
+    "seeCase": "Mostrar esa entrada",
+    "returnToDiagnostic": "Volver a tu programa de diagnóstico",
+    "showHints": "Mostrar las pistas que ya viste",
+    "hideHints": "Guardar las pistas",
+    "reasons": {
+      "untried": "Elige esta práctica si quieres ver la idea con más detalle antes de comprobar tu programa.",
+      "empty": "Empieza con un programa pequeño que produzca una salida. Tu borrador de diagnóstico se quedará aquí.",
+      "execution": "Primero resuelve el error de ejecución que aparece junto a estas entradas y luego vuelve a comprobar el mismo programa.",
+      "name": "Revisa los nombres que da la tarea y los que declaraste. Un nombre mal escrito se refiere a otro valor.",
+      "entry": "Revisa el nombre de la función y los parámetros que pide esta tarea. La tarea necesita llamar a tu función.",
+      "waiting": "Una parte del programa sigue esperando un mensaje. Sigue los canales y comprueba qué puede recibir realmente cada receptor.",
+      "mechanism": "Esta tarea comprueba cómo devuelve la función su resultado. Compara los retornos síncronos con las respuestas de función y vuelve a intentarlo.",
+      "concept": "En este grupo, «{concept}» todavía tiene que contribuir a la salida. Una declaración sin usar u otra señal correcta no pueden hacer ese trabajo en su lugar.",
+      "boundary": "Aquí el valor es igual al umbral. Sigue qué rama elige tu comparación cuando ambos lados son iguales.",
+      "zero": "Este grupo pide cero repeticiones. Comprueba si tu programa puede terminar sin enviar ninguna señal.",
+      "emptyList": "Esta lista de entrada está vacía. Comprueba si el programa puede terminar sin inventarse un elemento que procesar.",
+      "output": "El programa se ejecutó, pero esta entrada dio un resultado distinto. Sigue los valores a través del código antes de cambiarlo.",
+      "passed": "Este programa resuelve este conjunto de entradas. Puedes continuar sin abrir las pistas; siguen disponibles si las quieres."
+    }
   }
 }

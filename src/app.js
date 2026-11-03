@@ -41,7 +41,7 @@ let programScene=null,jumpLab=null,vaultGame=null,chaseGame=null,pursuitGame=nul
 const savesModel={},diagnosticModel={};
 const guideModel={selected:saved.state?.guideSelected,drafts:readGuideWork(saved.state?.guideWork)};
 const pursuitModel={},heistModel={};
-let guideView='guide';
+let guideView='guide',diagnosticReturn=false;
 let chaseLab=new URL(location.href).searchParams.get('mode')==='lab';
 const account=createAccountClient({url:location.href,onChange:()=>{if(messages){updateAccountEntry();accountPage?.refresh();savesPage?.refresh();}}});
 let messages, languageRequest=0, languageController, notice='', lastResult=null, feedbackState=null;
@@ -57,6 +57,7 @@ rememberLesson(state,course[state.lesson].id);
 if(!lessonWork(state,course[state.lesson].id))rememberLesson(state,course[state.lesson].id,state.resumePhase);
 function readRoute(){
   const route=parseRoute(location.pathname),previousLesson=state.lesson;
+  diagnosticReturn=['lesson','result'].includes(route?.view)&&new URL(location.href).searchParams.get('return')==='diagnostic';
   if(route?.view==='chase')chaseLab=new URL(location.href).searchParams.get('mode')==='lab';
   if(route?.lessonId){
     const index=course.findIndex(item=>item.id===route.lessonId);
@@ -157,6 +158,7 @@ function syncRoute(){
   if(view==='chase'&&chaseLab)url.searchParams.set('mode','lab');else url.searchParams.delete('mode');
   if(view==='lesson'&&['rewrite','independent'].includes(state.phase))url.searchParams.set('practice',state.phase);else url.searchParams.delete('practice');
   url.searchParams.delete('area');
+  if(diagnosticReturn&&['lesson','result'].includes(view))url.searchParams.set('return','diagnostic');else url.searchParams.delete('return');
   if(location.pathname!==url.pathname||location.search!==url.search)history.pushState(null,'',url);
 }
 function begin(index){rememberLesson(state,lesson().id);state={...state,phase:'brief',lesson:index,fragment:0,typed:'',draft:'',rewriteDraft:undefined,assessedSource:null,score:0,errors:0,keys:0};notice='';feedbackState=null;lastResult=null;syncRoute();render();save();window.scrollTo(0,0);}
@@ -214,6 +216,7 @@ function render(){
   let robots=document.querySelector('meta[name="robots"]');
   if(view==='result'){if(!robots){robots=document.createElement('meta');robots.name='robots';document.head.append(robots);}robots.content='noindex,follow';}else robots?.remove();
   attachLessonScene();attachJumpScene();
+  if(diagnosticReturn&&['lesson','result'].includes(view))$('learning-content').insertAdjacentHTML('afterbegin',`<p class="diagnostic-return"><a data-action="open-check" href="${routeUrl(location.href,lang,'check').pathname}"><span aria-hidden="true">←</span> ${escape(messages.diagnosticFeedback.returnToDiagnostic)}</a></p>`);
   requestAnimationFrame(()=>{refreshGeometry();if(state.phase==='typing')background();homePlane.refresh();});
 }
 function renderTyping(){
@@ -260,7 +263,7 @@ function journeyPanel(){
 function renderDialog(){
   if(state.phase==='guide'){
     $('learning-page').dataset.stage='guide';$('learning-content').innerHTML='<div id="guide-studio"></div>';
-    if(guideView==='check'){guidePage=mountDiagnostic($('guide-studio'),{text:messages.diagnostic,ui:messages.ui,errors:messages.ui,concepts:messages.assessment.concepts,statuses:messages.assessment,lessons:Object.fromEntries(course.map((l,i)=>[l.id,messages.lessons[i]])),initial:state.diagnostic,model:diagnosticModel,reduced,urls:{home:routeUrl(location.href,lang,'home').pathname,guide:routeUrl(location.href,lang,'guide').pathname,map:routeUrl(location.href,lang,'map').pathname,saves:routeUrl(location.href,lang,'saves').pathname,lesson:id=>routeUrl(location.href,lang,'lesson',id).pathname},onChange:value=>{state.diagnostic=value;return save();}});return;}
+    if(guideView==='check'){guidePage=mountDiagnostic($('guide-studio'),{text:messages.diagnostic,feedbackText:messages.diagnosticFeedback,ui:messages.ui,errors:messages.ui,concepts:messages.assessment.concepts,statuses:messages.assessment,lessons:Object.fromEntries(course.map((l,i)=>[l.id,messages.lessons[i]])),initial:state.diagnostic,model:diagnosticModel,reduced,urls:{home:routeUrl(location.href,lang,'home').pathname,guide:routeUrl(location.href,lang,'guide').pathname,map:routeUrl(location.href,lang,'map').pathname,saves:routeUrl(location.href,lang,'saves').pathname,lesson:id=>routeUrl(location.href,lang,'lesson',id).pathname},onChange:value=>{state.diagnostic=value;return save();}});return;}
     if(guideView==='map'){guidePage=mountLearningMap($('guide-studio'),{text:messages.learningMap,lessons:messages.lessons,ui:messages.ui,errors:messages.ui,completed:state.completed,model:guideModel,urls:{home:routeUrl(location.href,lang,'home').pathname,guide:routeUrl(location.href,lang,'guide').pathname,compare:routeUrl(location.href,lang,'compare').pathname,lesson:id=>routeUrl(location.href,lang,'lesson',id).pathname}});return;}
     guidePage=mountGuide($('guide-studio'),{text:messages.guideStudio,rewriteText:messages.rewrite,legacy:messages.guide,errors:messages.ui,ui:messages.ui,model:guideModel,compare:guideView==='compare',reduced,onChange:()=>{state.guideWork={...guideModel.drafts};state.guideSelected=guideModel.selected;save();},urls:{home:routeUrl(location.href,lang,'home').pathname,guide:routeUrl(location.href,lang,'guide').pathname,compare:routeUrl(location.href,lang,'compare').pathname,map:routeUrl(location.href,lang,'map').pathname,mapLabel:messages.learningMap.title,check:routeUrl(location.href,lang,'check').pathname,checkLabel:messages.saves.diagnosticTitle,dispatch:routeUrl(location.href,lang,'dispatch').pathname,lesson:id=>routeUrl(location.href,lang,'lesson',id).pathname}});
     return;
@@ -428,7 +431,7 @@ document.addEventListener('click',event=>{
   if(target.tagName==='A'){if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;event.preventDefault();}
   if(target.dataset.prediction!==undefined){if(Number(target.dataset.prediction)===lesson().predictionAnswer)move('output');else feedback('predictionHint');return;}
   if(target.dataset.answer!==undefined){if(Number(target.dataset.answer)===(lesson().explanationAnswer??0)){state.draft='';move('remix');}else feedback('answerHint',true);return;}
-  if(target.dataset.lesson!==undefined){const guideSource=guideModel.drafts[course[Number(target.dataset.lesson)].id];enterLesson(Number(target.dataset.lesson));if(target.dataset.practice==='rewrite')openRewrite(guideSource);else if(target.dataset.practice==='true')move('independent');return;}
+  if(target.dataset.lesson!==undefined){diagnosticReturn=target.dataset.diagnosticReturn==='true';const guideSource=guideModel.drafts[course[Number(target.dataset.lesson)].id];enterLesson(Number(target.dataset.lesson));if(target.dataset.practice==='rewrite')openRewrite(guideSource);else if(target.dataset.practice==='true')move('independent');return;}
   const action=target.dataset.action;
   if(action==='observe-program'){move('predict');return;}
   if(action==='try-jump'){tryJump();return;}

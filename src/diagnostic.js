@@ -1,5 +1,6 @@
 import {grade} from './assessment.js';
 import {dispatchPuzzle} from './dispatch.js';
+import {diagnosticFeedback} from './diagnostic-feedback.js';
 import {diagnosticIds,diagnosticSourceLimit,normalizeDiagnostic} from '../server/diagnostic-format.mjs';
 export {diagnosticIds,diagnosticSourceLimit,normalizeDiagnostic};
 const known=id=>{if(!diagnosticIds.includes(id))throw Error('Unknown diagnostic area');};
@@ -25,7 +26,7 @@ export function diagnosticPuzzle(seed,id){
   require=['for','name','add'];dataRequire=['for','add'];example='for dock in docks { (dock + offset).log() }';
  }else if(id==='counter'){
   cases=[0,1,2,5,8,...Array.from({length:4},()=>roll()%9)].map(limit=>sample({limit},Array.from({length:limit},(_,i)=>i),{require:limit===1?['while','compare','name']:undefined}));
-  require=['while','compare','name','add'];dataRequire=['add'];example='let count = 0; while count < limit { count.log(); count = count + 1 }';
+  require=['while','compare','name','add'];dataRequire=['add','name'];example='let count = 0; while count < limit { count.log(); count = count + 1 }';
  }else if(id==='function'||id==='reply'){
   const pairs=[[0,0],[0,7],[4,0],[-3,8],[6,-2],...Array.from({length:7},()=>[roll()%19-5,roll()%11-3])],name=id==='function'?'combine':'boost';
   cases=pairs.map(([cargo,reserve])=>sample({cargo,reserve},[cargo+reserve],{prefix:'',suffix:`\n${name}(${cargo}, ${reserve}).log()`,inputCode:`${name}(${cargo}, ${reserve})`}));
@@ -46,7 +47,7 @@ export function inspectDiagnostic(seed,id,source){
  if(typeof source!=='string'||source.length>diagnosticSourceLimit)return {ok:false,passed:0,total:puzzle.cases.length,cases:[],code:'limit'};
  const cases=puzzle.cases.map(item=>{
   const full=item.prefix+source+(item.suffix||''),require=item.logs.length?(item.require||puzzle.require):[],dataRequire=puzzle.dataRequire.filter(key=>require.includes(key));
-  const report=grade(full,{logs:item.logs,require,dataRequire});
+  const report=grade(full,{logs:item.logs,require,dataRequire,eachOutputRequire:require.filter(key=>id!=='counter'||key!=='add')});
   if(report.result?.waiting){report.ok=false;report.code='waiting';}
   if(report.ok&&puzzle.callKind){
    const entry=report.result.calls.find(call=>call.start===item.prefix.length+source.length+1);
@@ -68,5 +69,5 @@ export function nextDiagnostic(state,seed){const candidate=newDiagnostic(seed);i
 export function diagnosticSummary(state){
  const results=Object.fromEntries(diagnosticIds.map(id=>[id,state.submitted[id]!==null&&state.submitted[id]===state.drafts[id]?inspectDiagnostic(state.seed,id,state.drafts[id]):null]));
  const passed=diagnosticIds.filter(id=>results[id]?.ok),pending=diagnosticIds.find(id=>!results[id]?.ok);
- return {results,passed,checked:diagnosticIds.filter(id=>results[id]).length,next:pending||null,lesson:pending?diagnosticLessons[pending][0]:null};
+ return {results,passed,checked:diagnosticIds.filter(id=>results[id]).length,next:pending||null,lesson:pending?diagnosticFeedback(pending,results[pending],state.drafts[pending]).lesson:null};
 }

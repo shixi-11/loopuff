@@ -22,13 +22,9 @@ export function rewriteTask(id){
  return {id,starter:lesson.remix.source,goal:goals[id]};
 }
 export function inspectRewrite(id,source){
- const goal=rewriteTask(id).goal,report=grade(source,goal,{provenance:true});
+ const goal=rewriteTask(id).goal,report=grade(source,{...goal,eachOutputRequire:goal.require.filter(key=>id!=='counter'||key!=='add')},{provenance:true});
  if(!report.ok)return report;
  if(report.result.waiting)return {...report,ok:false,code:'waiting'};
- // Each signal must use the idea; a separate good output cannot certify it.
- const required=goal.require.filter(key=>id!=='counter'||key!=='add');
- const used=report.result.outputs.every(output=>required.every(key=>(goal.dataRequire?.includes(key)?output.dataConcepts:output.concepts).includes(key)));
- if(!used)return {...report,ok:false,code:'conceptMissing'};
  if(['function','reply'].includes(id)){
   // Calls are recorded on completion. A cached pair of earlier calls cannot
   // stand in for a new call producing the second signal.

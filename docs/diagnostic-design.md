@@ -14,7 +14,7 @@ Checks describe these programs on these inputs. They do not certify general mast
 
 The optional `course.state.diagnostic` record has its own version, seed, selected area, bounded per-area drafts, matching submitted sources and hint levels. Reports and passed flags are derived from real execution, not imported as trusted scores. Editing invalidates the submitted source even if the text is later changed back. Invalid records remain available through raw recovery rather than being overwritten silently; replacing one requires two explicit clicks.
 
-The five existing save domains and their IDs remain. Old files without a diagnostic remain readable. Same-seed conflicts choose a complete per-area draft/submission/hint record; different seeds choose a whole diagnostic run. A cloud writer that omits an existing diagnostic must not erase it, even with a matching revision. Stale revisions still return a conflict. The backend must understand the optional field before the public UI can upload it.
+The six existing save domains and their IDs remain. Old files without a diagnostic remain readable. Same-seed conflicts choose a complete per-area draft/submission/hint record; different seeds choose a whole diagnostic run. A cloud writer that omits an existing diagnostic must not erase it, even with a matching revision. Stale revisions still return a conflict. The backend must understand the optional field before the public UI can upload it.
 
 ## Interaction and verification
 

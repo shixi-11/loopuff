@@ -1638,5 +1638,28 @@
         "hint": "Trace the values in order: two messages, function result, condition, then the value displayed by the chosen branch."
       }
     }
+  },
+  "diagnosticFeedback": {
+    "title": "What to try next",
+    "case": "Look at input group {number}.",
+    "seeCase": "Show that input",
+    "returnToDiagnostic": "Return to your diagnostic program",
+    "showHints": "Show the hints you viewed",
+    "hideHints": "Put the hints away",
+    "reasons": {
+      "untried": "Choose this practice if you want a closer look at the idea before checking your program.",
+      "empty": "Start with one small program that produces an output. Your diagnostic draft will stay here.",
+      "execution": "First address the execution error shown beside these inputs, then check the same program again.",
+      "name": "Check the names provided by the task and the names you declared. A misspelt name refers to a different value.",
+      "entry": "Check the function name and parameters requested by this task. The task needs to call your function.",
+      "waiting": "Part of the program is still waiting for a message. Follow the channels and check what each receiver can actually receive.",
+      "mechanism": "This task checks how the function returns its result. Compare synchronous returns and function replies, then try again.",
+      "concept": "This group still needs {concept} to contribute to the output. An unused declaration, or another correct signal, cannot do that work for it.",
+      "boundary": "Here the value equals the threshold. Trace which branch your comparison chooses when the two sides are equal.",
+      "zero": "This group asks for zero repetitions. Trace whether your program can finish without sending a signal.",
+      "emptyList": "This input list is empty. Check whether the program can finish without inventing an item to process.",
+      "output": "The program ran, but this input produced a different result. Follow the values through the code before changing it.",
+      "passed": "This program handles this input set. You can continue without opening the hints; they are still available if you want them."
+    }
   }
 }

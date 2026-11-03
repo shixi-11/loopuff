@@ -5,7 +5,7 @@ export function assess(source, goal, options) {
   // declaration or calculation must not satisfy the task by coincidence.
   const outputConcepts=new Set(result.outputs.flatMap(output=>output.concepts));
   const dataConcepts=new Set(result.outputs.flatMap(output=>output.dataConcepts));
-  const requirements=goal.require.map(concept=>({concept,passed:(goal.dataRequire?.includes(concept)?dataConcepts:outputConcepts).has(concept)}));
+  const requirements=goal.require.map(concept=>({concept,passed:goal.eachOutputRequire?.includes(concept)?result.outputs.length>0&&result.outputs.every(output=>(goal.dataRequire?.includes(concept)?output.dataConcepts:output.concepts).includes(concept)):(goal.dataRequire?.includes(concept)?dataConcepts:outputConcepts).has(concept)}));
   const outputCorrect=JSON.stringify(result.logs)===JSON.stringify(goal.logs);
   const conceptsCorrect=requirements.every(item=>item.passed);
   const outputMax=requirements.length?50:80;

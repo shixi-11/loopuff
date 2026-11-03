@@ -1626,5 +1626,28 @@
         "hint": "Verfolge die Werte der Reihe nach: zwei Nachrichten, Funktionsergebnis, Bedingung und dann den Wert, den der gewählte Zweig anzeigt."
       }
     }
+  },
+  "diagnosticFeedback": {
+    "title": "Was du als Nächstes versuchen kannst",
+    "case": "Sieh dir Eingabegruppe {number} an.",
+    "seeCase": "Diese Eingabe anzeigen",
+    "returnToDiagnostic": "Zurück zu deinem Diagnoseprogramm",
+    "showHints": "Bereits angesehene Hinweise anzeigen",
+    "hideHints": "Hinweise ausblenden",
+    "reasons": {
+      "untried": "Wähle diese Übung, wenn du dir die Idee genauer ansehen möchtest, bevor du dein Programm prüfst.",
+      "empty": "Beginne mit einem kleinen Programm, das eine Ausgabe erzeugt. Dein Diagnoseentwurf bleibt hier erhalten.",
+      "execution": "Behebe zuerst den Ausführungsfehler, der neben diesen Eingaben angezeigt wird, und prüfe dann dasselbe Programm erneut.",
+      "name": "Vergleiche die Namen aus der Aufgabe mit den Namen, die du deklariert hast. Ein falsch geschriebener Name verweist auf einen anderen Wert.",
+      "entry": "Prüfe den Funktionsnamen und die Parameter, die diese Aufgabe verlangt. Die Aufgabe muss deine Funktion aufrufen.",
+      "waiting": "Ein Teil des Programms wartet noch auf eine Nachricht. Verfolge die Kanäle und prüfe, was jeder Empfänger tatsächlich empfangen kann.",
+      "mechanism": "Diese Aufgabe prüft, wie die Funktion ihr Ergebnis zurückgibt. Vergleiche synchrone Rückgaben mit Funktionsantworten und versuche es dann erneut.",
+      "concept": "In dieser Gruppe muss „{concept}“ noch zur Ausgabe beitragen. Eine ungenutzte Deklaration oder ein anderes korrektes Signal kann diese Arbeit nicht dafür übernehmen.",
+      "boundary": "Hier ist der Wert gleich dem Schwellenwert. Verfolge, welchen Zweig dein Vergleich wählt, wenn beide Seiten gleich sind.",
+      "zero": "Diese Gruppe verlangt null Wiederholungen. Verfolge, ob dein Programm enden kann, ohne ein Signal zu senden.",
+      "emptyList": "Diese Eingabeliste ist leer. Prüfe, ob das Programm enden kann, ohne ein Element zum Verarbeiten zu erfinden.",
+      "output": "Das Programm ist gelaufen, aber diese Eingabe hat ein anderes Ergebnis geliefert. Verfolge die Werte durch den Code, bevor du ihn änderst.",
+      "passed": "Dieses Programm bewältigt diese Eingabegruppe. Du kannst ohne die Hinweise weitermachen; sie stehen dir weiterhin zur Verfügung, wenn du sie brauchst."
+    }
   }
 }

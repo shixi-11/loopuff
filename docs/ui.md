@@ -1,6 +1,6 @@
 # Learning workbench
 
-The home remains an illustrated flight scene. Reading, lesson selection, games and assessment use an ivory-and-sage workbench, with dark teal reserved for the code editor and live game scene.
+The home remains an illustrated flight scene. Reading, arcade missions, games and assessment share the approved dark navy and cold white palette. Code editors and execution scenes use inset dark surfaces; this work does not change the approved aircraft, artwork, global font size or browser zoom.
 
 `public/ui.css` is applied after the base and vault styles in the bundled stylesheet. It owns the learning-page palette and the compact illustrated arcade layout. `src/arcade-art.js` contains the original decorative SVG signs; the real games retain their existing execution rules.
 
@@ -11,7 +11,7 @@ Verification covers the rendered home, levels, playground, guide, lesson brief, 
 
 ## Navigation
 
-The Lessons navigation link carries the completed-lesson count. It replaces the second route button, so the header has four distinct destinations and the language selector. Lesson cards and the flight challenge use real localized links, while ordinary clicks retain the in-page transition. The unused route dialog has been removed; all four lessons remain available on the full-page selector.
+The header has three destinations: Home, Arcade and Programming guide. The 13 lesson missions and their completion counts live inside the Arcade. Guide, language comparison, concept map and diagnostic pages remain related learning routes, with direct independent practice available to experienced learners. Links retain real localized destinations and ordinary clicks retain the in-page transition.
 
 At narrow widths the navigation uses four equal columns, a minimum 44px target and localized short labels for the introduction. Verification at a 320px CSS viewport covered all eleven locales, including Arabic RTL, with no horizontal overflow or clipped navigation labels. A real first-lesson run covered pause/resume, prediction, explanation, editing, assessment and completion; the 1/4 progress persisted through an English switch and reload. This was browser emulation, not physical-phone or software-keyboard testing.
 

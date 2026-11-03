@@ -1626,5 +1626,28 @@
         "hint": "Lần theo các giá trị theo thứ tự: hai tin nhắn, kết quả của hàm, điều kiện, rồi giá trị mà nhánh được chọn hiển thị."
       }
     }
+  },
+  "diagnosticFeedback": {
+    "title": "Thử gì tiếp theo",
+    "case": "Hãy xem nhóm đầu vào {number}.",
+    "seeCase": "Hiện đầu vào đó",
+    "returnToDiagnostic": "Quay lại chương trình chẩn đoán của bạn",
+    "showHints": "Hiện các gợi ý bạn đã xem",
+    "hideHints": "Cất gợi ý đi",
+    "reasons": {
+      "untried": "Hãy chọn bài luyện tập này nếu bạn muốn tìm hiểu kỹ hơn ý tưởng trước khi kiểm tra chương trình.",
+      "empty": "Hãy bắt đầu với một chương trình nhỏ tạo ra đầu ra. Bản nháp chẩn đoán của bạn vẫn được giữ ở đây.",
+      "execution": "Trước tiên, hãy xử lý lỗi thực thi hiển thị bên cạnh các đầu vào này, rồi kiểm tra lại chính chương trình đó.",
+      "name": "Hãy đối chiếu các tên mà bài tập cung cấp với các tên bạn đã khai báo. Một tên viết sai chính tả sẽ trỏ đến một giá trị khác.",
+      "entry": "Hãy kiểm tra tên hàm và các tham số mà bài tập này yêu cầu. Bài tập cần gọi được hàm của bạn.",
+      "waiting": "Một phần chương trình vẫn đang chờ tin nhắn. Hãy lần theo các kênh và kiểm tra xem mỗi bên nhận thực sự có thể nhận được gì.",
+      "mechanism": "Bài tập này kiểm tra cách hàm trả về kết quả. Hãy so sánh giá trị trả về đồng bộ với phản hồi của hàm, rồi thử lại.",
+      "concept": "Nhóm này vẫn cần {concept} góp phần tạo ra đầu ra. Một khai báo không được dùng, hay một tín hiệu đúng khác, không thể làm thay việc đó.",
+      "boundary": "Ở đây giá trị bằng đúng ngưỡng. Hãy lần theo xem phép so sánh của bạn chọn nhánh nào khi hai vế bằng nhau.",
+      "zero": "Nhóm này yêu cầu lặp lại 0 lần. Hãy lần theo xem chương trình có thể kết thúc mà không gửi tín hiệu nào hay không.",
+      "emptyList": "Danh sách đầu vào này trống. Hãy kiểm tra xem chương trình có thể kết thúc mà không tự bịa ra một mục để xử lý hay không.",
+      "output": "Chương trình đã chạy, nhưng đầu vào này cho ra kết quả khác. Hãy lần theo các giá trị trong mã trước khi sửa.",
+      "passed": "Chương trình này xử lý được bộ đầu vào này. Bạn có thể tiếp tục mà không cần mở gợi ý; gợi ý vẫn sẵn có nếu bạn cần."
+    }
   }
 }
