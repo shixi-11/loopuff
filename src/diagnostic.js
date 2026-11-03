@@ -1,4 +1,4 @@
-import {grade} from './assessment.js';
+import {gradeTask as grade} from './assessment.js';
 import {dispatchPuzzle} from './dispatch.js';
 import {diagnosticFeedback} from './diagnostic-feedback.js';
 import {diagnosticIds,diagnosticSourceLimit,normalizeDiagnostic} from '../server/diagnostic-format.mjs';

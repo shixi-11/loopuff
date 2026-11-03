@@ -1,4 +1,4 @@
-import { grade } from './assessment.js';
+import { gradeTask as grade } from './assessment.js';
 
 // Original dispatch puzzles. Inputs are game data, not new language features.
 export const dispatchIds=['branch','manifest','fuel','relay'];

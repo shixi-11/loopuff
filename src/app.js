@@ -1,6 +1,6 @@
 import { course, locales } from './course.js';
 import { run } from './runner.js';
-import { assess, grade } from './assessment.js';
+import { assessTask as assess, gradeTask as grade } from './assessment.js';
 import { mountJumpLab } from './jump.js';
 import { drawPlane, aircraftUrl } from './plane.js';
 import { mountHomePlane } from './home-plane.js';

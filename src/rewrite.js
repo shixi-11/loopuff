@@ -1,5 +1,5 @@
 import {course} from './course.js';
-import {grade} from './assessment.js';
+import {gradeTask as grade} from './assessment.js';
 
 // These are intermediate tasks, not certificates or substitutes for transfer.
 const goals={

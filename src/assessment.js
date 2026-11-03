@@ -1,12 +1,14 @@
 import { run, LessonError } from './runner.js';
-export function assess(source, goal, options) {
+export function assess(source,goal,options){return assessProgram(source,goal,options,false);}
+export function assessTask(source,goal,options){return assessProgram(source,goal,options,true);}
+function assessProgram(source, goal, options, requireCompletion) {
   const result = run(source,options);
   // Count concepts that actually contribute to the displayed value. An unused
   // declaration or calculation must not satisfy the task by coincidence.
   const outputConcepts=new Set(result.outputs.flatMap(output=>output.concepts));
   const dataConcepts=new Set(result.outputs.flatMap(output=>output.dataConcepts));
   const requirements=goal.require.map(concept=>({concept,passed:goal.eachOutputRequire?.includes(concept)?result.outputs.length>0&&result.outputs.every(output=>(goal.dataRequire?.includes(concept)?output.dataConcepts:output.concepts).includes(concept)):(goal.dataRequire?.includes(concept)?dataConcepts:outputConcepts).has(concept)}));
-  const outputCorrect=JSON.stringify(result.logs)===JSON.stringify(goal.logs),finished=result.waiting===0;
+  const outputCorrect=JSON.stringify(result.logs)===JSON.stringify(goal.logs),finished=!requireCompletion||result.waiting===0;
   const conceptsCorrect=requirements.every(item=>item.passed);
   const outputMax=requirements.length?50:80;
   const matched=goal.logs.filter((value,index)=>value===result.logs[index]).length;
@@ -22,10 +24,13 @@ export function assess(source, goal, options) {
     result,score,checks};
 }
 
-// A grade describes this task only. Time, retries, variable spelling and matching
-// the example text never affect points. Errors must not escape the report path.
-export function grade(source,goal,options){
-  try{return assess(source,goal,options);}
+// Observing output/concepts permits valid waiting language states. Finite user
+// tasks additionally require completion, without changing interpreter semantics.
+// Time, retries, spelling and matching the example never affect points.
+export function grade(source,goal,options){return gradeWith(assess,source,goal,options);}
+export function gradeTask(source,goal,options){return gradeWith(assessTask,source,goal,options);}
+function gradeWith(check,source,goal,options){
+  try{return check(source,goal,options);}
   catch(error){
     if(!(error instanceof LessonError))throw error;
     const checks=[{id:'execution',points:0,max:20,status:'fail'},

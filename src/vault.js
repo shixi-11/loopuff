@@ -1,4 +1,4 @@
-import { grade } from './assessment.js';
+import { gradeTask as grade } from './assessment.js';
 
 // Original fictional puzzle rules. The device consumes the teaching runner's
 // numeric output; these are game rules, not additional Tolang language features.
