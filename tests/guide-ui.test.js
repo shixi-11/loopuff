@@ -68,6 +68,7 @@ test('on mobile a comparison is revealed after running, while skipped prediction
 test('a first-time reader gets an action, literal result and optional next idea, without awards',()=>{
  const model={},m=setup(model);try{
   assert.equal(m.root.querySelector('[data-guide-first-step]').textContent,catalog.beginner.first);
+  const untouched=JSON.stringify(model);m.click({guide:'begin'});assert.equal(m.root.querySelector('#guide-editor').focused,true);assert.equal(m.root.querySelector('#guide-editor').scrolled,true);assert.equal(JSON.stringify(model),untouched);
   assert.equal(m.root.querySelector('[data-guide-forward]').hidden,true);
   assert.ok(m.root.innerHTML.includes('guide-catalog"><summary>'));
   assert.ok(m.root.innerHTML.indexOf('class="guide-run-row"')<m.root.innerHTML.indexOf('class="guide-prediction"'));

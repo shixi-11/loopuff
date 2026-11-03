@@ -73,4 +73,6 @@
 .guide-first-step{font-size:16px;line-height:1.8;color:#e2ecff;padding-inline-start:12px;border-inline-start:2px solid #91aeda}.guide-prediction[open]>summary{margin-bottom:10px}.guide-run-row{margin-block:16px}
 .guide-studio:not(.guide-compare) .guide-heading>div{max-width:none;flex:1}.guide-code .guide-orientation{margin-block:0 20px;padding-inline-start:0;border:0}.guide-code .guide-orientation h2{font-size:22px}.guide-code .guide-orientation details{font-size:14px}.guide-code .guide-orientation p{font-size:15px}
 .guide-code .guide-orientation>summary{cursor:pointer;min-height:44px;padding-block:10px;line-height:1.7;color:#bdcde7}.guide-code .guide-forward{min-height:44px;margin-bottom:12px;white-space:normal;text-align:start}
+.guide-begin{margin-top:18px;min-height:44px;padding:12px 18px;white-space:normal;text-align:start}
+@media(max-width:900px){.guide-studio:not(.guide-compare) .guide-workbench{display:flex;flex-direction:column}.guide-studio:not(.guide-compare) .guide-code{order:0;border:0}.guide-studio:not(.guide-compare) .guide-observation{order:1;border-top:1px solid #344263;scroll-margin-top:125px}}
 @media(max-width:600px){.guide-orientation{padding-inline-start:14px}.guide-orientation h2{font-size:21px}.guide-first-step{font-size:15px}}
