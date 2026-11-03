@@ -41,7 +41,7 @@ test('build emits localized entry points with canonical metadata',async()=>{
     const html=await readFile(new URL(`../dist/${locale}/index.html`,import.meta.url),'utf8');
     assert.ok(html.includes(`https://shixilin.com/games/loopuff/${locale}/`));
     assert.ok(!html.includes('?lang='));
-    for(const suffix of ['levels/','guide/','guide/compare/','guide/map/','saves/','play/','play/vault/','play/chase/','play/dispatch/','learn/signal/','learn/names/result/']){
+    for(const suffix of ['levels/','guide/','guide/compare/','guide/map/','guide/check/','saves/','play/','play/vault/','play/chase/','play/dispatch/','learn/signal/','learn/names/result/']){
       const page=await readFile(new URL(`../dist/${locale}/${suffix}index.html`,import.meta.url),'utf8');
       assert.ok(page.includes(`https://shixilin.com/games/loopuff/${locale}/${suffix==='levels/'?'play/':suffix}`));
       const navigation=page.match(/<nav id="page-navigation"[^>]*>([\s\S]*?)<\/nav>/)[1];

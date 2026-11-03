@@ -1071,7 +1071,13 @@
       "SAVE_OWNER_INVALID": "Die Kontoverknüpfung des Fortschritts in diesem Browser konnte nicht gelesen werden. Lade ein Backup herunter, bevor du ihn wiederherstellst.",
       "SAVE_LOCK_REQUIRED": "Dieser Browser kann keine sichere Wiederherstellung koordinieren. Lade ein Backup herunter und stelle es in einem aktuellen Browser wieder her.",
       "RATE_LIMITED": "Zu viele Anfragen. Warte einen Moment, bevor du es erneut versuchst."
-    }
+    },
+    "diagnosticTitle": "Diagnoseübungen",
+    "diagnosticDrafts": "Diagnoseentwürfe",
+    "diagnosticHints": "Hinweisstufe für diesen Satz",
+    "diagnosticSubmitted": "Für diesen Entwurf ist eine Einreichung gespeichert. Nach der Wiederherstellung wird sie erneut überprüft.",
+    "diagnosticPending": "Dieser Entwurf wurde noch nicht zur Überprüfung eingereicht.",
+    "diagnosticChoice": "Behalte den gewählten Entwurf mit seiner Einreichung und seinem Hinweisverlauf. Unterschiedliche Eingabesätze werden jeweils als Ganzes ausgewählt."
   },
   "guideStudio": {
     "tag": "Erster Sternhafen · Signalstation",
@@ -1284,5 +1290,115 @@
     "ready": "Führe dieses Programm aus, um zu sehen, was es tatsächlich ausgibt.",
     "error": "Das Programm wurde nicht zu Ende ausgeführt",
     "noOutput": "Das Programm wurde ohne Ausgabe ausgeführt."
+  },
+  "diagnostic": {
+    "tag": "Probiere vor dem Start ein Programm aus",
+    "title": "Finde deinen Einstieg.",
+    "intro": "Wähle einen Bereich und schreibe ein Programm, das mit wechselnden Eingaben funktioniert. Du kannst jederzeit eine Lektion wiederholen oder direkt üben; es gibt keine vorgegebene Reihenfolge.",
+    "map": "Begriffskarte erkunden",
+    "guide": "Zurück zu den Programmiergrundlagen",
+    "areas": "Wähle einen Bereich zum Überprüfen",
+    "pending": "Noch nicht überprüft",
+    "checking": "Wird überprüft…",
+    "reviewing": "Gespeicherte Programme werden erneut überprüft…",
+    "passed": "Mit diesem Eingabesatz bestanden",
+    "needsWork": "Hier lohnt sich Übung",
+    "checked": "{number} Bereiche überprüft",
+    "passedCount": "Mit diesem Eingabesatz bestanden: {number} / 9",
+    "allPassed": "Dieses Programm hat alle Eingaben des aktuellen Satzes bestanden.",
+    "partial": "Bei einigen Eingaben stimmt das Ergebnis noch nicht. Wähle eine aus, um den Unterschied zu sehen.",
+    "ready": "Schreibe ein Programm und überprüfe es dann mit diesem Eingabesatz.",
+    "editor": "Dein Programm",
+    "run": "Dieses Programm überprüfen",
+    "newSet": "Anderen Eingabesatz ausprobieren",
+    "newSetNote": "Dein Code bleibt erhalten. Die Eingaben werden geändert und die Überprüfungen sowie die Hinweiseinträge für diesen Satz zurückgesetzt.",
+    "hint": "Gib mir einen Ansatz",
+    "moreHint": "Codegerüst anzeigen",
+    "hintLabel": "Hinweis",
+    "hintFill": "Ersetze die Lücken durch passende Ausdrücke. Das Codegerüst ersetzt deinen Entwurf nicht.",
+    "withHints": "Für diesen Satz wurden Hinweise angesehen",
+    "withoutHints": "Für diesen Satz wurden keine Hinweise angesehen",
+    "learn": "Diesen Teil lernen",
+    "independent": "Direkt zu einer eigenständigen Übungsaufgabe",
+    "input": "Von der Aufgabe bereitgestellte Eingaben",
+    "expected": "Erwartete Ausgabe",
+    "actual": "Tatsächliche Programmausgabe",
+    "noOutput": "Keine Ausgabe",
+    "notRun": "Noch nicht ausgeführt",
+    "caseLabel": "Eingabefall {number}",
+    "cases": "Einzelne Eingaben ansehen",
+    "caseResult": "{passed} / {total} Fälle bestanden",
+    "criteria": "Verwendete Methoden",
+    "source": "Woher diese Ausgabe stammt",
+    "hostOutput": "Diese Ausgabe stammt aus dem Funktionsaufruf, den die Aufgabe hinzufügt.",
+    "frame": "Wähle eine Ausgabe",
+    "position": "Position im Quelltext",
+    "scope": "Diese Überprüfungen beschreiben das Verhalten dieses Programms mit diesem Eingabesatz. Sie ändern weder deine Kursnoten noch deinen Abschlussfortschritt.",
+    "next": "Du könntest auch Folgendes überprüfen: {topic}",
+    "nextAction": "Diesen Bereich erkunden",
+    "recommend": "Brauchst du dafür Grundlagen? Beginne mit „{lesson}“.",
+    "saveFailed": "Diese Änderung konnte nicht gespeichert werden. Kopiere deinen Code, bevor du die Seite verlässt.",
+    "badSave": "Dieser Diagnosedatensatz kann derzeit nicht gelesen werden. Lade unter „Fortschritt und Sicherungen“ seine unverarbeiteten Wiederherstellungsdaten herunter, bevor du entscheidest, ob du einen neuen anlegen möchtest.",
+    "resetBad": "Neue Diagnose starten",
+    "confirmBad": "Erneut klicken, um diesen Diagnosedatensatz zu ersetzen",
+    "saveTitle": "Fortschritt und Sicherungen",
+    "syncRequired": "Dieser Aufruf von combine muss direkt einen Wert zurückgeben. Ein gewöhnliches return und return ! verwenden unterschiedliche Mechanismen.",
+    "replyRequired": "Dieser Aufruf von boost muss sein Ergebnis mit return ! als Antwort senden.",
+    "tasks": {
+      "names": {
+        "title": "Namen und Rechnen",
+        "goal": "Addiere die Eingaben cargo und reserve und gib ihre Summe aus. Dein Programm muss auch bei veränderten Eingaben funktionieren.",
+        "context": "Die Aufgabe stellt cargo und reserve bereit. Schreibe die Berechnung und die Ausgabe.",
+        "hint": "Verwende die Namen der Eingaben statt einer festen Antwort für einen einzelnen Fall. Du kannst .log() auf einer in Klammern stehenden Summe aufrufen."
+      },
+      "branch": {
+        "title": "Einen Zweig auswählen",
+        "goal": "Gib 1 aus, wenn fuel größer als threshold ist. Gib 2 aus, wenn fuel gleich oder kleiner ist.",
+        "context": "Die Aufgabe stellt fuel und threshold bereit, auch mit Werten genau an der Grenze.",
+        "hint": "Vergleiche die Werte und wähle dann mit if einen Zweig aus. Welcher Zweig soll bei Gleichheit ausgeführt werden?"
+      },
+      "repeat": {
+        "title": "Eine wechselnde Liste",
+        "goal": "Gehe docks der Reihe nach durch und gib jeden Eintrag plus offset aus. Eine leere Liste erzeugt keine Ausgabe.",
+        "context": "Die Aufgabe stellt eine Liste namens docks und eine Zahl namens offset bereit. Einträge können mehrfach vorkommen oder negativ sein.",
+        "hint": "Lies mit for jeden Eintrag und addiere dann offset zu diesem Eintrag. Lege die Anzahl der Ausgaben nicht fest."
+      },
+      "counter": {
+        "title": "Ein veränderlicher Zähler",
+        "goal": "Verwende while, um einen Zähler auszugeben, der bei 0 beginnt, jeweils um 1 steigt und vor limit stoppt. Wenn limit 0 ist, gib nichts aus.",
+        "context": "Die Aufgabe stellt limit bereit. Erstelle und aktualisiere deinen eigenen Zähler im Programm.",
+        "hint": "Wähle einen Anfangswert für den Zähler, vergleiche ihn mit limit und erhöhe ihn am Ende jedes Schleifendurchlaufs."
+      },
+      "function": {
+        "title": "Rückgabewerte von Funktionen",
+        "goal": "Definiere combine als synchrone Funktion mit zwei Parametern, die deren Summe zurückgibt. Die Aufgabe ruft sie auf und zeigt den zurückgegebenen Wert an.",
+        "context": "Der Aufruf lautet combine(firstNumber, secondNumber). Die Parameternamen kannst du selbst wählen; du musst .log() nicht hinzufügen.",
+        "hint": "Gib die Summe mit einem gewöhnlichen return zurück. Die Aufgabe verwendet den Rückgabewert, keine zusätzliche Ausgabe innerhalb der Funktion."
+      },
+      "reply": {
+        "title": "Antworten von Funktionen",
+        "goal": "Definiere boost mit zwei Parametern und sende deren Summe mit return ! als Antwort. Die Aufgabe wartet auf die Antwort und zeigt sie an.",
+        "context": "Der Aufruf lautet boost(firstNumber, secondNumber). Die Parameternamen kannst du selbst wählen; du musst .log() nicht hinzufügen.",
+        "hint": "Eine ausdrückliche Antwort einer fn-Funktion verwendet return !. Dieser Bereich überprüft den Antwortmechanismus statt einer gewöhnlichen synchronen Rückgabe."
+      },
+      "message": {
+        "title": "Eine Nachricht empfangen",
+        "goal": "Empfange eine Zahl aus mailbox, addiere 1 und gib das Ergebnis aus.",
+        "context": "Die Aufgabe erstellt mailbox und sendet in einem anderen parallelen Zweig eine Nachricht. Erhalte den Wert, indem du die Nachricht empfängst.",
+        "hint": "Empfange mit ? eine Nachricht aus mailbox, gib dem empfangenen Wert einen Namen und berechne dann die Ausgabe."
+      },
+      "join": {
+        "title": "Auf zwei Nachrichten warten",
+        "goal": "Empfange die Nachrichten aus west und east gemeinsam und gib dann ihre Summe aus.",
+        "context": "Die Aufgabe sendet zwei Zahlenmeldungen in getrennten Zweigen. Beide Werte müssen zum Ergebnis beitragen.",
+        "hint": "Schreibe beide Empfangsbedingungen in einen einzigen Empfangsausdruck mit ?, verbinde sie mit & und addiere die Werte dann im zugehörigen Block."
+      },
+      "coordination": {
+        "title": "Einen Einsatz koordinieren",
+        "goal": "Empfange west und east gemeinsam und rufe dann eine Funktion auf, um ihre Summe zu berechnen. Addiere reserve, wenn die Summe größer als threshold ist; gib andernfalls die Summe selbst aus.",
+        "context": "Die Aufgabe stellt threshold, reserve und zwei Kanäle bereit. Zahlenmeldungen treffen als Nachrichten ein; berechne ihre Summe mit einer Funktion.",
+        "hint": "Definiere zuerst die Funktion total und warte dann auf beide Nachrichten. Verwende dieselbe Summe in der Bedingung und in der abschließenden Ausgabe."
+      }
+    }
   }
 }

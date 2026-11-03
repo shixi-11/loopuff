@@ -1083,7 +1083,13 @@
       "SAVE_OWNER_INVALID": "无法读取本机进度关联的账号。请先下载备份，再重新恢复。",
       "SAVE_LOCK_REQUIRED": "此浏览器暂不支持安全协调恢复，请先下载备份，换用较新的浏览器恢复。",
       "RATE_LIMITED": "操作过于频繁，请稍后再试。"
-    }
+    },
+    "diagnosticTitle": "能力诊断",
+    "diagnosticDrafts": "诊断草稿",
+    "diagnosticHints": "本组提示层数",
+    "diagnosticSubmitted": "保留了此草稿的提交，恢复后重新检查。",
+    "diagnosticPending": "此草稿尚未提交检查。",
+    "diagnosticChoice": "连同提交状态和提示记录保留所选版本；不同输入集将整份选择。"
   },
   "guideStudio": {
     "tag": "第一座星港 · 信号台",
@@ -1296,5 +1302,115 @@
     "ready": "运行这段程序，看看它会输出什么。",
     "error": "程序没有完成",
     "noOutput": "程序已执行，没有输出。"
+  },
+  "diagnostic": {
+    "tag": "出发前，试一段程序",
+    "title": "找到适合你的起点。",
+    "intro": "选一个想检验的部分，让同一段代码处理多组变化输入。你可以随时补学或直接练习，不必按顺序做完。",
+    "map": "查看概念地图",
+    "guide": "回到编程入门",
+    "areas": "选择要检验的部分",
+    "pending": "尚未检查",
+    "checking": "正在检查…",
+    "reviewing": "正在复核已保存的程序…",
+    "passed": "本组通过",
+    "needsWork": "可以再练练",
+    "checked": "已检查 {number} 项",
+    "passedCount": "通过本组输入 {number} / 9",
+    "allPassed": "这份程序通过了本组全部输入。",
+    "partial": "有些输入还没有通过。选一组看看差异。",
+    "ready": "写好程序后运行，看看它能否处理这组输入。",
+    "editor": "你的程序",
+    "run": "检查这份程序",
+    "newSet": "换一组输入",
+    "newSetNote": "保留代码，更新输入，并清除本组检查和提示记录。",
+    "hint": "给一点方向",
+    "moreHint": "看看代码框架",
+    "hintLabel": "提示",
+    "hintFill": "把空位换成合适的表达式；框架不会替换你的草稿。",
+    "withHints": "本组查看过提示",
+    "withoutHints": "本组未查看提示",
+    "learn": "补学这部分",
+    "independent": "直接进入独立任务",
+    "input": "任务提供的输入",
+    "expected": "需要的输出",
+    "actual": "程序的实际输出",
+    "noOutput": "没有输出",
+    "notRun": "尚未运行",
+    "caseLabel": "第 {number} 组输入",
+    "cases": "逐组查看",
+    "caseResult": "通过 {passed} / {total} 组",
+    "criteria": "用到的方法",
+    "source": "这条输出来自哪里",
+    "hostOutput": "这条输出由任务追加的函数调用产生。",
+    "frame": "选择一条输出",
+    "position": "源码位置",
+    "scope": "这些检查反映本组程序的表现，不改变原课程成绩或完成记录。",
+    "next": "还可以检验：{topic}",
+    "nextAction": "看看这一项",
+    "recommend": "这项还不熟悉？可以从「{lesson}」开始。",
+    "saveFailed": "这次未能保存，请先复制代码，再离开页面。",
+    "badSave": "这份诊断记录暂时无法读取。请先到进度与备份下载原始恢复记录，再决定是否新建。",
+    "resetBad": "新建一份诊断",
+    "confirmBad": "再次点击，替换这份诊断记录",
+    "saveTitle": "进度与备份",
+    "syncRequired": "这次 combine 调用需要直接返回数值。普通 return 与 return ! 的作用不同。",
+    "replyRequired": "这次 boost 调用需要通过 return ! 回复结果。",
+    "tasks": {
+      "names": {
+        "title": "名字与计算",
+        "goal": "用 cargo 和 reserve 两个输入相加，输出它们的和。输入变化时，程序也要给出正确结果。",
+        "context": "任务已提供 cargo 和 reserve；你只需编写计算与输出。",
+        "hint": "使用输入名字，而不是把某一组的答案写死。括号里的加法结果可以直接调用 .log()。"
+      },
+      "branch": {
+        "title": "条件分流",
+        "goal": "fuel 大于 threshold 时输出 1；等于或小于时输出 2。",
+        "context": "任务已提供 fuel 和 threshold，包含刚好等于阈值的输入。",
+        "hint": "先写比较，再用 if 选择一个分支。相等时应该走哪一边？"
+      },
+      "repeat": {
+        "title": "批量清单",
+        "goal": "按 docks 清单的顺序，将每个编号加上 offset 后逐条输出。空清单不输出。",
+        "context": "任务已提供列表 docks 和数字 offset；清单可能有重复编号或负数。",
+        "hint": "用 for 逐项读取 docks，再对当前项做加法。不要固定输出次数。"
+      },
+      "counter": {
+        "title": "状态循环",
+        "goal": "用 while 从 0 开始输出计数，每次加 1，到 limit 前停止。limit 为 0 时不输出。",
+        "context": "任务已提供 limit；需要在程序中创建并更新自己的计数名字。",
+        "hint": "先给计数起点，再比较它是否小于 limit。循环末尾要推进计数，才能检查下一轮。"
+      },
+      "function": {
+        "title": "函数返回",
+        "goal": "定义 combine，接收两个参数，用同步函数返回它们的和。任务会调用它并显示返回值。",
+        "context": "调用形式是 combine(第一个数, 第二个数)，参数名可以自己选；不用自己追加 .log()。",
+        "hint": "让加法结果经过普通 return 返回。任务使用的是函数返回值，不是函数内部额外打印的内容。"
+      },
+      "reply": {
+        "title": "函数回复",
+        "goal": "定义 boost，接收两个参数，用 return ! 回复它们的和。任务会等待回复并显示结果。",
+        "context": "调用形式是 boost(第一个数, 第二个数)，参数名可以自己选；不用自己追加 .log()。",
+        "hint": "fn 的显式回复写作 return !。注意这里要求回复机制，不是普通的同步返回。"
+      },
+      "message": {
+        "title": "接收一条消息",
+        "goal": "从 mailbox 接收一个数，加上 1 后输出。",
+        "context": "任务创建 mailbox 并在另一个并行分支发送消息。消息值只能通过接收取得。",
+        "hint": "用 ? 接收 mailbox 中的消息，为收到的数起个名字，再计算输出。"
+      },
+      "join": {
+        "title": "等齐两份消息",
+        "goal": "联合接收 west 与 east 的两条消息，输出两个数的和。",
+        "context": "任务会从独立分支发送两份数值报告。两条消息都必须参与结果。",
+        "hint": "把两个接收条件放在同一个 ? 接收式里，用 & 连接；接收体里再相加。"
+      },
+      "coordination": {
+        "title": "综合调度",
+        "goal": "联合接收 west 与 east，调用函数合计。合计大于 threshold 时加上 reserve，否则直接输出合计。",
+        "context": "任务提供 threshold、reserve 和两个通道，数值报告来自消息；合计需要经过函数计算。",
+        "hint": "先定义合计函数，再等齐两条消息。让同一份合计同时参与条件判断与最终输出。"
+      }
+    }
   }
 }

@@ -14,6 +14,7 @@ import { createAccountClient, mountAccount } from './account.js';
 import { progressStorage } from './save-data.js';
 import { mountSaves } from './saves-ui.js';
 import { mountGuide } from './guide-ui.js';
+import { mountDiagnostic } from './diagnostic-ui.js';
 import { mountLearningMap } from './learning-map-ui.js';
 import { readGuideWork } from './guide.js';
 import { selectedLocale, languageUrl, parseRoute, routeUrl } from './routing.js';
@@ -32,7 +33,7 @@ const validLocale=id=>locales.some(([key])=>key===id);
 let lang=selectedLocale(location.href,saved.lang,navigator.languages||[navigator.language]);
 if(!validLocale(lang))lang='en';
 let jumpLab=null,vaultGame=null,chaseGame=null,pursuitGame=null,dispatchGame=null,accountPage=null,savesPage=null,guidePage=null;
-const savesModel={};
+const savesModel={},diagnosticModel={};
 const guideModel={selected:saved.state?.guideSelected,drafts:readGuideWork(saved.state?.guideWork)};
 const pursuitModel={};
 let guideView='guide';
@@ -59,7 +60,7 @@ function readRoute(){
   if(['play','vault','chase','dispatch','account','saves'].includes(route?.view))state.phase=route.view;
   else if(route?.view==='result')state.phase='result';
   else if(route?.view==='levels'){state.phase='play';const target=routeUrl(location.href,lang,'play');target.hash='missions';history.replaceState(null,'',target);}
-  else if(['guide','compare','map'].includes(route?.view)){if(!['guide','welcome','pause'].includes(state.phase))state.resumePhase=state.phase;state.phase='guide';guideView=route.view;}
+  else if(['guide','compare','map','check'].includes(route?.view)){if(!['guide','welcome','pause'].includes(state.phase))state.resumePhase=state.phase;state.phase='guide';guideView=route.view;}
   else if(route?.view==='lesson'){
     if(previousLesson!==state.lesson){if(state.phase==='result')state.phase='independent';}
     else if(state.phase==='result')state.phase='independent';
@@ -74,7 +75,7 @@ function readRoute(){
 readRoute();
 const ui=key=>messages.ui[key], lesson=()=>course[state.lesson], copy=()=>messages.lessons[state.lesson];
 const fragments=()=>lesson().fragments;
-async function save(){rememberLesson(state,lesson().id);try{const raw=JSON.stringify({lang,state});await progressStorage().write(()=>localStorage.setItem(storageKey,raw));$('save-status').textContent=ui('save');await savesPage?.localSaved();}catch{$('save-status').textContent=ui('nosave');}}
+async function save(){rememberLesson(state,lesson().id);try{const raw=JSON.stringify({lang,state});await progressStorage().write(()=>localStorage.setItem(storageKey,raw));$('save-status').textContent=ui('save');await savesPage?.localSaved();return true;}catch{$('save-status').textContent=ui('nosave');return false;}}
 async function changeLanguage(next){
   if(!validLocale(next))return;
   const request=++languageRequest;
@@ -188,7 +189,7 @@ function render(){
   if(typing)renderTyping();else if(phase!=='welcome')renderDialog();
   if(['levels','play'].includes(phase))document.querySelector('.journey-panel')?.insertAdjacentHTML('beforeend',`<a class="journey-backup" data-action="open-saves" href="${routeUrl(location.href,lang,'saves').pathname}">${escape(messages.saves.title)} <span aria-hidden="true">↗</span></a>`);
   const view=parseRoute(location.pathname)?.view||'home';
-  document.title=`${ui('name')} · ${view==='map'?messages.learningMap.title:view==='compare'?messages.guideStudio.compareTitle:view==='saves'?messages.saves.title:view==='dispatch'?messages.dispatch.title:view==='chase'?messages.chase.title:view==='account'?messages.account.entry:view==='vault'?messages.vault.title:view==='play'?messages.vault.arcade:view==='result'?messages.assessment.title:view==='levels'?ui('navCourse'):view==='guide'?ui('guide'):view==='lesson'?copy().title:ui('tagline')}`;
+  document.title=`${ui('name')} · ${view==='check'?messages.diagnostic.title:view==='map'?messages.learningMap.title:view==='compare'?messages.guideStudio.compareTitle:view==='saves'?messages.saves.title:view==='dispatch'?messages.dispatch.title:view==='chase'?messages.chase.title:view==='account'?messages.account.entry:view==='vault'?messages.vault.title:view==='play'?messages.vault.arcade:view==='result'?messages.assessment.title:view==='levels'?ui('navCourse'):view==='guide'?ui('guide'):view==='lesson'?copy().title:ui('tagline')}`;
   document.querySelector('link[rel="canonical"]').href=routeUrl('https://shixilin.com/games/loopuff/',lang,view,lesson().id).href;
   let robots=document.querySelector('meta[name="robots"]');
   if(view==='result'){if(!robots){robots=document.createElement('meta');robots.name='robots';document.head.append(robots);}robots.content='noindex,follow';}else robots?.remove();
@@ -239,8 +240,9 @@ function journeyPanel(){
 function renderDialog(){
   if(state.phase==='guide'){
     $('learning-page').dataset.stage='guide';$('learning-content').innerHTML='<div id="guide-studio"></div>';
+    if(guideView==='check'){guidePage=mountDiagnostic($('guide-studio'),{text:messages.diagnostic,ui:messages.ui,errors:messages.ui,concepts:messages.assessment.concepts,statuses:messages.assessment,lessons:Object.fromEntries(course.map((l,i)=>[l.id,messages.lessons[i]])),initial:state.diagnostic,model:diagnosticModel,reduced,urls:{home:routeUrl(location.href,lang,'home').pathname,guide:routeUrl(location.href,lang,'guide').pathname,map:routeUrl(location.href,lang,'map').pathname,saves:routeUrl(location.href,lang,'saves').pathname,lesson:id=>routeUrl(location.href,lang,'lesson',id).pathname},onChange:value=>{state.diagnostic=value;return save();}});return;}
     if(guideView==='map'){guidePage=mountLearningMap($('guide-studio'),{text:messages.learningMap,lessons:messages.lessons,ui:messages.ui,errors:messages.ui,completed:state.completed,model:guideModel,urls:{home:routeUrl(location.href,lang,'home').pathname,guide:routeUrl(location.href,lang,'guide').pathname,compare:routeUrl(location.href,lang,'compare').pathname,lesson:id=>routeUrl(location.href,lang,'lesson',id).pathname}});return;}
-    guidePage=mountGuide($('guide-studio'),{text:messages.guideStudio,legacy:messages.guide,errors:messages.ui,ui:messages.ui,model:guideModel,compare:guideView==='compare',reduced,onChange:()=>{state.guideWork={...guideModel.drafts};state.guideSelected=guideModel.selected;save();},urls:{home:routeUrl(location.href,lang,'home').pathname,guide:routeUrl(location.href,lang,'guide').pathname,compare:routeUrl(location.href,lang,'compare').pathname,map:routeUrl(location.href,lang,'map').pathname,mapLabel:messages.learningMap.title,dispatch:routeUrl(location.href,lang,'dispatch').pathname,lesson:id=>routeUrl(location.href,lang,'lesson',id).pathname}});
+    guidePage=mountGuide($('guide-studio'),{text:messages.guideStudio,legacy:messages.guide,errors:messages.ui,ui:messages.ui,model:guideModel,compare:guideView==='compare',reduced,onChange:()=>{state.guideWork={...guideModel.drafts};state.guideSelected=guideModel.selected;save();},urls:{home:routeUrl(location.href,lang,'home').pathname,guide:routeUrl(location.href,lang,'guide').pathname,compare:routeUrl(location.href,lang,'compare').pathname,map:routeUrl(location.href,lang,'map').pathname,mapLabel:messages.learningMap.title,check:routeUrl(location.href,lang,'check').pathname,checkLabel:messages.saves.diagnosticTitle,dispatch:routeUrl(location.href,lang,'dispatch').pathname,lesson:id=>routeUrl(location.href,lang,'lesson',id).pathname}});
     return;
   }
   const c=copy(),phase=state.phase;let title='',body='';
@@ -254,7 +256,7 @@ function renderDialog(){
   if(phase==='account'){$('learning-content').innerHTML='<div id="account-page"></div>';accountPage=mountAccount($('account-page'),{client:account,text:messages.account,locale:lang,saveNote:ui('save'),homeUrl:routeUrl(location.href,lang,'home').pathname,savesUrl:routeUrl(location.href,lang,'saves').pathname,saveLabel:messages.saves.title});return;}
   if(phase==='saves'){
    $('learning-page').dataset.stage=phase;$('learning-content').innerHTML='<div id="saves-page"></div>';
-   savesPage=mountSaves($('saves-page'),{text:messages.saves,topics:{course:ui('navCourse'),guide:ui('navGuide'),vault:messages.vault.title,chase:messages.chase.title,dispatch:messages.dispatch.title,pursuit:messages.pursuit.title,police:messages.chase.police,thief:messages.chase.thief,dispatchTasks:messages.dispatch.missions.map(m=>m.title)},pursuitText:messages.pursuit,lessons:messages.lessons,phases:{brief:ui('mission'),typing:ui('assembled'),predict:ui('predict'),output:ui('output'),explain:ui('explain'),remix:ui('practice'),independent:ui('independent'),result:messages.assessment.title,complete:ui('complete')},account,locale:lang,name:ui('name'),urls:{account:routeUrl(location.href,lang,'account').pathname},model:savesModel});return;
+   savesPage=mountSaves($('saves-page'),{text:messages.saves,topics:{course:ui('navCourse'),guide:ui('navGuide'),vault:messages.vault.title,chase:messages.chase.title,dispatch:messages.dispatch.title,pursuit:messages.pursuit.title,police:messages.chase.police,thief:messages.chase.thief,dispatchTasks:messages.dispatch.missions.map(m=>m.title)},pursuitText:messages.pursuit,diagnosticText:messages.diagnostic,lessons:messages.lessons,phases:{brief:ui('mission'),typing:ui('assembled'),predict:ui('predict'),output:ui('output'),explain:ui('explain'),remix:ui('practice'),independent:ui('independent'),result:messages.assessment.title,complete:ui('complete')},account,locale:lang,name:ui('name'),urls:{account:routeUrl(location.href,lang,'account').pathname},model:savesModel});return;
   }
   if(phase==='dispatch'){
     $('learning-page').dataset.stage=phase;
@@ -386,7 +388,7 @@ document.addEventListener('click',event=>{
   if(action==='open-chase'){chaseLab=false;move('chase');return;}
   if(action==='chase-continuous'||action==='chase-lab'){chaseLab=action==='chase-lab';move('chase');return;}
   if(action==='open-levels'){move('play');return;}
-  if(action==='open-guide'||action==='open-compare'||action==='open-map'){if(!['welcome','guide','pause'].includes(state.phase))state.resumePhase=state.phase;guideView=action==='open-map'?'map':action==='open-compare'?'compare':'guide';move('guide');return;}
+  if(action==='open-guide'||action==='open-compare'||action==='open-map'||action==='open-check'){if(!['welcome','guide','pause'].includes(state.phase))state.resumePhase=state.phase;guideView=action==='open-check'?'check':action==='open-map'?'map':action==='open-compare'?'compare':'guide';move('guide');return;}
   if(action==='resume-course'){if(state.phase==='guide')enterLesson(state.lesson);else if(state.phase==='result')move('independent');return;}
   if(action==='edit-assessment'){move('independent');$('program-editor')?.focus();return;}
   if(action==='view-result'&&state.assessedSource!==null&&state.assessedSource===state.draft){move('result');return;}

@@ -1083,7 +1083,13 @@
       "SAVE_OWNER_INVALID": "無法讀取本機進度連結的帳號。請先下載備份，再重新還原。",
       "SAVE_LOCK_REQUIRED": "此瀏覽器暫不支援安全協調還原，請先下載備份，改用較新的瀏覽器還原。",
       "RATE_LIMITED": "操作過於頻繁，請稍後再試。"
-    }
+    },
+    "diagnosticTitle": "診斷練習",
+    "diagnosticDrafts": "診斷草稿",
+    "diagnosticHints": "本組提示層級",
+    "diagnosticSubmitted": "已儲存這份草稿的提交內容，還原後會重新檢查。",
+    "diagnosticPending": "這份草稿尚未提交檢查。",
+    "diagnosticChoice": "保留選定的草稿及其提交內容與提示紀錄。不同輸入組的資料須整組選擇。"
   },
   "guideStudio": {
     "tag": "第一座星港 · 信號台",
@@ -1296,5 +1302,115 @@
     "ready": "執行這段程式，看看它實際輸出什麼。",
     "error": "程式未能執行完畢",
     "noOutput": "程式已執行，沒有輸出。"
+  },
+  "diagnostic": {
+    "tag": "出發前，先試寫一段程式",
+    "title": "找到適合你的起點。",
+    "intro": "選擇一個領域，讓同一段程式處理一組會變動的輸入。需要時可以回頭學習課程，也可以直接練習，不必依照固定順序。",
+    "map": "探索概念地圖",
+    "guide": "回到程式設計基礎",
+    "areas": "選擇要檢查的領域",
+    "pending": "尚未檢查",
+    "checking": "正在檢查……",
+    "reviewing": "正在重新檢查已儲存的程式……",
+    "passed": "本組通過",
+    "needsWork": "值得再練習",
+    "checked": "已檢查 {number} 個領域",
+    "passedCount": "通過本組輸入：{number} / 9",
+    "allPassed": "這段程式通過了目前這組的所有輸入。",
+    "partial": "部分輸入仍未通過。選擇其中一項，查看差異。",
+    "ready": "寫好程式後，使用這組輸入執行檢查。",
+    "editor": "你的程式",
+    "run": "檢查這段程式",
+    "newSet": "試試另一組輸入",
+    "newSetNote": "保留程式碼、更換輸入，並清除本組的檢查結果與提示檢視紀錄。",
+    "hint": "給我一點方向",
+    "moreHint": "顯示程式碼架構",
+    "hintLabel": "提示",
+    "hintFill": "在空白處填入合適的運算式。架構不會取代你的草稿。",
+    "withHints": "本組已檢視提示",
+    "withoutHints": "本組未檢視提示",
+    "learn": "學習這個部分",
+    "independent": "直接進入獨立練習任務",
+    "input": "任務提供的輸入",
+    "expected": "預期輸出",
+    "actual": "程式的實際輸出",
+    "noOutput": "沒有輸出",
+    "notRun": "尚未執行",
+    "caseLabel": "第 {number} 組輸入",
+    "cases": "逐一查看輸入",
+    "caseResult": "通過 {passed} / {total} 組",
+    "criteria": "使用的方法",
+    "source": "這項輸出的來源",
+    "hostOutput": "這項輸出來自任務加入的函式呼叫。",
+    "frame": "選擇一項輸出",
+    "position": "原始碼位置",
+    "scope": "這些檢查反映這段程式在本組輸入下的表現，不會改變你的課程成績或完成紀錄。",
+    "next": "也可以檢查：{topic}",
+    "nextAction": "探索這個領域",
+    "recommend": "需要先打好基礎嗎？可以從「{lesson}」開始。",
+    "saveFailed": "無法儲存這次變更。離開頁面前，請先複製你的程式碼。",
+    "badSave": "目前無法讀取這筆診斷紀錄。請先到「進度與備份」下載其原始復原紀錄，再決定是否建立新的診斷。",
+    "resetBad": "建立新的診斷",
+    "confirmBad": "再次點擊以取代這筆診斷紀錄",
+    "saveTitle": "進度與備份",
+    "syncRequired": "這次 combine 呼叫必須直接傳回一個值。一般 return 與 return ! 使用不同的機制。",
+    "replyRequired": "這次 boost 呼叫必須透過 return ! 回覆結果。",
+    "tasks": {
+      "names": {
+        "title": "名稱與運算",
+        "goal": "將輸入 cargo 與 reserve 相加，然後輸出總和。輸入改變時，你的程式也必須能正確運作。",
+        "context": "任務會提供 cargo 與 reserve。請寫出計算與輸出。",
+        "hint": "使用輸入的名稱，不要把某一組輸入的答案寫死。可以對括號內的加法運算式呼叫 .log()。"
+      },
+      "branch": {
+        "title": "選擇分支",
+        "goal": "當 fuel 大於 threshold 時輸出 1；等於或小於時輸出 2。",
+        "context": "任務會提供 fuel 與 threshold，包括兩者恰好相等的邊界情況。",
+        "hint": "先比較數值，再用 if 選擇分支。相等時應該走哪個分支？"
+      },
+      "repeat": {
+        "title": "會變動的串列",
+        "goal": "依照 docks 的順序，將每個項目加上 offset 後輸出。空串列不產生輸出。",
+        "context": "任務會提供名為 docks 的串列，以及名為 offset 的數值。串列中的項目可能重複，也可能是負數。",
+        "hint": "用 for 讀取每個項目，再對該項目做加法。不要固定輸出的數量。"
+      },
+      "counter": {
+        "title": "會變動的計數器",
+        "goal": "使用 while 輸出計數器的值，從 0 開始，每次增加 1，並在達到 limit 前停止。limit 為 0 時不產生輸出。",
+        "context": "任務會提供 limit。請在程式中建立並更新自己的計數器。",
+        "hint": "設定計數器的初始值，將它與 limit 比較，並在每次迴圈結束時更新計數器。"
+      },
+      "function": {
+        "title": "函式傳回值",
+        "goal": "定義帶有兩個參數的同步函式 combine，並傳回兩個參數的總和。任務會呼叫它並顯示傳回值。",
+        "context": "呼叫方式為 combine(firstNumber, secondNumber)。參數名稱可以自行選擇，不需要加入 .log()。",
+        "hint": "用一般 return 傳回總和。任務使用的是傳回值，不是函式內額外列印的內容。"
+      },
+      "reply": {
+        "title": "函式回覆",
+        "goal": "定義帶有兩個參數的 boost，並使用 return ! 回覆兩個參數的總和。任務會等待回覆並顯示結果。",
+        "context": "呼叫方式為 boost(firstNumber, secondNumber)。參數名稱可以自行選擇，不需要加入 .log()。",
+        "hint": "fn 的明確回覆使用 return !。這個領域檢查的是回覆機制，而非一般的同步傳回。"
+      },
+      "message": {
+        "title": "接收一則訊息",
+        "goal": "從 mailbox 接收一個數值，加上 1 後輸出。",
+        "context": "任務會建立 mailbox，並在另一個平行分支傳送訊息。請透過接收訊息取得數值。",
+        "hint": "用 ? 從 mailbox 接收訊息，為接收到的值命名，再計算輸出。"
+      },
+      "join": {
+        "title": "等待兩則訊息",
+        "goal": "聯合接收 west 與 east 的訊息，然後輸出兩者的總和。",
+        "context": "任務會在不同分支傳送兩份數值回報。兩個數值都必須參與結果的計算。",
+        "hint": "將兩個接收條件放在同一個 ? 接收運算式中，以 & 連接，再於其主體內將兩個值相加。"
+      },
+      "coordination": {
+        "title": "協調調度",
+        "goal": "聯合接收 west 與 east，再呼叫函式計算總和。若總和大於 threshold，就加上 reserve 後輸出；否則直接輸出總和。",
+        "context": "任務會提供 threshold、reserve 與兩個通道。數值回報會以訊息送達，請透過函式計算總和。",
+        "hint": "先定義 total 函式，再等待兩則訊息。條件判斷與最後輸出應使用同一個總和。"
+      }
+    }
   }
 }

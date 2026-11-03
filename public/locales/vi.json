@@ -1071,7 +1071,13 @@
       "SAVE_OWNER_INVALID": "Không đọc được liên kết tài khoản của tiến độ trên trình duyệt này. Hãy tải xuống bản sao lưu trước khi khôi phục.",
       "SAVE_LOCK_REQUIRED": "Trình duyệt này không thể phối hợp khôi phục an toàn. Hãy tải xuống bản sao lưu và dùng trình duyệt mới hơn để khôi phục.",
       "RATE_LIMITED": "Quá nhiều yêu cầu. Hãy đợi một lát rồi thử lại."
-    }
+    },
+    "diagnosticTitle": "Luyện tập chẩn đoán",
+    "diagnosticDrafts": "Bản nháp chẩn đoán",
+    "diagnosticHints": "Mức gợi ý cho bộ này",
+    "diagnosticSubmitted": "Bài nộp của bản nháp này đã được lưu. Bài sẽ được kiểm tra lại sau khi khôi phục.",
+    "diagnosticPending": "Bản nháp này chưa được nộp để kiểm tra.",
+    "diagnosticChoice": "Giữ bản nháp đã chọn cùng bài nộp và lịch sử gợi ý của bản đó. Với các bộ đầu vào khác nhau, phải chọn nguyên bộ."
   },
   "guideStudio": {
     "tag": "Cảng sao đầu tiên · Đài tín hiệu",
@@ -1284,5 +1290,115 @@
     "ready": "Chạy chương trình này để xem kết quả đầu ra thực tế.",
     "error": "Chương trình chưa chạy xong",
     "noOutput": "Chương trình đã chạy nhưng không có đầu ra."
+  },
+  "diagnostic": {
+    "tag": "Thử viết một chương trình trước khi khởi hành",
+    "title": "Tìm điểm bắt đầu phù hợp.",
+    "intro": "Chọn một lĩnh vực và viết một chương trình xử lý được một bộ đầu vào có các giá trị thay đổi. Bạn có thể quay lại bài học hoặc vào thẳng phần luyện tập bất cứ khi nào cần, không phải theo thứ tự cố định.",
+    "map": "Khám phá bản đồ khái niệm",
+    "guide": "Quay lại kiến thức lập trình cơ bản",
+    "areas": "Chọn lĩnh vực cần kiểm tra",
+    "pending": "Chưa kiểm tra",
+    "checking": "Đang kiểm tra…",
+    "reviewing": "Đang kiểm tra lại các chương trình đã lưu…",
+    "passed": "Đã vượt qua bộ đầu vào này",
+    "needsWork": "Nên luyện tập thêm",
+    "checked": "Đã kiểm tra {number} lĩnh vực",
+    "passedCount": "Vượt qua bộ đầu vào này: {number} / 9",
+    "allPassed": "Chương trình này đã vượt qua mọi đầu vào trong bộ hiện tại.",
+    "partial": "Vẫn còn đầu vào chưa vượt qua. Chọn một đầu vào để xem sự khác biệt.",
+    "ready": "Viết chương trình rồi chạy với bộ đầu vào này.",
+    "editor": "Chương trình của bạn",
+    "run": "Kiểm tra chương trình này",
+    "newSet": "Thử bộ đầu vào khác",
+    "newSetNote": "Giữ nguyên mã, đổi đầu vào và xóa kết quả kiểm tra cùng lịch sử xem gợi ý của bộ này.",
+    "hint": "Gợi ý hướng giải",
+    "moreHint": "Xem khung mã",
+    "hintLabel": "Gợi ý",
+    "hintFill": "Điền biểu thức phù hợp vào chỗ trống. Khung mã không thay thế bản nháp của bạn.",
+    "withHints": "Đã xem gợi ý cho bộ này",
+    "withoutHints": "Chưa xem gợi ý cho bộ này",
+    "learn": "Học phần này",
+    "independent": "Vào thẳng bài tập tự giải",
+    "input": "Đầu vào do bài tập cung cấp",
+    "expected": "Đầu ra mong đợi",
+    "actual": "Đầu ra thực tế của chương trình",
+    "noOutput": "Không có đầu ra",
+    "notRun": "Chưa chạy",
+    "caseLabel": "Trường hợp đầu vào {number}",
+    "cases": "Xem từng đầu vào",
+    "caseResult": "Vượt qua {passed} / {total} trường hợp",
+    "criteria": "Phương pháp đã dùng",
+    "source": "Nguồn của đầu ra này",
+    "hostOutput": "Đầu ra này đến từ lời gọi hàm do bài tập thêm vào.",
+    "frame": "Chọn một đầu ra",
+    "position": "Vị trí trong mã nguồn",
+    "scope": "Các lần kiểm tra này cho biết chương trình này hoạt động ra sao với bộ đầu vào này. Chúng không thay đổi điểm khóa học hay hồ sơ hoàn thành của bạn.",
+    "next": "Bạn cũng có thể kiểm tra: {topic}",
+    "nextAction": "Khám phá lĩnh vực này",
+    "recommend": "Cần kiến thức nền cho phần này? Hãy bắt đầu với “{lesson}”.",
+    "saveFailed": "Không lưu được thay đổi này. Hãy sao chép mã trước khi rời trang.",
+    "badSave": "Hiện không đọc được bản ghi chẩn đoán này. Hãy tải các bản ghi khôi phục gốc từ mục Tiến độ và sao lưu trước khi quyết định có bắt đầu bản mới hay không.",
+    "resetBad": "Bắt đầu lượt chẩn đoán mới",
+    "confirmBad": "Nhấp lần nữa để thay thế bản ghi chẩn đoán này",
+    "saveTitle": "Tiến độ và sao lưu",
+    "syncRequired": "Lời gọi combine này phải trả về một giá trị trực tiếp. return thông thường và return ! dùng hai cơ chế khác nhau.",
+    "replyRequired": "Lời gọi boost này phải dùng return ! để gửi phản hồi chứa kết quả.",
+    "tasks": {
+      "names": {
+        "title": "Tên và phép tính",
+        "goal": "Cộng hai đầu vào cargo và reserve rồi xuất tổng. Chương trình của bạn phải hoạt động đúng khi đầu vào thay đổi.",
+        "context": "Bài tập cung cấp cargo và reserve. Hãy viết phần tính toán và xuất kết quả.",
+        "hint": "Dùng tên của đầu vào thay vì viết cố định đáp án cho một trường hợp. Bạn có thể gọi .log() trên biểu thức cộng đặt trong ngoặc."
+      },
+      "branch": {
+        "title": "Chọn nhánh",
+        "goal": "Xuất 1 khi fuel lớn hơn threshold. Xuất 2 khi fuel bằng hoặc nhỏ hơn threshold.",
+        "context": "Bài tập cung cấp fuel và threshold, bao gồm cả trường hợp hai giá trị bằng nhau tại ranh giới.",
+        "hint": "So sánh các giá trị rồi dùng if để chọn một nhánh. Khi bằng nhau thì nên đi theo nhánh nào?"
+      },
+      "repeat": {
+        "title": "Danh sách thay đổi",
+        "goal": "Theo thứ tự của docks, cộng từng phần tử với offset rồi xuất kết quả. Danh sách rỗng không tạo đầu ra.",
+        "context": "Bài tập cung cấp danh sách tên docks và số tên offset. Các phần tử có thể trùng nhau hoặc là số âm.",
+        "hint": "Dùng for để đọc từng phần tử rồi thực hiện phép cộng với phần tử đó. Đừng cố định số lần xuất kết quả."
+      },
+      "counter": {
+        "title": "Bộ đếm thay đổi",
+        "goal": "Dùng while để xuất giá trị bộ đếm bắt đầu từ 0, tăng mỗi lần 1 và dừng trước khi đạt limit. Khi limit bằng 0, không xuất gì.",
+        "context": "Bài tập cung cấp limit. Hãy tự tạo và cập nhật bộ đếm trong chương trình.",
+        "hint": "Chọn giá trị ban đầu cho bộ đếm, so sánh với limit và tăng bộ đếm ở cuối mỗi lượt lặp."
+      },
+      "function": {
+        "title": "Giá trị trả về của hàm",
+        "goal": "Định nghĩa hàm đồng bộ combine có hai tham số và trả về tổng của chúng. Bài tập sẽ gọi hàm và hiển thị giá trị trả về.",
+        "context": "Lời gọi là combine(firstNumber, secondNumber). Bạn có thể tự chọn tên tham số; không cần thêm .log().",
+        "hint": "Trả về tổng bằng return thông thường. Bài tập sử dụng giá trị trả về, không phải nội dung in thêm bên trong hàm."
+      },
+      "reply": {
+        "title": "Phản hồi từ hàm",
+        "goal": "Định nghĩa boost có hai tham số và dùng return ! để gửi phản hồi chứa tổng của chúng. Bài tập sẽ đợi phản hồi rồi hiển thị kết quả.",
+        "context": "Lời gọi là boost(firstNumber, secondNumber). Bạn có thể tự chọn tên tham số; không cần thêm .log().",
+        "hint": "Phản hồi tường minh từ fn dùng return !. Phần này kiểm tra cơ chế phản hồi thay vì cách trả về đồng bộ thông thường."
+      },
+      "message": {
+        "title": "Nhận một thông điệp",
+        "goal": "Nhận một số từ mailbox, cộng thêm 1 rồi xuất kết quả.",
+        "context": "Bài tập tạo mailbox và gửi một thông điệp trong một nhánh song song khác. Hãy nhận thông điệp để lấy giá trị.",
+        "hint": "Dùng ? để nhận từ mailbox, đặt tên cho giá trị nhận được rồi tính đầu ra."
+      },
+      "join": {
+        "title": "Đợi hai thông điệp",
+        "goal": "Nhận kết hợp các thông điệp từ west và east rồi xuất tổng của hai giá trị.",
+        "context": "Bài tập gửi hai báo cáo dạng số từ các nhánh riêng biệt. Cả hai giá trị đều phải tham gia vào phép tính kết quả.",
+        "hint": "Đặt cả hai điều kiện nhận trong cùng một biểu thức nhận ?, nối bằng &, rồi cộng các giá trị trong phần thân của biểu thức."
+      },
+      "coordination": {
+        "title": "Phối hợp điều vận",
+        "goal": "Nhận kết hợp từ west và east rồi gọi hàm để tính tổng. Nếu tổng lớn hơn threshold, cộng thêm reserve rồi xuất kết quả; nếu không, xuất chính tổng đó.",
+        "context": "Bài tập cung cấp threshold, reserve và hai kênh. Các báo cáo dạng số đến dưới dạng thông điệp; hãy tính tổng bằng một hàm.",
+        "hint": "Định nghĩa hàm total trước, rồi đợi cả hai thông điệp. Dùng cùng một tổng cho điều kiện và đầu ra cuối cùng."
+      }
+    }
   }
 }

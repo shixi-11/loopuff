@@ -1083,7 +1083,13 @@
       "SAVE_OWNER_INVALID": "The account link for this browser's progress could not be read. Download a backup before restoring it.",
       "SAVE_LOCK_REQUIRED": "This browser cannot coordinate a safe restore. Download a backup and use an up-to-date browser to restore it.",
       "RATE_LIMITED": "Too many requests. Wait a moment before trying again."
-    }
+    },
+    "diagnosticTitle": "Diagnostic practice",
+    "diagnosticDrafts": "Diagnostic drafts",
+    "diagnosticHints": "Hint level for this set",
+    "diagnosticSubmitted": "A submission is saved for this draft. It will be checked again after restoration.",
+    "diagnosticPending": "This draft has not been submitted for checking.",
+    "diagnosticChoice": "Keep the chosen draft with its submission and hint history. Different input sets are selected as a whole."
   },
   "guideStudio": {
     "tag": "First starport · Signal desk",
@@ -1296,5 +1302,115 @@
     "ready": "Run this program to see what it actually outputs.",
     "error": "The program did not finish",
     "noOutput": "The program ran without output."
+  },
+  "diagnostic": {
+    "tag": "Try a program before you set off",
+    "title": "Find your starting point.",
+    "intro": "Choose an area and make one program handle a changing set of inputs. Revisit a lesson or go straight to practice whenever you need to; there is no required order.",
+    "map": "Explore the concept map",
+    "guide": "Back to programming basics",
+    "areas": "Choose an area to check",
+    "pending": "Not checked yet",
+    "checking": "Checking…",
+    "reviewing": "Rechecking saved programs…",
+    "passed": "This set passed",
+    "needsWork": "Worth practising",
+    "checked": "{number} areas checked",
+    "passedCount": "Passed this input set: {number} / 9",
+    "allPassed": "This program passed every input in the current set.",
+    "partial": "Some inputs still need work. Choose one to see the difference.",
+    "ready": "Write a program, then run it against this input set.",
+    "editor": "Your program",
+    "run": "Check this program",
+    "newSet": "Try another input set",
+    "newSetNote": "Keep your code, change the inputs, and clear checks and hints for this set.",
+    "hint": "Give me a direction",
+    "moreHint": "Show a code outline",
+    "hintLabel": "Hint",
+    "hintFill": "Replace the blanks with suitable expressions. The outline does not replace your draft.",
+    "withHints": "Hints viewed for this set",
+    "withoutHints": "No hints viewed for this set",
+    "learn": "Learn this part",
+    "independent": "Go straight to an independent task",
+    "input": "Inputs supplied by the task",
+    "expected": "Expected output",
+    "actual": "Actual program output",
+    "noOutput": "No output",
+    "notRun": "Not run yet",
+    "caseLabel": "Input case {number}",
+    "cases": "Explore each input",
+    "caseResult": "Passed {passed} / {total} cases",
+    "criteria": "Methods used",
+    "source": "Where this output came from",
+    "hostOutput": "This output comes from the function call added by the task.",
+    "frame": "Choose an output",
+    "position": "Source position",
+    "scope": "These checks describe this program on this input set. They do not change your course grades or completion records.",
+    "next": "You could also check: {topic}",
+    "nextAction": "Explore this area",
+    "recommend": "Need a foundation for this? Start with “{lesson}”.",
+    "saveFailed": "This change could not be saved. Copy your code before leaving the page.",
+    "badSave": "This diagnostic record cannot currently be read. Download its raw recovery records from Progress and backups before deciding whether to start a new one.",
+    "resetBad": "Start a new diagnostic",
+    "confirmBad": "Click again to replace this diagnostic record",
+    "saveTitle": "Progress and backups",
+    "syncRequired": "This combine call must return a value directly. A normal return and return ! use different mechanisms.",
+    "replyRequired": "This boost call must reply with its result using return !.",
+    "tasks": {
+      "names": {
+        "title": "Names and arithmetic",
+        "goal": "Add the inputs cargo and reserve, then output their sum. Your program must work when the inputs change.",
+        "context": "The task supplies cargo and reserve. Write the calculation and output.",
+        "hint": "Use the input names instead of a fixed answer for one case. You can call .log() on a parenthesized sum."
+      },
+      "branch": {
+        "title": "Choosing a branch",
+        "goal": "Output 1 when fuel is greater than threshold. Output 2 when it is equal or smaller.",
+        "context": "The task supplies fuel and threshold, including values exactly on the boundary.",
+        "hint": "Compare the values, then use if to select one branch. Which branch should equality take?"
+      },
+      "repeat": {
+        "title": "A changing list",
+        "goal": "Follow the order of docks and output each entry plus offset. An empty list produces no output.",
+        "context": "The task supplies a list named docks and a number named offset. Entries may repeat or be negative.",
+        "hint": "Use for to read each entry, then add to that entry. Do not fix the number of outputs."
+      },
+      "counter": {
+        "title": "A changing counter",
+        "goal": "Use while to output a counter starting at 0, increasing by 1 and stopping before limit. When limit is 0, output nothing.",
+        "context": "The task supplies limit. Create and update your own counter in the program.",
+        "hint": "Choose an initial counter value, compare it with limit, and advance it at the end of each iteration."
+      },
+      "function": {
+        "title": "Function returns",
+        "goal": "Define combine with two parameters and return their sum through a synchronous function. The task calls it and displays the returned value.",
+        "context": "The call is combine(firstNumber, secondNumber). You may choose your parameter names; you do not need to add .log().",
+        "hint": "Return the sum with an ordinary return. The task uses the returned value, not an extra print inside the function."
+      },
+      "reply": {
+        "title": "Function replies",
+        "goal": "Define boost with two parameters and reply with their sum using return !. The task waits for the reply and displays it.",
+        "context": "The call is boost(firstNumber, secondNumber). You may choose your parameter names; you do not need to add .log().",
+        "hint": "An explicit fn reply uses return !. This area checks the reply mechanism rather than an ordinary synchronous return."
+      },
+      "message": {
+        "title": "Receiving a message",
+        "goal": "Receive a number from mailbox, add 1 and output it.",
+        "context": "The task creates mailbox and sends a message in another parallel branch. Obtain the value by receiving the message.",
+        "hint": "Use ? to receive from mailbox, give the received value a name, then calculate the output."
+      },
+      "join": {
+        "title": "Waiting for two messages",
+        "goal": "Jointly receive the messages from west and east, then output their sum.",
+        "context": "The task sends two numeric reports in separate branches. Both values must contribute to the result.",
+        "hint": "Put both receive conditions in one ? receive expression, joined by &, then add the values in its body."
+      },
+      "coordination": {
+        "title": "Coordinating a dispatch",
+        "goal": "Jointly receive west and east, then call a function to total them. Add reserve if the total is greater than threshold; otherwise output the total itself.",
+        "context": "The task supplies threshold, reserve and two channels. Numeric reports arrive as messages; calculate their total through a function.",
+        "hint": "Define the total function first, then wait for both messages. Use that same total in the condition and the final output."
+      }
+    }
   }
 }

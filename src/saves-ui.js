@@ -3,6 +3,7 @@ import {progressStorage,readBaseline,baselineMatches,readOwner,journalKey,ownerK
 import {createMergePlan,resolveMerge} from './save-merge.js';
 import {createCloudProgress} from './cloud-progress.js';
 import {course} from './course.js';
+import {diagnosticIds,diagnosticPuzzle} from './diagnostic.js';
 
 const html=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const code=source=>`<pre class="exercise-code" dir="ltr">${html(source)}</pre>`;
@@ -16,7 +17,7 @@ function download(value,filename){
  const url=URL.createObjectURL(new Blob([JSON.stringify(value,null,2)],{type:'application/json'}));
  const link=document.createElement('a');link.href=url;link.download=filename;document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
-export function mountSaves(root,{text:t,topics,lessons,phases,account,urls,locale,name,pursuitText,model={}}){
+export function mountSaves(root,{text:t,topics,lessons,phases,account,urls,locale,name,pursuitText,diagnosticText,model={}}){
  let disposed=false,busy=false,local=null,localError=null,recovery=null,focusComparison=false;
  setSaveAccount(model,account.user?.id??null);
  const access=progressStorage(),cloud=createCloudProgress({url:location.href,getAccount:()=>account.user});
@@ -33,9 +34,15 @@ export function mountSaves(root,{text:t,topics,lessons,phases,account,urls,local
    ['chase',`${(d.chase?.work.police.cleared.length??0)+(d.chase?.work.thief.cleared.length??0)} / 6`],
    ['dispatch',`${d.dispatch?.stamps.length??0} / 4`],
    ['pursuit',d.pursuit?`${topics[d.pursuit.current.role]} · ${Math.floor(d.pursuit.current.activeMs/60000)}:${String(Math.floor(d.pursuit.current.activeMs/1000)%60).padStart(2,'0')}`:'']
-  ].map(([domain,count])=>`<div><dt>${html(domainName(domain))}</dt><dd>${d[domain]===null?html(t.noProgress):`<bdi dir="ltr">${count}</bdi>`}</dd></div>`).join('')}</dl>`;
+  ].map(([domain,count])=>`<div><dt>${html(domainName(domain))}</dt><dd>${d[domain]===null?html(t.noProgress):`<bdi dir="ltr">${count}</bdi>${domain==='course'&&d.course?.state?.diagnostic?`<small>${html(t.diagnosticDrafts)}: <bdi dir="ltr">${diagnosticIds.filter(id=>d.course.state.diagnostic.drafts[id].trim()).length} / ${diagnosticIds.length}</bdi></small>`:''}`}</dd></div>`).join('')}</dl>`;
  }
+ function diagnosticTask(value){return code(value.draft||t.emptyDraft)+`<p>${html(t.diagnosticHints)}: <bdi dir="ltr">${value.hint} / 2</bdi></p><p>${html(value.submitted===null?t.diagnosticPending:t.diagnosticSubmitted)}</p>`;}
  function previewValue(item,value){
+  if(item.kind==='diagnostic-task')return diagnosticTask(value);
+  if(item.kind==='diagnostic-run')return diagnosticIds.map(id=>{
+   const samples=diagnosticPuzzle(value.seed,id).cases,inputs=[samples[0],samples.at(-1)].map(sample=>sample.inputCode||sample.prefix.trim()).join('\n…\n');
+   return `<h4>${html(diagnosticText.tasks[id].title)}</h4><p>${html(diagnosticText.input)}</p>${code(inputs)}${diagnosticTask({draft:value.drafts[id],submitted:value.submitted[id],hint:value.hints[id]})}`;
+  }).join('');
   if(item.domain==='pursuit'){
    const s=value.current;return `<p>${html(t.currentRun)}: ${html(topics[s.role])} · <bdi dir="ltr">${Math.floor(s.activeMs/60000)}:${String(Math.floor(s.activeMs/1000)%60).padStart(2,'0')}</bdi></p><p>${html(pursuitText.round)}: <bdi dir="ltr">${s.actors[s.role].section+1}</bdi> · ${html(pursuitText.history)}: <bdi dir="ltr">${value.history.length}</bdi></p>${code(s.draft||t.emptyDraft)}`;
   }
@@ -50,6 +57,8 @@ export function mountSaves(root,{text:t,topics,lessons,phases,account,urls,local
   return code((typeof value==='string'?value:value.draft)||t.emptyDraft);
  }
  function conflictTitle(item){
+  if(item.kind==='diagnostic-run')return t.diagnosticTitle;
+  if(item.kind==='diagnostic-task')return t.diagnosticTitle+' · '+diagnosticText.tasks[item.item].title;
   if(item.domain==='course')return (item.kind==='guide'?topics.guide+' · ':'')+lessons[course.findIndex(l=>l.id===item.item)].title;
   if(item.kind==='run')return domainName(item.domain)+' · '+t.currentRun;
   if(item.domain==='chase'){const [role,index]=item.item.split(':');return domainName(item.domain)+' · '+topics[role]+' · '+t.stage.replace('{number}',Number(index)+1);}
@@ -62,7 +71,7 @@ export function mountSaves(root,{text:t,topics,lessons,phases,account,urls,local
   return `<section class="save-comparison" aria-labelledby="save-compare-title"><header><h2 id="save-compare-title" tabindex="-1">${html(t.comparison)}</h2><p>${html(p.mode==='upload'?t.uploadNote:t.restoreNote)}</p>${p.mode!=='file'?`<p class="save-account-email" dir="ltr">${html(p.base.account.email)}</p>`:''}</header>
    <div class="save-comparison-overview"><section><h3>${html(t.localVersion)}</h3>${summary(p.plan.local)}</section><section><h3>${html(incoming)}</h3>${summary(p.plan.incoming)}</section></div>
    ${p.plan.conflicts.length?`<p>${html(t.chooseAll)}</p>`:`<p>${html(t.noConflicts)}</p>`}
-   ${p.plan.conflicts.map((item,i)=>`<fieldset class="save-conflict"><legend>${html(conflictTitle(item))}</legend>${item.domain==='pursuit'?`<p>${html(pursuitText.saveChoice)}</p>`:''}<div class="save-versions">${['local','incoming'].map(side=>`<label class="save-version" data-selected="${model.choices?.[item.id]===side}"><span class="save-choice"><input type="radio" name="save-choice-${i}" data-save-choice="${html(item.id)}" value="${side}"${model.choices?.[item.id]===side?' checked':''}><strong>${html(side==='local'?t.keepLocal:t.keepIncoming)}</strong></span><span class="save-version-body">${previewValue(item,item[side])}</span></label>`).join('')}</div></fieldset>`).join('')}
+   ${p.plan.conflicts.map((item,i)=>`<fieldset class="save-conflict"><legend>${html(conflictTitle(item))}</legend>${item.kind.startsWith('diagnostic-')?`<p>${html(t.diagnosticChoice)}</p>`:''}${item.domain==='pursuit'?`<p>${html(pursuitText.saveChoice)}</p>`:''}<div class="save-versions">${['local','incoming'].map(side=>`<label class="save-version" data-selected="${model.choices?.[item.id]===side}"><span class="save-choice"><input type="radio" name="save-choice-${i}" data-save-choice="${html(item.id)}" value="${side}"${model.choices?.[item.id]===side?' checked':''}><strong>${html(side==='local'?t.keepLocal:t.keepIncoming)}</strong></span><span class="save-version-body">${previewValue(item,item[side])}</span></label>`).join('')}</div></fieldset>`).join('')}
    ${p.mode==='upload'&&p.owner!==p.base.account.id?`<label class="save-adopt"><input type="checkbox" data-save-copy${model.allowCopy?' checked':''}> <span>${html(p.owner?t.copyOther:t.copyGuest)}</span></label>`:''}
    <div class="dialog-actions"><button class="primary" type="button" data-save-action="confirm"${!ready()?' disabled':''}>${html(p.mode==='upload'?t.upload:t.apply)}</button><button class="text-button" type="button" data-save-action="cancel">${html(t.cancel)}</button></div></section>`;
  }

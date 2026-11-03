@@ -1071,7 +1071,13 @@
       "SAVE_OWNER_INVALID": "No se pudo leer la cuenta vinculada al progreso de este navegador. Descarga una copia de seguridad antes de restaurarlo.",
       "SAVE_LOCK_REQUIRED": "Este navegador no puede coordinar una restauración segura. Descarga una copia de seguridad y restáurala en un navegador actualizado.",
       "RATE_LIMITED": "Demasiadas solicitudes. Espera un momento antes de volver a intentarlo."
-    }
+    },
+    "diagnosticTitle": "Práctica de diagnóstico",
+    "diagnosticDrafts": "Borradores de diagnóstico",
+    "diagnosticHints": "Nivel de pistas de este conjunto",
+    "diagnosticSubmitted": "Hay una entrega guardada para este borrador. Se volverá a comprobar después de restaurarla.",
+    "diagnosticPending": "Este borrador aún no se ha enviado para su comprobación.",
+    "diagnosticChoice": "Conserva el borrador elegido junto con su entrega y su historial de pistas. Los distintos conjuntos de entradas se seleccionan como un todo."
   },
   "guideStudio": {
     "tag": "Primer puerto estelar · Puesto de señales",
@@ -1284,5 +1290,115 @@
     "ready": "Ejecuta este programa para ver qué salida produce realmente.",
     "error": "El programa no terminó de ejecutarse",
     "noOutput": "El programa se ejecutó sin producir ninguna salida."
+  },
+  "diagnostic": {
+    "tag": "Prueba un programa antes de empezar",
+    "title": "Encuentra tu punto de partida.",
+    "intro": "Elige un área y escribe un programa que funcione con distintas entradas. Puedes repasar una lección o pasar directamente a practicar cuando lo necesites; no hay un orden obligatorio.",
+    "map": "Explorar el mapa de conceptos",
+    "guide": "Volver a los fundamentos de programación",
+    "areas": "Elige un área para comprobar",
+    "pending": "Sin comprobar",
+    "checking": "Comprobando…",
+    "reviewing": "Volviendo a comprobar los programas guardados…",
+    "passed": "Superado con este conjunto",
+    "needsWork": "Conviene practicar",
+    "checked": "{number} áreas comprobadas",
+    "passedCount": "Superado con este conjunto de entradas: {number} / 9",
+    "allPassed": "Este programa ha superado todas las entradas del conjunto actual.",
+    "partial": "Algunas entradas aún necesitan ajustes. Elige una para ver la diferencia.",
+    "ready": "Escribe un programa y ejecútalo con este conjunto de entradas.",
+    "editor": "Tu programa",
+    "run": "Comprobar este programa",
+    "newSet": "Probar otro conjunto de entradas",
+    "newSetNote": "Se conserva tu código, se cambian las entradas y se borran las comprobaciones y el registro de pistas de este conjunto.",
+    "hint": "Dame una orientación",
+    "moreHint": "Mostrar un esquema de código",
+    "hintLabel": "Pista",
+    "hintFill": "Sustituye los huecos por expresiones adecuadas. El esquema no sustituye tu borrador.",
+    "withHints": "Se han consultado pistas para este conjunto",
+    "withoutHints": "No se han consultado pistas para este conjunto",
+    "learn": "Aprender esta parte",
+    "independent": "Ir directamente a una tarea independiente",
+    "input": "Entradas proporcionadas por la tarea",
+    "expected": "Salida esperada",
+    "actual": "Salida real del programa",
+    "noOutput": "Sin salida",
+    "notRun": "Aún no se ha ejecutado",
+    "caseLabel": "Caso de entrada {number}",
+    "cases": "Explorar cada entrada",
+    "caseResult": "{passed} / {total} casos superados",
+    "criteria": "Métodos utilizados",
+    "source": "De dónde procede esta salida",
+    "hostOutput": "Esta salida procede de la llamada a función que añade la tarea.",
+    "frame": "Elige una salida",
+    "position": "Posición en el código fuente",
+    "scope": "Estas comprobaciones describen el comportamiento de este programa con este conjunto de entradas. No modifican tus calificaciones del curso ni tus registros de finalización.",
+    "next": "También puedes comprobar: {topic}",
+    "nextAction": "Explorar esta área",
+    "recommend": "¿Necesitas una base para esto? Empieza por «{lesson}».",
+    "saveFailed": "No se ha podido guardar este cambio. Copia tu código antes de salir de la página.",
+    "badSave": "No se puede leer este registro de diagnóstico en este momento. Descarga sus datos de recuperación sin procesar desde «Progreso y copias de seguridad» antes de decidir si quieres crear uno nuevo.",
+    "resetBad": "Iniciar un nuevo diagnóstico",
+    "confirmBad": "Haz clic de nuevo para sustituir este registro de diagnóstico",
+    "saveTitle": "Progreso y copias de seguridad",
+    "syncRequired": "Esta llamada a combine debe devolver un valor directamente. Un return normal y return ! utilizan mecanismos distintos.",
+    "replyRequired": "Esta llamada a boost debe responder con su resultado mediante return !.",
+    "tasks": {
+      "names": {
+        "title": "Nombres y aritmética",
+        "goal": "Suma las entradas cargo y reserve y muestra su suma. Tu programa debe funcionar cuando cambien las entradas.",
+        "context": "La tarea proporciona cargo y reserve. Escribe el cálculo y la salida.",
+        "hint": "Usa los nombres de las entradas en lugar de una respuesta fija para un solo caso. Puedes llamar a .log() sobre una suma entre paréntesis."
+      },
+      "branch": {
+        "title": "Elegir una rama",
+        "goal": "Muestra 1 cuando fuel sea mayor que threshold. Muestra 2 cuando sea igual o menor.",
+        "context": "La tarea proporciona fuel y threshold, incluidos valores situados justo en el límite.",
+        "hint": "Compara los valores y usa if para seleccionar una rama. ¿Qué rama corresponde cuando son iguales?"
+      },
+      "repeat": {
+        "title": "Una lista que cambia",
+        "goal": "Recorre docks en orden y muestra cada elemento más offset. Una lista vacía no produce salida.",
+        "context": "La tarea proporciona una lista llamada docks y un número llamado offset. Los elementos pueden repetirse o ser negativos.",
+        "hint": "Usa for para leer cada elemento y súmale offset. No fijes el número de salidas."
+      },
+      "counter": {
+        "title": "Un contador que cambia",
+        "goal": "Usa while para mostrar un contador que empiece en 0, aumente de 1 en 1 y se detenga antes de limit. Cuando limit sea 0, no muestres nada.",
+        "context": "La tarea proporciona limit. Crea y actualiza tu propio contador en el programa.",
+        "hint": "Elige un valor inicial para el contador, compáralo con limit e increméntalo al final de cada iteración."
+      },
+      "function": {
+        "title": "Valores de retorno de funciones",
+        "goal": "Define combine como una función síncrona con dos parámetros que devuelva su suma. La tarea la llama y muestra el valor devuelto.",
+        "context": "La llamada es combine(firstNumber, secondNumber). Puedes elegir los nombres de los parámetros; no necesitas añadir .log().",
+        "hint": "Devuelve la suma con un return normal. La tarea utiliza el valor devuelto, no una impresión adicional dentro de la función."
+      },
+      "reply": {
+        "title": "Respuestas de funciones",
+        "goal": "Define boost con dos parámetros y responde con su suma mediante return !. La tarea espera la respuesta y la muestra.",
+        "context": "La llamada es boost(firstNumber, secondNumber). Puedes elegir los nombres de los parámetros; no necesitas añadir .log().",
+        "hint": "Una respuesta explícita de fn utiliza return !. Esta área comprueba el mecanismo de respuesta en lugar de un retorno síncrono normal."
+      },
+      "message": {
+        "title": "Recibir un mensaje",
+        "goal": "Recibe un número de mailbox, súmale 1 y muestra el resultado.",
+        "context": "La tarea crea mailbox y envía un mensaje desde otra rama paralela. Obtén el valor recibiendo el mensaje.",
+        "hint": "Usa ? para recibir de mailbox, asigna un nombre al valor recibido y calcula la salida."
+      },
+      "join": {
+        "title": "Esperar dos mensajes",
+        "goal": "Recibe conjuntamente los mensajes de west y east y muestra su suma.",
+        "context": "La tarea envía dos informes numéricos desde ramas separadas. Ambos valores deben contribuir al resultado.",
+        "hint": "Pon las dos condiciones de recepción en una misma expresión de recepción con ?, unidas por &, y suma los valores en su cuerpo."
+      },
+      "coordination": {
+        "title": "Coordinar un despacho",
+        "goal": "Recibe conjuntamente west y east y llama a una función para sumarlos. Añade reserve si la suma es mayor que threshold; en caso contrario, muestra la suma sin cambios.",
+        "context": "La tarea proporciona threshold, reserve y dos canales. Los informes numéricos llegan como mensajes; calcula su suma mediante una función.",
+        "hint": "Define primero la función total y espera a los dos mensajes. Usa la misma suma en la condición y en la salida final."
+      }
+    }
   }
 }
