@@ -276,7 +276,7 @@ function renderDialog(){
   const c=copy(),phase=state.phase;let title='',body='';
   if(phase==='rewrite'){
    $('learning-page').dataset.stage=phase;$('learning-content').innerHTML=`<nav class="page-trail"><a data-action="open-play" href="${routeUrl(location.href,lang,'play').pathname}">${escape(messages.vault.arcade)}</a><span aria-hidden="true">/</span><span>${escape(c.title)}</span></nav><div id="rewrite-page"></div>`;
-   guidePage=mountRewrite($('rewrite-page'),{id:lesson().id,text:messages.rewrite,ui:messages.ui,sceneText:messages.lessonScene,jumpText:messages.jump,reduced,getSource:()=>state.rewriteDraft,onChange:value=>{state.rewriteDraft=value;return save();},onIndependent:()=>{move('independent');$('program-editor')?.focus();}});return;
+   guidePage=mountRewrite($('rewrite-page'),{id:lesson().id,text:messages.rewrite,ui:messages.ui,sceneText:messages.lessonScene,assessmentText:messages.assessment,hintText:messages.diagnosticFeedback,jumpText:messages.jump,reduced,getSource:()=>state.rewriteDraft,onChange:value=>{state.rewriteDraft=value;return save();},onIndependent:()=>{move('independent');$('program-editor')?.focus();}});return;
   }
   if(phase==='heist'){
    $('learning-page').dataset.stage=phase;
