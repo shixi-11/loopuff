@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { chaseRoles, chasePuzzle, newChase, restoreChase, inspectChase, submitChase, advanceChase } from '../src/chase.js';
 import { locales } from '../src/course.js';
 import { routeUrl, languageUrl, parseRoute } from '../src/routing.js';
+import {run} from '../src/runner.js';
 const code = moves => moves.map(n => `${n}.log()`).join(';');
 
 // Breadth-first exploration finds a route rather than assuming the authored
@@ -80,6 +81,13 @@ test('invalid or oversized plans never move an actor, even after an early winnin
   assert.throws(()=>chasePuzzle(3));
   const puzzle=chasePuzzle(1);puzzle.blocks.push(18);
   assert.deepEqual(chasePuzzle(1).blocks,[3,7,11]);
+});
+
+test('waiting plans cannot move, win or advance any short chase despite otherwise winning signals',()=>{
+ for(const role of chaseRoles)for(let stage=0;stage<3;stage++){
+  const plan=solutions(role,stage)[0],source=code(plan)+'; let never; ?(x <- never) {x.log()}';assert.ok(plan.length>0);assert.equal(inspectChase(role,stage,code(plan)).ok,true);const executed=run(source);assert.equal(executed.waiting,1);assert.deepEqual(executed.logs,plan.map(String));
+  const state=newChase();state.role=role;state.work[role].stage=stage;const report=submitChase(state,source);assert.equal(report.ok,false,role+'/'+stage);assert.equal(report.code,'waiting');assert.deepEqual(report.logs,executed.logs);assert.deepEqual(report.frames,[]);assert.deepEqual(state.work[role].cleared,[]);assert.equal(advanceChase(state),false);assert.equal(state.work[role].stage,stage);assert.equal(state.work[role].drafts[stage],source);
+ }
 });
 test('versioned role saves preserve empty drafts, invalidate edited wins and reject stage skips',()=>{
   let state=newChase();const route=solutions('police',0)[0];

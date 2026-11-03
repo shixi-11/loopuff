@@ -20,6 +20,7 @@ export function inspectChase(role, stage, source) {
     return { ok:false, code:error.code, logs:[], frames:[] };
   }
   const logs = result.logs;
+  if(result.waiting)return {ok:false,code:'waiting',logs,frames:[]};
   if (!logs.length || logs.length > p.maxSignals || logs.some(n => !/^[1-3]$/.test(n))) {
     return { ok:false, code:'signals', logs, frames:[] };
   }
