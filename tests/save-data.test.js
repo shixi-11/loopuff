@@ -6,9 +6,9 @@ const storage=()=>{const values=new Map();return {values,getItem:key=>values.get
 const lockManager=()=>{let tail=Promise.resolve();return {request(name,options,operation){const result=tail.then(operation);tail=result.catch(()=>{});return result;}};};
 const access=store=>createSaveAccess(store,{locks:lockManager()});
 const snapshot=draft=>{const result=emptySave();result.data.course={state:{lesson:0,phase:'independent',draft,assessedSource:null}};return result;};
-test('capture reads five game domains and leaves absent domains absent',()=>{
+test('capture reads six game domains and leaves absent domains absent',()=>{
  const store=storage();store.setItem('account-form','secret');store.setItem('other-site','private');store.setItem(saveKeys.course,JSON.stringify(snapshot('').data.course));
- const value=captureSave(store);assert.deepEqual(value.snapshot,snapshot(''));assert.equal(Object.keys(value.baseline).length,6);
+ const value=captureSave(store);assert.deepEqual(value.snapshot,snapshot(''));assert.equal(Object.keys(value.baseline).length,7);
  assert.equal(store.values.size,3);assert.ok(!JSON.stringify(value).includes('secret'));assert.ok(!JSON.stringify(value).includes('private'));
 });
 test('applying a save verifies its preview baseline, binds ownership and removes the completed journal',async()=>{

@@ -12,6 +12,8 @@ Lee código, predice el resultado, modifica el programa y resuelve problemas nue
 
 [Despacho del puerto estelar](https://shixilin.com/games/loopuff/es/play/dispatch/): Dirige la carga con condiciones, bucles, funciones y mensajes que cooperan. Cada ronda nueva trae nuevos datos de despacho.
 
+[Infiltración en el banco](https://shixilin.com/games/loopuff/es/play/heist/): Escribe una estrategia que interprete a la patrulla y saque el maletín. Cada decisión cambia una partida continua.
+
 ## Código actual
 
 Trece misiones abarcan los fundamentos de programación, las condiciones, los bucles, las funciones y las respuestas en Tolang, y después los mensajes y la recepción conjunta. Cada misión incluye actividades de predicción, explicación y modificación, además de una tarea independiente; las cuatro misiones originales también conservan sus ejercicios de vuelo. El curso y la interfaz están disponibles en 11 idiomas. Los programas se ejecutan localmente en un intérprete didáctico con límites de funcionamiento y ejecución, no en el compilador completo de Tolang ni en TVM. Las tareas independientes comprueban la salida real y el uso de los conceptos solicitados que contribuyen a producirla; la velocidad al escribir no afecta a las calificaciones.

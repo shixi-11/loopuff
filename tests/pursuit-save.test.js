@@ -10,12 +10,12 @@ const memory=()=>{const map=new Map();return {getItem:k=>map.get(k)??null,setIte
 const locks=()=>{let tail=Promise.resolve();return {request(_name,_opts,operation){const result=tail.then(operation);tail=result.catch(()=>{});return result;}};};
 const simulate=(s,ms,frame=100)=>{for(let n=0;n<ms&&s.status==='running';n+=frame)advancePursuit(s,Math.min(frame,ms-n));};
 const policy='if obstacle < 4 then { 3.log() } else { if energy > 35 then { 2.log() } else { 1.log() } }';
-test('fixed legacy v1 files migrate to five-domain v2 without changing four old domains',()=>{
+test('fixed legacy v1 files migrate to six-domain v3 without changing four old domains',()=>{
  const raw='{"format":"loopuff-save","version":1,"data":{"course":{"lang":"zh","state":{"lesson":0,"phase":"independent","draft":"","assessedSource":null,"completed":["signal"]}},"vault":null,"chase":null,"dispatch":null}}';
- const legacy=JSON.parse(raw),parsed=parseSave(raw);assert.equal(parsed.version,2);assert.equal(parsed.data.pursuit,null);
+ const legacy=JSON.parse(raw),parsed=parseSave(raw);assert.equal(parsed.version,3);assert.equal(parsed.data.pursuit,null);
  for(const key of Object.keys(legacy.data))assert.deepEqual(parsed.data[key],legacy.data[key]);
  assert.throws(()=>normalizeSave({...legacy,data:{...legacy.data,pursuit:null}}));
- const missing=emptySave();delete missing.data.pursuit;assert.throws(()=>normalizeSave(missing));assert.throws(()=>normalizeSave({...emptySave(),version:3}));
+ const missing=emptySave();delete missing.data.pursuit;assert.throws(()=>normalizeSave(missing));assert.throws(()=>normalizeSave({...emptySave(),version:4}));
 });
 test('a running pursuit restores paused, retains its fractional time and queue, and resumes identically',()=>{
  const s=newPursuit(8);deployPursuit(s,policy);startPursuit(s);simulate(s,60123,1000/60);
@@ -32,12 +32,12 @@ test('pursuit merge chooses a whole world, never splicing clocks, roads or queue
  for(const side of ['local','incoming'])assert.deepEqual(resolveMerge(plan,{[plan.conflicts[0].id]:side}).data.pursuit,side==='local'?a.data.pursuit:b.data.pursuit);
  const old={format:'loopuff-save',version:1,data:{course:null,vault:null,chase:null,dispatch:null}};assert.deepEqual(resolveMerge(createMergePlan(a,old)).data.pursuit,a.data.pursuit);
 });
-test('old journals leave pursuit alone while six-entry recovery rolls back pursuit and ownership',async()=>{
+test('old journals leave pursuit alone while seven-entry recovery rolls back pursuit and ownership',async()=>{
  const store=memory(),original=JSON.stringify(savePursuit(newPursuit(7)));store.setItem(saveKeys.pursuit,original);store.setItem(saveKeys.course,'after');
  store.setItem(journalKey,JSON.stringify({version:1,attempted:1,entries:[{key:saveKeys.course,before:null,after:'after'}]}));
  assert.equal((await createSaveAccess(store,{locks:locks()}).recover()).status,'recovered');assert.equal(store.getItem(saveKeys.pursuit),original);
  const entries=[...Object.values(saveKeys),ownerKey].map((key,i)=>({key,before:i===4?original:null,after:`new-${i}`}));for(const e of entries)store.setItem(e.key,e.after);
- store.setItem(journalKey,JSON.stringify({version:1,attempted:6,entries}));assert.equal((await createSaveAccess(store,{locks:locks()}).recover()).status,'recovered');
+ store.setItem(journalKey,JSON.stringify({version:1,attempted:7,entries}));assert.equal((await createSaveAccess(store,{locks:locks()}).recover()).status,'recovered');
  assert.equal(store.getItem(saveKeys.pursuit),original);assert.equal(store.getItem(ownerKey),null);
  const baseline=readBaseline(store);store.setItem(saveKeys.pursuit,JSON.stringify(savePursuit(newPursuit(9))));assert.equal(baselineMatches(store,baseline),false);
 });

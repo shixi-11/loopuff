@@ -11,7 +11,7 @@ export function captureSave(storage){
  for(const [domain,key] of Object.entries(saveKeys)){
   try{data[domain]=baseline[key]===null?null:JSON.parse(baseline[key]);}catch{fail('SAVE_INVALID');}
  }
- return {baseline,snapshot:supportedSave({format:'loopuff-save',version:2,data})};
+ return {baseline,snapshot:supportedSave({format:'loopuff-save',version:3,data})};
 }
 export function readOwner(storage){
  const raw=storage.getItem(ownerKey);if(raw===null)return null;

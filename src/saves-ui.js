@@ -17,7 +17,7 @@ function download(value,filename){
  const url=URL.createObjectURL(new Blob([JSON.stringify(value,null,2)],{type:'application/json'}));
  const link=document.createElement('a');link.href=url;link.download=filename;document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
-export function mountSaves(root,{text:t,topics,lessons,phases,account,urls,locale,name,pursuitText,diagnosticText,model={}}){
+export function mountSaves(root,{text:t,topics,lessons,phases,account,urls,locale,name,pursuitText,heistText,diagnosticText,model={}}){
  let disposed=false,busy=false,local=null,localError=null,recovery=null,focusComparison=false;
  setSaveAccount(model,account.user?.id??null);
  const access=progressStorage(),cloud=createCloudProgress({url:location.href,getAccount:()=>account.user});
@@ -33,11 +33,15 @@ export function mountSaves(root,{text:t,topics,lessons,phases,account,urls,local
    ['vault',`${d.vault?.stamps.length??0} / 3`],
    ['chase',`${(d.chase?.work.police.cleared.length??0)+(d.chase?.work.thief.cleared.length??0)} / 6`],
    ['dispatch',`${d.dispatch?.stamps.length??0} / 4`],
-   ['pursuit',d.pursuit?`${topics[d.pursuit.current.role]} · ${Math.floor(d.pursuit.current.activeMs/60000)}:${String(Math.floor(d.pursuit.current.activeMs/1000)%60).padStart(2,'0')}`:'']
+   ['pursuit',d.pursuit?`${topics[d.pursuit.current.role]} · ${Math.floor(d.pursuit.current.activeMs/60000)}:${String(Math.floor(d.pursuit.current.activeMs/1000)%60).padStart(2,'0')}`:''],
+   ['heist',d.heist?`${Math.floor(d.heist.current.activeMs/60000)}:${String(Math.floor(d.heist.current.activeMs/1000)%60).padStart(2,'0')} · #${d.heist.current.seed}`:'']
   ].map(([domain,count])=>`<div><dt>${html(domainName(domain))}</dt><dd>${d[domain]===null?html(t.noProgress):`<bdi dir="ltr">${count}</bdi>${domain==='course'&&d.course?.state?.diagnostic?`<small>${html(t.diagnosticDrafts)}: <bdi dir="ltr">${diagnosticIds.filter(id=>d.course.state.diagnostic.drafts[id].trim()).length} / ${diagnosticIds.length}</bdi></small>`:''}`}</dd></div>`).join('')}</dl>`;
  }
  function diagnosticTask(value){return code(value.draft||t.emptyDraft)+`<p>${html(t.diagnosticHints)}: <bdi dir="ltr">${value.hint} / 2</bdi></p><p>${html(value.submitted===null?t.diagnosticPending:t.diagnosticSubmitted)}</p>`;}
  function previewValue(item,value){
+  if(item.domain==='heist'){
+   const s=value.current;return `<p>${html(t.currentRun)}: <bdi dir="ltr">${Math.floor(s.activeMs/60000)}:${String(Math.floor(s.activeMs/1000)%60).padStart(2,'0')} · #${s.seed}</bdi></p><p>${html(s.status==='finished'?heistText[s.outcome]:heistText.phases[!s.key?0:!s.door?1:!s.bag?2:3])} · ${html(heistText.history)}: <bdi dir="ltr">${value.history.length}</bdi></p><p>${html(heistText.positionNow)}: <bdi dir="ltr">${s.x/1000} m</bdi> · ${html(heistText.energy)}: <bdi dir="ltr">${Math.floor(s.energy/1000)}</bdi> · ${html(heistText.alarm)}: <bdi dir="ltr">${Math.floor(s.alarm/1000)}</bdi></p><h4>${html(heistText.editor)}</h4>${code(s.draft||t.emptyDraft)}${s.strategy!==s.draft?`<p>${html(heistText.notDeployed)}</p><h4>${html(heistText.deployed)}</h4>${code(s.strategy||t.emptyDraft)}`:''}`;
+  }
   if(item.kind==='diagnostic-task')return diagnosticTask(value);
   if(item.kind==='diagnostic-run')return diagnosticIds.map(id=>{
    const samples=diagnosticPuzzle(value.seed,id).cases,inputs=[samples[0],samples.at(-1)].map(sample=>sample.inputCode||sample.prefix.trim()).join('\n…\n');
@@ -71,7 +75,7 @@ export function mountSaves(root,{text:t,topics,lessons,phases,account,urls,local
   return `<section class="save-comparison" aria-labelledby="save-compare-title"><header><h2 id="save-compare-title" tabindex="-1">${html(t.comparison)}</h2><p>${html(p.mode==='upload'?t.uploadNote:t.restoreNote)}</p>${p.mode!=='file'?`<p class="save-account-email" dir="ltr">${html(p.base.account.email)}</p>`:''}</header>
    <div class="save-comparison-overview"><section><h3>${html(t.localVersion)}</h3>${summary(p.plan.local)}</section><section><h3>${html(incoming)}</h3>${summary(p.plan.incoming)}</section></div>
    ${p.plan.conflicts.length?`<p>${html(t.chooseAll)}</p>`:`<p>${html(t.noConflicts)}</p>`}
-   ${p.plan.conflicts.map((item,i)=>`<fieldset class="save-conflict"><legend>${html(conflictTitle(item))}</legend>${item.kind.startsWith('diagnostic-')?`<p>${html(t.diagnosticChoice)}</p>`:''}${item.domain==='pursuit'?`<p>${html(pursuitText.saveChoice)}</p>`:''}<div class="save-versions">${['local','incoming'].map(side=>`<label class="save-version" data-selected="${model.choices?.[item.id]===side}"><span class="save-choice"><input type="radio" name="save-choice-${i}" data-save-choice="${html(item.id)}" value="${side}"${model.choices?.[item.id]===side?' checked':''}><strong>${html(side==='local'?t.keepLocal:t.keepIncoming)}</strong></span><span class="save-version-body">${previewValue(item,item[side])}</span></label>`).join('')}</div></fieldset>`).join('')}
+   ${p.plan.conflicts.map((item,i)=>`<fieldset class="save-conflict"><legend>${html(conflictTitle(item))}</legend>${item.kind.startsWith('diagnostic-')?`<p>${html(t.diagnosticChoice)}</p>`:''}${item.domain==='pursuit'?`<p>${html(pursuitText.saveChoice)}</p>`:''}${item.domain==='heist'?`<p>${html(heistText.saveChoice)}</p>`:''}<div class="save-versions">${['local','incoming'].map(side=>`<label class="save-version" data-selected="${model.choices?.[item.id]===side}"><span class="save-choice"><input type="radio" name="save-choice-${i}" data-save-choice="${html(item.id)}" value="${side}"${model.choices?.[item.id]===side?' checked':''}><strong>${html(side==='local'?t.keepLocal:t.keepIncoming)}</strong></span><span class="save-version-body">${previewValue(item,item[side])}</span></label>`).join('')}</div></fieldset>`).join('')}
    ${p.mode==='upload'&&p.owner!==p.base.account.id?`<label class="save-adopt"><input type="checkbox" data-save-copy${model.allowCopy?' checked':''}> <span>${html(p.owner?t.copyOther:t.copyGuest)}</span></label>`:''}
    <div class="dialog-actions"><button class="primary" type="button" data-save-action="confirm"${!ready()?' disabled':''}>${html(p.mode==='upload'?t.upload:t.apply)}</button><button class="text-button" type="button" data-save-action="cancel">${html(t.cancel)}</button></div></section>`;
  }

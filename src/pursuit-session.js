@@ -1,5 +1,6 @@
 import {newPursuit,pausePursuit,savePursuit,restorePursuit} from './pursuit.js';
 import {progressStorage} from './save-data.js';
+import {createSessionSaveQueue} from './session-save-queue.js';
 export const pursuitKey='loopuff-pursuit-v1';
 const fresh=(role='police',difficulty='standard',draft='1.log()')=>{const s=newPursuit(crypto.getRandomValues(new Uint32Array(1))[0],role,difficulty,crypto.randomUUID());s.draft=draft;return s;};
 export function loadPursuit(storage=localStorage){const raw=storage.getItem(pursuitKey);return raw===null?null:restorePursuit(JSON.parse(raw));}
@@ -8,23 +9,13 @@ export function loadPursuit(storage=localStorage){const raw=storage.getItem(purs
 export function createPursuitSession({storage=localStorage,access,createWorld=fresh}={}){
  let loaded=null,badSave=false;try{loaded=loadPursuit(storage);}catch{badSave=true;}
  const listeners=new Set(),session={world:loaded?.current||createWorld(),history:loaded?.history||[],badSave,saveFailed:false,restored:!!loaded};
- let pending=null,queued=false;
  const notify=()=>{for(const listener of listeners)listener(session);};
  session.subscribe=listener=>{listeners.add(listener);return()=>listeners.delete(listener);};
- session.persist=()=>{
-  if(session.badSave)return Promise.resolve();queued=true;if(pending)return pending;
-  pending=(async()=>{
-   while(queued){
-    queued=false;
-    try{
+ const enqueue=createSessionSaveQueue({write:async()=>{
      const raw=JSON.stringify(savePursuit(session.world,session.history));
      await (access||progressStorage()).write(()=>storage.setItem(pursuitKey,raw));session.saveFailed=false;
-    }catch{session.saveFailed=true;queued=false;pausePursuit(session.world);}
-    notify();
-   }
-  })().finally(()=>{pending=null;});
-  return pending;
- };
+ },failed:()=>{session.saveFailed=true;pausePursuit(session.world);},settled:notify});
+ session.persist=()=>session.badSave?Promise.resolve(false):enqueue();
  session.replace=(role,difficulty,draft)=>{session.world=createWorld(role,difficulty,draft);session.badSave=false;session.saveFailed=false;session.restored=false;notify();return session.world;};
  session.finish=()=>{
   const s=session.world;if(s.status!=='finished'||session.history.some(h=>h.id===s.id))return false;

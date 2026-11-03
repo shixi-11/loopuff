@@ -7,6 +7,7 @@ import { mountHomePlane } from './home-plane.js';
 import { mountVault, loadVault } from './vault-ui.js';
 import { mountChase, loadChase } from './chase-ui.js';
 import { mountPursuit } from './pursuit-ui.js';
+import { mountHeist } from './heist-ui.js';
 import { mountDispatch, loadDispatch } from './dispatch-ui.js';
 import { rememberLesson, lessonWork, explorationProgress, readSession } from './progress.js';
 import { arcadeArt } from './arcade-art.js';
@@ -33,10 +34,10 @@ let saved={};try{saved=readSession(localStorage.getItem(storageKey));}catch{}
 const validLocale=id=>locales.some(([key])=>key===id);
 let lang=selectedLocale(location.href,saved.lang,navigator.languages||[navigator.language]);
 if(!validLocale(lang))lang='en';
-let programScene=null,jumpLab=null,vaultGame=null,chaseGame=null,pursuitGame=null,dispatchGame=null,accountPage=null,savesPage=null,guidePage=null;
+let programScene=null,jumpLab=null,vaultGame=null,chaseGame=null,pursuitGame=null,heistGame=null,dispatchGame=null,accountPage=null,savesPage=null,guidePage=null;
 const savesModel={},diagnosticModel={};
 const guideModel={selected:saved.state?.guideSelected,drafts:readGuideWork(saved.state?.guideWork)};
-const pursuitModel={};
+const pursuitModel={},heistModel={};
 let guideView='guide';
 let chaseLab=new URL(location.href).searchParams.get('mode')==='lab';
 const account=createAccountClient({url:location.href,onChange:()=>{if(messages){updateAccountEntry();accountPage?.refresh();savesPage?.refresh();}}});
@@ -45,7 +46,7 @@ const initialCatalog=document.getElementById('initial-catalog');
 const catalogs=new Map(initialCatalog?[[initialCatalog.dataset.locale,JSON.parse(initialCatalog.textContent)]]:[]);
 let state={phase:'welcome',lesson:0,fragment:0,typed:'',draft:'',assessedSource:null,grades:{},score:0,errors:0,keys:0,completed:[],...saved.state};
 if(!state.grades||typeof state.grades!=='object'||Array.isArray(state.grades))state.grades={};
-if(!['welcome','levels','brief','typing','predict','output','explain','remix','independent','result','complete','guide','pause','play','vault','chase','dispatch','account','saves'].includes(state.phase)) state.phase='welcome';
+if(!['welcome','levels','brief','typing','predict','output','explain','remix','independent','result','complete','guide','pause','play','vault','chase','dispatch','heist','account','saves'].includes(state.phase)) state.phase='welcome';
 if(!Number.isInteger(state.lesson)||state.lesson<0||state.lesson>=course.length)state.lesson=0;
 state.completed=[...new Set(Array.isArray(state.completed)?state.completed.filter(id=>course.some(l=>l.id===id)):[])];
 rememberLesson(state,course[state.lesson].id);
@@ -58,7 +59,7 @@ function readRoute(){
     const index=course.findIndex(item=>item.id===route.lessonId);
     if(previousLesson!==index){rememberLesson(state,course[previousLesson].id);state.lesson=index;Object.assign(state,lessonWork(state,course[index].id)||{phase:'brief',fragment:0,typed:'',draft:'',assessedSource:null,score:0,errors:0,keys:0});}
   }
-  if(['play','vault','chase','dispatch','account','saves'].includes(route?.view))state.phase=route.view;
+  if(['play','vault','chase','dispatch','heist','account','saves'].includes(route?.view))state.phase=route.view;
   else if(route?.view==='result')state.phase='result';
   else if(route?.view==='levels'){state.phase='play';const target=routeUrl(location.href,lang,'play');target.hash='missions';history.replaceState(null,'',target);}
   else if(['guide','compare','map','check'].includes(route?.view)){if(!['guide','welcome','pause'].includes(state.phase))state.resumePhase=state.phase;state.phase='guide';guideView=route.view;}
@@ -66,7 +67,7 @@ function readRoute(){
     if(previousLesson!==state.lesson){if(state.phase==='result')state.phase='independent';}
     else if(state.phase==='result')state.phase='independent';
     else if(state.phase==='pause')state.phase=state.previousPhase||'brief';
-    else if(['welcome','levels','guide','play','vault','chase','dispatch','account','saves'].includes(state.phase))Object.assign(state,lessonWork(state,course[state.lesson].id)||{phase:'brief'});
+    else if(['welcome','levels','guide','play','vault','chase','dispatch','heist','account','saves'].includes(state.phase))Object.assign(state,lessonWork(state,course[state.lesson].id)||{phase:'brief'});
   }else{
     if(!['welcome','pause','guide'].includes(state.phase))state.resumePhase=state.phase;
     state.phase='welcome';
@@ -143,7 +144,7 @@ function applyStatic(){
 }
 function syncRoute(){
   if(state.phase==='pause')return;
-  const view=state.phase==='welcome'?'home':state.phase==='guide'?guideView:['levels','result','play','vault','chase','dispatch','account','saves'].includes(state.phase)?state.phase:'lesson';
+  const view=state.phase==='welcome'?'home':state.phase==='guide'?guideView:['levels','result','play','vault','chase','dispatch','heist','account','saves'].includes(state.phase)?state.phase:'lesson';
   const url=routeUrl(location.href,lang,view,lesson().id);url.hash='';
   if(view==='chase'&&chaseLab)url.searchParams.set('mode','lab');else url.searchParams.delete('mode');
   if(view!=='lesson'||state.phase!=='independent')url.searchParams.delete('practice');
@@ -174,6 +175,7 @@ function render(){
   vaultGame?.dispose();vaultGame=null;
   chaseGame?.dispose();chaseGame=null;
   pursuitGame?.dispose();pursuitGame=null;
+  heistGame?.dispose();heistGame=null;
   accountPage?.dispose();accountPage=null;
   savesPage?.dispose();savesPage=null;
   dispatchGame?.dispose();dispatchGame=null;
@@ -191,7 +193,7 @@ function render(){
   if(typing)renderTyping();else if(phase!=='welcome')renderDialog();
   if(['levels','play'].includes(phase))document.querySelector('.journey-panel')?.insertAdjacentHTML('beforeend',`<a class="journey-backup" data-action="open-saves" href="${routeUrl(location.href,lang,'saves').pathname}">${escape(messages.saves.title)} <span aria-hidden="true">↗</span></a>`);
   const view=parseRoute(location.pathname)?.view||'home';
-  document.title=`${ui('name')} · ${view==='check'?messages.diagnostic.title:view==='map'?messages.learningMap.title:view==='compare'?messages.guideStudio.compareTitle:view==='saves'?messages.saves.title:view==='dispatch'?messages.dispatch.title:view==='chase'?messages.chase.title:view==='account'?messages.account.entry:view==='vault'?messages.vault.title:view==='play'?messages.vault.arcade:view==='result'?messages.assessment.title:view==='levels'?ui('navCourse'):view==='guide'?ui('guide'):view==='lesson'?copy().title:ui('tagline')}`;
+  document.title=`${ui('name')} · ${view==='check'?messages.diagnostic.title:view==='map'?messages.learningMap.title:view==='compare'?messages.guideStudio.compareTitle:view==='saves'?messages.saves.title:view==='heist'?messages.heist.title:view==='dispatch'?messages.dispatch.title:view==='chase'?messages.chase.title:view==='account'?messages.account.entry:view==='vault'?messages.vault.title:view==='play'?messages.vault.arcade:view==='result'?messages.assessment.title:view==='levels'?ui('navCourse'):view==='guide'?ui('guide'):view==='lesson'?copy().title:ui('tagline')}`;
   document.querySelector('link[rel="canonical"]').href=routeUrl('https://shixilin.com/games/loopuff/',lang,view,lesson().id).href;
   let robots=document.querySelector('meta[name="robots"]');
   if(view==='result'){if(!robots){robots=document.createElement('meta');robots.name='robots';document.head.append(robots);}robots.content='noindex,follow';}else robots?.remove();
@@ -248,6 +250,11 @@ function renderDialog(){
     return;
   }
   const c=copy(),phase=state.phase;let title='',body='';
+  if(phase==='heist'){
+   $('learning-page').dataset.stage=phase;
+   $('learning-content').innerHTML=`<nav class="page-trail" aria-label="${escape(ui('navigation'))}"><a data-action="open-play" href="${routeUrl(location.href,lang,'play').pathname}">${escape(messages.vault.arcade)}</a><span aria-hidden="true">/</span><span aria-current="page">${escape(messages.heist.title)}</span></nav><div id="heist-game"></div>`;
+   heistGame=mountHeist($('heist-game'),{text:messages.heist,errors:messages.ui,model:heistModel,saveUrl:routeUrl(location.href,lang,'saves').pathname,saveLabel:messages.saves.title});return;
+  }
   if(phase==='chase'){
     $('learning-page').dataset.stage=phase;
     $('learning-content').innerHTML=`<nav class="page-trail" aria-label="${escape(ui('navigation'))}"><a data-action="home" href="${routeUrl(location.href,lang,'home').pathname}">${escape(ui('navHome'))}</a><span aria-hidden="true">/</span><a data-action="open-play" href="${routeUrl(location.href,lang,'play').pathname}">${escape(messages.vault.arcade)}</a><span aria-hidden="true">/</span><span aria-current="page">${escape(messages.chase.title)}</span></nav><div id="chase-game"></div>`;
@@ -258,7 +265,7 @@ function renderDialog(){
   if(phase==='account'){$('learning-content').innerHTML='<div id="account-page"></div>';accountPage=mountAccount($('account-page'),{client:account,text:messages.account,locale:lang,saveNote:ui('save'),homeUrl:routeUrl(location.href,lang,'home').pathname,savesUrl:routeUrl(location.href,lang,'saves').pathname,saveLabel:messages.saves.title});return;}
   if(phase==='saves'){
    $('learning-page').dataset.stage=phase;$('learning-content').innerHTML='<div id="saves-page"></div>';
-   savesPage=mountSaves($('saves-page'),{text:messages.saves,topics:{course:ui('navCourse'),guide:ui('navGuide'),vault:messages.vault.title,chase:messages.chase.title,dispatch:messages.dispatch.title,pursuit:messages.pursuit.title,police:messages.chase.police,thief:messages.chase.thief,dispatchTasks:messages.dispatch.missions.map(m=>m.title)},pursuitText:messages.pursuit,diagnosticText:messages.diagnostic,lessons:messages.lessons,phases:{brief:ui('mission'),typing:ui('assembled'),predict:ui('predict'),output:ui('output'),explain:ui('explain'),remix:ui('practice'),independent:ui('independent'),result:messages.assessment.title,complete:ui('complete')},account,locale:lang,name:ui('name'),urls:{account:routeUrl(location.href,lang,'account').pathname},model:savesModel});return;
+   savesPage=mountSaves($('saves-page'),{text:messages.saves,topics:{course:ui('navCourse'),guide:ui('navGuide'),vault:messages.vault.title,chase:messages.chase.title,dispatch:messages.dispatch.title,pursuit:messages.pursuit.title,heist:messages.heist.title,police:messages.chase.police,thief:messages.chase.thief,dispatchTasks:messages.dispatch.missions.map(m=>m.title)},pursuitText:messages.pursuit,heistText:messages.heist,diagnosticText:messages.diagnostic,lessons:messages.lessons,phases:{brief:ui('mission'),typing:ui('assembled'),predict:ui('predict'),output:ui('output'),explain:ui('explain'),remix:ui('practice'),independent:ui('independent'),result:messages.assessment.title,complete:ui('complete')},account,locale:lang,name:ui('name'),urls:{account:routeUrl(location.href,lang,'account').pathname},model:savesModel});return;
   }
   if(phase==='dispatch'){
     $('learning-page').dataset.stage=phase;
@@ -278,6 +285,7 @@ function renderDialog(){
       const dispatch=loadDispatch(),d=messages.dispatch;
       document.querySelector('.arcade-games').insertAdjacentHTML('beforeend',`<a class="arcade-game dispatch-entry" data-action="open-dispatch" href="${routeUrl(location.href,lang,'dispatch').pathname}"><div class="dispatch-card-art" aria-hidden="true"><img src="${aircraftUrl}" alt=""></div><div><span class="eyebrow">${escape(d.tag)}</span><h2>${escape(d.title)}</h2><p>${escape(d.entry)}</p><span class="game-record">${escape(d.badges)} <bdi dir="ltr">${dispatch.stamps.length} / 4</bdi></span><strong>${escape(v.enter.replace(/\s*↗$/,''))} ↗</strong></div></a>`);
       document.querySelector('.arcade-page').insertAdjacentHTML('beforeend',arcadeMissions());
+      document.querySelector('.arcade-games').insertAdjacentHTML('beforeend',`<a class="arcade-game heist-entry" data-action="open-heist" href="${routeUrl(location.href,lang,'heist').pathname}"><div class="heist-card-art" aria-hidden="true"><span>01 → 02 → 03 → 04</span><svg viewBox="0 0 240 180"><path d="M25 67 120 21 215 67M38 80h164M40 151h160M30 165h180M56 80v71m43-71v71m43-71v71m43-71v71" fill="none" stroke="currentColor" stroke-width="9"/></svg></div><div><span class="eyebrow">${escape(messages.heist.tag)}</span><h2>${escape(messages.heist.title)}</h2><p>${escape(messages.heist.intro)}</p><strong>${escape(messages.heist.enter)} ↗</strong></div></a>`);
     }
     return;
   }
@@ -408,6 +416,7 @@ document.addEventListener('click',event=>{
   if(action==='open-saves'){move('saves');return;}
   if(action==='open-play'){move('play');return;}
   if(action==='open-dispatch'){move('dispatch');return;}
+  if(action==='open-heist'){move('heist');return;}
   if(action==='open-vault'){move('vault');return;}
   if(action==='open-chase'){chaseLab=false;move('chase');return;}
   if(action==='chase-continuous'||action==='chase-lab'){chaseLab=action==='chase-lab';move('chase');return;}

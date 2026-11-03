@@ -12,6 +12,8 @@ Read code, predict its result, change it, and solve new problems without a templ
 
 [Starport Dispatch](https://shixilin.com/games/loopuff/en/play/dispatch/): Route cargo with conditions, loops, functions and cooperating messages. New rounds bring new dispatch data.
 
+[Bank infiltration](https://shixilin.com/games/loopuff/en/play/heist/): Write a strategy that reads the patrol and brings the case out. Every decision changes a continuous run.
+
 ## Current code
 
 Thirteen missions cover programming foundations, Tolang conditions, loops, functions and replies, then messages and joint receives. Each mission includes prediction, explanation, modification and an independent task; the original four also retain their flight exercises. The course and interface support 11 languages. Programs run locally in a bounded teaching interpreter, not the full Tolang compiler or TVM. Independent tasks check actual output and the requested concepts that contribute to it; typing speed does not affect grades.

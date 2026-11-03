@@ -12,6 +12,8 @@ Code lesen, Ergebnisse vorhersagen, Programme ändern und neue Aufgaben ohne Vor
 
 [Raumhafen-Disposition](https://shixilin.com/games/loopuff/de/play/dispatch/): Leite Fracht mit Bedingungen, Schleifen, Funktionen und zusammenarbeitenden Nachrichten. Neue Runden bringen neue Dispositionsdaten.
 
+[Bank-Infiltration](https://shixilin.com/games/loopuff/de/play/heist/): Schreib eine Strategie, die die Patrouille liest und den Koffer herausbringt. Jede Entscheidung verändert einen fortlaufenden Einsatz.
+
 ## Aktueller Code
 
 Dreizehn Missionen behandeln die Grundlagen der Programmierung sowie Bedingungen, Schleifen, Funktionen und Antworten in Tolang, anschließend Nachrichten und den kombinierten Empfang mehrerer Nachrichten. Jede Mission umfasst Vorhersagen, Erklärungen, Änderungen am Code und eine eigenständig zu lösende Aufgabe; die ursprünglichen vier enthalten weiterhin ihre Flugübungen. Kurs und Benutzeroberfläche unterstützen 11 Sprachen. Programme laufen lokal in einem Lehrinterpreter mit begrenztem Funktionsumfang und festgelegten Ausführungsgrenzen, nicht im vollständigen Tolang-Compiler oder in der TVM. Bei eigenständigen Aufgaben werden die tatsächliche Ausgabe und der Einsatz der geforderten Konzepte geprüft, die zu dieser Ausgabe beitragen; die Tippgeschwindigkeit hat keinen Einfluss auf die Bewertung.

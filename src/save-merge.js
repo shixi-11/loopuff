@@ -126,12 +126,12 @@ function merge(local,incoming,choose){
   }
   return value;
  }
- const mergers={course:mergeCourse,vault:mergeVault,chase:mergeChase,dispatch:mergeDispatch,pursuit:(a,b)=>pick('pursuit',null,'run',a,b)};
+ const mergers={course:mergeCourse,vault:mergeVault,chase:mergeChase,dispatch:mergeDispatch,pursuit:(a,b)=>pick('pursuit',null,'run',a,b),heist:(a,b)=>pick('heist',null,'run',a,b)};
  for(const domain of Object.keys(mergers)){
   const a=local.data[domain],b=incoming.data[domain];
   data[domain]=a===null?clone(b):b===null?clone(a):mergers[domain](a,b);
  }
- return supportedSave({format:'loopuff-save',version:2,data});
+ return supportedSave({format:'loopuff-save',version:3,data});
 }
 export function createMergePlan(local,incoming){
  const left=supportedSave(local),right=supportedSave(incoming),conflicts=[];

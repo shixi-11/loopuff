@@ -20,7 +20,7 @@ export function createProgressStore(db,{now=Date.now}={}){
    // if it somehow obtained a matching revision. Never downgrade GET responses.
    const current=read.get(userId);
    if(current&&current.revision!==expectedRevision)throw new SaveError('SAVE_CONFLICT');
-   if(current){const previous=parseSave(current.snapshot);if(snapshot.version===1&&previous.data.pursuit!==null||previous.data.course?.state?.diagnostic&&!snapshot.data.course?.state?.diagnostic)throw new SaveError('SAVE_VERSION');}
+   if(current){const previous=parseSave(current.snapshot);if(snapshot.version===1&&previous.data.pursuit!==null||snapshot.version<3&&previous.data.heist!==null||previous.data.course?.state?.diagnostic&&!snapshot.data.course?.state?.diagnostic)throw new SaveError('SAVE_VERSION');}
    const row=expectedRevision===0?insert.get(userId,encoded,timestamp):update.get(encoded,timestamp,userId,expectedRevision);
    if(!row)throw new SaveError('SAVE_CONFLICT');
    return {revision:row.revision,updatedAt:row.updatedAt};

@@ -1,8 +1,9 @@
 // Shared, host-independent save contract. No account or credential data belongs here.
 import {normalizePursuit} from './pursuit-format.mjs';
 import {normalizeDiagnostic} from './diagnostic-format.mjs';
+import {normalizeHeist} from './heist-format.mjs';
 export const saveLimit=256*1024;
-export const saveKeys=Object.freeze({course:'loopuff-v1',vault:'loopuff-vault-v1',chase:'loopuff-chase-v1',dispatch:'loopuff-dispatch-v1',pursuit:'loopuff-pursuit-v1'});
+export const saveKeys=Object.freeze({course:'loopuff-v1',vault:'loopuff-vault-v1',chase:'loopuff-chase-v1',dispatch:'loopuff-dispatch-v1',pursuit:'loopuff-pursuit-v1',heist:'loopuff-heist-v1'});
 export class SaveError extends Error{constructor(code='SAVE_INVALID'){super(code);this.code=code;}}
 const fail=()=>{throw new SaveError();};
 const own=(value,key)=>Object.prototype.hasOwnProperty.call(value,key);
@@ -22,7 +23,7 @@ const id=value=>{if(typeof value!=='string'||!/^[a-z][a-z0-9_-]{0,39}$/.test(val
 const dictionary=(value,check)=>{record(value,Object.keys(value||{}));if(Object.keys(value).length>128)fail();return Object.fromEntries(Object.entries(value).map(([key,item])=>[id(key),check(item)]));};
 const ids=value=>[...new Set(array(value,128,id))];
 const stages=value=>[...new Set(array(value,3,n=>integer(n,0,2)))];
-const phases=['welcome','levels','brief','typing','predict','output','explain','remix','independent','result','complete','guide','pause','play','vault','chase','dispatch','account','saves'];
+const phases=['welcome','levels','brief','typing','predict','output','explain','remix','independent','result','complete','guide','pause','play','vault','chase','dispatch','heist','account','saves'];
 const workPhases=['brief','typing','predict','output','explain','remix','independent','result','complete'];
 const workKeys=['phase','fragment','typed','draft','assessedSource','score','errors','keys'];
 function work(value){
@@ -83,11 +84,11 @@ function dispatch(value){
 }
 export function normalizeSave(value){
  record(value,['format','version','data'],['format','version','data']);
- if(value.format!=='loopuff-save'||![1,2].includes(value.version))throw new SaveError('SAVE_VERSION');
- const domains={course,vault,chase,dispatch,pursuit:value=>{try{return normalizePursuit(value);}catch{fail();}}};
- const fields=value.version===1?['course','vault','chase','dispatch']:Object.keys(domains);record(value.data,fields,fields);
- const data=Object.fromEntries(Object.entries(domains).map(([key,check])=>[key,value.version===1&&key==='pursuit'||value.data[key]===null?null:check(value.data[key])]));
- const result={format:'loopuff-save',version:2,data};
+ if(value.format!=='loopuff-save'||![1,2,3].includes(value.version))throw new SaveError('SAVE_VERSION');
+ const domains={course,vault,chase,dispatch,pursuit:value=>{try{return normalizePursuit(value);}catch{fail();}},heist:value=>{try{return normalizeHeist(value);}catch{fail();}}};
+ const fields=Object.keys(domains).slice(0,value.version===1?4:value.version===2?5:6);record(value.data,fields,fields);
+ const data=Object.fromEntries(Object.entries(domains).map(([key,check])=>[key,!fields.includes(key)||value.data[key]===null?null:check(value.data[key])]));
+ const result={format:'loopuff-save',version:3,data};
  if(new TextEncoder().encode(JSON.stringify(result)).length>saveLimit)throw new SaveError('SAVE_TOO_LARGE');
  return result;
 }
@@ -97,4 +98,4 @@ export function parseSave(raw){
  let value;try{value=JSON.parse(raw);}catch{throw new SaveError('SAVE_INVALID');}
  return normalizeSave(value);
 }
-export function emptySave(){return {format:'loopuff-save',version:2,data:{course:null,vault:null,chase:null,dispatch:null,pursuit:null}};}
+export function emptySave(){return {format:'loopuff-save',version:3,data:{course:null,vault:null,chase:null,dispatch:null,pursuit:null,heist:null}};}

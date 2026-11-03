@@ -12,6 +12,8 @@ Học lập trình và Tolang qua trò chơi.
 
 [Điều phối Cảng sao](https://shixilin.com/games/loopuff/vi/play/dispatch/): Định tuyến hàng hóa bằng điều kiện, vòng lặp, hàm và các tin nhắn phối hợp với nhau. Mỗi vòng mới mang đến dữ liệu điều phối mới.
 
+[Đột nhập ngân hàng](https://shixilin.com/games/loopuff/vi/play/heist/): Viết một chiến lược biết quan sát bảo vệ tuần tra và mang chiếc cặp ra ngoài. Mỗi quyết định đều làm thay đổi một lượt chơi diễn ra liên tục.
+
 ## Mã hiện có
 
 Mười ba nhiệm vụ bao quát kiến thức lập trình nền tảng, điều kiện, vòng lặp, hàm và phản hồi trong Tolang, sau đó đến thông điệp và cơ chế nhận kết hợp. Mỗi nhiệm vụ đều có phần dự đoán, giải thích, chỉnh sửa và một bài tập tự làm; bốn nhiệm vụ ban đầu vẫn giữ các bài luyện bay. Khóa học và giao diện hỗ trợ 11 ngôn ngữ. Chương trình chạy cục bộ trong một trình thông dịch phục vụ giảng dạy có giới hạn, không phải trình biên dịch Tolang đầy đủ hay TVM. Các bài tập tự làm kiểm tra đầu ra thực tế và việc vận dụng những khái niệm được yêu cầu để tạo ra đầu ra đó; tốc độ gõ không ảnh hưởng đến điểm số.
