@@ -35,3 +35,9 @@ export function dispatchMissionUrl(input,locale,mission){
  for(const key of ['practice','return','area','mode'])url.searchParams.delete(key);
  url.searchParams.set('mission',mission);return url;
 }
+export function diagnosticAreaUrl(input,locale,area){
+ if(!diagnosticIds.includes(area))throw Error('Unknown diagnostic area');
+ const url=routeUrl(input,locale,'check');url.hash='';
+ for(const key of ['mission','practice','return','mode'])url.searchParams.delete(key);
+ url.searchParams.set('area',area);return url;
+}

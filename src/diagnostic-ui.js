@@ -14,7 +14,7 @@ const outlines={
  message:'?(value <- mailbox) {\n  (___ + 1).log()\n}',join:'?(a <- west & b <- east) {\n  (___ + ___).log()\n}',
  coordination:'sync fn total(a, b) { return ___ };\n?(a <- west & b <- east) {\n  let load = total(___, ___);\n  if load > ___ then {\n    (load + ___).log()\n  } else { load.log() }\n}'
 };
-export function mountDiagnostic(root,{text:t,feedbackText:f,applicationText,applicationTitles,ui,errors,concepts,statuses,lessons,initial,model,urls,onChange=()=>true,reduced={matches:false}}){
+export function mountDiagnostic(root,{text:t,feedbackText:f,applicationText,applicationTitles,ui,errors,concepts,statuses,lessons,initial,model,urls,onChange=()=>true,onSelect=()=>{},reduced={matches:false}}){
  let disposed=false,timer=null,busy=null,caseIndex=0,outputIndex=0,resetArmed=false,saveSerial=0,saveFailed=false;
  if(!model.initialized||model.state!==initial){
   model.initialized=true;model.reports={};model.bad=false;
@@ -102,7 +102,7 @@ export function mountDiagnostic(root,{text:t,feedbackText:f,applicationText,appl
   }
   if(model.bad)return;
   const area=button.dataset.diagnosticArea;
-  if(area){cancel();state().selected=area;outputIndex=0;persist();render();reviewSaved();root.querySelector(`[data-diagnostic-area="${area}"]`).focus({preventScroll:true});return;}
+  if(area&&diagnosticIds.includes(area)){cancel();state().selected=area;onSelect(area);outputIndex=0;persist();render();reviewSaved();root.querySelector(`[data-diagnostic-area="${area}"]`).focus({preventScroll:true});return;}
   if(button.dataset.diagnosticCase!==undefined){caseIndex=Number(button.dataset.diagnosticCase);model.caseSelection[id()]=caseIndex;outputIndex=0;paint();root.querySelector(`[data-diagnostic-case="${caseIndex}"]`).focus({preventScroll:true});return;}
   if(button.dataset.diagnosticOutput!==undefined){outputIndex=Number(button.dataset.diagnosticOutput);paint();const details=root.querySelector('.diagnostic-source');if(details)details.open=true;root.querySelector(`[data-diagnostic-output="${outputIndex}"]`)?.focus({preventScroll:true});return;}
   if(button.dataset.diagnosticAction==='hint'){requestDiagnosticHint(state(),id());model.hintsOpen[id()]=true;persist();root.querySelector('[data-diagnostic-hints]').innerHTML=hints();root.querySelector('[data-diagnostic-hints-status]').textContent=t.withHints;const hint=root.querySelector('.diagnostic-hint');hint.tabIndex=-1;hint.focus({preventScroll:true});return;}
@@ -120,6 +120,6 @@ export function mountDiagnostic(root,{text:t,feedbackText:f,applicationText,appl
   },0);
  }
  root.addEventListener('click',click);root.addEventListener('input',input);root.addEventListener('submit',submit);render();
- if(!model.bad){persist();reviewSaved();}
+ if(!model.bad){onSelect(id());persist();reviewSaved();}
  return {dispose(){disposed=true;cancel();root.removeEventListener('click',click);root.removeEventListener('input',input);root.removeEventListener('submit',submit);}};
 }

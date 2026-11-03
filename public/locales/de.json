@@ -1675,9 +1675,9 @@
     }
   },
   "learningTransfer": {
-    "title": "In einer neuen Situation anwenden",
+    "title": "Weiter anwenden",
     "lesson": "Probiere die Idee mit wechselnden Eingaben aus. Diese Aufgabe hat ein eigenes Programm; dein Lektionsentwurf bleibt hier erhalten.",
-    "diagnostic": "Dieser Satz von Eingaben hat die Prüfung bestanden. Versuche nun, die Idee auf eine andere Aufgabe anzuwenden. Dein Diagnoseprogramm und dein Protokoll bleiben verfügbar.",
+    "diagnostic": "Dieser Eingabesatz hat bestanden. Übe im Raumhafen weiter. Dein Diagnoseprogramm und deine Aufzeichnungen bleiben erhalten.",
     "apply": "{mission} ausprobieren",
     "protocols": {
       "branch": "Der Raumhafen liefert cargo und threshold. Verwende ein einziges bedingtes Programm für Ladungen, die unter dem Schwellenwert liegen, ihm entsprechen oder darüber liegen.",

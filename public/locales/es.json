@@ -1675,9 +1675,9 @@
     }
   },
   "learningTransfer": {
-    "title": "Aplícalo en una situación nueva",
+    "title": "Sigue aplicándolo",
     "lesson": "Prueba la idea con entradas que cambian. Esta tarea tiene su propio programa; tu borrador de la lección se queda aquí.",
-    "diagnostic": "Este conjunto de entradas superó la comprobación. Prueba a aplicar la idea en otra tarea. Tu programa de diagnóstico y su registro siguen disponibles.",
+    "diagnostic": "Este conjunto de entradas ha superado la prueba. Sigue practicando en el puerto espacial. Tu programa de diagnóstico y tu registro se conservan.",
     "apply": "Probar {mission}",
     "protocols": {
       "branch": "El puerto estelar proporciona cargo y threshold. Usa un único programa condicional para cargas por debajo del umbral, iguales a él y por encima de él.",

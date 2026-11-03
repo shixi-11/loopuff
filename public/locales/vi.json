@@ -1675,9 +1675,9 @@
     }
   },
   "learningTransfer": {
-    "title": "Áp dụng vào tình huống mới",
+    "title": "Tiếp tục áp dụng",
     "lesson": "Hãy thử ý tưởng này với dữ liệu đầu vào thay đổi. Nhiệm vụ này có chương trình riêng; bản nháp bài học của bạn vẫn được giữ ở đây.",
-    "diagnostic": "Bộ đầu vào này đã đạt. Hãy thử áp dụng ý tưởng vào một nhiệm vụ khác. Chương trình chẩn đoán và bản ghi của bạn vẫn được giữ lại.",
+    "diagnostic": "Bộ đầu vào này đã đạt. Hãy tiếp tục luyện tập tại cảng vũ trụ. Chương trình chẩn đoán và bản ghi của bạn vẫn được giữ lại.",
     "apply": "Thử {mission}",
     "protocols": {
       "branch": "Cảng vũ trụ cung cấp cargo và threshold. Dùng một chương trình điều kiện duy nhất cho các mức tải nhỏ hơn, bằng và lớn hơn threshold.",

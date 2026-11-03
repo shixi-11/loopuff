@@ -7,14 +7,24 @@ import {course,locales} from '../src/course.js';
 import {parseRoute,routeUrl,languageUrl} from '../src/routing.js';
 const text=JSON.parse(await readFile(new URL('../public/locales/zh.json',import.meta.url),'utf8'));
 const tick=()=>new Promise(resolve=>setTimeout(resolve,15));
-function mount(initial,onChange=()=>true,model={}){
+function mount(initial,onChange=()=>true,model={},onSelect=()=>{}){
  const handlers={},nodes=new Map(),root={innerHTML:'',addEventListener:(key,fn)=>handlers[key]=fn,removeEventListener(){},querySelectorAll:()=>[],querySelector(selector){if(!nodes.has(selector))nodes.set(selector,{innerHTML:'',textContent:'',value:'',disabled:false,focus(){},scrollIntoView(){},setAttribute(){}});return nodes.get(selector);}};
- const page=mountDiagnostic(root,{initial,model,text:text.diagnostic,feedbackText:text.diagnosticFeedback,applicationText:text.learningTransfer,applicationTitles:text.dispatch.missions.map(m=>m.title),ui:text.ui,errors:text.ui,concepts:text.assessment.concepts,statuses:text.assessment,lessons:Object.fromEntries(course.map((l,i)=>[l.id,text.lessons[i]])),urls:{home:'/zh/',guide:'/zh/guide/',map:'/zh/guide/map/',saves:'/zh/saves/',lesson:id=>`/zh/learn/${id}/`,application:id=>`/zh/play/dispatch/?mission=${id}`},onChange});
+ const page=mountDiagnostic(root,{initial,model,text:text.diagnostic,feedbackText:text.diagnosticFeedback,applicationText:text.learningTransfer,applicationTitles:text.dispatch.missions.map(m=>m.title),ui:text.ui,errors:text.ui,concepts:text.assessment.concepts,statuses:text.assessment,lessons:Object.fromEntries(course.map((l,i)=>[l.id,text.lessons[i]])),urls:{home:'/zh/',guide:'/zh/guide/',map:'/zh/guide/map/',saves:'/zh/saves/',lesson:id=>`/zh/learn/${id}/`,application:id=>`/zh/play/dispatch/?mission=${id}`},onChange,onSelect});
  const action=dataset=>handlers.click({target:{closest:()=>({dataset})}});
  const edit=source=>{root.querySelector('#diagnostic-editor').value=source;handlers.input({target:{id:'diagnostic-editor',value:source}});};
  const submit=()=>handlers.submit({preventDefault(){},target:{matches:()=>true}});
  return {page,root,model,action,edit,submit};
 }
+
+test('the route is notified of restored and changed diagnostic selection without altering other work',()=>{
+ const state=newDiagnostic(42);state.selected='function';state.drafts.names='cargo.log()';state.hints.names=2;
+ const before=structuredClone(state),selections=[],m=mount(state,()=>true,{},area=>selections.push(area));
+ try{
+  assert.deepEqual(selections,['function']);m.action({diagnosticArea:'names'});assert.deepEqual(selections,['function','names']);
+  assert.deepEqual(m.model.state,{...before,selected:'names'});
+  m.action({diagnosticArea:'unknown'});assert.deepEqual(selections,['function','names']);assert.equal(m.model.state.selected,'names');
+ }finally{m.page.dispose();}
+});
 
 test('checked functions lead forward and into their own application without copying diagnostic source',async()=>{
  const s=newDiagnostic(42);s.selected='function';submitDiagnostic(s,'function',diagnosticPuzzle(42,'function').example);const before=JSON.stringify(s),m=mount(s);

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {locales} from '../src/course.js';
 import {diagnosticIds} from '../src/diagnostic.js';
 import {languageUrl} from '../src/routing.js';
-import {lessonApplication,diagnosticApplication,nextDiagnosticArea,requestedDispatchMission,dispatchMissionUrl} from '../src/learning-transfer.js';
+import {lessonApplication,diagnosticApplication,nextDiagnosticArea,requestedDispatchMission,dispatchMissionUrl,diagnosticAreaUrl} from '../src/learning-transfer.js';
 import {applicationPanel} from '../src/learning-transfer-ui.js';
 
 test('applications follow demonstrated concepts without awarding or inventing completion',()=>{
@@ -29,10 +29,12 @@ test('an explicit application mission survives language and both hosts without s
   const url=dispatchMissionUrl(input,locale,'fuel');
   assert.equal(url.pathname,`${prefix}/${locale}/play/dispatch/`);assert.equal(url.search,'?mission=fuel');assert.equal(url.hash,'');
   assert.equal(requestedDispatchMission(languageUrl(url.href,'ar')),'fuel');
+  const back=diagnosticAreaUrl(url.href,locale,'join');assert.equal(back.pathname,`${prefix}/${locale}/guide/check/`);assert.equal(back.search,'?area=join');assert.equal(languageUrl(back.href,'ar').search,'?area=join');
  }
  assert.equal(requestedDispatchMission('https://example.com/zh/play/dispatch/?mission=unknown'),null);
  assert.equal(requestedDispatchMission('https://example.com/zh/play/dispatch/'),null);
  assert.throws(()=>dispatchMissionUrl('https://example.com/zh/','zh','__proto__'));
+ assert.throws(()=>diagnosticAreaUrl('https://example.com/zh/','zh','unknown'));
 });
 
 test('application protocols isolate code identifiers and escape visitor-facing content',()=>{

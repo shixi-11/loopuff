@@ -6,6 +6,10 @@ Map branch→branch, repeat→manifest, function→fuel and coordination→relay
 
 Dispatch accepts an allowlisted mission query, applies it only to selected mission, and updates that query when the player changes mission. Language switches, reload and history must show the same selection. An invalid query keeps the saved selection; opening a target preserves seed, all four drafts/submissions, old stamps, clears and rounds. Leaving dispatch clears its view-specific query.
 
+Diagnostic topic choices likewise update their allowlisted area query. Previously a topic could change while its URL retained an older area; going to an application and back then reopened the older topic. Restored and selected areas now notify the route without changing other work, so back/reload/language can preserve the intended program. Unknown area actions are ignored.
+
+Coordination diagnostics reuse the relay puzzle contract. Continuing into relay preserves that application's seed and draft; it is continued practice, not evidence of a different problem or freshly generated inputs. The public copy makes that distinction.
+
 Diagnostic recommendations use the existing concept dependencies and checked reports. Function success can lead to replies; once joined receive is checked, the missing branch/function pieces lead toward coordination, and branch+function+join can recommend that combination immediately. Remaining unchecked topics are offered forward from the current topic before wrapping. Fully checked sets offer relay application. Suggestions do not certify implied prerequisites, write completion or unlock gates; all diagnostic choices remain accessible.
 
 Scope excludes interpreter semantics, persistent fields, new missions, navigation categories, scores, timers, art and global type/zoom. The existing continuous-game entry is retained. Its learning bridge still needs a concrete strategy exercise and will be handled separately rather than silently replacing a saved game policy.

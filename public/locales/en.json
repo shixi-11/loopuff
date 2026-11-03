@@ -1687,9 +1687,9 @@
     }
   },
   "learningTransfer": {
-    "title": "Use it in a new situation",
+    "title": "Put it into practice",
     "lesson": "Try the idea with changing inputs. This task has its own program; your lesson draft stays here.",
-    "diagnostic": "This input set passed. Try applying the idea to a different task. Your diagnostic program and record stay available.",
+    "diagnostic": "This input set passed. Continue practising at the starport. Your diagnostic program and record stay available.",
     "apply": "Try {mission}",
     "protocols": {
       "branch": "The starport supplies cargo and threshold. Use one conditional program for loads below, equal to and above the threshold.",
