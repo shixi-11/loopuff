@@ -1169,7 +1169,22 @@
         "meaning": "Thao tác gộp cần dữ liệu từ cả hai lần nhận. Thứ tự hiển thị ở đây không đại diện cho mọi lịch chạy đồng thời có thể xảy ra.",
         "difference": "Đồng thời bằng thông điệp khác với các lời gọi tuần tự thông thường. Kênh, hàng đợi, luồng và lập lịch bất đồng bộ cần được xem xét riêng. Cùng một tổng không chứng minh hành vi đồng thời là tương đương."
       }
-    ]
+    ],
+    "prediction": {
+      "label": "Dự đoán của tôi (không bắt buộc)",
+      "help": "Viết mỗi dòng một giá trị, theo thứ tự xuất ra. Sau đó chạy mã để so sánh.",
+      "silent": "Tôi đoán sẽ không có đầu ra",
+      "ready": "Ghi lại dự đoán, hoặc chạy ngay để khám phá.",
+      "matched": "Toàn bộ đầu ra khớp với dự đoán của bạn.",
+      "different": "Điểm khác đầu tiên nằm ở đầu ra thứ {number}.",
+      "expected": "Dự đoán của bạn",
+      "actual": "Đầu ra thực tế",
+      "absent": "Không có giá trị",
+      "error": "Hãy sửa lỗi chương trình rồi chạy lại để so sánh.",
+      "waiting": "Vẫn còn tác vụ đang chờ. Khi xong, hãy so sánh lại.",
+      "changed": "Dự đoán của bạn đã thay đổi. Chạy lại để so sánh với kết quả của mã.",
+      "silentMatched": "Đúng như dự đoán, chương trình này kết thúc mà không xuất ra giá trị nào."
+    }
   },
   "pursuit": {
     "title": "Truy đuổi liên tục",

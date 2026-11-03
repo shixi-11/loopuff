@@ -1169,7 +1169,22 @@
         "meaning": "La acción de combinar necesita datos de ambas recepciones. El orden que se muestra aquí no representa todas las planificaciones concurrentes posibles.",
         "difference": "La concurrencia basada en mensajes es distinta de las llamadas secuenciales normales. Los canales, las colas, los hilos y la planificación asíncrona deben tratarse por separado. Un mismo total no demuestra un comportamiento concurrente equivalente."
       }
-    ]
+    ],
+    "prediction": {
+      "label": "Mi predicción (opcional)",
+      "help": "Escribe un valor por línea, en el orden de la salida. Luego ejecuta tu código para comparar.",
+      "silent": "Espero que no haya salida",
+      "ready": "Anota una predicción o ejecuta el código directamente para explorar.",
+      "matched": "La salida completa coincide con tu predicción.",
+      "different": "La primera diferencia está en la salida {number}.",
+      "expected": "Tu predicción",
+      "actual": "Salida real",
+      "absent": "Sin valor",
+      "error": "Corrige el error del programa y vuelve a ejecutarlo para comparar.",
+      "waiting": "Todavía hay tareas en espera. Vuelve a comparar cuando terminen.",
+      "changed": "Tu predicción ha cambiado. Vuelve a ejecutar para compararla con el código.",
+      "silentMatched": "Tal como predijiste, este programa termina sin registrar ningún valor."
+    }
   },
   "pursuit": {
     "title": "Persecución continua",

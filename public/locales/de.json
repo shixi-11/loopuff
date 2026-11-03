@@ -1169,7 +1169,22 @@
         "meaning": "Das Kombinieren benötigt Daten aus beiden Empfängen. Die hier gezeigte Reihenfolge steht nicht für jeden möglichen nebenläufigen Ablauf.",
         "difference": "Nebenläufigkeit über Nachrichten unterscheidet sich von gewöhnlichen sequenziellen Aufrufen. Kanäle, Warteschlangen, Threads und asynchrone Ablaufplanung müssen getrennt betrachtet werden. Dieselbe Summe beweist kein gleichwertiges nebenläufiges Verhalten."
       }
-    ]
+    ],
+    "prediction": {
+      "label": "Meine Vorhersage (optional)",
+      "help": "Schreib einen Wert pro Zeile, in der Reihenfolge der Ausgabe. Führe dann deinen Code aus, um zu vergleichen.",
+      "silent": "Ich erwarte keine Ausgabe",
+      "ready": "Notiere eine Vorhersage oder führe den Code direkt aus, um ihn zu erkunden.",
+      "matched": "Die gesamte Ausgabe stimmt mit deiner Vorhersage überein.",
+      "different": "Der erste Unterschied liegt bei Ausgabe {number}.",
+      "expected": "Deine Vorhersage",
+      "actual": "Tatsächliche Ausgabe",
+      "absent": "Kein Wert",
+      "error": "Behebe den Fehler im Programm und führe es dann erneut aus, um zu vergleichen.",
+      "waiting": "Einige Aufgaben warten noch. Vergleiche erneut, sobald sie abgeschlossen sind.",
+      "changed": "Deine Vorhersage hat sich geändert. Führe den Code erneut aus, um sie damit zu vergleichen.",
+      "silentMatched": "Wie vorhergesagt: Dieses Programm endet, ohne einen Wert auszugeben."
+    }
   },
   "pursuit": {
     "title": "Fortlaufende Verfolgung",

@@ -1,0 +1,13 @@
+# Predicting a program's output
+
+The introductory guide asks learners to predict before they run, but previously offered no place to record or compare that prediction. This change makes that step observable: an optional field accepts one logged value per line, and an explicit checkbox represents no output. Running remains available without a prediction.
+
+The comparison uses the edited program's actual complete log, including order, duplicates and missing or extra lines. The first difference displays both values. Syntax/runtime errors and unfinished receives cannot confirm a prediction, including when a matching partial log exists. Matching describes this run only; it awards no points, grades, completion or claim of language mastery.
+
+Each run captures its prediction. Editing it afterward requests a new run rather than retroactively declaring a match. Code edits invalidate the old observation as before. Per-station predictions survive a view/language remount in the current page, but are deliberately transient: existing source drafts, lesson work, diagnostic records, progress formats and cloud contracts remain unchanged. Reloading starts a fresh prediction. Restoring an example clears only that station's prediction and observation.
+
+This extends the Predict–Run–Investigate sequence described in [Sue Sentance's PRIMM introduction](https://suesentance.net/2017/09/01/primm-a-structured-approach-to-teaching-programming/). The optional text field, comparison rules and presentation are our implementation; no third-party exercises, assets or code are copied. A matching prediction is not evidence of lasting learning. Real novice use remains necessary to evaluate the teaching outcome.
+
+The preceding persistence investigation found no stale-page overwrite: two access instances sharing storage and a lock were exercised; the old writer rejected with `SAVE_LOCAL_CHANGED`, leaving the new draft intact. No persistence repair was made for that disproven hypothesis.
+
+Validation: 227 frontend checks passed and the static build succeeded. The independent UI review found no blocking issue. Actual browser checks covered changed predictions, complete and missing output, waiting/errors, language remounts and all 11 locales at 390×640 without horizontal overflow. Mobile run feedback was visually checked after automatic scrolling; temporary device metrics were cleared and browser zoom verified at 1. Existing lesson grades/completion remained empty in the isolated test save; only its source draft was persisted. No interpreter, backend or save-format change required a new native/compiler run or account-service restart.

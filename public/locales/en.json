@@ -1181,7 +1181,22 @@
         "meaning": "The combining action needs data from both receives. The order shown here does not represent every possible concurrent schedule.",
         "difference": "Message concurrency differs from ordinary sequential calls. Channels, queues, threads and async scheduling need separate treatment. The same total does not prove equivalent concurrent behavior."
       }
-    ]
+    ],
+    "prediction": {
+      "label": "My prediction (optional)",
+      "help": "Write one value per line, in output order. Then run your code to compare.",
+      "silent": "I expect no output",
+      "ready": "Record a prediction, or run directly to explore.",
+      "matched": "The complete output matches your prediction.",
+      "different": "The first difference is at output {number}.",
+      "expected": "Your prediction",
+      "actual": "Actual output",
+      "absent": "No value",
+      "error": "Fix the program error, then run again to compare.",
+      "waiting": "Some work is still waiting. Compare again when it finishes.",
+      "changed": "Your prediction has changed. Run again to compare it with the code.",
+      "silentMatched": "As predicted, this program finishes without logging a value."
+    }
   },
   "pursuit": {
     "title": "Continuous pursuit",

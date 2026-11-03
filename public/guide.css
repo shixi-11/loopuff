@@ -60,3 +60,10 @@
 .comparison-output{color:#bdcff1;font-size:14px}.comparison-output bdi{font-family:var(--mono);margin-inline-start:10px}
 @media(min-width:1101px){.language-columns{grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}}
 @media(min-width:901px) and (max-width:1100px){.language-columns{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.guide-prediction{margin-block:20px 12px;padding-top:16px;border-top:1px solid #344263}
+.guide-prediction>label{font-size:15px;color:#bdcde7}.guide-prediction>p{font-size:13px;line-height:1.7;color:#a8bcda;margin:7px 0 10px}
+.guide-code .guide-prediction textarea{min-height:72px;padding:10px 14px;font-size:16px;line-height:1.6}.guide-prediction textarea:disabled{opacity:.5}
+.guide-silent{display:flex;align-items:center;gap:9px;min-height:44px;cursor:pointer}.guide-silent input{width:18px;height:18px;margin:0;flex:none;accent-color:#b4c8f7}
+.guide-prediction-result{scroll-margin-top:125px;font-size:13px;line-height:1.75;color:#a8bcda;overflow-wrap:anywhere}.guide-prediction-result p{margin:4px 0}.guide-prediction-result[data-kind=matched]{color:#d4e2ff}
+.guide-prediction-result dl{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:10px 0}.guide-prediction-result dl>div{min-width:0}.guide-prediction-result dt{font-size:12px;color:#a8bcda}.guide-prediction-result dd{margin:4px 0 0;color:#e5edff;font:16px/1.7 var(--mono)}
