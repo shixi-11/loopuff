@@ -997,7 +997,16 @@
         "hint": "Verwende & für den gemeinsamen Empfang. Beide empfangenen Werte müssen in das Ergebnis deiner Funktion einfließen, und dieses Ergebnis muss in die angezeigte Berechnung gelangen.",
         "learned": "Nachrichten, eine Funktion und eine Bedingung arbeiten jetzt über verschiedene Berichte hinweg zusammen."
       }
-    ]
+    ],
+    "repair": {
+      "title": "Diesen Batch untersuchen",
+      "waiting": "Eine Empfangsoperation wartet noch auf eine Nachricht. Finde diesen Kanal und prüfe, ob ein Sender ihn erreichen kann. Eine teilweise Ausgabe bedeutet nicht, dass der Batch abgeschlossen ist.",
+      "contribution": "Ausgabe {number} nutzt noch nicht alle Methoden, die diese Aufgabe verlangt. Öffne ihr Ausführungsprotokoll und prüfe, ob dieser Wert als feste Antwort eingetragen wurde.",
+      "output": "Ausgabe {number} weicht ab. Vergleiche die Eingabe mit dem Ausführungsprotokoll und verfolge, woher dieser Wert stammt.",
+      "empty": "Eine leere Frachtliste sollte keine Ausgabe erzeugen. Prüfe, ob außerhalb der Schleife ein zusätzliches .log() steht.",
+      "boundary": "Hier entspricht die Ladung genau dem Schwellenwert. Lege fest, welchen Zweig der Gleichheitsfall nehmen soll, und prüfe dann deinen Vergleich.",
+      "inspect": "Ausführungsprotokoll dieser Ausgabe ansehen"
+    }
   },
   "saves": {
     "title": "Fortschritt & Backups",

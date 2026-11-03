@@ -1009,7 +1009,16 @@
         "hint": "Use & for the joint receive. Both received values must reach your function result, and that result must reach the displayed calculation.",
         "learned": "Messages, a function and a condition now cooperate across different reports."
       }
-    ]
+    ],
+    "repair": {
+      "title": "Investigate this batch",
+      "waiting": "A receive is still waiting for a message. Find that channel and check whether a sender can reach it. A partial output does not mean the batch has finished.",
+      "contribution": "Output {number} does not use all the methods this task asks for. Open its execution record and check whether this value was written as a fixed answer.",
+      "output": "Output {number} differs. Compare the input with the execution record and follow where this value comes from.",
+      "empty": "An empty manifest should produce no output. Check for an extra .log() outside the loop.",
+      "boundary": "Here the cargo equals the threshold. Decide which branch equality should take, then check your comparison.",
+      "inspect": "Inspect this output's execution record"
+    }
   },
   "saves": {
     "title": "Progress & backups",

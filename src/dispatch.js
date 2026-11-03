@@ -56,7 +56,9 @@ export function inspectDispatch(seed,id,source){
  const cases=puzzle.cases.map(sample=>{
   // An empty manifest must emit nothing; method evidence comes from the other batches.
   const fullSource=sample.prefix+source+(sample.suffix||'');
-  const report=grade(fullSource,{logs:sample.logs,require:sample.logs.length?puzzle.require:[],dataRequire:puzzle.dataRequire});
+  const require=sample.logs.length?puzzle.require:[];
+  const report=grade(fullSource,{logs:sample.logs,require,dataRequire:puzzle.dataRequire,eachOutputRequire:require});
+  if(report.result?.waiting){report.ok=false;report.code='waiting';}
   const position=Math.max(0,(report.position||0)-sample.prefix.length);
   return {...report,position,inputs:sample.inputs,expected:sample.logs,
    outputs:report.result?.outputs.map(output=>{

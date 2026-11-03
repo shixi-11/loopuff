@@ -997,7 +997,16 @@
         "hint": "Dùng & để nhận đồng thời. Cả hai giá trị nhận được phải đi vào kết quả của hàm, và kết quả đó phải đi vào phép tính được hiển thị.",
         "learned": "Giờ đây tin nhắn, hàm và điều kiện phối hợp với nhau qua nhiều báo cáo khác nhau."
       }
-    ]
+    ],
+    "repair": {
+      "title": "Điều tra lô này",
+      "waiting": "Một lệnh nhận vẫn đang chờ tin nhắn. Hãy tìm kênh đó và kiểm tra xem có bên gửi nào đến được không. Đã có một phần đầu ra không có nghĩa là lô đã chạy xong.",
+      "contribution": "Đầu ra {number} chưa dùng hết các phương thức mà nhiệm vụ này yêu cầu. Hãy mở bản ghi thực thi của nó và kiểm tra xem giá trị này có bị viết sẵn thành đáp án cố định không.",
+      "output": "Đầu ra {number} không khớp. Hãy đối chiếu đầu vào với bản ghi thực thi và lần theo xem giá trị này đến từ đâu.",
+      "empty": "Khi danh sách hàng trống thì không được có đầu ra nào. Hãy kiểm tra xem có lệnh .log() thừa nằm ngoài vòng lặp không.",
+      "boundary": "Ở đây, khối lượng hàng đúng bằng ngưỡng. Hãy quyết định trường hợp bằng nhau nên đi vào nhánh nào, rồi kiểm tra phép so sánh của bạn.",
+      "inspect": "Xem bản ghi thực thi của đầu ra này"
+    }
   },
   "saves": {
     "title": "Tiến độ và bản sao lưu",

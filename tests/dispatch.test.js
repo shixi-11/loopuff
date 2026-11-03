@@ -5,6 +5,26 @@ import {locales} from '../src/course.js';
 import {parseRoute,routeUrl,languageUrl} from '../src/routing.js';
 import {dispatchIds,dispatchPuzzle,inspectDispatch,newDispatch,restoreDispatch,editDispatch,submitDispatch,nextDispatchRound} from '../src/dispatch.js';
 
+test('each manifest signal must carry its own calculation, rather than borrow evidence from a neighbouring output',()=>{
+ const source='for dock in docks { if dock == 4 then { 5.log() } else { (dock + offset).log() } }';
+ const report=inspectDispatch(0,'manifest',source);
+ assert.equal(report.ok,false);
+ const mixed=report.cases[3];assert.deepEqual(mixed.result.logs,mixed.expected);
+ assert.equal(mixed.code,'conceptMissing');assert.equal(mixed.checks.find(c=>c.id==='concepts').requirements.find(c=>c.concept==='add').passed,false);
+ assert.equal(inspectDispatch(0,'manifest','for dock in docks { let n = offset + dock; n.log() }').ok,true);
+});
+
+test('unfinished programs cannot complete any dispatch mission or award a round despite matching visible logs',()=>{
+ for(const id of dispatchIds){
+  const state=newDispatch(42),puzzle=dispatchPuzzle(42,id);
+  const source=id==='fuel'?'fn fuel(a,b) { return ! (a+b); let pending; ?(n <- pending) { n.log() } }':puzzle.example+'; let pending; ?(n <- pending) { n.log() }';
+  const report=submitDispatch(state,id,source);
+  assert.equal(report.ok,false,id);assert.equal(report.passed,0,id);assert.equal(report.code,'waiting',id);
+  for(const item of report.cases){assert.deepEqual(item.result.logs,item.expected,id);assert.ok(item.result.waiting>0,id);}
+  assert.deepEqual(state.cleared,[]);assert.deepEqual(state.stamps,[]);assert.equal(state.rounds,0);assert.equal(state.drafts[id],source);assert.equal(state.submitted[id],source);
+ }
+});
+
 test('dispatch missions require one program to work across changing inputs',()=>{
  const alternatives={branch:'if cargo >= threshold then { 2.log() } else { 1.log() }',
   manifest:'for place in docks { let target = offset + place; target.log() }',

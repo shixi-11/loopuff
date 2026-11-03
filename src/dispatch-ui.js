@@ -1,5 +1,6 @@
 import { aircraftUrl } from './plane.js';
 import {progressStorage} from './save-data.js';
+import {dispatchFeedback} from './dispatch-feedback.js';
 import {dispatchIds,dispatchSourceLimit,dispatchPuzzle,inspectDispatch,restoreDispatch,editDispatch,submitDispatch,nextDispatchRound} from './dispatch.js';
 const key='loopuff-dispatch-v1';
 const html=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
@@ -14,6 +15,12 @@ export function mountDispatch(root,{text:t,errors,concepts,reduced,urls,format=h
  const code=source=>`<pre class="exercise-code" dir="ltr">${html(source)}</pre>`;
  async function persist(){try{const raw=JSON.stringify(state);await progressStorage().write(()=>localStorage.setItem(key,raw));saveFailed=false;}catch{saveFailed=true;}const note=root.querySelector('[data-dispatch-save]');if(note)note.textContent=saveFailed?t.noSave:t.local;}
  function restoreReport(){const source=state.submitted[state.selected];report=source!==null&&source===state.drafts[state.selected]?inspectDispatch(state.seed,state.selected,source):null;}
+ function repair(current,p){
+  const feedback=dispatchFeedback(p,current);if(!feedback||feedback.kind==='passed')return '';
+  const message=feedback.kind==='error'?errors[feedback.code]||errors.limit:t.repair[feedback.kind];
+  const canInspect=feedback.outputIndex!==undefined&&feedback.outputIndex<8&&current.outputs[feedback.outputIndex];
+  return '<aside class="dispatch-repair" aria-labelledby="dispatch-repair-title"><h3 id="dispatch-repair-title">'+html(t.repair.title)+'</h3><p>'+html(message.replace('{number}',String((feedback.outputIndex??0)+1)))+'</p>'+(canInspect?'<button class="text-button" type="button" data-dispatch-action="inspect">'+html(t.repair.inspect)+'</button>':'')+'</aside>';
+ }
  function scene(){
   const p=puzzle(),sample=p.cases[index],current=report?.cases[index],outputs=current?.result?.logs||[];
   const targetLabel=['branch','manifest'].includes(p.id)?t.dock:t.expected;
@@ -22,7 +29,8 @@ export function mountDispatch(root,{text:t,errors,concepts,reduced,urls,format=h
    <div class="dispatch-input"><h3>${html(t.inputs)}</h3>${code(inputCode(sample))}<p>${html(t.inputNote)}</p></div>
    <div class="dispatch-board ${current&&!reduced.matches?'dispatch-animate':''}" aria-label="${html(t.preview)}">${signals.map((signal,i)=>`<div class="dispatch-lane" style="--delay:${i*180}ms" data-match="${current?String(signal===sample.logs[i]):'idle'}"><div class="dispatch-station"><img src="${aircraftUrl}" alt=""><span>${html(t.origin)}</span></div><div class="dispatch-track"><span class="dispatch-packet">${signal===null?'—':html(signal)}</span></div><div class="dispatch-target"><small>${html(targetLabel)}</small><strong dir="ltr">${html(sample.logs[i]??'—')}</strong></div></div>`).join('')}</div>
    <dl class="dispatch-signals"><div><dt>${html(t.expected)}</dt><dd dir="ltr">${html(printed(sample.logs,t.noOutput))}</dd></div><div><dt>${html(t.actual)}</dt><dd dir="ltr">${current?html(printed(outputs,t.noOutput)):'—'}</dd></div></dl>
-   ${current?.outputs.length?`<details class="dispatch-trace"><summary>${html(t.code)}</summary>${current.outputs.slice(0,8).map(output=>{const names=Object.entries(output.names).map(([name,value])=>name+' = '+value).join(', ');return code(output.source+' → '+output.value)+(names?`<p>${html(t.names)}: <bdi dir="ltr">${html(names)}</bdi></p>`:'');}).join('')}</details>`:''}`;
+   ${repair(current,p)}
+   ${current?.outputs.length?`<details class="dispatch-trace"><summary>${html(t.code)}</summary>${current.outputs.slice(0,8).map((output,i)=>{const names=Object.entries(output.names).map(([name,value])=>name+' = '+value).join(', ');return `<article data-dispatch-trace-output="${i}" tabindex="-1">`+code(output.source+' → '+output.value)+(names?`<p>${html(t.names)}: <bdi dir="ltr">${html(names)}</bdi></p>`:'')+'</article>';}).join('')}</details>`:''}`;
  }
  function result(){
   if(!report)return '';
@@ -63,6 +71,10 @@ export function mountDispatch(root,{text:t,errors,concepts,reduced,urls,format=h
   if(target.dataset.dispatchMission){state.selected=target.dataset.dispatchMission;index=3;restoreReport();persist();render();root.querySelector(`[data-dispatch-mission="${state.selected}"]`).focus({preventScroll:true});return;}
   if(target.dataset.dispatchCase!==undefined){index=Number(target.dataset.dispatchCase);updatePreview();const heading=root.querySelector('.dispatch-preview-heading h2');heading.tabIndex=-1;heading.focus({preventScroll:true});root.querySelector('[data-dispatch-preview]').scrollIntoView({block:'nearest',behavior:reduced.matches?'instant':'smooth'});return;}
   const action=target.dataset.dispatchAction;
+  if(action==='inspect'){
+   const feedback=dispatchFeedback(puzzle(),report?.cases[index]),trace=root.querySelector('.dispatch-trace'),output=root.querySelector('[data-dispatch-trace-output="'+feedback?.outputIndex+'"]');
+   if(trace&&output){trace.open=true;output.focus({preventScroll:true});output.scrollIntoView({block:'nearest',behavior:reduced.matches?'instant':'smooth'});}return;
+  }
   if(action==='reset'){editDispatch(state,state.selected,puzzle().starter);report=null;persist();render();root.querySelector('#dispatch-editor').focus();}
   if(action==='new-round'){state=nextDispatchRound(state,freshSeed());report=null;index=3;persist();render();root.querySelector('[data-dispatch-action="new-round"]').focus({preventScroll:true});}
   if(action==='replay')updatePreview();

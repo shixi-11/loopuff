@@ -997,7 +997,16 @@
         "hint": "Usa & para la recepción conjunta. Ambos valores recibidos deben llegar al resultado de tu función, y ese resultado debe llegar al cálculo que se muestra.",
         "learned": "Ahora los mensajes, una función y una condición cooperan con distintos informes."
       }
-    ]
+    ],
+    "repair": {
+      "title": "Investiga este lote",
+      "waiting": "Una recepción sigue esperando un mensaje. Busca ese canal y comprueba si un emisor puede llegar a él. Una salida parcial no significa que el lote haya terminado.",
+      "contribution": "La salida {number} no usa todos los métodos que pide esta tarea. Abre su registro de ejecución y comprueba si este valor se escribió como una respuesta fija.",
+      "output": "La salida {number} es distinta. Compara la entrada con el registro de ejecución y sigue de dónde viene este valor.",
+      "empty": "Un manifiesto vacío no debería producir ninguna salida. Comprueba si hay un .log() de más fuera del bucle.",
+      "boundary": "Aquí la carga es igual al umbral. Decide qué rama debe tomar la igualdad y luego revisa tu comparación.",
+      "inspect": "Ver el registro de ejecución de esta salida"
+    }
   },
   "saves": {
     "title": "Progreso y copias de seguridad",
