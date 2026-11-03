@@ -26,6 +26,8 @@ test('one and two report trials run fresh displayed source and keep separate obs
   m.send('east',true);assert.equal(model.causal.join.report,null);assert.equal(m.root.querySelector('[data-causal-result]').innerHTML,'');m.run();
   assert.equal(model.causal.join.report.result.waiting,0);assert.deepEqual(model.causal.join.report.result.logs,['10']);assert.equal(m.root.querySelector('[data-causal-status]').textContent,catalog.causalExperiments.done);
   m.number('b','2');m.run();assert.deepEqual(model.causal.join.report.result.logs,['6']);
+  m.send('west',false);m.send('east',false);m.run();assert.equal(model.causal.join.report.result.waiting,1);
+  assert.ok(!m.root.querySelector('[data-causal-result]').innerHTML.includes(catalog.causalExperiments.waitingNote));
   m.number('b','1e2');m.run();assert.equal(model.causal.join.report,null);assert.equal(m.root.querySelector('[data-causal-status]').textContent,catalog.causalExperiments.invalid);assert.equal(m.root.querySelector('[data-causal-source]').textContent,'');
  }finally{m.view.dispose();}
 });
