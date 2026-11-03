@@ -1685,5 +1685,95 @@
       "fuel": "Định nghĩa một hàm tên fuel nhận hai tham số. Cảng vũ trụ sẽ gọi hàm với các lượng cargo và reserve thay đổi, rồi hiển thị giá trị trả về. Đừng thêm lệnh gọi hay đầu ra nào khác bên ngoài hàm.",
       "relay": "Kết hợp báo cáo từ west và east, gộp các giá trị của chúng trong một hàm, rồi dùng threshold và reserve để chọn đầu ra. Cảng vũ trụ cung cấp báo cáo mới cho mỗi lô."
     }
+  },
+  "beginner": {
+    "foundation": "Lập trình là nói cho máy tính biết cần làm gì.",
+    "intro": "Mã là những chỉ dẫn mà máy tính có thể thực hiện. Tolang là một ngôn ngữ để viết mã. Hãy bắt đầu với một việc nhỏ: cho máy tính hiển thị một con số. Chạy thử, đổi một con số, rồi xem điều gì thay đổi.",
+    "more": "Khám phá các ý khác khi bạn cần",
+    "reading": "Cách đọc ví dụ này",
+    "first": "Trước tiên, chọn “Chạy mã” và xem máy tính hiển thị gì.",
+    "change": "Bây giờ hãy đổi một con số trong mã rồi chạy lại. Kết quả có thay đổi không?",
+    "result": "Mã hiện tại của bạn đã hiển thị: {value}.",
+    "mapStart": "Chưa từng lập trình? Hãy bắt đầu bằng một thí nghiệm nhỏ",
+    "mapIntro": "Trước tiên, hãy vào trang nhập môn và cho máy tính hiển thị một con số. Sau đó tìm hiểu các ý này. Các đường nối gợi ý thứ tự học; bạn có thể tự do chọn.",
+    "mapGo": "Bắt đầu bằng việc hiển thị một con số →",
+    "mapMeaning": "Điều này nghĩa là gì?",
+    "vaultGoal": "Mục tiêu của bạn: gửi các con số này đến ổ khóa theo đúng thứ tự này.",
+    "vaultSteps": [
+      "Xem các con số mục tiêu, rồi xem vùng mã. Mã là những chỉ dẫn dành cho ổ khóa này.",
+      "Chạy mã hiện có trước. Các bộ nhận bên dưới ổ khóa sẽ hiển thị những con số nó thực sự nhận được.",
+      "So sánh với mục tiêu, sửa mã rồi chạy lại. Khi các con số và thứ tự khớp nhau, ổ khóa sẽ mở."
+    ],
+    "vaultStart": "Thử ở vùng mã ↓",
+    "vaultFirst": "Với ổ khóa này, chỉ cần đổi một chỗ: thay 0 trong mã bằng {b}. ({a} + {b}) cộng hai số lại; .log() gửi kết quả đến ổ khóa.",
+    "vaultNames": "energy là tên bạn đặt cho một con số, không phải đáp án cần nhập. let energy = {a} nghĩa là về sau, mỗi chỗ dùng energy đều chỉ {a}. Hãy thay 0 trong energy + 0 bằng {b} rồi chạy lại.",
+    "vaultOrder": "Mỗi .log() gửi một con số. Hãy dùng ba lệnh để lần lượt hiển thị {a}, {sum}, rồi {total}. Bạn có thể tính chúng bằng phép cộng hoặc thử một cách viết đúng khác.",
+    "concepts": {
+      "signal": {
+        "term": "Đầu ra: hiển thị một kết quả",
+        "meaning": "Không phải lúc nào bạn cũng nhìn thấy chương trình đã tính ra gì. Cho chương trình hiển thị kết quả được gọi là đầu ra.",
+        "read": "7 là con số cần hiển thị. .log() ghi con số đứng trước nó vào nhật ký, ở đây nhật ký hiện ở bên trái. Vì vậy, chạy 7.log() sẽ hiển thị 7."
+      },
+      "addition": {
+        "term": "Tính toán: để máy tính tính giúp bạn",
+        "meaning": "Nếu bạn có hai phần tiếp tế và lấy thêm ba phần nữa, hãy để máy tính tính tổng.",
+        "read": "+ là phép cộng. (2 + 3) tính ra 5 trước, sau đó .log() hiển thị 5. Dấu ngoặc gom phép tính này lại với nhau."
+      },
+      "names": {
+        "term": "Tên: gắn nhãn cho một giá trị",
+        "meaning": "Đặt tên cho một con số để về sau gọi nó bằng tên, không phải viết lặp lại cùng một con số ở khắp nơi.",
+        "read": "let n = 5 đặt tên n cho con số 5. Về sau, n + 2 nghĩa là 5 + 2. Bạn có thể chọn tên khác, nhưng phải dùng thống nhất."
+      },
+      "leap": {
+        "term": "Khoảng cách: điều khiển chuyến bay bằng phép tính",
+        "meaning": "Trò chơi có thể đọc một con số từ chương trình của bạn và dùng nó làm khoảng cách cho một lần bay.",
+        "read": "Hãy tính khoảng cách, rồi hiển thị nó bằng .log(). Bay là việc trò chơi này làm với con số đó; bản thân .log() chỉ ghi lại con số."
+      },
+      "comparison": {
+        "term": "So sánh: kiểm tra xem có đủ không",
+        "meaning": "Một phép so sánh, chẳng hạn kiểm tra nhiên liệu có vượt mức tối thiểu không, sẽ cho ra câu trả lời có hoặc không.",
+        "read": "> nghĩa là lớn hơn. 6 > 4 đúng, nên ra true; 4 > 4 sai, nên ra false. true và false lần lượt biểu thị có và không."
+      },
+      "branch": {
+        "term": "Điều kiện: lựa chọn theo tình huống",
+        "meaning": "Giống như đủ nhiên liệu thì xuất phát, không đủ thì tiếp tế, điều kiện giúp máy tính chọn việc cần làm theo tình hình thực tế.",
+        "read": "let fuel = 6 ghi nhiên liệu là 6. if kiểm tra fuel > 4. Nếu đúng, nó chạy phần trong ngoặc nhọn sau then; nếu không, chạy phần trong ngoặc nhọn sau else. Ví dụ này chỉ hiển thị 1 hoặc 2, chứ không làm phi cơ di chuyển."
+      },
+      "repeat": {
+        "term": "Lặp lại: làm cùng một việc nhiều lần",
+        "meaning": "Gửi báo cáo đến nhiều nơi mà không phải viết đi viết lại cùng một cách làm.",
+        "read": "[2, 4, 6] là một danh sách gồm ba con số. for lấy lần lượt từng số, tạm gọi nó là dock, rồi chạy dock.log() trong ngoặc nhọn. Vì vậy nó hiển thị 2, 4, rồi 6."
+      },
+      "counter": {
+        "term": "Đếm: vừa lặp vừa kiểm tra",
+        "meaning": "Giống như làm lần lượt từng mục trong danh sách kiểm tra trước khi cất cánh, bạn vừa làm vừa đếm và dừng lại khi đã đủ.",
+        "read": "while kiểm tra điều kiện trước mỗi lần lặp, và chỉ chạy tiếp khi điều kiện còn đúng. Số đếm phải thay đổi trong quá trình làm, nếu không việc lặp có thể không bao giờ dừng."
+      },
+      "function": {
+        "term": "Hàm: đặt tên cho một cách làm để dùng lại",
+        "meaning": "Lưu một cách làm, chẳng hạn cộng hai số, thành một công cụ có tên, rồi dùng nó với những con số khác nhau.",
+        "read": "sync fn combine(a, b) định nghĩa một hàm đồng bộ nhận hai con số, tạm đặt tên là a và b. combine(3, 4) đưa cho nó 3 và 4. return a + b trả 7 về chỗ đã dùng nó, rồi load.log() hiển thị con số đó."
+      },
+      "reply": {
+        "term": "Phản hồi: gửi câu trả lời trở lại",
+        "meaning": "Nhờ một phần khác của chương trình xử lý một việc, chờ nó gửi câu trả lời về, rồi dùng câu trả lời đó.",
+        "read": "fn boost(load) nhận một con số. return ! gửi kết quả đã tính trở lại dưới dạng phản hồi. Khác với return thông thường, sau khi gửi phản hồi, các câu lệnh phía sau trong hàm vẫn có thể tiếp tục chạy."
+      },
+      "message": {
+        "term": "Tin nhắn: gửi dữ liệu đến nơi khác",
+        "meaning": "Giống như gửi một mẩu giấy ghi số lượng: người gửi gửi đi một con số, người nhận nhận được rồi mới xử lý.",
+        "read": "! gửi một tin nhắn. Trong cách viết để nhận, <- cho biết giá trị được lấy từ đâu. Con số nhận được có một cái tên mà các phép tính sau có thể dùng."
+      },
+      "join": {
+        "term": "Phối hợp: chờ đủ cả hai tin nhắn",
+        "meaning": "Muốn tính tổng từ hai địa điểm, phải chờ cả hai báo cáo đến rồi mới xử lý chung.",
+        "read": "west ! 4 và east ! 6 lần lượt gửi 4 và 6. ?(a <- west & b <- east) phải nhận được số từ cả hai bên rồi mới chạy phép cộng trong ngoặc nhọn. Nếu thiếu một bên, nó sẽ chờ."
+      },
+      "coordination": {
+        "term": "Kết hợp: nối các ý đã học lại với nhau",
+        "meaning": "Chờ đủ báo cáo, dùng hàm để cộng tổng, rồi chọn hành động dựa trên tổng đó. Đó là ghép các bước nhỏ thành một chương trình.",
+        "read": "Trước tiên xem dữ liệu đến từ đâu, tiếp theo xem nó được tính thế nào, cuối cùng xem điều kiện quyết định đầu ra ra sao. Hãy đi theo con đường đó từng bước một."
+      }
+    }
   }
 }

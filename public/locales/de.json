@@ -1685,5 +1685,95 @@
       "fuel": "Definiere eine Funktion namens fuel mit zwei Parametern. Der Raumhafen ruft sie mit wechselnden Werten für cargo und reserve auf und zeigt ihren Rückgabewert an. Füge außerhalb der Funktion keinen weiteren Aufruf und keine Ausgabe hinzu.",
       "relay": "Führe die Berichte von west und east zusammen, fasse ihre Werte in einer Funktion zusammen und wähle dann anhand von threshold und reserve die Ausgabe. Der Raumhafen liefert für jeden Durchlauf neue Berichte."
     }
+  },
+  "beginner": {
+    "foundation": "Programmieren heißt, einem Computer zu sagen, was er tun soll.",
+    "intro": "Code besteht aus Anweisungen, die ein Computer ausführen kann. Tolang ist eine Sprache, um sie zu schreiben. Beginne mit einer kleinen Aufgabe: Lass den Computer eine Zahl anzeigen. Führe den Code aus, ändere eine Zahl und sieh, was sich ändert.",
+    "more": "Weitere Ideen erkunden, wenn du sie brauchst",
+    "reading": "So liest du dieses Beispiel",
+    "first": "Wähle zuerst „Code ausführen“ und sieh, was der Computer anzeigt.",
+    "change": "Ändere jetzt eine Zahl im Code und führe ihn erneut aus. Ändert sich das Ergebnis?",
+    "result": "Dein aktueller Code hat angezeigt: {value}.",
+    "mapStart": "Noch nie programmiert? Beginne mit einem kleinen Experiment",
+    "mapIntro": "Geh zuerst zur Einführung und lass den Computer eine Zahl anzeigen. Erkunde danach diese Ideen. Die Linien schlagen eine Lernreihenfolge vor; du kannst frei wählen.",
+    "mapGo": "Beginne damit, eine Zahl anzuzeigen →",
+    "mapMeaning": "Was bedeutet das?",
+    "vaultGoal": "Dein Ziel: Schicke diese Zahlen in dieser Reihenfolge an das Schloss.",
+    "vaultSteps": [
+      "Sieh dir die Zielzahlen an, dann den Codebereich. Der Code gibt diesem Schloss seine Anweisungen.",
+      "Führe zuerst den vorhandenen Code aus. Die Empfänger unter dem Schloss zeigen die Zahlen, die es tatsächlich erhält.",
+      "Vergleiche sie mit dem Ziel, ändere den Code und führe ihn erneut aus. Stimmen die Zahlen und ihre Reihenfolge, öffnet sich das Schloss."
+    ],
+    "vaultStart": "Probier es im Codebereich ↓",
+    "vaultFirst": "Ändere bei diesem Schloss nur eine Stelle: Ersetze die 0 im Code durch {b}. ({a} + {b}) addiert die beiden Zahlen; .log() schickt das Ergebnis an das Schloss.",
+    "vaultNames": "energy ist ein Name, den du einer Zahl gibst, nicht die Antwort, die du eingeben sollst. let energy = {a} bedeutet: Wo später energy steht, ist {a} gemeint. Ersetze die 0 in energy + 0 durch {b} und führe den Code erneut aus.",
+    "vaultOrder": "Jedes .log() schickt eine Zahl. Verwende drei davon, um nacheinander {a}, {sum} und {total} anzuzeigen. Du kannst sie mit Addition berechnen oder eine andere richtige Lösung ausprobieren.",
+    "concepts": {
+      "signal": {
+        "term": "Ausgabe: ein Ergebnis anzeigen",
+        "meaning": "Was ein Programm berechnet hat, kannst du nicht immer sehen. Wenn du es ein Ergebnis anzeigen lässt, nennt man das Ausgabe.",
+        "read": "7 ist die Zahl, die angezeigt werden soll. .log() schreibt die Zahl davor in ein Protokoll, das hier links angezeigt wird. Deshalb zeigt 7.log() beim Ausführen 7 an."
+      },
+      "addition": {
+        "term": "Rechnen: den Computer ausrechnen lassen",
+        "meaning": "Wenn du zwei Vorräte hast und drei weitere holst, lass den Computer die Gesamtzahl berechnen.",
+        "read": "+ addiert Zahlen. (2 + 3) berechnet zuerst 5, danach zeigt .log() die 5 an. Die Klammern fassen diese Rechnung zusammen."
+      },
+      "names": {
+        "term": "Namen: einen Wert beschriften",
+        "meaning": "Gib einer Zahl einen Namen, damit du später darauf verweisen kannst, statt überall dieselbe Zahl zu wiederholen.",
+        "read": "let n = 5 gibt der Zahl 5 den Namen n. Später bedeutet n + 2 also 5 + 2. Du kannst einen anderen Namen wählen, musst ihn aber überall gleich schreiben."
+      },
+      "leap": {
+        "term": "Entfernung: einen Flug mit einer Rechnung steuern",
+        "meaning": "Ein Spiel kann eine Zahl aus deinem Programm lesen und sie als Entfernung für einen Flug verwenden.",
+        "read": "Berechne die Entfernung und zeige sie dann mit .log() an. Das Fliegen ist das, was dieses Spiel mit der Zahl macht; .log() selbst hält die Zahl nur fest."
+      },
+      "comparison": {
+        "term": "Vergleich: prüfen, ob es genug ist",
+        "meaning": "Ein Vergleich, etwa die Prüfung, ob der Treibstoff über einem Mindestwert liegt, liefert die Antwort Ja oder Nein.",
+        "read": "> bedeutet „größer als“. 6 > 4 stimmt und ergibt true; 4 > 4 stimmt nicht und ergibt false. true und false stehen für Ja und Nein."
+      },
+      "branch": {
+        "term": "Bedingungen: je nach Lage wählen",
+        "meaning": "Wie „bei genug Treibstoff losfliegen, sonst Vorräte auffüllen“: Eine Bedingung lässt den Computer wählen, was er tut.",
+        "read": "let fuel = 6 hält den Treibstoff als 6 fest. if prüft fuel > 4. Stimmt das, wird ausgeführt, was nach then in den geschweiften Klammern steht, sonst das, was nach else in den geschweiften Klammern steht. Dieses Beispiel zeigt 1 oder 2 an; das Flugzeug bewegt es nicht."
+      },
+      "repeat": {
+        "term": "Wiederholung: dasselbe mehrmals tun",
+        "meaning": "Schicke Berichte an mehrere Orte, ohne dieselben Anweisungen immer wieder zu schreiben.",
+        "read": "[2, 4, 6] ist eine Liste aus drei Zahlen. for nimmt jeweils eine davon, nennt sie vorübergehend dock und führt dock.log() in den geschweiften Klammern aus. So werden nacheinander 2, 4 und 6 angezeigt."
+      },
+      "counter": {
+        "term": "Zählen: wiederholen und dabei prüfen",
+        "meaning": "Wie beim Abarbeiten einer Startcheckliste: Zähle unterwegs mit und hör auf, wenn du genug erledigt hast.",
+        "read": "while prüft vor jeder Wiederholung seine Bedingung und macht nur weiter, solange sie stimmt. Der Zähler muss sich dabei verändern, sonst hört die Wiederholung vielleicht nie auf."
+      },
+      "function": {
+        "term": "Funktionen: einer wiederverwendbaren Anleitung einen Namen geben",
+        "meaning": "Speichere ein Vorgehen wie „zwei Zahlen addieren“ als Werkzeug mit Namen und verwende es dann mit verschiedenen Zahlen.",
+        "read": "sync fn combine(a, b) legt eine synchrone Funktion an, die zwei Zahlen annimmt; a und b sind ihre vorübergehenden Namen. combine(3, 4) übergibt ihr 3 und 4. return a + b gibt 7 an die Stelle zurück, an der sie verwendet wurde, und load.log() zeigt die Zahl dann an."
+      },
+      "reply": {
+        "term": "Antworten: eine Antwort zurückschicken",
+        "meaning": "Bitte einen anderen Teil des Programms, eine Aufgabe zu erledigen, warte auf seine Antwort und verwende sie dann.",
+        "read": "fn boost(load) nimmt eine Zahl an. return ! schickt das berechnete Ergebnis als Antwort zurück. Anders als beim gewöhnlichen return können nach dem Zurückschicken der Antwort spätere Anweisungen in der Funktion noch ausgeführt werden."
+      },
+      "message": {
+        "term": "Nachrichten: Daten an eine andere Stelle schicken",
+        "meaning": "Wie ein verschickter Zettel mit einer Mengenangabe: Ein Absender schickt eine Zahl los, und ein Empfänger verarbeitet sie, sobald er sie erhalten hat.",
+        "read": "! schickt eine Nachricht. <- gibt beim Empfangen an, woher ein Wert kommt. Die empfangene Zahl hat einen Namen, den spätere Rechnungen verwenden können."
+      },
+      "join": {
+        "term": "Abstimmung: auf beide Nachrichten warten",
+        "meaning": "Um eine Gesamtmenge aus zwei Orten zu berechnen, warte auf beide Berichte, bevor du sie zusammen verarbeitest.",
+        "read": "west ! 4 und east ! 6 schicken 4 und 6. ?(a <- west & b <- east) braucht Zahlen von beiden Seiten, bevor die Addition in seinen geschweiften Klammern ausgeführt wird. Fehlt eine, wird gewartet."
+      },
+      "coordination": {
+        "term": "Zusammensetzen: Gelerntes verbinden",
+        "meaning": "Warte auf die Berichte, rechne sie mit einer Funktion zusammen und wähle anhand der Summe eine Aktion. So werden kleine Schritte zu einem Programm verbunden.",
+        "read": "Finde zuerst heraus, woher die Daten kommen, dann, wie sie berechnet werden, und schließlich, wie eine Bedingung über die Ausgabe entscheidet. Folge diesem Weg Schritt für Schritt."
+      }
+    }
   }
 }

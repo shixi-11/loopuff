@@ -14,7 +14,7 @@ function setup(model={},mobile=false){
  const saved={document:globalThis.document,innerHeight:globalThis.innerHeight,matchMedia:globalThis.matchMedia};
  globalThis.document={hidden:false,addEventListener(){},removeEventListener(){}};globalThis.innerHeight=900;globalThis.matchMedia=()=>({matches:mobile});
  const root=node();let writes=0;
- const page=mountGuide(root,{text:catalog.guideStudio,legacy:catalog.guide,errors:catalog.ui,ui:catalog.ui,model,reduced:{matches:true},onChange:()=>writes++,urls:{home:'/zh/',guide:'/zh/guide/',compare:'/zh/guide/compare/',check:'/zh/guide/check/',map:'/zh/guide/map/',dispatch:'/zh/play/dispatch/',lesson:id=>'/zh/learn/'+id+'/'}});
+ const page=mountGuide(root,{beginner:catalog.beginner,text:catalog.guideStudio,legacy:catalog.guide,errors:catalog.ui,ui:catalog.ui,model,reduced:{matches:true},onChange:()=>writes++,urls:{home:'/zh/',guide:'/zh/guide/',compare:'/zh/guide/compare/',check:'/zh/guide/check/',map:'/zh/guide/map/',dispatch:'/zh/play/dispatch/',lesson:id=>'/zh/learn/'+id+'/'}});
  return {root,model,writes:()=>writes,page,
   edit(id,value){root.querySelector('#'+id).value=value;root.handlers.input({target:{id,value}});},
   silent(checked){root.handlers.input({target:{id:'guide-silent',checked}});},
@@ -62,5 +62,20 @@ test('on mobile a comparison is revealed after running, while skipped prediction
   assert.equal(m.root.querySelector('.guide-prediction-result').scrolled,true);assert.equal(m.root.querySelector('.guide-observation').scrolled,undefined);
   m.root.querySelector('.guide-prediction-result').scrolled=false;m.edit('guide-prediction','');m.submit();assert.equal(m.root.querySelector('.guide-observation').scrolled,true);
   m.root.querySelector('.guide-observation').scrolled=false;m.edit('guide-prediction','7');m.edit('guide-editor','unknown.log()');m.submit();assert.equal(m.root.querySelector('.guide-observation').scrolled,true);
+ }finally{m.close();}
+});
+
+test('a first-time reader gets an action, literal result and optional next idea, without awards',()=>{
+ const model={},m=setup(model);try{
+  assert.equal(m.root.querySelector('[data-guide-first-step]').textContent,catalog.beginner.first);
+  assert.equal(m.root.querySelector('[data-guide-forward]').hidden,true);
+  assert.ok(m.root.innerHTML.includes('guide-catalog"><summary>'));
+  assert.ok(m.root.innerHTML.indexOf('class="guide-run-row"')<m.root.innerHTML.indexOf('class="guide-prediction"'));
+  m.edit('guide-editor','7.log()');m.submit();assert.equal(m.root.querySelector('[data-guide-first-step]').textContent,catalog.beginner.change);
+  assert.equal(m.root.querySelector('[data-guide-forward]').hidden,false);assert.equal(m.root.querySelector('[data-guide-forward]').dataset.concept,'addition');
+  m.edit('guide-editor','9.log()');assert.equal(m.root.querySelector('[data-guide-forward]').hidden,true);m.submit();
+  assert.equal(m.root.querySelector('[data-guide-first-step]').textContent,catalog.beginner.result.replace('{value}','9'));
+  m.edit('guide-editor','unknown.log()');m.submit();assert.equal(m.root.querySelector('[data-guide-forward]').hidden,true);
+  assert.equal(model.completed,undefined);assert.equal(model.grades,undefined);
  }finally{m.close();}
 });

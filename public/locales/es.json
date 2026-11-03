@@ -1685,5 +1685,95 @@
       "fuel": "Define una función llamada fuel con dos parámetros. El puerto estelar la llama con cantidades cambiantes de cargo y reserve, y muestra su valor de retorno. No añadas otra llamada ni ninguna salida fuera de la función.",
       "relay": "Une los informes de west y east, combina sus valores en una función y luego usa threshold y reserve para elegir la salida. El puerto estelar envía informes nuevos en cada tanda."
     }
+  },
+  "beginner": {
+    "foundation": "Programar es decirle a una computadora qué hacer.",
+    "intro": "El código son instrucciones que una computadora puede ejecutar. Tolang es un lenguaje para escribirlas. Empieza con una tarea pequeña: haz que la computadora muestre un número. Ejecútalo, cambia un número y observa qué cambia.",
+    "more": "Explora otras ideas cuando las necesites",
+    "reading": "Cómo leer este ejemplo",
+    "first": "Primero, selecciona «Ejecutar código» y observa qué muestra la computadora.",
+    "change": "Ahora cambia un número del código y vuelve a ejecutarlo. ¿Cambia el resultado?",
+    "result": "Tu código actual mostró: {value}.",
+    "mapStart": "¿Nunca has programado? Empieza con un pequeño experimento",
+    "mapIntro": "Primero ve a la introducción y haz que la computadora muestre un número. Después explora estas ideas. Las líneas sugieren un orden de aprendizaje; puedes elegir libremente.",
+    "mapGo": "Empieza mostrando un número →",
+    "mapMeaning": "¿Qué significa esto?",
+    "vaultGoal": "Tu objetivo: enviar estos números a la cerradura en este orden.",
+    "vaultSteps": [
+      "Mira los números objetivo y después el área de código. El código le da sus instrucciones a esta cerradura.",
+      "Primero ejecuta el código que ya está. Los receptores debajo de la cerradura muestran los números que realmente recibe.",
+      "Compáralos con el objetivo, edita el código y vuelve a ejecutarlo. Si coinciden los números y su orden, la cerradura se abre."
+    ],
+    "vaultStart": "Prueba en el área de código ↓",
+    "vaultFirst": "En esta cerradura cambia solo una cosa: sustituye el 0 del código por {b}. ({a} + {b}) suma los dos números; .log() envía el resultado a la cerradura.",
+    "vaultNames": "energy es un nombre que le das a un número, no la respuesta que debes escribir. let energy = {a} significa que, cuando más adelante aparezca energy, se refiere a {a}. Sustituye el 0 de energy + 0 por {b} y vuelve a ejecutarlo.",
+    "vaultOrder": "Cada .log() envía un número. Usa tres para mostrar {a}, {sum} y luego {total}. Puedes calcularlos con sumas o probar otra solución correcta.",
+    "concepts": {
+      "signal": {
+        "term": "Salida: mostrar un resultado",
+        "meaning": "No siempre puedes ver lo que ha calculado un programa. Hacer que muestre un resultado se llama salida.",
+        "read": "7 es el número que se va a mostrar. .log() escribe el número anterior en un registro, que aquí aparece a la izquierda. Por eso, al ejecutar 7.log() se muestra 7."
+      },
+      "addition": {
+        "term": "Cálculo: deja que la computadora haga la cuenta",
+        "meaning": "Si tienes dos suministros y consigues tres más, deja que la computadora calcule el total.",
+        "read": "+ suma números. (2 + 3) calcula primero 5 y después .log() muestra 5. Los paréntesis agrupan este cálculo."
+      },
+      "names": {
+        "term": "Nombres: ponle una etiqueta a un valor",
+        "meaning": "Ponle un nombre a un número para poder referirte a él más tarde, en lugar de repetir el mismo número por todas partes.",
+        "read": "let n = 5 le pone el nombre n al número 5. Después, n + 2 significa 5 + 2. Puedes elegir otro nombre, pero escríbelo siempre igual."
+      },
+      "leap": {
+        "term": "Distancia: controla un vuelo con un cálculo",
+        "meaning": "Un juego puede leer un número de tu programa y usarlo como la distancia de un vuelo.",
+        "read": "Calcula la distancia y luego muéstrala con .log(). Volar es lo que este juego hace con el número; .log() por sí mismo solo lo registra."
+      },
+      "comparison": {
+        "term": "Comparación: comprobar si hay suficiente",
+        "meaning": "Una comparación, como comprobar si el combustible supera un mínimo, da una respuesta de sí o no.",
+        "read": "> significa «mayor que». 6 > 4 se cumple y da true; 4 > 4 no se cumple y da false. true y false representan sí y no."
+      },
+      "branch": {
+        "term": "Condiciones: elegir según la situación",
+        "meaning": "Como salir cuando hay suficiente combustible y reabastecerse si no lo hay, una condición permite que la computadora elija qué hacer.",
+        "read": "let fuel = 6 registra el combustible como 6. if comprueba fuel > 4. Si se cumple, ejecuta lo que está entre llaves después de then; si no, lo que está entre llaves después de else. Este ejemplo muestra 1 o 2; no mueve el avión."
+      },
+      "repeat": {
+        "term": "Repetición: hacer lo mismo varias veces",
+        "meaning": "Envía informes a varios lugares sin escribir las mismas instrucciones una y otra vez.",
+        "read": "[2, 4, 6] es una lista de tres números. for toma uno cada vez, lo llama temporalmente dock y ejecuta dock.log() dentro de las llaves. Muestra 2, 4 y luego 6."
+      },
+      "counter": {
+        "term": "Conteo: repetir mientras compruebas",
+        "meaning": "Como al repasar una lista de comprobación antes del despegue: lleva la cuenta sobre la marcha y para cuando hayas hecho suficiente.",
+        "read": "while comprueba su condición antes de cada repetición y vuelve a ejecutar solo mientras se cumpla. La cuenta tiene que cambiar sobre la marcha; si no, la repetición podría no detenerse nunca."
+      },
+      "function": {
+        "term": "Funciones: ponle nombre a un conjunto de instrucciones reutilizable",
+        "meaning": "Guarda un procedimiento, como sumar dos números, como una herramienta con nombre y úsala luego con números distintos.",
+        "read": "sync fn combine(a, b) define una función síncrona que recibe dos números, llamados temporalmente a y b. combine(3, 4) le da 3 y 4. return a + b devuelve 7 al lugar donde se usó y después load.log() lo muestra."
+      },
+      "reply": {
+        "term": "Respuestas: enviar una respuesta de vuelta",
+        "meaning": "Pide a otra parte del programa que se encargue de una tarea, espera su respuesta y luego usa esa respuesta.",
+        "read": "fn boost(load) recibe un número. return ! envía de vuelta el resultado calculado como respuesta. A diferencia del return normal, después de enviar la respuesta es posible que se sigan ejecutando instrucciones posteriores dentro de la función."
+      },
+      "message": {
+        "term": "Mensajes: enviar datos a otro lugar",
+        "meaning": "Como enviar por correo una nota con una cantidad: un remitente envía un número y un destinatario lo procesa después de recibirlo.",
+        "read": "! envía un mensaje. En una recepción, <- indica de dónde viene un valor. El número recibido tiene un nombre que los cálculos posteriores pueden usar."
+      },
+      "join": {
+        "term": "Coordinación: esperar a que lleguen ambos mensajes",
+        "meaning": "Para calcular un total a partir de dos lugares, espera a tener ambos informes antes de procesarlos juntos.",
+        "read": "west ! 4 y east ! 6 envían 4 y 6. ?(a <- west & b <- east) necesita números de ambos lados antes de ejecutar la suma que está entre sus llaves. Si falta uno, espera."
+      },
+      "coordination": {
+        "term": "Composición: conecta las ideas que has aprendido",
+        "meaning": "Espera los informes, súmalos con una función y luego elige una acción según ese total. Así se combinan pasos pequeños en un programa.",
+        "read": "Primero averigua de dónde vienen los datos, luego cómo se calculan y, por último, cómo una condición decide la salida. Sigue ese camino paso a paso."
+      }
+    }
   }
 }

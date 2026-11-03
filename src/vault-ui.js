@@ -1,3 +1,4 @@
+import {vaultFirstStep} from './beginner.js';
 import { newVault, restoreVault, vaultPuzzle, inspectVault, submitVault, advanceVault, replayVault } from './vault.js';
 import {progressStorage} from './save-data.js';
 
@@ -5,7 +6,7 @@ const key='loopuff-vault-v1';
 const html=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const freshSeed=()=>crypto.getRandomValues(new Uint32Array(1))[0];
 export function loadVault(){try{return restoreVault(JSON.parse(localStorage.getItem(key)),freshSeed());}catch{return newVault(freshSeed());}}
-export function mountVault(root,{text:t,errors,reduced}){
+export function mountVault(root,{text:t,errors,reduced,beginner}){
   const state=loadVault();let timers=[],disposed=false;
   const persist=async()=>{try{const raw=JSON.stringify(state);await progressStorage().write(()=>localStorage.setItem(key,raw));}catch{const status=root.querySelector('[data-vault-status]');if(status)status.textContent=t.noSave;}};
   const cancel=()=>{for(const timer of timers)clearTimeout(timer);timers=[];};
@@ -19,11 +20,11 @@ export function mountVault(root,{text:t,errors,reduced}){
     root.innerHTML=`<section class="vault-mission">
       <header class="vault-heading"><div><span class="eyebrow">${html(t.eyebrow)} · <bdi dir="ltr">0${state.stage+1} / 03</bdi></span><h1 id="learning-title">${html(t.title)}</h1><p>${html(t.intro)}</p></div><div class="vault-stamps"><span>${html(t.collection)}</span><strong><bdi dir="ltr">${state.stamps.length} / 3</bdi></strong></div></header>
       <ol class="vault-path">${t.stages.map((item,i)=>`<li ${i===state.stage?'aria-current="step"':''} data-cleared="${state.cleared.includes(i)}"><bdi dir="ltr">${state.cleared.includes(i)?'✓':String(i+1).padStart(2,'0')}</bdi><span>${html(item.title)}</span></li>`).join('')}</ol>
-      <div class="vault-workspace"><section class="vault-observation" aria-label="${html(t.scene)}">
+      <section class="vault-instructions"><div><h2>${html(beginner.vaultGoal)}</h2><p class="vault-target" dir="ltr">${p.goal.logs.map(value=>`<bdi>${html(value)}</bdi>`).join('<span aria-hidden="true"> → </span>')}</p></div><ol>${beginner.vaultSteps.map(step=>`<li>${html(step)}</li>`).join('')}</ol><button class="text-button" type="button" data-vault-action="begin">${html(beginner.vaultStart)}</button></section><div class="vault-workspace"><section class="vault-observation" aria-label="${html(t.scene)}">
         <div class="vault-theatre" data-vault-scene data-state="idle" aria-hidden="true"><div class="vault-stars"></div><div class="vault-rim"><div class="vault-core"><span>✦</span></div><div class="vault-door"><div class="vault-ring"><i></i><i></i><i></i><div class="vault-dial"><span data-vault-dial>—</span></div></div><div class="vault-bolts"><i></i><i></i><i></i></div></div></div><div class="vault-scan"></div><div class="vault-scene-label">${html(t.bank)}</div></div>
         <div class="vault-receivers" aria-label="${html(t.receivers)}" dir="ltr">${p.goal.logs.map((_,i)=>`<span data-receiver="${i}"><small>${String(i+1).padStart(2,'0')}</small><b>—</b></span>`).join('')}</div>
         <div class="vault-brief"><h2>${html(s.title)}</h2><p>${html(s.task.replaceAll('{a}',p.a).replaceAll('{b}',p.b).replaceAll('{c}',p.c))}</p><div class="vault-clues" dir="ltr"><span><small>A</small>${p.a}</span><span><small>B</small>+ ${p.b}</span>${state.stage===2?`<span><small>C</small>+ ${p.c}</span>`:''}</div></div>
-      </section><section class="vault-console"><form data-vault-form><label for="vault-editor">${html(t.editor)}</label><p class="vault-editor-note">${html(t.signalRule)}</p><textarea id="vault-editor" class="practice-editor" rows="7" maxlength="4096" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off" aria-describedby="vault-keyboard">${html(draft)}</textarea><small id="vault-keyboard">${html(t.keyboard)}</small><div class="dialog-actions"><button class="primary" data-vault-run type="submit">${html(t.run)} <span aria-hidden="true">↗</span></button><button class="text-button" type="button" data-vault-action="reset">${html(t.reset)}</button></div></form>
+      </section><section class="vault-console"><form data-vault-form><label for="vault-editor">${html(t.editor)}</label><p class="vault-editor-note">${html(t.signalRule)}</p><p class="vault-first-step">${html(vaultFirstStep(beginner,p,draft))}</p><textarea id="vault-editor" class="practice-editor" rows="7" maxlength="4096" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off" aria-describedby="vault-keyboard">${html(draft)}</textarea><small id="vault-keyboard">${html(t.keyboard)}</small><div class="dialog-actions"><button class="primary" data-vault-run type="submit">${html(t.run)} <span aria-hidden="true">↗</span></button><button class="text-button" type="button" data-vault-action="reset">${html(t.reset)}</button></div></form>
         <div class="vault-feedback" data-vault-feedback data-kind="idle" role="status" aria-live="polite"><strong data-vault-status>${html(t.ready)}</strong><p data-vault-detail>${html(t.consequence)}</p><div data-vault-output hidden><span>${html(t.output)}</span><code dir="ltr"></code></div></div>
         <div class="vault-next" data-vault-next hidden><button class="primary" type="button" data-vault-action="next">${html(state.stage===2?t.replay:t.next)} <span aria-hidden="true">→</span></button><p>${html(state.stage===2?t.allDone:s.learned)}</p></div>
         <details class="vault-help"><summary>${html(t.help)}</summary><p>${html(s.hint)}</p><pre dir="ltr">${html(p.example)}</pre><p>${html(t.meaning)}</p></details>
@@ -67,6 +68,7 @@ export function mountVault(root,{text:t,errors,reduced}){
   function onSubmit(event){if(!event.target.matches('[data-vault-form]'))return;event.preventDefault();const source=root.querySelector('#vault-editor').value;const report=submitVault(state,source);persist();render();present(report,true);}
   function onClick(event){
     const action=event.target.closest('[data-vault-action]')?.dataset.vaultAction;if(!action)return;
+    if(action==='begin'){const editor=root.querySelector('#vault-editor');editor.focus({preventScroll:true});editor.scrollIntoView({block:'center',behavior:'instant'});return;}
     if(action==='reset'){state.drafts[state.stage]=vaultPuzzle(state.seed,state.stage).starter;state.edited=(state.edited||[]).filter(i=>i!==state.stage);state.submitted=null;}
     if(action==='next'){
       if(state.stage===2){if(!state.submitted||!inspectVault(state,state.submitted).ok)return;const next=replayVault(state,freshSeed());Object.keys(state).forEach(k=>delete state[k]);Object.assign(state,next);}

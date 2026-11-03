@@ -1697,5 +1697,95 @@
       "fuel": "Define a function named fuel with two parameters. The starport calls it with changing cargo and reserve amounts and displays its return value. Do not add another call or output outside the function.",
       "relay": "Join the reports from west and east, combine their values in a function, then use threshold and reserve to choose the output. The starport supplies new reports for every batch."
     }
+  },
+  "beginner": {
+    "foundation": "Programming means telling a computer what to do.",
+    "intro": "Code is instructions a computer can execute. Tolang is one language for writing them. Start with one small task: make the computer display a number. Run it, change a number, and see what changes.",
+    "more": "Explore other ideas when you need them",
+    "reading": "How to read this example",
+    "first": "First, select Run code and see what the computer displays.",
+    "change": "Now change a number in the code and run it again. Does the result change?",
+    "result": "Your current code displayed: {value}.",
+    "mapStart": "Never programmed? Start with one small experiment",
+    "mapIntro": "First visit the introduction and make the computer display a number. Then explore these ideas. Lines suggest a learning order; you can choose freely.",
+    "mapGo": "Start by displaying a number →",
+    "mapMeaning": "What does this mean?",
+    "vaultGoal": "Your goal: send these numbers to the lock in this order.",
+    "vaultSteps": [
+      "Look at the target numbers, then the code area. The code gives this lock its instructions.",
+      "Run the existing code first. The receivers below the lock show the numbers it actually receives.",
+      "Compare them with the target, edit the code, and run again. Match the numbers and their order to open the lock."
+    ],
+    "vaultStart": "Try the code area ↓",
+    "vaultFirst": "For this lock, change just one thing: replace 0 in the code with {b}. ({a} + {b}) adds the two numbers; .log() sends the result to the lock.",
+    "vaultNames": "energy is a name you give a number, not the answer to enter. let energy = {a} means later uses of energy refer to {a}. Replace 0 in energy + 0 with {b} and run again.",
+    "vaultOrder": "Each .log() sends one number. Use three to display {a}, {sum}, then {total}. You can calculate them with addition or try another correct solution.",
+    "concepts": {
+      "signal": {
+        "term": "Output: display a result",
+        "meaning": "You cannot always see what a program has calculated. Making it display a result is called output.",
+        "read": "7 is the number to display. .log() writes the preceding number to a log, shown on the left here. Running 7.log() therefore displays 7."
+      },
+      "addition": {
+        "term": "Calculation: let the computer work it out",
+        "meaning": "If you have two supplies and collect three more, let the computer calculate the total.",
+        "read": "+ adds numbers. (2 + 3) calculates 5 first, then .log() displays 5. The parentheses group this calculation together."
+      },
+      "names": {
+        "term": "Names: label a value",
+        "meaning": "Give a number a name so you can refer to it later instead of repeating the same number everywhere.",
+        "read": "let n = 5 names the number 5 n. Later, n + 2 means 5 + 2. You can choose another name, but use it consistently."
+      },
+      "leap": {
+        "term": "Distance: control a flight with a calculation",
+        "meaning": "A game can read a number from your program and use it as the distance for a flight.",
+        "read": "Calculate the distance, then display it with .log(). Flying is what this game does with the number; .log() itself only records it."
+      },
+      "comparison": {
+        "term": "Comparison: check whether there is enough",
+        "meaning": "A comparison, such as checking whether fuel exceeds a minimum, gives a yes or no answer.",
+        "read": "> means greater than. 6 > 4 is true; 4 > 4 is false. true and false represent yes and no."
+      },
+      "branch": {
+        "term": "Conditions: choose according to the situation",
+        "meaning": "Like departing when there is enough fuel and resupplying otherwise, a condition lets the computer choose what to do.",
+        "read": "let fuel = 6 records fuel as 6. if checks fuel > 4. If true, it runs the braces after then; otherwise, the braces after else. This example displays 1 or 2; it does not move the aircraft."
+      },
+      "repeat": {
+        "term": "Repetition: do the same thing several times",
+        "meaning": "Send reports to several places without writing the same instructions over and over.",
+        "read": "[2, 4, 6] is a list of three numbers. for takes one at a time, temporarily names it dock, and runs dock.log() inside the braces. It displays 2, 4, then 6."
+      },
+      "counter": {
+        "term": "Counting: repeat while checking",
+        "meaning": "Like working through a takeoff checklist, keep count as you go and stop when you have done enough.",
+        "read": "while checks its condition before each repetition and runs again only while it is true. The count must change as you go, or repetition may never stop."
+      },
+      "function": {
+        "term": "Functions: name a reusable set of instructions",
+        "meaning": "Save a method such as adding two numbers as a named tool, then use it with different numbers.",
+        "read": "sync fn combine(a, b) defines a synchronous function taking two numbers, temporarily named a and b. combine(3, 4) gives it 3 and 4. return a + b hands 7 back to where it was used, then load.log() displays it."
+      },
+      "reply": {
+        "term": "Replies: send an answer back",
+        "meaning": "Ask another part of the program to handle a task, wait for its answer, then use that answer.",
+        "read": "fn boost(load) accepts a number. return ! sends its calculated result back as a reply. Unlike ordinary return, sending a reply may still allow later statements inside the function to run."
+      },
+      "message": {
+        "term": "Messages: send data somewhere else",
+        "meaning": "Like mailing a note with a quantity, a sender sends a number and a receiver processes it after receiving it.",
+        "read": "! sends a message. <- in a receive specifies where a value comes from. The received number has a name that later calculations can use."
+      },
+      "join": {
+        "term": "Coordination: wait for both messages",
+        "meaning": "To calculate a total from two locations, wait for both reports before processing them together.",
+        "read": "west ! 4 and east ! 6 send 4 and 6. ?(a <- west & b <- east) requires numbers from both sides before running the addition inside its braces. It waits if one is missing."
+      },
+      "coordination": {
+        "term": "Composition: connect the ideas you have learned",
+        "meaning": "Wait for reports, total them with a function, then choose an action using that total. Combine small steps into a program.",
+        "read": "First find where the data comes from, then how it is calculated, and finally how a condition decides the output. Follow that path one step at a time."
+      }
+    }
   }
 }
