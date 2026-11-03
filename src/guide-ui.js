@@ -72,7 +72,7 @@ export function mountGuide(root,{text,rewriteText,legacy,errors,ui,model,compare
  }
  function click(event){
   const button=event.target.closest('button');if(!button)return;
-  if(button.dataset.concept){model.selected=button.dataset.concept;model.cursor=0;onChange();render();root.querySelector(`[data-concept="${model.selected}"]`).focus();return;}
+  if(button.dataset.concept){model.selected=button.dataset.concept;model.cursor=0;onChange();render();root.querySelector('#guide-editor').focus();return;}
   if(button.dataset.frame!==undefined){stop();model.cursor=Number(button.dataset.frame);paint();return;}
   const action=button.dataset.guide;if(!action)return;
   if(action==='reset'){delete model.drafts[model.selected];delete model.reports[model.selected];delete model.predictions[model.selected];model.cursor=0;onChange();render();root.querySelector('#guide-editor').focus();return;}

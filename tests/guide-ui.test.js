@@ -6,7 +6,7 @@ const catalog=JSON.parse(fs.readFileSync(new URL('../public/locales/zh.json',imp
 function node(){
  const children=new Map(),handlers={};
  return {handlers,innerHTML:'',textContent:'',value:'',dataset:{},disabled:false,scrollWidth:0,clientWidth:0,
-  classList:{toggle(){}},setAttribute(){},removeAttribute(){},getBoundingClientRect:()=>({top:0,bottom:1}),focus(){},scrollIntoView(){this.scrolled=true;},
+  classList:{toggle(){}},setAttribute(){},removeAttribute(){},getBoundingClientRect:()=>({top:0,bottom:1}),focus(){this.focused=true;},scrollIntoView(){this.scrolled=true;},
   querySelector(selector){if(!children.has(selector))children.set(selector,node());return children.get(selector);},querySelectorAll:()=>[],
   addEventListener:(name,fn)=>handlers[name]=fn,removeEventListener(){}};
 }
@@ -77,5 +77,6 @@ test('a first-time reader gets an action, literal result and optional next idea,
   assert.equal(m.root.querySelector('[data-guide-first-step]').textContent,catalog.beginner.result.replace('{value}','9'));
   m.edit('guide-editor','unknown.log()');m.submit();assert.equal(m.root.querySelector('[data-guide-forward]').hidden,true);
   assert.equal(model.completed,undefined);assert.equal(model.grades,undefined);
+  m.click({concept:'addition'});assert.equal(m.root.querySelector('#guide-editor').focused,true);
  }finally{m.close();}
 });

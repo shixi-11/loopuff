@@ -58,6 +58,7 @@ export function mountVault(root,{text:t,errors,reduced,beginner}){
   function onInput(event){
     if(event.target.id!=='vault-editor')return;
     cancel();state.drafts[state.stage]=event.target.value;state.submitted=null;
+    root.querySelector('.vault-first-step').textContent=vaultFirstStep(beginner,vaultPuzzle(state.seed,state.stage),event.target.value);
     if(!state.edited)state.edited=[];if(!state.edited.includes(state.stage))state.edited.push(state.stage);
     root.querySelector('[data-vault-run]').disabled=false;
     root.querySelector('[data-vault-scene]').dataset.state='idle';root.querySelector('[data-vault-dial]').textContent='—';
