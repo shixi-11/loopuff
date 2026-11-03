@@ -1856,6 +1856,10 @@
     "gapMeaning": "Rival's lead in route progress (m)",
     "roundMeaning": "Current road section",
     "rivalEnergyMeaning": "Rival energy (0–100)",
-    "gapNote": "gap compares progress along each route. It is not the physical distance between the police and thief."
+    "gapNote": "gap compares progress along each route. It is not the physical distance between the police and thief.",
+    "signalError": "For this exercise, output exactly one 1, 2 or 3 per run.",
+    "saving": "Saving the adopted draft. Please wait.",
+    "saveError": "The adopted draft was not saved. Play has not resumed. Check the save message before trying again.",
+    "obstacleNote": "An obstacle value of 999 means no barrier remains to cross in this road section."
   }
 }

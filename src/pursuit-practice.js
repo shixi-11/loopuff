@@ -19,3 +19,10 @@ export function stagePursuitPractice(world,source,report,confirmed=false){
  world.draft=source;
  return 'staged';
 }
+export async function persistPursuitPractice(session,world,source,previous){
+ let saved=false;try{saved=await session.persist();}catch{}
+ // A failed write must not erase the replaced draft. A later edit or a new
+ // session owns its own source and must never be rolled back by this request.
+ if(!saved&&session.world===world&&world.draft===source)world.draft=previous;
+ return saved;
+}

@@ -1844,6 +1844,10 @@
     "gapMeaning": "Ventaja del rival en el avance por la ruta (m)",
     "roundMeaning": "Tramo actual del camino",
     "rivalEnergyMeaning": "Energía del rival (0–100)",
-    "gapNote": "gap compara el avance de cada uno por su propia ruta. No es la distancia física entre la policía y el ladrón."
+    "gapNote": "gap compara el avance de cada uno por su propia ruta. No es la distancia física entre la policía y el ladrón.",
+    "signalError": "En este ejercicio, emite exactamente un 1, 2 o 3 por ejecución.",
+    "saving": "Guardando el borrador elegido. Espera un momento.",
+    "saveError": "No se guardó el borrador elegido. El juego no se ha reanudado. Revisa el aviso de guardado antes de volver a intentarlo.",
+    "obstacleNote": "Un valor de obstacle de 999 indica que no quedan barreras por superar en este tramo."
   }
 }

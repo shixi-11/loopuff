@@ -1844,6 +1844,10 @@
     "gapMeaning": "Vorsprung des Gegners im Streckenfortschritt (m)",
     "roundMeaning": "Aktueller Streckenabschnitt",
     "rivalEnergyMeaning": "Energie des Gegners (0–100)",
-    "gapNote": "gap vergleicht den Fortschritt auf der jeweiligen Strecke. Es ist nicht der tatsächliche Abstand zwischen Polizist und Dieb."
+    "gapNote": "gap vergleicht den Fortschritt auf der jeweiligen Strecke. Es ist nicht der tatsächliche Abstand zwischen Polizist und Dieb.",
+    "signalError": "Gib in dieser Übung pro Ausführung genau eine 1, 2 oder 3 aus.",
+    "saving": "Der übernommene Entwurf wird gespeichert. Bitte warten.",
+    "saveError": "Der übernommene Entwurf wurde nicht gespeichert. Das Spiel wurde nicht fortgesetzt. Prüfe vor einem erneuten Versuch den Speicherhinweis.",
+    "obstacleNote": "Ein obstacle-Wert von 999 bedeutet, dass in diesem Straßenabschnitt kein Hindernis mehr zu überwinden ist."
   }
 }

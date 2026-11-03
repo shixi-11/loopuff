@@ -1856,6 +1856,10 @@
     "gapMeaning": "对手领先的路线进度（米）",
     "roundMeaning": "当前路段",
     "rivalEnergyMeaning": "对手体力（0–100）",
-    "gapNote": "gap比较沿各自路线的进度，不是警察与小偷实际相距几米。"
+    "gapNote": "gap比较沿各自路线的进度，不是警察与小偷实际相距几米。",
+    "signalError": "试写时每次只输出一个1、2或3。",
+    "saving": "正在保存采用的草稿，请稍等。",
+    "saveError": "这次采用未保存，未继续游戏。检查存档提示后再试。",
+    "obstacleNote": "obstacle为999时，表示本路段已没有待跨的路障。"
   }
 }

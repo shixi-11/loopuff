@@ -1844,6 +1844,10 @@
     "gapMeaning": "Mức đối thủ dẫn trước về tiến độ trên tuyến đường (m)",
     "roundMeaning": "Đoạn đường hiện tại",
     "rivalEnergyMeaning": "Thể lực đối thủ (0–100)",
-    "gapNote": "gap so sánh tiến độ trên tuyến đường của mỗi bên. Đó không phải khoảng cách thực tế giữa cảnh sát và tên trộm."
+    "gapNote": "gap so sánh tiến độ trên tuyến đường của mỗi bên. Đó không phải khoảng cách thực tế giữa cảnh sát và tên trộm.",
+    "signalError": "Trong bài tập này, mỗi lần chạy chỉ xuất một số 1, 2 hoặc 3.",
+    "saving": "Đang lưu bản nháp được chọn. Vui lòng đợi.",
+    "saveError": "Chưa lưu được bản nháp được chọn. Trò chơi chưa tiếp tục. Hãy kiểm tra thông báo lưu trước khi thử lại.",
+    "obstacleNote": "Giá trị obstacle bằng 999 nghĩa là đoạn đường này không còn vật cản cần vượt qua."
   }
 }

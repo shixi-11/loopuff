@@ -1,4 +1,5 @@
 import {startPursuit,pausePursuit,advancePursuit,deployPursuit,inspectPursuit,setPursuitRoute,pursuitInputs} from './pursuit.js';
+import {persistPursuitPractice} from './pursuit-practice.js';
 import {mountPursuitPractice} from './pursuit-practice-ui.js';
 import {mountPursuitScene} from './pursuit-scene.js';
 import {createPursuitClock} from './pursuit-clock.js';
@@ -10,7 +11,7 @@ export function mountPursuit(root,{text:t,practiceText,roles,errors,reduced,save
  const session=model.session??=createPursuitSession();
  let world=session.world,history=session.history,badSave=session.badSave,scene=null,disposed=false,raf=0,lastHUD=0,lastSave=0,saveFailed=session.saveFailed,notice=badSave?t.badSave:world.status==='finished'?t[world.outcome]:session.restored||world.activeMs?t.savedPaused:t.ready,report=null,lastReport=null,ready=false,confirmNew=false,keySprint=false,sprintPointer=null,jump=false,seenEvent=world.eventSerial;
  const el=selector=>root.querySelector(selector),button=name=>el(`[data-pursuit="${name}"]`);
- let clock,practice=null;
+ let clock,practice=null,stageWasPending=!!model.practice?.pending;
  function createClock(){clock=createPursuitClock({state:world,advance:elapsed=>{advancePursuit(world,elapsed,{sprint:keySprint||sprintPointer!==null,jump});jump=false;},pause:reason=>pause(reason)});}
  createClock();
  const persist=()=>session.persist();
@@ -28,9 +29,9 @@ export function mountPursuit(root,{text:t,practiceText,roles,errors,reduced,save
   <div class="pursuit-scene" tabindex="0" role="group" aria-label="${esc(t.controls)}"><canvas aria-hidden="true"></canvas><p data-pursuit-loading>${esc(t.loading)}</p></div>
   <div class="pursuit-controls"><div class="pursuit-actions"><button class="primary" type="button" data-pursuit="start" disabled>${esc(t.start)}</button><button type="button" data-pursuit="jump" disabled>${esc(t.jump)} <kbd>Space</kbd></button><button type="button" data-pursuit="sprint" disabled>${esc(t.sprint)} <kbd>Shift</kbd></button></div><div class="pursuit-route" role="group" aria-label="${esc(t.route)}"><small>${esc(t.route)}</small>${[0,1].map(n=>`<button type="button" data-pursuit-path="${n}" aria-pressed="${world.nextRoute===n}" title="${esc(n?t.alleyHint:t.wideHint)}">${esc(n?t.alley:t.wide)}</button>`).join('')}</div></div><p class="pursuit-status" role="status" aria-live="polite" data-pursuit-status>${esc(notice)}</p><p class="pursuit-keyboard">${esc(t.controls)}</p></section>
   <section class="pursuit-result" hidden><h2 data-pursuit-result></h2><p data-pursuit-outcome></p><p>${esc(t.resultNote)}</p><dl><div><dt>${esc(t.collisions)}</dt><dd data-pursuit-collisions></dd></div><div><dt>${esc(t.clears)}</dt><dd data-pursuit-clears></dd></div></dl></section>
-  <details class="pursuit-strategy"><summary>${esc(t.strategy)}</summary><div data-pursuit-practice-root></div><p>${esc(t.strategyNote)}</p><p>${esc(t.signals)}</p><dl class="pursuit-inputs" aria-label="${esc(t.inputValues)}">${Object.keys(pursuitInputs(world)).map(name=>`<div><dt>${esc(practiceText[name+'Meaning'])} <code dir="ltr">${name}</code></dt><dd data-pursuit-input="${name}" dir="ltr"></dd></div>`).join('')}</dl><p>${esc(practiceText.gapNote)}</p><form data-pursuit-form><label for="pursuit-editor">${esc(t.editor)}</label><textarea id="pursuit-editor" dir="ltr" rows="6" maxlength="3000" autocomplete="off" autocapitalize="off" spellcheck="false">${esc(world.draft)}</textarea><div class="pursuit-code-actions"><button class="primary" type="submit">${esc(t.deploy)}</button><button type="button" data-pursuit="inspect">${esc(t.inspect)}</button><button type="button" data-pursuit="example">${esc(t.restoreExample)}</button></div></form><p role="status" aria-live="polite" data-pursuit-report>${esc(t.idlePlan)}</p><pre class="pursuit-code-trace" dir="ltr" hidden></pre></details>
+  <details class="pursuit-strategy"><summary>${esc(t.strategy)}</summary><div data-pursuit-practice-root></div><p>${esc(t.strategyNote)}</p><p>${esc(t.signals)}</p><dl class="pursuit-inputs" aria-label="${esc(t.inputValues)}">${Object.keys(pursuitInputs(world)).map(name=>`<div><dt>${esc(practiceText[name+'Meaning'])} <code dir="ltr">${name}</code></dt><dd data-pursuit-input="${name}" dir="ltr"></dd></div>`).join('')}</dl><p>${esc(practiceText.obstacleNote)} ${esc(practiceText.gapNote)}</p><form data-pursuit-form><label for="pursuit-editor">${esc(t.editor)}</label><textarea id="pursuit-editor" dir="ltr" rows="6" maxlength="3000" autocomplete="off" autocapitalize="off" spellcheck="false">${esc(world.draft)}</textarea><div class="pursuit-code-actions"><button class="primary" type="submit">${esc(t.deploy)}</button><button type="button" data-pursuit="inspect">${esc(t.inspect)}</button><button type="button" data-pursuit="example">${esc(t.restoreExample)}</button></div></form><p role="status" aria-live="polite" data-pursuit-report>${esc(t.idlePlan)}</p><pre class="pursuit-code-trace" dir="ltr" hidden></pre></details>
   <details class="pursuit-help"><summary>${esc(t.help)}</summary><p>${esc(t.rules)}</p><p>${esc(t.minimum)}</p><p>${esc(t.wideHint)} · ${esc(t.alleyHint)}</p></details><details class="pursuit-history"><summary>${esc(t.history)}</summary><ol>${history.length?history.map(h=>`<li>${esc(roles[h.role])} · <bdi dir="ltr">${time(h.activeMs)}</bdi> · ${esc(h.outcome==='caught'?t.caught:t.escaped)}</li>`).join(''):`<li>${esc(t.noHistory)}</li>`}</ol></details><p data-pursuit-save role="status"></p></section>`;
-  practice=mountPursuitPractice(el('[data-pursuit-practice-root]'),{text:practiceText,errors,model,getWorld:()=>world,pause,canStage:()=>!badSave&&!saveFailed,onStage:()=>{el('#pursuit-editor').value=world.draft;report=null;lastReport=world.lastReport;showReport();notice=practiceText.staged;updateHUD();persist();const editor=el('#pursuit-editor');editor.focus({preventScroll:true});editor.scrollIntoView({block:'center',behavior:'instant'});}});
+  practice=mountPursuitPractice(el('[data-pursuit-practice-root]'),{text:practiceText,errors,model,getWorld:()=>world,pause,canStage:()=>!badSave&&!saveFailed,onStage:async previous=>{const target=world,source=world.draft;report=null;lastReport=world.lastReport;showReport();notice=practiceText.saving;updateHUD();const saved=await persistPursuitPractice(session,target,source,previous);model.practice.pending=false;if(!disposed){notice=saved?practiceText.staged:practiceText.saveError;updateHUD();if(saved){const editor=el('#pursuit-editor');editor.focus({preventScroll:true});editor.scrollIntoView({block:'center',behavior:'instant'});}}return saved;}});
   const mounted=mountPursuitScene(el('.pursuit-scene'),{getState:()=>world,text:t,roles,onError:()=>{if(disposed||scene!==mounted)return;notice=t.artError;ready=false;updateHUD();}});scene=mounted;
   el('.pursuit-settings a').textContent=saveLabel;
   mounted.ready.then(ok=>{if(disposed||scene!==mounted)return;ready=ok;el('[data-pursuit-loading]').hidden=ok;if(!ok)el('[data-pursuit-loading]').textContent=t.artError;updateHUD();});
@@ -39,11 +40,11 @@ export function mountPursuit(root,{text:t,practiceText,roles,errors,reduced,save
   updateHUD();
  }
  function updateHUD(){
-  if(disposed)return;practice?.refresh();const a=world.actors[world.role];el('[data-pursuit-time]').textContent=time(world.activeMs);el('[data-pursuit-round]').textContent=a.road==='exit'?t.exit:`${a.section+1} / 20${a.road==='thief'&&world.role==='police'?' ↶':''}`;
+  if(disposed)return;practice?.refresh();const staging=!!model.practice?.pending;if(stageWasPending&&!staging){el('#pursuit-editor').value=world.draft;report=null;showReport();}stageWasPending=staging;for(const control of root.querySelectorAll('[data-pursuit-form] button,#pursuit-editor'))control.disabled=staging;button('new').disabled=staging;const a=world.actors[world.role];el('[data-pursuit-time]').textContent=time(world.activeMs);el('[data-pursuit-round]').textContent=a.road==='exit'?t.exit:`${a.section+1} / 20${a.road==='thief'&&world.role==='police'?' ↶':''}`;
   for(const role of ['police','thief']){el(`[data-pursuit-energy="${role}"]`).value=world.actors[role].energy;el(`[data-pursuit-energy-number="${role}"]`).textContent=String(Math.floor(world.actors[role].energy));}
   for(const [name,value]of Object.entries(pursuitInputs(world)))el(`[data-pursuit-input="${name}"]`).textContent=String(value);
   for(const route of root.querySelectorAll('[data-pursuit-path]')){route.setAttribute('aria-pressed',String(Number(route.dataset.pursuitPath)===world.nextRoute));route.disabled=world.status==='finished'||badSave;}
-  button('start').disabled=!ready||badSave||world.status==='finished'||saveFailed;
+  button('start').disabled=!ready||badSave||world.status==='finished'||saveFailed||staging;
   button('start').textContent=world.status==='finished'?((world.outcome==='caught')===(world.role==='police')?t.won:t.lost):world.status==='running'?t.pause:world.draft!==world.strategy?t.deploy:world.status==='ready'?t.start:t.resume;
   button('jump').disabled=button('sprint').disabled=world.status!=='running';
   el('[data-pursuit-status]').textContent=notice;
@@ -60,7 +61,7 @@ export function mountPursuit(root,{text:t,practiceText,roles,errors,reduced,save
   const source=world.draft===world.strategy?world.strategy:world.draft,output=report.outputs[0];trace.innerHTML=output?`${esc(source.slice(0,output.start))}<mark>${esc(source.slice(output.start,output.end))}</mark>${esc(source.slice(output.end))}`:esc(source);
  }
  function resume(){
-  if(!ready||badSave||saveFailed||world.status==='finished')return;
+  if(!ready||badSave||saveFailed||model.practice?.pending||world.status==='finished')return;
   if(world.status==='running'){pause();return;}
   if(world.status==='ready'){
    const role=el('[data-pursuit-role]').value,difficulty=el('[data-pursuit-difficulty]').value;
@@ -86,15 +87,15 @@ export function mountPursuit(root,{text:t,practiceText,roles,errors,reduced,save
   if(action==='jump'){jump=true;el('.pursuit-scene').focus({preventScroll:true});return;}
   if(action==='focus'){el('.pursuit-theatre').classList.toggle('is-expanded');target.textContent=el('.pursuit-theatre').classList.contains('is-expanded')?t.closeFocus:t.focus;scene?.resize();return;}
   if(action==='inspect'){pause();report=inspectPursuit(world,world.draft);lastReport=world.lastReport;showReport();return;}
-  if(action==='example'){pause();world.draft='1.log()';el('#pursuit-editor').value=world.draft;report=null;showReport();persist();return;}
+  if(action==='example'){if(model.practice?.pending)return;pause();world.draft='1.log()';el('#pursuit-editor').value=world.draft;report=null;showReport();persist();return;}
   if(action==='new'){
-   pause();if(!confirmNew&&(world.activeMs>0||badSave)&&world.status!=='finished'){confirmNew=true;target.textContent=t.confirmNew;return;}
+   if(model.practice?.pending)return;pause();if(!confirmNew&&(world.activeMs>0||badSave)&&world.status!=='finished'){confirmNew=true;target.textContent=t.confirmNew;return;}
    const role=el('[data-pursuit-role]').value,difficulty=el('[data-pursuit-difficulty]').value,draft=world.draft;
    world=session.replace(role,difficulty,draft);badSave=false;saveFailed=false;report=null;lastReport=null;confirmNew=false;seenEvent=0;notice=t.ready;scene?.dispose();createClock();render();button('start').focus({preventScroll:true});persist();
   }
  }
- function submit(event){if(!event.target.matches('[data-pursuit-form]'))return;event.preventDefault();pause();report=deployPursuit(world,world.draft);lastReport=world.lastReport;showReport();if(report.ok)resume();else{notice=t.error;updateHUD();persist();}}
- function input(event){if(event.target.id!=='pursuit-editor')return;pause();world.draft=event.target.value;report=null;lastReport=world.lastReport;showReport();persist();updateHUD();}
+ function submit(event){if(!event.target.matches('[data-pursuit-form]'))return;event.preventDefault();if(model.practice?.pending)return;pause();report=deployPursuit(world,world.draft);lastReport=world.lastReport;showReport();if(report.ok)resume();else{notice=t.error;updateHUD();persist();}}
+ function input(event){if(event.target.id!=='pursuit-editor'||model.practice?.pending)return;pause();world.draft=event.target.value;report=null;lastReport=world.lastReport;showReport();persist();updateHUD();}
  function keydown(event){if(event.key==='Escape'){if(el('.pursuit-theatre').classList.contains('is-expanded')){event.preventDefault();button('focus').click();}else if(!event.target.closest('input,textarea,select'))pause();return;}if(world.status==='running'&&event.key==='Shift'&&!event.target.closest('input,textarea,select')){keySprint=true;return;}if(event.target.closest('input,textarea,select,button,a,summary')||event.ctrlKey||event.metaKey||event.altKey)return;if(world.status!=='running')return;if(event.code==='Space'){event.preventDefault();if(!event.repeat)jump=true;}}
  function keyup(event){if(event.key==='Shift')keySprint=false;}
  function pointerdown(event){if(event.button!==0||!event.target.closest('[data-pursuit="sprint"]')||world.status!=='running')return;sprintPointer=event.pointerId;event.preventDefault();}
