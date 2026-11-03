@@ -51,8 +51,15 @@ export function pursuitInputs(state){
   rivalEnergy:Math.floor(rival.energy)};
 }
 export function inspectPursuit(state,source){
+ return inspectPursuitInputs(pursuitInputs(state),source);
+}
+// Both live play and the optional scratch exercise execute the same input
+// protocol. Practice inputs are labelled samples, never changes to the world.
+export function inspectPursuitInputs(values,source){
  if(typeof source!=='string'||source.length>pursuitRules.sourceLimit)return {ok:false,code:'limit',logs:[],outputs:[]};
- const inputs=pursuitInputs(state),prefix=Object.entries(inputs).map(([name,value])=>`let ${name} = ${value};`).join('\n')+'\n';
+ const names=['energy','obstacle','gap','round','rivalEnergy'];
+ if(!values||!names.every(name=>Number.isSafeInteger(values[name])))return {ok:false,code:'inputs',logs:[],outputs:[]};
+ const inputs=Object.fromEntries(names.map(name=>[name,values[name]])),prefix=Object.entries(inputs).map(([name,value])=>`let ${name} = ${value};`).join('\n')+'\n';
  try{
   const result=run(prefix+source),logs=result.logs;
   if(result.waiting)return {ok:false,code:'waiting',inputs,logs,outputs:[]};
