@@ -1724,7 +1724,7 @@
       "signal": {
         "term": "Output: display a result",
         "meaning": "You cannot always see what a program has calculated. Making it display a result is called output.",
-        "read": "7 is the number to display. .log() writes the preceding number to a log, shown on the left here. Running 7.log() therefore displays 7."
+        "read": "7 is the number to display. .log() writes the preceding number to a log, shown in the observation panel here. Running 7.log() therefore displays 7."
       },
       "addition": {
         "term": "Calculation: let the computer work it out",

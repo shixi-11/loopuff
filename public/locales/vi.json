@@ -1712,7 +1712,7 @@
       "signal": {
         "term": "Đầu ra: hiển thị một kết quả",
         "meaning": "Không phải lúc nào bạn cũng nhìn thấy chương trình đã tính ra gì. Cho chương trình hiển thị kết quả được gọi là đầu ra.",
-        "read": "7 là con số cần hiển thị. .log() ghi con số đứng trước nó vào nhật ký, ở đây nhật ký hiện ở bên trái. Vì vậy, chạy 7.log() sẽ hiển thị 7."
+        "read": "7 là con số cần hiển thị. .log() ghi con số đứng trước nó vào nhật ký, ở đây nhật ký hiện trong khung quan sát. Vì vậy, chạy 7.log() sẽ hiển thị 7."
       },
       "addition": {
         "term": "Tính toán: để máy tính tính giúp bạn",

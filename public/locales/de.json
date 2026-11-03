@@ -1712,7 +1712,7 @@
       "signal": {
         "term": "Ausgabe: ein Ergebnis anzeigen",
         "meaning": "Was ein Programm berechnet hat, kannst du nicht immer sehen. Wenn du es ein Ergebnis anzeigen lässt, nennt man das Ausgabe.",
-        "read": "7 ist die Zahl, die angezeigt werden soll. .log() schreibt die Zahl davor in ein Protokoll, das hier links angezeigt wird. Deshalb zeigt 7.log() beim Ausführen 7 an."
+        "read": "7 ist die Zahl, die angezeigt werden soll. .log() schreibt die Zahl davor in ein Protokoll, das hier im Beobachtungsfenster angezeigt wird. Deshalb zeigt 7.log() beim Ausführen 7 an."
       },
       "addition": {
         "term": "Rechnen: den Computer ausrechnen lassen",

@@ -1712,7 +1712,7 @@
       "signal": {
         "term": "Salida: mostrar un resultado",
         "meaning": "No siempre puedes ver lo que ha calculado un programa. Hacer que muestre un resultado se llama salida.",
-        "read": "7 es el número que se va a mostrar. .log() escribe el número anterior en un registro, que aquí aparece a la izquierda. Por eso, al ejecutar 7.log() se muestra 7."
+        "read": "7 es el número que se va a mostrar. .log() escribe el número anterior en un registro, que aquí aparece en el panel de observación. Por eso, al ejecutar 7.log() se muestra 7."
       },
       "addition": {
         "term": "Cálculo: deja que la computadora haga la cuenta",
