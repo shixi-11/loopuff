@@ -3,17 +3,18 @@ const esc=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>
 export function mountPursuitPractice(root,{text:t,errors,model,getWorld,pause,canStage,onStage}){
  const state=model.practice??={source:pursuitPracticeSource,report:null,confirmation:null,notice:'ready'};
  const el=selector=>root.querySelector(selector);
- let lastAllowed,disposed=false;
+ let lastAllowed,lastPending,lastNotice,disposed=false;
  root.innerHTML=`<details class="pursuit-practice"><summary>${esc(t.title)}</summary><p>${esc(t.intro)}</p><p>${esc(t.rule)}</p><label for="pursuit-practice-editor">${esc(t.editor)}</label><textarea id="pursuit-practice-editor" dir="ltr" rows="9" maxlength="3000" spellcheck="false" autocapitalize="off" autocomplete="off">${esc(state.source)}</textarea><div class="pursuit-code-actions"><button type="button" class="primary" data-pursuit-practice="check">${esc(t.check)}</button><button type="button" data-pursuit-practice="stage">${esc(t.stage)}</button><button type="button" data-pursuit-practice="cancel" hidden>${esc(t.cancel)}</button></div><p data-pursuit-practice-status role="status" aria-live="polite"></p><div data-pursuit-practice-result></div><p class="pursuit-practice-boundary">${esc(t.boundary)}</p></details>`;
  function refresh(){
   const stale=state.report&&!currentPursuitPractice(getWorld(),state.source,state.report),allowed=!state.pending&&canStage()&&['ready','paused'].includes(getWorld().status);
-  if(!stale&&allowed===lastAllowed)return;
+  if(!stale&&allowed===lastAllowed&&!!state.pending===lastPending&&state.notice===lastNotice)return;
   if(stale){state.report=null;state.confirmation=null;state.notice='changed';}
   if(state.confirmation&&!allowed){state.confirmation=null;state.notice='unavailable';}
   paint();
  }
  function paint(){
   lastAllowed=!state.pending&&canStage()&&['ready','paused'].includes(getWorld().status);
+  lastPending=!!state.pending;lastNotice=state.notice;
   el('#pursuit-practice-editor').disabled=!!state.pending;el('[data-pursuit-practice="check"]').disabled=!!state.pending;
   const stage=el('[data-pursuit-practice="stage"]');stage.disabled=!state.report?.ready||!lastAllowed;
   stage.textContent=state.confirmation?t.confirm:t.stage;el('[data-pursuit-practice="cancel"]').hidden=!state.confirmation;
