@@ -1,6 +1,7 @@
 import { aircraftUrl } from './plane.js';
 import {progressStorage} from './save-data.js';
 import {dispatchFeedback} from './dispatch-feedback.js';
+import {mountDispatchLayout,keepDispatchEditorVisible} from './dispatch-layout.js';
 import {dispatchIds,dispatchSourceLimit,dispatchPuzzle,inspectDispatch,restoreDispatch,editDispatch,submitDispatch,nextDispatchRound} from './dispatch.js';
 const key='loopuff-dispatch-v1';
 const html=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
@@ -11,6 +12,7 @@ const inputCode=sample=>sample.inputCode||sample.prefix.trim();
 
 export function mountDispatch(root,{text:t,errors,concepts,reduced,urls,format=html,statuses={pass:t.passed,fail:t.failed}}){
  let state=loadDispatch(),index=3,report=null,saveFailed=false;
+ let disposeLayout=()=>{};
  const puzzle=()=>dispatchPuzzle(state.seed,state.selected),mission=()=>t.missions[dispatchIds.indexOf(state.selected)];
  const code=source=>`<pre class="exercise-code" dir="ltr">${html(source)}</pre>`;
  async function persist(){try{const raw=JSON.stringify(state);await progressStorage().write(()=>localStorage.setItem(key,raw));saveFailed=false;}catch{saveFailed=true;}const note=root.querySelector('[data-dispatch-save]');if(note)note.textContent=saveFailed?t.noSave:t.local;}
@@ -51,14 +53,16 @@ export function mountDispatch(root,{text:t,errors,concepts,reduced,urls,format=h
   const select=root.querySelector('#dispatch-batch');select.value=String(index);
  }
  function render(){
+  disposeLayout();
   const p=puzzle(),m=mission();index=Math.min(index,p.cases.length-1);
   root.innerHTML=`<section class="dispatch-page"><nav class="page-trail"><a href="${html(urls.home)}">${html(urls.homeLabel)}</a><span aria-hidden="true">/</span><a href="${html(urls.play)}">${html(urls.playLabel)}</a><span aria-hidden="true">/</span><span>${html(t.title)}</span></nav><header class="dispatch-hero"><span class="eyebrow">${html(t.tag)}</span><h1 id="learning-title">${html(t.title)}</h1><p>${html(t.intro)}</p><dl><div><dt>${html(t.badges)}</dt><dd dir="ltr">${state.stamps.length} / ${dispatchIds.length}</dd></div><div><dt>${html(t.rounds)}</dt><dd dir="ltr">${state.rounds}</dd></div></dl></header>
    <nav class="dispatch-missions" aria-label="${html(t.title)}">${dispatchIds.map((id,i)=>`<button type="button" data-dispatch-mission="${id}" ${id===state.selected?'aria-current="step"':''}><span aria-hidden="true">${state.cleared.includes(id)?'✓':String(i+1).padStart(2,'0')}</span>${html(t.missions[i].title)}</button>`).join('')}</nav>
-   <div class="dispatch-workspace"><section class="dispatch-console"><h2>${html(m.title)}</h2><p>${format(m.brief)}</p><form data-dispatch-form><label class="editor-label" for="dispatch-editor">${html(t.editor)}</label><textarea id="dispatch-editor" class="practice-editor" rows="10" maxlength="${dispatchSourceLimit}" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">${html(state.drafts[state.selected])}</textarea><div class="dialog-actions"><button class="primary" type="submit">${html(t.run)} ↗</button><button class="text-button" type="button" data-dispatch-action="replay" ${report?'':'disabled'}>${html(t.replay)}</button></div></form><p class="dispatch-status" data-dispatch-status tabindex="-1" role="status" aria-live="polite">${html(report?t.summary.replace('{passed}',report.passed).replace('{total}',report.total):t.idle)}</p><details class="dispatch-help"><summary>${html(t.help)}</summary><p>${format(m.hint)}</p><a href="${html(urls.lessons[dispatchIds.indexOf(state.selected)])}">${html(t.learn)} ↗</a></details><details class="dispatch-reset"><summary>${html(t.reset)}</summary><button type="button" class="text-button" data-dispatch-action="reset">${html(t.reset)}</button></details></section>
-   <section class="dispatch-inspector"><label for="dispatch-batch">${html(t.batch)}</label><select id="dispatch-batch" dir="ltr">${p.cases.map((sample,i)=>`<option value="${i}" ${i===index?'selected':''}>${i+1} · ${html(inputCode(sample).replaceAll('\n',' '))}</option>`).join('')}</select><p>${html(t.previewNote)}</p><div data-dispatch-preview>${scene()}</div></section></div>
-   <section class="dispatch-results" data-dispatch-results>${result()}</section><section class="dispatch-round"><div><button class="text-button" type="button" data-dispatch-action="new-round">${html(t.newRound)} ↗</button><p>${html(t.newRoundNote)}</p></div><p data-dispatch-save>${html(saveFailed?t.noSave:t.local)}</p></section></section>`;
+   <div class="dispatch-workspace"><section class="dispatch-console"><h2>${html(m.title)}</h2><p>${format(m.brief)}</p><div class="dispatch-editing"><form data-dispatch-form><label class="editor-label" for="dispatch-editor">${html(t.editor)}</label><textarea id="dispatch-editor" class="practice-editor" rows="10" maxlength="${dispatchSourceLimit}" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">${html(state.drafts[state.selected])}</textarea><div class="dialog-actions"><button class="primary" type="submit">${html(t.run)} ↗</button><button class="text-button" type="button" data-dispatch-action="replay" ${report?'':'disabled'}>${html(t.replay)}</button></div></form><p class="dispatch-status" data-dispatch-status tabindex="-1" role="status" aria-live="polite">${html(report?t.summary.replace('{passed}',report.passed).replace('{total}',report.total):t.idle)}</p><div class="dispatch-support"><details class="dispatch-help"><summary>${html(t.help)}</summary><p>${format(m.hint)}</p><a href="${html(urls.lessons[dispatchIds.indexOf(state.selected)])}">${html(t.learn)} ↗</a></details><details class="dispatch-reset"><summary>${html(t.reset)}</summary><button type="button" class="text-button" data-dispatch-action="reset">${html(t.reset)}</button></details></div></div></section>
+   <div class="dispatch-review"><section class="dispatch-inspector"><label for="dispatch-batch">${html(t.batch)}</label><select id="dispatch-batch" dir="ltr">${p.cases.map((sample,i)=>`<option value="${i}" ${i===index?'selected':''}>${i+1} · ${html(inputCode(sample).replaceAll('\n',' '))}</option>`).join('')}</select><p>${html(t.previewNote)}</p><div data-dispatch-preview>${scene()}</div></section><section class="dispatch-results" data-dispatch-results>${result()}</section></div></div>
+   <section class="dispatch-round"><div><button class="text-button" type="button" data-dispatch-action="new-round">${html(t.newRound)} ↗</button><p>${html(t.newRoundNote)}</p></div><p data-dispatch-save>${html(saveFailed?t.noSave:t.local)}</p></section></section>`;
+  disposeLayout=mountDispatchLayout(root);
  }
- function onInput(event){if(event.target.id!=='dispatch-editor')return;editDispatch(state,state.selected,event.target.value);report=null;persist();updatePreview();root.querySelector('[data-dispatch-status]').textContent=t.changed;root.querySelector('[data-dispatch-action="replay"]').disabled=true;}
+ function onInput(event){if(event.target.id!=='dispatch-editor')return;const hadReport=!!report;editDispatch(state,state.selected,event.target.value);report=null;persist();updatePreview();root.querySelector('[data-dispatch-status]').textContent=t.changed;root.querySelector('[data-dispatch-action="replay"]').disabled=true;if(hadReport)keepDispatchEditorVisible(root);}
  function onChange(event){if(event.target.id!=='dispatch-batch')return;index=Number(event.target.value);updatePreview();}
  function onSubmit(event){
   if(!event.target.matches('[data-dispatch-form]'))return;event.preventDefault();
@@ -81,5 +85,5 @@ export function mountDispatch(root,{text:t,errors,concepts,reduced,urls,format=h
  }
  restoreReport();render();persist();
  root.addEventListener('input',onInput);root.addEventListener('change',onChange);root.addEventListener('submit',onSubmit);root.addEventListener('click',onClick);
- return {dispose(){root.removeEventListener('input',onInput);root.removeEventListener('change',onChange);root.removeEventListener('submit',onSubmit);root.removeEventListener('click',onClick);}};
+ return {dispose(){disposeLayout();root.removeEventListener('input',onInput);root.removeEventListener('change',onChange);root.removeEventListener('submit',onSubmit);root.removeEventListener('click',onClick);}};
 }

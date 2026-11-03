@@ -15,3 +15,12 @@
 .dispatch-repair{border-inline-start:2px solid #91aeda;padding-inline-start:16px;margin-block:20px;color:#b9c9e5}
 .dispatch-repair h3{font-size:17px;color:#e5edff;margin:0 0 9px}.dispatch-repair p{font-size:15px;line-height:1.8;margin:0 0 8px;overflow-wrap:anywhere}
 .dispatch-repair button{white-space:normal;text-align:start;min-height:44px}.dispatch-trace article{scroll-margin-top:130px;padding:4px 0}.dispatch-trace article:focus{outline:2px solid #adc6f7;outline-offset:5px}.dispatch-trace article p{overflow-wrap:anywhere}
+
+.dispatch-editing{background:#152039}
+.dispatch-support{display:flex;flex-wrap:wrap;align-items:flex-start;gap:12px 24px;border-top:1px solid #3b4c7266;padding-block-start:12px;margin-block-start:16px}
+.dispatch-support .dispatch-help,.dispatch-support .dispatch-reset{flex:1 1 160px;min-width:0;margin:0;padding:0;border:0}.dispatch-support details[open]{flex-basis:100%}
+.dispatch-support summary{box-sizing:border-box;min-height:44px;padding-block:6px;overflow-wrap:anywhere}
+@media(min-width:801px){.dispatch-editing[data-sticky=true]{position:sticky;top:var(--dispatch-sticky-top,104px);z-index:1}}
+
+.dispatch-review{min-width:0}
+#dispatch-editor{scroll-margin-top:var(--dispatch-sticky-top,104px);scroll-margin-bottom:16px}
