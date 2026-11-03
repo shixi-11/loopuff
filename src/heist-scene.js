@@ -1,8 +1,8 @@
-import {loadChaseAssets} from './chase-scene.js';
+import {loadChaseActors} from './chase-scene.js';
 import {heistWorld,heistPhase,heistRules} from './heist.js';
 export function mountHeistScene(root,{getState,text:t,onError=()=>{}}){
  const canvas=root.querySelector('canvas'),ctx=canvas.getContext('2d');let width=0,height=0,art=null,disposed=false;
- const ready=loadChaseAssets().then(value=>{if(disposed)return false;art=value;draw();return true;}).catch(()=>{if(!disposed)onError();return false;});
+ const ready=loadChaseActors().then(value=>{if(disposed)return false;art=value;draw();return true;}).catch(()=>{if(!disposed)onError();return false;});
  function resize(){width=Math.max(1,root.clientWidth);height=root.closest('.is-expanded')?Math.max(240,root.clientHeight):Math.max(290,Math.min(480,width*.44));const dpr=Math.min(devicePixelRatio||1,2);canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);canvas.style.height=`${height}px`;ctx.setTransform(dpr,0,0,dpr,0,0);draw();}
  function draw(){
   if(disposed||!width)return;const s=getState(),w=heistWorld(s.seed),ground=height*.76,unit=width<600?9:12,anchor=width*.35,x=n=>anchor+(n-s.x)/1000*unit;

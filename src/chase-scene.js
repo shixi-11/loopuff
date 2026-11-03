@@ -1,29 +1,33 @@
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 const ease=t=>t*t*(3-2*t);
 const assets={police:'chase-police.webp?v=39bc4f5601',thief:'chase-thief.webp?v=9403edfa76',props:'chase-props.webp?v=b6866b67ec',street:'chase-street.webp?v=195a74ab0d'};
-let assetPromise;
-export function validateChaseArt(art){
-  for(const [kind,count] of [['police',8],['thief',8],['props',2]]){
+const assetPromises=new Map();
+export function validateChaseArt(art,actorsOnly=false){
+  for(const [kind,count] of [['police',8],['thief',8],...(actorsOnly?[]:[['props',2]])]){
     const a=art.atlas[kind],image=art[kind];
-    if(!a||a.width!==image.width||a.height!==image.height||a.frames?.length!==count)throw Error('Invalid chase atlas');
+    if(!a||!image||a.width!==image.width||a.height!==image.height||a.frames?.length!==count)throw Error('Invalid chase atlas');
     for(const r of a.frames)if(!Array.isArray(r)||r.length!==4||r.some(n=>!Number.isInteger(n))||r[0]<0||r[1]<0||r[2]<=0||r[3]<=0||r[0]+r[2]>a.width||r[1]+r[3]>a.height)throw Error('Invalid chase pose');
   }
   return art;
 }
-export function loadChaseAssets(){
-  if(assetPromise)return assetPromise;
+export function loadChaseAssets(){return loadArt(false);}
+export function loadChaseActors(){return loadArt(true);}
+function loadArt(actorsOnly){
+  if(assetPromises.has(actorsOnly))return assetPromises.get(actorsOnly);
+  const requested=actorsOnly?['police','thief']:Object.keys(assets);
   const controller=new AbortController(),images=[];let timer;
   const pending=Promise.all([
     fetch(new URL('../assets/chase-sprites.json',import.meta.url),{signal:controller.signal,priority:'high'}).then(r=>{if(!r.ok)throw Error('atlas');return r.json();}),
-    ...Object.values(assets).map(file=>new Promise((resolve,reject)=>{
+    ...requested.map(kind=>new Promise((resolve,reject)=>{
+      const file=assets[kind];
       const img=new Image();images.push(img);img.fetchPriority='high';img.decoding='async';img.onload=()=>resolve(img);img.onerror=()=>reject(Error(file));img.src=new URL(`../assets/${file}`,import.meta.url).href;
     }))
-  ]).then(([atlas,police,thief,props,street])=>validateChaseArt({atlas,police,thief,props,street}));
+  ]).then(([atlas,...loaded])=>validateChaseArt({atlas,...Object.fromEntries(requested.map((kind,i)=>[kind,loaded[i]]))},actorsOnly));
   const timeout=new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('Chase assets timed out')),45000);});
-  assetPromise=Promise.race([pending,timeout]).catch(error=>{
-    controller.abort();for(const img of images){img.onload=img.onerror=null;img.src='';}assetPromise=null;throw error;
+  const promise=Promise.race([pending,timeout]).catch(error=>{
+    controller.abort();for(const img of images){img.onload=img.onerror=null;img.src='';}assetPromises.delete(actorsOnly);throw error;
   }).finally(()=>clearTimeout(timer));
-  return assetPromise;
+  assetPromises.set(actorsOnly,promise);return promise;
 }
 
 // The player moves before the rival. Sampling changes only presentation, never
