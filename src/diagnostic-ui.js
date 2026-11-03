@@ -98,7 +98,7 @@ export function mountDiagnostic(root,{text:t,feedbackText:f,applicationText,appl
   const button=event.target.closest('button');if(!button)return;
   if(button.dataset.diagnosticAction==='reset-bad'){
    if(!resetArmed){resetArmed=true;render();root.querySelector('[data-diagnostic-action="reset-bad"]').focus();return;}
-   model.state=newDiagnostic(freshSeed());model.reports={};model.bad=false;clearView();persist();render();root.querySelector('#diagnostic-editor').focus();return;
+   model.state=newDiagnostic(freshSeed());model.reports={};model.bad=false;clearView();onSelect(id());persist();render();root.querySelector('#diagnostic-editor').focus();return;
   }
   if(model.bad)return;
   const area=button.dataset.diagnosticArea;

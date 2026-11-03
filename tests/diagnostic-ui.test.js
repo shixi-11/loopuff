@@ -70,8 +70,8 @@ test('new inputs retain code but clear submissions and hints; hints do not inser
  }finally{m.page.dispose();}
 });
 test('future records remain untouched until the explicit two-step replacement',()=>{
- const original={version:99,privateDraft:'keep these bytes'},writes=[],m=mount(original,s=>writes.push(structuredClone(s)));
- try{assert.equal(writes.length,0);assert.equal(m.model.state,original);assert.ok(m.root.innerHTML.includes(text.diagnostic.badSave));m.action({diagnosticAction:'reset-bad'});assert.equal(writes.length,0);assert.equal(m.model.state,original);m.action({diagnosticAction:'reset-bad'});assert.equal(writes.length,1);assert.equal(writes[0].version,1);assert.deepEqual(original,{version:99,privateDraft:'keep these bytes'});
+ const original={version:99,privateDraft:'keep these bytes'},writes=[],selections=[],m=mount(original,s=>writes.push(structuredClone(s)),{},area=>selections.push(area));
+ try{assert.deepEqual(selections,[]);assert.equal(writes.length,0);assert.equal(m.model.state,original);assert.ok(m.root.innerHTML.includes(text.diagnostic.badSave));m.action({diagnosticAction:'reset-bad'});assert.equal(writes.length,0);assert.equal(m.model.state,original);m.action({diagnosticAction:'reset-bad'});assert.equal(writes.length,1);assert.equal(writes[0].version,1);assert.deepEqual(selections,['names']);assert.deepEqual(original,{version:99,privateDraft:'keep these bytes'});
  }finally{m.page.dispose();}
 });
 test('save failures are visible and a late older failure cannot replace the newest save result',async()=>{
