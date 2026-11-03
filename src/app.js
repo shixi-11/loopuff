@@ -14,6 +14,7 @@ import { createAccountClient, mountAccount } from './account.js';
 import { progressStorage } from './save-data.js';
 import { mountSaves } from './saves-ui.js';
 import { mountGuide } from './guide-ui.js';
+import { mountLessonScene } from './lesson-scene-ui.js';
 import { mountDiagnostic } from './diagnostic-ui.js';
 import { mountLearningMap } from './learning-map-ui.js';
 import { readGuideWork } from './guide.js';
@@ -32,7 +33,7 @@ let saved={};try{saved=readSession(localStorage.getItem(storageKey));}catch{}
 const validLocale=id=>locales.some(([key])=>key===id);
 let lang=selectedLocale(location.href,saved.lang,navigator.languages||[navigator.language]);
 if(!validLocale(lang))lang='en';
-let jumpLab=null,vaultGame=null,chaseGame=null,pursuitGame=null,dispatchGame=null,accountPage=null,savesPage=null,guidePage=null;
+let programScene=null,jumpLab=null,vaultGame=null,chaseGame=null,pursuitGame=null,dispatchGame=null,accountPage=null,savesPage=null,guidePage=null;
 const savesModel={},diagnosticModel={};
 const guideModel={selected:saved.state?.guideSelected,drafts:readGuideWork(saved.state?.guideWork)};
 const pursuitModel={};
@@ -168,6 +169,7 @@ function arcadeMissions(){
 }
 function choices(items,action){return `<div class="choices">${items.map((text,index)=>`<button class="choice" data-${action}="${index}"><span>${String(index+1).padStart(2,'0')}</span>${prose(text||ui('noOutput'))}</button>`).join('')}</div>`;}
 function render(){
+  programScene?.dispose();programScene=null;
   jumpLab?.dispose();jumpLab=null;
   vaultGame?.dispose();vaultGame=null;
   chaseGame?.dispose();chaseGame=null;
@@ -193,7 +195,7 @@ function render(){
   document.querySelector('link[rel="canonical"]').href=routeUrl('https://shixilin.com/games/loopuff/',lang,view,lesson().id).href;
   let robots=document.querySelector('meta[name="robots"]');
   if(view==='result'){if(!robots){robots=document.createElement('meta');robots.name='robots';document.head.append(robots);}robots.content='noindex,follow';}else robots?.remove();
-  attachJumpScene();
+  attachLessonScene();attachJumpScene();
   requestAnimationFrame(()=>{refreshGeometry();if(state.phase==='typing')background();homePlane.refresh();});
 }
 function renderTyping(){
@@ -305,6 +307,28 @@ function renderDialog(){
   const trail=`<nav class="page-trail" aria-label="${escape(ui('map'))}"><a data-action="home" href="${routeUrl(location.href,lang,'home').pathname}">${escape(ui('home'))}</a><span aria-hidden="true">/</span>${phase==='result'?`<a data-action="edit-assessment" href="${routeUrl(location.href,lang,'lesson',lesson().id).pathname}">${escape(c.title)}</a><span aria-hidden="true">/</span><span aria-current="page">${escape(messages.assessment.title)}</span>`:`<span aria-current="page">${escape(phase==='guide'?ui('guide'):c.title)}</span>`}</nav>`;
   $('learning-content').innerHTML=trail+(phase==='result'?assessmentPanel():`<div class="lesson-page-body"><span class="eyebrow">${escape(ui('name'))} / ${String(state.lesson+1).padStart(2,'0')}</span><h1 id="learning-title">${escape(title)}</h1>${body}<p class="feedback" id="feedback" role="status" aria-live="polite">${prose(notice)}</p><div id="practice-output" class="practice-output" ${lastResult?'':'hidden'}>${lastResult?escape(ui('output'))+codeBlock(lastResult.logs.join('\n')||ui('noOutput')):''}</div></div>`);
 }
+function observedSource(){return state.phase==='remix'?lesson().remix.template.replace('___',state.draft.trim()):state.phase==='result'?state.assessedSource:state.phase==='independent'?state.draft:lesson().source;}
+function attachLessonScene(){
+  const phase=state.phase;if(lesson().world||!['brief','output','explain','remix','independent','result'].includes(phase))return;
+  if(phase==='result'&&(state.assessedSource===null||state.assessedSource!==state.draft))return;
+  const expected=phase==='remix'?lesson().remix.logs:['independent','result'].includes(phase)?lesson().independent.logs:lesson().logs;
+  const root=document.createElement('div');root.className='lesson-observation';root.id='lesson-observation';
+  const body=$('learning-content').querySelector('.lesson-page-body');
+  if(phase==='independent'){
+    body.classList.add('observed-independent');const brief=body.querySelector('.challenge-brief'),form=$('program-form');
+    body.querySelector('h1').textContent=copy().title;body.querySelector('.eyebrow').textContent=ui('independent');
+    body.querySelector('.challenge-layout').before(brief.querySelector('.dialog-note'));brief.querySelector('h2').classList.add('sr-only');brief.prepend(root);
+    const notes=document.createElement('details');notes.className='lesson-background';const summary=document.createElement('summary');summary.textContent=messages.guideStudio.background;notes.append(summary);
+    for(const node of [...brief.querySelectorAll('.scope-note')])notes.append(node);form.append(notes);
+    const note=document.createElement('p');note.className='scope-note';note.textContent=messages.lessonScene.practice;form.append(note);
+  }else if(phase==='remix'){
+    const workspace=document.createElement('div'),controls=document.createElement('div');workspace.className='scene-workbench';const intro=body.querySelector('.dialog-note');intro.remove();
+    for(const node of [...body.children].slice(2))controls.append(node);workspace.append(controls,root);body.append(intro,workspace);
+  }else if(phase==='result')$('learning-content').querySelector('.result-breakdown').before(root);
+  else{body.querySelector('.dialog-note').after(root);if(phase==='output')body.querySelector('.signal')?.remove();}
+  programScene=mountLessonScene(root,{text:messages.lessonScene,errors:messages.ui,expected,getSource:observedSource,locked:phase==='brief',reduced});
+  if(['output','explain','result'].includes(phase))programScene.run({end:phase!=='output',autoplay:phase==='output'});
+}
 function jumpScene(target){
   const j=messages.jump;
   return `<section class="jump-section" aria-labelledby="jump-title"><header><div><span class="eyebrow">${escape(j.eyebrow)}</span><h2 id="jump-title">${escape(j.title)}</h2></div><span class="jump-target">${escape(j.target.replace('{n}',target))}</span></header><p>${escape(j.rule)}</p><div class="jump-lab" id="jump-lab" dir="ltr"><canvas aria-hidden="true"></canvas><p role="status" aria-live="polite" dir="${lang==='ar'?'rtl':'ltr'}"></p></div></section>`;
@@ -366,7 +390,7 @@ function pause(){if(state.phase==='welcome'||state.phase==='pause')return;state.
 document.addEventListener('change',event=>{if(event.target.matches('[data-language],#language-select'))changeLanguage(event.target.value);});
 document.addEventListener('input',event=>{if(event.target.id==='program-editor'){
   state.draft=event.target.value;
-  jumpLab?.reset();
+  jumpLab?.reset();programScene?.reset();
   if(state.phase==='independent'&&state.assessedSource!==null){state.assessedSource=null;$('assessment-status').textContent=messages.assessment.changed;document.querySelector('[data-action="view-result"]')?.remove();}
   save();
 }});

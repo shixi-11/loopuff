@@ -7,10 +7,35 @@ const derive=(v,extra=[])=>({...v,concepts:union(v.concepts,extra),dataConcepts:
 const controlled=(v,extra)=>({...v,concepts:union(v.concepts,extra),...(v.shapeConcepts?{shapeConcepts:union(v.shapeConcepts,extra)}:{})});
 const computed=(data,concepts,operands)=>({...value(data),concepts:union(concepts,...operands.map(v=>v.concepts)),dataConcepts:union(concepts,...operands.map(v=>v.dataConcepts)),inputs:union(...operands.map(v=>v.inputs))});
 const control=(flow,...extra)=>({...flow,concepts:union(flow.concepts,...extra)});
-export function run(source){
+export function run(source,{trace=false}={}){
   const program=compile(source),logs=[],outputs=[],calls=[],queue=[],waiting=[];
   let steps=0,callCount=0,channelCount=0,messageCount=0,printedSize=0,bindingId=0,receiveId=0;
-  const jointInputs=[];
+  const jointInputs=[],events=[],messageTokens=new Map();let truncated=false,messageSerial=0,requestSerial=0;
+  // Lists in a scene are bounded previews; log events retain the full printed value.
+  const snapshot=data=>{
+    let remaining=192;
+    const visit=(item,depth=0)=>{
+      if(remaining<4)return '…';
+      if(Array.isArray(item)){
+        if(depth>=4){remaining-=3;return '[…]';}
+        remaining-=2;const parts=[];
+        for(let index=0;index<item.length;index++){
+          if(index>=16||remaining<4){parts.push('…');break;}
+          if(index)remaining-=2;parts.push(visit(item[index],depth+1));
+        }
+        return '['+parts.join(', ')+']';
+      }
+      const printed=item?.kind==='channel'?'@'+item.id:item?.kind==='function'?item.node.name+'(…)':String(item);
+      const result=printed.length>remaining?printed.slice(0,remaining-1)+'…':printed;remaining-=result.length;return result;
+    };return visit(data);
+  };
+  const record=(type,node,fields={},env,flow)=>{
+    if(!trace)return;if(events.length>=512){truncated=true;return;}
+    const event={type,sequence:events.length+1,context:flow?.callId||fields.context||0,start:node?.span?.start??0,end:node?.span?.end??0,...fields};
+    for(const key of ['value','left','right'])if(Object.hasOwn(event,key))event[key]=type==='log'&&key==='value'?event[key]:snapshot(event[key]);
+    for(const key of ['values','args'])if(event[key])event[key]=event[key].map(value=>snapshot(value));
+    if(env){event.references=channelBindings(env);event.names=scalarNames(env);event.bindingIds=Object.fromEntries(Object.keys(event.names).map(name=>[name,env.get(name).bindingId]));}events.push(event);
+  };
   const bind=(v,id=++bindingId)=>({...v,bindingId:id});
   const spend=node=>{if(++steps>20000)throw new LessonError('limit',node?.span?.start||0);};
   const fail=(code,node)=>{throw new LessonError(code,node?.span?.start||0);};
@@ -20,6 +45,7 @@ export function run(source){
   const channel=(v,node)=>{if(v.data?.kind!=='channel')fail('type',node);return v.data;};
   const fresh=(single=false)=>({kind:'channel',id:++channelCount,messages:[],single,spent:false});
   const scalarNames=env=>Object.fromEntries([...env].filter(([,v])=>typeof v.data==='number'||typeof v.data==='boolean').map(([name,v])=>[name,v.data]));
+  const channelBindings=env=>[...env].filter(([,v])=>v.data?.kind==='channel').map(([name,v])=>({name,channel:v.data.id,bindingId:v.bindingId}));
   const carry=(outer,inner,keys)=>{for(const key of keys)if(inner.has(key)&&inner.get(key).bindingId===outer.get(key)?.bindingId)outer.set(key,inner.get(key));};
   function display(data,node){
     let size=0;
@@ -56,18 +82,21 @@ export function run(source){
       if(flow.depth>=32||++callCount>1024)fail('limit',node);
       const callEnv=new Map(fn.closure);
       fn.node.params.forEach((name,index)=>callEnv.set(name,bind(args[index])));
-      const next=control({...flow,depth:flow.depth+1},callee.concepts,['call']);
+      const invocation=callCount;
+      const next=control({...flow,depth:flow.depth+1,callId:invocation},callee.concepts,['call']);
       if(fn.node.async){
         if(flow.sync)fail('subset',node);
         const reply=fresh(true);
+        record('call',node,{name:fn.node.name,kind:'reply',invocation,args:args.map(v=>v.data),replyChannel:reply.id},env,flow);
         yield {kind:'fork',tasks:[execute(fn.node.body,callEnv,{...next,reply,sync:false})]};
-        const [answer]=yield {kind:'receive',channels:[reply]};
-        calls.push({...node.span,kind:'reply'});
+        const [answer]=yield {kind:'receive',channels:[reply],span:node.span,names:[],reply:true,context:flow.callId||0,request:trace?++requestSerial:0,references:trace?channelBindings(env):[],scalarNames:trace?scalarNames(env):{},scalarBindings:trace?Object.fromEntries([...env].filter(([,v])=>typeof v.data==='number'||typeof v.data==='boolean').map(([name,v])=>[name,v.bindingId])):{}};
+        calls.push({...node.span,kind:'reply'});record('call-result',node,{name:fn.node.name,kind:'reply',invocation,value:answer.data},env,flow);
         return controlled(derive(answer,union(callee.dataConcepts,['call'])),callee.concepts);
       }
+      record('call',node,{name:fn.node.name,kind:'sync',invocation,args:args.map(v=>v.data)},env,flow);
       const result=yield* execute(fn.node.body,callEnv,{...next,reply:null,sync:true});
       if(result?.kind!=='return')fail('type',node);
-      calls.push({...node.span,kind:'sync'});
+      calls.push({...node.span,kind:'sync'});record('call-result',node,{name:fn.node.name,kind:'sync',invocation,value:result.value.data},env,flow);
       return controlled(derive(result.value,union(callee.dataConcepts,['call'])),callee.concepts);
     }
     if(node.type==='loop'){
@@ -100,6 +129,7 @@ export function run(source){
       if((node.op==='/'||node.op==='%')&&b===0)fail('zeroDivision',node);
       result=integer(node.op==='+'?a+b:node.op==='-'?a-b:node.op==='*'?a*b:node.op==='/'?Math.trunc(a/b):a%b,node);
     }
+    record('calculate',node,{operator:node.op,left:left.data,right:right.data,value:result},env,flow);
     return {...computed(result,[node.type],[left,right]),concepts};
   }
   function* execute(nodes,env,flow){
@@ -108,12 +138,12 @@ export function run(source){
       switch(node.type){
         case 'bind':case 'assign':{
           const v=yield* expression(node.expr,env,flow);
-          env.set(node.name,bind(controlled(derive(v,union(['bind'],node.type==='assign'?['assign']:[])),flow.concepts),node.type==='assign'?env.get(node.name).bindingId:undefined));break;
+          env.set(node.name,bind(controlled(derive(v,union(['bind'],node.type==='assign'?['assign']:[])),flow.concepts),node.type==='assign'?env.get(node.name).bindingId:undefined));record(node.type,node,{name:node.name,bindingId:env.get(node.name).bindingId,value:v.data,...(v.data?.kind==='channel'?{channel:v.data.id}:{})},env,flow);break;
         }
-        case 'channel':env.set(node.name,bind(value(fresh(),union(flow.concepts,['channel','bind']))));break;
+        case 'channel':env.set(node.name,bind(value(fresh(),union(flow.concepts,['channel','bind']))));record('channel',node,{name:node.name,bindingId:env.get(node.name).bindingId,channel:env.get(node.name).data.id},env,flow);break;
         case 'function':{
           const closure=new Map(env),fn=bind(value({kind:'function',node,closure,bound:[]},['function']));
-          closure.set(node.name,fn);env.set(node.name,fn);break;
+          closure.set(node.name,fn);env.set(node.name,fn);record('function',node,{name:node.name,params:node.params,kind:node.async?'reply':'sync'},env,flow);break;
         }
         case 'expression':yield* expression(node.expr,env,flow);break;
         case 'log':{
@@ -123,7 +153,7 @@ export function run(source){
           const printed=display(v.data,node);logs.push(printed);
           const dataConcepts=union(v.dataConcepts);
           if(jointInputs.some(group=>group.every(input=>v.inputs.has(input))))dataConcepts.add('join');
-          outputs.push({...node.span,value:printed,names:scalarNames(env),concepts:[...union(v.concepts,flow.concepts)].sort(),dataConcepts:[...dataConcepts].sort()});break;
+          outputs.push({...node.span,value:printed,names:scalarNames(env),concepts:[...union(v.concepts,flow.concepts)].sort(),dataConcepts:[...dataConcepts].sort()});record('log',node,{value:printed,index:logs.length-1},env,flow);break;
         }
         case 'block':{
           const result=yield* execute(node.body,env,flow);if(result)return result;break;
@@ -135,6 +165,7 @@ export function run(source){
         }
         case 'if':{
           const condition=yield* expression(node.condition,env,flow),branch=boolean(condition,node)?node.yes:node.no;
+          record('branch',node.condition,{value:condition.data},env,flow);
           const branchFlow=control(flow,condition.concepts,['if']);
           const inner=new Map(env),result=yield* execute(branch,inner,branchFlow);
           carry(env,inner,[...env.keys()]);if(result)return result;
@@ -146,7 +177,7 @@ export function run(source){
         case 'while':{
           const keys=[...env.keys()];
           for(;;){
-            spend(node);const condition=yield* expression(node.condition,env,flow);if(!boolean(condition,node))break;
+            spend(node);const condition=yield* expression(node.condition,env,flow);const active=boolean(condition,node);record('while',node.condition,{value:active},env,flow);if(!active)break;
             const inner=new Map(env),result=yield* execute(node.body,inner,control(flow,condition.concepts,['while']));
             carry(env,inner,keys);if(result?.kind==='return')return result;if(result?.kind==='break')break;
             if(result?.kind==='continue')fail('subset',node);
@@ -163,20 +194,22 @@ export function run(source){
             iterable={...range,elements,shapeConcepts:range.concepts,shapeDataConcepts:range.dataConcepts,shapeInputs:range.inputs};
           }else iterable=yield* expression(node.iterable,env,flow);
           if(!Array.isArray(iterable.data))fail('type',node);if(iterable.data.length>256)fail('limit',node);
+          record('list',node,{name:node.name,value:iterable.data},env,flow);
           const keys=[...env.keys()].filter(name=>name!==node.name);
           for(const [index,item] of iterable.data.entries()){
             const shape=iterable.shapeConcepts||new Set();
             spend(node);const inner=new Map(env),next=control(flow,shape,['for']);
             const element=derive(iterable.elements?.[index]||value(item),['for']);
             inner.set(node.name,bind({...controlled(element,shape),dataConcepts:union(element.dataConcepts,iterable.shapeDataConcepts),inputs:union(element.inputs,iterable.shapeInputs)}));
+            record('iteration',node,{name:node.name,value:item,index},inner,flow);
             const result=yield* execute(node.body,inner,next);carry(env,inner,keys);
             if(result?.kind==='return')return result;if(result?.kind==='break')break;if(result?.kind==='continue')fail('subset',node);
           }break;
         }
         case 'return':{
           const v=yield* expression(node.expr,env,flow),answer=controlled(v,flow.concepts);
-          if(node.reply){if(!flow.reply)fail('type',node);send(flow.reply,derive(answer,['reply']),node);yield {kind:'tick'};break;}
-          return {kind:'return',value:answer};
+          if(node.reply){if(!flow.reply)fail('type',node);send(flow.reply,derive(answer,['reply']),node,flow,env);yield {kind:'tick'};break;}
+          record('return',node,{value:answer.data},env,flow);return {kind:'return',value:answer};
         }
         case 'break':{
           const v=node.expr?yield* expression(node.expr,env,flow):value(null);
@@ -189,12 +222,12 @@ export function run(source){
         case 'send':{
           const target=yield* expression(node.channel,env,flow),v=yield* expression(node.expr,env,flow);
           const delivery=union(target.concepts,flow.concepts,['send']);
-          send(channel(target,node),{...controlled(derive(v,['send']),delivery),delivery},node);
+          send(channel(target,node),{...controlled(derive(v,['send']),delivery),delivery},node,flow,env);
           yield {kind:'tick'};break;
         }
         case 'receive':{
           const targets=[];for(const binding of node.bindings)targets.push(yield* expression(binding.channel,env,flow));
-          const messages=yield {kind:'receive',channels:targets.map(v=>channel(v,node))};
+          const messages=yield {kind:'receive',channels:targets.map(v=>channel(v,node)),span:node.span,names:node.bindings.map(binding=>binding.name),context:flow.callId||0,request:trace?++requestSerial:0,references:trace?channelBindings(env):[],scalarNames:trace?scalarNames(env):{},scalarBindings:trace?Object.fromEntries([...env].filter(([,v])=>typeof v.data==='number'||typeof v.data==='boolean').map(([name,v])=>[name,v.bindingId])):{}};
           const inner=new Map(env),next=control(flow,...messages.map(v=>v.delivery||[]),...targets.map(v=>v.concepts),['receive'],node.bindings.length>1?['join']:[]);
           const group=node.bindings.map((_,index)=>`${++receiveId}:${index}`);
           if(group.length>1)jointInputs.push(group);
@@ -202,6 +235,7 @@ export function run(source){
             const received=derive(messages[index],['receive']);
             inner.set(binding.name,bind({...received,inputs:union(received.inputs,[group[index]]),...(received.shapeInputs?{shapeInputs:union(received.shapeInputs,[group[index]])}:{})}));
           });
+          record('received-names',node,{bindings:node.bindings.map(binding=>binding.name),values:messages.map(message=>message.data)},inner,flow);
           const result=yield* execute(node.body,inner,next);if(result)return result;break;
         }
         default:fail('subset',node);
@@ -209,31 +243,33 @@ export function run(source){
     }
     return null;
   }
-  function send(target,message,node){
+  function send(target,message,node,flow,env){
     if(target.single&&target.spent)fail('replyUsed',node);
-    if(++messageCount>256)fail('limit',node);target.spent=true;target.messages.push(message);
+    if(++messageCount>256)fail('limit',node);target.spent=true;target.messages.push(message);if(trace){if(!messageTokens.has(target.id))messageTokens.set(target.id,[]);messageTokens.get(target.id).push(++messageSerial);record('send',node,{channel:target.id,message:messageSerial,value:message.data,reply:target.single,context:flow.callId||0},env,flow);}
   }
-  function consume(channels){
+  function consume(channels,origin){
     const counts=new Map();for(const target of channels)counts.set(target,(counts.get(target)||0)+1);
     for(const [target,count] of counts)if(target.messages.length<count)return null;
-    const messages=channels.map(target=>target.messages.shift());messageCount-=messages.length;return messages;
+    const messages=channels.map(target=>target.messages.shift());messageCount-=messages.length;if(trace)record('receive',origin,{channels:channels.map(target=>target.id),messages:channels.map(target=>messageTokens.get(target.id).shift()),bindings:origin.names,values:messages.map(message=>message.data),reply:!!origin.reply,request:origin.request,context:origin.context,references:origin.references,names:origin.scalarNames,bindingIds:origin.scalarBindings});return messages;
   }
   queue.push({task:execute(program,new Map(),{concepts:new Set(),depth:0,sync:false,reply:null}),resume:undefined});
-  while(queue.length){
+  try{while(queue.length){
     spend();if(queue.length+waiting.length>128)fail('limit');
     const job=queue.shift(),next=job.task.next(job.resume);job.resume=undefined;
     if(!next.done){
       const event=next.value;
       if(event.kind==='fork'){for(const task of event.tasks)queue.push({task,resume:undefined});queue.push(job);}
       else if(event.kind==='receive'){
-        const messages=consume(event.channels);
-        if(messages){job.resume=messages;queue.push(job);}else waiting.push({...job,channels:event.channels});
+        const messages=consume(event.channels,event);
+        if(messages){job.resume=messages;queue.push(job);}else {record('wait',event,{channels:event.channels.map(target=>target.id),bindings:event.names,reply:!!event.reply,request:event.request,context:event.context,references:event.references,names:event.scalarNames,bindingIds:event.scalarBindings});waiting.push({...job,channels:event.channels,origin:event});}
       }else queue.push(job);
     }
     for(let i=0;i<waiting.length;){
-      const job=waiting[i],messages=consume(job.channels);
+      const job=waiting[i],messages=consume(job.channels,job.origin);
       if(messages){waiting.splice(i,1);job.resume=messages;queue.push(job);}else i++;
     }
   }
-  return {logs,outputs,calls,steps,statementCount:program.length,waiting:waiting.length};
+  }
+  catch(error){if(trace&&error instanceof LessonError)error.recording={events,truncated,logs:[...logs],outputs:[...outputs]};throw error;}
+  return {logs,outputs,calls,steps,statementCount:program.length,waiting:waiting.length,...(trace?{recording:{events,truncated}}:{})};
 }
