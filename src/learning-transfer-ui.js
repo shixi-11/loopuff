@@ -4,5 +4,6 @@ const protocol=value=>String(value).split(/(\b(?:cargo|threshold|docks|offset|fu
 export function applicationPanel(mission,{text,titles,context,href}){
  if(!mission)return '';
  const index=dispatchIds.indexOf(mission);if(index<0)throw Error('Unknown dispatch mission');
- return `<aside class="learning-application"><span class="eyebrow">${esc(text.title)}</span><h3>${esc(titles[index])}</h3><p>${esc(text[context])}</p><p>${protocol(text.protocols[mission])}</p><a class="text-button" data-action="open-dispatch" data-mission="${mission}" href="${esc(href)}">${esc(text.apply.replace('{mission}',titles[index]))} <span aria-hidden="true">↗</span></a></aside>`;
+ const heading=context==='lesson'?'h2':'h3';
+ return `<aside class="learning-application"><span class="eyebrow">${esc(text.title)}</span><${heading}>${esc(titles[index])}</${heading}><p>${esc(text[context])}</p><p>${protocol(text.protocols[mission])}</p><a class="text-button" data-action="open-dispatch" data-mission="${mission}" href="${esc(href)}">${esc(text.apply.replace('{mission}',titles[index]))} <span aria-hidden="true">↗</span></a></aside>`;
 }
