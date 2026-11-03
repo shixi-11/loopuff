@@ -6,17 +6,19 @@ export function assess(source, goal, options) {
   const outputConcepts=new Set(result.outputs.flatMap(output=>output.concepts));
   const dataConcepts=new Set(result.outputs.flatMap(output=>output.dataConcepts));
   const requirements=goal.require.map(concept=>({concept,passed:goal.eachOutputRequire?.includes(concept)?result.outputs.length>0&&result.outputs.every(output=>(goal.dataRequire?.includes(concept)?output.dataConcepts:output.concepts).includes(concept)):(goal.dataRequire?.includes(concept)?dataConcepts:outputConcepts).has(concept)}));
-  const outputCorrect=JSON.stringify(result.logs)===JSON.stringify(goal.logs);
+  const outputCorrect=JSON.stringify(result.logs)===JSON.stringify(goal.logs),finished=result.waiting===0;
   const conceptsCorrect=requirements.every(item=>item.passed);
   const outputMax=requirements.length?50:80;
   const matched=goal.logs.filter((value,index)=>value===result.logs[index]).length;
-  const checks=[{id:'execution',points:20,max:20,status:'pass'},
+  // Waiting is valid language behaviour, but these finite tasks are not done.
+  // Keep the observed output and method points without awarding completion.
+  const checks=[{id:'execution',points:finished?20:0,max:20,status:finished?'pass':'fail'},
     {id:'output',points:outputCorrect?outputMax:Math.floor(outputMax*matched/Math.max(goal.logs.length,result.logs.length,1)),
       max:outputMax,status:outputCorrect?'pass':'fail',expected:goal.logs,actual:result.logs}];
   if(requirements.length)checks.push({id:'concepts',points:Math.floor(30*requirements.filter(item=>item.passed).length/requirements.length),
     max:30,status:conceptsCorrect?'pass':'fail',requirements});
   const score=checks.reduce((sum,item)=>sum+item.points,0);
-  return {ok:outputCorrect&&conceptsCorrect,code:!outputCorrect?'goalMismatch':!conceptsCorrect?'conceptMissing':null,
+  return {ok:finished&&outputCorrect&&conceptsCorrect,code:!finished?'waiting':!outputCorrect?'goalMismatch':!conceptsCorrect?'conceptMissing':null,
     result,score,checks};
 }
 

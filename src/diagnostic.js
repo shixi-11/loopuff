@@ -48,7 +48,6 @@ export function inspectDiagnostic(seed,id,source){
  const cases=puzzle.cases.map(item=>{
   const full=item.prefix+source+(item.suffix||''),require=item.logs.length?(item.require||puzzle.require):[],dataRequire=puzzle.dataRequire.filter(key=>require.includes(key));
   const report=grade(full,{logs:item.logs,require,dataRequire,eachOutputRequire:require.filter(key=>id!=='counter'||key!=='add')});
-  if(report.result?.waiting){report.ok=false;report.code='waiting';}
   if(report.ok&&puzzle.callKind){
    const entry=report.result.calls.find(call=>call.start===item.prefix.length+source.length+1);
    if(entry?.kind!==puzzle.callKind){report.ok=false;report.code=puzzle.callKind==='sync'?'syncRequired':'replyRequired';}

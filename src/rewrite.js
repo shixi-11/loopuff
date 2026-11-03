@@ -24,7 +24,6 @@ export function rewriteTask(id){
 export function inspectRewrite(id,source){
  const goal=rewriteTask(id).goal,report=grade(source,{...goal,eachOutputRequire:goal.require.filter(key=>id!=='counter'||key!=='add')},{provenance:true});
  if(!report.ok)return report;
- if(report.result.waiting)return {...report,ok:false,code:'waiting'};
  if(['function','reply'].includes(id)){
   // Calls are recorded on completion. A cached pair of earlier calls cannot
   // stand in for a new call producing the second signal.

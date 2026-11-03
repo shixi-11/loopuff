@@ -58,7 +58,6 @@ export function inspectDispatch(seed,id,source){
   const fullSource=sample.prefix+source+(sample.suffix||'');
   const require=sample.logs.length?puzzle.require:[];
   const report=grade(fullSource,{logs:sample.logs,require,dataRequire:puzzle.dataRequire,eachOutputRequire:require});
-  if(report.result?.waiting){report.ok=false;report.code='waiting';}
   const position=Math.max(0,(report.position||0)-sample.prefix.length);
   return {...report,position,inputs:sample.inputs,expected:sample.logs,
    outputs:report.result?.outputs.map(output=>{
