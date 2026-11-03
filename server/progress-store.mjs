@@ -1,4 +1,17 @@
-import {normalizeSave,parseSave,SaveError} from './save-format.mjs';
+import {normalizeSave,parseSave,SaveError,courseLessonIds} from './save-format.mjs';
+
+function omitsRewrite(previous,next){
+ const records=snapshot=>{
+  const state=snapshot.data.course?.state,map={};if(!state)return map;
+  for(const [id,work] of Object.entries(state.lessonWork||{}))if(typeof work.rewriteDraft==='string')map[id]=work.rewriteDraft;
+  const id=courseLessonIds[state.lesson??0];
+  // A menu may carry a stale mirror: it only fills a missing per-lesson field.
+  if(id&&map[id]===undefined&&typeof state.rewriteDraft==='string')map[id]=state.rewriteDraft;
+  return map;
+ };
+ const before=records(previous),after=records(next);
+ return Object.keys(before).some(id=>after[id]===undefined);
+}
 
 // Private per-account snapshots; revisions are write preconditions, not game scores.
 export function createProgressStore(db,{now=Date.now}={}){
@@ -20,7 +33,7 @@ export function createProgressStore(db,{now=Date.now}={}){
    // if it somehow obtained a matching revision. Never downgrade GET responses.
    const current=read.get(userId);
    if(current&&current.revision!==expectedRevision)throw new SaveError('SAVE_CONFLICT');
-   if(current){const previous=parseSave(current.snapshot);if(snapshot.version===1&&previous.data.pursuit!==null||snapshot.version<3&&previous.data.heist!==null||previous.data.course?.state?.diagnostic&&!snapshot.data.course?.state?.diagnostic)throw new SaveError('SAVE_VERSION');}
+   if(current){const previous=parseSave(current.snapshot);if(snapshot.version===1&&previous.data.pursuit!==null||snapshot.version<3&&previous.data.heist!==null||previous.data.course?.state?.diagnostic&&!snapshot.data.course?.state?.diagnostic||omitsRewrite(previous,normalized))throw new SaveError('SAVE_VERSION');}
    const row=expectedRevision===0?insert.get(userId,encoded,timestamp):update.get(encoded,timestamp,userId,expectedRevision);
    if(!row)throw new SaveError('SAVE_CONFLICT');
    return {revision:row.revision,updatedAt:row.updatedAt};

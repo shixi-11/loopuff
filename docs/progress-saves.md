@@ -41,3 +41,7 @@ An interrupted POST is `SAVE_UNCONFIRMED`, including an upstream commit whose re
 Run the frontend test command and build in sequence. Server tests run from `server/` with its installed dependencies: `npm test` includes both account and progress suites. Local Node without Better Auth cannot substitute for these tests. Before deploying the schema, back up the existing account database and validate a temporary restore. Preserve the environment, database, session secret and shared Funnel; restart only `com.loopuff.account` after verified source synchronization.
 
 The static build copies only the host-independent `save-format.mjs`, `pursuit-format.mjs`, `diagnostic-format.mjs` and `heist-format.mjs` modules into `dist/server/`; account code, the database and configuration must never enter the static output. Real browser file download/import, two-page conflicts, locale layouts, account isolation, revision conflicts and a live cloud round trip remain separate checks from unit-test success.
+
+## 整段改写草稿
+
+course及lessonWork加入可选rewriteDraft，rewrite为课程内阶段。缺失表示未创建，空串表示主动删空；独立draft与assessedSource不被它替换。旧文件合并保留存在方的字段，双方均编辑时整课明确选择。服务按课程保护已存在字段，旧页遗漏写入返回SAVE_VERSION；版本仍为v3六域，无新表。

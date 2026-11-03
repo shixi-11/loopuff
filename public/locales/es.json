@@ -1552,5 +1552,79 @@
     "decisionCount": "Decisiones",
     "focus": "Ampliar escena",
     "closeFocus": "Cerrar escena ampliada"
+  },
+  "rewrite": {
+    "title": "Haz tuyo el programa",
+    "intro": "Conserva el programa como punto de partida. Cambia cualquier parte que necesites, ejecútalo y explícate por qué cambiaron las señales.",
+    "guide": "Continúa reescribiendo un programa completo",
+    "direct": "Probar directamente la tarea independiente",
+    "back": "Volver a la reescritura del programa",
+    "run": "Ejecutar y comprobar",
+    "next": "Continuar sin el programa inicial",
+    "hint": "Una pista",
+    "ready": "Tu programa inicial se puede editar. Predice la nueva salida antes de ejecutarlo.",
+    "changed": "El programa ha cambiado. Ejecútalo de nuevo para comprobar esta versión.",
+    "success": "Esta versión cumple el objetivo de la reescritura. Ahora resuelve una tarea nueva sin el programa inicial.",
+    "retry": "El programa se ejecutó, pero todavía no cumple el objetivo. Compara las señales y sigue los valores a lo largo de la ejecución.",
+    "missing": "La salida debe usar la idea que se pide. Una declaración sin usar no ayuda a producir una señal.",
+    "scope": "Esta práctica no cambia tu puntuación de la tarea ni marca ninguna lección como completada.",
+    "savedError": "No se pudo guardar este cambio. Guarda una copia de tu código antes de salir.",
+    "transfer": "Prueba esta idea con entradas que cambian",
+    "independentDraft": "Programa independiente",
+    "rewriteDraft": "Reescritura del programa",
+    "tasks": {
+      "signal": {
+        "goal": "Envía dos señales en orden: primero 3 y luego 8. Una línea puede enviar una señal; ¿cómo enviarás dos?",
+        "hint": "Conserva la primera llamada a .log() y añade otra. Cada llamada muestra su propio valor."
+      },
+      "addition": {
+        "goal": "Muestra 10 y luego 13. Usa la suma para producir las señales; puedes cambiar ambos números de un cálculo.",
+        "hint": "Puedes escribir más de un cálculo. Mantén .log() después de cada valor calculado."
+      },
+      "names": {
+        "goal": "Guarda un número con un nombre y úsalo en sumas que muestren 13 y luego 17.",
+        "hint": "Usa el mismo valor con nombre en dos cálculos. Los números que sumas no tienen por qué ser iguales."
+      },
+      "leap": {
+        "goal": "Construye una señal de salto de 9 sumando dos números. Si quieres, cambia toda la expresión.",
+        "hint": "Elige dos números cuya suma sea 9. Envía el valor calculado con .log()."
+      },
+      "comparison": {
+        "goal": "Muestra false y luego true usando comparaciones. Puedes cambiar ambos lados y añadir una segunda comparación.",
+        "hint": "Una comparación produce un booleano. Prueba a invertir el lado en el que está el número mayor."
+      },
+      "branch": {
+        "goal": "Haz que una comparación elija una rama que muestre 3. Puedes cambiar el combustible, la condición y el contenido de las ramas.",
+        "hint": "Primero decide qué rama se ejecuta con tu valor de combustible. Cambia lo que envía esa rama."
+      },
+      "repeat": {
+        "goal": "Usa un bucle y suma algo a cada valor visitado para mostrar 4, 6, 10. Por ejemplo, recorre [3, 5, 9] y suma 1 a cada valor.",
+        "hint": "Cambia tanto la lista como el cálculo dentro del bucle. La variable del bucle tiene un valor distinto en cada vuelta."
+      },
+      "counter": {
+        "goal": "Usa un bucle while para mostrar 3, 4, 5 y luego detenerte. Define un nuevo valor inicial y una nueva condición de parada.",
+        "hint": "Piensa en el primer valor, el último valor permitido y cómo cambia el contador en cada vuelta."
+      },
+      "function": {
+        "goal": "Llama dos veces a una función de suma síncrona para que muestre 9 y luego 13. Reutiliza la función con entradas distintas.",
+        "hint": "Define la función una sola vez. Llámala dos veces y muestra cada resultado devuelto."
+      },
+      "reply": {
+        "goal": "Usa respuestas de función y sumas para obtener 11 y luego 15. Por ejemplo, suma 3 a las entradas 8 y 12.",
+        "hint": "Cambia el cuerpo de la función y prueba distintas entradas. Mantén return ! para su respuesta."
+      },
+      "message": {
+        "goal": "Envía un valor por un canal, recíbelo y úsalo en una suma que muestre 14. Por ejemplo, envía 10 y suma 4 después de recibirlo.",
+        "hint": "El emisor elige el valor del paquete. Pon la suma dentro del receptor para que use el valor recibido."
+      },
+      "join": {
+        "goal": "Envía valores por dos canales, recíbelos juntos y súmalos para mostrar 17. Por ejemplo, envía 8 y 9.",
+        "hint": "Mantén la recepción conjunta con &. Da un valor a cada canal y calcula a partir de los dos nombres recibidos."
+      },
+      "coordination": {
+        "goal": "Envía dos valores, recíbelos juntos y súmalos en una función. Usa una comparación para elegir una rama que muestre 20 a partir del total. Una opción: envía 6 y 9; si el total es mayor que 12, suma 5.",
+        "hint": "Sigue los valores en orden: dos mensajes, el resultado de la función, la condición y, por último, el valor que muestra la rama elegida."
+      }
+    }
   }
 }

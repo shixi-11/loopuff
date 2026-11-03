@@ -5,11 +5,11 @@ const union=(...items)=>new Set(items.flatMap(item=>[...(item||[])]));
 const value=(data,concepts=[])=>({data,concepts:new Set(concepts),dataConcepts:new Set(concepts),inputs:new Set()});
 const derive=(v,extra=[])=>({...v,concepts:union(v.concepts,extra),dataConcepts:union(v.dataConcepts,extra),...(v.shapeConcepts?{shapeConcepts:union(v.shapeConcepts,extra),shapeDataConcepts:union(v.shapeDataConcepts,extra)}:{})});
 const controlled=(v,extra)=>({...v,concepts:union(v.concepts,extra),...(v.shapeConcepts?{shapeConcepts:union(v.shapeConcepts,extra)}:{})});
-const computed=(data,concepts,operands)=>({...value(data),concepts:union(concepts,...operands.map(v=>v.concepts)),dataConcepts:union(concepts,...operands.map(v=>v.dataConcepts)),inputs:union(...operands.map(v=>v.inputs))});
+const computed=(data,concepts,operands)=>({...value(data),concepts:union(concepts,...operands.map(v=>v.concepts)),dataConcepts:union(concepts,...operands.map(v=>v.dataConcepts)),inputs:union(...operands.map(v=>v.inputs)),...(operands.some(v=>v.invocations)?{invocations:union(...operands.map(v=>v.invocations))}:{})});
 const control=(flow,...extra)=>({...flow,concepts:union(flow.concepts,...extra)});
-export function run(source,{trace=false}={}){
+export function run(source,{trace=false,provenance=false}={}){
   const program=compile(source),logs=[],outputs=[],calls=[],queue=[],waiting=[];
-  let steps=0,callCount=0,channelCount=0,messageCount=0,printedSize=0,bindingId=0,receiveId=0;
+  let steps=0,callCount=0,channelCount=0,messageCount=0,printedSize=0,bindingId=0,receiveId=0,functionCount=0;
   const jointInputs=[],events=[],messageTokens=new Map();let truncated=false,messageSerial=0,requestSerial=0;
   // Lists in a scene are bounded previews; log events retain the full printed value.
   const snapshot=data=>{
@@ -37,6 +37,17 @@ export function run(source,{trace=false}={}){
     if(env){event.references=channelBindings(env);event.names=scalarNames(env);event.bindingIds=Object.fromEntries(Object.keys(event.names).map(name=>[name,env.get(name).bindingId]));}events.push(event);
   };
   const bind=(v,id=++bindingId)=>({...v,bindingId:id});
+  // Intern shallow structural keys. A shared list stays a DAG, never a tree
+  // expanded into display text or JSON merely to compare two call inputs.
+  const argumentKeys=new Map(),argumentObjects=new WeakMap();
+  function argumentIdentity(data){
+    if(data&&typeof data==='object'&&argumentObjects.has(data))return argumentObjects.get(data);
+    const parts=Array.isArray(data)?['list',...data.map(argumentIdentity)]:data?.kind==='channel'?['channel',data.id]:data?.kind==='function'?['function',data.identity,...data.bound.map(v=>argumentIdentity(v.data))]:[typeof data,data];
+    const key=JSON.stringify(parts);if(!argumentKeys.has(key))argumentKeys.set(key,argumentKeys.size+1);const id=argumentKeys.get(key);
+    if(data&&typeof data==='object')argumentObjects.set(data,id);return id;
+  }
+  // A returned list adds a lazy origin for each element when it is visited.
+  const fromInvocation=(v,id)=>({...v,invocations:union(v.invocations,[id]),...(v.elements?{elementInvocations:union(v.elementInvocations,[id])}:{})});
   const spend=node=>{if(++steps>20000)throw new LessonError('limit',node?.span?.start||0);};
   const fail=(code,node)=>{throw new LessonError(code,node?.span?.start||0);};
   const integer=(n,node)=>{if(!Number.isSafeInteger(n)||Math.abs(n)>1000000)fail('limit',node);return n;};
@@ -82,7 +93,7 @@ export function run(source,{trace=false}={}){
       if(flow.depth>=32||++callCount>1024)fail('limit',node);
       const callEnv=new Map(fn.closure);
       fn.node.params.forEach((name,index)=>callEnv.set(name,bind(args[index])));
-      const invocation=callCount;
+      const invocation=callCount,callArgs=provenance?args.map(v=>argumentIdentity(v.data)):undefined;
       const next=control({...flow,depth:flow.depth+1,callId:invocation},callee.concepts,['call']);
       if(fn.node.async){
         if(flow.sync)fail('subset',node);
@@ -90,14 +101,16 @@ export function run(source,{trace=false}={}){
         record('call',node,{name:fn.node.name,kind:'reply',invocation,args:args.map(v=>v.data),replyChannel:reply.id},env,flow);
         yield {kind:'fork',tasks:[execute(fn.node.body,callEnv,{...next,reply,sync:false})]};
         const [answer]=yield {kind:'receive',channels:[reply],span:node.span,names:[],reply:true,context:flow.callId||0,request:trace?++requestSerial:0,references:trace?channelBindings(env):[],scalarNames:trace?scalarNames(env):{},scalarBindings:trace?Object.fromEntries([...env].filter(([,v])=>typeof v.data==='number'||typeof v.data==='boolean').map(([name,v])=>[name,v.bindingId])):{}};
-        calls.push({...node.span,kind:'reply'});record('call-result',node,{name:fn.node.name,kind:'reply',invocation,value:answer.data},env,flow);
-        return controlled(derive(answer,union(callee.dataConcepts,['call'])),callee.concepts);
+        calls.push({...node.span,kind:'reply',...(provenance?{invocation,definition:fn.identity,args:callArgs}:{})});record('call-result',node,{name:fn.node.name,kind:'reply',invocation,value:answer.data},env,flow);
+        const returned=controlled(derive(answer,union(callee.dataConcepts,['call'])),callee.concepts);
+        return provenance?fromInvocation(returned,invocation):returned;
       }
       record('call',node,{name:fn.node.name,kind:'sync',invocation,args:args.map(v=>v.data)},env,flow);
       const result=yield* execute(fn.node.body,callEnv,{...next,reply:null,sync:true});
       if(result?.kind!=='return')fail('type',node);
-      calls.push({...node.span,kind:'sync'});record('call-result',node,{name:fn.node.name,kind:'sync',invocation,value:result.value.data},env,flow);
-      return controlled(derive(result.value,union(callee.dataConcepts,['call'])),callee.concepts);
+      calls.push({...node.span,kind:'sync',...(provenance?{invocation,definition:fn.identity,args:callArgs}:{})});record('call-result',node,{name:fn.node.name,kind:'sync',invocation,value:result.value.data},env,flow);
+      const returned=controlled(derive(result.value,union(callee.dataConcepts,['call'])),callee.concepts);
+      return provenance?fromInvocation(returned,invocation):returned;
     }
     if(node.type==='loop'){
       const state=new Map(env),keys=[...env.keys()].filter(name=>!node.names.includes(name));
@@ -142,7 +155,7 @@ export function run(source,{trace=false}={}){
         }
         case 'channel':env.set(node.name,bind(value(fresh(),union(flow.concepts,['channel','bind']))));record('channel',node,{name:node.name,bindingId:env.get(node.name).bindingId,channel:env.get(node.name).data.id},env,flow);break;
         case 'function':{
-          const closure=new Map(env),fn=bind(value({kind:'function',node,closure,bound:[]},['function']));
+          const closure=new Map(env),fn=bind(value({kind:'function',node,closure,bound:[],...(provenance?{identity:++functionCount}:{})},['function']));
           closure.set(node.name,fn);env.set(node.name,fn);record('function',node,{name:node.name,params:node.params,kind:node.async?'reply':'sync'},env,flow);break;
         }
         case 'expression':yield* expression(node.expr,env,flow);break;
@@ -153,7 +166,7 @@ export function run(source,{trace=false}={}){
           const printed=display(v.data,node);logs.push(printed);
           const dataConcepts=union(v.dataConcepts);
           if(jointInputs.some(group=>group.every(input=>v.inputs.has(input))))dataConcepts.add('join');
-          outputs.push({...node.span,value:printed,names:scalarNames(env),concepts:[...union(v.concepts,flow.concepts)].sort(),dataConcepts:[...dataConcepts].sort()});record('log',node,{value:printed,index:logs.length-1},env,flow);break;
+          outputs.push({...node.span,value:printed,names:scalarNames(env),concepts:[...union(v.concepts,flow.concepts)].sort(),dataConcepts:[...dataConcepts].sort(),...(provenance?{invocations:[...(v.invocations||[])]}:{})});record('log',node,{value:printed,index:logs.length-1},env,flow);break;
         }
         case 'block':{
           const result=yield* execute(node.body,env,flow);if(result)return result;break;
@@ -200,7 +213,7 @@ export function run(source,{trace=false}={}){
             const shape=iterable.shapeConcepts||new Set();
             spend(node);const inner=new Map(env),next=control(flow,shape,['for']);
             const element=derive(iterable.elements?.[index]||value(item),['for']);
-            inner.set(node.name,bind({...controlled(element,shape),dataConcepts:union(element.dataConcepts,iterable.shapeDataConcepts),inputs:union(element.inputs,iterable.shapeInputs)}));
+            inner.set(node.name,bind({...controlled(element,shape),dataConcepts:union(element.dataConcepts,iterable.shapeDataConcepts),inputs:union(element.inputs,iterable.shapeInputs),...(provenance?{invocations:union(element.invocations,iterable.elementInvocations),...(element.elements?{elementInvocations:union(element.elementInvocations,iterable.elementInvocations)}:{})}:{})}));
             record('iteration',node,{name:node.name,value:item,index},inner,flow);
             const result=yield* execute(node.body,inner,next);carry(env,inner,keys);
             if(result?.kind==='return')return result;if(result?.kind==='break')break;if(result?.kind==='continue')fail('subset',node);

@@ -1552,5 +1552,79 @@
     "decisionCount": "Entscheidungen",
     "focus": "Szene vergrößern",
     "closeFocus": "Vergrößerte Szene schließen"
+  },
+  "rewrite": {
+    "title": "Mach das Programm zu deinem eigenen",
+    "intro": "Behalte das Programm als Ausgangspunkt. Ändere jeden Teil, den du brauchst, führe es aus und erkläre dir selbst, warum sich die Signale verändert haben.",
+    "guide": "Weiter: ein ganzes Programm umschreiben",
+    "direct": "Die eigenständige Aufgabe direkt versuchen",
+    "back": "Zurück zum Umschreiben des Programms",
+    "run": "Ausführen und prüfen",
+    "next": "Ohne Startprogramm weitermachen",
+    "hint": "Ein kleiner Tipp",
+    "ready": "Dein Startprogramm ist bearbeitbar. Sag die neue Ausgabe voraus, bevor du es ausführst.",
+    "changed": "Das Programm wurde geändert. Führe es erneut aus, um diese Version zu prüfen.",
+    "success": "Diese Version erfüllt das Ziel der Umschreibung. Löse als Nächstes eine neue Aufgabe ohne Startprogramm.",
+    "retry": "Das Programm ist gelaufen, erfüllt das Ziel aber noch nicht. Vergleiche die Signale und verfolge die Werte durch die Ausführung.",
+    "missing": "Die Ausgabe muss die geforderte Idee verwenden. Eine ungenutzte Deklaration hilft nicht, ein Signal zu erzeugen.",
+    "scope": "Diese Übung ändert weder deine Aufgabenwertung, noch markiert sie eine Lektion als abgeschlossen.",
+    "savedError": "Diese Änderung konnte nicht gespeichert werden. Sichere vor dem Verlassen eine Kopie deines Codes.",
+    "transfer": "Probiere diese Idee mit wechselnden Eingaben aus",
+    "independentDraft": "Eigenständiges Programm",
+    "rewriteDraft": "Umgeschriebenes Programm",
+    "tasks": {
+      "signal": {
+        "goal": "Sende zwei Signale nacheinander: erst 3, dann 8. Eine Zeile kann ein Signal senden – wie sendest du zwei?",
+        "hint": "Behalte den ersten .log()-Aufruf und füge einen weiteren hinzu. Jeder Aufruf zeigt seinen eigenen Wert an."
+      },
+      "addition": {
+        "goal": "Zeige erst 10, dann 13 an. Erzeuge die Signale mit Addition; du kannst beide Zahlen einer Rechnung ändern.",
+        "hint": "Du kannst mehr als eine Rechnung schreiben. Behalte .log() nach jedem berechneten Wert."
+      },
+      "names": {
+        "goal": "Speichere eine Zahl unter einem Namen und verwende sie in Additionen, die erst 13, dann 17 anzeigen.",
+        "hint": "Verwende denselben benannten Wert in zwei Rechnungen. Die Zahlen, die du addierst, müssen nicht gleich sein."
+      },
+      "leap": {
+        "goal": "Bilde ein Sprungsignal von 9, indem du zwei Zahlen addierst. Du kannst auch den ganzen Ausdruck ändern.",
+        "hint": "Wähle zwei Zahlen, deren Summe 9 ist. Sende den berechneten Wert mit .log()."
+      },
+      "comparison": {
+        "goal": "Zeige mit Vergleichen erst false, dann true an. Du darfst beide Seiten ändern und einen zweiten Vergleich hinzufügen.",
+        "hint": "Ein Vergleich ergibt einen booleschen Wert. Tausche probeweise, auf welcher Seite die größere Zahl steht."
+      },
+      "branch": {
+        "goal": "Lass einen Vergleich einen Zweig wählen, der 3 anzeigt. Du kannst den Treibstoff, die Bedingung und den Inhalt der Zweige ändern.",
+        "hint": "Überlege zuerst, welcher Zweig bei deinem Treibstoffwert ausgeführt wird. Ändere dann, was dieser Zweig sendet."
+      },
+      "repeat": {
+        "goal": "Verwende eine Schleife und addiere zu jedem besuchten Wert etwas, damit 4, 6, 10 angezeigt werden. Besuche zum Beispiel [3, 5, 9] und addiere zu jedem Wert 1.",
+        "hint": "Ändere sowohl die Liste als auch die Rechnung in der Schleife. Die Schleifenvariable enthält bei jedem Durchlauf einen anderen Wert."
+      },
+      "counter": {
+        "goal": "Zeige mit einer while-Schleife 3, 4, 5 an und höre dann auf. Lege einen neuen Startwert und eine neue Abbruchbedingung fest.",
+        "hint": "Denk an den ersten Wert, den letzten erlaubten Wert und daran, wie sich der Zähler jedes Mal ändert."
+      },
+      "function": {
+        "goal": "Rufe eine synchrone Additionsfunktion zweimal auf, sodass sie erst 9, dann 13 anzeigt. Verwende die Funktion mit verschiedenen Eingaben wieder.",
+        "hint": "Definiere die Funktion nur einmal. Rufe sie zweimal auf und zeige jedes zurückgegebene Ergebnis an."
+      },
+      "reply": {
+        "goal": "Erzeuge mit Funktionsantworten und Addition zuerst 11, dann 15. Addiere zum Beispiel 3 zu den Eingaben 8 und 12.",
+        "hint": "Ändere den Funktionsrumpf und probiere verschiedene Eingaben aus. Behalte return ! für die Antwort bei."
+      },
+      "message": {
+        "goal": "Sende einen Wert über einen Kanal, empfange ihn und verwende ihn in einer Addition, die 14 anzeigt. Sende zum Beispiel 10 und addiere nach dem Empfang 4.",
+        "hint": "Der Sender bestimmt den Wert im Paket. Setze die Addition in den Empfänger, damit sie den empfangenen Wert verwendet."
+      },
+      "join": {
+        "goal": "Sende Werte auf zwei Kanälen, empfange beide gemeinsam und addiere sie, damit 17 angezeigt wird. Sende zum Beispiel 8 und 9.",
+        "hint": "Behalte den gemeinsamen Empfang mit & bei. Gib jedem Kanal einen Wert und rechne mit den beiden empfangenen Namen."
+      },
+      "coordination": {
+        "goal": "Sende zwei Werte, empfange beide gemeinsam und bilde in einer Funktion ihre Summe. Wähle mit einem Vergleich einen Zweig, der mithilfe der Summe 20 anzeigt. Eine Möglichkeit: Sende 6 und 9; wenn die Summe größer als 12 ist, addiere 5.",
+        "hint": "Verfolge die Werte der Reihe nach: zwei Nachrichten, Funktionsergebnis, Bedingung und dann den Wert, den der gewählte Zweig anzeigt."
+      }
+    }
   }
 }

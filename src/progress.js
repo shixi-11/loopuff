@@ -3,12 +3,13 @@ export function readSession(raw){
   try{const value=JSON.parse(raw);return value&&typeof value==='object'&&!Array.isArray(value)?value:{};}
   catch{return {};}
 }
-const phases=['brief','typing','predict','output','explain','remix','independent','result','complete'];
+const phases=['brief','typing','predict','output','explain','remix','rewrite','independent','result','complete'];
 export function rememberLesson(state,id,phase=state.phase==='pause'?state.previousPhase:state.phase){
   if(!phases.includes(phase))return;
   if(!state.lessonWork||typeof state.lessonWork!=='object'||Array.isArray(state.lessonWork))state.lessonWork={};
   state.lessonWork[id]={phase,fragment:state.fragment,typed:state.typed,draft:state.draft,
-    assessedSource:state.assessedSource,score:state.score,errors:state.errors,keys:state.keys};
+    assessedSource:state.assessedSource,score:state.score,errors:state.errors,keys:state.keys,
+    ...(typeof state.rewriteDraft==='string'?{rewriteDraft:state.rewriteDraft}:{})};
 }
 export function lessonWork(state,id){
   const work=state.lessonWork?.[id];
@@ -16,7 +17,7 @@ export function lessonWork(state,id){
   const text=value=>typeof value==='string'?value.slice(0,4096):'';
   const draft=text(work.draft);
   return {phase:work.phase,fragment:Number.isInteger(work.fragment)?Math.max(0,work.fragment):0,
-    typed:text(work.typed),draft,assessedSource:typeof work.assessedSource==='string'&&work.assessedSource===draft?draft:null,
+    typed:text(work.typed),draft,rewriteDraft:typeof work.rewriteDraft==='string'?text(work.rewriteDraft):undefined,assessedSource:typeof work.assessedSource==='string'&&work.assessedSource===draft?draft:null,
     score:Number.isFinite(work.score)?Math.max(0,work.score):0,
     errors:Number.isFinite(work.errors)?Math.max(0,work.errors):0,
     keys:Number.isFinite(work.keys)?Math.max(0,work.keys):0};

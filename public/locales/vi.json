@@ -1552,5 +1552,79 @@
     "decisionCount": "Số quyết định",
     "focus": "Mở rộng hiện trường",
     "closeFocus": "Đóng hiện trường mở rộng"
+  },
+  "rewrite": {
+    "title": "Biến chương trình thành của riêng bạn",
+    "intro": "Giữ chương trình này làm điểm xuất phát. Thay đổi bất kỳ phần nào cần thiết, chạy thử và tự giải thích vì sao các tín hiệu thay đổi.",
+    "guide": "Tiếp tục bằng cách viết lại cả chương trình",
+    "direct": "Thử ngay bài tập độc lập",
+    "back": "Quay lại phần viết lại chương trình",
+    "run": "Chạy và kiểm tra",
+    "next": "Tiếp tục mà không có chương trình ban đầu",
+    "hint": "Gợi ý một chút",
+    "ready": "Chương trình ban đầu có thể chỉnh sửa. Hãy đoán kết quả mới trước khi chạy.",
+    "changed": "Chương trình đã thay đổi. Hãy chạy lại để kiểm tra phiên bản này.",
+    "success": "Phiên bản này đã đạt mục tiêu viết lại. Tiếp theo, hãy giải một bài mới mà không cần chương trình ban đầu.",
+    "retry": "Chương trình đã chạy nhưng chưa đạt mục tiêu. Hãy so sánh các tín hiệu và lần theo giá trị trong suốt quá trình thực thi.",
+    "missing": "Kết quả cần dùng đến ý tưởng được yêu cầu. Một khai báo không được dùng sẽ không giúp tạo ra tín hiệu.",
+    "scope": "Bài luyện tập này không thay đổi điểm bài tập và không đánh dấu bài học là hoàn thành.",
+    "savedError": "Không thể lưu thay đổi này. Hãy giữ một bản sao mã trước khi rời đi.",
+    "transfer": "Thử ý tưởng này với các đầu vào khác nhau",
+    "independentDraft": "Chương trình độc lập",
+    "rewriteDraft": "Chương trình viết lại",
+    "tasks": {
+      "signal": {
+        "goal": "Gửi hai tín hiệu theo thứ tự: 3, rồi 8. Một dòng có thể gửi một tín hiệu; làm sao để gửi hai?",
+        "hint": "Giữ lệnh gọi .log() đầu tiên và thêm một lệnh nữa. Mỗi lệnh gọi hiển thị giá trị của riêng nó."
+      },
+      "addition": {
+        "goal": "Hiển thị 10, rồi 13. Dùng phép cộng để tạo tín hiệu; có thể đổi cả hai số trong một phép tính.",
+        "hint": "Có thể viết nhiều phép tính. Giữ .log() sau mỗi giá trị được tính."
+      },
+      "names": {
+        "goal": "Lưu một số dưới một tên và dùng nó trong các phép cộng để hiển thị 13, rồi 17.",
+        "hint": "Dùng cùng một giá trị có tên trong hai phép tính. Các số cộng thêm không cần bằng nhau."
+      },
+      "leap": {
+        "goal": "Tạo tín hiệu nhảy bằng 9 bằng cách cộng hai số. Có thể đổi cả biểu thức nếu muốn.",
+        "hint": "Chọn hai số có tổng bằng 9. Gửi giá trị đã tính bằng .log()."
+      },
+      "comparison": {
+        "goal": "Hiển thị false, rồi true bằng phép so sánh. Có thể đổi cả hai vế và thêm phép so sánh thứ hai.",
+        "hint": "Phép so sánh tạo ra giá trị boolean. Thử đổi vế chứa số lớn hơn."
+      },
+      "branch": {
+        "goal": "Làm cho một phép so sánh chọn nhánh hiển thị 3. Có thể đổi nhiên liệu, điều kiện và nội dung các nhánh.",
+        "hint": "Trước tiên, xác định nhánh nào chạy với giá trị nhiên liệu đã chọn. Sau đó đổi giá trị mà nhánh đó gửi đi."
+      },
+      "repeat": {
+        "goal": "Dùng vòng lặp và cộng thêm vào mỗi giá trị được duyệt để hiển thị 4, 6, 10. Ví dụ: duyệt [3, 5, 9] và cộng 1 vào mỗi giá trị.",
+        "hint": "Hãy thay đổi cả danh sách lẫn phép tính trong vòng lặp. Mỗi lần duyệt, biến vòng lặp giữ một giá trị khác."
+      },
+      "counter": {
+        "goal": "Dùng vòng lặp while để hiển thị 3, 4, 5 rồi dừng. Đặt giá trị bắt đầu và điều kiện dừng mới.",
+        "hint": "Hãy nghĩ về giá trị đầu tiên, giá trị cuối cùng được phép, và cách bộ đếm thay đổi sau mỗi lượt."
+      },
+      "function": {
+        "goal": "Gọi hai lần một hàm đồng bộ thực hiện phép cộng để hiển thị 9, rồi 13. Dùng lại hàm với các đầu vào khác nhau.",
+        "hint": "Chỉ định nghĩa hàm một lần. Gọi hai lần và hiển thị từng kết quả trả về."
+      },
+      "reply": {
+        "goal": "Dùng phản hồi của hàm và phép cộng để tạo ra 11, rồi 15. Ví dụ: cộng 3 vào các đầu vào 8 và 12.",
+        "hint": "Hãy thay đổi thân hàm và thử các đầu vào khác nhau. Giữ nguyên return ! để gửi phản hồi."
+      },
+      "message": {
+        "goal": "Gửi một giá trị qua kênh, nhận nó rồi dùng trong phép cộng để hiển thị 14. Ví dụ: gửi 10 và cộng 4 sau khi nhận.",
+        "hint": "Bên gửi chọn giá trị đặt trong gói hàng. Đặt phép cộng bên trong bên nhận để nó dùng giá trị đã nhận."
+      },
+      "join": {
+        "goal": "Gửi giá trị trên hai kênh, nhận cả hai cùng lúc rồi cộng lại để hiển thị 17. Ví dụ: gửi 8 và 9.",
+        "hint": "Giữ nguyên phép nhận kết hợp với &. Gán cho mỗi kênh một giá trị rồi tính từ hai tên đã nhận."
+      },
+      "coordination": {
+        "goal": "Gửi hai giá trị, nhận cả hai cùng lúc và tính tổng trong một hàm. Dùng phép so sánh để chọn nhánh hiển thị 20 dựa trên tổng. Một cách làm: gửi 6 và 9; nếu tổng lớn hơn 12 thì cộng thêm 5.",
+        "hint": "Lần theo các giá trị theo thứ tự: hai tin nhắn, kết quả của hàm, điều kiện, rồi giá trị mà nhánh được chọn hiển thị."
+      }
+    }
   }
 }

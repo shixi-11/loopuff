@@ -1,12 +1,12 @@
-import {normalizeSave,SaveError} from '../server/save-format.mjs';
+import {normalizeSave,SaveError,courseLessonIds} from '../server/save-format.mjs';
 import {course} from './course.js';
 import {lessonWork,rememberLesson} from './progress.js';
 import {guideStations} from './guide.js';
 import {diagnosticIds} from '../server/diagnostic-format.mjs';
 
-const lessonIds=course.map(item=>item.id),tasks=['branch','manifest','fuel','relay'];
-const workFields=['fragment','typed','draft','assessedSource','score','errors','keys'];
-const workPhases=['brief','typing','predict','output','explain','remix','independent','result','complete'];
+const lessonIds=courseLessonIds,tasks=['branch','manifest','fuel','relay'];
+const workFields=['fragment','typed','draft','rewriteDraft','assessedSource','score','errors','keys'];
+const workPhases=['brief','typing','predict','output','explain','remix','rewrite','independent','result','complete'];
 const clone=value=>structuredClone(value);
 const union=(a=[],b=[])=>[...new Set([...a,...b])];
 const stable=value=>JSON.stringify(value,(_,item)=>item&&typeof item==='object'&&!Array.isArray(item)?Object.fromEntries(Object.keys(item).sort().map(key=>[key,item[key]])):item);
@@ -42,7 +42,7 @@ function courseWork(value){
  const phase=s.phase==='pause'?s.previousPhase:s.phase;
  if(workPhases.includes(phase))rememberLesson(s,id,phase);
  else if(!lessonWork(s,id)&&workPhases.includes(s.resumePhase))rememberLesson(s,id,s.resumePhase);
- if(s.lessonWork)s.lessonWork=Object.fromEntries(Object.keys(s.lessonWork).map(id=>[id,lessonWork(s,id)]));
+ if(s.lessonWork)s.lessonWork=Object.fromEntries(Object.keys(s.lessonWork).map(id=>[id,Object.fromEntries(Object.entries(lessonWork(s,id)).filter(([,value])=>value!==undefined))]));
  return saved;
 }
 function merge(local,incoming,choose){
@@ -56,6 +56,9 @@ function merge(local,incoming,choose){
    const x=left.lessonWork?.[id],y=right.lessonWork?.[id],lg=left.grades?.[id],rg=right.grades?.[id];
    let selected=x?'local':'incoming';
    if(x&&y){
+    // Missing means an older lesson, not deletion. Empty strings remain choices.
+    if(x.rewriteDraft===undefined&&y.rewriteDraft!==undefined)x.rewriteDraft=y.rewriteDraft;
+    if(y.rewriteDraft===undefined&&x.rewriteDraft!==undefined)y.rewriteDraft=x.rewriteDraft;
     const decision=same(x,y)&&(lg?.score??null)===(rg?.score??null)?{work:clone(x),side:'local'}:pick('course',id,'lesson',{work:x,score:lg?.score??null,side:'local'},{work:y,score:rg?.score??null,side:'incoming'});
     selected=decision.side;map[id]=decision.work;
    }else if(x||y)map[id]=clone(x||y);
@@ -89,7 +92,7 @@ function merge(local,incoming,choose){
   s.lesson=left.lesson??right.lesson??0;
   const current=map[lessonIds[s.lesson]];
   if(current){
-   for(const key of workFields)s[key]=current[key];
+   for(const key of workFields){if(current[key]===undefined)delete s[key];else s[key]=current[key];}
    if(workPhases.includes(s.phase))s.phase=current.phase;
    else if(s.phase==='pause')s.previousPhase=current.phase;
    s.resumePhase=current.phase;

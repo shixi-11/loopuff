@@ -15,6 +15,17 @@ async function account(service,name){
 }
 async function serviceFor(t){const service=await createAccountService({databasePath:':memory:',baseURL,secret});t.after(()=>service.close());return service;}
 
+test('whole-program rewrites round-trip and older pages cannot silently erase them',async t=>{
+ const service=await serviceFor(t),a=await account(service,'progress-rewrite'),snapshot=emptySave();
+ const work={phase:'rewrite',draft:'12.log()',rewriteDraft:'',assessedSource:'12.log()'};
+ snapshot.data.course={state:{lesson:0,...work,lessonWork:{signal:{...work}},grades:{signal:{score:100,best:100,attempts:1}}}};
+ assert.equal((await request(service,'POST',{expectedAccountId:a.id,expectedRevision:0,snapshot},a.cookies)).status,200);
+ const old=structuredClone(snapshot);delete old.data.course.state.rewriteDraft;delete old.data.course.state.lessonWork.signal.rewriteDraft;old.data.course.state.phase='independent';old.data.course.state.lessonWork.signal.phase='independent';
+ const response=await request(service,'POST',{expectedAccountId:a.id,expectedRevision:1,snapshot:old},a.cookies);assert.equal(response.status,400);assert.equal((await response.json()).error.code,'SAVE_VERSION');
+ assert.equal((await request(service,'POST',{expectedAccountId:a.id,expectedRevision:0,snapshot:old},a.cookies)).status,409);
+ const result=await(await request(service,'GET',null,a.cookies)).json();assert.equal(result.revision,1);assert.deepEqual(result.snapshot,snapshot);
+});
+
 test('v1 and v2 account requests cannot omit an existing bank run even with a matching revision',async t=>{
  const service=await serviceFor(t),a=await account(service,'progress-bank'),snapshot=emptySave(),w=heistWorld(7);
  snapshot.data.heist={version:1,current:{version:1,seed:7,id:'bank-7',mode:'practice',status:'ready',activeMs:0,remainderMs:0,x:6000,guardX:w.guardStart,facing:w.guardFacing,energy:100000,alarm:0,peakAlarm:0,key:false,door:false,bag:false,useMs:0,command:3,nextDecisionMs:0,decisions:0,hidden:false,visible:false,blocked:false,strategy:'',draft:'',outcome:null,eventSerial:0,events:[]},history:[]};

@@ -1564,5 +1564,79 @@
     "decisionCount": "Decisions",
     "focus": "Expand scene",
     "closeFocus": "Close expanded scene"
+  },
+  "rewrite": {
+    "title": "Make the program your own",
+    "intro": "Keep the program as a starting point. Change any part you need, run it, and explain to yourself why the signals changed.",
+    "guide": "Continue by changing a whole program",
+    "direct": "Try the independent task directly",
+    "back": "Return to the program rewrite",
+    "run": "Run and check",
+    "next": "Continue without the starting program",
+    "hint": "A nudge",
+    "ready": "Your starting program is editable. Predict the new output before running.",
+    "changed": "The program changed. Run it again to check this version.",
+    "success": "This version meets the rewrite goal. Next, solve a new task without the starting program.",
+    "retry": "The program ran, but does not meet the goal yet. Compare the signals and follow the values through the execution.",
+    "missing": "The output needs to use the requested idea. An unused declaration does not help produce a signal.",
+    "scope": "This practice does not change your task score or mark a lesson complete.",
+    "savedError": "This change could not be saved. Keep a copy of your code before leaving.",
+    "transfer": "Try this idea with changing inputs",
+    "independentDraft": "Independent program",
+    "rewriteDraft": "Program rewrite",
+    "tasks": {
+      "signal": {
+        "goal": "Send two signals in order: 3, then 8. One line can send one signal; how will you send two?",
+        "hint": "Keep the first .log() call and add another. Each call displays its own value."
+      },
+      "addition": {
+        "goal": "Show 10, then 13. Use addition to produce the signals; you can change both numbers in a calculation.",
+        "hint": "You can write more than one calculation. Keep .log() after each calculated value."
+      },
+      "names": {
+        "goal": "Keep a number under a name and use it in additions that show 13, then 17.",
+        "hint": "Use the same named value in two calculations. The numbers you add do not have to be equal."
+      },
+      "leap": {
+        "goal": "Build a jump signal of 9 by adding two numbers. Change the whole expression if you want.",
+        "hint": "Choose two numbers whose sum is 9. Send the calculated value with .log()."
+      },
+      "comparison": {
+        "goal": "Show false, then true, using comparisons. You may change both sides and add a second comparison.",
+        "hint": "A comparison produces a boolean. Try reversing which side holds the larger number."
+      },
+      "branch": {
+        "goal": "Make a comparison choose a branch that displays 3. You can change the fuel, condition and branch contents.",
+        "hint": "First decide which branch runs for your fuel value. Change what that branch sends."
+      },
+      "repeat": {
+        "goal": "Use a loop and add to each visited value to display 4, 6, 10. For example, visit [3, 5, 9] and add 1 to each value.",
+        "hint": "Change both the list and the calculation inside the loop. The loop variable holds a different value on each visit."
+      },
+      "counter": {
+        "goal": "Use a while loop to display 3, 4, 5, then stop. Set a new starting value and stopping condition.",
+        "hint": "Think about the first value, the last allowed value, and how the counter changes each time."
+      },
+      "function": {
+        "goal": "Call a synchronous addition function twice so it displays 9, then 13. Reuse the function with different inputs.",
+        "hint": "Keep the function definition once. Call it twice and display each returned result."
+      },
+      "reply": {
+        "goal": "Use function replies and addition to produce 11, then 15. For example, add 3 to the inputs 8 and 12.",
+        "hint": "Change the function body and try different inputs. Keep return ! for its reply."
+      },
+      "message": {
+        "goal": "Send a value through a channel, receive it and use it in an addition that displays 14. For example, send 10 and add 4 after receiving.",
+        "hint": "The sender chooses the parcel value. Put the addition inside the receiver so it uses the received value."
+      },
+      "join": {
+        "goal": "Send values on two channels, receive both together, and add them to display 17. For example, send 8 and 9.",
+        "hint": "Keep the joined receive with &. Give each channel a value and calculate from the two received names."
+      },
+      "coordination": {
+        "goal": "Send two values, receive both together, and total them in a function. Use a comparison to choose a branch that displays 20 using the total. One option: send 6 and 9; if the total exceeds 12, add 5.",
+        "hint": "Trace the values in order: two messages, function result, condition, then the value displayed by the chosen branch."
+      }
+    }
   }
 }

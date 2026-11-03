@@ -3,6 +3,8 @@ import {normalizePursuit} from './pursuit-format.mjs';
 import {normalizeDiagnostic} from './diagnostic-format.mjs';
 import {normalizeHeist} from './heist-format.mjs';
 export const saveLimit=256*1024;
+// Persisted lesson indices keep this order; new lessons append rather than move.
+export const courseLessonIds=Object.freeze(['signal','addition','names','leap','comparison','branch','repeat','counter','function','reply','message','join','coordination']);
 export const saveKeys=Object.freeze({course:'loopuff-v1',vault:'loopuff-vault-v1',chase:'loopuff-chase-v1',dispatch:'loopuff-dispatch-v1',pursuit:'loopuff-pursuit-v1',heist:'loopuff-heist-v1'});
 export class SaveError extends Error{constructor(code='SAVE_INVALID'){super(code);this.code=code;}}
 const fail=()=>{throw new SaveError();};
@@ -23,13 +25,13 @@ const id=value=>{if(typeof value!=='string'||!/^[a-z][a-z0-9_-]{0,39}$/.test(val
 const dictionary=(value,check)=>{record(value,Object.keys(value||{}));if(Object.keys(value).length>128)fail();return Object.fromEntries(Object.entries(value).map(([key,item])=>[id(key),check(item)]));};
 const ids=value=>[...new Set(array(value,128,id))];
 const stages=value=>[...new Set(array(value,3,n=>integer(n,0,2)))];
-const phases=['welcome','levels','brief','typing','predict','output','explain','remix','independent','result','complete','guide','pause','play','vault','chase','dispatch','heist','account','saves'];
-const workPhases=['brief','typing','predict','output','explain','remix','independent','result','complete'];
-const workKeys=['phase','fragment','typed','draft','assessedSource','score','errors','keys'];
+const phases=['welcome','levels','brief','typing','predict','output','explain','remix','rewrite','independent','result','complete','guide','pause','play','vault','chase','dispatch','heist','account','saves'];
+const workPhases=['brief','typing','predict','output','explain','remix','rewrite','independent','result','complete'];
+const workKeys=['phase','fragment','typed','draft','rewriteDraft','assessedSource','score','errors','keys'];
 function work(value){
  record(value,workKeys,['phase']);const result={phase:oneOf(value.phase,workPhases)};
  for(const key of ['fragment','score','errors','keys'])optional(value,key,n=>integer(n,0,1000000000),result);
- for(const key of ['typed','draft'])optional(value,key,s=>text(s,4096),result);
+ for(const key of ['typed','draft','rewriteDraft'])optional(value,key,s=>text(s,4096),result);
  optional(value,'assessedSource',s=>s===null?null:text(s,4096),result);
  if(result.assessedSource!==undefined&&result.assessedSource!==result.draft)result.assessedSource=null;
  return result;
@@ -42,7 +44,7 @@ function course(value){
   const saved={};
   for(const key of ['phase','previousPhase','resumePhase'])optional(state,key,p=>oneOf(p,phases),saved);
   for(const key of ['lesson','fragment','score','errors','keys'])optional(state,key,n=>integer(n,0,1000000000),saved);
-  for(const key of ['typed','draft'])optional(state,key,s=>text(s,4096),saved);
+  for(const key of ['typed','draft','rewriteDraft'])optional(state,key,s=>text(s,4096),saved);
   optional(state,'assessedSource',s=>s===null?null:text(s,4096),saved);
   if(saved.assessedSource!==undefined&&saved.assessedSource!==saved.draft)saved.assessedSource=null;
   optional(state,'completed',ids,saved);

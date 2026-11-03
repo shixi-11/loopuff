@@ -1,6 +1,6 @@
 import { run, LessonError } from './runner.js';
-export function assess(source, goal) {
-  const result = run(source);
+export function assess(source, goal, options) {
+  const result = run(source,options);
   // Count concepts that actually contribute to the displayed value. An unused
   // declaration or calculation must not satisfy the task by coincidence.
   const outputConcepts=new Set(result.outputs.flatMap(output=>output.concepts));
@@ -22,8 +22,8 @@ export function assess(source, goal) {
 
 // A grade describes this task only. Time, retries, variable spelling and matching
 // the example text never affect points. Errors must not escape the report path.
-export function grade(source,goal){
-  try{return assess(source,goal);}
+export function grade(source,goal,options){
+  try{return assess(source,goal,options);}
   catch(error){
     if(!(error instanceof LessonError))throw error;
     const checks=[{id:'execution',points:0,max:20,status:'fail'},

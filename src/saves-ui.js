@@ -17,7 +17,7 @@ function download(value,filename){
  const url=URL.createObjectURL(new Blob([JSON.stringify(value,null,2)],{type:'application/json'}));
  const link=document.createElement('a');link.href=url;link.download=filename;document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
-export function mountSaves(root,{text:t,topics,lessons,phases,account,urls,locale,name,pursuitText,heistText,diagnosticText,model={}}){
+export function mountSaves(root,{text:t,topics,lessons,phases,account,urls,locale,name,pursuitText,heistText,diagnosticText,rewriteText,model={}}){
  let disposed=false,busy=false,local=null,localError=null,recovery=null,focusComparison=false;
  setSaveAccount(model,account.user?.id??null);
  const access=progressStorage(),cloud=createCloudProgress({url:location.href,getAccount:()=>account.user});
@@ -52,7 +52,7 @@ export function mountSaves(root,{text:t,topics,lessons,phases,account,urls,local
   }
   if(item.kind==='lesson'){
    const w=value.work;
-   return `<p>${html(t.phase)}: ${html(phases[w.phase]||t.phase)}</p>${code(w.draft||t.emptyDraft)}${w.typed?`<p>${html(t.step.replace('{number}',(w.fragment??0)+1))}</p>${code(w.typed)}`:''}${value.score!==null?`<p>${html(t.score)}: <bdi dir="ltr">${value.score} / 100</bdi></p>`:''}`;
+   return `<p>${html(t.phase)}: ${html(phases[w.phase]||t.phase)}</p>${typeof w.rewriteDraft==='string'?`<h4>${html(rewriteText.rewriteDraft)}</h4>${code(w.rewriteDraft||t.emptyDraft)}<h4>${html(rewriteText.independentDraft)}</h4>`:''}${code(w.draft||t.emptyDraft)}${w.typed?`<p>${html(t.step.replace('{number}',(w.fragment??0)+1))}</p>${code(w.typed)}`:''}${value.score!==null?`<p>${html(t.score)}: <bdi dir="ltr">${value.score} / 100</bdi></p>`:''}`;
   }
   if(item.kind==='run'){
    const drafts=Array.isArray(value.drafts)?value.drafts:Object.values(value.drafts);
