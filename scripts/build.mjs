@@ -11,7 +11,7 @@ await mkdir(out, { recursive: true });
 await cp(resolve(root, 'public'), out, { recursive: true });
 await cp(resolve(root, 'src'), resolve(out, 'src'), { recursive: true });
 await mkdir(resolve(out,'server'),{recursive:true});
-for(const file of ['save-format.mjs','pursuit-format.mjs'])await cp(resolve(root,'server',file),resolve(out,'server',file));
+for(const file of ['save-format.mjs','pursuit-format.mjs','diagnostic-format.mjs'])await cp(resolve(root,'server',file),resolve(out,'server',file));
 const bundled=await build({entryPoints:[resolve(root,'src/app.js')],bundle:true,format:'esm',target:'es2022',minify:true,write:false});
 const script=bundled.outputFiles[0].text;
 const scriptName=`app-${createHash('sha256').update(script).digest('hex').slice(0,12)}.js`;

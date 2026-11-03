@@ -66,3 +66,20 @@ test('v1 cloud writes migrate safely and cannot erase a pursuit even with the cu
  assert.equal((await request(service,'POST',{...input,expectedRevision:1},a.cookies)).status,409);
  const final=await (await request(service,'GET',null,a.cookies)).json();assert.equal(final.revision,2);assert.deepEqual(final.snapshot,snapshot);
 });
+
+test('old v2 writers cannot erase diagnostic work through missing course, state or diagnostic fields',async t=>{
+ const service=await serviceFor(t),a=await account(service,'progress-diagnostic');
+ const ids=['names','branch','repeat','counter','function','reply','message','join','coordination'];
+ const diagnostic={version:1,seed:42,selected:'names',drafts:Object.fromEntries(ids.map(id=>[id,id==='names'?'(cargo+reserve).log()':''])),submitted:Object.fromEntries(ids.map(id=>[id,null])),hints:Object.fromEntries(ids.map(id=>[id,id==='names'?1:0]))};
+ const snapshot=emptySave();snapshot.data.course={state:{completed:['signal'],diagnostic}};
+ const input={expectedAccountId:a.id,expectedRevision:0,snapshot};assert.equal((await request(service,'POST',input,a.cookies)).status,200);
+ for(const course of [null,{}, {state:{}}, {state:{completed:['signal']}}]){
+  const old=emptySave();old.data.course=course;
+  const refused=await request(service,'POST',{...input,expectedRevision:1,snapshot:old},a.cookies);assert.equal(refused.status,400);assert.equal((await refused.json()).error.code,'SAVE_VERSION');
+  assert.equal((await request(service,'POST',{...input,snapshot:old},a.cookies)).status,409);
+ }
+ let current=await (await request(service,'GET',null,a.cookies)).json();assert.equal(current.revision,1);assert.deepEqual(current.snapshot,snapshot);
+ const updated=structuredClone(snapshot);updated.data.course.state.diagnostic.seed=43;updated.data.course.state.diagnostic.hints.names=0;
+ assert.equal((await request(service,'POST',{...input,expectedRevision:1,snapshot:updated},a.cookies)).status,200);
+ current=await (await request(service,'GET',null,a.cookies)).json();assert.equal(current.revision,2);assert.deepEqual(current.snapshot,updated);
+});

@@ -1,5 +1,6 @@
 // Shared, host-independent save contract. No account or credential data belongs here.
 import {normalizePursuit} from './pursuit-format.mjs';
+import {normalizeDiagnostic} from './diagnostic-format.mjs';
 export const saveLimit=256*1024;
 export const saveKeys=Object.freeze({course:'loopuff-v1',vault:'loopuff-vault-v1',chase:'loopuff-chase-v1',dispatch:'loopuff-dispatch-v1',pursuit:'loopuff-pursuit-v1'});
 export class SaveError extends Error{constructor(code='SAVE_INVALID'){super(code);this.code=code;}}
@@ -36,7 +37,7 @@ function course(value){
  record(value,['lang','state']);const result={};
  optional(value,'lang',lang=>oneOf(lang,['en','zh','zh-Hant','ja','ko','vi','de','es','ru','uk','ar']),result);
  optional(value,'state',state=>{
-  record(state,[...workKeys,'lesson','previousPhase','resumePhase','completed','grades','lessonWork','guideWork','guideSelected']);
+  record(state,[...workKeys,'lesson','previousPhase','resumePhase','completed','grades','lessonWork','guideWork','guideSelected','diagnostic']);
   const saved={};
   for(const key of ['phase','previousPhase','resumePhase'])optional(state,key,p=>oneOf(p,phases),saved);
   for(const key of ['lesson','fragment','score','errors','keys'])optional(state,key,n=>integer(n,0,1000000000),saved);
@@ -47,6 +48,7 @@ function course(value){
   optional(state,'lessonWork',map=>dictionary(map,work),saved);
   optional(state,'guideWork',map=>dictionary(map,s=>text(s,4096)),saved);
   optional(state,'guideSelected',id,saved);
+  optional(state,'diagnostic',value=>{try{return normalizeDiagnostic(value);}catch{fail();}},saved);
   optional(state,'grades',map=>dictionary(map,grade=>{
    record(grade,['score','best','attempts'],['score','best','attempts']);
    return {score:integer(grade.score,0,100),best:integer(grade.best,0,100),attempts:integer(grade.attempts,0,1000000000)};

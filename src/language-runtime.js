@@ -8,7 +8,7 @@ const controlled=(v,extra)=>({...v,concepts:union(v.concepts,extra),...(v.shapeC
 const computed=(data,concepts,operands)=>({...value(data),concepts:union(concepts,...operands.map(v=>v.concepts)),dataConcepts:union(concepts,...operands.map(v=>v.dataConcepts)),inputs:union(...operands.map(v=>v.inputs))});
 const control=(flow,...extra)=>({...flow,concepts:union(flow.concepts,...extra)});
 export function run(source){
-  const program=compile(source),logs=[],outputs=[],queue=[],waiting=[];
+  const program=compile(source),logs=[],outputs=[],calls=[],queue=[],waiting=[];
   let steps=0,callCount=0,channelCount=0,messageCount=0,printedSize=0,bindingId=0,receiveId=0;
   const jointInputs=[];
   const bind=(v,id=++bindingId)=>({...v,bindingId:id});
@@ -62,10 +62,12 @@ export function run(source){
         const reply=fresh(true);
         yield {kind:'fork',tasks:[execute(fn.node.body,callEnv,{...next,reply,sync:false})]};
         const [answer]=yield {kind:'receive',channels:[reply]};
+        calls.push({...node.span,kind:'reply'});
         return controlled(derive(answer,union(callee.dataConcepts,['call'])),callee.concepts);
       }
       const result=yield* execute(fn.node.body,callEnv,{...next,reply:null,sync:true});
       if(result?.kind!=='return')fail('type',node);
+      calls.push({...node.span,kind:'sync'});
       return controlled(derive(result.value,union(callee.dataConcepts,['call'])),callee.concepts);
     }
     if(node.type==='loop'){
@@ -233,5 +235,5 @@ export function run(source){
       if(messages){waiting.splice(i,1);job.resume=messages;queue.push(job);}else i++;
     }
   }
-  return {logs,outputs,steps,statementCount:program.length,waiting:waiting.length};
+  return {logs,outputs,calls,steps,statementCount:program.length,waiting:waiting.length};
 }

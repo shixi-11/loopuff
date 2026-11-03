@@ -2,6 +2,7 @@ import {normalizeSave,SaveError} from '../server/save-format.mjs';
 import {course} from './course.js';
 import {lessonWork,rememberLesson} from './progress.js';
 import {guideStations} from './guide.js';
+import {diagnosticIds} from '../server/diagnostic-format.mjs';
 
 const lessonIds=course.map(item=>item.id),tasks=['branch','manifest','fuel','relay'];
 const workFields=['fragment','typed','draft','assessedSource','score','errors','keys'];
@@ -73,6 +74,18 @@ function merge(local,incoming,choose){
    }
   }
   if(left.guideSelected||right.guideSelected)s.guideSelected=left.guideSelected||right.guideSelected;
+  if(left.diagnostic||right.diagnostic){
+   const x=left.diagnostic,y=right.diagnostic;
+   if(!x||!y)s.diagnostic=clone(x||y);
+   else if(x.seed!==y.seed)s.diagnostic=pick('course','diagnostic','diagnostic-run',x,y);
+   else{
+    s.diagnostic=clone(x);
+    for(const id of diagnosticIds){
+     const selected=pick('course',id,'diagnostic-task',{draft:x.drafts[id],submitted:x.submitted[id],hint:x.hints[id]},{draft:y.drafts[id],submitted:y.submitted[id],hint:y.hints[id]});
+     s.diagnostic.drafts[id]=selected.draft;s.diagnostic.submitted[id]=selected.submitted;s.diagnostic.hints[id]=selected.hint;
+    }
+   }
+  }
   s.lesson=left.lesson??right.lesson??0;
   const current=map[lessonIds[s.lesson]];
   if(current){
