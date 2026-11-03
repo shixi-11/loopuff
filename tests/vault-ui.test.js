@@ -19,3 +19,12 @@ test('an edit immediately retracts a starter-only instruction without rebuilding
   await new Promise(resolve=>setImmediate(resolve));
  }finally{page.dispose();globalThis.localStorage=original;}
 });
+
+test('correct vault signals with an outstanding receive explain waiting and keep the next action hidden',()=>{
+ const original=globalThis.localStorage,initial=newVault(123),source=vaultPuzzle(initial.seed,0).example+'; let never; ?(x <- never) {x.log()}';initial.drafts[0]=source;initial.submitted=source;initial.edited=[0];
+ globalThis.localStorage={getItem:key=>key==='loopuff-vault-v1'?JSON.stringify(initial):null,setItem(){},removeItem(){}};
+ const nodes=new Map();function node(){const children=new Map();return {textContent:'',value:'',hidden:false,disabled:false,dataset:{},querySelector(selector){if(!children.has(selector))children.set(selector,node());return children.get(selector);}};}
+ const root={innerHTML:'',querySelector(selector){if(!nodes.has(selector))nodes.set(selector,node());return nodes.get(selector);},querySelectorAll:()=>[],addEventListener(){},removeEventListener(){}};
+ const page=mountVault(root,{text:t.vault,errors:t.ui,reduced:{matches:true},beginner:t.beginner});
+ try{assert.equal(root.querySelector('[data-vault-status]').textContent,t.vault.fixCode);assert.equal(root.querySelector('[data-vault-detail]').textContent,t.ui.waiting);assert.equal(root.querySelector('[data-vault-next]').hidden,true);assert.equal(root.querySelector('[data-vault-scene]').dataset.state,'retry');assert.equal(root.querySelector('[data-vault-output]').hidden,false);}finally{page.dispose();globalThis.localStorage=original;}
+});

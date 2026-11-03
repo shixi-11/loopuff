@@ -36,8 +36,8 @@ export function mountVault(root,{text:t,errors,reduced,beginner}){
     const finish=()=>{
       if(disposed)return;
       scene.dataset.state=report.ok?'open':'retry';feedback.dataset.kind=report.ok?'success':'retry';
-      status.textContent=(report.ok?(state.stage===2?t.complete:t.opened):report.result?t.mismatch:t.fixCode)+(report.earned?` · +${report.earned} ✦`:'');
-      detail.textContent=report.ok?t.stages[state.stage].learned:report.result?t.compare.replace('{expected}', '\u2066'+report.expected.join(' → ')+'\u2069'):errors[report.code==='name'?'nameError':report.code]||errors.limit;
+      status.textContent=(report.ok?(state.stage===2?t.complete:t.opened):report.result?.waiting?t.fixCode:report.result?t.mismatch:t.fixCode)+(report.earned?` · +${report.earned} ✦`:'');
+      detail.textContent=report.result?.waiting?errors.waiting:report.ok?t.stages[state.stage].learned:report.result?t.compare.replace('{expected}', '\u2066'+report.expected.join(' → ')+'\u2069'):errors[report.code==='name'?'nameError':report.code]||errors.limit;
       root.querySelector('[data-vault-next]').hidden=!report.ok;
       root.querySelector('[data-vault-run]').disabled=false;
     };
