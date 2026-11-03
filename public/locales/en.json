@@ -1685,5 +1685,17 @@
       "output": "The program ran, but this input produced a different result. Follow the values through the code before changing it.",
       "passed": "This program handles this input set. You can continue without opening the hints; they are still available if you want them."
     }
+  },
+  "learningTransfer": {
+    "title": "Use it in a new situation",
+    "lesson": "Try the idea with changing inputs. This task has its own program; your lesson draft stays here.",
+    "diagnostic": "This input set passed. Try applying the idea to a different task. Your diagnostic program and record stay available.",
+    "apply": "Try {mission}",
+    "protocols": {
+      "branch": "The starport supplies cargo and threshold. Use one conditional program for loads below, equal to and above the threshold.",
+      "manifest": "The starport supplies docks and offset. Lists can be empty, contain duplicates or change length and order; your program must use this batch's list.",
+      "fuel": "Define a function named fuel with two parameters. The starport calls it with changing cargo and reserve amounts and displays its return value. Do not add another call or output outside the function.",
+      "relay": "Join the reports from west and east, combine their values in a function, then use threshold and reserve to choose the output. The starport supplies new reports for every batch."
+    }
   }
 }

@@ -13,14 +13,15 @@ function node(){
 test('dispatch repair feedback follows selection, opens the actual trace and preserves old awards and source',async()=>{
  const original=globalThis.localStorage,values=new Map(),key='loopuff-dispatch-v1';
  globalThis.localStorage={getItem:k=>values.get(k)??null,setItem:(k,v)=>values.set(k,v)};
- const saved=newDispatch(0);saved.selected='manifest';saved.stamps=['manifest'];saved.cleared=['manifest'];saved.rounds=3;
+ const saved=newDispatch(0);saved.selected='branch';saved.stamps=['manifest'];saved.cleared=['manifest'];saved.rounds=3;
  saved.drafts.manifest='for dock in docks { if dock == 4 then { 5.log() } else { (dock + offset).log() } }';saved.submitted.manifest=saved.drafts.manifest;
  values.set(key,JSON.stringify(saved));const root=node();
- const page=mountDispatch(root,{text:catalog.dispatch,errors:catalog.ui,concepts:catalog.assessment.concepts,reduced:{matches:true},urls:{home:'/zh/',play:'/zh/play/',homeLabel:'首页',playLabel:'游乐场',lessons:['/branch','/repeat','/function','/coordination']}});
+ const selections=[],options={text:catalog.dispatch,errors:catalog.ui,concepts:catalog.assessment.concepts,reduced:{matches:true},urls:{home:'/zh/',play:'/zh/play/',homeLabel:'首页',playLabel:'游乐场',lessons:['/branch','/repeat','/function','/coordination']}};
+ const page=mountDispatch(root,{...options,initialMission:'manifest',onSelect:id=>selections.push(id)});
  const click=dataset=>root.handlers.click({target:{closest:()=>({dataset})}});
  const submit=source=>{root.querySelector('#dispatch-editor').value=source;root.handlers.input({target:{id:'dispatch-editor',value:source}});root.handlers.submit({target:{matches:()=>true},preventDefault(){}});};
  try{
-  await tick();assert.deepEqual(JSON.parse(values.get(key)),saved);
+  await tick();assert.deepEqual(JSON.parse(values.get(key)),{...saved,selected:'manifest'});assert.deepEqual(selections,['manifest']);
   assert.ok(root.innerHTML.includes(catalog.dispatch.repair.contribution.replace('{number}','1')));
   assert.ok(root.innerHTML.includes('data-dispatch-trace-output="0"'));assert.ok(root.innerHTML.includes('5.log() → 5'));
   const before=values.get(key);click({dispatchAction:'inspect'});
@@ -37,5 +38,7 @@ test('dispatch repair feedback follows selection, opens the actual trace and pre
   assert.ok(root.innerHTML.includes(catalog.dispatch.repair.boundary));
   root.handlers.input({target:{id:'dispatch-editor',value:''}});await tick();
   assert.ok(!root.querySelector('[data-dispatch-preview]').innerHTML.includes('dispatch-repair-title'));assert.equal(JSON.parse(values.get(key)).drafts.branch,'');
+  assert.deepEqual(selections,['manifest','branch']);
+  const beforeUnknown=values.get(key),invalid=mountDispatch(node(),{...options,initialMission:'unknown'});await tick();invalid.dispose();assert.equal(values.get(key),beforeUnknown);
  }finally{await tick();page.dispose();globalThis.localStorage=original;}
 });

@@ -1673,5 +1673,17 @@
       "output": "Das Programm ist gelaufen, aber diese Eingabe hat ein anderes Ergebnis geliefert. Verfolge die Werte durch den Code, bevor du ihn änderst.",
       "passed": "Dieses Programm bewältigt diese Eingabegruppe. Du kannst ohne die Hinweise weitermachen; sie stehen dir weiterhin zur Verfügung, wenn du sie brauchst."
     }
+  },
+  "learningTransfer": {
+    "title": "In einer neuen Situation anwenden",
+    "lesson": "Probiere die Idee mit wechselnden Eingaben aus. Diese Aufgabe hat ein eigenes Programm; dein Lektionsentwurf bleibt hier erhalten.",
+    "diagnostic": "Dieser Satz von Eingaben hat die Prüfung bestanden. Versuche nun, die Idee auf eine andere Aufgabe anzuwenden. Dein Diagnoseprogramm und dein Protokoll bleiben verfügbar.",
+    "apply": "{mission} ausprobieren",
+    "protocols": {
+      "branch": "Der Raumhafen liefert cargo und threshold. Verwende ein einziges bedingtes Programm für Ladungen, die unter dem Schwellenwert liegen, ihm entsprechen oder darüber liegen.",
+      "manifest": "Der Raumhafen liefert docks und offset. Listen können leer sein, Duplikate enthalten oder ihre Länge und Reihenfolge ändern; dein Programm muss die Liste dieses Durchlaufs verwenden.",
+      "fuel": "Definiere eine Funktion namens fuel mit zwei Parametern. Der Raumhafen ruft sie mit wechselnden Werten für cargo und reserve auf und zeigt ihren Rückgabewert an. Füge außerhalb der Funktion keinen weiteren Aufruf und keine Ausgabe hinzu.",
+      "relay": "Führe die Berichte von west und east zusammen, fasse ihre Werte in einer Funktion zusammen und wähle dann anhand von threshold und reserve die Ausgabe. Der Raumhafen liefert für jeden Durchlauf neue Berichte."
+    }
   }
 }

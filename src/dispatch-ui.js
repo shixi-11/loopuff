@@ -10,9 +10,10 @@ export function loadDispatch(){let value;try{value=JSON.parse(localStorage.getIt
 const printed=(logs,empty)=>{if(!logs.length)return empty;const text=logs.join(' → ');return text.slice(0,200)+(text.length>200?' …':'');};
 const inputCode=sample=>sample.inputCode||sample.prefix.trim();
 
-export function mountDispatch(root,{text:t,errors,concepts,reduced,urls,format=html,statuses={pass:t.passed,fail:t.failed}}){
+export function mountDispatch(root,{text:t,errors,concepts,reduced,urls,format=html,initialMission,onSelect=()=>{},statuses={pass:t.passed,fail:t.failed}}){
  let state=loadDispatch(),index=3,report=null,saveFailed=false;
  let disposeLayout=()=>{};
+ if(dispatchIds.includes(initialMission))state.selected=initialMission;onSelect(state.selected);
  const puzzle=()=>dispatchPuzzle(state.seed,state.selected),mission=()=>t.missions[dispatchIds.indexOf(state.selected)];
  const code=source=>`<pre class="exercise-code" dir="ltr">${html(source)}</pre>`;
  async function persist(){try{const raw=JSON.stringify(state);await progressStorage().write(()=>localStorage.setItem(key,raw));saveFailed=false;}catch{saveFailed=true;}const note=root.querySelector('[data-dispatch-save]');if(note)note.textContent=saveFailed?t.noSave:t.local;}
@@ -72,7 +73,7 @@ export function mountDispatch(root,{text:t,errors,concepts,reduced,urls,format=h
  }
  function onClick(event){
   const target=event.target.closest('button');if(!target)return;
-  if(target.dataset.dispatchMission){state.selected=target.dataset.dispatchMission;index=3;restoreReport();persist();render();root.querySelector(`[data-dispatch-mission="${state.selected}"]`).focus({preventScroll:true});return;}
+  if(target.dataset.dispatchMission){state.selected=target.dataset.dispatchMission;onSelect(state.selected);index=3;restoreReport();persist();render();root.querySelector(`[data-dispatch-mission="${state.selected}"]`).focus({preventScroll:true});return;}
   if(target.dataset.dispatchCase!==undefined){index=Number(target.dataset.dispatchCase);updatePreview();const heading=root.querySelector('.dispatch-preview-heading h2');heading.tabIndex=-1;heading.focus({preventScroll:true});root.querySelector('[data-dispatch-preview]').scrollIntoView({block:'nearest',behavior:reduced.matches?'instant':'smooth'});return;}
   const action=target.dataset.dispatchAction;
   if(action==='inspect'){

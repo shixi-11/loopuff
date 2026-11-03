@@ -9,6 +9,9 @@ import { mountChase, loadChase } from './chase-ui.js';
 import { mountPursuit } from './pursuit-ui.js';
 import { mountHeist } from './heist-ui.js';
 import { mountDispatch, loadDispatch } from './dispatch-ui.js';
+import {dispatchIds} from './dispatch.js';
+import {lessonApplication,requestedDispatchMission,dispatchMissionUrl} from './learning-transfer.js';
+import {applicationPanel} from './learning-transfer-ui.js';
 import { rememberLesson, lessonWork, explorationProgress, readSession } from './progress.js';
 import { arcadeArt } from './arcade-art.js';
 import { createAccountClient, mountAccount } from './account.js';
@@ -41,7 +44,7 @@ let programScene=null,jumpLab=null,vaultGame=null,chaseGame=null,pursuitGame=nul
 const savesModel={},diagnosticModel={};
 const guideModel={selected:saved.state?.guideSelected,drafts:readGuideWork(saved.state?.guideWork)};
 const pursuitModel={},heistModel={};
-let guideView='guide',diagnosticReturn=false;
+let guideView='guide',diagnosticReturn=false,dispatchMission=null;
 let chaseLab=new URL(location.href).searchParams.get('mode')==='lab';
 const account=createAccountClient({url:location.href,onChange:()=>{if(messages){updateAccountEntry();accountPage?.refresh();savesPage?.refresh();}}});
 let messages, languageRequest=0, languageController, notice='', lastResult=null, feedbackState=null;
@@ -57,6 +60,7 @@ rememberLesson(state,course[state.lesson].id);
 if(!lessonWork(state,course[state.lesson].id))rememberLesson(state,course[state.lesson].id,state.resumePhase);
 function readRoute(){
   const route=parseRoute(location.pathname),previousLesson=state.lesson;
+  dispatchMission=route?.view==='dispatch'?requestedDispatchMission(location.href):null;
   diagnosticReturn=['lesson','result'].includes(route?.view)&&new URL(location.href).searchParams.get('return')==='diagnostic';
   if(route?.view==='chase')chaseLab=new URL(location.href).searchParams.get('mode')==='lab';
   if(route?.lessonId){
@@ -158,6 +162,7 @@ function syncRoute(){
   if(view==='chase'&&chaseLab)url.searchParams.set('mode','lab');else url.searchParams.delete('mode');
   if(view==='lesson'&&['rewrite','independent'].includes(state.phase))url.searchParams.set('practice',state.phase);else url.searchParams.delete('practice');
   url.searchParams.delete('area');
+  if(view==='dispatch'&&dispatchMission)url.searchParams.set('mission',dispatchMission);else url.searchParams.delete('mission');
   if(diagnosticReturn&&['lesson','result'].includes(view))url.searchParams.set('return','diagnostic');else url.searchParams.delete('return');
   if(location.pathname!==url.pathname||location.search!==url.search)history.pushState(null,'',url);
 }
@@ -263,7 +268,7 @@ function journeyPanel(){
 function renderDialog(){
   if(state.phase==='guide'){
     $('learning-page').dataset.stage='guide';$('learning-content').innerHTML='<div id="guide-studio"></div>';
-    if(guideView==='check'){guidePage=mountDiagnostic($('guide-studio'),{text:messages.diagnostic,feedbackText:messages.diagnosticFeedback,ui:messages.ui,errors:messages.ui,concepts:messages.assessment.concepts,statuses:messages.assessment,lessons:Object.fromEntries(course.map((l,i)=>[l.id,messages.lessons[i]])),initial:state.diagnostic,model:diagnosticModel,reduced,urls:{home:routeUrl(location.href,lang,'home').pathname,guide:routeUrl(location.href,lang,'guide').pathname,map:routeUrl(location.href,lang,'map').pathname,saves:routeUrl(location.href,lang,'saves').pathname,lesson:id=>routeUrl(location.href,lang,'lesson',id).pathname},onChange:value=>{state.diagnostic=value;return save();}});return;}
+    if(guideView==='check'){guidePage=mountDiagnostic($('guide-studio'),{text:messages.diagnostic,feedbackText:messages.diagnosticFeedback,applicationText:messages.learningTransfer,applicationTitles:messages.dispatch.missions.map(m=>m.title),ui:messages.ui,errors:messages.ui,concepts:messages.assessment.concepts,statuses:messages.assessment,lessons:Object.fromEntries(course.map((l,i)=>[l.id,messages.lessons[i]])),initial:state.diagnostic,model:diagnosticModel,reduced,urls:{home:routeUrl(location.href,lang,'home').pathname,guide:routeUrl(location.href,lang,'guide').pathname,map:routeUrl(location.href,lang,'map').pathname,saves:routeUrl(location.href,lang,'saves').pathname,lesson:id=>routeUrl(location.href,lang,'lesson',id).pathname,application:mission=>dispatchMissionUrl(location.href,lang,mission).href},onChange:value=>{state.diagnostic=value;return save();}});return;}
     if(guideView==='map'){guidePage=mountLearningMap($('guide-studio'),{text:messages.learningMap,lessons:messages.lessons,ui:messages.ui,errors:messages.ui,completed:state.completed,model:guideModel,urls:{home:routeUrl(location.href,lang,'home').pathname,guide:routeUrl(location.href,lang,'guide').pathname,compare:routeUrl(location.href,lang,'compare').pathname,lesson:id=>routeUrl(location.href,lang,'lesson',id).pathname}});return;}
     guidePage=mountGuide($('guide-studio'),{text:messages.guideStudio,rewriteText:messages.rewrite,legacy:messages.guide,errors:messages.ui,ui:messages.ui,model:guideModel,compare:guideView==='compare',reduced,onChange:()=>{state.guideWork={...guideModel.drafts};state.guideSelected=guideModel.selected;save();},urls:{home:routeUrl(location.href,lang,'home').pathname,guide:routeUrl(location.href,lang,'guide').pathname,compare:routeUrl(location.href,lang,'compare').pathname,map:routeUrl(location.href,lang,'map').pathname,mapLabel:messages.learningMap.title,check:routeUrl(location.href,lang,'check').pathname,checkLabel:messages.saves.diagnosticTitle,dispatch:routeUrl(location.href,lang,'dispatch').pathname,lesson:id=>routeUrl(location.href,lang,'lesson',id).pathname}});
     return;
@@ -293,7 +298,7 @@ function renderDialog(){
   if(phase==='dispatch'){
     $('learning-page').dataset.stage=phase;
     $('learning-content').innerHTML='<div id="dispatch-game"></div>';
-    dispatchGame=mountDispatch($('dispatch-game'),{text:messages.dispatch,errors:messages.ui,concepts:messages.assessment.concepts,statuses:{pass:messages.assessment.pass,fail:messages.assessment.fail},reduced,format:prose,urls:{home:routeUrl(location.href,lang,'home').pathname,play:routeUrl(location.href,lang,'play').pathname,homeLabel:ui('navHome'),playLabel:messages.vault.arcade,lessons:['branch','repeat','function','coordination'].map(id=>routeUrl(location.href,lang,'lesson',id).pathname)}});
+    dispatchGame=mountDispatch($('dispatch-game'),{text:messages.dispatch,initialMission:dispatchMission,onSelect:mission=>{dispatchMission=mission;const url=dispatchMissionUrl(location.href,lang,mission);if(location.href!==url.href)history.replaceState(null,'',url);},errors:messages.ui,concepts:messages.assessment.concepts,statuses:{pass:messages.assessment.pass,fail:messages.assessment.fail},reduced,format:prose,urls:{home:routeUrl(location.href,lang,'home').pathname,play:routeUrl(location.href,lang,'play').pathname,homeLabel:ui('navHome'),playLabel:messages.vault.arcade,lessons:['branch','repeat','function','coordination'].map(id=>routeUrl(location.href,lang,'lesson',id).pathname)}});
     return;
   }
   if(phase==='play'||phase==='vault'){
@@ -327,7 +332,8 @@ function renderDialog(){
     title=ui('independent');body=`<div class="challenge-layout"><section class="challenge-brief"><h2>${escape(a.task)}</h2><p class="dialog-note">${prose(c.independent)}</p><p class="scope-note">${escape(a.intro)}</p>${actions([['hint',ui('hint'),true],['rewrite-program',messages.rewrite.back,true]])}<p class="scope-note">${escape(ui('scope'))}</p></section><form id="program-form"><label class="editor-label" for="program-editor">${escape(ui('codeLabel'))}</label><textarea id="program-editor" class="practice-editor" rows="8" autocomplete="off" autocapitalize="off" spellcheck="false" dir="ltr">${escape(state.draft)}</textarea><div class="dialog-actions"><button class="primary" type="submit">${escape(a.submit)}</button>${state.assessedSource!==null&&state.assessedSource===state.draft?`<button class="text-button" data-action="view-result" type="button">${escape(a.viewResult)}</button>`:''}</div><p id="assessment-status" class="scope-note" aria-live="polite"></p></form></div>`;
   }
   if(phase==='complete'){
-    title=ui('complete');body=`<div class="signal">✧ ✧ ✧</div><p class="dialog-note">${prose(c.learned)}</p><p class="completed-grade">${escape(messages.assessment.score)} <bdi dir="ltr">${state.grades[lesson().id]?.score??100} / 100</bdi></p>${lesson().mode==='lab'?'':`<div class="score-summary"><div><small>${escape(ui('score'))}</small><strong>${state.score}</strong></div><div><small>${escape(ui('accuracy'))}</small><strong>${state.keys?Math.round(Math.max(0,1-state.errors/state.keys)*100):100}%</strong></div></div>`}<p class="scope-note">${escape(lesson().mode==='lab'?messages.assessment.note:ui('masteryNote'))}</p>${actions([[state.lesson<course.length-1?'next':'home',ui(state.lesson<course.length-1?'next':'home')],...(lesson().mode==='lab'?[['open-dispatch',messages.dispatch.title,true]]:[]),['open-chase',ui('practiceInChase'),true],['replay',ui('replay'),true],['lesson-diagnostic',messages.rewrite.transfer,true]])}`;
+    const application=lessonApplication(lesson().id);
+    title=ui('complete');body=`<div class="signal">✧ ✧ ✧</div><p class="dialog-note">${prose(c.learned)}</p><p class="completed-grade">${escape(messages.assessment.score)} <bdi dir="ltr">${state.grades[lesson().id]?.score??100} / 100</bdi></p>${lesson().mode==='lab'?'':`<div class="score-summary"><div><small>${escape(ui('score'))}</small><strong>${state.score}</strong></div><div><small>${escape(ui('accuracy'))}</small><strong>${state.keys?Math.round(Math.max(0,1-state.errors/state.keys)*100):100}%</strong></div></div>`}<p class="scope-note">${escape(lesson().mode==='lab'?messages.assessment.note:ui('masteryNote'))}</p>${application?applicationPanel(application,{text:messages.learningTransfer,titles:messages.dispatch.missions.map(m=>m.title),context:'lesson',href:dispatchMissionUrl(location.href,lang,application).href}):''}${actions([[state.lesson<course.length-1?'next':'home',ui(state.lesson<course.length-1?'next':'home')],...(lesson().mode==='lab'&&!application?[['open-dispatch',messages.dispatch.title,true]]:[]),['open-chase',ui('practiceInChase'),true],['replay',ui('replay'),true],['lesson-diagnostic',messages.rewrite.transfer,true]])}`;
   }
   if(phase==='pause'){title=ui('pause');body=`<p class="dialog-note">${escape(ui('paused'))}</p>${actions([['resume',ui('resumePlay')],['restart',ui('restart'),true],['home',ui('home'),true]])}`;}
   if(phase==='pause'){
@@ -438,7 +444,7 @@ document.addEventListener('click',event=>{
   if(action==='open-account'){move('account');return;}
   if(action==='open-saves'){move('saves');return;}
   if(action==='open-play'){move('play');return;}
-  if(action==='open-dispatch'){move('dispatch');return;}
+  if(action==='open-dispatch'){dispatchMission=dispatchIds.includes(target.dataset.mission)?target.dataset.mission:state.phase==='complete'?lessonApplication(lesson().id):null;move('dispatch');return;}
   if(action==='open-heist'){move('heist');return;}
   if(action==='open-vault'){move('vault');return;}
   if(action==='open-chase'){chaseLab=false;move('chase');return;}

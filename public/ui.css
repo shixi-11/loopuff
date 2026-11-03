@@ -289,3 +289,7 @@ body[data-phase=play] .arcade-vault-art,body[data-phase=play] .arcade-jump-art{m
 .mission-destination{display:inline-block;margin:16px 0 20px 42px;color:#b4cbfb;font-size:14px;text-decoration:none}
 [dir=rtl] .mission-destination{margin:16px 42px 20px 0}
 @media(max-width:640px){.arcade-missions{margin-block-start:36px}.arcade-track>summary{gap:12px}.arcade-track>summary strong{font-size:17px}.arcade-track>ol,[dir=rtl] .arcade-track>ol{padding:0}.arcade-track li>a{grid-template-columns:28px minmax(0,1fr);gap:8px 12px}.arcade-track li small{grid-column:2;max-width:none}.arcade-track li>a>span>span{font-size:13px}.mission-destination,[dir=rtl] .mission-destination{margin-inline:40px 0}}
+
+.learning-application{border-inline-start:2px solid #91aeda;padding-inline-start:18px;margin-block:24px;text-align:start;max-width:760px}
+.learning-application h3{font-size:20px;line-height:1.5;margin:7px 0 10px}.learning-application p{font-size:15px;line-height:1.85;color:#b9c9e5;margin:9px 0;overflow-wrap:anywhere}.learning-application .text-button{display:inline-block;min-height:44px;padding-block:10px;box-sizing:border-box;white-space:normal}
+[dir=rtl] .learning-application a>span{display:inline-block;transform:scaleX(-1)}

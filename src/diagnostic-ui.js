@@ -1,6 +1,8 @@
 import {diagnosticIds,diagnosticSourceLimit,normalizeDiagnostic,newDiagnostic,diagnosticPuzzle,diagnosticLessons,inspectDiagnostic,editDiagnostic,submitDiagnostic,requestDiagnosticHint,nextDiagnostic} from './diagnostic.js';
 import {aircraftUrl} from './plane.js';
 import {course} from './course.js';
+import {nextDiagnosticArea,diagnosticApplication} from './learning-transfer.js';
+import {applicationPanel} from './learning-transfer-ui.js';
 import {diagnosticFeedback} from './diagnostic-feedback.js';
 const esc=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const code=source=>`<pre dir="ltr">${esc(source)}</pre>`;
@@ -12,7 +14,7 @@ const outlines={
  message:'?(value <- mailbox) {\n  (___ + 1).log()\n}',join:'?(a <- west & b <- east) {\n  (___ + ___).log()\n}',
  coordination:'sync fn total(a, b) { return ___ };\n?(a <- west & b <- east) {\n  let load = total(___, ___);\n  if load > ___ then {\n    (load + ___).log()\n  } else { load.log() }\n}'
 };
-export function mountDiagnostic(root,{text:t,feedbackText:f,ui,errors,concepts,statuses,lessons,initial,model,urls,onChange=()=>true,reduced={matches:false}}){
+export function mountDiagnostic(root,{text:t,feedbackText:f,applicationText,applicationTitles,ui,errors,concepts,statuses,lessons,initial,model,urls,onChange=()=>true,reduced={matches:false}}){
  let disposed=false,timer=null,busy=null,caseIndex=0,outputIndex=0,resetArmed=false,saveSerial=0,saveFailed=false;
  if(!model.initialized||model.state!==initial){
   model.initialized=true;model.reports={};model.bad=false;
@@ -67,9 +69,10 @@ export function mountDiagnostic(root,{text:t,feedbackText:f,ui,errors,concepts,s
  }
  function next(){
   const report=cached(id()),feedback=diagnosticFeedback(id(),report,state().drafts[id()]),lesson=feedback.lesson,lessonTitle=lessons[lesson].title;
-  const next=diagnosticIds.find(area=>area!==id()&&!cached(area)?.ok);
+  const passed=diagnosticIds.filter(area=>cached(area)?.ok),next=nextDiagnosticArea(id(),passed),application=diagnosticApplication(id(),passed);
+  const applicationHtml=application&&applicationText?applicationPanel(application,{text:applicationText,titles:applicationTitles,context:'diagnostic',href:urls.application(application)}):'';
   const guided=report&&!report.ok&&state().drafts[id()].trim(),reason=f.reasons[feedback.reason].replace('{concept}',concepts[feedback.concept]||'');
-  return `<section class="diagnostic-guidance"><h3>${esc(f.title)}</h3><p>${esc(reason)}</p>${feedback.caseIndex!==null?`<p>${esc(f.case.replace('{number}',feedback.caseIndex+1))}${caseIndex!==feedback.caseIndex?` <button type="button" class="text-button" data-diagnostic-action="feedback-case">${esc(f.seeCase)}</button>`:''}</p>`:''}${!report?.ok?`<p>${esc(t.recommend.replace('{lesson}',lessonTitle))}</p>`:''}<div class="diagnostic-links"><a data-lesson="${course.findIndex(item=>item.id===lesson)}" data-diagnostic-return="true"${guided?' data-practice="rewrite"':''} href="${urls.lesson(lesson)}?${guided?'practice=rewrite&':''}return=diagnostic">${esc(t.learn)} ↗</a><a data-lesson="${course.findIndex(item=>item.id===diagnosticLessons[id()].at(-1))}" data-diagnostic-return="true" data-practice="true" href="${urls.lesson(diagnosticLessons[id()].at(-1))}?practice=independent&return=diagnostic">${esc(t.independent)} ↗</a></div>${report?.ok&&next?`<div class="diagnostic-next"><span>${esc(t.next.replace('{topic}',t.tasks[next].title))}</span><button class="text-button" type="button" data-diagnostic-area="${next}">${esc(t.nextAction)} →</button></div>`:''}</section>`;
+  return `<section class="diagnostic-guidance"><h3>${esc(f.title)}</h3><p>${esc(reason)}</p>${feedback.caseIndex!==null?`<p>${esc(f.case.replace('{number}',feedback.caseIndex+1))}${caseIndex!==feedback.caseIndex?` <button type="button" class="text-button" data-diagnostic-action="feedback-case">${esc(f.seeCase)}</button>`:''}</p>`:''}${!report?.ok?`<p>${esc(t.recommend.replace('{lesson}',lessonTitle))}</p>`:''}<div class="diagnostic-links"><a data-lesson="${course.findIndex(item=>item.id===lesson)}" data-diagnostic-return="true"${guided?' data-practice="rewrite"':''} href="${urls.lesson(lesson)}?${guided?'practice=rewrite&':''}return=diagnostic">${esc(t.learn)} ↗</a><a data-lesson="${course.findIndex(item=>item.id===diagnosticLessons[id()].at(-1))}" data-diagnostic-return="true" data-practice="true" href="${urls.lesson(diagnosticLessons[id()].at(-1))}?practice=independent&return=diagnostic">${esc(t.independent)} ↗</a></div>${applicationHtml}${report?.ok&&next?`<div class="diagnostic-next"><span>${esc(t.next.replace('{topic}',t.tasks[next].title))}</span><button class="text-button" type="button" data-diagnostic-area="${next}">${esc(t.nextAction)} →</button></div>`:''}</section>`;
  }
  function paint(){
   if(disposed||model.bad)return;

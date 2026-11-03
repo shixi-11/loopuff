@@ -9,12 +9,34 @@ const text=JSON.parse(await readFile(new URL('../public/locales/zh.json',import.
 const tick=()=>new Promise(resolve=>setTimeout(resolve,15));
 function mount(initial,onChange=()=>true,model={}){
  const handlers={},nodes=new Map(),root={innerHTML:'',addEventListener:(key,fn)=>handlers[key]=fn,removeEventListener(){},querySelectorAll:()=>[],querySelector(selector){if(!nodes.has(selector))nodes.set(selector,{innerHTML:'',textContent:'',value:'',disabled:false,focus(){},scrollIntoView(){},setAttribute(){}});return nodes.get(selector);}};
- const page=mountDiagnostic(root,{initial,model,text:text.diagnostic,feedbackText:text.diagnosticFeedback,ui:text.ui,errors:text.ui,concepts:text.assessment.concepts,statuses:text.assessment,lessons:Object.fromEntries(course.map((l,i)=>[l.id,text.lessons[i]])),urls:{home:'/zh/',guide:'/zh/guide/',map:'/zh/guide/map/',saves:'/zh/saves/',lesson:id=>`/zh/learn/${id}/`},onChange});
+ const page=mountDiagnostic(root,{initial,model,text:text.diagnostic,feedbackText:text.diagnosticFeedback,applicationText:text.learningTransfer,applicationTitles:text.dispatch.missions.map(m=>m.title),ui:text.ui,errors:text.ui,concepts:text.assessment.concepts,statuses:text.assessment,lessons:Object.fromEntries(course.map((l,i)=>[l.id,text.lessons[i]])),urls:{home:'/zh/',guide:'/zh/guide/',map:'/zh/guide/map/',saves:'/zh/saves/',lesson:id=>`/zh/learn/${id}/`,application:id=>`/zh/play/dispatch/?mission=${id}`},onChange});
  const action=dataset=>handlers.click({target:{closest:()=>({dataset})}});
  const edit=source=>{root.querySelector('#diagnostic-editor').value=source;handlers.input({target:{id:'diagnostic-editor',value:source}});};
  const submit=()=>handlers.submit({preventDefault(){},target:{matches:()=>true}});
  return {page,root,model,action,edit,submit};
 }
+
+test('checked functions lead forward and into their own application without copying diagnostic source',async()=>{
+ const s=newDiagnostic(42);s.selected='function';submitDiagnostic(s,'function',diagnosticPuzzle(42,'function').example);const before=JSON.stringify(s),m=mount(s);
+ try{
+  await tick();let html=m.root.querySelector('[data-diagnostic-next]').innerHTML;
+  assert.match(html,/data-diagnostic-area="reply"/);assert.doesNotMatch(html,/data-diagnostic-area="names"/);assert.match(html,/data-mission="fuel"/);assert.match(html,/mission=fuel/);
+  assert.equal(JSON.stringify(m.model.state),before);
+  m.edit('sync fn combine(a,b) { return 0 }');html=m.root.querySelector('[data-diagnostic-next]').innerHTML;assert.doesNotMatch(html,/data-mission=/);
+ }finally{m.page.dispose();}
+});
+
+test('checked branch/function/join suggest composition, and a fully checked set has an application exit',async()=>{
+ for(const ids of [['branch','function','join'],diagnosticIds]){
+  const s=newDiagnostic(42);s.selected=ids.length===diagnosticIds.length?'names':'function';for(const id of ids)submitDiagnostic(s,id,diagnosticPuzzle(42,id).example);const before=JSON.stringify(s),m=mount(s);
+  try{
+   for(let n=0;n<30&&!m.model.reports[ids.at(-1)];n++)await tick();
+   const html=m.root.querySelector('[data-diagnostic-next]').innerHTML;
+   if(ids.length===diagnosticIds.length){assert.match(html,/data-mission="relay"/);assert.doesNotMatch(html,/class="diagnostic-next"/);}else assert.match(html,/data-diagnostic-area="coordination"/);
+   assert.equal(JSON.stringify(m.model.state),before);
+  }finally{m.page.dispose();}
+ }
+});
 test('editing and undo invalidate submitted output; navigating cancels deferred submissions',async()=>{
  const original=globalThis.matchMedia;globalThis.matchMedia=()=>({matches:false});
  const s=newDiagnostic(42),source=diagnosticPuzzle(42,'names').example;submitDiagnostic(s,'names',source);const m=mount(s);

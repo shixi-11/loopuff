@@ -1673,5 +1673,17 @@
       "output": "El programa se ejecutó, pero esta entrada dio un resultado distinto. Sigue los valores a través del código antes de cambiarlo.",
       "passed": "Este programa resuelve este conjunto de entradas. Puedes continuar sin abrir las pistas; siguen disponibles si las quieres."
     }
+  },
+  "learningTransfer": {
+    "title": "Aplícalo en una situación nueva",
+    "lesson": "Prueba la idea con entradas que cambian. Esta tarea tiene su propio programa; tu borrador de la lección se queda aquí.",
+    "diagnostic": "Este conjunto de entradas superó la comprobación. Prueba a aplicar la idea en otra tarea. Tu programa de diagnóstico y su registro siguen disponibles.",
+    "apply": "Probar {mission}",
+    "protocols": {
+      "branch": "El puerto estelar proporciona cargo y threshold. Usa un único programa condicional para cargas por debajo del umbral, iguales a él y por encima de él.",
+      "manifest": "El puerto estelar proporciona docks y offset. Las listas pueden estar vacías, contener duplicados o cambiar de longitud y de orden; tu programa debe usar la lista de esta tanda.",
+      "fuel": "Define una función llamada fuel con dos parámetros. El puerto estelar la llama con cantidades cambiantes de cargo y reserve, y muestra su valor de retorno. No añadas otra llamada ni ninguna salida fuera de la función.",
+      "relay": "Une los informes de west y east, combina sus valores en una función y luego usa threshold y reserve para elegir la salida. El puerto estelar envía informes nuevos en cada tanda."
+    }
   }
 }

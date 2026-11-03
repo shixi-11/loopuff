@@ -1673,5 +1673,17 @@
       "output": "Chương trình đã chạy, nhưng đầu vào này cho ra kết quả khác. Hãy lần theo các giá trị trong mã trước khi sửa.",
       "passed": "Chương trình này xử lý được bộ đầu vào này. Bạn có thể tiếp tục mà không cần mở gợi ý; gợi ý vẫn sẵn có nếu bạn cần."
     }
+  },
+  "learningTransfer": {
+    "title": "Áp dụng vào tình huống mới",
+    "lesson": "Hãy thử ý tưởng này với dữ liệu đầu vào thay đổi. Nhiệm vụ này có chương trình riêng; bản nháp bài học của bạn vẫn được giữ ở đây.",
+    "diagnostic": "Bộ đầu vào này đã đạt. Hãy thử áp dụng ý tưởng vào một nhiệm vụ khác. Chương trình chẩn đoán và bản ghi của bạn vẫn được giữ lại.",
+    "apply": "Thử {mission}",
+    "protocols": {
+      "branch": "Cảng vũ trụ cung cấp cargo và threshold. Dùng một chương trình điều kiện duy nhất cho các mức tải nhỏ hơn, bằng và lớn hơn threshold.",
+      "manifest": "Cảng vũ trụ cung cấp docks và offset. Danh sách có thể rỗng, có phần tử trùng lặp, hoặc thay đổi độ dài và thứ tự; chương trình của bạn phải dùng danh sách của lô này.",
+      "fuel": "Định nghĩa một hàm tên fuel nhận hai tham số. Cảng vũ trụ sẽ gọi hàm với các lượng cargo và reserve thay đổi, rồi hiển thị giá trị trả về. Đừng thêm lệnh gọi hay đầu ra nào khác bên ngoài hàm.",
+      "relay": "Kết hợp báo cáo từ west và east, gộp các giá trị của chúng trong một hàm, rồi dùng threshold và reserve để chọn đầu ra. Cảng vũ trụ cung cấp báo cáo mới cho mỗi lô."
+    }
   }
 }
