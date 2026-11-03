@@ -14,7 +14,7 @@ function setup(model={},mobile=false){
  const saved={document:globalThis.document,innerHeight:globalThis.innerHeight,matchMedia:globalThis.matchMedia};
  globalThis.document={hidden:false,addEventListener(){},removeEventListener(){}};globalThis.innerHeight=900;globalThis.matchMedia=()=>({matches:mobile});
  const root=node();let writes=0;
- const page=mountGuide(root,{beginner:catalog.beginner,text:catalog.guideStudio,legacy:catalog.guide,errors:catalog.ui,ui:catalog.ui,model,reduced:{matches:true},onChange:()=>writes++,urls:{home:'/zh/',guide:'/zh/guide/',compare:'/zh/guide/compare/',check:'/zh/guide/check/',map:'/zh/guide/map/',dispatch:'/zh/play/dispatch/',lesson:id=>'/zh/learn/'+id+'/'}});
+ const page=mountGuide(root,{experimentText:catalog.causalExperiments,beginner:catalog.beginner,text:catalog.guideStudio,legacy:catalog.guide,errors:catalog.ui,ui:catalog.ui,model,reduced:{matches:true},onChange:()=>writes++,urls:{home:'/zh/',guide:'/zh/guide/',compare:'/zh/guide/compare/',check:'/zh/guide/check/',map:'/zh/guide/map/',dispatch:'/zh/play/dispatch/',lesson:id=>'/zh/learn/'+id+'/'}});
  return {root,model,writes:()=>writes,page,
   edit(id,value){root.querySelector('#'+id).value=value;root.handlers.input({target:{id,value}});},
   silent(checked){root.handlers.input({target:{id:'guide-silent',checked}});},

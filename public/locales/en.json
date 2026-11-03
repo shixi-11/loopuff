@@ -1787,5 +1787,34 @@
         "read": "First find where the data comes from, then how it is calculated, and finally how a condition decides the output. Follow that path one step at a time."
       }
     }
+  },
+  "causalExperiments": {
+    "functionTitle": "Try it: give two numbers to the same set of instructions",
+    "functionIntro": "Give two supply quantities to a totaling tool named combine. Run it, then try two different numbers. The instructions stay the same; what result comes back?",
+    "joinTitle": "Try it: wait until both reports arrive",
+    "joinIntro": "West and east each report a quantity. Select only west and run, then select east too and run again. When can the program calculate the total?",
+    "separate": "This runs the example shown below and leaves your code unchanged. Each experiment starts a fresh run.",
+    "first": "First supply quantity",
+    "second": "Second supply quantity",
+    "west": "West report",
+    "east": "East report",
+    "send": "Send this report",
+    "run": "Try it",
+    "ready": "Choose quantities or reports, then select Try it.",
+    "invalid": "Enter whole numbers from 0 to 99.",
+    "arguments": "Numbers passed in",
+    "calculation": "Calculation inside the function",
+    "returned": "Result handed back",
+    "output": "Displayed on screen",
+    "returnNote": "Returning a result and displaying it are separate actions. This example uses .log() outside the function to display the result it receives.",
+    "sent": "Reports that were sent",
+    "absent": "Not sent",
+    "received": "Both reports taken together",
+    "waiting": "Still waiting for reports: nothing was displayed in this run.",
+    "waitingNote": "A report that has arrived stays waiting. The program does not take half the required reports before calculating.",
+    "done": "Both reports were received together and the total was displayed.",
+    "noOutput": "Nothing displayed",
+    "source": "View the code for this experiment",
+    "changed": "Settings changed and the old result was cleared. Try again to see the new result."
   }
 }

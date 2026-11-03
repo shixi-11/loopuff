@@ -1775,5 +1775,34 @@
         "read": "Primero averigua de dónde vienen los datos, luego cómo se calculan y, por último, cómo una condición decide la salida. Sigue ese camino paso a paso."
       }
     }
+  },
+  "causalExperiments": {
+    "functionTitle": "Pruébalo: da dos números al mismo conjunto de instrucciones",
+    "functionIntro": "Da dos cantidades de suministros a una herramienta de suma llamada combine. Ejecútala y luego prueba con otros dos números. Las instrucciones no cambian; ¿qué resultado se devuelve?",
+    "joinTitle": "Pruébalo: espera a que lleguen los dos informes",
+    "joinIntro": "El oeste y el este informan cada uno de una cantidad. Selecciona solo «Oeste» y ejecuta; luego selecciona también «Este» y vuelve a ejecutar. ¿Cuándo puede el programa calcular el total?",
+    "separate": "Esto ejecuta el ejemplo que se muestra abajo y no modifica tu código. Cada prueba empieza una ejecución nueva.",
+    "first": "Primera cantidad de suministros",
+    "second": "Segunda cantidad de suministros",
+    "west": "Informe del oeste",
+    "east": "Informe del este",
+    "send": "Enviar este informe",
+    "run": "Pruébalo",
+    "ready": "Elige cantidades o informes y luego selecciona «Pruébalo».",
+    "invalid": "Introduce números enteros del 0 al 99.",
+    "arguments": "Números que se pasan",
+    "calculation": "Cálculo dentro de la función",
+    "returned": "Resultado devuelto",
+    "output": "Mostrado en pantalla",
+    "returnNote": "Devolver un resultado y mostrarlo son acciones distintas. Este ejemplo usa .log() fuera de la función para mostrar el resultado que recibe.",
+    "sent": "Informes enviados",
+    "absent": "No enviado",
+    "received": "Ambos informes tomados a la vez",
+    "waiting": "Aún se esperan informes: en esta ejecución no se mostró nada.",
+    "waitingNote": "Un informe que ya llegó sigue esperando. El programa no toma la mitad de los informes necesarios antes de calcular.",
+    "done": "Ambos informes se recibieron juntos y se mostró el total.",
+    "noOutput": "No se mostró nada",
+    "source": "Ver el código de esta prueba",
+    "changed": "La configuración cambió y se borró el resultado anterior. Vuelve a probar para ver el nuevo resultado."
   }
 }

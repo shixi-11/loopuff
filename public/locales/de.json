@@ -1775,5 +1775,34 @@
         "read": "Finde zuerst heraus, woher die Daten kommen, dann, wie sie berechnet werden, und schließlich, wie eine Bedingung über die Ausgabe entscheidet. Folge diesem Weg Schritt für Schritt."
       }
     }
+  },
+  "causalExperiments": {
+    "functionTitle": "Ausprobieren: Zwei Zahlen an dieselbe Anleitung übergeben",
+    "functionIntro": "Übergib zwei Vorratsmengen an ein Summierwerkzeug namens combine. Führe es aus und probiere dann zwei andere Zahlen. Die Anleitung bleibt gleich – welches Ergebnis kommt zurück?",
+    "joinTitle": "Ausprobieren: Warten, bis beide Meldungen da sind",
+    "joinIntro": "West und Ost melden jeweils eine Menge. Wähle nur West aus und führe aus, wähle dann auch Ost aus und führe erneut aus. Wann kann das Programm die Summe berechnen?",
+    "separate": "Hier wird das unten gezeigte Beispiel ausgeführt; dein Code bleibt unverändert. Jeder Versuch startet einen neuen Durchlauf.",
+    "first": "Erste Vorratsmenge",
+    "second": "Zweite Vorratsmenge",
+    "west": "Meldung West",
+    "east": "Meldung Ost",
+    "send": "Diese Meldung senden",
+    "run": "Ausprobieren",
+    "ready": "Wähle Mengen oder Meldungen und dann „Ausprobieren“.",
+    "invalid": "Gib ganze Zahlen von 0 bis 99 ein.",
+    "arguments": "Übergebene Zahlen",
+    "calculation": "Berechnung in der Funktion",
+    "returned": "Zurückgegebenes Ergebnis",
+    "output": "Auf dem Bildschirm angezeigt",
+    "returnNote": "Ein Ergebnis zurückgeben und es anzeigen sind zwei getrennte Schritte. Dieses Beispiel zeigt das erhaltene Ergebnis außerhalb der Funktion mit .log() an.",
+    "sent": "Gesendete Meldungen",
+    "absent": "Nicht gesendet",
+    "received": "Beide Meldungen zusammen entnommen",
+    "waiting": "Warte noch auf Meldungen: In diesem Durchlauf wurde nichts angezeigt.",
+    "waitingNote": "Eine eingetroffene Meldung wartet weiter. Das Programm nimmt nicht schon die Hälfte der benötigten Meldungen, bevor es rechnet.",
+    "done": "Beide Meldungen wurden zusammen empfangen, und die Summe wurde angezeigt.",
+    "noOutput": "Nichts angezeigt",
+    "source": "Code dieses Versuchs anzeigen",
+    "changed": "Die Einstellungen wurden geändert und das alte Ergebnis entfernt. Probiere es erneut, um das neue Ergebnis zu sehen."
   }
 }

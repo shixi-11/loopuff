@@ -1775,5 +1775,34 @@
         "read": "Trước tiên xem dữ liệu đến từ đâu, tiếp theo xem nó được tính thế nào, cuối cùng xem điều kiện quyết định đầu ra ra sao. Hãy đi theo con đường đó từng bước một."
       }
     }
+  },
+  "causalExperiments": {
+    "functionTitle": "Thử nhé: đưa hai số cho cùng một cách làm",
+    "functionIntro": "Đưa hai lượng tiếp tế cho công cụ tính tổng tên là combine. Chạy thử, rồi đổi sang hai số khác. Cách làm vẫn giữ nguyên; kết quả trả về sẽ ra sao?",
+    "joinTitle": "Thử nhé: chờ đến khi cả hai báo cáo đều tới",
+    "joinIntro": "Phía tây và phía đông mỗi bên báo một số lượng. Chỉ chọn phía tây rồi chạy, sau đó chọn thêm phía đông và chạy lại. Khi nào chương trình tính được tổng?",
+    "separate": "Phần này chạy đoạn ví dụ bên dưới và không thay đổi mã của bạn. Mỗi lần thử đều chạy lại từ đầu.",
+    "first": "Lượng tiếp tế thứ nhất",
+    "second": "Lượng tiếp tế thứ hai",
+    "west": "Báo cáo phía tây",
+    "east": "Báo cáo phía đông",
+    "send": "Gửi báo cáo này",
+    "run": "Thử",
+    "ready": "Chọn số lượng hoặc báo cáo, rồi chọn “Thử”.",
+    "invalid": "Nhập số nguyên từ 0 đến 99.",
+    "arguments": "Các số được đưa vào",
+    "calculation": "Phép tính bên trong hàm",
+    "returned": "Kết quả được trả về",
+    "output": "Hiển thị trên màn hình",
+    "returnNote": "Trả về kết quả và hiển thị kết quả là hai việc riêng. Ví dụ này dùng .log() bên ngoài hàm để hiển thị kết quả mà nó nhận được.",
+    "sent": "Các báo cáo đã gửi",
+    "absent": "Không gửi",
+    "received": "Lấy cả hai báo cáo cùng lúc",
+    "waiting": "Vẫn đang chờ báo cáo: lần chạy này không hiển thị gì.",
+    "waitingNote": "Báo cáo đã tới vẫn tiếp tục chờ. Chương trình không lấy trước một nửa số báo cáo cần thiết rồi mới tính.",
+    "done": "Đã nhận cả hai báo cáo cùng lúc và tổng đã được hiển thị.",
+    "noOutput": "Không hiển thị gì",
+    "source": "Xem mã của lần thử này",
+    "changed": "Cài đặt đã thay đổi nên kết quả cũ đã được xóa. Hãy thử lại để xem kết quả mới."
   }
 }
