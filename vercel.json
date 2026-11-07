@@ -1,4 +1,5 @@
 {
+  "ignoreCommand": "[ \"$VERCEL_GIT_COMMIT_REF\" != \"main\" ]",
   "framework": null,
   "buildCommand": "node scripts/build.mjs",
   "installCommand": "npm ci --include=dev --no-audit --no-fund",
