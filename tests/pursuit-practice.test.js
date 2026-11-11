@@ -6,7 +6,7 @@ import {pursuitPracticeSource,checkPursuitPractice,currentPursuitPractice,stageP
 test('practice and live play execute the same inputs; sample runs do not alter the current pursuit',()=>{
  const world=newPursuit(81);deployPursuit(world,'2.log()');startPursuit(world);advancePursuit(world,250);pausePursuit(world);world.draft='1.log();1.log()';
  assert.ok(world.activeMs>0);assert.notEqual(world.draft,world.strategy);const before=structuredClone(world),report=checkPursuitPractice(world,pursuitPracticeSource);
- assert.equal(report.ready,true);assert.deepEqual(report.cases[0].report,inspectPursuit(world,pursuitPracticeSource));assert.deepEqual(report.cases.map(item=>item.report.logs),[['2'],['3'],['2'],['1']]);assert.deepEqual(world,before);
+ assert.equal(report.ready,true);assert.deepEqual(report.cases[0].report,inspectPursuit(world,pursuitPracticeSource));assert.deepEqual(report.cases.slice(0,4).map(item=>item.report.logs),[['2'],['3'],['2'],['1']]);assert.deepEqual(world,before);
  const changed=checkPursuitPractice(world,pursuitPracticeSource.replace('3.log()','2.log()'));
  assert.equal(changed.ready,false);assert.deepEqual(changed.cases.find(item=>item.id==='near').report.logs,['2']);assert.deepEqual(world,before);
  const liveWrong=checkPursuitPractice(world,`if energy > 60 then { 1.log() } else { ${pursuitPracticeSource} }`);

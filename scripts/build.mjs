@@ -3,6 +3,8 @@ import { resolve, relative, isAbsolute } from 'node:path';
 import { build, transform } from 'esbuild';
 import { createHash } from 'node:crypto';
 import { course, locales } from '../src/course.js';
+import {verifyPursuitExercise} from './verify-pursuit-exercise.mjs';
+verifyPursuitExercise();
 const root = resolve(import.meta.dirname, '..'), out = resolve(root, 'dist');
 const inside = relative(root, out);
 if (!inside || inside.startsWith('..') || isAbsolute(inside) || inside !== 'dist') throw Error('invalid build output');

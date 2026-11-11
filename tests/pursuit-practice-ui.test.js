@@ -3,11 +3,12 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {newPursuit,pausePursuit,savePursuit} from '../src/pursuit.js';
 import {createPursuitSession,pursuitKey} from '../src/pursuit-session.js';
-import {persistPursuitPractice} from '../src/pursuit-practice.js';
+import {persistPursuitPractice,pursuitPracticeSource} from '../src/pursuit-practice.js';
 import {mountPursuitPractice} from '../src/pursuit-practice-ui.js';
 import {locales} from '../src/course.js';
 const copy=JSON.parse(fs.readFileSync(new URL('../public/locales/zh.json',import.meta.url),'utf8')).pursuitPractice;
-function setup(world=newPursuit(4),model={},onStage=()=>true){
+function setup(world=newPursuit(4),model={},onStage=()=>true,reference=true){
+ if(reference&&!model.practice)model.practice={source:pursuitPracticeSource,report:null,confirmation:null,notice:'ready'};
  const handlers={},nodes=new Map(),root={innerHTML:'',querySelector(selector){if(!nodes.has(selector))nodes.set(selector,{textContent:'',innerHTML:'',disabled:false,hidden:false});return nodes.get(selector);},addEventListener:(key,fn)=>handlers[key]=fn,removeEventListener:(key,fn)=>{if(handlers[key]===fn)delete handlers[key];}};
  let stages=0,allowed=true;const view=mountPursuitPractice(root,{text:copy,errors:{limit:'limit'},model,getWorld:()=>world,pause:()=>pausePursuit(world),canStage:()=>allowed,onStage:previous=>{stages++;return onStage(previous);}});
  return {view,model,root,world,handlers,stages:()=>stages,allow:value=>allowed=value,click:action=>handlers.click({target:{closest:()=>({dataset:{pursuitPractice:action}})}}),edit:value=>handlers.input({target:{id:'pursuit-practice-editor',value}})};
@@ -23,8 +24,27 @@ test('scratch UI checks, edits, confirmation and cancel preserve existing work u
  }finally{m.view.dispose();}assert.deepEqual(m.handlers,{});
  const remount=setup(world,model);try{assert.equal(model.practice.source,'1.log()');assert.ok(remount.root.innerHTML.includes('>1.log()</textarea>'));}finally{remount.view.dispose();}
 });
+test('a new learner starts with one executable command, can reveal hints, and success folds them away',()=>{
+ const model={},m=setup(newPursuit(4),model,()=>true,false);try{
+  assert.equal(model.practice.source,'1.log()');assert.ok(m.root.innerHTML.includes('>1.log()</textarea>'));
+  m.click('check');assert.equal(model.practice.report.ready,false);assert.equal(m.root.querySelector('[data-pursuit-practice="stage"]').disabled,true);
+  const replay=m.root.querySelector('[data-pursuit-practice-result]');replay.innerHTML='keep the selected replay frame';
+  m.click('hint');assert.equal(model.practice.hintLevel,1);assert.ok(m.root.querySelector('#pursuit-practice-hints').innerHTML.includes(copy.hint1));assert.equal(replay.innerHTML,'keep the selected replay frame');
+  m.click('hint');m.click('hint');assert.equal(model.practice.hintLevel,3);assert.equal(model.practice.source,'1.log()');
+  m.edit(pursuitPracticeSource);m.click('check');assert.equal(model.practice.report.ready,true);assert.equal(model.practice.hintLevel,0);
+  m.click('hint');assert.equal(model.practice.hintLevel,1);m.click('hideHints');assert.equal(model.practice.hintLevel,0);
+ }finally{m.view.dispose();}
+});
 test('invalid action numbers and empty output explain the action protocol rather than a runtime limit',()=>{
  const m=setup();try{for(const source of ['9.log()','']){m.edit(source);m.click('check');assert.ok(m.model.practice.report.cases.every(item=>item.report.code==='signals'));const shown=m.root.querySelector('[data-pursuit-practice-result]').innerHTML;assert.ok(shown.includes(copy.signalError));assert.ok(!shown.includes('limit'));assert.equal(m.root.querySelector('[data-pursuit-practice="stage"]').disabled,true);}}finally{m.view.dispose();}
+});
+test('choosing a situation shows its actual output and source without editing the scratch or main draft',()=>{
+ const m=setup();try{m.click('check');const source=m.model.practice.source,main=m.world.draft;
+  m.handlers.change({target:{id:'pursuit-practice-case',value:'near'}});
+  assert.equal(m.model.practice.selected,'near');assert.equal(m.model.practice.source,source);assert.equal(m.world.draft,main);
+  assert.ok(m.root.querySelector('[data-pursuit-practice-result]').innerHTML.includes('<mark>3.log()</mark>'));
+  m.edit('1.log()');assert.equal(m.root.querySelector('[data-pursuit-practice-result]').innerHTML,'');
+ }finally{m.view.dispose();}
 });
 test('adoption save failure restores the previous draft and withdraws the success message',async()=>{
  const original=newPursuit(4);original.draft='(1 + 1).log()';const raw=JSON.stringify(savePursuit(original)),store=new Map([[pursuitKey,raw]]),storage={getItem:key=>store.get(key)??null,setItem(){throw Error('quota');}};
