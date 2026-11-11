@@ -1879,5 +1879,88 @@
     "previewCleared": "Cleared the barrier",
     "previewJumping": "Jumping",
     "tiredNear": "Nearby barrier, low energy"
+  },
+  "learningPaths": {
+    "choose": "Start where it makes sense for you",
+    "beginnerTitle": "My first time programming",
+    "beginnerIntro": "Start with one instruction. Run it, change it, fix a mistake, then write a working program yourself.",
+    "advancedTitle": "Build on what you know",
+    "advancedIntro": "Check your understanding with varied inputs, fill gaps, then combine functions, messages and coordination.",
+    "enterStart": "Start step by step",
+    "enterAdvance": "Explore the advanced path",
+    "backGuide": "Learn programming",
+    "backPath": "Back to the learning path",
+    "startIntro": "Code gives instructions to a computer. First see a result, then learn to change it. Try each step yourself and return whenever you need a refresher.",
+    "step": "Current step",
+    "verified": "Run and checked",
+    "notVerified": "Ready to try",
+    "run": "Run and see",
+    "editor": "Your program",
+    "expected": "Your goal for this step",
+    "actual": "Actual run result",
+    "notRun": "Not run yet. Choose Run and see to produce a result here.",
+    "passed": "You did it. Compare the code with the result, then continue.",
+    "needsWork": "The result does not meet the goal yet. Compare the instructions with the actual result and try again.",
+    "next": "Continue to the next step",
+    "read": "What does this code mean?",
+    "repairHelp": "Parentheses are part of the code too. An error can stop the program from running. Look at the error position, fix the code, then run it again.",
+    "hint": "Give me a hint",
+    "reset": "Use this step's starter code",
+    "confirmReset": "Confirm replacing this draft",
+    "cancelReset": "Keep my draft",
+    "resetNote": "You have edited this step. Confirm again to replace it. Drafts for other steps will stay as they are.",
+    "case": "Input situation",
+    "executed": "The code that produced this result",
+    "allStartDone": "You have tried running, editing, fixing an error, calculating, naming a value and making a decision. Continue with complete tasks to put them into practice.",
+    "courseRoad": "Continue your learning journey",
+    "courseIntro": "Understand a purpose, rewrite a program, then complete a task independently. Your drafts and completed tasks are still here; continue where you need to.",
+    "continueCourse": "Open this task",
+    "advanceGoal": "Start with practical questions: does the program still work when inputs change? Can you find the cause of a failure and combine parts into a working feature?",
+    "diagnosticRoad": "Check first, then fill the gaps",
+    "diagnosticIntro": "Each check runs several inputs. Choose any topic. If you get stuck, the result links to the relevant concept and rewrite exercise.",
+    "projectRoad": "Combine your skills in a task",
+    "projectIntro": "Choose a berth, handle a batch of deliveries, implement a function interface and coordinate two ports. Each task has varied inputs, actual results and optional hints. Try another round to check the same program again.",
+    "recommend": "Try this next",
+    "checkTask": "Check this skill",
+    "applyTask": "Start this combined task",
+    "badSave": "This diagnostic record cannot be read right now. Open save management to resolve it. The original record has not been replaced.",
+    "lanes": [
+      "Instructions, calculation and names",
+      "Decisions and repetition",
+      "Functions and replies",
+      "Messages and coordination"
+    ],
+    "steps": {
+      "run": {
+        "title": "Ask the computer to show a number",
+        "goal": "Run the starter program so the result area shows 7. Identify the instructions you wrote and the value produced when the computer executes them.",
+        "hint": "Leave the code as it is and choose Run and see. 7 is the value to display; .log() displays it."
+      },
+      "change": {
+        "title": "Change a number and run again",
+        "goal": "Change the result from 7 to 9. Editing does not execute code. Run it again after your change to see a new result.",
+        "hint": "Try changing only 7 and keep .log(). Editing withdraws the old result; another run produces a new one."
+      },
+      "repair": {
+        "title": "Fix a small mistake",
+        "goal": "This code is missing a symbol. Run it to see the error, then fix it so the program displays 7.",
+        "hint": "Compare the end of the code with the parentheses in .log(). Add the missing part and run again."
+      },
+      "calculate": {
+        "title": "Let the computer calculate",
+        "goal": "Use addition to calculate and display 11. You can choose different numbers as long as they add up to 11.",
+        "hint": "The addition inside parentheses produces a value, then .log() displays it. Simply printing a fixed 11 does not complete this step."
+      },
+      "name": {
+        "title": "Give a value a name",
+        "goal": "Name an energy value, then use that name in an addition that produces 14. The name must contribute to the calculation.",
+        "hint": "let energy = 10 names the value 10 energy. Using energy later reads that value. What would you add to it?"
+      },
+      "decide": {
+        "title": "Choose an action for a barrier",
+        "goal": "obstacle is the distance to the next barrier. Output 3 below 4; otherwise output 1. The same code must handle every input. Here you check action signals; a character acts on them when you enter the pursuit.",
+        "hint": "Use if obstacle < 4 then { ... } else { ... } for the two situations. Exactly 4 is not less than 4. Always outputting 3 cannot handle every situation."
+      }
+    }
   }
 }

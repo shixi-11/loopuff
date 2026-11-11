@@ -4,7 +4,9 @@ import { build, transform } from 'esbuild';
 import { createHash } from 'node:crypto';
 import { course, locales } from '../src/course.js';
 import {verifyPursuitExercise} from './verify-pursuit-exercise.mjs';
+import {verifyStartExercises} from './verify-start-exercises.mjs';
 verifyPursuitExercise();
+verifyStartExercises();
 const root = resolve(import.meta.dirname, '..'), out = resolve(root, 'dist');
 const inside = relative(root, out);
 if (!inside || inside.startsWith('..') || isAbsolute(inside) || inside !== 'dist') throw Error('invalid build output');
@@ -31,11 +33,11 @@ const escape=text=>String(text).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','
 for(const [locale] of locales){
   const messages=JSON.parse(await readFile(resolve(root,`public/locales/${locale}.json`),'utf8'));
   const lang=locale==='zh'?'zh-CN':locale==='zh-Hant'?'zh-TW':locale;
-  const entries=['','levels/','guide/','guide/compare/','guide/map/','guide/check/','account/','saves/','play/','play/vault/','play/chase/','play/dispatch/','play/heist/',...course.flatMap(lesson=>[`learn/${lesson.id}/`,`learn/${lesson.id}/result/`])];
+  const entries=['','levels/','guide/','guide/start/','guide/advance/','guide/compare/','guide/map/','guide/check/','account/','saves/','play/','play/vault/','play/chase/','play/dispatch/','play/heist/',...course.flatMap(lesson=>[`learn/${lesson.id}/`,`learn/${lesson.id}/result/`])];
   for(const entry of entries){
   const canonical=`https://shixilin.com/games/loopuff/${locale}/${entry==='levels/'?'play/':entry}`;
   const lessonIndex=course.findIndex(lesson=>entry.startsWith(`learn/${lesson.id}/`));
-  const title=entry==='play/heist/'?messages.heist.title:entry==='guide/check/'?messages.diagnostic.title:entry==='guide/map/'?messages.learningMap.title:entry==='guide/compare/'?messages.guideStudio.compareTitle:entry==='saves/'?messages.saves.title:entry==='play/dispatch/'?messages.dispatch.title:entry==='play/chase/'?messages.chase.title:entry.endsWith('/result/')?messages.assessment.title:entry==='account/'?messages.account.entry:entry==='play/'?messages.vault.arcade:entry==='play/vault/'?messages.vault.title:entry==='levels/'?messages.ui.navCourse:entry==='guide/'?messages.ui.guide:lessonIndex>=0?messages.lessons[lessonIndex].title:messages.ui.tagline;
+  const title=entry==='guide/start/'?messages.learningPaths.beginnerTitle:entry==='guide/advance/'?messages.learningPaths.advancedTitle:entry==='play/heist/'?messages.heist.title:entry==='guide/check/'?messages.diagnostic.title:entry==='guide/map/'?messages.learningMap.title:entry==='guide/compare/'?messages.guideStudio.compareTitle:entry==='saves/'?messages.saves.title:entry==='play/dispatch/'?messages.dispatch.title:entry==='play/chase/'?messages.chase.title:entry.endsWith('/result/')?messages.assessment.title:entry==='account/'?messages.account.entry:entry==='play/'?messages.vault.arcade:entry==='play/vault/'?messages.vault.title:entry==='levels/'?messages.ui.navCourse:entry==='guide/'?messages.ui.guide:lessonIndex>=0?messages.lessons[lessonIndex].title:messages.ui.tagline;
   const page=html.replace('<html lang="zh-CN">',`<html lang="${lang}" dir="${locale==='ar'?'rtl':'ltr'}">`)
     .replace('<base href="./">',`<base href="${'../'.repeat(1+entry.split('/').filter(Boolean).length)}">`)
     .replace('</head>',`<script id="initial-catalog" type="application/json" data-locale="${locale}">${JSON.stringify(messages).replace(/</g,'\\u003c')}</script></head>`)

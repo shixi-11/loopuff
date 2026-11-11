@@ -1867,5 +1867,88 @@
     "previewCleared": "Đã vượt chướng ngại vật",
     "previewJumping": "Đang nhảy",
     "tiredNear": "Rào chắn ở gần, thể lực thấp"
+  },
+  "learningPaths": {
+    "choose": "Bắt đầu từ nơi phù hợp với bạn",
+    "beginnerTitle": "Lần đầu học lập trình",
+    "beginnerIntro": "Bắt đầu bằng một lệnh. Chạy, thay đổi, sửa lỗi, rồi tự viết một chương trình hoạt động được.",
+    "advancedTitle": "Tiến xa hơn từ kiến thức đã có",
+    "advancedIntro": "Kiểm tra hiểu biết bằng nhiều đầu vào, bổ sung phần còn thiếu, rồi kết hợp hàm, tin nhắn và phối hợp.",
+    "enterStart": "Bắt đầu từng bước",
+    "enterAdvance": "Vào lộ trình nâng cao",
+    "backGuide": "Nhập môn lập trình",
+    "backPath": "Về lộ trình học",
+    "startIntro": "Mã là các lệnh dành cho máy tính. Trước tiên, hãy xem kết quả, rồi học cách thay đổi nó. Bạn có thể tự thử từng bước và quay lại ôn bất cứ lúc nào.",
+    "step": "Bước hiện tại",
+    "verified": "Đã chạy và kiểm tra",
+    "notVerified": "Sẵn sàng thử",
+    "run": "Chạy và xem",
+    "editor": "Chương trình của bạn",
+    "expected": "Mục tiêu của bước này",
+    "actual": "Kết quả chạy thực tế",
+    "notRun": "Chưa chạy. Chọn “Chạy và xem” để kết quả xuất hiện ở đây.",
+    "passed": "Bạn làm được rồi. So sánh mã với kết quả, rồi tiếp tục.",
+    "needsWork": "Kết quả chưa đạt mục tiêu. So sánh yêu cầu với kết quả thực tế và thử lại.",
+    "next": "Tiếp tục bước sau",
+    "read": "Đoạn mã này có nghĩa gì?",
+    "repairHelp": "Dấu ngoặc cũng là một phần của mã. Lỗi có thể khiến chương trình không chạy được. Xem vị trí lỗi, sửa mã, rồi chạy lại.",
+    "hint": "Cho tôi gợi ý",
+    "reset": "Dùng mã ban đầu của bước này",
+    "confirmReset": "Xác nhận thay bản nháp này",
+    "cancelReset": "Giữ bản nháp của tôi",
+    "resetNote": "Bạn đã sửa mã ở bước này. Xác nhận lần nữa để thay bản nháp. Bản nháp ở các bước khác vẫn được giữ nguyên.",
+    "case": "Tình huống đầu vào",
+    "executed": "Đoạn mã tạo ra kết quả này",
+    "allStartDone": "Bạn đã thử chạy, sửa mã, sửa lỗi, tính toán, đặt tên cho giá trị và xét điều kiện. Hãy tiếp tục luyện tập bằng các nhiệm vụ hoàn chỉnh.",
+    "courseRoad": "Tiếp tục hành trình học",
+    "courseIntro": "Hiểu công dụng, viết lại chương trình, rồi tự hoàn thành nhiệm vụ. Bản nháp và tiến độ đã hoàn thành vẫn còn; bạn có thể tiếp tục từ phần mình cần.",
+    "continueCourse": "Mở nhiệm vụ này",
+    "advanceGoal": "Bắt đầu từ câu hỏi thực tế: chương trình có còn đúng khi đầu vào thay đổi không? Bạn có tìm được nguyên nhân thất bại và kết hợp các phần thành một chức năng dùng được không?",
+    "diagnosticRoad": "Kiểm tra trước, bổ sung sau",
+    "diagnosticIntro": "Mỗi bài kiểm tra chạy với nhiều đầu vào. Bạn có thể chọn bất kỳ chủ đề nào. Nếu gặp khó khăn, kết quả sẽ dẫn bạn về khái niệm và bài tập viết lại mã tương ứng.",
+    "projectRoad": "Kết hợp kỹ năng để làm nhiệm vụ",
+    "projectIntro": "Chọn chỗ neo đậu, xử lý nhiều chuyến vận chuyển, triển khai giao diện hàm và phối hợp hai cảng. Mỗi nhiệm vụ có nhiều đầu vào, kết quả thực tế và gợi ý để xem khi cần. Bạn cũng có thể thử lượt tình huống khác để kiểm tra lại cùng một chương trình.",
+    "recommend": "Thử tiếp phần này",
+    "checkTask": "Kiểm tra kỹ năng này",
+    "applyTask": "Bắt đầu nhiệm vụ kết hợp",
+    "badSave": "Hiện chưa đọc được bản ghi chẩn đoán này. Hãy mở phần quản lý dữ liệu lưu để xử lý. Bản ghi gốc chưa bị thay thế.",
+    "lanes": [
+      "Lệnh, tính toán và tên",
+      "Điều kiện và lặp",
+      "Hàm và phản hồi",
+      "Tin nhắn và phối hợp"
+    ],
+    "steps": {
+      "run": {
+        "title": "Cho máy tính hiển thị một số",
+        "goal": "Chạy chương trình ban đầu để vùng kết quả hiển thị 7. Phân biệt các lệnh bạn viết với giá trị máy tính tạo ra khi thực hiện chúng.",
+        "hint": "Giữ nguyên mã và chọn “Chạy và xem”. 7 là giá trị cần hiển thị; .log() hiển thị giá trị đó."
+      },
+      "change": {
+        "title": "Đổi một số rồi chạy lại",
+        "goal": "Đổi kết quả từ 7 thành 9. Sửa mã không tự chạy chương trình. Sau khi sửa, hãy chạy lại để xem kết quả mới.",
+        "hint": "Thử chỉ đổi 7 và giữ nguyên .log(). Khi sửa mã, kết quả cũ sẽ được gỡ bỏ; chạy lại mới tạo ra kết quả mới."
+      },
+      "repair": {
+        "title": "Sửa một lỗi nhỏ",
+        "goal": "Đoạn mã này thiếu một ký hiệu. Chạy để xem lỗi, rồi sửa để chương trình hiển thị 7.",
+        "hint": "So sánh phần cuối của mã với các dấu ngoặc trong .log(). Thêm phần còn thiếu rồi chạy lại."
+      },
+      "calculate": {
+        "title": "Để máy tính giúp bạn tính",
+        "goal": "Dùng phép cộng để tính và hiển thị 11. Bạn có thể chọn hai số khác nhau, miễn là tổng bằng 11.",
+        "hint": "Phép cộng trong ngoặc tạo ra một giá trị, rồi .log() hiển thị giá trị đó. Chỉ in ra số cố định 11 sẽ không hoàn thành bước này."
+      },
+      "name": {
+        "title": "Đặt tên cho một giá trị",
+        "goal": "Đặt tên cho giá trị thể lực, rồi dùng tên đó trong phép cộng để có kết quả 14. Tên phải thực sự được dùng trong phép tính.",
+        "hint": "let energy = 10 đặt tên energy cho giá trị 10. Khi dùng energy ở phía sau, chương trình đọc giá trị đó. Bạn cần cộng thêm bao nhiêu?"
+      },
+      "decide": {
+        "title": "Chọn hành động theo vật cản",
+        "goal": "obstacle là khoảng cách đến vật cản phía trước. Xuất 3 khi nhỏ hơn 4; các trường hợp còn lại xuất 1. Cùng một đoạn mã phải xử lý mọi đầu vào. Ở đây, bạn kiểm tra tín hiệu hành động; nhân vật sẽ thực hiện tín hiệu đó khi vào cuộc truy đuổi.",
+        "hint": "Dùng if obstacle < 4 then { ... } else { ... } để chia thành hai trường hợp. Đúng bằng 4 không phải là nhỏ hơn 4. Luôn xuất 3 không thể xử lý mọi tình huống."
+      }
+    }
   }
 }

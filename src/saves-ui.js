@@ -17,7 +17,7 @@ function download(value,filename){
  const url=URL.createObjectURL(new Blob([JSON.stringify(value,null,2)],{type:'application/json'}));
  const link=document.createElement('a');link.href=url;link.download=filename;document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
-export function mountSaves(root,{text:t,topics,lessons,phases,account,urls,locale,name,pursuitText,heistText,diagnosticText,rewriteText,model={}}){
+export function mountSaves(root,{text:t,topics,lessons,phases,account,urls,locale,name,pursuitText,heistText,diagnosticText,rewriteText,pathText,model={}}){
  let disposed=false,busy=false,local=null,localError=null,recovery=null,focusComparison=false;
  setSaveAccount(model,account.user?.id??null);
  const access=progressStorage(),cloud=createCloudProgress({url:location.href,getAccount:()=>account.user});
@@ -58,9 +58,10 @@ export function mountSaves(root,{text:t,topics,lessons,phases,account,urls,local
    const drafts=Array.isArray(value.drafts)?value.drafts:Object.values(value.drafts);
    return `<p>${html(t.cleared)}: <bdi dir="ltr">${value.cleared.length} / ${item.domain==='vault'?3:4}</bdi></p>${drafts.map((draft,i)=>`<h4>${html(t.stage.replace('{number}',i+1))}</h4>${code(draft||t.emptyDraft)}`).join('')}`;
   }
-  return code((typeof value==='string'?value:value.draft)||t.emptyDraft);
+  return code((typeof value==='string'?value:value.draft??value.checked)||t.emptyDraft);
  }
  function conflictTitle(item){
+  if(item.kind==='start')return pathText.beginnerTitle+' · '+pathText.steps[item.item].title;
   if(item.kind==='diagnostic-run')return t.diagnosticTitle;
   if(item.kind==='diagnostic-task')return t.diagnosticTitle+' · '+diagnosticText.tasks[item.item].title;
   if(item.domain==='course')return (item.kind==='guide'?topics.guide+' · ':'')+lessons[course.findIndex(l=>l.id===item.item)].title;

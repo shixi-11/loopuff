@@ -1,7 +1,7 @@
 import {normalizeSave,SaveError,courseLessonIds} from '../server/save-format.mjs';
 import {course} from './course.js';
 import {lessonWork,rememberLesson} from './progress.js';
-import {guideStations} from './guide.js';
+import {guideStationIds,guideWorkIds,startStepIds,startWorkKey} from './guide-work.js';
 import {diagnosticIds} from '../server/diagnostic-format.mjs';
 
 const lessonIds=courseLessonIds,tasks=['branch','manifest','fuel','relay'];
@@ -17,8 +17,7 @@ export function supportedSave(value){
  if(state){
   const ids=[...(state.completed||[]),...Object.keys(state.lessonWork||{}),...Object.keys(state.grades||{})];
   if(ids.some(id=>!lessonIds.includes(id))||state.lesson!==undefined&&state.lesson>=lessonIds.length)throw new SaveError('SAVE_NEW_LESSONS');
-  const guideIds=guideStations.map(s=>s.id);
-  if([...Object.keys(state.guideWork||{}),...(state.guideSelected?[state.guideSelected]:[])].some(id=>!guideIds.includes(id)))throw new SaveError('SAVE_NEW_LESSONS');
+  if(Object.keys(state.guideWork||{}).some(id=>!guideWorkIds.includes(id))||state.guideSelected&&!guideStationIds.includes(state.guideSelected))throw new SaveError('SAVE_NEW_LESSONS');
   const checkFragment=(work,index)=>{
    const phase=work.phase==='pause'?work.previousPhase:work.phase;
    if(phase==='typing'&&course[index].mode==='lab')throw new SaveError('SAVE_INVALID');
@@ -70,10 +69,16 @@ function merge(local,incoming,choose){
   s.lessonWork=map;s.grades=grades;s.completed=union(left.completed,right.completed);
   if(left.guideWork||right.guideWork){
    s.guideWork={};
-   for(const {id} of guideStations){
+   for(const id of guideStationIds){
     const x=left.guideWork?.[id],y=right.guideWork?.[id];
     if(x!==undefined&&y!==undefined)s.guideWork[id]=pick('course',id,'guide',x,y);
     else if(x!==undefined||y!==undefined)s.guideWork[id]=x??y;
+   }
+   for(const id of startStepIds){
+    const pack=work=>Object.fromEntries([['draft',work?.[startWorkKey(id)]],['checked',work?.[startWorkKey(id,true)]]].filter(([,value])=>value!==undefined));
+    const x=pack(left.guideWork),y=pack(right.guideWork),hasX=Object.keys(x).length,hasY=Object.keys(y).length;
+    const selected=hasX&&hasY?pick('course',id,'start',x,y):hasX?x:hasY?y:null;
+    if(selected)for(const [kind,value]of Object.entries(selected))s.guideWork[startWorkKey(id,kind==='checked')]=value;
    }
   }
   if(left.guideSelected||right.guideSelected)s.guideSelected=left.guideSelected||right.guideSelected;

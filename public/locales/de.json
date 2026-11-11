@@ -1867,5 +1867,88 @@
     "previewCleared": "Hindernis überwunden",
     "previewJumping": "Springt",
     "tiredNear": "Nahes Hindernis, wenig Energie"
+  },
+  "learningPaths": {
+    "choose": "Starte dort, wo es für dich passt",
+    "beginnerTitle": "Zum ersten Mal programmieren",
+    "beginnerIntro": "Beginne mit einer Anweisung. Führe sie aus, ändere sie, behebe einen Fehler und schreibe dann selbst ein funktionierendes Programm.",
+    "advancedTitle": "Auf deinem Wissen aufbauen",
+    "advancedIntro": "Prüfe dein Verständnis mit wechselnden Eingaben, schließe Lücken und verbinde dann Funktionen, Nachrichten und Zusammenarbeit.",
+    "enterStart": "Schritt für Schritt beginnen",
+    "enterAdvance": "Zum Lernpfad für Fortgeschrittene",
+    "backGuide": "Programmieren lernen",
+    "backPath": "Zurück zum Lernpfad",
+    "startIntro": "Code gibt dem Computer Anweisungen. Sieh dir zuerst ein Ergebnis an und lerne dann, es zu verändern. Probiere jeden Schritt selbst aus und kehre jederzeit zum Wiederholen zurück.",
+    "step": "Aktueller Schritt",
+    "verified": "Ausgeführt und geprüft",
+    "notVerified": "Bereit zum Ausprobieren",
+    "run": "Ausführen und ansehen",
+    "editor": "Dein Programm",
+    "expected": "Dein Ziel für diesen Schritt",
+    "actual": "Tatsächliches Ergebnis",
+    "notRun": "Noch nicht ausgeführt. Wähle „Ausführen und ansehen“, damit hier ein Ergebnis erscheint.",
+    "passed": "Geschafft! Vergleiche den Code mit dem Ergebnis und mache dann weiter.",
+    "needsWork": "Das Ergebnis erfüllt das Ziel noch nicht. Vergleiche die Aufgabe mit dem tatsächlichen Ergebnis und versuche es erneut.",
+    "next": "Weiter zum nächsten Schritt",
+    "read": "Was bedeutet dieser Code?",
+    "repairHelp": "Auch Klammern gehören zum Code. Ein Fehler kann verhindern, dass das Programm läuft. Sieh nach, wo der Fehler liegt, korrigiere den Code und führe ihn erneut aus.",
+    "hint": "Gib mir einen Hinweis",
+    "reset": "Startcode dieses Schritts verwenden",
+    "confirmReset": "Ersetzen dieses Entwurfs bestätigen",
+    "cancelReset": "Meinen Entwurf behalten",
+    "resetNote": "Du hast diesen Schritt bearbeitet. Bestätige noch einmal, um den Entwurf zu ersetzen. Die Entwürfe anderer Schritte bleiben erhalten.",
+    "case": "Eingabesituation",
+    "executed": "Der Code, der dieses Ergebnis erzeugt hat",
+    "allStartDone": "Du hast ein Programm ausgeführt und geändert, einen Fehler behoben, gerechnet, einen Wert benannt und eine Entscheidung getroffen. Übe das jetzt in vollständigen Aufgaben.",
+    "courseRoad": "Setze deine Lernreise fort",
+    "courseIntro": "Verstehe zuerst den Zweck, schreibe ein Programm um und löse dann selbstständig eine Aufgabe. Deine Entwürfe und abgeschlossenen Aufgaben sind noch da. Mache dort weiter, wo du üben möchtest.",
+    "continueCourse": "Diese Aufgabe öffnen",
+    "advanceGoal": "Beginne mit praktischen Fragen: Funktioniert das Programm auch bei anderen Eingaben? Kannst du die Ursache eines Fehlers finden und einzelne Teile zu einer funktionierenden Lösung verbinden?",
+    "diagnosticRoad": "Erst prüfen, dann Lücken schließen",
+    "diagnosticIntro": "Jede Prüfung verwendet mehrere Eingaben. Du kannst jedes Thema direkt wählen. Wenn du nicht weiterkommst, führt dich das Ergebnis zum passenden Konzept und zur Übung zum Umschreiben.",
+    "projectRoad": "Verbinde dein Können in einer Aufgabe",
+    "projectIntro": "Wähle einen Liegeplatz, bearbeite mehrere Lieferungen, setze eine Funktionsschnittstelle um und stimme zwei Häfen aufeinander ab. Jede Aufgabe bietet wechselnde Eingaben, tatsächliche Ergebnisse und Hinweise bei Bedarf. Prüfe dasselbe Programm in einer weiteren Runde erneut.",
+    "recommend": "Probiere als Nächstes",
+    "checkTask": "Diese Fähigkeit prüfen",
+    "applyTask": "Diese kombinierte Aufgabe starten",
+    "badSave": "Dieser Diagnoseeintrag kann gerade nicht gelesen werden. Öffne die Speicherstandverwaltung, um das Problem zu lösen. Der ursprüngliche Eintrag wurde nicht ersetzt.",
+    "lanes": [
+      "Anweisungen, Rechnen und Namen",
+      "Entscheidungen und Wiederholungen",
+      "Funktionen und Antworten",
+      "Nachrichten und Zusammenarbeit"
+    ],
+    "steps": {
+      "run": {
+        "title": "Den Computer eine Zahl anzeigen lassen",
+        "goal": "Führe das Startprogramm aus, sodass im Ergebnisbereich 7 erscheint. Unterscheide dabei zwischen deinen Anweisungen und dem Wert, den der Computer beim Ausführen erzeugt.",
+        "hint": "Lass den Code unverändert und wähle „Ausführen und ansehen“. 7 ist der anzuzeigende Wert; .log() zeigt ihn an."
+      },
+      "change": {
+        "title": "Eine Zahl ändern und erneut ausführen",
+        "goal": "Ändere das Ergebnis von 7 auf 9. Bearbeiten führt den Code nicht aus. Starte ihn nach deiner Änderung erneut, um das neue Ergebnis zu sehen.",
+        "hint": "Ändere zunächst nur 7 und behalte .log() bei. Beim Bearbeiten wird das alte Ergebnis zurückgenommen. Erst erneutes Ausführen erzeugt ein neues."
+      },
+      "repair": {
+        "title": "Einen kleinen Fehler beheben",
+        "goal": "In diesem Code fehlt ein Zeichen. Führe ihn aus, um den Fehler zu sehen. Korrigiere ihn dann so, dass das Programm 7 anzeigt.",
+        "hint": "Vergleiche das Ende des Codes mit den Klammern in .log(). Ergänze den fehlenden Teil und führe den Code erneut aus."
+      },
+      "calculate": {
+        "title": "Den Computer rechnen lassen",
+        "goal": "Berechne mit einer Addition den Wert 11 und zeige ihn an. Du kannst beliebige Zahlen wählen, solange ihre Summe 11 ist.",
+        "hint": "Die Addition in den Klammern ergibt einen Wert, den .log() anschließend anzeigt. Nur den festen Wert 11 auszugeben, erfüllt diese Aufgabe nicht."
+      },
+      "name": {
+        "title": "Einem Wert einen Namen geben",
+        "goal": "Gib einem Energiewert einen Namen. Verwende diesen Namen dann in einer Addition, deren Ergebnis 14 ist. Der benannte Wert muss in die Berechnung eingehen.",
+        "hint": "let energy = 10 gibt dem Wert 10 den Namen energy. Wenn du später energy verwendest, erhältst du diesen Wert. Was musst du dazu addieren?"
+      },
+      "decide": {
+        "title": "Eine Aktion für ein Hindernis wählen",
+        "goal": "obstacle ist die Entfernung zum nächsten Hindernis. Gib 3 aus, wenn sie kleiner als 4 ist, sonst 1. Derselbe Code muss alle Eingaben verarbeiten. Hier prüfst du die Aktionssignale. Erst bei der Verfolgung führt die Figur sie aus.",
+        "hint": "Verwende if obstacle < 4 then { ... } else { ... } für die beiden Fälle. Genau 4 ist nicht kleiner als 4. Immer 3 auszugeben, passt nicht zu jeder Situation."
+      }
+    }
   }
 }

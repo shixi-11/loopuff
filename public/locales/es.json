@@ -1867,5 +1867,88 @@
     "previewCleared": "Obstáculo superado",
     "previewJumping": "Saltando",
     "tiredNear": "Barrera cercana, poca energía"
+  },
+  "learningPaths": {
+    "choose": "Empieza por donde mejor te venga",
+    "beginnerTitle": "Mi primera vez programando",
+    "beginnerIntro": "Empieza con una instrucción. Ejecútala, cámbiala, corrige un error y después escribe por tu cuenta un programa que funcione.",
+    "advancedTitle": "Sigue avanzando con lo que ya sabes",
+    "advancedIntro": "Comprueba lo que entiendes con distintas entradas, refuerza lo que te falte y combina funciones, mensajes y coordinación.",
+    "enterStart": "Empezar paso a paso",
+    "enterAdvance": "Explorar la ruta avanzada",
+    "backGuide": "Aprender a programar",
+    "backPath": "Volver a la ruta de aprendizaje",
+    "startIntro": "El código da instrucciones al ordenador. Primero verás un resultado y luego aprenderás a cambiarlo. Prueba cada paso y vuelve cuando necesites repasar.",
+    "step": "Paso actual",
+    "verified": "Ejecutado y comprobado",
+    "notVerified": "Pendiente de probar",
+    "run": "Ejecutar y ver",
+    "editor": "Tu programa",
+    "expected": "Tu objetivo en este paso",
+    "actual": "Resultado real de la ejecución",
+    "notRun": "Todavía no se ha ejecutado. Elige «Ejecutar y ver» para que aparezca aquí un resultado.",
+    "passed": "¡Lo has conseguido! Compara el código con el resultado y continúa.",
+    "needsWork": "El resultado aún no cumple el objetivo. Compara lo que se pide con el resultado real y vuelve a intentarlo.",
+    "next": "Continuar al siguiente paso",
+    "read": "¿Qué significa este código?",
+    "repairHelp": "Los paréntesis también forman parte del código. Un error puede impedir que el programa se ejecute. Mira dónde está el error, corrige el código y vuelve a ejecutarlo.",
+    "hint": "Dame una pista",
+    "reset": "Usar el código inicial de este paso",
+    "confirmReset": "Confirmar la sustitución de este borrador",
+    "cancelReset": "Conservar mi borrador",
+    "resetNote": "Has editado este paso. Confirma de nuevo para sustituir el borrador. Los borradores de los demás pasos se conservarán.",
+    "case": "Caso de entrada",
+    "executed": "El código que produjo este resultado",
+    "allStartDone": "Ya has ejecutado y modificado un programa, corregido un error, hecho cálculos, dado un nombre a un valor y tomado una decisión. Sigue con tareas completas para practicarlo.",
+    "courseRoad": "Continúa tu recorrido de aprendizaje",
+    "courseIntro": "Comprende para qué sirve, modifica un programa y después completa una tarea por tu cuenta. Tus borradores y tareas completadas siguen aquí; continúa donde lo necesites.",
+    "continueCourse": "Abrir esta tarea",
+    "advanceGoal": "Empieza con preguntas prácticas: ¿sigue funcionando el programa cuando cambian las entradas? ¿Puedes encontrar la causa de un fallo y combinar las partes para crear una función útil?",
+    "diagnosticRoad": "Primero comprueba y después refuerza",
+    "diagnosticIntro": "Cada comprobación usa varias entradas. Puedes elegir cualquier tema. Si te atascas, el resultado te llevará al concepto y al ejercicio de modificación correspondientes.",
+    "projectRoad": "Combina tus habilidades en una tarea",
+    "projectIntro": "Elige un puesto de atraque, gestiona un lote de entregas, implementa la interfaz de una función y coordina dos puertos. Cada tarea ofrece distintas entradas, resultados reales y pistas opcionales. Prueba otra ronda para volver a comprobar el mismo programa.",
+    "recommend": "Prueba esto a continuación",
+    "checkTask": "Comprobar esta habilidad",
+    "applyTask": "Empezar esta tarea combinada",
+    "badSave": "Ahora mismo no se puede leer este registro de diagnóstico. Abre la gestión de partidas guardadas para resolverlo. El registro original no se ha sustituido.",
+    "lanes": [
+      "Instrucciones, cálculos y nombres",
+      "Decisiones y repeticiones",
+      "Funciones y respuestas",
+      "Mensajes y coordinación"
+    ],
+    "steps": {
+      "run": {
+        "title": "Pide al ordenador que muestre un número",
+        "goal": "Ejecuta el programa inicial para que la zona de resultados muestre 7. Distingue las instrucciones que escribes del valor que produce el ordenador al ejecutarlas.",
+        "hint": "Deja el código como está y elige «Ejecutar y ver». 7 es el valor que quieres mostrar; .log() lo muestra."
+      },
+      "change": {
+        "title": "Cambia un número y ejecuta de nuevo",
+        "goal": "Cambia el resultado de 7 a 9. Editar el código no lo ejecuta. Vuelve a ejecutarlo después del cambio para ver el nuevo resultado.",
+        "hint": "Prueba a cambiar solo 7 y conserva .log(). Al editar se retira el resultado anterior; una nueva ejecución produce otro resultado."
+      },
+      "repair": {
+        "title": "Corrige un pequeño error",
+        "goal": "A este código le falta un símbolo. Ejecútalo para ver el error y después corrígelo para que el programa muestre 7.",
+        "hint": "Compara el final del código con los paréntesis de .log(). Añade la parte que falta y ejecútalo de nuevo."
+      },
+      "calculate": {
+        "title": "Deja que el ordenador calcule",
+        "goal": "Usa una suma para calcular y mostrar 11. Puedes elegir distintos números, siempre que sumen 11.",
+        "hint": "La suma entre paréntesis produce un valor y .log() lo muestra. Mostrar directamente el valor fijo 11 no completa este paso."
+      },
+      "name": {
+        "title": "Dale un nombre a un valor",
+        "goal": "Dale un nombre a un valor de energía y úsalo en una suma cuyo resultado sea 14. El valor asociado al nombre debe participar en el cálculo.",
+        "hint": "let energy = 10 da el nombre energy al valor 10. Al usar energy después, obtienes ese valor. ¿Qué le sumarías?"
+      },
+      "decide": {
+        "title": "Elige una acción ante un obstáculo",
+        "goal": "obstacle es la distancia al siguiente obstáculo. Muestra 3 si es menor que 4; en los demás casos, muestra 1. El mismo código debe funcionar con todas las entradas. Aquí compruebas las señales de acción; el personaje las ejecutará cuando entres en la persecución.",
+        "hint": "Usa if obstacle < 4 then { ... } else { ... } para distinguir los dos casos. Exactamente 4 no es menor que 4. Mostrar siempre 3 no sirve para todas las situaciones."
+      }
+    }
   }
 }

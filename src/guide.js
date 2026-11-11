@@ -1,12 +1,13 @@
 import {course} from './course.js';
 import {run} from './runner.js';
+import {guideStationIds,guideWorkIds} from './guide-work.js';
 
 // Reuse the executable, native-checked course examples. The scene is a log viewer,
 // not a second interpreter or an animation standing in for program execution.
-export const guideStations=['signal','addition','names','branch','repeat','function','reply','join'].map(id=>course.find(item=>item.id===id));
+export const guideStations=guideStationIds.map(id=>course.find(item=>item.id===id));
 export function readGuideWork(value){
  if(!value||typeof value!=='object'||Array.isArray(value))return {};
- return Object.fromEntries(guideStations.filter(s=>typeof value[s.id]==='string').map(s=>[s.id,value[s.id].slice(0,4096)]));
+ return Object.fromEntries(guideWorkIds.filter(id=>typeof value[id]==='string').map(id=>[id,value[id].slice(0,4096)]));
 }
 export function executeGuide(source){
  try{return {ok:true,source,result:run(source)};}
