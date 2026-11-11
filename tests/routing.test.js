@@ -69,3 +69,13 @@ test('legacy level URLs remain parseable for the arcade mission compatibility en
     assert.equal(languageUrl(url.href,'en').pathname,`${prefix}/en/levels/`);
   }
 });
+
+test('street entries request their real art before application startup and skip the unused aircraft preload',async()=>{
+ const {chaseAssets,chaseAtlas}=await import('../src/chase-assets.js');
+ for(const [locale]of locales){
+  const street=await readFile(new URL(`../dist/${locale}/play/chase/index.html`,import.meta.url),'utf8'),home=await readFile(new URL(`../dist/${locale}/index.html`,import.meta.url),'utf8');
+  for(const file of [...Object.values(chaseAssets),chaseAtlas])assert.ok(street.includes(`href="./assets/${file}"`));
+  assert.ok(!street.includes('as="image" href="./assets/aircraft-2d.png'));
+  assert.ok(home.includes('as="image" href="./assets/aircraft-2d.png'));
+ }
+});

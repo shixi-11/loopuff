@@ -1,16 +1,18 @@
 // Use the approved transparent artwork for both the home and flight-game aircraft.
 export const aircraftUrl=new URL('../assets/aircraft-2d.png?v=6fa6af1aeee1',import.meta.url).href;
-const aircraft=typeof Image==='undefined'?null:new Image();
-if(aircraft){
- aircraft.decoding='async';
- aircraft.src=aircraftUrl;
+let aircraft=null;
+function loadAircraft(){
+ if(!aircraft&&typeof Image!=='undefined'){aircraft=new Image();aircraft.decoding='async';aircraft.src=aircraftUrl;}
+ return aircraft;
 }
 export function whenPlaneReady(redraw){
+ loadAircraft();
  if(aircraft?.complete&&aircraft.naturalWidth){redraw();return ()=>{};}
  aircraft?.addEventListener('load',redraw,{once:true});
  return ()=>aircraft?.removeEventListener('load',redraw);
 }
 export function drawPlane(ctx,x,y,size=110,time=0,angle=0){
+ loadAircraft();
  if(!aircraft?.complete||!aircraft.naturalWidth)return;
  const height=size*1.15,width=height*aircraft.naturalWidth/aircraft.naturalHeight;
  ctx.save();ctx.translate(x,y);ctx.rotate(angle);

@@ -97,7 +97,8 @@ test('a hanging asset request times out, exposes the error and can load successf
   set('Image',class{set src(url){this.width=url.includes('chase-street.webp')?1672:1774;this.height=url.includes('chase-street.webp')?940:887;if(successful&&url)queueMicrotask(()=>this.onload?.());}});
   set('fetch',async()=>successful?{ok:true,json:async()=>atlas}:new Promise(()=>{}));
   set('devicePixelRatio',1);set('ResizeObserver',class{observe(){}disconnect(){}});
-  set('setTimeout',(cb,ms)=>{assert.equal(ms,45000);timers.set(++id,cb);return id;});set('clearTimeout',n=>timers.delete(n));
+  // A stalled street now returns control within twenty seconds, rather than forty-five.
+  set('setTimeout',(cb,ms)=>{assert.ok(ms>0&&ms<=20000);timers.set(++id,cb);return id;});set('clearTimeout',n=>timers.delete(n));
   set('cancelAnimationFrame',()=>{});
   const ctx=new Proxy({}, {get(target,name){return target[name]||(()=>{});}}),canvas={style:{},getContext:()=>ctx};
   const create=()=>({clientWidth:960,dataset:{},querySelector:()=>canvas});

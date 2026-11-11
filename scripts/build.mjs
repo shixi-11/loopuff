@@ -4,6 +4,7 @@ import { build, transform } from 'esbuild';
 import { createHash } from 'node:crypto';
 import { course, locales } from '../src/course.js';
 import {verifyPursuitExercise} from './verify-pursuit-exercise.mjs';
+import {chaseAssets,chaseAtlas} from '../src/chase-assets.js';
 import {verifyStartExercises} from './verify-start-exercises.mjs';
 verifyPursuitExercise();
 verifyStartExercises();
@@ -38,7 +39,7 @@ for(const [locale] of locales){
   const canonical=`https://shixilin.com/games/loopuff/${locale}/${entry==='levels/'?'play/':entry}`;
   const lessonIndex=course.findIndex(lesson=>entry.startsWith(`learn/${lesson.id}/`));
   const title=entry==='guide/start/'?messages.learningPaths.beginnerTitle:entry==='guide/advance/'?messages.learningPaths.advancedTitle:entry==='play/heist/'?messages.heist.title:entry==='guide/check/'?messages.diagnostic.title:entry==='guide/map/'?messages.learningMap.title:entry==='guide/compare/'?messages.guideStudio.compareTitle:entry==='saves/'?messages.saves.title:entry==='play/dispatch/'?messages.dispatch.title:entry==='play/chase/'?messages.chase.title:entry.endsWith('/result/')?messages.assessment.title:entry==='account/'?messages.account.entry:entry==='play/'?messages.vault.arcade:entry==='play/vault/'?messages.vault.title:entry==='levels/'?messages.ui.navCourse:entry==='guide/'?messages.ui.guide:lessonIndex>=0?messages.lessons[lessonIndex].title:messages.ui.tagline;
-  const page=html.replace('<html lang="zh-CN">',`<html lang="${lang}" dir="${locale==='ar'?'rtl':'ltr'}">`)
+  let page=html.replace('<html lang="zh-CN">',`<html lang="${lang}" dir="${locale==='ar'?'rtl':'ltr'}">`)
     .replace('<base href="./">',`<base href="${'../'.repeat(1+entry.split('/').filter(Boolean).length)}">`)
     .replace('</head>',`<script id="initial-catalog" type="application/json" data-locale="${locale}">${JSON.stringify(messages).replace(/</g,'\\u003c')}</script></head>`)
     .replace('<span id="brand-name">Loopuff</span>',`<span id="brand-name">${escape(messages.ui.name)}</span>`)
@@ -49,6 +50,8 @@ for(const [locale] of locales){
     .replace(/<p class="welcome-copy">[\s\S]*?<\/p>/,`<p class="welcome-copy">${escape(messages.ui.lead)}</p>`)
     .replace('<body>',`<body data-view="${entry?'learning':'game'}"${entry?' data-entry="learning"':' data-phase="welcome"'}>`)
     .replace(/<title>[^<]*<\/title>/,`<title>${messages.ui.name} · ${title}</title><link rel="canonical" href="${canonical}">${entry.endsWith('/result/')?'<meta name="robots" content="noindex,follow">':''}`);
+  if(entry)page=page.replace('<link rel="preload" as="image" href="./assets/aircraft-2d.png?v=6fa6af1aeee1" fetchpriority="high">','');
+  if(entry==='play/chase/')page=page.replace('</head>',Object.values(chaseAssets).map(file=>'<link rel="preload" as="image" href="./assets/'+file+'" fetchpriority="high">').join('')+'<link rel="preload" as="fetch" href="./assets/'+chaseAtlas+'" crossorigin="anonymous">'+'</head>');
   await mkdir(resolve(out,locale,entry),{recursive:true});await writeFile(resolve(out,locale,entry,'index.html'),page);
   }
 }

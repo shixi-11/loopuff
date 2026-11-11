@@ -1,7 +1,21 @@
+import {chaseAssets,chaseAtlas,chaseLoadTimeoutMs} from './chase-assets.js';
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 const ease=t=>t*t*(3-2*t);
-const assets={police:'chase-police.webp?v=39bc4f5601',thief:'chase-thief.webp?v=9403edfa76',props:'chase-props.webp?v=b6866b67ec',street:'chase-street.webp?v=195a74ab0d'};
-const assetPromises=new Map();
+const assets=chaseAssets;
+const assetPromises=new Map(),resources=new Map();
+function resource(file,image){
+ const url=new URL('../assets/'+file,import.meta.url).href;
+ if(resources.has(url))return resources.get(url);
+ let cancel,entry={pending:true,users:0};
+ const pending=image?new Promise((resolve,reject)=>{
+  const img=new Image();img.fetchPriority='high';img.decoding='async';
+  img.onload=()=>resolve(img);img.onerror=()=>reject(Error(file));
+  cancel=()=>{img.onload=img.onerror=null;img.src='';reject(Error('Cancelled asset'));};img.src=url;
+ }):(()=>{const controller=new AbortController();cancel=()=>controller.abort();return fetch(url,{signal:controller.signal,priority:'high'}).then(r=>{if(!r.ok)throw Error('atlas');return r.json();});})();
+ entry.cancel=()=>{if(!entry.pending)return;cancel();if(resources.get(url)===entry)resources.delete(url);};
+ entry.promise=pending.then(value=>{entry.pending=false;return value;},error=>{if(resources.get(url)===entry)resources.delete(url);throw error;});
+ resources.set(url,entry);return entry;
+}
 export function validateChaseArt(art,actorsOnly=false){
   for(const [kind,count] of [['police',8],['thief',8],...(actorsOnly?[]:[['props',2]])]){
     const a=art.atlas[kind],image=art[kind];
@@ -13,21 +27,20 @@ export function validateChaseArt(art,actorsOnly=false){
 export function loadChaseAssets(){return loadArt(false);}
 export function loadChaseActors(){return loadArt(true);}
 function loadArt(actorsOnly){
-  if(assetPromises.has(actorsOnly))return assetPromises.get(actorsOnly);
-  const requested=actorsOnly?['police','thief']:Object.keys(assets);
-  const controller=new AbortController(),images=[];let timer;
-  const pending=Promise.all([
-    fetch(new URL('../assets/chase-sprites.json',import.meta.url),{signal:controller.signal,priority:'high'}).then(r=>{if(!r.ok)throw Error('atlas');return r.json();}),
-    ...requested.map(kind=>new Promise((resolve,reject)=>{
-      const file=assets[kind];
-      const img=new Image();images.push(img);img.fetchPriority='high';img.decoding='async';img.onload=()=>resolve(img);img.onerror=()=>reject(Error(file));img.src=new URL(`../assets/${file}`,import.meta.url).href;
-    }))
-  ]).then(([atlas,...loaded])=>validateChaseArt({atlas,...Object.fromEntries(requested.map((kind,i)=>[kind,loaded[i]]))},actorsOnly));
-  const timeout=new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('Chase assets timed out')),45000);});
-  const promise=Promise.race([pending,timeout]).catch(error=>{
-    controller.abort();for(const img of images){img.onload=img.onerror=null;img.src='';}assetPromises.delete(actorsOnly);throw error;
-  }).finally(()=>clearTimeout(timer));
-  assetPromises.set(actorsOnly,promise);return promise;
+ if(assetPromises.has(actorsOnly))return assetPromises.get(actorsOnly);
+ const requested=actorsOnly?['police','thief']:Object.keys(assets),entries=[resource(chaseAtlas,false),...requested.map(kind=>resource(assets[kind],true))];
+ for(const entry of entries)entry.users++;
+ let timer,integrityFailure=false;
+ const pending=Promise.all(entries.map(entry=>entry.promise)).then(([atlas,...loaded])=>{
+  try{return validateChaseArt({atlas,...Object.fromEntries(requested.map((kind,i)=>[kind,loaded[i]]))},actorsOnly);}catch(error){integrityFailure=true;throw error;}
+ });
+ const timeout=new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('Chase assets timed out')),chaseLoadTimeoutMs);});
+ const promise=Promise.race([pending,timeout]).catch(error=>{
+  for(const entry of entries)if(entry.users===1)entry.cancel();
+  if(integrityFailure)for(const [url,entry]of resources)if(entries.includes(entry))resources.delete(url);
+  assetPromises.delete(actorsOnly);throw error;
+ }).finally(()=>{clearTimeout(timer);for(const entry of entries)entry.users--;});
+ assetPromises.set(actorsOnly,promise);return promise;
 }
 
 // The player moves before the rival. Sampling changes only presentation, never
