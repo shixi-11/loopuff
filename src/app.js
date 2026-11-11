@@ -6,6 +6,9 @@ import { drawPlane, aircraftUrl } from './plane.js';
 import { mountHomePlane } from './home-plane.js';
 import {homeDestination} from './home.js';
 import {mountHomeDemo,homeSections} from './home-ui.js';
+import {mountHandheld,handheldTeaser} from './handheld-ui.js';
+import {mountDistrict} from './district-ui.js';
+import {cartridgeArt} from './cartridge-art.js';
 import {loadPursuit} from './pursuit-session.js';
 import { mountVault, loadVault } from './vault-ui.js';
 import { mountChase, loadChase } from './chase-ui.js';
@@ -49,8 +52,8 @@ if(!validLocale(lang))lang='en';
 let programScene=null,jumpLab=null,vaultGame=null,chaseGame=null,pursuitGame=null,heistGame=null,dispatchGame=null,accountPage=null,savesPage=null,guidePage=null;
 const savesModel={},diagnosticModel={};
 const guideModel={selected:saved.state?.guideSelected,drafts:readGuideWork(saved.state?.guideWork)};
-const pursuitModel={},heistModel={},homeModel={};
-let homeDemo=null;
+const pursuitModel={},heistModel={},homeModel={},handheldModel={},districtModel={};
+let homeDemo=null,handheldGame=null,districtGame=null;
 let guideView='guide',diagnosticReturn=false,dispatchMission=null;
 let chaseLab=new URL(location.href).searchParams.get('mode')==='lab';
 const account=createAccountClient({url:location.href,onChange:()=>{if(messages){updateAccountEntry();accountPage?.refresh();savesPage?.refresh();}}});
@@ -169,6 +172,7 @@ function syncRoute(){
   if(view==='lesson'&&['rewrite','independent'].includes(state.phase))url.searchParams.set('practice',state.phase);else url.searchParams.delete('practice');
   url.searchParams.delete('area');
   if(view!=='start')url.searchParams.delete('step');
+  if(view!=='play')url.searchParams.delete('game');
   if(!['lesson','result','check','compare','dispatch'].includes(view))url.searchParams.delete('path');
   if(view==='dispatch'&&dispatchMission)url.searchParams.set('mission',dispatchMission);else url.searchParams.delete('mission');
   if(diagnosticReturn&&['lesson','result'].includes(view))url.searchParams.set('return','diagnostic');else url.searchParams.delete('return');
@@ -212,18 +216,23 @@ function render(){
   dispatchGame?.dispose();dispatchGame=null;
   guidePage?.dispose();guidePage=null;
   homeDemo?.dispose();homeDemo=null;
+  handheldGame?.dispose();handheldGame=null;
+  districtGame?.dispose();districtGame=null;
   applyStatic();const phase=state.phase, typing=phase==='typing';
   const page=!['welcome','typing','pause'].includes(phase);
   document.body.dataset.view=page?'learning':'game';
   document.body.dataset.phase=phase;
   $('universe').hidden=page;$('learning-page').hidden=!page;
   $('universe').dataset.phase=phase;$('welcome').hidden=phase!=='welcome';$('welcome-foot').hidden=phase!=='welcome';
-  $('home-plane').hidden=phase!=='welcome';
+  $('home-plane').hidden=true;
+  $('home-flight-field').hidden=true;
+  document.querySelector('.home-console-bridge').hidden=phase!=='welcome';
   $('home-content').hidden=phase!=='welcome';
   if(phase==='welcome'){
    const homeUrls=Object.fromEntries(['start','advance','play','vault','chase','dispatch','map','compare'].map(view=>[view,routeUrl(location.href,lang,view).pathname]));
    homeDemo=mountHomeDemo($('home-demo'),{text:messages.homeExperience,model:homeModel});
-   $('home-content').innerHTML=homeSections({text:messages.homeExperience,paths:messages.learningPaths,guide:{mapLabel:messages.learningMap.title,compareLabel:messages.guideStudio.compareTitle},urls:homeUrls,games:[{id:'vault',title:messages.vault.title},{id:'chase',title:messages.chase.title,art:'<div class="home-chase-pair"><img src="'+new URL('../assets/chase-police-idle.webp',import.meta.url).href+'" alt=""><img src="'+new URL('../assets/chase-thief-idle.webp',import.meta.url).href+'" alt=""></div>'},{id:'dispatch',title:messages.dispatch.title,art:'<img class="home-mini-plane" src="'+aircraftUrl+'" alt="">'}]});
+   $('home-handheld-teaser').innerHTML=handheldTeaser(messages.handheld,homeUrls.play);
+   $('home-content').innerHTML=homeSections({text:messages.homeExperience,paths:messages.learningPaths,guide:{mapLabel:messages.learningMap.title,compareLabel:messages.guideStudio.compareTitle},urls:homeUrls,games:[...['blocks','tanks','flight'].map((id,index)=>({id,title:messages.handheld.games[index],art:cartridgeArt(id),note:messages.handheld.short?.[index]||messages.handheld.help[index],href:homeUrls.play+'?game='+id})),{id:'chase',title:messages.chase.title,art:cartridgeArt('chase'),note:messages.pursuit.intro}]});
   }
   for(const id of ['flight-hud','code-coach','target','cockpit'])$(id).hidden=!typing;
   $('pause-button').hidden=!typing;
@@ -325,23 +334,18 @@ function renderDialog(){
     dispatchGame=mountDispatch($('dispatch-game'),{text:messages.dispatch,initialMission:dispatchMission,onSelect:mission=>{dispatchMission=mission;const url=dispatchMissionUrl(location.href,lang,mission);if(location.href!==url.href)history.replaceState(null,'',url);},errors:messages.ui,concepts:messages.assessment.concepts,statuses:{pass:messages.assessment.pass,fail:messages.assessment.fail},reduced,format:prose,urls:{home:routeUrl(location.href,lang,'home').pathname,play:routeUrl(location.href,lang,'play').pathname,homeLabel:ui('navHome'),playLabel:messages.vault.arcade,lessons:['branch','repeat','function','coordination'].map(id=>routeUrl(location.href,lang,'lesson',id).pathname)}});
     return;
   }
-  if(phase==='play'||phase==='vault'){
-
-    $('learning-page').dataset.stage=phase;
-    const v=messages.vault;
-    const trail=`<nav class="page-trail" aria-label="${escape(ui('navigation'))}"><a data-action="home" href="${routeUrl(location.href,lang,'home').pathname}">${escape(ui('navHome'))}</a><span aria-hidden="true">/</span>${phase==='vault'?`<a data-action="open-play" href="${routeUrl(location.href,lang,'play').pathname}">${escape(v.arcade)}</a><span aria-hidden="true">/</span><span aria-current="page">${escape(v.title)}</span>`:`<span aria-current="page">${escape(v.arcade)}</span>`}</nav>`;
-    $('learning-content').innerHTML=trail+(phase==='vault'?'<div id="vault-game"></div>':`<section class="arcade-page"><span class="eyebrow">${escape(ui('name'))}</span><h1 id="learning-title">${escape(v.arcadeTitle)}</h1><p class="levels-intro">${escape(v.arcadeIntro)}</p>${journeyPanel()}<div class="arcade-games"><a class="arcade-game vault-entry" data-action="open-vault" href="${routeUrl(location.href,lang,'vault').pathname}"><div class="arcade-vault-art" aria-hidden="true">${arcadeArt('vault')}</div><div><span class="eyebrow">${escape(v.puzzleTag)}</span><h2>${escape(v.title)}</h2><p>${escape(v.intro)}</p><span class="game-record">${escape(v.collection)} <bdi dir="ltr">${loadVault().stamps.length} / 3</bdi></span><strong>${escape((loadVault().stage||loadVault().submitted?ui('resume'):v.enter).replace(/\s*↗$/,''))} ↗</strong></div></a><a class="arcade-game jump-entry" href="${routeUrl(location.href,lang,'lesson',course[3].id).pathname}" data-lesson="3"><div class="arcade-jump-art" aria-hidden="true">${arcadeArt('jump')}</div><div><span class="eyebrow">${escape(v.jumpTag)}</span><h2>${escape(messages.jump.title)}</h2><p>${escape(messages.lessons[3].goal)}</p><span class="game-record">${escape(state.completed.includes(course[3].id)?ui('done'):ui('open'))}</span><strong>${escape((lessonWork(state,course[3].id)?ui('resume'):v.enter).replace(/\s*↗$/,''))} ↗</strong></div></a></div></section>`);
-    if(phase==='vault')vaultGame=mountVault($('vault-game'),{beginner:messages.beginner,text:v,errors:messages.ui,reduced});
-    else {let chaseWorld;try{chaseWorld=pursuitModel.session?.world||loadPursuit()?.current;}catch{}
-    const chaseRecord=chaseWorld?messages.chase[chaseWorld.role]+' · '+messages.pursuit.elapsed+' '+String(Math.floor(chaseWorld.activeMs/60000)).padStart(2,'0')+':'+String(Math.floor(chaseWorld.activeMs/1000)%60).padStart(2,'0'):ui('open');
-    document.querySelector('.arcade-games').insertAdjacentHTML('beforeend',`<a class="arcade-game chase-entry" data-action="open-chase" href="${routeUrl(location.href,lang,'chase').pathname}"><div class="chase-card-art" aria-hidden="true"><img src="${new URL('../assets/chase-police-idle.webp',import.meta.url).href}" alt=""><img src="${new URL('../assets/chase-thief-idle.webp',import.meta.url).href}" alt=""></div><div><span class="eyebrow">${escape(messages.chase.tag)}</span><h2>${escape(messages.chase.title)}</h2><p>${escape(messages.pursuit.intro)}</p><span class="game-record">${escape(chaseRecord)}</span><strong>${escape((chaseWorld?.activeMs&&chaseWorld.status!=='finished'?ui('resume'):v.enter).replace(/\s*↗$/,''))} ↗</strong></div></a>`);}
-    if(phase==='play'){
-      const dispatch=loadDispatch(),d=messages.dispatch;
-      document.querySelector('.arcade-games').insertAdjacentHTML('beforeend',`<a class="arcade-game dispatch-entry" data-action="open-dispatch" href="${routeUrl(location.href,lang,'dispatch').pathname}"><div class="dispatch-card-art" aria-hidden="true"><img src="${aircraftUrl}" alt=""></div><div><span class="eyebrow">${escape(d.tag)}</span><h2>${escape(d.title)}</h2><p>${escape(d.entry)}</p><span class="game-record">${escape(d.badges)} <bdi dir="ltr">${dispatch.stamps.length} / 4</bdi></span><strong>${escape(v.enter.replace(/\s*↗$/,''))} ↗</strong></div></a>`);
-      document.querySelector('.arcade-page').insertAdjacentHTML('beforeend',arcadeMissions());
-      document.querySelector('.arcade-games').insertAdjacentHTML('beforeend',`<a class="arcade-game heist-entry" data-action="open-heist" href="${routeUrl(location.href,lang,'heist').pathname}"><div class="heist-card-art" aria-hidden="true"><span>01 → 02 → 03 → 04</span><svg viewBox="0 0 240 180"><path d="M25 67 120 21 215 67M38 80h164M40 151h160M30 165h180M56 80v71m43-71v71m43-71v71m43-71v71" fill="none" stroke="currentColor" stroke-width="9"/></svg></div><div><span class="eyebrow">${escape(messages.heist.tag)}</span><h2>${escape(messages.heist.title)}</h2><p>${escape(messages.heist.intro)}</p><strong>${escape(messages.heist.enter)} ↗</strong></div></a>`);
-    }
-    return;
+  if(phase==='vault'){
+   $('learning-page').dataset.stage=phase;$('learning-content').innerHTML='<div id="vault-game"></div>';
+   vaultGame=mountVault($('vault-game'),{beginner:messages.beginner,text:messages.vault,errors:messages.ui,reduced});return;
+  }
+  if(phase==='play'){
+   $('learning-page').dataset.stage=phase;
+   $('learning-content').innerHTML=`<nav class="page-trail"><a data-action="home" href="${routeUrl(location.href,lang,'home').pathname}">${escape(ui('navHome'))}</a><span aria-hidden="true">/</span><span>${escape(messages.vault.arcade)}</span></nav><section class="arcade-page"><span class="eyebrow">${escape(ui('name'))}</span><h1 id="learning-title">${escape(messages.district.title)}</h1><p class="levels-intro">${escape(messages.district.intro)}</p><div id="game-district"></div><div id="handheld-machine" hidden></div>${journeyPanel()}<details class="district-curriculum"><summary>${escape(messages.learningPaths.courseRoad)}</summary>${arcadeMissions()}</details></section>`;
+   handheldGame=mountHandheld($('handheld-machine'),{text:messages.handheld,errors:messages.ui,model:handheldModel,onSelect:index=>{const url=new URL(location.href);url.searchParams.set('game',['blocks','tanks','flight'][index]);history.replaceState(null,'',url);}});
+   const shops=[...['blocks','tanks','flight'].map((id,index)=>({id,title:messages.handheld.games[index],era:'1980s'})),{id:'start',title:messages.learningPaths.beginnerTitle,era:'TOLANG'},{id:'chase',title:messages.chase.title,era:'1990s'},{id:'dispatch',title:messages.dispatch.title,era:'1990s'},{id:'heist',title:messages.heist.title,era:'1990s'},{id:'map',title:messages.learningMap.title,era:'TOLANG'}];
+   districtGame=mountDistrict($('game-district'),{text:{...messages.district,title:messages.district.shops,intro:''},shops,model:districtModel,onEnter:enterDistrict});
+   const initial=['blocks','tanks','flight'].indexOf(new URL(location.href).searchParams.get('game'));if(initial>=0)showHandheld(initial);
+   return;
   }
   if(phase==='brief'){title=c.title;body=`<p class="dialog-note">${prose(c.intro)}</p>${codeBlock(lesson().source)}${teachingReading(messages.teaching,lesson().id)}<p>${prose(c.goal)}</p>${actions([[lesson().mode==='lab'?'observe-program':'type',ui(lesson().mode==='lab'?'observeProgram':'launch')]])}`;}
   if(phase==='predict'){title=ui('predict');body=`<p class="dialog-note">${escape(ui('predictionPrompt'))}</p>${codeBlock(lesson().source)}${choices(lesson().prediction,'prediction')}`;}
@@ -452,6 +456,17 @@ function submitProgram(){
     state.draft='';state.assessedSource=null;openRewrite(source);
   }catch(error){lastResult=null;feedback(error.code==='syntax'?'syntax':error.code==='name'?'nameError':'limit',false,error.code==='syntax'?` ${error.position+1}.`:'');}
 }
+function showHandheld(index){
+ const root=$('handheld-machine');if(!root||!handheldGame)return;root.hidden=false;handheldGame.select(index);
+ if(!root.querySelector('[data-action="open-district"]'))root.insertAdjacentHTML('afterbegin',`<button type="button" class="text-button district-back" data-action="open-district">← ${escape(messages.district.title)}</button>`);
+ const url=new URL(location.href);url.searchParams.set('game',['blocks','tanks','flight'][index]);history.replaceState(null,'',url);
+ requestAnimationFrame(()=>{root.scrollIntoView({block:'start',behavior:'instant'});root.querySelector('canvas').focus({preventScroll:true});});
+}
+function enterDistrict(id){
+ const index=['blocks','tanks','flight'].indexOf(id);if(index>=0){showHandheld(index);return;}
+ if(['start','map'].includes(id)){guideView=id;move('guide');return;}
+ if(id==='chase')chaseLab=false;if(id==='dispatch')dispatchMission=null;move(id);
+}
 function pause(){if(state.phase==='welcome'||state.phase==='pause')return;state.previousPhase=state.phase;move('pause');}
 document.addEventListener('change',event=>{if(event.target.matches('[data-language],#language-select'))changeLanguage(event.target.value);});
 document.addEventListener('input',event=>{if(event.target.id==='program-editor'){
@@ -473,6 +488,8 @@ document.addEventListener('click',event=>{
   if(action==='open-account'){move('account');return;}
   if(action==='open-saves'){move('saves');return;}
   if(action==='open-play'){move('play');return;}
+  if(['open-blocks','open-tanks','open-flight'].includes(action)){const index=['open-blocks','open-tanks','open-flight'].indexOf(action);move('play');showHandheld(index);return;}
+  if(action==='open-district'){handheldGame?.pause();$('handheld-machine').hidden=true;const url=new URL(location.href);url.searchParams.delete('game');history.replaceState(null,'',url);$('game-district').scrollIntoView({block:'start',behavior:'instant'});$('game-district').querySelector('canvas').focus({preventScroll:true});return;}
   if(action==='open-dispatch'){dispatchMission=dispatchIds.includes(target.dataset.mission)?target.dataset.mission:state.phase==='complete'?lessonApplication(lesson().id):null;move('dispatch');return;}
   if(action==='open-heist'){move('heist');return;}
   if(action==='open-vault'){move('vault');return;}

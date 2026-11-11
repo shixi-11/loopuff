@@ -1,6 +1,6 @@
 # Loopuff
 
-[English](README.md) · [简体中文](README.zh.md) · [繁體中文](README.zh-Hant.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [Русский](README.ru.md) · [Українська](README.uk.md) · [العربية](README.ar.md)
+[简体中文](README.zh.md) · [繁體中文](README.zh-Hant.md) · [English](README.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [Français](README.fr.md) · [Tiếng Việt](README.vi.md) · [Русский](README.ru.md) · [Українська](README.uk.md) · [العربية](README.ar.md) · [日本語](README.ja.md) · [한국어](README.ko.md)
 
 A game for learning programming with Tolang.
 
@@ -16,7 +16,9 @@ Read code, predict its result, change it, and solve new problems without a templ
 
 ## Current code
 
-Thirteen missions cover programming foundations, Tolang conditions, loops, functions and replies, then messages and joint receives. Each mission includes prediction, explanation, modification and an independent task; the original four also retain their flight exercises. The course and interface support 11 languages. Programs run locally in a bounded teaching interpreter, not the full Tolang compiler or TVM. Independent tasks check actual output and the requested concepts that contribute to it; typing speed does not affect grades.
+Thirteen missions cover programming foundations, Tolang conditions, loops, functions and replies, then messages and joint receives. Each mission includes prediction, explanation, modification and an independent task; the original four also retain their flight exercises. The course and interface support 12 languages, in the same order as shixilin.com. Programs run locally in a bounded teaching interpreter, not the full Tolang compiler or TVM. Independent tasks check actual output and the requested concepts that contribute to it; typing speed does not affect grades.
+
+The playground includes a programmable pixel handheld with falling blocks, tank defence and a vertical shooter. Run `choose(1); start();` to select and start a cartridge; `pause()` and `finish()` control its lifecycle. The main console sends ordered commands. Automatic strategies alone receive a fresh game-state snapshot every 250 ms. These functions belong to the handheld host, rather than the Tolang standard library. The three new games keep their current round in this page session; course progress and existing game saves retain their established storage.
 
 Independent challenges include a 100-point code assessment with execution, output and requirement feedback. Revise and resubmit; typing speed and matching an example do not affect the grade.
 

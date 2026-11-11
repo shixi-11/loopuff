@@ -1,0 +1,2122 @@
+{
+  "ui": {
+    "name": "Loopuff",
+    "tagline": "Découvrez la programmation en jouant.",
+    "pilot": "AUCUNE EXPÉRIENCE NÉCESSAIRE",
+    "hero": "Écrivez du code.\nExplorez de nouvelles planètes.",
+    "lead": "Partez de zéro. Comprenez le code, expérimentez et écrivez vos propres programmes en Tolang.",
+    "start": "Commencer le voyage ↗",
+    "resume": "Reprendre le voyage ↗",
+    "guide": "Qu’est-ce que la programmation ?",
+    "map": "Votre parcours",
+    "language": "Langue",
+    "movePlane": "Faites glisser l’avion pour voler. Les flèches le déplacent ; Début ou Entrée le replace au départ.",
+    "firstSignal": "Votre première instruction",
+    "welcomeFoot": "Laissez-vous guider par la curiosité. Aucune expérience nécessaire.",
+    "learningLoop": "Lire et écrire → Prévoir et expliquer → Créer",
+    "save": "Progression enregistrée dans ce navigateur",
+    "nosave": "Ce navigateur n’a pas pu enregistrer votre progression",
+    "routeTitle": "Qu’allez-vous découvrir ensuite ?",
+    "routeIntro": "Explorez les valeurs, les calculs et les noms. Résolvez un nouveau problème à la fin de chaque mission.",
+    "done": "Terminée · rejouer",
+    "open": "Prête à explorer",
+    "locked": "Pas encore débloquée",
+    "pause": "Pause",
+    "paused": "Soufflez un peu. Votre code est toujours là.",
+    "resumePlay": "Continuer ↗",
+    "restart": "Recommencer la mission",
+    "read": "CE QUE FAIT CE CODE",
+    "assembled": "Votre programme jusqu’ici",
+    "nextKey": "Prochaine touche",
+    "typeHelp": "Recopiez le fragment. Utilisez les signes de ponctuation du code, sans les adapter au français.",
+    "wrong": "Vérifiez le caractère suivant. La touche Retour arrière permet de le corriger.",
+    "typeLabel": "Votre clavier",
+    "typePlaceholder": "Recopiez le fragment…",
+    "takeTime": "Prenez votre temps",
+    "mission": "Mission",
+    "fragment": "Fragment",
+    "noOutput": "Aucune sortie",
+    "predict": "Prévoyez le résultat avant de lancer",
+    "predictionPrompt": "Qu’affichera ce programme ?",
+    "output": "Votre programme a produit",
+    "modelSteps": "Étapes du modèle pédagogique",
+    "modelNote": "Ces étapes décrivent le modèle pédagogique, pas le gas de la TVM ni des frais de blockchain.",
+    "why": "Expliquer le principe →",
+    "explain": "Pourquoi ce résultat ?",
+    "practice": "Modifier le résultat",
+    "valueLabel": "Nombre de remplacement",
+    "submit": "Vérifier mon programme ↗",
+    "hint": "Un petit indice",
+    "independent": "À vous de l’écrire",
+    "codeLabel": "Votre programme",
+    "scope": "Cet interpréteur pédagogique prend en charge un ensemble limité d’entiers, de booléens, de listes, de calculs, de noms, de conditions, de boucles, de fonctions, de messages et de réceptions conjointes. Ce n’est ni le compilateur Tolang complet ni la TVM.",
+    "complete": "Votre programme fonctionne.",
+    "score": "Points de vol",
+    "accuracy": "Précision de frappe",
+    "masteryNote": "Les scores de frappe mesurent l’entraînement, pas la maîtrise de la programmation.",
+    "next": "Mission suivante →",
+    "home": "Retour à l’accueil",
+    "replay": "Réessayer",
+    "foundationFinish": "Écrire votre premier programme ↗",
+    "foundationNext": "Découvrir la notion suivante →",
+    "error": "Impossible de charger la langue. Essayez de la sélectionner à nouveau.",
+    "numberRequired": "Saisissez un nombre entier avec les chiffres 0–9.",
+    "goalMismatch": "Votre programme s’est exécuté, mais sa sortie ne correspond pas encore à l’objectif.",
+    "conceptMissing": "La sortie est correcte. Utilisez aussi la notion de programmation demandée dans l’exercice.",
+    "syntax": "Vérifiez la syntaxe près du caractère",
+    "nameError": "Déclarez un nom avec let avant de l’utiliser.",
+    "limit": "Ce programme dépasse les limites de l’environnement d’initiation.",
+    "predictionHint": "Suivez chaque calcul, puis examinez ce que .log() affiche.",
+    "close": "Fermer",
+    "chapterNote": "13 missions · Bases de programmation, Tolang et coordination",
+    "footer": "De votre première question à votre premier programme.",
+    "launch": "Lire, puis écrire ↗",
+    "navigation": "Navigation principale",
+    "navHome": "Accueil",
+    "navCourse": "Leçons",
+    "navGuide": "Bases de programmation",
+    "navGuideShort": "Les bases",
+    "mapShort": "Carte",
+    "heroAccent": "planètes",
+    "observeProgram": "Prévoir et exécuter",
+    "practiceInChase": "Essayez vos idées dans Poursuite en ville",
+    "trackBeginner": "Bases de programmation",
+    "trackTolang": "Tolang en pratique",
+    "trackAdvanced": "Messages et coordination",
+    "subset": "Cette forme ne fait pas partie du sous-ensemble pris en charge par cet environnement d’exercice. Utilisez les formes présentées dans les leçons.",
+    "type": "Ces valeurs ne conviennent pas à cette opération. Les conditions exigent true ou false ; les calculs arithmétiques exigent des entiers.",
+    "arity": "Cet appel fournit plus de valeurs que la fonction n’en accepte.",
+    "zeroDivision": "La division et le reste ne peuvent pas avoir zéro pour diviseur.",
+    "waiting": "Le programme attend une réponse ou des messages qui ne sont pas encore arrivés.",
+    "bindingScope": "Ce nom ne peut pas être réaffecté ici. Vérifiez sa portée dans la branche conditionnelle ou pour l’élément de boucle.",
+    "replyUsed": "Cette fonction a déjà répondu. Un même appel ne peut pas utiliser son canal de réponse une seconde fois."
+  },
+  "lessons": [
+    {
+      "title": "Envoyer un signal",
+      "intro": "Un programme est une instruction précise. Ici, 7 est un nombre et .log() demande de l’afficher.",
+      "goal": "Lisez chaque partie, puis envoyez le nombre 7.",
+      "result": "Le nombre 7 apparaît parce que le programme demande explicitement de l’afficher.",
+      "question": "Que fait .log() ici ?",
+      "remix": "Remplacez le blanc pour que le programme affiche 9.",
+      "remixHint": "La valeur avant .log() est le nombre à afficher.",
+      "independent": "Écrivez un programme qui affiche 12. Vous pouvez utiliser toute expression prise en charge.",
+      "independentHint": "Gardez l’instruction d’affichage et choisissez une valeur qui donne 12.",
+      "learned": "Vous avez relié une instruction écrite à son résultat visible.",
+      "answerHint": "La valeur reste identique ; .log() la rend visible.",
+      "answers": [
+        "Il affiche la valeur placée avant le point.",
+        "Il ajoute un au nombre.",
+        "Il stocke un message sur une blockchain."
+      ],
+      "coach": [
+        [
+          "Fragment",
+          "7 est un nombre : la valeur que nous voulons afficher.",
+          "Lisez chaque partie, puis envoyez le nombre 7."
+        ],
+        [
+          "Fragment",
+          "Le point relie la valeur à log, l’opération d’affichage.",
+          "Lisez chaque partie, puis envoyez le nombre 7."
+        ],
+        [
+          "Fragment",
+          "() appelle l’opération. Les parenthèses sont vides car cet appel ne reçoit aucun argument supplémentaire.",
+          "Lisez chaque partie, puis envoyez le nombre 7."
+        ]
+      ]
+    },
+    {
+      "title": "Calculer un itinéraire",
+      "intro": "Une expression produit une valeur. Le signe + additionne deux nombres ; les parenthèses regroupent le calcul avant l’affichage.",
+      "goal": "Calculez 2 + 3, puis affichez le résultat.",
+      "result": "L’addition produit 5. Le programme affiche cette valeur.",
+      "question": "Pourquoi la sortie vaut-elle 5 ?",
+      "remix": "Remplacez le blanc pour que (2 + ___).log() affiche 8.",
+      "remixHint": "Quel nombre faut-il ajouter à 2 pour obtenir 8 ?",
+      "independent": "Affichez 11 à l’aide d’une addition. Choisissez vous-même les deux nombres.",
+      "independentHint": "Utilisez + dans l’expression affichée ; plusieurs paires de nombres conviennent.",
+      "learned": "Vous avez effectué un calcul pour produire une nouvelle valeur.",
+      "answerHint": "+ additionne les nombres ; les parenthèses n’ajoutent aucune valeur.",
+      "answers": [
+        "Il additionne 2 et 3 avant d’afficher le résultat.",
+        "Il assemble les chiffres pour former 23.",
+        "Les parenthèses ajoutent un point supplémentaire."
+      ],
+      "coach": [
+        [
+          "Fragment",
+          "(2 + 3) additionne les deux nombres. Sa valeur est 5.",
+          "Calculez 2 + 3, puis affichez le résultat."
+        ],
+        [
+          "Fragment",
+          "Le point relie la valeur à log, l’opération d’affichage.",
+          "Calculez 2 + 3, puis affichez le résultat."
+        ],
+        [
+          "Fragment",
+          "() appelle l’opération. Les parenthèses sont vides car cet appel ne reçoit aucun argument supplémentaire.",
+          "Calculez 2 + 3, puis affichez le résultat."
+        ]
+      ]
+    },
+    {
+      "title": "Donner un nom à une valeur",
+      "intro": "let n = 5; associe le nom n à 5. Utiliser n ensuite renvoie à cette valeur. Le point-virgule termine la déclaration.",
+      "goal": "Utilisez le nom n dans un nouveau calcul.",
+      "result": "n désigne 5, donc n + 2 produit 7.",
+      "question": "Pourquoi n + 2 produit-il 7 ?",
+      "remix": "Modifiez le nombre déclaré pour que le programme affiche 10.",
+      "remixHint": "La valeur déclarée plus 2 doit être égale à 10.",
+      "independent": "Déclarez un nom avec let, puis utilisez-le dans une addition qui affiche 14.",
+      "independentHint": "Choisissez un nom et une valeur, puis ajoutez un autre nombre lors de l’affichage.",
+      "learned": "Vous avez nommé une valeur et l’avez réutilisée dans une expression.",
+      "answerHint": "Lire n utilise la valeur associée précédemment. L’addition ne modifie pas cette association.",
+      "answers": [
+        "n désigne 5, donc le calcul est 5 + 2.",
+        "Le nom n signifie toujours 7.",
+        "Le signe + remplace définitivement la valeur de n par 7."
+      ],
+      "coach": [
+        [
+          "Fragment",
+          "let n = 5; donne le nom n à la valeur 5. Le point-virgule termine cette déclaration.",
+          "Utilisez le nom n dans un nouveau calcul."
+        ],
+        [
+          "Fragment",
+          "Un saut de ligne rend ce programme plus lisible. Il n’affiche pas de ligne vide.",
+          "Utilisez le nom n dans un nouveau calcul."
+        ],
+        [
+          "Fragment",
+          "(n + 2) lit la valeur nommée n et lui ajoute 2.",
+          "Utilisez le nom n dans un nouveau calcul."
+        ],
+        [
+          "Fragment",
+          "Le point relie la valeur à log, l’opération d’affichage.",
+          "Utilisez le nom n dans un nouveau calcul."
+        ],
+        [
+          "Fragment",
+          "() appelle l’opération. Les parenthèses sont vides car cet appel ne reçoit aucun argument supplémentaire.",
+          "Utilisez le nom n dans un nouveau calcul."
+        ]
+      ]
+    },
+    {
+      "title": "Voler jusqu’à l’île suivante",
+      "intro": "Un petit avion doit rejoindre l’île suivante. Dans cette mission, le nombre affiché par votre programme détermine le nombre de cases parcourues en vol.",
+      "goal": "Calculez 2 + 3 et regardez l’avion avancer de cinq cases.",
+      "result": "Le programme affiche 5. Le jeu lit cette sortie et fait avancer l’avion de cinq cases ; .log() ne fait toujours qu’afficher une valeur.",
+      "question": "Pourquoi la sortie vaut-elle 5 ?",
+      "remix": "Modifiez le programme pour afficher 7 et atteindre l’île située à sept cases.",
+      "remixHint": "2 plus le nombre manquant doit être égal à 7.",
+      "independent": "Utilisez une addition pour afficher 6 et atterrir sur l’île située à six cases. Exécutez le programme et observez le vol avant d’envoyer votre réponse.",
+      "independentHint": "Choisissez deux nombres dont la somme vaut 6. Vous pouvez aussi réutiliser une valeur nommée.",
+      "learned": "Vous avez utilisé la sortie d’un programme pour commander une action et vérifié le résultat.",
+      "answerHint": "+ additionne les nombres ; les parenthèses n’ajoutent aucune valeur.",
+      "answers": [
+        "Il additionne 2 et 3 avant d’afficher le résultat.",
+        "Il assemble les chiffres pour former 23.",
+        "Les parenthèses ajoutent un point supplémentaire."
+      ],
+      "coach": [
+        [
+          "Fragment",
+          "(2 + 3) additionne les deux nombres. Sa valeur est 5.",
+          "Calculez 2 + 3, puis affichez le résultat."
+        ],
+        [
+          "Fragment",
+          "Le point relie la valeur à log, l’opération d’affichage.",
+          "Calculez 2 + 3, puis affichez le résultat."
+        ],
+        [
+          "Fragment",
+          "() appelle l’opération. Les parenthèses sont vides car cet appel ne reçoit aucun argument supplémentaire.",
+          "Calculez 2 + 3, puis affichez le résultat."
+        ]
+      ]
+    },
+    {
+      "title": "Vérifier le carburant",
+      "intro": "Une comparaison pose une question sur deux valeurs. > produit true si la valeur de gauche est plus grande, et false sinon.",
+      "goal": "Vérifiez si la quantité de carburant est supérieure à 4.",
+      "result": "6 est supérieur à 4, donc la sortie est true.",
+      "question": "Que produit fuel > 4 ?",
+      "remix": "Modifiez la quantité de carburant pour que la comparaison affiche false.",
+      "remixHint": "Choisissez une valeur qui n’est pas supérieure à 4.",
+      "independent": "Affichez true, puis false, à l’aide de comparaisons qui produisent ces deux résultats.",
+      "independentHint": "Essayez deux comparaisons différentes, ou comparez une valeur nommée à deux limites.",
+      "learned": "Vous avez utilisé des comparaisons pour obtenir des réponses de type oui ou non à partir de valeurs.",
+      "answerHint": "La comparaison produit un booléen ; elle n’affiche pas la quantité de carburant.",
+      "answers": [
+        "Un booléen : true.",
+        "La quantité de carburant : 6.",
+        "Le nombre 4."
+      ],
+      "coach": [
+        [
+          "Fragment",
+          "Nommez la quantité de carburant pour que l’expression suivante puisse l’utiliser.",
+          "Vérifiez si la quantité de carburant est supérieure à 4."
+        ],
+        [
+          "Fragment",
+          "Comparez fuel à 4. L’expression produit true ou false.",
+          "Vérifiez si la quantité de carburant est supérieure à 4."
+        ],
+        [
+          "Fragment",
+          "Affichez le résultat de la comparaison.",
+          "Vérifiez si la quantité de carburant est supérieure à 4."
+        ]
+      ]
+    },
+    {
+      "title": "Choisir un signal de départ",
+      "intro": "if utilise un booléen pour choisir une branche. L’autre branche ne s’exécute pas. Ici, 1 et 2 sont deux signaux de départ.",
+      "goal": "Utilisez la vérification du carburant pour choisir un signal.",
+      "result": "La condition est vraie, donc seule la branche then affiche 1.",
+      "question": "Pourquoi seul 1 est-il affiché ?",
+      "remix": "Modifiez la quantité de carburant pour que la branche else affiche 2.",
+      "remixHint": "Faites en sorte que fuel > 4 soit faux.",
+      "independent": "Nommez une valeur, comparez-la dans une condition if et faites en sorte que la branche choisie affiche uniquement 2.",
+      "independentHint": "Vous pouvez modifier le nom, la comparaison, les valeurs et le contenu des branches. Laissez la condition décider quel affichage s’exécute.",
+      "learned": "Vous avez fait choisir une action au programme en fonction d’une condition.",
+      "answerHint": "if sélectionne une branche ; il n’exécute pas les deux.",
+      "answers": [
+        "La condition vraie sélectionne la branche then.",
+        "Les deux branches s’exécutent, mais 2 est masqué.",
+        "if choisit toujours la première branche."
+      ],
+      "coach": [
+        [
+          "Fragment",
+          "Associez un nom à la valeur utilisée par la condition.",
+          "Utilisez la vérification du carburant pour choisir un signal."
+        ],
+        [
+          "Fragment",
+          "Une condition vraie fait entrer dans cette branche.",
+          "Utilisez la vérification du carburant pour choisir un signal."
+        ],
+        [
+          "Fragment",
+          "Voici la sortie de la branche correspondant à une condition vraie.",
+          "Utilisez la vérification du carburant pour choisir un signal."
+        ],
+        [
+          "Fragment",
+          "else introduit la branche correspondant à une condition fausse.",
+          "Utilisez la vérification du carburant pour choisir un signal."
+        ],
+        [
+          "Fragment",
+          "Cette sortie ne s’exécute que si la condition est fausse.",
+          "Utilisez la vérification du carburant pour choisir un signal."
+        ],
+        [
+          "Fragment",
+          "Fermez la structure de sélection des branches.",
+          "Utilisez la vérification du carburant pour choisir un signal."
+        ]
+      ]
+    },
+    {
+      "title": "Visiter les quais",
+      "intro": "for prend les éléments d’une liste un par un. Le nom de boucle désigne l’élément courant.",
+      "goal": "Affichez chaque numéro de quai dans l’ordre de la liste.",
+      "result": "La boucle lit 2, puis 4, puis 6 et affiche chaque valeur.",
+      "question": "Pourquoi trois nombres différents sont-ils affichés ?",
+      "remix": "Remplacez le dernier quai pour obtenir les sorties 2, 4, puis 8.",
+      "remixHint": "La liste détermine les valeurs reçues par dock.",
+      "independent": "Utilisez for pour afficher 3, 5, puis 7. Chaque sortie doit utiliser l’élément courant de la boucle.",
+      "independentHint": "Choisissez directement la liste, ou calculez une nouvelle valeur à partir de chaque élément.",
+      "learned": "Vous avez répété une instruction sur une suite de valeurs.",
+      "answerHint": "La boucle change l’élément de liste auquel le nom fait référence.",
+      "answers": [
+        "dock désigne un élément différent de la liste à chaque tour.",
+        "log ajoute automatiquement 2.",
+        "Seul le dernier élément est exécuté."
+      ],
+      "coach": [
+        [
+          "Fragment",
+          "Prenez chaque valeur de dock dans l’ordre de la liste.",
+          "Affichez chaque numéro de quai dans l’ordre de la liste."
+        ],
+        [
+          "Fragment",
+          "Affichez l’élément de ce tour.",
+          "Affichez chaque numéro de quai dans l’ordre de la liste."
+        ],
+        [
+          "Fragment",
+          "Revenez pour l’élément suivant ; terminez quand la liste est épuisée.",
+          "Affichez chaque numéro de quai dans l’ordre de la liste."
+        ]
+      ]
+    },
+    {
+      "title": "Compter les vérifications avant le décollage",
+      "intro": "while vérifie sa condition avant chaque tour. Mettre tick à jour à la fin permet à la vérification suivante de lire une nouvelle valeur.",
+      "goal": "Affichez 1, 2 et 3, puis arrêtez-vous avant 4.",
+      "result": "Après l’affichage de 3, tick devient 4. La condition suivante est fausse, donc la boucle se termine.",
+      "question": "Pourquoi 4 n’est-il pas affiché ?",
+      "remix": "Modifiez la limite pour que le programme affiche aussi 4.",
+      "remixHint": "La comparaison est vérifiée avant l’exécution du corps de la boucle.",
+      "independent": "Utilisez while pour afficher 2, 3, puis 4. Mettez le compteur à jour à la fin de chaque tour pour que la boucle s’arrête.",
+      "independentHint": "Choisissez une valeur initiale et une limite. Vous pouvez afficher le compteur ou effectuer un calcul à partir de celui-ci.",
+      "learned": "Vous avez contrôlé la répétition grâce à une valeur qui évolue et à une condition d’arrêt.",
+      "answerHint": "Le compteur est mis à jour après l’affichage et avant la vérification suivante de la condition.",
+      "answers": [
+        "Quand tick atteint 4, la condition suivante est fausse.",
+        "La boucle masque sa dernière sortie.",
+        "while s’exécute toujours exactement trois fois."
+      ],
+      "coach": [
+        [
+          "Fragment",
+          "Initialisez le compteur à 1.",
+          "Affichez 1, 2 et 3, puis arrêtez-vous avant 4."
+        ],
+        [
+          "Fragment",
+          "Vérifiez le compteur courant avant d’entrer dans le corps de la boucle.",
+          "Affichez 1, 2 et 3, puis arrêtez-vous avant 4."
+        ],
+        [
+          "Fragment",
+          "Affichez la valeur courante.",
+          "Affichez 1, 2 et 3, puis arrêtez-vous avant 4."
+        ],
+        [
+          "Fragment",
+          "Mettez le compteur à jour pour la vérification suivante de la condition.",
+          "Affichez 1, 2 et 3, puis arrêtez-vous avant 4."
+        ],
+        [
+          "Fragment",
+          "Revenez à la condition.",
+          "Affichez 1, 2 et 3, puis arrêtez-vous avant 4."
+        ]
+      ]
+    },
+    {
+      "title": "Réutiliser un calcul de cargaison",
+      "intro": "Une fonction sync reçoit des arguments et renvoie une valeur. Un return explicite transmet le résultat du calcul à l’appelant.",
+      "goal": "Appelez combine et affichez la valeur renvoyée.",
+      "result": "Les arguments deviennent a = 3 et b = 4. La fonction renvoie 7, que load affiche ensuite.",
+      "question": "Comment load reçoit-il 7 ?",
+      "remix": "Modifiez le deuxième argument pour que le total de cargaison renvoyé soit 9.",
+      "remixHint": "Le premier argument reste 3 ; choisissez le second pour obtenir une somme de 9.",
+      "independent": "Définissez une fonction sync avec un return explicite et une addition. Appelez-la et affichez sa valeur de retour, qui doit être 12.",
+      "independentHint": "Vous pouvez utiliser deux arguments, ou ajouter une valeur fixe à un seul argument. La valeur affichée doit provenir de l’appel.",
+      "learned": "Vous avez regroupé un calcul dans une fonction et utilisé sa valeur de retour ailleurs.",
+      "answerHint": "La fonction effectue l’addition lorsqu’on l’appelle ; la définir seule n’affiche rien.",
+      "answers": [
+        "L’appel renvoie a + b et cette valeur est associée à load.",
+        "Nommer la fonction affiche automatiquement 7.",
+        "Le point-virgule additionne les arguments."
+      ],
+      "coach": [
+        [
+          "Fragment",
+          "Définissez une fonction synchrone avec deux paramètres.",
+          "Appelez combine et affichez la valeur renvoyée."
+        ],
+        [
+          "Fragment",
+          "Renvoyez la somme à l’appelant.",
+          "Appelez combine et affichez la valeur renvoyée."
+        ],
+        [
+          "Fragment",
+          "Fermez la définition de la fonction.",
+          "Appelez combine et affichez la valeur renvoyée."
+        ],
+        [
+          "Fragment",
+          "Appelez la fonction et nommez sa valeur de retour.",
+          "Appelez combine et affichez la valeur renvoyée."
+        ],
+        [
+          "Fragment",
+          "Affichez la valeur renvoyée par l’appel.",
+          "Appelez combine et affichez la valeur renvoyée."
+        ]
+      ]
+    },
+    {
+      "title": "Attendre la réponse d’une fonction",
+      "intro": "return ! envoie la réponse d’une fonction. L’appelant peut l’utiliser dans un calcul. Ici, boost reçoit load, ajoute 2 et répond avec le résultat.",
+      "goal": "Suivez une valeur à l’entrée d’une fonction, puis à son retour dans la réponse.",
+      "result": "boost reçoit 5 et répond avec 7 ; result nomme cette réponse.",
+      "question": "Qu’est-ce qui permet à result.log() d’afficher 7 ?",
+      "remix": "Modifiez la valeur transmise à boost pour que sa réponse affiche 10.",
+      "remixHint": "La fonction ajoute 2 à la valeur reçue.",
+      "independent": "Écrivez une fonction qui répond avec une addition, puis affichez sa réponse, qui doit être 12. Choisissez vos propres noms et nombres.",
+      "independentHint": "Utilisez return ! pour répondre, puis utilisez le résultat de l’appel à cette fonction.",
+      "learned": "Vous avez utilisé la réponse d’une fonction comme donnée pour l’appelant.",
+      "answerHint": "Le corps d’une fonction ne renvoie pas automatiquement sa dernière expression. Cette fonction répond explicitement.",
+      "answers": [
+        "boost répond avec 5 sans le modifier.",
+        "return ! répond avec 5 + 2 ; l’appelant utilise cette valeur.",
+        "L’appelant remplace toujours une réponse absente par 0."
+      ],
+      "coach": [
+        [
+          "Fonction",
+          "boost reçoit une valeur nommée load.",
+          "Suivez une valeur à l’entrée d’une fonction, puis à son retour dans la réponse."
+        ],
+        [
+          "Réponse",
+          "return ! répond avec load + 2. Ce mécanisme diffère du retour par la pile d’appels utilisé dans une fonction sync.",
+          "Suivez une valeur à l’entrée d’une fonction, puis à son retour dans la réponse."
+        ],
+        [
+          "Définition",
+          "L’accolade fermante termine la définition de la fonction.",
+          "Suivez une valeur à l’entrée d’une fonction, puis à son retour dans la réponse."
+        ],
+        [
+          "Appel",
+          "L’appelant transmet 5 et nomme la réponse result.",
+          "Suivez une valeur à l’entrée d’une fonction, puis à son retour dans la réponse."
+        ],
+        [
+          "Affichage",
+          "Affichez la réponse désignée par result.",
+          "Suivez une valeur à l’entrée d’une fonction, puis à son retour dans la réponse."
+        ]
+      ]
+    },
+    {
+      "title": "Transmettre un message de cargaison",
+      "intro": "let parcel; crée un canal. ! envoie une valeur ; un motif de réception associe un nom à la valeur reçue. | place ces activités en parallèle.",
+      "goal": "Envoyez 7 et affichez la valeur reçue depuis parcel.",
+      "result": "Le motif de réception prend le message 7 et le nomme value. Le corps affiche cette valeur.",
+      "question": "D’où vient le nombre de value ?",
+      "remix": "Modifiez le message envoyé pour que le récepteur affiche 9.",
+      "remixHint": "Modifiez la valeur après !, pas le nom de réception.",
+      "independent": "Envoyez un nombre par un canal, recevez-le et utilisez la valeur reçue pour afficher 11.",
+      "independentHint": "Envoyez directement 11, ou transformez un autre nombre reçu pour obtenir 11.",
+      "learned": "Vous avez transmis une valeur d’un émetteur à un récepteur.",
+      "answerHint": "Le nom de réception est associé au message qui arrive. Ce n’est pas un compteur automatique.",
+      "answers": [
+        "Il est associé au message reçu depuis parcel.",
+        "Il vaut toujours 7, quel que soit le message envoyé.",
+        "Le nom du canal est converti en nombre."
+      ],
+      "coach": [
+        [
+          "Fragment",
+          "Créez le canal sans lui affecter de valeur numérique.",
+          "Envoyez 7 et affichez la valeur reçue depuis parcel."
+        ],
+        [
+          "Fragment",
+          "Envoyez le nombre 7 sur parcel.",
+          "Envoyez 7 et affichez la valeur reçue depuis parcel."
+        ],
+        [
+          "Fragment",
+          "Recevez un message de parcel et associez-le à value.",
+          "Envoyez 7 et affichez la valeur reçue depuis parcel."
+        ],
+        [
+          "Fragment",
+          "Affichez la valeur reçue.",
+          "Envoyez 7 et affichez la valeur reçue depuis parcel."
+        ],
+        [
+          "Fragment",
+          "Fermez le corps du récepteur et le groupe parallèle.",
+          "Envoyez 7 et affichez la valeur reçue depuis parcel."
+        ]
+      ]
+    },
+    {
+      "title": "Attendre les deux rapports de cargaison",
+      "intro": "Une réception conjointe utilise & pour attendre un message sur chacun des canaux nommés. Son corps ne s’exécute que lorsque les deux messages sont disponibles.",
+      "goal": "Recevez les deux rapports et affichez leur somme.",
+      "result": "Le corps reçoit a = 4 et b = 6, puis affiche leur somme, 10.",
+      "question": "Que se passe-t-il si east n’a pas encore reçu de message ?",
+      "remix": "Modifiez le rapport east pour que le total soit 12.",
+      "remixHint": "Le rapport west reste à 4. Choisissez l’autre partie du total.",
+      "independent": "Réunissez deux messages reçus et utilisez leurs deux valeurs dans une addition qui affiche 15.",
+      "independentHint": "Choisissez deux valeurs à envoyer ; vous pouvez aussi ajouter un ajustement fixe après les avoir reçues.",
+      "learned": "Vous avez coordonné deux entrées avant de calculer un résultat.",
+      "answerHint": "& exige les deux messages. Il ne choisit pas simplement le premier arrivé.",
+      "answers": [
+        "Le récepteur attend ; son corps ne s’exécute pas encore.",
+        "Le corps utilise 0 pour le message manquant.",
+        "Le premier message est additionné deux fois."
+      ],
+      "coach": [
+        [
+          "Fragment",
+          "Créez un canal pour chaque rapport.",
+          "Recevez les deux rapports et affichez leur somme."
+        ],
+        [
+          "Fragment",
+          "Envoyez le rapport west.",
+          "Recevez les deux rapports et affichez leur somme."
+        ],
+        [
+          "Fragment",
+          "Envoyez le rapport east.",
+          "Recevez les deux rapports et affichez leur somme."
+        ],
+        [
+          "Fragment",
+          "Attendez un message sur chaque canal et associez un nom à chacune des deux valeurs.",
+          "Recevez les deux rapports et affichez leur somme."
+        ],
+        [
+          "Fragment",
+          "Additionnez les deux valeurs reçues et affichez le résultat.",
+          "Recevez les deux rapports et affichez leur somme."
+        ],
+        [
+          "Fragment",
+          "Fermez la réception conjointe et le groupe parallèle.",
+          "Recevez les deux rapports et affichez leur somme."
+        ]
+      ]
+    },
+    {
+      "title": "Coordonner un rapport de lancement",
+      "intro": "Combinez vos acquis : recueillez deux rapports, additionnez-les avec une fonction sync, puis choisissez comment calculer le signal final. Ces nombres sont des données d’exercice pour un rapport de lancement.",
+      "goal": "Réunissez les deux rapports, appelez total et ajoutez 5 seulement si le total est supérieur à 12.",
+      "result": "Les rapports donnent un total de 13. La condition est vraie, donc le programme affiche 13 + 5 = 18.",
+      "question": "Quel chemin produit le résultat final de 18 ?",
+      "remix": "Modifiez le rapport east pour que ce même programme affiche 19.",
+      "remixHint": "Remontez le calcul depuis l’ajustement final de 5, en gardant la condition vraie.",
+      "independent": "Créez votre propre programme de lancement à deux rapports qui affiche uniquement 18. Réunissez les deux messages, combinez les deux valeurs reçues dans une fonction sync, comparez son résultat dans if et calculez la sortie de la branche choisie à partir de ce résultat.",
+      "independentHint": "Choisissez les valeurs des rapports, un seuil et un ajustement. Les deux messages doivent influer sur le résultat de la fonction, et la branche choisie doit effectuer son calcul à partir de ce résultat.",
+      "learned": "Vous avez relié communication, calcul réutilisable et décision conditionnelle dans un seul programme.",
+      "answerHint": "Suivez les valeurs : rapports reçus → résultat de la fonction → condition → calcul sélectionné.",
+      "answers": [
+        "Les deux rapports donnent 13 ; la branche vraie ajoute 5.",
+        "Le récepteur affiche toujours 18, quels que soient ses messages.",
+        "Les deux émetteurs affichent chacun 9."
+      ],
+      "coach": [
+        [
+          "Fragment",
+          "Définissez le calcul réutilisable des rapports.",
+          "Réunissez les deux rapports, appelez total et ajoutez 5 seulement si le total est supérieur à 12."
+        ],
+        [
+          "Fragment",
+          "Renvoyez une somme qui dépend des deux entrées.",
+          "Réunissez les deux rapports, appelez total et ajoutez 5 seulement si le total est supérieur à 12."
+        ],
+        [
+          "Fragment",
+          "Terminez la fonction et créez deux canaux de rapport.",
+          "Réunissez les deux rapports, appelez total et ajoutez 5 seulement si le total est supérieur à 12."
+        ],
+        [
+          "Fragment",
+          "Envoyez un rapport sur chaque canal.",
+          "Réunissez les deux rapports, appelez total et ajoutez 5 seulement si le total est supérieur à 12."
+        ],
+        [
+          "Fragment",
+          "Attendez les deux rapports et nommez leurs valeurs.",
+          "Réunissez les deux rapports, appelez total et ajoutez 5 seulement si le total est supérieur à 12."
+        ],
+        [
+          "Fragment",
+          "Transmettez les deux valeurs reçues à la fonction.",
+          "Réunissez les deux rapports, appelez total et ajoutez 5 seulement si le total est supérieur à 12."
+        ],
+        [
+          "Fragment",
+          "Comparez le total calculé pour sélectionner une branche.",
+          "Réunissez les deux rapports, appelez total et ajoutez 5 seulement si le total est supérieur à 12."
+        ],
+        [
+          "Fragment",
+          "Calculez cette sortie à partir du total renvoyé.",
+          "Réunissez les deux rapports, appelez total et ajoutez 5 seulement si le total est supérieur à 12."
+        ],
+        [
+          "Fragment",
+          "Sinon, affichez le total sans ajustement.",
+          "Réunissez les deux rapports, appelez total et ajoutez 5 seulement si le total est supérieur à 12."
+        ],
+        [
+          "Fragment",
+          "Fermez le récepteur et le groupe parallèle.",
+          "Réunissez les deux rapports, appelez total et ajoutez 5 seulement si le total est supérieur à 12."
+        ]
+      ]
+    }
+  ],
+  "guide": [
+    {
+      "title": "Qu’est-ce que la programmation ?",
+      "text": "Programmer, c’est décrire une tâche par des instructions précises. L’ordinateur suit les règles du langage ; il ne devine pas votre intention.",
+      "code": "7.log()",
+      "takeaway": "Ici, l’objectif est d’afficher 7. Changez le nombre et le résultat affiché changera aussi."
+    },
+    {
+      "title": "Du texte à l’action",
+      "text": "Un compilateur analyse le texte et le traduit sous une forme qu’un environnement d’exécution peut exécuter. Le petit interpréteur de ce jeu construit d’abord une structure, puis l’évalue.",
+      "code": "(2 + 3).log()",
+      "takeaway": "Le sens vient de la structure : additionner d’abord, afficher ensuite. Ce jeu n’exécute pas toute la chaîne de compilation Tolang."
+    },
+    {
+      "title": "Les erreurs sont des indices",
+      "text": "Les règles de syntaxe décrivent les formes valides. Une parenthèse manquante rompt cette structure. Un programme valide peut pourtant faire autre chose que ce qui est attendu : afficher 8 est valide, mais ne remplit pas un objectif de 9.",
+      "code": "8.log()",
+      "takeaway": "Rendez d’abord le programme valide, puis vérifiez que son résultat réel répond à la consigne."
+    },
+    {
+      "title": "Pourquoi compter le travail ?",
+      "text": "Des instructions différentes peuvent produire le même résultat en effectuant plus ou moins de travail. Calculer et stocker des données consomme des ressources. Le nombre d’étapes affiché ici n’est qu’un modèle pédagogique.",
+      "code": "5.log()\n(2 + 3).log()",
+      "takeaway": "Les deux affichent 5. Le second nécessite une addition. Ces nombres d’étapes ne permettent pas de prévoir le gas de la TVM ni les frais de transaction."
+    },
+    {
+      "title": "Tolang et la blockchain",
+      "text": "Tolang sert à écrire des programmes pour ALUX. Sur une blockchain, modifier un état partagé implique aussi des règles de transaction et un accord entre les nœuds. Le langage et l’environnement d’exécution comptent tous les deux.",
+      "code": "7.log()",
+      "takeaway": "Afficher un nombre dans ce jeu n’envoie aucune transaction sur une blockchain. Ces premières notions vous aideront aussi à apprendre d’autres langages de programmation."
+    },
+    {
+      "title": "Choisir et répéter",
+      "text": "Une comparaison produit true ou false. if choisit une branche ; for parcourt une liste ou un intervalle, et while répète tant que sa condition est vraie. En Tolang, and et or évaluent les deux côtés : ils ne protègent donc pas d’une division par zéro située de l’autre côté.",
+      "code": "for dock in [2, 4, 6] { dock.log() }",
+      "takeaway": "Prévoyez les valeurs affichées et le nombre de sorties. Changer le nombre d’itérations peut modifier un plan de déplacement."
+    },
+    {
+      "title": "Renvoyer une valeur ou répondre",
+      "text": "sync fn avec return value produit un résultat via la pile d’appels. return ! value envoie une réponse de fonction. Écrivez le retour explicitement : une fonction ne renvoie pas automatiquement sa dernière expression. L’absence de réponse peut laisser l’appelant en attente.",
+      "code": "fn boost(load) { return ! (load + 2) };\nboost(5).log()",
+      "takeaway": "Fournir moins d’arguments peut créer une fonction partiellement appliquée. En fournir trop ne crée pas de paramètres supplémentaires."
+    },
+    {
+      "title": "Coordonner des messages",
+      "text": "let parcel; crée un nom de communication. ! envoie et ? reçoit. Une réception conjointe utilise & pour attendre que tous les messages correspondants soient disponibles. | compose des activités concurrentes ; sa présence ne garantit pas quelle sortie apparaîtra en premier.",
+      "code": "let a; let b;\n{ a ! 4 | b ! 6 | ?(x <- a & y <- b) { (x + y).log() } }",
+      "takeaway": "S’il manque un message, la réception reste en attente. Utilisez une réception conjointe lorsque la suite du travail nécessite les deux valeurs."
+    }
+  ],
+  "assessment": {
+    "title": "Évaluation du code",
+    "intro": "Écrivez seul un programme complet. Gagnez des points en l’exécutant, en obtenant la sortie attendue et en respectant les consignes. Vous pouvez le modifier et le soumettre à nouveau à tout moment.",
+    "submit": "Soumettre à l’évaluation",
+    "continue": "Terminer le défi",
+    "score": "Score de l’exercice",
+    "pass": "Réussi",
+    "fail": "À retravailler",
+    "blocked": "Non vérifié",
+    "expected": "Sortie attendue",
+    "actual": "Votre sortie réelle",
+    "notRun": "Le programme ne s’est pas exécuté",
+    "success": "Vous avez respecté toutes les consignes de cet exercice.",
+    "retry": "Examinez ce qui manque, puis réessayez.",
+    "changed": "Le code a changé. Soumettez-le à nouveau pour obtenir une nouvelle évaluation.",
+    "note": "Ce score porte uniquement sur cet exercice. Des solutions correctes différentes rapportent les mêmes points ; la vitesse de frappe n’entre pas en compte.",
+    "labels": {
+      "execution": "Exécution du programme",
+      "output": "Sortie",
+      "concepts": "Consignes de l’exercice"
+    },
+    "concepts": {
+      "add": "Utiliser une addition pour calculer une sortie",
+      "bind": "Associer un nom à une valeur",
+      "name": "Utiliser le nom associé dans une sortie",
+      "compare": "Comparer des valeurs qui influent sur la sortie",
+      "if": "Utiliser une condition pour choisir la branche exécutée",
+      "for": "Utiliser for pour produire la sortie",
+      "while": "Utiliser while pour produire la sortie",
+      "call": "Utiliser un appel de fonction qui influe sur la sortie",
+      "reply": "Utiliser une réponse de fonction explicite",
+      "send": "Envoyer un message qui influe sur la sortie",
+      "receive": "Recevoir un message qui influe sur la sortie",
+      "join": "Attendre plusieurs messages ensemble",
+      "loop": "Faire évoluer un état dans une boucle explicite"
+    },
+    "edit": "Modifier le code",
+    "yourCode": "Votre code",
+    "breakdown": "Détail du score",
+    "task": "Votre exercice",
+    "noReport": "Pas encore d’évaluation",
+    "noReportHint": "Écrivez et soumettez un programme pour cet exercice. Votre résultat sera enregistré dans ce navigateur.",
+    "viewResult": "Voir le résultat"
+  },
+  "jump": {
+    "eyebrow": "CODE → ACTION",
+    "title": "Voler jusqu’à l’île suivante",
+    "target": "Objectif : {n} cases",
+    "rule": "Cette mission utilise un unique entier affiché comme distance de vol. L’échelle va de 0 à 12.",
+    "try": "Exécuter et observer",
+    "ready": "Prêt. L’île est à {n} cases.",
+    "running": "Sortie {n} → décollage…",
+    "landed": "Vol de {n} cases terminé. Atterrissage réussi.",
+    "short": "Vol de {n} cases : trop court. Modifiez le code et réessayez.",
+    "long": "Vol de {n} cases : trop loin. Modifiez le code et réessayez.",
+    "invalid": "Affichez exactement un entier compris entre 0 et 12.",
+    "codeError": "Le code ne s’est pas exécuté. Vérifiez le programme avant de décoller."
+  },
+  "vault": {
+    "arcade": "Jouer",
+    "arcadeTitle": "Un peu de code. Un nouveau passage.",
+    "arcadeIntro": "Observez la scène, essayez une idée et regardez votre programme transformer le monde.",
+    "browse": "Explorer les jeux →",
+    "eyebrow": "BANQUE STELLAIRE / OPÉRATION COFFRE",
+    "title": "Opération coffre",
+    "intro": "Trois verrous. Un cœur stellaire. Écrivez les signaux qui ouvriront un passage dans la banque stellaire.",
+    "collection": "Tampons des mécanismes",
+    "scene": "Coffre et récepteurs de signaux",
+    "bank": "BANQUE STELLAIRE · ORBITE 07",
+    "receivers": "Signaux reçus, dans l’ordre d’exécution",
+    "editor": "Votre programme de commande",
+    "signalRule": "Chaque .log() produit un nombre. Dans ce jeu, le coffre lit ces nombres dans l’ordre.",
+    "keyboard": "Utilisez les signes de ponctuation du code, sans les adapter au français. Les sauts de ligne séparent vos instructions.",
+    "run": "Envoyer les signaux",
+    "reset": "Réinitialiser le code",
+    "ready": "Le coffre attend",
+    "consequence": "Modifiez une valeur, exécutez à nouveau et observez ce qui arrive au récepteur.",
+    "output": "Votre sortie",
+    "next": "Mécanisme suivant",
+    "replay": "De nouveaux indices, un nouvel essai",
+    "allDone": "Les trois mécanismes sont ouverts. De nouveaux indices vous permettent d’essayer une autre solution ; vous conservez vos tampons.",
+    "help": "Besoin d’un point de départ ?",
+    "meaning": "let donne un nom à une valeur. + additionne des nombres. .log() envoie le résultat vers la sortie.",
+    "practiceNote": "Prenez votre temps : il n’y a pas de compte à rebours. Les tampons enregistrent ces défis de jeu, pas la maîtrise de la programmation.",
+    "running": "Envoi des signaux…",
+    "complete": "Cœur stellaire récupéré",
+    "opened": "Verrou ouvert",
+    "mismatch": "Les signaux ne correspondent pas encore",
+    "fixCode": "Vérifiez d’abord votre code",
+    "compare": "La sortie attendue, dans l’ordre, est {expected}. Comparez-la à ce que votre programme a envoyé.",
+    "noOutput": "Aucune sortie",
+    "changed": "Le code a changé. Exécutez-le pour le tester.",
+    "noSave": "Ce navigateur n’a pas pu enregistrer votre progression.",
+    "puzzleTag": "ÉNIGME · 3 MÉCANISMES",
+    "jumpTag": "VOL · CODE ET DISTANCE",
+    "enter": "Jouer",
+    "stages": [
+      {
+        "title": "Le verrou extérieur",
+        "task": "Le verrou attend la somme de A et B. Modifiez le programme pour qu’il envoie ce nombre.",
+        "hint": "Remplacez 0 par B. Les parenthèses font effectuer le calcul d’abord ; .log() produit la somme en sortie.",
+        "learned": "Votre calcul est devenu un signal que le dispositif peut lire."
+      },
+      {
+        "title": "La porte énergétique",
+        "task": "Partez de A unités d’énergie et ajoutez B. Essayez de donner un nom à la valeur initiale, puis utilisez-le dans le calcul.",
+        "hint": "let energy = A; associe A au nom energy. Utilisez energy + B dans la sortie.",
+        "learned": "Un nom permet de réutiliser une valeur sans la répéter. Modifier la valeur qui lui est associée modifie les calculs suivants."
+      },
+      {
+        "title": "La chambre du cœur",
+        "task": "Envoyez trois signaux : A, puis A + B, puis A + B + C. Le récepteur les lit exactement dans cet ordre. Écrivez le programme vous-même.",
+        "hint": "Utilisez trois instructions .log(). Vous pouvez nommer A avec let et réutiliser ce nom.",
+        "learned": "Les mêmes nombres dans un autre ordre donnent un résultat différent. L’ordre d’exécution fait partie de votre programme."
+      }
+    ]
+  },
+  "journey": {
+    "title": "Votre carnet de vol",
+    "local": "Enregistré dans ce navigateur",
+    "points": "Points d’exploration",
+    "lessons": "Missions du cours",
+    "next": "À suivre",
+    "rule": "Première réussite : +100 par mission, +50 par tampon de mécanisme. Rejouer ne vous fait pas perdre vos points."
+  },
+  "account": {
+    "entry": "Connexion / Inscription",
+    "eyebrow": "PASSEPORT DE PILOTE",
+    "loginTitle": "Heureux de vous revoir.",
+    "registerTitle": "Votre prochaine aventure vous attend.",
+    "signed": "Mon compte",
+    "intro": "Connectez-vous avec votre adresse e-mail et votre mot de passe, ou créez un compte de pilote.",
+    "login": "Se connecter",
+    "register": "S’inscrire",
+    "email": "Adresse e-mail",
+    "logout": "Se déconnecter",
+    "guest": "Explorer sans compte",
+    "unavailable": "Le service de compte est temporairement indisponible. Réessayez plus tard.",
+    "invalidEmail": "Saisissez une adresse e-mail valide.",
+    "rate": "Trop de demandes. Réessayez plus tard.",
+    "network": "La connexion a échoué. Vérifiez votre accès à Internet et réessayez.",
+    "busy": "Traitement en cours…",
+    "password": "Mot de passe",
+    "passwordHint": "Utilisez au moins 10 caractères.",
+    "invalidCredentials": "Vérifiez votre adresse e-mail et votre mot de passe.",
+    "emailTaken": "Cette adresse e-mail est déjà inscrite. Essayez de vous connecter."
+  },
+  "chase": {
+    "title": "Poursuite en ville",
+    "tag": "Deux rôles · Une poursuite pilotée par le code",
+    "intro": "Jouez la police ou le voleur. Observez la rue, écrivez un plan et voyez comment chaque signal change la poursuite.",
+    "choose": "Choisissez votre rôle",
+    "police": "Police",
+    "thief": "Voleur",
+    "policeGoal": "Attraper le voleur avant la sortie",
+    "thiefGoal": "Atteindre la sortie sans se faire attraper",
+    "rules": "Vous vous déplacez d'abord, puis votre adversaire avance d'une case. Si vous atterrissez sur un barrage, vous restez sur place, mais votre adversaire avance quand même. Vous pouvez sauter par-dessus un barrage. Le voleur s'échappe à la case 18 ; la police l'attrape en atteignant ou en dépassant sa position.",
+    "blocks": "Barrages",
+    "clue": "Observez les cases numérotées. Prévoyez où vous atterrissez, pas seulement la distance totale.",
+    "signalRule": "Chaque sortie doit être un entier de 1 à 3 : c'est le nombre de cases à parcourir. Affichez de 1 à 8 signaux dans l'ordre. La poursuite s'arrête dès qu'un personnage est attrapé ou s'échappe ; les signaux suivants ne sont pas utilisés.",
+    "editor": "Votre plan de déplacement",
+    "keyboard": "Écrivez le code ici, puis exécutez-le. La vitesse de frappe ne change pas la poursuite.",
+    "run": "Exécuter le plan",
+    "reset": "Réinitialiser ce brouillon",
+    "ready": "La rue attend votre plan.",
+    "changed": "Le plan a changé. Exécutez-le à nouveau pour voir le résultat.",
+    "running": "Exécution de vos signaux…",
+    "pause": "Pause",
+    "resume": "Reprendre",
+    "watch": "Revoir",
+    "won": "Mission accomplie",
+    "caught": "Le voleur a été attrapé",
+    "escaped": "Le voleur s'est échappé",
+    "unfinished": "Vous n'avez plus de signaux",
+    "fix": "Vérifiez votre code",
+    "retry": "Suivez chaque point d'arrivée et essayez un autre plan. Réessayer ne coûte rien.",
+    "step": "Signal {n} : avancer de {move} cases",
+    "blocked": "Barrage · Ce déplacement a été bloqué",
+    "next": "Quartier suivant",
+    "replay": "Recommencer",
+    "help": "Besoin d'un indice ?",
+    "meaning": "let donne un nom à une valeur ; + additionne des valeurs ; .log() affiche une valeur. Ce jeu interprète chaque nombre affiché comme un déplacement. Le même code peut commander autre chose dans un autre jeu.",
+    "local": "Les brouillons des deux rôles et les quartiers terminés restent dans ce navigateur. La connexion ne les synchronise pas. Ces missions ne sont pas chronométrées.",
+    "noSave": "Ce navigateur n'a pas pu enregistrer votre brouillon. Gardez cette page ouverte et copiez votre code avant de partir.",
+    "stages": [
+      "Rue dégagée",
+      "Quartier des barrages",
+      "Votre propre itinéraire"
+    ],
+    "hints": [
+      "Essayez d'afficher un nombre plus grand. Chaque .log() correspond à un déplacement, suivi d'un tour pour votre adversaire. Ajoutez des signaux pour parcourir un itinéraire plus long.",
+      "Vérifiez la position de départ de votre personnage et la case d'arrivée de chaque signal. Réutilisez une valeur nommée ou une addition, et évitez les cases bloquées.",
+      "Partez d'un éditeur vide. Donnez un nom à la longueur de vos déplacements, puis combinez 1, 2 et 3 pour tracer un itinéraire. Répéter le même déplacement peut vous mener sur un barrage."
+    ],
+    "learned": [
+      "Une valeur affichée a provoqué un déplacement. Changer cette valeur a changé la poursuite.",
+      "Une même distance totale peut correspondre à des itinéraires différents. L'ordre et les cases d'arrivée comptent.",
+      "Vous avez écrit et testé un plan complet. Essayez l'autre rôle : la position de départ et l'objectif changent."
+    ],
+    "sceneControls": "Scène de poursuite. Pendant l'essai, appuyez sur 1, 2 ou 3 pour avancer.",
+    "loading": "Ouverture de la rue…",
+    "practice": "Essayer l'itinéraire vous-même",
+    "moveButton": "Avancer de {n} cases",
+    "practiceHint": "Lancez un essai, puis utilisez 1, 2, 3 ou les boutons. Chaque action déplace d'abord votre personnage, puis votre adversaire. Les grands pas vous font bondir dans la rue.",
+    "copyPlan": "Placer cet itinéraire dans l'éditeur",
+    "retryArt": "Recharger la rue",
+    "rulesTitle": "Règles de la rue",
+    "artError": "La rue n'a pas pu être chargée. Essayez de la recharger.",
+    "practiceDone": "Votre itinéraire d'essai",
+    "practiceReview": "L'essai vous permet d'explorer. Placez l'itinéraire dans l'éditeur et exécutez son code pour terminer la mission.",
+    "practiceReady": "Choisissez un déplacement : 1, 2 ou 3. Surveillez les cases d'arrivée.",
+    "debug": "Avancer pas à pas",
+    "debugTitle": "Suivre votre plan",
+    "debugHint": "Avancez un signal à la fois. Revenez en arrière pour examiner une arrivée, ou modifiez le code pour lancer un nouveau suivi.",
+    "debugReady": "Prêt aux positions de départ",
+    "debugNext": "Signal suivant",
+    "debugBack": "Signal précédent",
+    "debugRestart": "Retour au départ",
+    "debugCount": "Signal {n} sur {total}",
+    "traceSignal": "Signal",
+    "traceCode": "Code → sortie",
+    "tracePositions": "Positions",
+    "traceEvent": "Ce qui s'est passé",
+    "traceMove": "Arrivée à la case {target}.",
+    "traceBlocked": "La case d'arrivée {target} contient un barrage. Vous êtes resté à la case {from}.",
+    "traceCaught": "La police a attrapé le voleur à la case {target}. La poursuite est terminée.",
+    "traceEscaped": "Le voleur a atteint la sortie {target}. La poursuite est terminée.",
+    "traceUnused": "Sorties suivantes non utilisées, car la poursuite était terminée : {n}.",
+    "traceEmpty": "Aucun signal n'a encore déplacé les personnages.",
+    "traceBindings": "Valeurs nommées avant cette sortie",
+    "traceRival": "Votre adversaire a ensuite avancé d'une case."
+  },
+  "dispatch": {
+    "title": "Gare de fret",
+    "tag": "Un programme · Des cargaisons différentes",
+    "intro": "Écrivez un programme capable de traiter chaque lot de livraisons. Regardez la grue déplacer les caisses selon vos signaux, comparez les résultats des livraisons et ajustez votre plan.",
+    "entry": "Acheminez les cargaisons avec des conditions, des boucles, des fonctions et des messages qui coopèrent. Chaque nouvelle manche apporte de nouvelles données de livraison.",
+    "editor": "Votre programme de livraison",
+    "inputs": "Entrées de ce lot",
+    "inputNote": "Le dépôt fournit ces entrées.",
+    "run": "Exécuter tous les lots",
+    "batch": "Lot de livraisons",
+    "preview": "Aperçu de la livraison",
+    "previewNote": "Choisissez un lot pour examiner ses entrées, ses sorties et sa livraison. Le même programme doit fonctionner pour tous les lots.",
+    "expected": "Signaux attendus",
+    "actual": "Vos signaux",
+    "pending": "En attente de votre programme",
+    "success": "Tous les lots sont arrivés à destination.",
+    "retry": "Certains lots demandent encore des ajustements.",
+    "changed": "Le programme a changé. Relancez-le pour actualiser les résultats des livraisons.",
+    "summary": "{passed} lots livrés sur {total}",
+    "passed": "Livré",
+    "failed": "À ajuster",
+    "noOutput": "Aucun signal",
+    "rules": "Exigences du programme",
+    "details": "Examiner tous les lots",
+    "code": "Code exécuté",
+    "names": "Valeurs à ce signal",
+    "help": "Afficher un indice",
+    "learn": "Revoir la leçon",
+    "reset": "Rétablir le code de départ de cette mission",
+    "newRound": "Nouvelle manche de livraisons",
+    "newRoundNote": "Renouvelez les données et effacez les livraisons de cette manche. Votre code et les badges obtenus sont conservés.",
+    "rounds": "Manches terminées",
+    "badges": "Badges de livraison",
+    "local": "Le code et l'historique des livraisons restent dans ce navigateur. La connexion ne les synchronise pas. Il n'y a pas de chronomètre.",
+    "noSave": "Ce navigateur n'a pas pu enregistrer votre code. Gardez la page ouverte et copiez-le avant de partir.",
+    "replay": "Rejouer ce lot",
+    "origin": "Point de départ du dépôt",
+    "dock": "Quai",
+    "idle": "Examinez les entrées, puis exécutez votre programme.",
+    "missions": [
+      {
+        "title": "Choisir un quai",
+        "brief": "Envoyez le signal 1 lorsque cargo est inférieur à threshold ; sinon, envoyez le signal 2. Chaque lot exige exactement un signal.",
+        "hint": "Comparez cargo à threshold dans if. Vérifiez le lot où cargo est égal à threshold, ainsi que ceux situés de chaque côté de cette limite.",
+        "learned": "Votre condition oriente différentes cargaisons sans modifier le programme."
+      },
+      {
+        "title": "Suivre le manifeste",
+        "brief": "Utilisez for pour lire docks dans l'ordre. Ajoutez offset à chaque numéro de quai et affichez la nouvelle destination. Un manifeste vide ne demande aucun signal.",
+        "hint": "Utilisez l'élément courant de la boucle dans l'addition. Des numéros de quai répétés représentent tout de même des livraisons distinctes.",
+        "learned": "Votre boucle traite dans l'ordre les manifestes vides, courts ou contenant des répétitions."
+      },
+      {
+        "title": "Calculer le carburant",
+        "brief": "Définissez fuel(cargo, reserve) et renvoyez la somme de ses deux paramètres. Le dépôt appelle votre fonction avec différentes cargaisons et réserves, puis affiche sa valeur de retour. Votre code doit seulement définir la fonction.",
+        "hint": "Utilisez un return explicite. Choisissez vos noms de paramètres, mais gardez le nom fuel pour que le dépôt puisse appeler la fonction. Vous n'avez pas besoin de .log() ici.",
+        "learned": "Une seule fonction réutilisable calcule le carburant pour différentes cargaisons et réserves."
+      },
+      {
+        "title": "Réunir les rapports",
+        "brief": "Le dépôt envoie des rapports par west et east. Recevez-les ensemble et combinez leurs valeurs dans une fonction sync. Si le total dépasse threshold, ajoutez reserve. Affichez uniquement le total obtenu.",
+        "hint": "Utilisez & pour la réception conjointe. Les deux valeurs reçues doivent contribuer au résultat de votre fonction, et ce résultat doit contribuer au calcul affiché.",
+        "learned": "Des messages, une fonction et une condition coopèrent désormais sur des rapports différents."
+      }
+    ],
+    "repair": {
+      "title": "Examiner ce lot",
+      "waiting": "Une réception attend encore un message. Repérez le canal concerné et vérifiez qu'un émetteur peut l'atteindre. Une sortie partielle ne signifie pas que le lot est terminé.",
+      "contribution": "La sortie {number} n'utilise pas toutes les méthodes demandées. Ouvrez sa trace d'exécution et vérifiez si cette valeur a été écrite comme une réponse fixe.",
+      "output": "La sortie {number} diffère. Comparez l'entrée à la trace d'exécution et remontez à l'origine de cette valeur.",
+      "empty": "Un manifeste vide ne doit produire aucune sortie. Cherchez un .log() superflu en dehors de la boucle.",
+      "boundary": "Ici, cargo est égal à threshold. Déterminez quelle branche doit traiter l'égalité, puis vérifiez votre comparaison.",
+      "inspect": "Examiner la trace d'exécution de cette sortie"
+    }
+  },
+  "saves": {
+    "title": "Progression et sauvegardes",
+    "intro": "Rassemblez vos brouillons de leçons et vos résultats de jeu. Téléchargez une sauvegarde ou enregistrez-les dans votre compte. Comparez les deux versions avant toute restauration.",
+    "local": "Ce navigateur",
+    "file": "Fichier de sauvegarde",
+    "cloud": "Progression du compte",
+    "download": "Télécharger une sauvegarde",
+    "selectFile": "Choisir une sauvegarde à comparer",
+    "fileHint": "Choisissez une sauvegarde JSON de Loopuff de 256 Ko maximum. Sélectionner un fichier ne modifie pas votre progression.",
+    "readCloud": "Lire la progression du compte",
+    "saveCloud": "Comparer et enregistrer dans le compte",
+    "restoreCloud": "Comparer et restaurer ici",
+    "signIn": "Connectez-vous pour utiliser les sauvegardes du compte",
+    "manual": "La connexion ne téléverse ni ne remplace votre progression. Les sauvegardes du compte sont manuelles.",
+    "notRead": "Lisez la sauvegarde du compte avant toute modification.",
+    "noCloud": "Ce compte ne contient pas encore de progression enregistrée.",
+    "updated": "Enregistré le {date}",
+    "comparison": "Choisissez le travail à conserver",
+    "localVersion": "Ce navigateur",
+    "fileVersion": "Sauvegarde",
+    "cloudVersion": "Compte",
+    "keepLocal": "Conserver la version du navigateur",
+    "keepIncoming": "Utiliser cette version",
+    "noConflicts": "Aucun brouillon différent à départager. Les leçons terminées et les tampons obtenus seront réunis.",
+    "chooseAll": "Choisissez une version pour chaque différence avant de continuer.",
+    "cancel": "Annuler la comparaison",
+    "apply": "Restaurer ici la progression choisie",
+    "upload": "Enregistrer la progression choisie dans le compte",
+    "restoreNote": "Le contenu choisi sera restauré dans ce navigateur. Fermez d'abord les autres pages du jeu, y compris celles ouvertes avant cette mise à jour.",
+    "uploadNote": "Cette action met à jour la sauvegarde du compte. Les brouillons du navigateur restent inchangés.",
+    "copyGuest": "Utiliser la progression de ce navigateur pour ce compte.",
+    "copyOther": "La progression de ce navigateur était liée à un autre compte. La copier dans le compte affiché ci-dessus.",
+    "emptyDraft": "Brouillon vide",
+    "noProgress": "Aucune progression enregistrée",
+    "currentRun": "Partie en cours",
+    "stage": "Niveau {number}",
+    "lesson": "Leçon {number}",
+    "step": "Étape {number}",
+    "phase": "Étape actuelle",
+    "score": "Dernière note d'exercice",
+    "cleared": "Terminé pendant cette partie",
+    "badges": "Tampons obtenus",
+    "rounds": "Manches terminées",
+    "busy": "Traitement en cours…",
+    "saved": "Enregistré dans ce compte. Les brouillons du navigateur n'ont pas été remplacés.",
+    "savedLocalChanged": "Enregistré dans le compte. Ce navigateur a changé pendant le téléversement ; relisez et comparez les versions avant le prochain enregistrement.",
+    "changed": "La progression a changé dans une autre page. Lancez une nouvelle comparaison pour l'inclure.",
+    "reload": "Recharger pour continuer",
+    "recovery": "Une restauration a été interrompue",
+    "recoveryNote": "Une partie de la progression a changé dans une autre page pendant la récupération. Ces données plus récentes ont été conservées. Téléchargez le relevé de récupération avant de conserver la progression actuelle du navigateur.",
+    "rawRecoveryNote": "Ces données ne peuvent pas être lues pour le moment. Téléchargez les données brutes pour en garder une copie ; ce fichier ne peut pas être importé comme sauvegarde de progression.",
+    "downloadRecovery": "Télécharger le relevé de récupération",
+    "keepCurrent": "Conserver la progression actuelle du navigateur et recharger",
+    "recoveryConfirm": "J'ai téléchargé le relevé de récupération et je souhaite conserver la progression actuellement présente dans ce navigateur.",
+    "errors": {
+      "SAVE_INVALID": "Ce fichier n'est pas une sauvegarde Loopuff prise en charge. Votre progression actuelle n'a pas été remplacée par un import.",
+      "SAVE_VERSION": "Le format ou la version de cette sauvegarde n'est pas pris en charge. Ouvrez-la avec la version de Loopuff qui l'a créée.",
+      "SAVE_TOO_LARGE": "Cette sauvegarde dépasse 256 Ko.",
+      "SAVE_NEW_LESSONS": "Cette sauvegarde contient des leçons non prises en charge par cette page. Rechargez la dernière version du jeu avant de réessayer.",
+      "SAVE_LOCAL_CHANGED": "La progression du navigateur a changé depuis cette comparaison. Comparez à nouveau avant de restaurer ou d'enregistrer.",
+      "SAVE_CHOICES_REQUIRED": "Choisissez une version pour chaque brouillon différent.",
+      "SAVE_CONFLICT": "La sauvegarde du compte a changé sur un autre appareil. Relisez-la et comparez les deux versions.",
+      "ACCOUNT_CHANGED": "Le compte connecté a changé. Relisez la progression du compte actuel.",
+      "AUTH_REQUIRED": "Reconnectez-vous avant de lire ou d'enregistrer la progression du compte.",
+      "SAVE_UNCONFIRMED": "Le résultat de l'enregistrement n'a pas pu être confirmé. Les données ont peut-être atteint votre compte. Relisez sa progression pour vérifier avant d'enregistrer à nouveau.",
+      "SAVE_NETWORK": "Impossible de lire la progression du compte. Vérifiez votre connexion et réessayez.",
+      "SAVE_UNAVAILABLE": "Les sauvegardes du compte sont temporairement indisponibles. Vous pouvez toujours télécharger un fichier de sauvegarde.",
+      "SAVE_STORAGE": "Le navigateur n'a pas pu enregistrer cette progression. Libérez de l'espace de stockage ou téléchargez un fichier de sauvegarde.",
+      "SAVE_RECOVERY_REQUIRED": "Une restauration interrompue doit être examinée avant une autre sauvegarde. Rechargez la page pour la consulter.",
+      "SAVE_OWNER_INVALID": "Le lien entre la progression de ce navigateur et son compte n'a pas pu être lu. Téléchargez une sauvegarde avant de la restaurer.",
+      "SAVE_LOCK_REQUIRED": "Ce navigateur ne peut pas coordonner une restauration sûre. Téléchargez une sauvegarde et restaurez-la dans un navigateur à jour.",
+      "RATE_LIMITED": "Trop de demandes. Patientez un instant avant de réessayer."
+    },
+    "diagnosticTitle": "Exercices de diagnostic",
+    "diagnosticDrafts": "Brouillons du diagnostic",
+    "diagnosticHints": "Niveau d'aide pour cette série",
+    "diagnosticSubmitted": "Un envoi est enregistré pour ce brouillon. Il sera vérifié à nouveau après la restauration.",
+    "diagnosticPending": "Ce brouillon n'a pas encore été envoyé pour vérification.",
+    "diagnosticChoice": "Conservez le brouillon choisi avec son envoi et son historique d'indices. Les séries d'entrées différentes sont sélectionnées en bloc."
+  },
+  "guideStudio": {
+    "tag": "Premier spatioport · Poste de signalisation",
+    "title": "Changez une ligne. Observez le résultat.",
+    "intro": "Faites une prédiction, puis exécutez le programme. Chaque valeur inscrite dans le journal apparaît sur une balise devant vous.",
+    "beginner": "Reprendre depuis le début",
+    "experienced": "Je sais programmer · Comparer les langages",
+    "compareTag": "Carte des notions · Passer d'un langage à l'autre",
+    "compareTitle": "Vous connaissez un langage ? Explorez-en un autre.",
+    "compareIntro": "Partez d'une notion familière, comparez le code, puis exécutez l'exemple Tolang. Les messages et les réponses méritent un examen plus attentif.",
+    "map": "Choisir une notion de programmation",
+    "scene": "Fenêtre d'observation",
+    "sceneRule": "Chaque entrée du journal allume une balise",
+    "output": "Sortie réelle",
+    "editor": "Votre code Tolang",
+    "reset": "Rétablir l'exemple",
+    "run": "Exécuter le code",
+    "predict": "Prédisez le résultat avant l'exécution.",
+    "previous": "Sortie précédente",
+    "next": "Sortie suivante",
+    "replay": "Rejouer la sortie",
+    "ready": "Le poste est prêt. Exécutez le code et observez ce qui arrive.",
+    "error": "Le programme n'a pas pu s'exécuter",
+    "noOutput": "Le programme s'est terminé sans sortie. Essayez d'ajouter .log().",
+    "frame": "Sortie",
+    "sourceStep": "Quel code a produit cette sortie ?",
+    "practice": "Essayer un exercice en autonomie",
+    "background": "Pour aller plus loin",
+    "sameIdea": "Un objectif, des codes différents",
+    "comparisonScope": "Ces exemples produisent les mêmes résultats numériques simples. Seul Tolang s'exécute ici. Des résultats identiques ne signifient pas que les types, l'ordonnancement ou les modèles d'exécution sont identiques.",
+    "reference": "Documentation officielle du langage",
+    "difference": "À surveiller en changeant de langage",
+    "messageDifference": "Les envois de messages, les réceptions, les réceptions conjointes et les réponses de fonction de Tolang n'ont pas de traduction unique, mot pour mot, en Python, JavaScript ou Rust. Exécutez l'exemple Tolang ci-dessus, puis explorez les dépendances réelles entre les données dans un exercice de coordination.",
+    "transfer": "Essayer de nouvelles entrées dans la Gare de fret",
+    "stations": [
+      {
+        "title": "Sortie",
+        "prompt": "Envoyez un nombre au poste. Prédisez ce que produira 7.log().",
+        "try": "Remplacez 7 par un nombre de votre choix, puis relancez le programme. Qu'est-ce qui change ?",
+        "meaning": ".log() écrit cette valeur dans le journal. Ici, les balises affichent le journal ; y écrire ne déplace pas automatiquement un personnage.",
+        "difference": "Python utilise print, JavaScript utilise souvent console.log et Rust utilise souvent println!. Des résultats identiques ne font pas de ces appels un même mécanisme."
+      },
+      {
+        "title": "Calcul",
+        "prompt": "Deux cargaisons contiennent 2 et 3 unités. Additionnez-les avant d'envoyer le total.",
+        "try": "Changez un seul nombre pour obtenir un total de 9.",
+        "meaning": "L'expression entre parenthèses est évaluée avant que son résultat soit inscrit dans le journal.",
+        "difference": "Ces additions de petits entiers donnent le même résultat. Les grands nombres, les conversions de types et les dépassements de capacité suivent des règles propres à chaque langage."
+      },
+      {
+        "title": "Noms",
+        "prompt": "Nommez une cargaison n, puis calculez le total après l'ajout de deux unités.",
+        "try": "Changez la valeur liée à n et observez la nouvelle sortie.",
+        "meaning": "Un nom permet aux expressions suivantes de désigner une valeur. Une modification invalide l'ancienne sortie ; relancez le programme pour voir le nouveau résultat.",
+        "difference": "Python effectue une affectation directe ; ces exemples JavaScript et Tolang utilisent let. En Rust, les liaisons let sont immuables par défaut. Une écriture similaire ne suppose pas les mêmes règles de liaison."
+      },
+      {
+        "title": "Choix",
+        "prompt": "Si fuel est supérieur à 4, envoyez le signal 1. Sinon, envoyez le signal 2.",
+        "try": "Donnez à fuel la valeur 4, puis 5. Quelle branche s'exécute à la limite ?",
+        "meaning": "if choisit une branche selon une condition. Ici, seule la branche choisie inscrit une valeur dans le journal.",
+        "difference": "L'exemple Tolang exige then. Python utilise l'indentation ; JavaScript et Rust utilisent des accolades. Rust exige une condition booléenne."
+      },
+      {
+        "title": "Répétition",
+        "prompt": "Activez les balises 2, 4 et 6 dans l'ordre. Prédisez s'il y aura une sortie ou trois.",
+        "try": "Ajoutez un nombre à la liste, puis utilisez les flèches pour examiner chaque sortie.",
+        "meaning": "for prend les valeurs successives de la liste. La même expression de sortie s'exécute plusieurs fois : la mise en évidence désigne donc le même code.",
+        "difference": "Les trois exemples parcourent des listes d'entiers. En JavaScript, for...of parcourt les valeurs, contrairement à for...in. Les règles des collections et de propriété restent différentes."
+      },
+      {
+        "title": "Fonctions",
+        "prompt": "Donnez un nom à une façon de réunir deux cargaisons, puis appelez-la avec 3 et 4.",
+        "try": "Changez un argument pour obtenir le résultat 10.",
+        "meaning": "Cet exemple utilise sync fn et un return ordinaire pour transmettre une valeur calculée à l'appelant avant de l'inscrire dans le journal.",
+        "difference": "Cette fonction Tolang est synchrone. Rust déclare les types des paramètres et du retour et peut utiliser une expression finale. Python et JavaScript utilisent ici un return ordinaire. Le return ! de Tolang fonctionne autrement."
+      },
+      {
+        "title": "Réponses",
+        "prompt": "Comparez avec le poste précédent : return ! envoie une réponse, et les instructions suivantes peuvent encore s'exécuter.",
+        "try": "Changez la valeur de réponse et examinez le journal, puis distinguez réponse et sortie dans l'exercice en autonomie.",
+        "meaning": "Quitter une fonction en renvoyant une valeur et envoyer une réponse sont deux actions différentes. Remplacer une réponse par un return ordinaire change le sens du programme.",
+        "difference": "En Tolang, l'exécution peut continuer après l'envoi d'une réponse par return ! ; un return ordinaire quitte la fonction. Une Promise JavaScript ou un Future Rust n'est pas un équivalent direct."
+      },
+      {
+        "title": "Coordination",
+        "prompt": "Deux rapports arrivent sur des canaux distincts. Une réception conjointe attend les deux valeurs avant de les combiner.",
+        "try": "Changez la valeur d'un message et vérifiez qu'elle contribue au total.",
+        "meaning": "La combinaison a besoin des données des deux réceptions. L'ordre présenté ici ne représente pas tous les ordonnancements concurrents possibles.",
+        "difference": "La concurrence par messages diffère des appels séquentiels ordinaires. Canaux, files, fils d'exécution et ordonnancement asynchrone demandent un traitement distinct. Un total identique ne prouve pas un comportement concurrent équivalent."
+      }
+    ],
+    "prediction": {
+      "label": "Ma prédiction (facultatif)",
+      "help": "Écrivez une valeur par ligne, dans l'ordre des sorties. Exécutez ensuite votre code pour comparer.",
+      "silent": "Je ne prévois aucune sortie",
+      "ready": "Notez une prédiction ou lancez directement le programme pour explorer.",
+      "matched": "La sortie complète correspond à votre prédiction.",
+      "different": "La première différence se trouve à la sortie {number}.",
+      "expected": "Votre prédiction",
+      "actual": "Sortie réelle",
+      "absent": "Aucune valeur",
+      "error": "Corrigez l'erreur du programme, puis relancez-le pour comparer.",
+      "waiting": "Certaines opérations sont encore en attente. Comparez à nouveau lorsqu'elles seront terminées.",
+      "changed": "Votre prédiction a changé. Relancez le programme pour la comparer au code.",
+      "silentMatched": "Comme prévu, ce programme se termine sans inscrire de valeur dans le journal."
+    }
+  },
+  "pursuit": {
+    "title": "Poursuite en ville",
+    "tag": "Opération en ville · 20 tronçons",
+    "intro": "Courez, choisissez vos itinéraires et franchissez les barrages. Le résultat d'une partie complète exige au moins dix minutes, suivies d'une interception ou d'une fuite effective.",
+    "continuous": "Poursuite continue",
+    "lab": "Expériences de code",
+    "elapsed": "Temps de jeu actif",
+    "round": "Tronçon",
+    "energy": "Énergie",
+    "route": "Prochain carrefour",
+    "wide": "Route principale",
+    "alley": "Ruelle",
+    "wideHint": "Plus longue, avec deux ravitaillements",
+    "alleyHint": "Plus courte ; l'entrée coûte 14 points d'énergie",
+    "start": "Lancer la poursuite",
+    "resume": "Reprendre la poursuite",
+    "pause": "Pause",
+    "jump": "Sauter",
+    "sprint": "Maintenir pour sprinter",
+    "controls": "Espace pour sauter ; maintenez Maj pour sprinter. Le choix d'itinéraire s'applique à l'entrée du prochain tronçon.",
+    "ready": "Les rues sont prêtes. Commencez maintenant ou ouvrez « Rôle et nouvelle partie » pour choisir d'abord un rôle et une difficulté.",
+    "running": "Poursuite en cours",
+    "paused": "En pause ; le chronomètre est arrêté",
+    "background": "En pause. Revenez dans la rue et choisissez Reprendre.",
+    "slow": "L'affichage a été interrompu : la partie est en pause. Reprendre n'ajoute jamais le temps passé ailleurs.",
+    "settings": "Rôle et nouvelle partie",
+    "role": "Rôle pour une nouvelle poursuite",
+    "difficulty": "Difficulté de l'adversaire pour une nouvelle poursuite",
+    "difficulties": [
+      "Détente",
+      "Standard",
+      "Défi"
+    ],
+    "newRun": "Lancer une nouvelle poursuite avec ces réglages",
+    "confirmNew": "Confirmer la nouvelle partie",
+    "resetNote": "Une nouvelle partie réinitialise cet itinéraire et son chronomètre, en conservant votre brouillon de stratégie, l'historique et les expériences de code.",
+    "focus": "Agrandir la scène",
+    "closeFocus": "Fermer la scène agrandie",
+    "strategy": "Laisser le code commander vos actions",
+    "strategyNote": "Le programme lit les valeurs actuelles de energy, obstacle, gap, round et rivalEnergy. Chaque sortie dure 250 millisecondes. Lorsque la file est vide, le même programme s'exécute à nouveau avec les entrées actualisées du monde.",
+    "signals": "Affichez 1 pour garder l'allure, 2 pour sprinter ou 3 pour tenter un saut. Chaque exécution doit produire de 1 à 8 signaux et ne peut pas rester en attente de messages.",
+    "inputValues": "Entrées actuelles",
+    "editor": "Stratégie Tolang",
+    "deploy": "Appliquer et reprendre",
+    "inspect": "Vérifier le code uniquement",
+    "restoreExample": "Rétablir le code de départ",
+    "plan": "Plan de signaux actuel",
+    "idlePlan": "Appliquez la stratégie pour voir le résultat réel de l'exécution.",
+    "error": "Révisez la stratégie",
+    "position": "Position du personnage",
+    "rivalStreet": "Cible dans une autre rue",
+    "interception": "Voie d'interception atteinte",
+    "exit": "Voie de sortie",
+    "terrain": [
+      "Rues de la ville",
+      "Rues mouillées",
+      "Escaliers",
+      "Rues bordées d'arbres"
+    ],
+    "won": "Opération réussie",
+    "lost": "Opération terminée",
+    "caught": "La police a attrapé le voleur à leurs positions réelles.",
+    "escaped": "Le voleur a franchi la sortie.",
+    "saveChoice": "La poursuite conserve la version choisie en bloc, avec la scène actuelle et l'historique des parties. Les progressions des deux versions ne sont pas fusionnées.",
+    "resultNote": "Examinez les itinéraires, les collisions et l'énergie, puis essayez une autre stratégie. Les résultats des parties ne sont pas des notes de programmation.",
+    "collisions": "Collisions",
+    "clears": "Barrages franchis",
+    "history": "Opérations récentes",
+    "noHistory": "Terminez une partie pour en conserver le relevé ici.",
+    "saving": "Enregistrement de la scène…",
+    "noSave": "Cette scène n'a pas pu être enregistrée ; la poursuite est en pause. Copiez votre code ou enregistrez un relevé de récupération dans Progression et sauvegardes.",
+    "badSave": "Cette sauvegarde de poursuite n'a pas pu être lue. Conservez d'abord un relevé de récupération dans Progression et sauvegardes, puis décidez si vous souhaitez commencer une nouvelle partie.",
+    "loading": "Ouverture des rues…",
+    "artError": "Les décors de la rue n'ont pas pu être chargés. Rouvrez cette page pour réessayer.",
+    "help": "Itinéraires et stratégies",
+    "rules": "Deux routes se rejoignent à leur extrémité. Si la police arrive d'abord, elle rebrousse chemin sur la voie de fuite pour intercepter le voleur. Une progression égale dans des rues ou des embranchements différents ne constitue pas un contact. L'énergie, les sauts et les erreurs précédentes influencent la suite de la partie. Les pauses, le temps passé en arrière-plan, la modification du code et la relecture ne comptent pas comme temps de jeu actif.",
+    "minimum": "Au moins 10 minutes ; le chronomètre seul ne décide jamais du résultat.",
+    "savedPaused": "Scène restaurée. Le temps n'avance qu'après la reprise.",
+    "events": {
+      "blocked": "Barrage heurté ; énergie perdue et bref arrêt",
+      "jumped": "Barrage franchi",
+      "recovered": "Ravitaillement récupéré",
+      "section": "Entrée sur une autre route",
+      "intercept": "Retour sur la voie de fuite pour intercepter la cible",
+      "joined": "Carrefour atteint",
+      "caught": "Cible attrapée",
+      "escaped": "Sortie franchie",
+      "route-tired": "Énergie insuffisante ; emprunt de la route principale"
+    }
+  },
+  "learningMap": {
+    "title": "Carte des notions de programmation",
+    "tag": "Trouvez votre point de départ",
+    "intro": "Partez d'un signal de sortie et découvrez comment s'articulent décisions, boucles, fonctions et messages. Choisissez une notion, suivez ses bases ou passez directement à un exercice en autonomie.",
+    "compare": "Comparer avec d'autres langages",
+    "completed": "Exercice terminé",
+    "available": "Libre à explorer",
+    "arrows": "Les liens indiquent un ordre d'apprentissage suggéré",
+    "scroll": "Faites défiler la carte horizontalement. Toutes les notions sont accessibles ; vous n'avez pas à les débloquer dans l'ordre.",
+    "lanes": [
+      "Envoyer un signal",
+      "Commander des actions",
+      "Organiser les programmes",
+      "Coordonner les messages"
+    ],
+    "selected": "Votre notion choisie",
+    "before": "Bases utiles",
+    "after": "À utiliser dans",
+    "first": "Commencez ici. Aucune expérience en programmation n'est nécessaire.",
+    "transfer": "Appliquez ces idées à des tâches concrètes dans l'aire de jeux.",
+    "practice": "Apprendre avec l'exercice",
+    "tryDirect": "Essayer en autonomie",
+    "start": "Commencer par : {concept}",
+    "progressNote": "Les repères indiquent les exercices d'apprentissage terminés. Pour vérifier votre compréhension, essayez un exercice en autonomie.",
+    "example": "À quoi cela ressemble dans le code",
+    "run": "Exécuter l'exemple",
+    "ready": "Exécutez ce programme pour voir ce qu'il produit réellement.",
+    "error": "Le programme ne s'est pas terminé",
+    "noOutput": "Le programme s'est exécuté sans sortie."
+  },
+  "diagnostic": {
+    "tag": "Essayez un programme avant de partir",
+    "title": "Trouvez votre point de départ.",
+    "intro": "Choisissez un domaine et faites traiter à un même programme une série d'entrées variables. Revoyez une leçon ou passez directement à la pratique selon vos besoins ; aucun ordre n'est imposé.",
+    "map": "Explorer la carte des notions",
+    "guide": "Retour aux bases de la programmation",
+    "areas": "Choisir un domaine à vérifier",
+    "pending": "Pas encore vérifié",
+    "checking": "Vérification…",
+    "reviewing": "Nouvelle vérification des programmes enregistrés…",
+    "passed": "Cette série est réussie",
+    "needsWork": "À pratiquer",
+    "checked": "{number} domaines vérifiés",
+    "passedCount": "Réussis pour cette série d'entrées : {number} / 9",
+    "allPassed": "Ce programme a réussi pour toutes les entrées de la série actuelle.",
+    "partial": "Certaines entrées demandent encore du travail. Choisissez-en une pour examiner la différence.",
+    "ready": "Écrivez un programme, puis exécutez-le sur cette série d'entrées.",
+    "editor": "Votre programme",
+    "run": "Vérifier ce programme",
+    "newSet": "Essayer une autre série d'entrées",
+    "newSetNote": "Conservez votre code, changez les entrées et effacez les vérifications et les indices de cette série.",
+    "hint": "Donnez-moi une piste",
+    "moreHint": "Afficher une trame de code",
+    "hintLabel": "Indice",
+    "hintFill": "Remplacez les blancs par des expressions adaptées. La trame ne remplace pas votre brouillon.",
+    "withHints": "Indices consultés pour cette série",
+    "withoutHints": "Aucun indice consulté pour cette série",
+    "learn": "Apprendre cette partie",
+    "independent": "Passer directement à un exercice en autonomie",
+    "input": "Entrées fournies par l'exercice",
+    "expected": "Sortie attendue",
+    "actual": "Sortie réelle du programme",
+    "noOutput": "Aucune sortie",
+    "notRun": "Pas encore exécuté",
+    "caseLabel": "Cas d'entrée {number}",
+    "cases": "Explorer chaque entrée",
+    "caseResult": "{passed} cas réussis sur {total}",
+    "criteria": "Méthodes utilisées",
+    "source": "Origine de cette sortie",
+    "hostOutput": "Cette sortie provient de l'appel de fonction ajouté par l'exercice.",
+    "frame": "Choisir une sortie",
+    "position": "Position dans le code source",
+    "scope": "Ces vérifications décrivent ce programme sur cette série d'entrées. Elles ne changent ni vos notes ni vos leçons terminées.",
+    "next": "Vous pouvez aussi vérifier : {topic}",
+    "nextAction": "Explorer ce domaine",
+    "recommend": "Besoin de bases pour cet exercice ? Commencez par « {lesson} ».",
+    "saveFailed": "Cette modification n'a pas pu être enregistrée. Copiez votre code avant de quitter la page.",
+    "badSave": "Ce relevé de diagnostic ne peut pas être lu pour le moment. Téléchargez ses données brutes de récupération dans Progression et sauvegardes avant de décider d'en créer un nouveau.",
+    "resetBad": "Commencer un nouveau diagnostic",
+    "confirmBad": "Cliquez à nouveau pour remplacer ce relevé de diagnostic",
+    "saveTitle": "Progression et sauvegardes",
+    "syncRequired": "Cet appel à combine doit renvoyer directement une valeur. Un return ordinaire et return ! utilisent des mécanismes différents.",
+    "replyRequired": "Cet appel à boost doit envoyer son résultat en réponse avec return !.",
+    "tasks": {
+      "names": {
+        "title": "Noms et calculs",
+        "goal": "Additionnez les entrées cargo et reserve, puis affichez leur somme. Votre programme doit fonctionner lorsque les entrées changent.",
+        "context": "L'exercice fournit cargo et reserve. Écrivez le calcul et sa sortie.",
+        "hint": "Utilisez les noms des entrées plutôt qu'une réponse fixe pour un seul cas. Vous pouvez appeler .log() sur une somme entre parenthèses."
+      },
+      "branch": {
+        "title": "Choisir une branche",
+        "goal": "Affichez 1 lorsque fuel est supérieur à threshold. Affichez 2 lorsqu'il est égal ou inférieur.",
+        "context": "L'exercice fournit fuel et threshold, y compris des valeurs exactement à la limite.",
+        "hint": "Comparez les valeurs, puis utilisez if pour sélectionner une branche. Quelle branche doit traiter l'égalité ?"
+      },
+      "repeat": {
+        "title": "Une liste variable",
+        "goal": "Suivez l'ordre de docks et affichez chaque élément augmenté de offset. Une liste vide ne produit aucune sortie.",
+        "context": "L'exercice fournit une liste nommée docks et un nombre nommé offset. Les éléments peuvent se répéter ou être négatifs.",
+        "hint": "Utilisez for pour lire chaque élément, puis ajoutez-lui la valeur voulue. Ne fixez pas le nombre de sorties."
+      },
+      "counter": {
+        "title": "Un compteur variable",
+        "goal": "Utilisez while pour afficher un compteur qui part de 0, augmente de 1 et s'arrête avant limit. Lorsque limit vaut 0, n'affichez rien.",
+        "context": "L'exercice fournit limit. Créez et mettez à jour votre propre compteur dans le programme.",
+        "hint": "Choisissez une valeur initiale, comparez le compteur à limit et faites-le avancer à la fin de chaque itération."
+      },
+      "function": {
+        "title": "Valeur de retour d'une fonction",
+        "goal": "Définissez combine avec deux paramètres et renvoyez leur somme par une fonction synchrone. L'exercice l'appelle et affiche la valeur renvoyée.",
+        "context": "L'appel est combine(firstNumber, secondNumber). Vous pouvez choisir les noms des paramètres ; inutile d'ajouter .log().",
+        "hint": "Renvoyez la somme avec un return ordinaire. L'exercice utilise la valeur renvoyée, pas un affichage supplémentaire dans la fonction."
+      },
+      "reply": {
+        "title": "Réponse d'une fonction",
+        "goal": "Définissez boost avec deux paramètres et envoyez leur somme en réponse avec return !. L'exercice attend la réponse et l'affiche.",
+        "context": "L'appel est boost(firstNumber, secondNumber). Vous pouvez choisir les noms des paramètres ; inutile d'ajouter .log().",
+        "hint": "Une réponse explicite de fn utilise return !. Ce domaine vérifie le mécanisme de réponse, plutôt qu'un retour synchrone ordinaire."
+      },
+      "message": {
+        "title": "Recevoir un message",
+        "goal": "Recevez un nombre depuis mailbox, ajoutez 1 et affichez le résultat.",
+        "context": "L'exercice crée mailbox et envoie un message dans une autre branche parallèle. Obtenez la valeur en recevant le message.",
+        "hint": "Utilisez ? pour recevoir depuis mailbox, donnez un nom à la valeur reçue, puis calculez la sortie."
+      },
+      "join": {
+        "title": "Attendre deux messages",
+        "goal": "Recevez conjointement les messages de west et east, puis affichez leur somme.",
+        "context": "L'exercice envoie deux rapports numériques dans des branches distinctes. Les deux valeurs doivent contribuer au résultat.",
+        "hint": "Placez les deux conditions de réception dans une seule expression de réception ?, reliées par &, puis additionnez les valeurs dans son corps."
+      },
+      "coordination": {
+        "title": "Coordonner une livraison",
+        "goal": "Recevez conjointement west et east, puis appelez une fonction pour en faire le total. Ajoutez reserve si le total dépasse threshold ; sinon, affichez le total seul.",
+        "context": "L'exercice fournit threshold, reserve et deux canaux. Des rapports numériques arrivent par messages ; calculez leur total au moyen d'une fonction.",
+        "hint": "Définissez d'abord la fonction de total, puis attendez les deux messages. Utilisez ce même total dans la condition et dans la sortie finale."
+      }
+    }
+  },
+  "lessonScene": {
+    "title": "Le programme en action",
+    "run": "Exécuter et explorer",
+    "play": "Poursuivre la relecture",
+    "pause": "Mettre la relecture en pause",
+    "previous": "Étape précédente",
+    "next": "Étape suivante",
+    "start": "Retour au début",
+    "end": "Aller à la dernière étape",
+    "step": "Trace d'exécution {number} / {total}",
+    "scrub": "Choisir une position de relecture",
+    "ready": "Exécutez le programme et suivez l'évolution des valeurs.",
+    "locked": "Prédisez d'abord la sortie, puis explorez comment le programme l'obtient.",
+    "processing": "Opération actuelle",
+    "inputs": "Entrées et valeurs nommées",
+    "messages": "Messages dans les canaux",
+    "empty": "Aucun message ici pour le moment",
+    "emptyInputs": "Exécutez le programme pour voir les valeurs de l'étape actuelle.",
+    "output": "Signaux déjà envoyés",
+    "expected": "Signaux cibles",
+    "noOutput": "Aucune sortie",
+    "notRun": "Pas encore exécuté",
+    "source": "Code de cette étape",
+    "trace": "Explorer la trace d'exécution",
+    "names": "Valeurs à cette étape",
+    "main": "Programme principal",
+    "inCall": "Dans {name}",
+    "reply": "réponse",
+    "waiting": "{number} réceptions sont encore en attente.",
+    "finished": "L'exécution de ce programme est terminée.",
+    "error": "Le programme s'est arrêté ici.",
+    "truncated": "La scène ne rejoue que les 512 premières opérations enregistrées. La sortie complète est disponible ci-dessous.",
+    "fullOutput": "Sortie complète du programme",
+    "scope": "Il s'agit d'une exécution enregistrée par l'interpréteur pédagogique. Les branches parallèles peuvent aussi s'exécuter dans d'autres ordres autorisés.",
+    "practice": "Explorer une exécution ne change pas les notes du cours. L'envoi de votre programme vérifie toujours les exigences de l'exercice.",
+    "matched": "La sortie correspond à la cible",
+    "different": "La sortie diffère de la cible",
+    "events": {
+      "channel": "Créer un canal",
+      "function": "Définir une fonction",
+      "bind": "Lier une valeur",
+      "assign": "Mettre à jour une valeur",
+      "calculate": "Calculer",
+      "branch": "Choisir une branche",
+      "while": "Vérifier la condition de boucle",
+      "list": "Lire une liste",
+      "iteration": "Prendre l'élément suivant",
+      "call": "Appeler une fonction",
+      "call-result": "Obtenir le résultat d'une fonction",
+      "return": "Renvoyer un résultat",
+      "send": "Envoyer un message",
+      "receive": "Recevoir un message",
+      "join": "Recevoir des messages conjointement",
+      "wait": "Attendre des messages",
+      "received-names": "Nommer les valeurs reçues",
+      "log": "Envoyer un signal"
+    }
+  },
+  "heist": {
+    "deployed": "Stratégie active",
+    "finished": "Partie terminée",
+    "title": "Infiltration de la banque",
+    "tag": "Un programme sur le terrain",
+    "intro": "Écris une stratégie qui observe la patrouille et permet de ressortir avec la mallette. Chaque décision modifie le déroulement de la partie.",
+    "enter": "Entrer dans la banque",
+    "elapsed": "Temps de jeu",
+    "budget": "Temps restant",
+    "practice": "Entraînement · sans compte à rebours",
+    "timed": "Défi chronométré",
+    "phase": "Objectif",
+    "phases": [
+      "Récupérer la clé",
+      "Déverrouiller la porte",
+      "Ouvrir le coffre",
+      "Rejoindre la sortie"
+    ],
+    "energy": "Endurance",
+    "alarm": "Alerte",
+    "action": "Action en cours",
+    "actions": [
+      "Avancer",
+      "Avancer discrètement",
+      "Attendre / se cacher à couvert",
+      "Interagir avec l’objectif",
+      "Reculer",
+      "Sprinter en avant"
+    ],
+    "start": "Activer et démarrer",
+    "resume": "Continuer",
+    "pause": "Pause",
+    "running": "Ta stratégie observe la scène toutes les 0,8 seconde.",
+    "paused": "En pause. Les positions et le temps de jeu sont figés.",
+    "background": "En pause tant que cette page est en arrière-plan.",
+    "slow": "En pause après un ralentissement. Le temps écoulé pendant ce ralentissement n’a pas été ajouté.",
+    "ready": "Observe la scène, examine les données d’entrée, puis active ta stratégie.",
+    "restored": "La partie sauvegardée a été restaurée et mise en pause.",
+    "editor": "Ta stratégie en Tolang",
+    "inspect": "Vérifier cette décision",
+    "deploy": "Activer et continuer",
+    "example": "Charger un exemple qui s’adapte",
+    "confirmExample": "Remplacer ce brouillon par l’exemple ?",
+    "newRun": "Nouvelle partie",
+    "confirmNew": "Quitter cette partie et recommencer ?",
+    "settings": "Réglages de la partie",
+    "mode": "Mode",
+    "seed": "Graine de la scène",
+    "seedNote": "La même graine reproduit la même scène ; chaque nouvelle partie possède son propre historique.",
+    "invalidSeed": "Saisis un nombre entier de 0 à 4294967295.",
+    "input": "Données à cette position",
+    "inputNote": "distance et guard indiquent des distances en mètres par rapport à toi, avec un signe positif ou négatif. facing vaut -1 vers la gauche et 1 vers la droite. cover indique si attendre ici te dissimule. alarm et energy vont de 0 à 100. phase va de 0 à 3.",
+    "contract": "Définis decide(distance, guard, facing, cover, alarm, energy, phase). Renvoie un seul numéro d’action, de 1 à 6. Le jeu appelle cette fonction et affiche son résultat ; n’ajoute pas d’autre .log(). Ces nombres sont des signaux pour le jeu, pas des commandes intégrées à Tolang.",
+    "result": "Décision",
+    "idle": "Aucune décision vérifiée pour le moment.",
+    "error": "Le code a mis la partie en pause",
+    "signals": "L’appel doit produire exactement un nombre de 1 à 6.",
+    "waiting": "Le programme attend un message. Il n’a pas choisi d’action.",
+    "position": "Emplacement dans le code",
+    "hostError": "Vérifie la fonction decide, ses sept paramètres et la valeur qu’elle renvoie.",
+    "map": "Tout le couloir",
+    "player": "Toi",
+    "guard": "Patrouille",
+    "cover": "Abri",
+    "hidden": "À couvert",
+    "visible": "Dans le champ de vision de la patrouille",
+    "clear": "Hors de vue",
+    "use": "Interaction avec l’objectif",
+    "key": "Clé",
+    "door": "Porte",
+    "safe": "Coffre",
+    "exit": "Sortie",
+    "loading": "Chargement de la scène…",
+    "artError": "Les personnages n’ont pas pu être chargés. Recharge la page pour réessayer.",
+    "escaped": "Mallette récupérée. Tu as atteint la sortie.",
+    "caught": "La patrouille t’a attrapé.",
+    "lockdown": "L’alerte a atteint 100. La banque est verrouillée.",
+    "timeout": "Le temps du défi est écoulé.",
+    "history": "Tes parties",
+    "noHistory": "Aucune partie terminée pour le moment.",
+    "recordNote": "Cet historique est personnel. Il ne certifie ni la maîtrise du langage ni un résultat classé.",
+    "help": "Comment la scène réagit",
+    "rules": "Reste à moins de 4 mètres d’un objectif et poursuis l’interaction pour la terminer. Attendre à couvert te dissimule. Bouger interrompt une action inachevée. Une porte fermée bloque les déplacements et la vue. À moins de 28 mètres, une patrouille voit devant elle ; un contact physique te fait attraper, sauf si tu es dissimulé. Sprinter consomme davantage d’endurance et augmente l’alerte.",
+    "hint": "Conseil de stratégie",
+    "hintText": "Observe la distance et la direction. Une patrouille qui s’approche d’une alcôve sombre ne présente pas la même situation qu’une patrouille qui s’éloigne. Laisse-la passer avant de quitter ton abri et garde assez d’endurance pour t’échapper.",
+    "saveFailed": "La partie n’a pas pu être sauvegardée et a été mise en pause. Ouvre les sauvegardes avant de continuer.",
+    "badSave": "Cette partie sauvegardée ne peut pas être lue. Ouvre les sauvegardes pour la conserver avant de commencer une nouvelle partie.",
+    "saveChoice": "Choisis la partie d’infiltration entière, avec sa stratégie, sa scène et son historique personnel. Des parties différentes ne peuvent pas être fusionnées.",
+    "notDeployed": "Ce brouillon n’a pas encore été activé.",
+    "positionNow": "Position",
+    "decisionCount": "Décisions",
+    "focus": "Agrandir la scène",
+    "closeFocus": "Fermer la scène agrandie"
+  },
+  "rewrite": {
+    "title": "Approprie-toi le programme",
+    "intro": "Prends ce programme comme point de départ. Modifie les parties nécessaires, exécute-le et cherche à expliquer pourquoi les signaux ont changé.",
+    "guide": "Continuer en modifiant un programme entier",
+    "direct": "Essayer directement la tâche en autonomie",
+    "back": "Revenir à la réécriture du programme",
+    "run": "Exécuter et vérifier",
+    "next": "Continuer sans programme de départ",
+    "hint": "Un petit coup de pouce",
+    "ready": "Tu peux modifier le programme de départ. Prévois le nouveau résultat avant de l’exécuter.",
+    "changed": "Le programme a changé. Exécute-le de nouveau pour vérifier cette version.",
+    "success": "Cette version atteint l’objectif de réécriture. Résous maintenant une nouvelle tâche sans le programme de départ.",
+    "retry": "Le programme s’est exécuté, mais l’objectif n’est pas encore atteint. Compare les signaux et suis les valeurs pendant l’exécution.",
+    "missing": "Le résultat doit utiliser la notion demandée. Une déclaration inutilisée ne contribue pas à produire un signal.",
+    "scope": "Cet exercice ne modifie pas ton score de tâche et ne marque pas la leçon comme terminée.",
+    "savedError": "Cette modification n’a pas pu être enregistrée. Garde une copie de ton code avant de quitter la page.",
+    "transfer": "Essayer cette idée avec des entrées différentes",
+    "independentDraft": "Programme en autonomie",
+    "rewriteDraft": "Réécriture du programme",
+    "tasks": {
+      "signal": {
+        "goal": "Envoie deux signaux dans l’ordre : 3, puis 8. Une ligne peut envoyer un signal ; comment en envoyer deux ?",
+        "hint": "Garde le premier appel à .log() et ajoute-en un autre. Chaque appel affiche sa propre valeur."
+      },
+      "addition": {
+        "goal": "Affiche 10, puis 13. Utilise des additions pour produire ces signaux ; tu peux changer les deux nombres d’un calcul.",
+        "hint": "Tu peux écrire plusieurs calculs. Garde .log() après chaque valeur calculée."
+      },
+      "names": {
+        "goal": "Donne un nom à un nombre et utilise-le dans des additions qui affichent 13, puis 17.",
+        "hint": "Utilise la même valeur nommée dans deux calculs. Les nombres que tu lui ajoutes peuvent être différents."
+      },
+      "leap": {
+        "goal": "Produis un signal de saut de 9 en additionnant deux nombres. Tu peux modifier toute l’expression.",
+        "hint": "Choisis deux nombres dont la somme vaut 9. Envoie la valeur calculée avec .log()."
+      },
+      "comparison": {
+        "goal": "Affiche false, puis true, à l’aide de comparaisons. Tu peux modifier les deux côtés et ajouter une seconde comparaison.",
+        "hint": "Une comparaison produit un booléen. Essaie de placer le plus grand nombre de l’autre côté."
+      },
+      "branch": {
+        "goal": "Fais choisir par une comparaison une branche qui affiche 3. Tu peux modifier la valeur de fuel, la condition et le contenu des branches.",
+        "hint": "Détermine d’abord quelle branche s’exécute pour ta valeur de fuel. Change ce que cette branche envoie."
+      },
+      "repeat": {
+        "goal": "Utilise une boucle et ajoute un nombre à chaque valeur parcourue pour afficher 4, 6, 10. Par exemple, parcours [3, 5, 9] et ajoute 1 à chaque valeur.",
+        "hint": "Modifie la liste et le calcul à l’intérieur de la boucle. La variable de boucle contient une valeur différente à chaque passage."
+      },
+      "counter": {
+        "goal": "Utilise une boucle while pour afficher 3, 4, 5, puis t’arrêter. Choisis une nouvelle valeur de départ et une condition d’arrêt.",
+        "hint": "Réfléchis à la première valeur, à la dernière valeur autorisée et à la façon dont le compteur évolue à chaque tour."
+      },
+      "function": {
+        "goal": "Appelle deux fois une fonction synchrone d’addition pour afficher 9, puis 13. Réutilise la fonction avec des entrées différentes.",
+        "hint": "Garde une seule définition de la fonction. Appelle-la deux fois et affiche chaque résultat renvoyé."
+      },
+      "reply": {
+        "goal": "Utilise des réponses de fonction et des additions pour produire 11, puis 15. Par exemple, ajoute 3 aux valeurs d’entrée 8 et 12.",
+        "hint": "Modifie le corps de la fonction et essaie d’autres valeurs d’entrée. Garde return ! pour envoyer sa réponse."
+      },
+      "message": {
+        "goal": "Envoie une valeur dans un canal, reçois-la et utilise-la dans une addition qui affiche 14. Par exemple, envoie 10 et ajoute 4 après la réception.",
+        "hint": "L’émetteur choisit la valeur envoyée dans parcel. Place l’addition dans la partie qui reçoit pour qu’elle utilise la valeur reçue."
+      },
+      "join": {
+        "goal": "Envoie des valeurs sur deux canaux, reçois-les ensemble et additionne-les pour afficher 17. Par exemple, envoie 8 et 9.",
+        "hint": "Garde la réception conjointe avec &. Attribue une valeur à chaque canal et fais le calcul à partir des deux noms reçus."
+      },
+      "coordination": {
+        "goal": "Envoie deux valeurs, reçois-les ensemble et additionne-les dans une fonction. Utilise une comparaison pour choisir une branche qui affiche 20 à partir du total. Une possibilité : envoyer 6 et 9, puis ajouter 5 si le total dépasse 12.",
+        "hint": "Suis les valeurs dans l’ordre : les deux messages, le résultat de la fonction, la condition, puis la valeur affichée par la branche choisie."
+      }
+    }
+  },
+  "diagnosticFeedback": {
+    "title": "Que faire ensuite ?",
+    "case": "Regarde le groupe d’entrées {number}.",
+    "seeCase": "Afficher ces entrées",
+    "returnToDiagnostic": "Revenir à ton programme de diagnostic",
+    "showHints": "Afficher les indices déjà consultés",
+    "hideHints": "Masquer les indices",
+    "reasons": {
+      "untried": "Choisis cet exercice pour approfondir la notion avant de vérifier ton programme.",
+      "empty": "Commence par un petit programme qui produit un résultat. Ton brouillon de diagnostic reste ici.",
+      "execution": "Corrige d’abord l’erreur d’exécution indiquée à côté de ces entrées, puis vérifie de nouveau le même programme.",
+      "name": "Vérifie les noms fournis par la tâche et ceux que tu as déclarés. Un nom mal orthographié désigne une autre valeur.",
+      "entry": "Vérifie le nom de fonction et les paramètres demandés. La tâche doit pouvoir appeler ta fonction.",
+      "waiting": "Une partie du programme attend encore un message. Suis les canaux et vérifie ce que chaque partie peut réellement recevoir.",
+      "mechanism": "Cette tâche vérifie comment la fonction transmet son résultat. Compare le retour synchrone et la réponse de fonction, puis réessaie.",
+      "concept": "Dans ce groupe, {concept} doit encore contribuer au résultat. Une déclaration inutilisée ou un autre signal correct ne peut pas remplir ce rôle à sa place.",
+      "boundary": "Ici, la valeur est égale au seuil. Suis la branche choisie par ta comparaison lorsque les deux côtés sont égaux.",
+      "zero": "Ce groupe demande zéro répétition. Vérifie si ton programme peut se terminer sans envoyer de signal.",
+      "emptyList": "Cette liste d’entrée est vide. Vérifie si le programme peut se terminer sans inventer un élément à traiter.",
+      "output": "Le programme s’est exécuté, mais ces entrées ont produit un résultat différent. Suis les valeurs dans le code avant de le modifier.",
+      "passed": "Ce programme traite correctement cet ensemble d’entrées. Tu peux continuer sans ouvrir les indices ; ils restent disponibles si tu en as besoin."
+    }
+  },
+  "learningTransfer": {
+    "title": "Passe à la pratique",
+    "lesson": "Essaie cette idée avec des entrées différentes. Cette tâche a son propre programme ; ton brouillon de leçon reste ici.",
+    "diagnostic": "Cet ensemble d’entrées a passé les vérifications. Poursuis l’entraînement au port spatial. Ton programme de diagnostic et ses résultats restent disponibles.",
+    "apply": "Essayer {mission}",
+    "protocols": {
+      "branch": "Le port spatial fournit cargo et threshold. Utilise un même programme conditionnel pour les chargements inférieurs, égaux et supérieurs au seuil.",
+      "manifest": "Le port spatial fournit docks et offset. Les listes peuvent être vides, contenir des doublons ou changer de longueur et d’ordre ; ton programme doit utiliser la liste de ce lot.",
+      "fuel": "Définis une fonction appelée fuel avec deux paramètres. Le port spatial l’appelle avec des valeurs de cargo et reserve qui changent, puis affiche la valeur renvoyée. N’ajoute pas d’autre appel ni d’affichage en dehors de la fonction.",
+      "relay": "Reçois ensemble les rapports de west et east, combine leurs valeurs dans une fonction, puis utilise threshold et reserve pour choisir le résultat à afficher. Le port spatial fournit de nouveaux rapports pour chaque lot."
+    }
+  },
+  "beginner": {
+    "foundation": "Programmer, c’est dire à un ordinateur quoi faire.",
+    "intro": "Le code contient des instructions qu’un ordinateur peut exécuter. Tolang est un langage pour les écrire. Commence par une petite tâche : faire afficher un nombre. Exécute le programme, change un nombre et observe ce qui change.",
+    "more": "Explore d’autres notions quand tu en as besoin",
+    "reading": "Comment lire cet exemple",
+    "first": "Commence par choisir Exécuter le code et regarde ce que l’ordinateur affiche.",
+    "change": "Change maintenant un nombre dans le code et exécute-le de nouveau. Le résultat change-t-il ?",
+    "result": "Ton code actuel a affiché : {value}.",
+    "mapStart": "Jamais programmé ? Commence par une petite expérience",
+    "mapIntro": "Passe d’abord par l’introduction et fais afficher un nombre à l’ordinateur. Explore ensuite ces notions. Les lignes proposent un ordre d’apprentissage, mais tu restes libre de choisir.",
+    "mapGo": "Commencer par afficher un nombre ↗",
+    "mapMeaning": "Qu’est-ce que cela veut dire ?",
+    "vaultGoal": "Ton objectif : envoyer ces nombres à la serrure dans cet ordre.",
+    "vaultSteps": [
+      "Regarde les nombres à obtenir, puis la zone de code. Le code donne ses instructions à cette serrure.",
+      "Exécute d’abord le code existant. Les récepteurs sous la serrure montrent les nombres qu’elle reçoit réellement.",
+      "Compare-les à l’objectif, modifie le code et exécute-le de nouveau. Pour ouvrir la serrure, il faut les bons nombres dans le bon ordre."
+    ],
+    "vaultStart": "Essayer la zone de code ↗",
+    "vaultFirst": "Pour cette serrure, ne change qu’une chose : remplace 0 dans le code par {b}. ({a} + {b}) additionne les deux nombres ; .log() transmet le résultat à la serrure.",
+    "vaultNames": "energy est le nom que tu donnes à un nombre, pas la réponse à saisir. let energy = {a} signifie que les utilisations suivantes de energy désignent {a}. Remplace 0 dans energy + 0 par {b} et exécute de nouveau.",
+    "vaultOrder": "Chaque .log() envoie un nombre. Utilise-en trois pour afficher {a}, {sum}, puis {total}. Tu peux les calculer avec des additions ou trouver une autre solution correcte.",
+    "concepts": {
+      "signal": {
+        "term": "Sortie : afficher un résultat",
+        "meaning": "Le résultat d’un calcul n’est pas toujours visible. Le faire afficher s’appelle produire une sortie.",
+        "read": "7 est le nombre à afficher. .log() écrit le nombre précédent dans un journal, présenté ici dans le panneau d’observation. Exécuter 7.log() affiche donc 7."
+      },
+      "addition": {
+        "term": "Calcul : laisser l’ordinateur faire l’opération",
+        "meaning": "Si tu as deux provisions et que tu en récupères trois autres, laisse l’ordinateur calculer le total.",
+        "read": "+ additionne des nombres. (2 + 3) calcule d’abord 5, puis .log() affiche 5. Les parenthèses regroupent ce calcul."
+      },
+      "names": {
+        "term": "Noms : nommer une valeur",
+        "meaning": "Donne un nom à un nombre pour pouvoir le réutiliser sans répéter ce nombre partout.",
+        "read": "let n = 5 donne au nombre 5 le nom n. Ensuite, n + 2 signifie 5 + 2. Tu peux choisir un autre nom, mais utilise-le de façon cohérente."
+      },
+      "leap": {
+        "term": "Distance : piloter un vol avec un calcul",
+        "meaning": "Un jeu peut lire un nombre produit par ton programme et l’utiliser comme distance de vol.",
+        "read": "Calcule la distance, puis affiche-la avec .log(). C’est le jeu qui fait voler l’avion à partir du nombre ; .log() se contente de l’enregistrer."
+      },
+      "comparison": {
+        "term": "Comparaison : vérifier s’il y en a assez",
+        "meaning": "Une comparaison, comme vérifier si le carburant dépasse un minimum, donne une réponse par oui ou par non.",
+        "read": "> signifie supérieur à. 6 > 4 vaut true ; 4 > 4 vaut false. true et false représentent oui et non."
+      },
+      "branch": {
+        "term": "Conditions : choisir selon la situation",
+        "meaning": "Partir si le carburant suffit, sinon se ravitailler : une condition permet à l’ordinateur de choisir quoi faire.",
+        "read": "let fuel = 6 donne la valeur 6 à fuel. if vérifie fuel > 4. Si c’est vrai, le code entre les accolades après then s’exécute ; sinon, c’est celui après else. Cet exemple affiche 1 ou 2 ; il ne déplace pas l’avion."
+      },
+      "repeat": {
+        "term": "Répétition : refaire la même chose plusieurs fois",
+        "meaning": "Envoie des rapports à plusieurs endroits sans réécrire les mêmes instructions à chaque fois.",
+        "read": "[2, 4, 6] est une liste de trois nombres. for en prend un à la fois, lui donne temporairement le nom dock et exécute dock.log() entre les accolades. Il affiche 2, 4, puis 6."
+      },
+      "counter": {
+        "term": "Compteur : répéter en vérifiant une condition",
+        "meaning": "Comme pour parcourir une liste de vérifications avant le décollage, compte au fur et à mesure et arrête-toi quand tu en as fait assez.",
+        "read": "while vérifie sa condition avant chaque répétition et ne recommence que si elle est vraie. Le compteur doit évoluer, sinon la répétition risque de ne jamais s’arrêter."
+      },
+      "function": {
+        "term": "Fonctions : nommer des instructions réutilisables",
+        "meaning": "Fais d’un calcul, comme l’addition de deux nombres, un outil nommé que tu peux réutiliser avec d’autres nombres.",
+        "read": "sync fn combine(a, b) définit une fonction synchrone qui reçoit deux nombres, appelés temporairement a et b. combine(3, 4) lui transmet 3 et 4. return a + b renvoie 7 à l’endroit de l’appel, puis load.log() l’affiche."
+      },
+      "reply": {
+        "term": "Réponses : renvoyer un résultat",
+        "meaning": "Demande à une autre partie du programme d’effectuer une tâche, attends sa réponse, puis utilise-la.",
+        "read": "fn boost(load) reçoit un nombre. return ! renvoie le résultat calculé sous forme de réponse. À la différence d’un return ordinaire, l’envoi d’une réponse peut laisser les instructions suivantes de la fonction s’exécuter."
+      },
+      "message": {
+        "term": "Messages : transmettre des données ailleurs",
+        "meaning": "Comme pour envoyer un billet indiquant une quantité, une partie envoie un nombre et une autre le traite après l’avoir reçu.",
+        "read": "! envoie un message. Dans une réception, <- indique d’où vient la valeur. Le nombre reçu porte un nom que les calculs suivants peuvent utiliser."
+      },
+      "join": {
+        "term": "Coordination : attendre les deux messages",
+        "meaning": "Pour calculer un total à partir de deux lieux, attends les deux rapports avant de les traiter ensemble.",
+        "read": "west ! 4 et east ! 6 envoient 4 et 6. ?(a <- west & b <- east) exige un nombre de chaque côté avant d’exécuter l’addition entre ses accolades. S’il en manque un, le programme attend."
+      },
+      "coordination": {
+        "term": "Composition : relier les notions apprises",
+        "meaning": "Attends les rapports, calcule leur total avec une fonction, puis utilise ce total pour choisir une action. Assemble de petites étapes pour former un programme.",
+        "read": "Repère d’abord d’où viennent les données, puis comment elles sont utilisées dans le calcul et enfin comment une condition choisit le résultat à afficher. Suis ce chemin étape par étape."
+      }
+    }
+  },
+  "causalExperiments": {
+    "functionTitle": "À toi d’essayer : donner deux nombres aux mêmes instructions",
+    "functionIntro": "Transmets deux quantités de provisions à un outil de calcul du total nommé combine. Exécute-le, puis essaie avec deux autres nombres. Les instructions restent les mêmes ; quel résultat revient ?",
+    "joinTitle": "À toi d’essayer : attendre les deux rapports",
+    "joinIntro": "L’ouest et l’est envoient chacun une quantité. Sélectionne seulement l’ouest et exécute, puis sélectionne aussi l’est et recommence. Quand le programme peut-il calculer le total ?",
+    "separate": "Cet essai exécute l’exemple ci-dessous sans modifier ton code. Chaque expérience repart de zéro.",
+    "first": "Première quantité de provisions",
+    "second": "Seconde quantité de provisions",
+    "west": "Rapport de l’ouest",
+    "east": "Rapport de l’est",
+    "send": "Envoyer ce rapport",
+    "run": "Essayer",
+    "ready": "Choisis les quantités ou les rapports, puis sélectionne Essayer.",
+    "invalid": "Saisis des nombres entiers de 0 à 99.",
+    "arguments": "Nombres transmis",
+    "calculation": "Calcul dans la fonction",
+    "returned": "Résultat renvoyé",
+    "output": "Affichage à l’écran",
+    "returnNote": "Renvoyer un résultat et l’afficher sont deux actions distinctes. Cet exemple utilise .log() en dehors de la fonction pour afficher le résultat reçu.",
+    "sent": "Rapports envoyés",
+    "absent": "Non envoyé",
+    "received": "Les deux rapports reçus ensemble",
+    "waiting": "Le programme attend encore des rapports : rien n’a été affiché lors de cet essai.",
+    "waitingNote": "Un rapport déjà arrivé reste en attente. Le programme ne prélève pas une partie des rapports nécessaires avant de calculer.",
+    "done": "Les deux rapports ont été reçus ensemble et le total a été affiché.",
+    "noOutput": "Aucun affichage",
+    "source": "Voir le code de cette expérience",
+    "changed": "Les réglages ont changé et l’ancien résultat a été effacé. Réessaie pour voir le nouveau résultat."
+  },
+  "pursuitPractice": {
+    "title": "Essaie une règle : sauter quand un obstacle est proche",
+    "intro": "Exécute d’abord 1.log() pour voir ton personnage avancer à allure régulière. Modifie ensuite le programme pour choisir les actions selon la règle ci-dessous. Si tu as besoin d’aide, ouvre les indices un par un.",
+    "rule": "Essaie cette règle : saute si le prochain obstacle est à moins de 4 mètres. Sinon, sprinte si ton énergie dépasse 35, ou avance à allure régulière. Modifie le code et compare les résultats.",
+    "editor": "Programme d’essai, distinct de la stratégie du jeu",
+    "check": "Exécuter et comparer",
+    "stage": "Placer dans l’éditeur de stratégie",
+    "cancel": "Garder le brouillon actuel",
+    "confirm": "Remplacer le brouillon actuel",
+    "ready": "Exécute cette commande, choisis une situation et observe l’action étape par étape. Essaie de faire fonctionner le même code avec des entrées différentes.",
+    "changed": "Le code ou l’état du jeu a changé. Exécute de nouveau avant de comparer ou d’adopter ce programme.",
+    "checked": "Toutes ces entrées respectent la règle ci-dessus. Tu peux placer le programme dans l’éditeur de stratégie, puis décider de l’activer ou non.",
+    "mismatch": "Certains résultats ne respectent pas la règle ci-dessus. Compare les entrées, les actions attendues et les actions produites, puis modifie le code.",
+    "replace": "L’éditeur de stratégie contient un autre brouillon. Confirmer le remplacera ; la stratégie active et la progression de cette partie seront conservées.",
+    "staged": "Le programme a été ajouté à l’éditeur de stratégie. Utilise le bouton d’activation habituel quand tu veux que le personnage le suive.",
+    "stale": "L’observation précédente n’est plus à jour. Exécute de nouveau avec l’état actuel du jeu.",
+    "unavailable": "Impossible d’adopter ce programme maintenant. Résous le problème de sauvegarde ou reviens à une poursuite qui peut continuer.",
+    "boundary": "L’aperçu effectue une seule action dans une petite rue séparée. Il ne modifie pas ta poursuite, n’ajoute pas de temps de jeu et n’attribue pas de score. Réussir ces vérifications ne garantit pas de gagner la partie. Ton code d’essai est réinitialisé au rechargement.",
+    "samples": "Choisis une situation et compare les entrées, l’action demandée et le résultat réel. L’instantané actuel vient de cette partie ; les autres situations ne modifient que l’énergie et la distance de l’obstacle. Chacune exécute le même code depuis le début.",
+    "situation": "Situation",
+    "input": "Entrées",
+    "expected": "Action demandée par la règle",
+    "observation": "Actions réelles",
+    "current": "Instantané actuel du jeu",
+    "near": "Obstacle proche",
+    "clear": "Voie libre, énergie élevée",
+    "tired": "Voie libre, énergie faible",
+    "energy": "Énergie",
+    "obstacle": "Distance de l’obstacle (m)",
+    "action1": "Allure régulière",
+    "action2": "Sprint",
+    "action3": "Demande de saut",
+    "match": "Respecte cette règle",
+    "different": "Ne respecte pas cette règle",
+    "energyMeaning": "Ton énergie (0–100)",
+    "obstacleMeaning": "Distance du prochain obstacle (m)",
+    "gapMeaning": "Avance du rival sur son parcours (m)",
+    "roundMeaning": "Tronçon actuel",
+    "rivalEnergyMeaning": "Énergie du rival (0–100)",
+    "gapNote": "gap compare la progression sur chaque parcours. Ce n’est pas la distance physique entre le policier et le voleur.",
+    "signalError": "Pour cet exercice, affiche exactement un nombre parmi 1, 2 ou 3 à chaque exécution.",
+    "saving": "Enregistrement du brouillon adopté. Patiente un instant.",
+    "saveError": "Le brouillon adopté n’a pas été enregistré. Le jeu n’a pas repris. Vérifie le message de sauvegarde avant de réessayer.",
+    "obstacleNote": "Une valeur de 999 pour obstacle signifie qu’il ne reste aucun obstacle à franchir sur ce tronçon.",
+    "atBoundary": "Exactement 4 m, énergie à 35",
+    "aboveEnergy": "Exactement 4 m, énergie à 36",
+    "closer": "À seulement 1 m",
+    "priority": "L’obstacle est prioritaire",
+    "hint": "Donne-moi un indice",
+    "nextHint": "Afficher un autre indice",
+    "hideHints": "Masquer les indices",
+    "hint1": "obstacle est la distance du prochain obstacle ; energy représente ton endurance. Vérifie d’abord l’obstacle : saute s’il est à moins de 4 mètres. 1.log() fait avancer à allure régulière, 2.log() fait sprinter et 3.log() demande un saut.",
+    "hint2": "Choisis avec if condition then {action} else {other action}. Rappelle-toi que obstacle < 4 exclut 4 et que energy > 35 exclut 35.",
+    "hint3": "Commence par if obstacle < 4 then { 3.log() }. Dans else, vérifie energy pour choisir entre les sorties 2 et 1. La réussite d’une demande de saut dépend encore de l’endurance réelle et du moment du décollage.",
+    "executed": "Le code surligné a produit cette action",
+    "previewNote": "Aperçu d’une seule action : ton personnage rejoue cette énergie et cette distance d’obstacle dans une petite rue séparée, par pas de 0,2 seconde. Observe s’il franchit réellement l’obstacle. L’aperçu n’exécute pas toute ta stratégie en continu.",
+    "previousFrame": "Étape précédente",
+    "nextFrame": "Étape suivante",
+    "previewBlocked": "Obstacle heurté ; récupération en cours",
+    "previewCleared": "Obstacle franchi",
+    "previewJumping": "Saut en cours",
+    "tiredNear": "Obstacle proche, énergie faible"
+  },
+  "learningPaths": {
+    "choose": "Commence au bon endroit pour toi",
+    "beginnerTitle": "Mes premiers pas en programmation",
+    "beginnerIntro": "Commence par une instruction. Exécute-la, modifie-la, corrige une erreur, puis écris toi-même un programme qui fonctionne.",
+    "advancedTitle": "Aller plus loin avec tes acquis",
+    "advancedIntro": "Vérifie ta compréhension avec des entrées variées, comble les lacunes, puis combine fonctions, messages et coordination.",
+    "enterStart": "Commencer pas à pas",
+    "enterAdvance": "Explorer le parcours avancé",
+    "backGuide": "Apprendre à programmer",
+    "backPath": "Revenir au parcours d’apprentissage",
+    "startIntro": "Le code donne des instructions à un ordinateur. Observe d’abord un résultat, puis apprends à le modifier. Essaie chaque étape toi-même et reviens quand tu as besoin de revoir une notion.",
+    "step": "Étape actuelle",
+    "verified": "Exécuté et vérifié",
+    "notVerified": "À essayer",
+    "run": "Exécuter et observer",
+    "editor": "Ton programme",
+    "expected": "L’objectif de cette étape",
+    "actual": "Résultat réel de l’exécution",
+    "notRun": "Pas encore exécuté. Choisis Exécuter et observer pour obtenir un résultat ici.",
+    "passed": "Tu as réussi. Compare le code et le résultat, puis continue.",
+    "needsWork": "Le résultat ne remplit pas encore l’objectif. Compare les instructions au résultat réel et réessaie.",
+    "next": "Passer à l’étape suivante",
+    "read": "Que signifie ce code ?",
+    "repairHelp": "Les parenthèses font aussi partie du code. Une erreur peut empêcher le programme de s’exécuter. Repère l’emplacement de l’erreur, corrige le code et exécute-le de nouveau.",
+    "hint": "Donne-moi un indice",
+    "reset": "Utiliser le code de départ de cette étape",
+    "confirmReset": "Confirmer le remplacement de ce brouillon",
+    "cancelReset": "Garder mon brouillon",
+    "resetNote": "Tu as modifié cette étape. Confirme une seconde fois pour la remplacer. Les brouillons des autres étapes resteront inchangés.",
+    "case": "Situation d’entrée",
+    "executed": "Le code qui a produit ce résultat",
+    "allStartDone": "Tu as essayé d’exécuter et de modifier du code, de corriger une erreur, de calculer, de nommer une valeur et de prendre une décision. Poursuis avec des tâches complètes pour mettre tout cela en pratique.",
+    "courseRoad": "Poursuis ton apprentissage",
+    "courseIntro": "Comprends une utilité, réécris un programme, puis réalise une tâche en autonomie. Tes brouillons et tes tâches terminées sont toujours là ; reprends là où tu en as besoin.",
+    "continueCourse": "Ouvrir cette tâche",
+    "advanceGoal": "Pars de questions concrètes : le programme fonctionne-t-il encore quand les entrées changent ? Peux-tu trouver la cause d’un échec et assembler les éléments en une fonctionnalité utilisable ?",
+    "diagnosticRoad": "Vérifier d’abord, combler les lacunes ensuite",
+    "diagnosticIntro": "Chaque vérification utilise plusieurs entrées. Choisis le thème qui t’intéresse. En cas de difficulté, le résultat propose un lien vers la notion et l’exercice de réécriture correspondants.",
+    "projectRoad": "Combine tes compétences dans une tâche",
+    "projectIntro": "Choisis un poste d’amarrage, gère un lot de livraisons, implémente une interface de fonction et coordonne deux ports. Chaque tâche propose des entrées variées, des résultats réels et des indices facultatifs. Essaie une nouvelle série pour vérifier encore le même programme.",
+    "recommend": "À essayer ensuite",
+    "checkTask": "Vérifier cette compétence",
+    "applyTask": "Commencer cette tâche combinée",
+    "badSave": "Ce résultat de diagnostic ne peut pas être lu pour le moment. Ouvre la gestion des sauvegardes pour résoudre le problème. L’enregistrement d’origine n’a pas été remplacé.",
+    "lanes": [
+      "Instructions, calculs et noms",
+      "Décisions et répétitions",
+      "Fonctions et réponses",
+      "Messages et coordination"
+    ],
+    "steps": {
+      "run": {
+        "title": "Faire afficher un nombre à l’ordinateur",
+        "goal": "Exécute le programme de départ pour que la zone de résultats affiche 7. Distingue les instructions que tu écris de la valeur produite lorsque l’ordinateur les exécute.",
+        "hint": "Laisse le code tel quel et choisis Exécuter et observer. 7 est la valeur à afficher ; .log() l’affiche."
+      },
+      "change": {
+        "title": "Changer un nombre et exécuter de nouveau",
+        "goal": "Fais passer le résultat de 7 à 9. Modifier le code ne l’exécute pas. Exécute-le de nouveau après ta modification pour voir un nouveau résultat.",
+        "hint": "Essaie de changer seulement 7 et garde .log(). La modification retire l’ancien résultat ; une nouvelle exécution en produit un nouveau."
+      },
+      "repair": {
+        "title": "Corriger une petite erreur",
+        "goal": "Il manque un symbole dans ce code. Exécute-le pour voir l’erreur, puis corrige-le pour que le programme affiche 7.",
+        "hint": "Compare la fin du code aux parenthèses de .log(). Ajoute la partie manquante et exécute de nouveau."
+      },
+      "calculate": {
+        "title": "Laisser l’ordinateur calculer",
+        "goal": "Utilise une addition pour calculer et afficher 11. Tu peux choisir différents nombres, tant que leur somme vaut 11.",
+        "hint": "L’addition entre parenthèses produit une valeur, puis .log() l’affiche. Afficher simplement la valeur fixe 11 ne suffit pas pour cette étape."
+      },
+      "name": {
+        "title": "Donner un nom à une valeur",
+        "goal": "Donne un nom à une valeur d’énergie, puis utilise ce nom dans une addition qui produit 14. Le nom doit contribuer au calcul.",
+        "hint": "let energy = 10 donne à la valeur 10 le nom energy. Réutiliser energy permet de lire cette valeur. Que pourrais-tu lui ajouter ?"
+      },
+      "decide": {
+        "title": "Choisir une action face à un obstacle",
+        "goal": "obstacle est la distance du prochain obstacle. Affiche 3 en dessous de 4 ; sinon, affiche 1. Le même code doit gérer toutes les entrées. Tu vérifies ici des signaux d’action ; le personnage les utilise lorsque tu entres dans la poursuite.",
+        "hint": "Utilise if obstacle < 4 then { ... } else { ... } pour les deux situations. Exactement 4 n’est pas inférieur à 4. Afficher toujours 3 ne permet pas de gérer toutes les situations."
+      }
+    }
+  },
+  "homeExperience": {
+    "demoTitle": "Fais afficher un nombre à l’ordinateur",
+    "demoIntro": "Remplace 7 par un nombre de ton choix, puis exécute.",
+    "number": "Choisis un nombre (0–99)",
+    "run": "Exécuter cette instruction",
+    "result": "L’ordinateur affiche",
+    "ready": "Exécute l’instruction pour voir ce qu’elle affiche.",
+    "meaning": "Le nombre est la valeur à afficher. .log() demande à l’ordinateur de l’afficher.",
+    "invalid": "Saisis un nombre entier de 0 à 99.",
+    "changed": "Tu as changé le nombre. Exécute de nouveau.",
+    "routeTitle": "De ta première exécution à un problème résolu en autonomie.",
+    "routeIntro": "Tu découvres la programmation ? Commence par de petites étapes concrètes. Tu sais déjà coder ? Vérifie ta compréhension, puis combine tes compétences dans une tâche.",
+    "practiceTitle": "Que peut faire le code ? Essaie dans un jeu.",
+    "practiceIntro": "Observe la scène, écris une solution et fais de son résultat la prochaine action. Tu peux revenir dans chaque jeu pour continuer.",
+    "gameNotes": [
+      "Calcule et envoie les signaux dans l’ordre pour ouvrir trois mécanismes.",
+      "Cours dans les rues, choisis ton itinéraire et saute les obstacles. Utilise une stratégie pour modifier la poursuite.",
+      "Gère des chargements variables avec des conditions, des boucles et des fonctions, puis coordonne deux dépôts."
+    ],
+    "allGames": "Explorer tous les jeux",
+    "roadTitle": "Comprends ce que tu fais à chaque étape.",
+    "roadSteps": [
+      [
+        "Comprendre",
+        "Observe le code, les entrées et les résultats ensemble pour comprendre ce qui se passe."
+      ],
+      [
+        "Expérimenter",
+        "Change une chose et exécute de nouveau. Utilise le résultat pour trouver et corriger les erreurs."
+      ],
+      [
+        "Résoudre en autonomie",
+        "Écris ton propre programme pour de nouvelles entrées et vérifie si ton approche fonctionne toujours."
+      ]
+    ],
+    "helpTitle": "Une notion inconnue ?",
+    "help": "Explore les liens entre les idées sur la carte des notions, ou compare Tolang à un langage que tu connais déjà."
+  },
+  "teaching": {
+    "title": "D’une valeur à un résultat visible",
+    "intro": "Essaie les deux programmes. Avant chaque exécution, détermine s’il demande à l’ordinateur d’afficher quelque chose.",
+    "programTitle": "Qu’est-ce qu’un programme ?",
+    "programText": "Un programme est un ensemble d’instructions ; Tolang est le langage utilisé ici pour les écrire. Cette page exécute de courts programmes : change le nombre ou choisis une autre écriture, puis appuie sur Exécuter pour lancer le programme actuel. Modifier le code ne l’exécute pas ; c’est le jeu qui décide comment utiliser ses résultats.",
+    "syntaxTitle": "Lis ce programme",
+    "valueLabel": "Le nombre à utiliser",
+    "valueText": "Ce nombre est la valeur avec laquelle nous voulons travailler. Écrire un nombre seul ne demande pas à l’ordinateur de l’afficher.",
+    "dotLabel": ". · relier",
+    "dotText": "Le point relie la valeur à sa gauche à l’opération nommée à sa droite.",
+    "operationLabel": "log · enregistrer",
+    "operationText": "log est le nom d’une opération qui enregistre la valeur précédente. Cette page affiche ces enregistrements dans la zone de résultats.",
+    "callLabel": "() · effectuer l’opération",
+    "callText": "Les parenthèses appellent l’opération : elles demandent à l’ordinateur de l’effectuer. Elles sont vides parce que cet appel n’a besoin d’aucune information supplémentaire à l’intérieur.",
+    "runLabel": "Exécuter ce programme",
+    "bareLabel": "Écrire seulement le nombre",
+    "outputLabel": "Zone de résultats",
+    "noOutput": "Aucune sortie : ce programme n’a pas demandé à l’ordinateur d’enregistrer une valeur.",
+    "ready": "Choisis un programme, prévois son résultat, puis exécute-le.",
+    "changed": "Le code a changé. Exécute-le de nouveau pour voir son nouveau résultat.",
+    "ran": "L’ordinateur a exécuté ce programme. Compare le résultat à ta prévision.",
+    "nextLabel": "Ensuite : écrire un autre nombre",
+    "steps": {
+      "run": "Dans 7.log(), 7 est la valeur et .log() demande à l’ordinateur de l’enregistrer. Exécute le programme pour afficher 7, puis réfléchis à la partie à modifier pour afficher 9.",
+      "change": "Remplace seulement 7 par le nombre demandé et garde .log(). Exécute de nouveau : le résultat vient de ta nouvelle instruction. Pour le prochain objectif, détermine d’abord quel nombre écrire.",
+      "repair": "Il manque la parenthèse fermante dans 7.log(, donc l’ordinateur ne peut pas lire l’instruction complète. Ajoute ) pour obtenir 7.log(), exécute de nouveau et vérifie que 7 apparaît.",
+      "calculate": "(2 + 3).log() additionne 2 et 3 avant d’enregistrer 5. Ton objectif est 11 : choisis deux nombres dont la somme vaut 11, écris le calcul et exécute-le pour vérifier ton choix.",
+      "name": "let energy = 5 donne à la valeur 5 le nom energy ; (energy + 2).log() l’utilise pour afficher 7. Ton objectif est 14 : choisis une valeur pour energy et un nombre à lui ajouter, puis vérifie que le calcul utilise réellement ce nom.",
+      "decide": "1.log() enregistre toujours 1 et ne peut donc pas choisir une action selon l’obstacle. Vérifie obstacle < 4 : enregistre 3 dans le bloc then si c’est vrai, et 1 dans le bloc else sinon. Réfléchis à la branche qui inclut 4 avant d’exécuter les différents cas."
+    },
+    "lessons": {
+      "signal": "7 est un nombre ; le point le relie à log et () appelle cette opération. Exécuter 7.log() enregistre 7 dans la zone de résultats. Pour enregistrer un autre nombre, change la valeur avant le point.",
+      "addition": "Les parenthèses autour de 2 + 3 regroupent le calcul. L’ordinateur obtient 5, puis .log() enregistre ce résultat. Modifier l’un des nombres modifie la somme.",
+      "names": "let n = 5 donne à 5 le nom n. La ligne suivante retrouve la valeur de n, ajoute 2 et enregistre 7. Modifier la définition change la valeur utilisée dans ce calcul.",
+      "leap": "(2 + 3) produit 5 et .log() l’enregistre. Dans cette mission, le jeu lit cet enregistrement et fait avancer l’avion de cinq cases. log ne fait qu’enregistrer la valeur.",
+      "comparison": "let fuel = 6 donne à 6 le nom fuel. fuel > 4 vérifie si 6 est supérieur à 4 ; .log() enregistre donc true. Si fuel valait 3, il enregistrerait false.",
+      "branch": "La première ligne donne la valeur 6 à fuel. if vérifie fuel > 4 et exécute le bloc qui enregistre 1 si c’est vrai. Sinon, else exécute le bloc qui enregistre 2 : les deux résultats sont des possibilités alternatives.",
+      "repeat": "for prend 2, puis 4, puis 6 dans la liste et donne à chaque fois à la valeur actuelle le nom dock. Le bloc enregistre dock à chaque passage et produit trois résultats séparés dans cet ordre.",
+      "counter": "Le compteur tick commence à 1. while vérifie tick < 4 avant chaque tour ; le bloc enregistre tick, puis l’augmente de 1. Il produit 1, 2, 3 et s’arrête à 4.",
+      "function": "sync fn définit combine comme un calcul réutilisable avec deux entrées, a et b ; return renvoie leur somme à l’endroit de l’appel. combine(3, 4) fournit ces entrées et donne au résultat 7 le nom load. load.log() l’affiche.",
+      "reply": "fn définit boost avec une entrée nommée load. boost(5) l’exécute avec 5 et return ! répond avec 5 + 2. La réponse prend le nom result, puis .log() l’affiche sous la forme 7.",
+      "message": "let parcel crée un endroit où envoyer un message. parcel ! 7 envoie 7, tandis que la partie qui reçoit attend parcel et donne à la valeur reçue le nom value. value.log() affiche 7.",
+      "join": "west et east sont deux destinations de messages ; les parties parallèles envoient 4 et 6. La réception reliée par & attend une valeur de chaque côté et leur donne les noms a et b. Elle enregistre ensuite leur somme, 10.",
+      "coordination": "total définit d’abord comment additionner deux entrées. Les parties parallèles envoient 6 et 7 ; lorsque les deux messages arrivent, total(a, b) produit load = 13. Comme 13 > 12 est vrai, le bloc choisi ajoute 5 et enregistre 18 ; sinon, il enregistrerait load sans le modifier."
+    },
+    "workedTitle": "Lis d’abord un exemple complet",
+    "workedIntro": "Commence par des programmes complets montrant une fonction qui renvoie une valeur, une fonction qui envoie une réponse, la réception d’un message et l’attente de deux messages. Lis comment chaque partie mène au résultat affiché, puis essaie les diagnostics avec des entrées variables et les projets qui combinent ces notions."
+  },
+  "handheld": {
+    "title": "Une console portable pilotée par votre code",
+    "intro": "Choisissez une cartouche, lancez une partie et commandez-la avec Tolang. Vous pouvez aussi commencer avec les boutons pour découvrir le jeu.",
+    "open": "Ouvrir la console",
+    "device": "Console portable programmable",
+    "screen": "Écran de jeu. Les flèches déplacent ; Space ou Z correspond à A, X à B.",
+    "games": [
+      "Blocs en chute",
+      "Défense de chars",
+      "Patrouille stellaire"
+    ],
+    "select": "Choisir une cartouche",
+    "first": "Exécutez les deux lignes ci-dessous : choose(1) sélectionne le jeu de blocs et start() lance la partie. Essayez ensuite d'ajouter une commande de déplacement.",
+    "console": "Vos commandes Tolang",
+    "run": "Exécuter ces instructions",
+    "commands": "Que puis-je écrire ?",
+    "commandNote": "Ces fonctions de jeu sont fournies par la console. Appelez-les avec Tolang ; l'écran exécute les instructions dans l'ordre.",
+    "chooseNote": "1 sélectionne les blocs, 2 les chars et 3 la patrouille stellaire. Choisir une cartouche prépare une nouvelle partie.",
+    "lifecycleNote": "Démarrer ou reprendre ; mettre en pause ; terminer la partie actuelle avant la fin. Démarrer après une partie terminée crée une nouvelle manche.",
+    "motionNote": "Utilisez les fonctions indiquées pour cette cartouche. Par exemple, left(); left(); effectue deux déplacements.",
+    "applied": "Instructions reçues. Observez l'écran les exécuter dans l'ordre.",
+    "none": "Le programme s'est exécuté sans envoyer d'instruction de jeu. Essayez start() ou une fonction de déplacement.",
+    "invalid": "Ce programme n'a pas pu commander la console. Vérifiez le code et les fonctions disponibles pour cette cartouche, corrigez-le et relancez-le.",
+    "changed": "Le code a changé. Exécutez-le pour appliquer les nouvelles instructions.",
+    "autopilot": "Commande automatique",
+    "autoNote": "Toutes les 0.25 secondes, la console lit l'état actuel du jeu et exécute à nouveau cette stratégie. Utilisez plutôt choose(), start(), pause() et finish() dans les commandes principales.",
+    "strategy": "Votre stratégie de commande",
+    "autoApply": "Appliquer la stratégie et jouer",
+    "manual": "Revenir aux boutons",
+    "observations": "Valeurs que votre programme peut lire",
+    "inputNotes": [
+      "x et y situent le cadre de 4 × 4 de la pièce actuelle ; targetX suggère une colonne pour sa rotation actuelle. danger est la hauteur de l'empilement, de 0 à 20. Le cadre peut dépasser du plateau si les cases situées à l'extérieur sont vides.",
+      "x et y sont la position de votre char sur la grille. enemyX et enemyY situent un ennemi, ou valent -1 s'il n'y en a aucun. danger vaut 1 lorsqu'un projectile ennemi proche demande votre attention ; health est le nombre de vies restantes.",
+      "x et y sont la position de votre vaisseau en pixels. enemyX et enemyY situent un ennemi, ou valent -1 s'il n'y en a aucun. danger vaut 1 lorsqu'un projectile ennemi proche demande votre attention ; health est le nombre de vies restantes."
+    ],
+    "help": [
+      "← → déplacer · ↑ / A / Space tourner · B / X faire tomber · ↓ descendre. Remplissez une ligne pour l'effacer.",
+      "Flèches pour déplacer · A / B / Space pour tirer. Protégez votre base, détruisez les murs de briques et repoussez les vagues ennemies.",
+      "Flèches pour déplacer · A / B / Space pour tirer. Évitez les projectiles et éliminez chaque formation."
+    ],
+    "start": "Démarrer / reprendre",
+    "pause": "Pause",
+    "finish": "Terminer la partie",
+    "left": "Déplacer à gauche",
+    "right": "Déplacer à droite",
+    "up": "Monter / tourner",
+    "down": "Descendre",
+    "score": "Score",
+    "ready": "Prêt",
+    "running": "Partie en cours",
+    "paused": "En pause",
+    "ended": "Partie arrêtée avant la fin",
+    "over": "Partie terminée",
+    "won": "Mission accomplie",
+    "short": [
+      "Complétez des lignes pour faire de la place à la prochaine pièce.",
+      "Défendez la base et détruisez les murs de briques et les chars ennemis.",
+      "Évitez les tirs et éliminez les formations ennemies, vague après vague."
+    ]
+  },
+  "district": {
+    "title": "Le quartier des jeux de code",
+    "intro": "Mettez votre capuche et flânez entre les boutiques. Choisissez une boutique et commencez à jouer.",
+    "move": "Les boutiques forment deux rangées, en haut et en bas. Utilisez les flèches ou WASD, ou cliquez sur la rue pour vous déplacer dans les quatre directions et contourner les obstacles. Une action manuelle reprend le contrôle de la promenade automatique. Appuyez sur Enter près d’une porte, ou cliquez sur une boutique pour entrer directement.",
+    "autoWalk": "Flâner automatiquement",
+    "manualWalk": "Marcher manuellement",
+    "enter": "Entrer dans le jeu",
+    "near": "{name} · Appuyez sur Enter pour jouer",
+    "shops": "Boutiques du quartier"
+  }
+}

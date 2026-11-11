@@ -79,7 +79,7 @@
     "mapShort": "Karte",
     "heroAccent": "Planeten",
     "observeProgram": "Vorhersagen und ausführen",
-    "practiceInChase": "Teste deine Ideen in der Raumhafen-Jagd",
+    "practiceInChase": "Teste deine Ideen in „Verfolgungsjagd durch die Straßen“",
     "trackBeginner": "Programmiergrundlagen",
     "trackTolang": "Tolang in der Praxis",
     "trackAdvanced": "Nachrichten und Koordination",
@@ -839,7 +839,7 @@
     "rule": "Beim ersten Abschluss: +100 je Mission, +50 je Mechanismus-Stempel. Wiederholungen geben keine doppelten Punkte."
   },
   "chase": {
-    "title": "Verfolgungsjagd am Raumhafen",
+    "title": "Verfolgungsjagd durch die Straßen",
     "tag": "Zwei Rollen · Eine codegesteuerte Jagd",
     "intro": "Sei Polizist oder Dieb. Lies die Straße, schreibe einen Plan und beobachte, wie sich jedes Signal auf die Jagd auswirkt.",
     "choose": "Wähle deine Rolle",
@@ -875,9 +875,21 @@
     "meaning": "Mit let gibst du einem Wert einen Namen; + addiert Werte; .log() gibt einen Wert aus. Dieses Spiel liest jede ausgegebene Zahl als Bewegung. Derselbe Code kann in einem anderen Spiel andere Dinge steuern.",
     "local": "Die Entwürfe beider Rollen und abgeschlossene Bezirke bleiben in diesem Browser. Eine Anmeldung synchronisiert sie nicht. Diese Missionen haben kein Zeitlimit.",
     "noSave": "Dieser Browser konnte deinen Entwurf nicht speichern. Lass diese Seite geöffnet und kopiere deinen Code, bevor du sie verlässt.",
-    "stages": ["Offene Straße", "Bezirk mit Straßensperren", "Deine eigene Route"],
-    "hints": ["Versuche, eine größere Zahl auszugeben. Jeder .log() ist eine Bewegung, und dein Gegner ist danach einmal am Zug. Für eine längere Strecke füge weitere Signale hinzu.", "Prüfe, wo deine Rolle startet und wo jedes Signal landet. Verwende einen benannten Wert oder eine Addition erneut und vermeide blockierte Landepunkte.", "Beginne mit einem leeren Editor. Gib deiner Schrittweite einen Namen und kombiniere dann 1, 2 und 3, um eine Route zu planen. Wenn du dieselbe Bewegung wiederholst, triffst du möglicherweise auf eine Straßensperre."],
-    "learned": ["Ein ausgegebener Wert verursachte eine Bewegung. Eine Änderung des Werts änderte die Jagd.", "Dieselbe Gesamtstrecke kann über verschiedene Routen verlaufen. Reihenfolge und Landepositionen sind entscheidend.", "Du hast einen vollständigen Plan geschrieben und getestet. Probiere die andere Rolle: Startposition und Ziel ändern sich."],
+    "stages": [
+      "Offene Straße",
+      "Bezirk mit Straßensperren",
+      "Deine eigene Route"
+    ],
+    "hints": [
+      "Versuche, eine größere Zahl auszugeben. Jeder .log() ist eine Bewegung, und dein Gegner ist danach einmal am Zug. Für eine längere Strecke füge weitere Signale hinzu.",
+      "Prüfe, wo deine Rolle startet und wo jedes Signal landet. Verwende einen benannten Wert oder eine Addition erneut und vermeide blockierte Landepunkte.",
+      "Beginne mit einem leeren Editor. Gib deiner Schrittweite einen Namen und kombiniere dann 1, 2 und 3, um eine Route zu planen. Wenn du dieselbe Bewegung wiederholst, triffst du möglicherweise auf eine Straßensperre."
+    ],
+    "learned": [
+      "Ein ausgegebener Wert verursachte eine Bewegung. Eine Änderung des Werts änderte die Jagd.",
+      "Dieselbe Gesamtstrecke kann über verschiedene Routen verlaufen. Reihenfolge und Landepositionen sind entscheidend.",
+      "Du hast einen vollständigen Plan geschrieben und getestet. Probiere die andere Rolle: Startposition und Ziel ändern sich."
+    ],
     "sceneControls": "Verfolgungsszene. Drücke beim Üben 1, 2 oder 3, um dich zu bewegen.",
     "loading": "Die Straße wird geöffnet…",
     "practice": "Route selbst ausprobieren",
@@ -934,13 +946,13 @@
     "emailTaken": "Diese E-Mail ist bereits registriert. Melde dich an."
   },
   "dispatch": {
-    "title": "Raumhafen-Disposition",
+    "title": "Frachthof",
     "tag": "Ein Programm · Wechselnde Fracht",
-    "intro": "Schreibe ein Programm, das jede Lieferung bearbeitet. Beobachte, was es sendet, vergleiche die Ergebnisse und passe deinen Plan an.",
+    "intro": "Schreibe ein Programm, das jede Lieferung bearbeitet. Beobachte, wie der Kran deinen Signalen folgt und Kisten versetzt, vergleiche die Lieferergebnisse und passe deinen Plan an.",
     "entry": "Leite Fracht mit Bedingungen, Schleifen, Funktionen und zusammenarbeitenden Nachrichten. Neue Runden bringen neue Dispositionsdaten.",
     "editor": "Dein Dispositionsprogramm",
     "inputs": "Eingaben für diese Lieferung",
-    "inputNote": "Diese Eingaben liefert die Station.",
+    "inputNote": "Diese Eingaben liefert der Frachthof.",
     "run": "Alle Lieferungen ausführen",
     "batch": "Lieferung",
     "preview": "Lieferungsvorschau",
@@ -969,7 +981,7 @@
     "local": "Code und Dispositionsdaten bleiben in diesem Browser. Beim Anmelden werden sie nicht synchronisiert. Es gibt kein Zeitlimit.",
     "noSave": "Dieser Browser konnte deinen Code nicht speichern. Lass die Seite geöffnet und kopiere den Code, bevor du sie verlässt.",
     "replay": "Diese Lieferung erneut abspielen",
-    "origin": "Frachtstation",
+    "origin": "Startpunkt im Frachthof",
     "dock": "Dock",
     "idle": "Prüfe die Eingaben und führe dann dein Programm aus.",
     "missions": [
@@ -987,13 +999,13 @@
       },
       {
         "title": "Treibstoff berechnen",
-        "brief": "Definiere fuel(cargo, reserve) und gib die Summe der beiden Parameter zurück. Die Station ruft deine Funktion mit verschiedenen Frachtmengen und Reserven auf und zeigt dann ihren Rückgabewert an. Dein Code braucht nur die Funktionsdefinition.",
-        "hint": "Verwende ein ausdrückliches return. Die Parameternamen darfst du selbst wählen, aber der Funktionsname muss fuel bleiben, damit die Station sie aufrufen kann. .log() brauchst du hier nicht.",
+        "brief": "Definiere fuel(cargo, reserve) und gib die Summe der beiden Parameter zurück. Der Frachthof ruft deine Funktion mit verschiedenen Frachtmengen und Reserven auf und zeigt dann ihren Rückgabewert an. Dein Code braucht nur die Funktionsdefinition.",
+        "hint": "Verwende ein ausdrückliches return. Die Parameternamen darfst du selbst wählen, aber der Funktionsname muss fuel bleiben, damit der Frachthof sie aufrufen kann. .log() brauchst du hier nicht.",
         "learned": "Eine wiederverwendbare Funktion berechnet Treibstoff für verschiedene Frachtmengen und Reserven."
       },
       {
         "title": "Berichte zusammenführen",
-        "brief": "Die Station sendet Berichte über west und east. Empfange beide gemeinsam und kombiniere ihre empfangenen Werte in einer sync-Funktion. Wenn die Summe threshold überschreitet, addiere reserve. Zeige nur die resultierende Summe an.",
+        "brief": "Der Frachthof sendet Berichte über west und east. Empfange beide gemeinsam und kombiniere ihre empfangenen Werte in einer sync-Funktion. Wenn die Summe threshold überschreitet, addiere reserve. Zeige nur die resultierende Summe an.",
         "hint": "Verwende & für den gemeinsamen Empfang. Beide empfangenen Werte müssen in das Ergebnis deiner Funktion einfließen, und dieses Ergebnis muss in die angezeigte Berechnung gelangen.",
         "learned": "Nachrichten, eine Funktion und eine Bedingung arbeiten jetzt über verschiedene Berichte hinweg zusammen."
       }
@@ -1120,7 +1132,7 @@
     "reference": "Offizielle Sprachdokumentation",
     "difference": "Darauf beim Wechsel achten",
     "messageDifference": "Für das Senden und Empfangen von Nachrichten, das gemeinsame Empfangen und Funktionsantworten in Tolang gibt es in Python, JavaScript und Rust keinen einheitlichen Wort-für-Wort-Ersatz. Führe zuerst das Tolang-Beispiel oben aus und erkunde dann echte Datenabhängigkeiten in einer Koordinationsaufgabe.",
-    "transfer": "Neue Eingaben in der Sternhafen-Leitstelle ausprobieren",
+    "transfer": "Neue Eingaben im Frachthof ausprobieren",
     "stations": [
       {
         "title": "Ausgabe",
@@ -1196,7 +1208,7 @@
     }
   },
   "pursuit": {
-    "title": "Fortlaufende Verfolgung",
+    "title": "Verfolgungsjagd durch die Straßen",
     "tag": "Einsatz in der Stadt · 20 Straßenabschnitte",
     "intro": "Laufe, wähle Wege und überwinde Straßensperren. Ein Spielergebnis gibt es frühestens nach zehn Minuten aktiver Spielzeit und erst nach einem tatsächlichen Abfangen oder einer Flucht.",
     "continuous": "Fortlaufende Verfolgung",
@@ -1968,7 +1980,7 @@
     "gameNotes": [
       "Berechne Werte und sende Signale in der richtigen Reihenfolge, um drei Mechanismen zu öffnen.",
       "Laufe durch Straßen, wähle Wege und springe über Hindernisse. Beeinflusse die Verfolgung mit einer Strategie.",
-      "Verarbeite wechselnde Fracht mit Bedingungen, Schleifen und Funktionen und lasse anschließend zwei Raumhäfen zusammenarbeiten."
+      "Verarbeite wechselnde Fracht mit Bedingungen, Schleifen und Funktionen und lasse anschließend zwei Frachthöfe zusammenarbeiten."
     ],
     "allGames": "Alle Spiele entdecken",
     "roadTitle": "Wisse bei jedem Schritt, was du tust.",
@@ -2036,5 +2048,75 @@
     },
     "workedTitle": "Zuerst ein vollständiges Beispiel lesen",
     "workedIntro": "Beginne mit vollständigen Programmen: Eine Funktion gibt einen Wert zurück, eine andere sendet eine Antwort, eine Nachricht wird empfangen oder auf zwei Nachrichten gewartet. Lies, wie aus den einzelnen Teilen das angezeigte Ergebnis entsteht. Probiere danach die Diagnosen mit wechselnden Eingaben und die kombinierten Projekte aus."
+  },
+  "handheld": {
+    "title": "Ein Handheld, gesteuert mit deinem Code",
+    "intro": "Wähle ein Spielmodul, starte ein Spiel und steuere es mit Tolang. Du kannst zuerst auch die Tasten benutzen, um das Spiel kennenzulernen.",
+    "open": "Handheld öffnen",
+    "device": "Programmierbarer Handheld",
+    "screen": "Spielbildschirm. Pfeiltasten bewegen; Space oder Z entspricht A, X entspricht B.",
+    "games": [
+      "Fallende Blöcke",
+      "Panzerverteidigung",
+      "Sternenpatrouille"
+    ],
+    "select": "Spielmodul wählen",
+    "first": "Führe die beiden Zeilen unten aus: choose(1) wählt das Blockspiel, start() startet es. Ergänze dann einen Bewegungsbefehl.",
+    "console": "Deine Tolang-Steuerung",
+    "run": "Diese Anweisungen ausführen",
+    "commands": "Was kann ich schreiben?",
+    "commandNote": "Diese Spielfunktionen stellt der Handheld bereit. Rufe sie mit Tolang auf; der Bildschirm führt die Anweisungen der Reihe nach aus.",
+    "chooseNote": "1 wählt Blöcke, 2 Panzer, 3 Sternenpatrouille. Die Auswahl eines Spielmoduls bereitet ein neues Spiel vor.",
+    "lifecycleNote": "Starten oder fortsetzen; pausieren; das aktuelle Spiel vorzeitig beenden. Nach einem beendeten Spiel beginnt beim Starten eine neue Runde.",
+    "motionNote": "Verwende die hier gezeigten Funktionen für dieses Spielmodul. Zum Beispiel führt left(); left(); zwei Bewegungen aus.",
+    "applied": "Anweisungen empfangen. Sieh zu, wie sie auf dem Bildschirm der Reihe nach ausgeführt werden.",
+    "none": "Das Programm lief, hat aber keine Spielanweisung gesendet. Versuche start() oder eine Bewegungsfunktion.",
+    "invalid": "Dieses Programm konnte den Handheld nicht steuern. Prüfe den Code und die verfügbaren Funktionen dieses Spielmoduls, korrigiere ihn und führe ihn erneut aus.",
+    "changed": "Code geändert. Führe ihn aus, um die neuen Anweisungen anzuwenden.",
+    "autopilot": "Automatische Steuerung",
+    "autoNote": "Alle 0.25 Sekunden liest der Handheld den aktuellen Spielzustand und führt diese Strategie erneut aus. Verwende choose(), start(), pause() und finish() stattdessen in der Hauptsteuerung.",
+    "strategy": "Deine Steuerungsstrategie",
+    "autoApply": "Strategie anwenden und spielen",
+    "manual": "Zur Tastensteuerung zurückkehren",
+    "observations": "Werte, die dein Programm lesen kann",
+    "inputNotes": [
+      "x und y geben die Position des 4 × 4 großen Rahmens des aktuellen Steins an; targetX schlägt eine Spalte für seine aktuelle Drehung vor. danger ist die Stapelhöhe von 0 bis 20. Der Rahmen darf über das Spielfeld hinausragen, wenn außerhalb nur leere Felder liegen.",
+      "x und y sind die Rasterposition deines Panzers. enemyX und enemyY geben die Position eines Gegners an oder sind -1, wenn keiner vorhanden ist. danger ist 1, wenn ein nahes feindliches Geschoss Aufmerksamkeit erfordert; health sind deine verbleibenden Leben.",
+      "x und y sind die Pixelposition deines Schiffs. enemyX und enemyY geben die Position eines Gegners an oder sind -1, wenn keiner vorhanden ist. danger ist 1, wenn ein nahes feindliches Geschoss Aufmerksamkeit erfordert; health sind deine verbleibenden Leben."
+    ],
+    "help": [
+      "← → bewegen · ↑ / A / Space drehen · B / X sofort fallen lassen · ↓ absenken. Fülle eine Reihe, um sie zu entfernen.",
+      "Pfeiltasten bewegen · A / B / Space feuern. Schütze deine Basis, zerstöre Ziegelmauern und besiege die Gegnerwellen.",
+      "Pfeiltasten bewegen · A / B / Space feuern. Weiche anfliegenden Geschossen aus und besiege jede Formation."
+    ],
+    "start": "Starten / fortsetzen",
+    "pause": "Pause",
+    "finish": "Spiel beenden",
+    "left": "Nach links bewegen",
+    "right": "Nach rechts bewegen",
+    "up": "Nach oben bewegen / drehen",
+    "down": "Nach unten bewegen",
+    "score": "Punkte",
+    "ready": "Bereit",
+    "running": "Spiel läuft",
+    "paused": "Pausiert",
+    "ended": "Vorzeitig beendet",
+    "over": "Spiel vorbei",
+    "won": "Mission erfüllt",
+    "short": [
+      "Fülle ganze Reihen, um Platz für den nächsten Stein zu schaffen.",
+      "Verteidige die Basis und zerstöre Ziegelmauern und feindliche Panzer.",
+      "Weiche dem Beschuss aus und besiege eine Welle feindlicher Flugzeuge nach der anderen."
+    ]
+  },
+  "district": {
+    "title": "Das Code-Spieleviertel",
+    "intro": "Zieh die Kapuze hoch und schlendere an den Läden entlang. Klicke auf einen Laden und spiel los.",
+    "move": "Die Läden stehen oben und unten entlang der Straße. Mit den Pfeiltasten, WASD oder einem Klick auf den Weg kannst du dich in alle vier Richtungen bewegen und Hindernisse umgehen. Sobald du selbst steuerst, endet das automatische Gehen. Drücke nahe einer Ladentür Enter oder klicke direkt auf einen Laden, um hineinzugehen.",
+    "autoWalk": "Automatisch schlendern",
+    "manualWalk": "Selbst gehen",
+    "enter": "Spiel betreten",
+    "near": "{name} · Zum Spielen Enter drücken",
+    "shops": "Läden im Spieleviertel"
   }
 }

@@ -79,7 +79,7 @@
     "mapShort": "Map",
     "heroAccent": "planets",
     "observeProgram": "Predict and run",
-    "practiceInChase": "Try your ideas in Starport Chase",
+    "practiceInChase": "Try your ideas in Street Pursuit",
     "trackBeginner": "Programming foundations",
     "trackTolang": "Tolang in practice",
     "trackAdvanced": "Messages and coordination",
@@ -861,7 +861,7 @@
     "emailTaken": "This email is already registered. Try logging in."
   },
   "chase": {
-    "title": "Starport Chase",
+    "title": "Street Pursuit",
     "tag": "Two roles · One code-powered chase",
     "intro": "Be the police or the thief. Read the street, write a plan and watch every signal change the chase.",
     "choose": "Choose your role",
@@ -946,13 +946,13 @@
     "traceRival": "Your rival then moved one space."
   },
   "dispatch": {
-    "title": "Starport Dispatch",
+    "title": "Cargo Dispatch",
     "tag": "One program · Changing cargo",
-    "intro": "Write a program that handles every delivery batch. Watch what it sends, compare the results and adjust your plan.",
+    "intro": "Write a program that handles every delivery batch. Watch the crane move crates according to your signals, compare delivery results and adjust your plan.",
     "entry": "Route cargo with conditions, loops, functions and cooperating messages. New rounds bring new dispatch data.",
     "editor": "Your dispatch program",
     "inputs": "Inputs for this batch",
-    "inputNote": "The station supplies these inputs.",
+    "inputNote": "The cargo yard supplies these inputs.",
     "run": "Run all batches",
     "batch": "Delivery batch",
     "preview": "Delivery preview",
@@ -981,7 +981,7 @@
     "local": "Code and dispatch records stay in this browser. Signing in does not sync them. There is no timer.",
     "noSave": "This browser could not save your code. Keep the page open and copy it before leaving.",
     "replay": "Replay this batch",
-    "origin": "Cargo station",
+    "origin": "Yard starting point",
     "dock": "Dock",
     "idle": "Inspect the inputs, then run your program.",
     "missions": [
@@ -999,13 +999,13 @@
       },
       {
         "title": "Calculate fuel",
-        "brief": "Define fuel(cargo, reserve) and return the sum of its two parameters. The station calls your function with different cargo loads and reserves, then displays its return value. Your code only needs the function definition.",
-        "hint": "Use an explicit return. Choose your own parameter names, but keep the function name fuel so the station can call it. You do not need .log() here.",
+        "brief": "Define fuel(cargo, reserve) and return the sum of its two parameters. The cargo yard calls your function with different cargo loads and reserves, then displays its return value. Your code only needs the function definition.",
+        "hint": "Use an explicit return. Choose your own parameter names, but keep the function name fuel so the cargo yard can call it. You do not need .log() here.",
         "learned": "One reusable function calculates fuel for different cargo loads and reserves."
       },
       {
         "title": "Combine the reports",
-        "brief": "The station sends reports through west and east. Receive both together and combine their received values in a sync function. If the total exceeds threshold, add reserve. Display only the resulting total.",
+        "brief": "The cargo yard sends reports through west and east. Receive both together and combine their received values in a sync function. If the total exceeds threshold, add reserve. Display only the resulting total.",
         "hint": "Use & for the joint receive. Both received values must reach your function result, and that result must reach the displayed calculation.",
         "learned": "Messages, a function and a condition now cooperate across different reports."
       }
@@ -1132,7 +1132,7 @@
     "reference": "Official language documentation",
     "difference": "Watch for this when switching",
     "messageDifference": "Tolang message sends, receives, joins and function replies have no single word-for-word replacement across Python, JavaScript and Rust. Run the Tolang example above, then explore real data dependencies in a coordination task.",
-    "transfer": "Try new inputs at Starport Dispatch",
+    "transfer": "Try new inputs at Cargo Dispatch",
     "stations": [
       {
         "title": "Output",
@@ -1208,7 +1208,7 @@
     }
   },
   "pursuit": {
-    "title": "Continuous pursuit",
+    "title": "Street Pursuit",
     "tag": "City operation · 20 road sections",
     "intro": "Run, choose routes and clear roadblocks. A whole-match result requires at least ten minutes, followed by a real interception or escape.",
     "continuous": "Continuous pursuit",
@@ -1980,7 +1980,7 @@
     "gameNotes": [
       "Calculate and send signals in order to open three mechanisms.",
       "Run through streets, choose routes and jump barriers. Use a strategy to change the chase.",
-      "Handle changing cargo with conditions, loops and functions, then coordinate two starports."
+      "Handle changing cargo with conditions, loops and functions, then coordinate two cargo yards."
     ],
     "allGames": "Explore all games",
     "roadTitle": "Know what you are doing at every step.",
@@ -2048,5 +2048,75 @@
     },
     "workedTitle": "Read a complete example first",
     "workedIntro": "Start with complete programs showing a function returning a value, a function sending a reply, receiving one message, and waiting for two messages. Read how each part leads to the displayed result, then try the diagnostics with changing inputs and the combined projects."
+  },
+  "handheld": {
+    "title": "A handheld, powered by your code",
+    "intro": "Choose a cartridge, start a game and control it with Tolang. You can also use the buttons to get a feel for the game first.",
+    "open": "Open the handheld",
+    "device": "Programmable handheld",
+    "screen": "Game screen. Arrow keys move; Space or Z is A, X is B.",
+    "games": [
+      "Falling blocks",
+      "Tank defence",
+      "Star patrol"
+    ],
+    "select": "Choose a cartridge",
+    "first": "Run the two lines below: choose(1) selects falling blocks, and start() begins the game. Then try adding a movement command.",
+    "console": "Your Tolang controls",
+    "run": "Run these instructions",
+    "commands": "What can I write?",
+    "commandNote": "These game functions are provided by the handheld. Call them using Tolang; the screen carries out the instructions in order.",
+    "chooseNote": "1 selects blocks, 2 tanks, 3 star patrol. Choosing a cartridge prepares a fresh game.",
+    "lifecycleNote": "Start or resume; pause; end the current game early. Starting after an ended game creates a new round.",
+    "motionNote": "Use the functions shown here for this cartridge. For example, left(); left(); moves twice.",
+    "applied": "Instructions received. Watch the screen carry them out in order.",
+    "none": "The program ran without sending a game instruction. Try start() or a movement function.",
+    "invalid": "This program could not control the handheld. Check the code and the functions available for this cartridge; correct it and run again.",
+    "changed": "Code changed. Run it to apply the new instructions.",
+    "autopilot": "Automatic control",
+    "autoNote": "Every 0.25 seconds, the handheld reads the current game state and runs this strategy again. Use choose(), start(), pause() and finish() in the main controls instead.",
+    "strategy": "Your control strategy",
+    "autoApply": "Apply strategy and play",
+    "manual": "Return to the buttons",
+    "observations": "Values your program can read",
+    "inputNotes": [
+      "x and y locate the current piece's 4 × 4 frame; targetX suggests a column for its current rotation. danger is the height of the stack, from 0 to 20. A frame can extend outside the board if its empty cells are outside.",
+      "x and y are your tank's grid position. enemyX and enemyY locate an enemy, or are -1 if none is present. danger is 1 when a nearby enemy bullet needs attention; health is your remaining lives.",
+      "x and y are your ship's pixel position. enemyX and enemyY locate an enemy, or are -1 if none is present. danger is 1 when a nearby enemy bullet needs attention; health is your remaining lives."
+    ],
+    "help": [
+      "← → move · ↑ / A / Space rotate · B / X drop · ↓ lower. Fill a row to clear it.",
+      "Arrows move · A / B / Space fire. Protect your base, break brick walls and clear the enemy waves.",
+      "Arrows move · A / B / Space fire. Dodge incoming bullets and clear each formation."
+    ],
+    "start": "Start / resume",
+    "pause": "Pause",
+    "finish": "End game",
+    "left": "Move left",
+    "right": "Move right",
+    "up": "Move up / rotate",
+    "down": "Move down",
+    "score": "Score",
+    "ready": "Ready",
+    "running": "Playing",
+    "paused": "Paused",
+    "ended": "Ended early",
+    "over": "Game over",
+    "won": "Mission complete",
+    "short": [
+      "Fill complete rows to make room for the next block.",
+      "Defend the base and destroy brick walls and enemy tanks.",
+      "Dodge incoming fire and clear wave after wave of enemy formations."
+    ]
+  },
+  "district": {
+    "title": "Code Arcade District",
+    "intro": "Pull up your hood and wander between the shops. Pick a shop and start playing.",
+    "move": "Shops line the top and bottom of the street. Use the arrow keys or WASD, or click the pavement to walk around in any direction. Manual input takes over from automatic walking. Press Enter near a doorway, or click a shop to enter directly.",
+    "autoWalk": "Stroll automatically",
+    "manualWalk": "Walk manually",
+    "enter": "Enter game",
+    "near": "{name} · Press Enter to play",
+    "shops": "District shops"
   }
 }

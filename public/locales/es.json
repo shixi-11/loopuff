@@ -79,7 +79,7 @@
     "mapShort": "Mapa",
     "heroAccent": "planetas",
     "observeProgram": "Predice y ejecuta",
-    "practiceInChase": "Prueba tus ideas en Persecución en el puerto espacial",
+    "practiceInChase": "Prueba tus ideas en Persecución callejera",
     "trackBeginner": "Fundamentos de programación",
     "trackTolang": "Tolang en la práctica",
     "trackAdvanced": "Mensajes y coordinación",
@@ -839,7 +839,7 @@
     "rule": "Primera victoria: +100 por misión, +50 por sello de mecanismo. Repetir no suma puntos otra vez."
   },
   "chase": {
-    "title": "Persecución en el puerto estelar",
+    "title": "Persecución callejera",
     "tag": "Dos roles · Una persecución controlada por código",
     "intro": "Sé policía o ladrón. Lee la calle, escribe un plan y observa cómo cada señal cambia la persecución.",
     "choose": "Elige tu rol",
@@ -875,9 +875,21 @@
     "meaning": "let da un nombre a un valor; + suma valores; .log() imprime un valor. Este juego lee cada número impreso como un movimiento. El mismo código puede controlar cosas distintas en otro juego.",
     "local": "Los borradores de ambos roles y los distritos completados permanecen en este navegador. Iniciar sesión no los sincroniza. Estas misiones no tienen límite de tiempo.",
     "noSave": "Este navegador no pudo guardar tu borrador. Mantén abierta esta página y copia tu código antes de salir.",
-    "stages": ["Calle abierta", "Distrito de barreras", "Tu propia ruta"],
-    "hints": ["Prueba a imprimir un número mayor. Cada .log() es un movimiento y tu rival tiene un turno después. Para una ruta más larga, añade más señales.", "Comprueba dónde empieza tu rol y dónde aterriza cada señal. Reutiliza un valor con nombre o una suma y evita los puntos de aterrizaje bloqueados.", "Empieza con el editor vacío. Ponle nombre al tamaño de tu paso y combina 1, 2 y 3 para planificar una ruta. Repetir el mismo movimiento puede llevarte a una barrera."],
-    "learned": ["Cada valor impreso provocó un movimiento. Cambiar el valor cambió la persecución.", "La misma distancia total puede seguir rutas distintas. El orden y las posiciones de aterrizaje importan.", "Has escrito y probado un plan completo. Prueba el otro rol: cambian la posición inicial y el objetivo."],
+    "stages": [
+      "Calle abierta",
+      "Distrito de barreras",
+      "Tu propia ruta"
+    ],
+    "hints": [
+      "Prueba a imprimir un número mayor. Cada .log() es un movimiento y tu rival tiene un turno después. Para una ruta más larga, añade más señales.",
+      "Comprueba dónde empieza tu rol y dónde aterriza cada señal. Reutiliza un valor con nombre o una suma y evita los puntos de aterrizaje bloqueados.",
+      "Empieza con el editor vacío. Ponle nombre al tamaño de tu paso y combina 1, 2 y 3 para planificar una ruta. Repetir el mismo movimiento puede llevarte a una barrera."
+    ],
+    "learned": [
+      "Cada valor impreso provocó un movimiento. Cambiar el valor cambió la persecución.",
+      "La misma distancia total puede seguir rutas distintas. El orden y las posiciones de aterrizaje importan.",
+      "Has escrito y probado un plan completo. Prueba el otro rol: cambian la posición inicial y el objetivo."
+    ],
     "sceneControls": "Escena de persecución. Durante la práctica, pulsa 1, 2 o 3 para moverte.",
     "loading": "Abriendo la calle…",
     "practice": "Prueba la ruta tú mismo",
@@ -934,13 +946,13 @@
     "emailTaken": "Este correo ya está registrado. Inicia sesión."
   },
   "dispatch": {
-    "title": "Despacho del puerto estelar",
+    "title": "Patio de carga",
     "tag": "Un programa · Carga cambiante",
-    "intro": "Escribe un programa que gestione cada lote de entrega. Observa lo que envía, compara los resultados y ajusta tu plan.",
+    "intro": "Escribe un programa que gestione cada lote de entrega. Observa cómo la grúa mueve cajas siguiendo tus señales, compara los resultados de entrega y ajusta tu plan.",
     "entry": "Dirige la carga con condiciones, bucles, funciones y mensajes que cooperan. Cada ronda nueva trae nuevos datos de despacho.",
     "editor": "Tu programa de despacho",
     "inputs": "Entradas de este lote",
-    "inputNote": "La estación proporciona estas entradas.",
+    "inputNote": "El patio de carga proporciona estas entradas.",
     "run": "Ejecutar todos los lotes",
     "batch": "Lote de entrega",
     "preview": "Vista previa de la entrega",
@@ -969,7 +981,7 @@
     "local": "El código y los registros de despacho se quedan en este navegador. Iniciar sesión no los sincroniza. No hay límite de tiempo.",
     "noSave": "Este navegador no pudo guardar tu código. Mantén la página abierta y cópialo antes de salir.",
     "replay": "Repetir este lote",
-    "origin": "Estación de carga",
+    "origin": "Punto de partida del patio",
     "dock": "Muelle",
     "idle": "Revisa las entradas y luego ejecuta tu programa.",
     "missions": [
@@ -987,13 +999,13 @@
       },
       {
         "title": "Calcula el combustible",
-        "brief": "Define fuel(cargo, reserve) y devuelve la suma de sus dos parámetros. La estación llama a tu función con distintas cargas y reservas, y luego muestra su valor de retorno. Tu código solo necesita la definición de la función.",
-        "hint": "Usa un return explícito. Puedes elegir los nombres de los parámetros, pero mantén el nombre de función fuel para que la estación pueda llamarla. Aquí no necesitas .log().",
+        "brief": "Define fuel(cargo, reserve) y devuelve la suma de sus dos parámetros. El patio de carga llama a tu función con distintas cargas y reservas, y luego muestra su valor de retorno. Tu código solo necesita la definición de la función.",
+        "hint": "Usa un return explícito. Puedes elegir los nombres de los parámetros, pero mantén el nombre de función fuel para que el patio de carga pueda llamarla. Aquí no necesitas .log().",
         "learned": "Una sola función reutilizable calcula el combustible para distintas cargas y reservas."
       },
       {
         "title": "Combina los informes",
-        "brief": "La estación envía informes por west y east. Recíbelos juntos y combina los valores recibidos en una función sync. Si el total supera threshold, suma reserve. Muestra solo el total resultante.",
+        "brief": "El patio de carga envía informes por west y east. Recíbelos juntos y combina los valores recibidos en una función sync. Si el total supera threshold, suma reserve. Muestra solo el total resultante.",
         "hint": "Usa & para la recepción conjunta. Ambos valores recibidos deben llegar al resultado de tu función, y ese resultado debe llegar al cálculo que se muestra.",
         "learned": "Ahora los mensajes, una función y una condición cooperan con distintos informes."
       }
@@ -1120,7 +1132,7 @@
     "reference": "Documentación oficial del lenguaje",
     "difference": "Ten esto en cuenta al cambiar de lenguaje",
     "messageDifference": "El envío y la recepción de mensajes, la recepción conjunta y las respuestas de funciones de Tolang no tienen un sustituto literal único en Python, JavaScript y Rust. Ejecuta primero el ejemplo de Tolang de arriba y luego explora dependencias de datos reales en una tarea de coordinación.",
-    "transfer": "Prueba nuevas entradas en el Despacho del Puerto Estelar",
+    "transfer": "Prueba nuevas entradas en el Patio de carga",
     "stations": [
       {
         "title": "Salida",
@@ -1196,7 +1208,7 @@
     }
   },
   "pursuit": {
-    "title": "Persecución continua",
+    "title": "Persecución callejera",
     "tag": "Operación urbana · 20 tramos de calle",
     "intro": "Corre, elige rutas y supera obstáculos. El resultado de la partida requiere al menos diez minutos de juego activo y, después, una captura o una huida real.",
     "continuous": "Persecución continua",
@@ -1968,7 +1980,7 @@
     "gameNotes": [
       "Calcula y envía señales en orden para abrir tres mecanismos.",
       "Recorre calles, elige rutas y salta obstáculos. Usa una estrategia para cambiar el rumbo de la persecución.",
-      "Gestiona cargas variables con condiciones, bucles y funciones; después, coordina dos puertos espaciales."
+      "Gestiona cargas variables con condiciones, bucles y funciones; después, coordina dos patios de carga."
     ],
     "allGames": "Explorar todos los juegos",
     "roadTitle": "Entiende lo que haces en cada paso.",
@@ -2036,5 +2048,75 @@
     },
     "workedTitle": "Lee primero un ejemplo completo",
     "workedIntro": "Empieza con programas completos que muestran una función que devuelve un valor, otra que envía una respuesta, la recepción de un mensaje y la espera de dos mensajes. Lee cómo cada parte produce el resultado mostrado. Después prueba los diagnósticos con distintas entradas y los proyectos que combinan estas ideas."
+  },
+  "handheld": {
+    "title": "Una consola portátil controlada por tu código",
+    "intro": "Elige un cartucho, inicia una partida y contrólala con Tolang. También puedes usar primero los botones para familiarizarte con el juego.",
+    "open": "Abrir la consola",
+    "device": "Consola portátil programable",
+    "screen": "Pantalla de juego. Las flechas mueven; Space o Z corresponde a A, y X a B.",
+    "games": [
+      "Bloques en caída",
+      "Defensa de tanques",
+      "Patrulla estelar"
+    ],
+    "select": "Elegir un cartucho",
+    "first": "Ejecuta las dos líneas de abajo: choose(1) selecciona el juego de bloques y start() inicia la partida. Después, prueba a añadir una orden de movimiento.",
+    "console": "Tus controles en Tolang",
+    "run": "Ejecutar estas instrucciones",
+    "commands": "¿Qué puedo escribir?",
+    "commandNote": "La consola proporciona estas funciones de juego. Llámalas con Tolang; la pantalla ejecutará las instrucciones en orden.",
+    "chooseNote": "1 selecciona bloques, 2 tanques y 3 patrulla estelar. Elegir un cartucho prepara una partida nueva.",
+    "lifecycleNote": "Iniciar o reanudar; pausar; terminar la partida actual antes de tiempo. Iniciar tras una partida terminada crea una ronda nueva.",
+    "motionNote": "Usa las funciones que se muestran para este cartucho. Por ejemplo, left(); left(); realiza dos movimientos.",
+    "applied": "Instrucciones recibidas. Observa cómo la pantalla las ejecuta en orden.",
+    "none": "El programa se ejecutó sin enviar instrucciones de juego. Prueba start() o una función de movimiento.",
+    "invalid": "Este programa no pudo controlar la consola. Revisa el código y las funciones disponibles para este cartucho; corrígelo y vuelve a ejecutarlo.",
+    "changed": "El código ha cambiado. Ejecútalo para aplicar las nuevas instrucciones.",
+    "autopilot": "Control automático",
+    "autoNote": "Cada 0.25 segundos, la consola lee el estado actual del juego y vuelve a ejecutar esta estrategia. Usa choose(), start(), pause() y finish() en los controles principales.",
+    "strategy": "Tu estrategia de control",
+    "autoApply": "Aplicar la estrategia y jugar",
+    "manual": "Volver a los botones",
+    "observations": "Valores que puede leer tu programa",
+    "inputNotes": [
+      "x e y indican la posición del marco de 4 × 4 de la pieza actual; targetX sugiere una columna para su rotación actual. danger es la altura de la pila, de 0 a 20. El marco puede sobresalir del tablero si las celdas que quedan fuera están vacías.",
+      "x e y son la posición de tu tanque en la cuadrícula. enemyX y enemyY indican la posición de un enemigo, o valen -1 si no hay ninguno. danger vale 1 cuando una bala enemiga cercana requiere atención; health son las vidas restantes.",
+      "x e y son la posición de tu nave en píxeles. enemyX y enemyY indican la posición de un enemigo, o valen -1 si no hay ninguno. danger vale 1 cuando una bala enemiga cercana requiere atención; health son las vidas restantes."
+    ],
+    "help": [
+      "← → mover · ↑ / A / Space girar · B / X dejar caer · ↓ bajar. Completa una fila para eliminarla.",
+      "Flechas para mover · A / B / Space para disparar. Protege tu base, rompe los muros de ladrillo y derrota las oleadas enemigas.",
+      "Flechas para mover · A / B / Space para disparar. Esquiva los proyectiles y elimina cada formación."
+    ],
+    "start": "Iniciar / reanudar",
+    "pause": "Pausar",
+    "finish": "Terminar partida",
+    "left": "Mover a la izquierda",
+    "right": "Mover a la derecha",
+    "up": "Subir / girar",
+    "down": "Bajar",
+    "score": "Puntuación",
+    "ready": "Listo",
+    "running": "En juego",
+    "paused": "En pausa",
+    "ended": "Terminada antes de tiempo",
+    "over": "Fin de la partida",
+    "won": "Misión cumplida",
+    "short": [
+      "Completa filas para dejar espacio a la siguiente pieza.",
+      "Defiende la base y destruye muros de ladrillo y tanques enemigos.",
+      "Esquiva los disparos y elimina oleadas de formaciones aéreas enemigas."
+    ]
+  },
+  "district": {
+    "title": "El barrio de los juegos de código",
+    "intro": "Ponte la capucha y pasea entre las tiendas. Elige una tienda y empieza a jugar.",
+    "move": "Hay una fila de tiendas arriba y otra abajo. Usa las flechas o WASD, o haz clic en la calle para moverte en las cuatro direcciones y rodear los obstáculos. Al moverte manualmente, tomas el control del paseo automático. Pulsa Enter cerca de una puerta o haz clic en una tienda para entrar directamente.",
+    "autoWalk": "Pasear automáticamente",
+    "manualWalk": "Caminar manualmente",
+    "enter": "Entrar al juego",
+    "near": "{name} · Pulsa Enter para jugar",
+    "shops": "Tiendas del barrio"
   }
 }

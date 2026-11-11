@@ -21,13 +21,14 @@ const bundled=await build({entryPoints:[resolve(root,'src/app.js')],bundle:true,
 const script=bundled.outputFiles[0].text;
 const scriptName=`app-${createHash('sha256').update(script).digest('hex').slice(0,12)}.js`;
 await writeFile(resolve(out,'src',scriptName),script);
-const cssFiles=['style.css','vault.css','ui.css','home.css','flight.css','chase.css','dispatch.css','saves.css','guide.css','pursuit.css','learning-map.css','diagnostic.css','program-scene.css','heist.css'];
+const cssFiles=['style.css','vault.css','ui.css','home.css','flight.css','chase.css','dispatch.css','saves.css','guide.css','pursuit.css','learning-map.css','diagnostic.css','program-scene.css','heist.css','pixel.css'];
 const css=(await transform((await Promise.all(cssFiles.map(file=>readFile(resolve(out,file),'utf8')))).join('\n'),{loader:'css',minify:true})).code;
 const cssName=`style-${createHash('sha256').update(css).digest('hex').slice(0,12)}.css`;
 await writeFile(resolve(out,cssName),css);
 const html=(await readFile(resolve(out,'index.html'),'utf8'))
   .replace('href="./style.css"',`href="./${cssName}"`)
   .replace('<link rel="stylesheet" href="./vault.css">','')
+  .replace('<link rel="stylesheet" href="./pixel.css">','')
   .replace('src="./src/app.js"',`src="./src/${scriptName}"`);
 await writeFile(resolve(out,'index.html'),html);
 const escape=text=>String(text).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -50,7 +51,7 @@ for(const [locale] of locales){
     .replace(/<p class="welcome-copy">[\s\S]*?<\/p>/,`<p class="welcome-copy">${escape(messages.ui.lead)}</p>`)
     .replace('<body>',`<body data-view="${entry?'learning':'game'}"${entry?' data-entry="learning"':' data-phase="welcome"'}>`)
     .replace(/<title>[^<]*<\/title>/,`<title>${messages.ui.name} · ${title}</title><link rel="canonical" href="${canonical}">${entry.endsWith('/result/')?'<meta name="robots" content="noindex,follow">':''}`);
-  if(entry)page=page.replace('<link rel="preload" as="image" href="./assets/aircraft-2d.png?v=6fa6af1aeee1" fetchpriority="high">','');
+  if(entry)page=page.replace('<link rel="preload" as="image" href="./assets/pixel-expedition.webp?v=1" fetchpriority="high">','').replace('<main class="universe" id="universe"','<main class="universe" id="universe" hidden');
   if(entry==='play/chase/')page=page.replace('</head>',Object.values(chaseAssets).map(file=>'<link rel="preload" as="image" href="./assets/'+file+'" fetchpriority="high">').join('')+'<link rel="preload" as="fetch" href="./assets/'+chaseAtlas+'" crossorigin="anonymous">'+'</head>');
   await mkdir(resolve(out,locale,entry),{recursive:true});await writeFile(resolve(out,locale,entry,'index.html'),page);
   }

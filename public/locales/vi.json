@@ -79,7 +79,7 @@
     "mapShort": "Bản đồ",
     "heroAccent": "hành tinh",
     "observeProgram": "Dự đoán và chạy",
-    "practiceInChase": "Thử ý tưởng trong Truy đuổi tại cảng sao",
+    "practiceInChase": "Thử ý tưởng trong Truy đuổi trên phố",
     "trackBeginner": "Nền tảng lập trình",
     "trackTolang": "Thực hành Tolang",
     "trackAdvanced": "Thông điệp và phối hợp",
@@ -861,7 +861,7 @@
     "emailTaken": "Email này đã được đăng ký. Hãy đăng nhập."
   },
   "chase": {
-    "title": "Cuộc truy đuổi ở Cảng Sao",
+    "title": "Truy đuổi trên phố",
     "tag": "Hai vai · Một cuộc truy đuổi bằng mã",
     "intro": "Hãy làm cảnh sát hoặc kẻ trộm, đọc con phố, viết kế hoạch và xem từng tín hiệu thay đổi cuộc truy đuổi ra sao.",
     "choose": "Chọn vai",
@@ -897,9 +897,21 @@
     "meaning": "let đặt tên cho một giá trị; + cộng các giá trị; .log() in ra một giá trị. Trò chơi đọc mỗi số được in ra như một bước di chuyển. Cùng một đoạn mã có thể điều khiển những thứ khác trong trò chơi khác.",
     "local": "Bản nháp và các khu phố đã hoàn thành của cả hai vai được lưu trong trình duyệt này. Đăng nhập không đồng bộ chúng. Các nhiệm vụ này không tính giờ.",
     "noSave": "Trình duyệt này không thể lưu bản nháp. Hãy giữ trang mở và sao chép mã trước khi rời đi.",
-    "stages": ["Con phố rộng", "Khu phố có chướng ngại", "Tuyến đường của bạn"],
-    "hints": ["Hãy thử in một số lớn hơn. Mỗi .log() là một bước đi, rồi đối thủ được đi một lượt. Muốn đi xa hơn, hãy thêm tín hiệu.", "Kiểm tra vị trí bắt đầu của vai mình và nơi mỗi tín hiệu đáp xuống. Dùng lại một giá trị đã đặt tên hoặc phép cộng, đồng thời tránh đáp vào chướng ngại.", "Bắt đầu với trình soạn thảo trống. Đặt tên cho độ dài bước, rồi kết hợp 1, 2 và 3 để lên kế hoạch. Lặp lại cùng một bước có thể khiến bạn gặp chướng ngại."],
-    "learned": ["Một giá trị được in ra tạo thành một bước đi. Đổi giá trị sẽ đổi cuộc truy đuổi.", "Cùng một tổng khoảng cách vẫn có thể đi theo các tuyến khác nhau. Thứ tự và điểm đáp đều quan trọng.", "Bạn đã viết và thử nghiệm một kế hoạch hoàn chỉnh. Hãy thử vai còn lại: vị trí bắt đầu và mục tiêu sẽ thay đổi."],
+    "stages": [
+      "Con phố rộng",
+      "Khu phố có chướng ngại",
+      "Tuyến đường của bạn"
+    ],
+    "hints": [
+      "Hãy thử in một số lớn hơn. Mỗi .log() là một bước đi, rồi đối thủ được đi một lượt. Muốn đi xa hơn, hãy thêm tín hiệu.",
+      "Kiểm tra vị trí bắt đầu của vai mình và nơi mỗi tín hiệu đáp xuống. Dùng lại một giá trị đã đặt tên hoặc phép cộng, đồng thời tránh đáp vào chướng ngại.",
+      "Bắt đầu với trình soạn thảo trống. Đặt tên cho độ dài bước, rồi kết hợp 1, 2 và 3 để lên kế hoạch. Lặp lại cùng một bước có thể khiến bạn gặp chướng ngại."
+    ],
+    "learned": [
+      "Một giá trị được in ra tạo thành một bước đi. Đổi giá trị sẽ đổi cuộc truy đuổi.",
+      "Cùng một tổng khoảng cách vẫn có thể đi theo các tuyến khác nhau. Thứ tự và điểm đáp đều quan trọng.",
+      "Bạn đã viết và thử nghiệm một kế hoạch hoàn chỉnh. Hãy thử vai còn lại: vị trí bắt đầu và mục tiêu sẽ thay đổi."
+    ],
     "sceneControls": "Cảnh truy đuổi. Khi luyện tập, nhấn 1, 2 hoặc 3 để di chuyển.",
     "loading": "Đang mở con phố…",
     "practice": "Tự thử tuyến đường",
@@ -934,13 +946,13 @@
     "traceRival": "Sau đó đối thủ di chuyển một ô."
   },
   "dispatch": {
-    "title": "Điều phối Cảng sao",
+    "title": "Điều phối hàng hóa",
     "tag": "Một chương trình · Hàng hóa luôn thay đổi",
-    "intro": "Viết một chương trình xử lý mọi lô giao hàng. Xem chương trình gửi đi những gì, so sánh kết quả và điều chỉnh kế hoạch của bạn.",
+    "intro": "Viết một chương trình xử lý mọi lô giao hàng. Xem cần cẩu di chuyển các thùng hàng theo tín hiệu của bạn, so sánh kết quả giao hàng và điều chỉnh kế hoạch.",
     "entry": "Định tuyến hàng hóa bằng điều kiện, vòng lặp, hàm và các tin nhắn phối hợp với nhau. Mỗi vòng mới mang đến dữ liệu điều phối mới.",
     "editor": "Chương trình điều phối của bạn",
     "inputs": "Dữ liệu vào của lô này",
-    "inputNote": "Trạm cung cấp các dữ liệu vào này.",
+    "inputNote": "Bãi hàng cung cấp các dữ liệu vào này.",
     "run": "Chạy tất cả các lô",
     "batch": "Lô giao hàng",
     "preview": "Xem trước giao hàng",
@@ -969,7 +981,7 @@
     "local": "Mã và hồ sơ điều phối chỉ được lưu trong trình duyệt này. Đăng nhập không đồng bộ chúng. Không có giới hạn thời gian.",
     "noSave": "Trình duyệt này không lưu được mã của bạn. Hãy giữ trang mở và sao chép mã trước khi rời đi.",
     "replay": "Phát lại lô này",
-    "origin": "Trạm hàng hóa",
+    "origin": "Điểm xuất phát trong bãi",
     "dock": "Bến",
     "idle": "Xem dữ liệu vào, rồi chạy chương trình của bạn.",
     "missions": [
@@ -987,13 +999,13 @@
       },
       {
         "title": "Tính nhiên liệu",
-        "brief": "Định nghĩa fuel(cargo, reserve) và trả về tổng hai tham số của nó. Trạm sẽ gọi hàm của bạn với các lượng hàng và lượng dự trữ khác nhau, rồi hiển thị giá trị trả về. Mã của bạn chỉ cần phần định nghĩa hàm.",
-        "hint": "Dùng return một cách rõ ràng. Bạn tự đặt tên tham số, nhưng hãy giữ tên hàm là fuel để trạm có thể gọi. Ở đây không cần .log().",
+        "brief": "Định nghĩa fuel(cargo, reserve) và trả về tổng hai tham số của nó. Bãi hàng sẽ gọi hàm của bạn với các lượng hàng và lượng dự trữ khác nhau, rồi hiển thị giá trị trả về. Mã của bạn chỉ cần phần định nghĩa hàm.",
+        "hint": "Dùng return một cách rõ ràng. Bạn tự đặt tên tham số, nhưng hãy giữ tên hàm là fuel để bãi hàng có thể gọi. Ở đây không cần .log().",
         "learned": "Một hàm dùng lại được tính nhiên liệu cho các lượng hàng và lượng dự trữ khác nhau."
       },
       {
         "title": "Gộp các báo cáo",
-        "brief": "Trạm gửi báo cáo qua west và east. Nhận cả hai cùng lúc và gộp các giá trị nhận được trong hàm sync. Nếu tổng vượt quá threshold, cộng thêm reserve. Chỉ hiển thị tổng cuối cùng.",
+        "brief": "Bãi hàng gửi báo cáo qua west và east. Nhận cả hai cùng lúc và gộp các giá trị nhận được trong hàm sync. Nếu tổng vượt quá threshold, cộng thêm reserve. Chỉ hiển thị tổng cuối cùng.",
         "hint": "Dùng & để nhận đồng thời. Cả hai giá trị nhận được phải đi vào kết quả của hàm, và kết quả đó phải đi vào phép tính được hiển thị.",
         "learned": "Giờ đây tin nhắn, hàm và điều kiện phối hợp với nhau qua nhiều báo cáo khác nhau."
       }
@@ -1120,7 +1132,7 @@
     "reference": "Tài liệu chính thức của ngôn ngữ",
     "difference": "Lưu ý khi chuyển ngôn ngữ",
     "messageDifference": "Việc gửi, nhận, nhận kết hợp thông điệp và phản hồi hàm trong Tolang không có một cách thay thế từng chữ duy nhất nào trong Python, JavaScript và Rust. Hãy chạy ví dụ Tolang ở trên, rồi khám phá các phụ thuộc dữ liệu thực tế trong một nhiệm vụ phối hợp.",
-    "transfer": "Thử đầu vào mới tại Điều phối Cảng sao",
+    "transfer": "Thử đầu vào mới tại Điều phối hàng hóa",
     "stations": [
       {
         "title": "Đầu ra",
@@ -1196,7 +1208,7 @@
     }
   },
   "pursuit": {
-    "title": "Truy đuổi liên tục",
+    "title": "Truy đuổi trên phố",
     "tag": "Chiến dịch trong thành phố · 20 đoạn đường",
     "intro": "Chạy, chọn đường và vượt chướng ngại vật. Bạn phải thực sự chơi ít nhất mười phút khi màn hình trò chơi đang hoạt động, sau đó thực sự bắt được đối phương hoặc thoát qua lối ra thì trận đấu mới có kết quả.",
     "continuous": "Truy đuổi liên tục",
@@ -1968,7 +1980,7 @@
     "gameNotes": [
       "Tính toán và gửi tín hiệu đúng thứ tự để mở ba cơ cấu khóa.",
       "Băng qua các con phố, chọn đường và nhảy qua chướng ngại vật. Dùng chiến thuật để thay đổi cục diện cuộc rượt đuổi.",
-      "Dùng điều kiện, vòng lặp và hàm để xử lý các lô hàng khác nhau, rồi phối hợp hai cảng vũ trụ."
+      "Dùng điều kiện, vòng lặp và hàm để xử lý các lô hàng khác nhau, rồi phối hợp hai bãi hàng."
     ],
     "allGames": "Xem tất cả trò chơi",
     "roadTitle": "Hiểu mình đang làm gì ở từng bước.",
@@ -2036,5 +2048,75 @@
     },
     "workedTitle": "Đọc một ví dụ hoàn chỉnh trước",
     "workedIntro": "Hãy bắt đầu bằng các chương trình hoàn chỉnh về hàm trả về giá trị, hàm gửi lời đáp, nhận một tin nhắn và đợi đủ hai tin nhắn. Đọc từng phần và cách chúng tạo ra kết quả hiển thị, rồi thử bài chẩn đoán với nhiều đầu vào khác nhau và các dự án kết hợp."
+  },
+  "handheld": {
+    "title": "Máy chơi game cầm tay do mã của bạn điều khiển",
+    "intro": "Chọn băng game, bắt đầu chơi và điều khiển bằng Tolang. Bạn cũng có thể dùng các nút trước để làm quen với trò chơi.",
+    "open": "Mở máy chơi game",
+    "device": "Máy chơi game cầm tay lập trình được",
+    "screen": "Màn hình trò chơi. Phím mũi tên để di chuyển; Space hoặc Z tương ứng với A, X tương ứng với B.",
+    "games": [
+      "Xếp khối",
+      "Phòng thủ xe tăng",
+      "Tuần tra vũ trụ"
+    ],
+    "select": "Chọn băng game",
+    "first": "Chạy hai dòng bên dưới: choose(1) chọn trò xếp khối, còn start() bắt đầu chơi. Sau đó thử thêm một lệnh di chuyển.",
+    "console": "Lệnh điều khiển Tolang của bạn",
+    "run": "Chạy các lệnh này",
+    "commands": "Tôi có thể viết gì?",
+    "commandNote": "Các hàm trò chơi này do máy chơi game cung cấp. Gọi chúng bằng Tolang; màn hình sẽ thực hiện các lệnh theo thứ tự.",
+    "chooseNote": "1 chọn xếp khối, 2 chọn xe tăng, 3 chọn tuần tra vũ trụ. Chọn băng game sẽ chuẩn bị một ván mới.",
+    "lifecycleNote": "Bắt đầu hoặc tiếp tục; tạm dừng; kết thúc sớm ván hiện tại. Bắt đầu sau khi ván đã kết thúc sẽ tạo ván mới.",
+    "motionNote": "Dùng các hàm được liệt kê cho băng game này. Ví dụ, left(); left(); di chuyển hai lần.",
+    "applied": "Đã nhận lệnh. Hãy xem màn hình thực hiện lần lượt.",
+    "none": "Chương trình đã chạy nhưng không gửi lệnh trò chơi. Thử start() hoặc một hàm di chuyển.",
+    "invalid": "Chương trình này chưa điều khiển được máy chơi game. Kiểm tra mã và các hàm có sẵn cho băng game này, sửa rồi chạy lại.",
+    "changed": "Mã đã thay đổi. Hãy chạy để áp dụng các lệnh mới.",
+    "autopilot": "Điều khiển tự động",
+    "autoNote": "Cứ mỗi 0.25 giây, máy đọc trạng thái trò chơi hiện tại và chạy lại chiến lược này. Hãy dùng choose(), start(), pause() và finish() trong phần điều khiển chính.",
+    "strategy": "Chiến lược điều khiển của bạn",
+    "autoApply": "Áp dụng chiến lược và chơi",
+    "manual": "Quay lại dùng nút",
+    "observations": "Các giá trị chương trình có thể đọc",
+    "inputNotes": [
+      "x và y xác định vị trí khung 4 × 4 của khối hiện tại; targetX gợi ý cột cho hướng xoay hiện tại. danger là chiều cao chồng khối, từ 0 đến 20. Khung có thể vượt ra ngoài bảng nếu những ô nằm ngoài đều trống.",
+      "x và y là vị trí xe tăng của bạn trên lưới. enemyX và enemyY xác định vị trí một kẻ địch, hoặc bằng -1 nếu không có. danger bằng 1 khi có đạn địch ở gần cần chú ý; health là số mạng còn lại.",
+      "x và y là vị trí phi thuyền của bạn theo pixel. enemyX và enemyY xác định vị trí một kẻ địch, hoặc bằng -1 nếu không có. danger bằng 1 khi có đạn địch ở gần cần chú ý; health là số mạng còn lại."
+    ],
+    "help": [
+      "← → di chuyển · ↑ / A / Space xoay · B / X thả xuống ngay · ↓ hạ xuống. Lấp đầy một hàng để xóa hàng đó.",
+      "Phím mũi tên để di chuyển · A / B / Space để bắn. Bảo vệ căn cứ, phá tường gạch và đánh bại từng đợt địch.",
+      "Phím mũi tên để di chuyển · A / B / Space để bắn. Né đạn và tiêu diệt từng đội hình."
+    ],
+    "start": "Bắt đầu / tiếp tục",
+    "pause": "Tạm dừng",
+    "finish": "Kết thúc ván",
+    "left": "Sang trái",
+    "right": "Sang phải",
+    "up": "Đi lên / xoay",
+    "down": "Đi xuống",
+    "score": "Điểm",
+    "ready": "Sẵn sàng",
+    "running": "Đang chơi",
+    "paused": "Đã tạm dừng",
+    "ended": "Đã kết thúc sớm",
+    "over": "Hết ván",
+    "won": "Hoàn thành nhiệm vụ",
+    "short": [
+      "Lấp đầy từng hàng để chừa chỗ cho khối tiếp theo.",
+      "Bảo vệ căn cứ, phá tường gạch và tiêu diệt xe tăng địch.",
+      "Né đạn và tiêu diệt từng đợt máy bay địch."
+    ]
+  },
+  "district": {
+    "title": "Khu phố trò chơi lập trình",
+    "intro": "Trùm mũ lên và dạo quanh các cửa tiệm. Chọn một tiệm để bắt đầu chơi.",
+    "move": "Các cửa tiệm nằm thành hai hàng phía trên và phía dưới. Dùng phím mũi tên, WASD hoặc nhấp vào mặt đường để đi theo bốn hướng và vòng qua chướng ngại vật. Thao tác thủ công sẽ thay thế việc đi tự động. Nhấn Enter khi ở gần cửa, hoặc nhấp vào tiệm để vào ngay.",
+    "autoWalk": "Tự động dạo phố",
+    "manualWalk": "Tự điều khiển đi bộ",
+    "enter": "Vào trò chơi",
+    "near": "{name} · Nhấn Enter để chơi",
+    "shops": "Các cửa tiệm trong khu phố"
   }
 }

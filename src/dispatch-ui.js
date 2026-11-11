@@ -1,4 +1,4 @@
-import { aircraftUrl } from './plane.js';
+import {craneBatchArt} from './crane-art.js';
 import {progressStorage} from './save-data.js';
 import {dispatchFeedback} from './dispatch-feedback.js';
 import {mountDispatchLayout,keepDispatchEditorVisible} from './dispatch-layout.js';
@@ -27,10 +27,10 @@ export function mountDispatch(root,{text:t,errors,concepts,reduced,urls,format=h
  function scene(){
   const p=puzzle(),sample=p.cases[index],current=report?.cases[index],outputs=current?.result?.logs||[];
   const targetLabel=['branch','manifest'].includes(p.id)?t.dock:t.expected;
-  const signals=outputs.length?outputs.slice(0,8):[null];
+  const signals=outputs.slice(0,8);
   return `<header class="dispatch-preview-heading"><div><span class="eyebrow">${html(t.preview)}</span><h2>${html(t.batch)} <bdi dir="ltr">${index+1} / ${p.cases.length}</bdi></h2></div><span class="dispatch-verdict" data-status="${current?current.ok?'pass':'fail':'idle'}">${html(current?current.ok?t.passed:t.failed:t.pending)}</span></header>
    <div class="dispatch-input"><h3>${html(t.inputs)}</h3>${code(inputCode(sample))}<p>${html(t.inputNote)}</p></div>
-   <div class="dispatch-board ${current&&!reduced.matches?'dispatch-animate':''}" aria-label="${html(t.preview)}">${signals.map((signal,i)=>`<div class="dispatch-lane" style="--delay:${i*180}ms" data-match="${current?String(signal===sample.logs[i]):'idle'}"><div class="dispatch-station"><img src="${aircraftUrl}" alt=""><span>${html(t.origin)}</span></div><div class="dispatch-track"><span class="dispatch-packet">${signal===null?'—':html(signal)}</span></div><div class="dispatch-target"><small>${html(targetLabel)}</small><strong dir="ltr">${html(sample.logs[i]??'—')}</strong></div></div>`).join('')}</div>
+   <div class="dispatch-board dispatch-cargo-yard" aria-label="${html(t.preview)}"><div class="dispatch-yard-labels"><span>${html(t.origin)}</span><span>${html(targetLabel)}</span></div>${craneBatchArt(signals,sample.logs,{idle:!current,animate:!!current&&!reduced.matches,waiting:!!current?.result?.waiting})}<p class="dispatch-yard-state">${html(!current?t.pending:current.result?.waiting?t.repair.waiting:signals.length?current.ok?t.passed:t.failed:t.noOutput)}</p></div>
    <dl class="dispatch-signals"><div><dt>${html(t.expected)}</dt><dd dir="ltr">${html(printed(sample.logs,t.noOutput))}</dd></div><div><dt>${html(t.actual)}</dt><dd dir="ltr">${current?html(printed(outputs,t.noOutput)):'—'}</dd></div></dl>
    ${repair(current,p)}
    ${current?.outputs.length?`<details class="dispatch-trace"><summary>${html(t.code)}</summary>${current.outputs.slice(0,8).map((output,i)=>{const names=Object.entries(output.names).map(([name,value])=>name+' = '+value).join(', ');return `<article data-dispatch-trace-output="${i}" tabindex="-1">`+code(output.source+' → '+output.value)+(names?`<p>${html(t.names)}: <bdi dir="ltr">${html(names)}</bdi></p>`:'')+'</article>';}).join('')}</details>`:''}`;

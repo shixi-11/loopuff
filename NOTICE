@@ -1,2 +1,10 @@
 Required Notice: Copyright 2026 Shixi Lin
 Required Notice: Loopuff game code and original course content by Shixi Lin.
+
+The tetromino rotation-mask tables in src/handheld-blocks.js are adapted from
+Javascript Tetris by Jake Gordon and contributors:
+https://github.com/jakesgordon/javascript-tetris
+Copyright (c) 2011, 2012, 2013, 2014, 2015, 2016 Jake Gordon and contributors.
+Licensed under the MIT License; see public/licenses/javascript-tetris.txt.
+The new simulation, seven-bag randomizer, wall kicks and pixel rendering are
+original to Loopuff. The upstream license remains applicable to the adapted tables.

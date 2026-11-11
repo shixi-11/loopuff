@@ -38,7 +38,7 @@ function work(value){
 }
 function course(value){
  record(value,['lang','state']);const result={};
- optional(value,'lang',lang=>oneOf(lang,['en','zh','zh-Hant','ja','ko','vi','de','es','ru','uk','ar']),result);
+ optional(value,'lang',lang=>oneOf(lang,['zh','zh-Hant','en','de','es','fr','vi','ru','uk','ar','ja','ko']),result);
  optional(value,'state',state=>{
   record(state,[...workKeys,'lesson','previousPhase','resumePhase','completed','grades','lessonWork','guideWork','guideSelected','diagnostic']);
   const saved={};

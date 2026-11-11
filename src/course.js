@@ -451,6 +451,6 @@ export const course = [
   }
 ];
 export const locales = [
-  ['en','English'],['zh','简体中文'],['zh-Hant','繁體中文'],['ja','日本語'],['ko','한국어'],
-  ['vi','Tiếng Việt'],['de','Deutsch'],['es','Español'],['ru','Русский'],['uk','Українська'],['ar','العربية']
+  ['zh','简体中文'],['zh-Hant','繁體中文'],['en','English'],['de','Deutsch'],['es','Español'],['fr','Français'],
+  ['vi','Tiếng Việt'],['ru','Русский'],['uk','Українська'],['ar','العربية'],['ja','日本語'],['ko','한국어']
 ];
