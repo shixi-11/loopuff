@@ -1215,20 +1215,20 @@
     "jump": "Nhảy",
     "sprint": "Nhấn giữ để chạy nước rút",
     "controls": "Nhấn phím cách để nhảy; giữ Shift để chạy nước rút. Lựa chọn đường đi có hiệu lực khi bạn vào đoạn đường tiếp theo.",
-    "ready": "Đường phố đã sẵn sàng. Hãy chọn vai và bắt đầu.",
+    "ready": "Đường phố đã sẵn sàng. Bắt đầu ngay, hoặc mở phần vai trò và lượt đuổi bắt mới để chọn vai trò và độ khó trước.",
     "running": "Đang truy đuổi",
     "paused": "Đã tạm dừng; đồng hồ cũng dừng",
     "background": "Đã tạm dừng. Hãy trở lại màn hình đường phố và chọn “Tiếp tục truy đuổi”.",
     "slow": "Việc cập nhật hình ảnh bị gián đoạn nên trò chơi đã tạm dừng. Khi tiếp tục, thời gian bạn rời đi sẽ không được cộng vào.",
     "settings": "Vai và trận mới",
-    "role": "Chọn vai",
-    "difficulty": "Độ khó của đối thủ",
+    "role": "Vai trò trong cuộc rượt đuổi mới",
+    "difficulty": "Độ khó của đối thủ trong cuộc rượt đuổi mới",
     "difficulties": [
       "Thư thả",
       "Tiêu chuẩn",
       "Thử thách"
     ],
-    "newRun": "Bắt đầu trận mới",
+    "newRun": "Bắt đầu cuộc rượt đuổi mới với thiết lập đã chọn",
     "confirmNew": "Xác nhận bắt đầu trận mới",
     "resetNote": "Trận mới sẽ đặt lại lộ trình và đồng hồ hiện tại, nhưng vẫn giữ bản nháp chiến thuật, lịch sử và các thử nghiệm mã.",
     "focus": "Mở rộng khung cảnh",
@@ -1950,5 +1950,43 @@
         "hint": "Dùng if obstacle < 4 then { ... } else { ... } để chia thành hai trường hợp. Đúng bằng 4 không phải là nhỏ hơn 4. Luôn xuất 3 không thể xử lý mọi tình huống."
       }
     }
+  },
+  "homeExperience": {
+    "demoTitle": "Trước tiên, hãy để máy tính hiển thị một số",
+    "demoIntro": "Đổi 7 thành số bạn thích, rồi chạy thử.",
+    "number": "Chọn một số (0–99)",
+    "run": "Chạy lệnh này",
+    "result": "Máy tính hiển thị",
+    "ready": "Chạy lệnh để xem máy tính hiển thị gì.",
+    "meaning": "Con số là giá trị bạn muốn hiển thị. .log() yêu cầu máy tính hiển thị giá trị đó.",
+    "invalid": "Hãy nhập số nguyên từ 0 đến 99.",
+    "changed": "Bạn đã đổi số. Hãy chạy lại.",
+    "routeTitle": "Từ lần chạy đầu tiên đến tự giải quyết vấn đề.",
+    "routeIntro": "Mới học lập trình? Hãy bắt đầu bằng những bài thực hành nhỏ. Đã biết viết mã? Kiểm tra điều mình hiểu, rồi kết hợp các cách đã học để làm nhiệm vụ.",
+    "practiceTitle": "Mã có thể làm gì? Vào trò chơi để thử.",
+    "practiceIntro": "Quan sát tình huống, viết cách giải và dùng kết quả của chương trình để quyết định hành động tiếp theo. Bạn có thể quay lại chơi tiếp từng trò.",
+    "gameNotes": [
+      "Tính toán và gửi tín hiệu đúng thứ tự để mở ba cơ cấu khóa.",
+      "Băng qua các con phố, chọn đường và nhảy qua chướng ngại vật. Dùng chiến thuật để thay đổi cục diện cuộc rượt đuổi.",
+      "Dùng điều kiện, vòng lặp và hàm để xử lý các lô hàng khác nhau, rồi phối hợp hai cảng vũ trụ."
+    ],
+    "allGames": "Xem tất cả trò chơi",
+    "roadTitle": "Hiểu mình đang làm gì ở từng bước.",
+    "roadSteps": [
+      [
+        "Hiểu",
+        "Đặt mã, dữ liệu đầu vào và kết quả cạnh nhau để tìm hiểu chương trình làm gì."
+      ],
+      [
+        "Thử làm",
+        "Thay đổi một chỗ rồi chạy lại. Nếu có lỗi, dựa vào kết quả để tìm và sửa lỗi."
+      ],
+      [
+        "Tự giải quyết",
+        "Tự viết chương trình cho dữ liệu đầu vào mới và kiểm tra xem cách giải còn phù hợp không."
+      ]
+    ],
+    "helpTitle": "Gặp một khái niệm chưa quen?",
+    "help": "Xem các khái niệm liên hệ với nhau trên bản đồ, hoặc so sánh Tolang với ngôn ngữ bạn đã biết."
   }
 }

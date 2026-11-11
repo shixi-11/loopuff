@@ -3,6 +3,10 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {mountGuide} from '../src/guide-ui.js';
 const catalog=JSON.parse(fs.readFileSync(new URL('../public/locales/zh.json',import.meta.url)));
+
+test('an independent task href carries the same mode when copied or opened in a new tab',()=>{
+ const m=setup();try{assert.ok(m.root.innerHTML.includes('href="/zh/learn/signal/?practice=independent"'));}finally{m.close();}
+});
 function node(){
  const children=new Map(),handlers={};
  return {handlers,innerHTML:'',textContent:'',value:'',dataset:{},disabled:false,scrollWidth:0,clientWidth:0,

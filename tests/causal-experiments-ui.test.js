@@ -6,9 +6,16 @@ import {locales} from '../src/course.js';
 const catalog=JSON.parse(fs.readFileSync(new URL('../public/locales/zh.json',import.meta.url),'utf8'));
 function mount(kind,model={}){
  const handlers={},nodes=new Map(),root={innerHTML:'',querySelector(selector){if(!nodes.has(selector))nodes.set(selector,{textContent:'',innerHTML:''});return nodes.get(selector);},addEventListener:(name,fn)=>handlers[name]=fn,removeEventListener:(name,fn)=>{if(handlers[name]===fn)delete handlers[name];}};
- const view=mountCausalExperiment(root,{kind,text:catalog.causalExperiments,ownLabel:catalog.guideStudio.editor,errors:catalog.ui,model});
+ const view=mountCausalExperiment(root,{kind,text:catalog.causalExperiments,ownLabel:catalog.guideStudio.editor,ownUrl:'/games/loopuff/zh/guide/#guide-editor',errors:catalog.ui,model});
  return {view,root,handlers,number:(key,value)=>handlers.input({target:{dataset:{causalNumber:key},value}}),send:(key,checked)=>handlers.input({target:{dataset:{causalSend:key},checked}}),run:()=>handlers.click({target:{closest:()=>true}})};
 }
+
+test('the link back to the editor stays on the guide despite a root base URL',()=>{
+ const m=mount('function');try{
+  const href=m.root.innerHTML.match(/class="text-button causal-own" href="([^"]+)"/)[1];
+  assert.equal(new URL(href,'https://example.com/games/loopuff/').pathname,'/games/loopuff/zh/guide/');
+ }finally{m.view.dispose();}
+});
 test('example edits invalidate only their own observation and remounts keep the settings',()=>{
  const model={drafts:{function:'9.log()',join:''},predictions:{function:{raw:'9',silent:false}}},work=JSON.stringify(model),m=mount('function',model);
  try{

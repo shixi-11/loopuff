@@ -42,6 +42,33 @@ test('a pending save completing after language remount unlocks the new view, and
 test('concept feedback names only the contribution that is actually missing',async()=>{
  const m=setup({drafts:{}},'name');try{m.edit('let energy = 5; (7 + 7).log()');m.run();await m.model.startSavePromise;const status=m.root.querySelector('[data-start-status]').textContent;assert.ok(status.includes(copy.assessment.concepts.name));assert.ok(!status.includes(copy.assessment.concepts.add));}finally{m.view.dispose();}
 });
+
+test('correct output with a missing method is distinguished from incorrect output',async()=>{
+ const m=setup({drafts:{}},'calculate');try{
+  m.edit('11.log()');m.run();await m.model.startSavePromise;
+  assert.ok(m.root.querySelector('[data-start-status]').textContent.startsWith(copy.ui.conceptMissing));
+  m.edit('10.log()');m.run();await m.model.startSavePromise;
+  assert.ok(m.root.querySelector('[data-start-status]').textContent.startsWith(copy.learningPaths.needsWork));
+ }finally{m.view.dispose();}
+});
+
+test('finishing six steps offers a named real course task beside the completion message',()=>{
+ const work={};for(const task of startSteps){editStart(work,task.id,task.example);checkStart(work,task.id);}
+ const m=setup({drafts:work},'decide');try{
+  assert.equal(m.root.querySelector('[data-start-finished]').hidden,false);
+  assert.equal(m.root.querySelector('[data-start-course]').href,'/zh/learn/signal/');
+  assert.ok(m.root.querySelector('[data-start-course]').textContent.includes(copy.lessons[0].title));
+ }finally{m.view.dispose();}
+});
+
+test('the final course handoff waits for a successful save and remains unavailable on failure',async()=>{
+ let finish;const work={};for(const task of startSteps){editStart(work,task.id,task.example);checkStart(work,task.id);}
+ const m=setup({drafts:work},'decide',()=>new Promise(resolve=>finish=resolve));try{
+  m.run();assert.equal(m.root.querySelector('[data-start-finished]').hidden,true);
+  finish(false);await m.model.startSavePromise;assert.equal(m.root.querySelector('[data-start-finished]').hidden,true);
+  m.run();finish(true);await m.model.startSavePromise;assert.equal(m.root.querySelector('[data-start-finished]').hidden,false);
+ }finally{m.view.dispose();}
+});
 test('both entrances and advanced links describe real existing checks and projects; every catalog matches',()=>{
  assert.ok(pathEntrances(copy.learningPaths,urls).includes('data-action="open-start"'));assert.ok(pathEntrances(copy.learningPaths,urls).includes('data-action="open-advance"'));
  const root=node();mountAdvancePath(root,{text:copy.learningPaths,diagnosticText:copy.diagnostic,dispatchText:copy.dispatch,urls});assert.ok(root.innerHTML.includes('/zh/guide/check/?area=coordination'));assert.ok(root.innerHTML.includes('/zh/play/dispatch/?mission=relay'));

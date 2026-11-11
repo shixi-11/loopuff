@@ -1215,20 +1215,20 @@
     "jump": "Springen",
     "sprint": "Zum Sprinten gedrückt halten",
     "controls": "Mit der Leertaste springen; Shift zum Sprinten gedrückt halten. Die Wegwahl gilt ab dem nächsten Straßenabschnitt.",
-    "ready": "Die Straßen sind bereit. Wähle eine Rolle und starte.",
+    "ready": "Die Straßen sind bereit. Starte direkt oder öffne die Rollen- und Neustart-Einstellungen, um zuerst Rolle und Schwierigkeit zu wählen.",
     "running": "Verfolgung läuft",
     "paused": "Pausiert; die Uhr steht still",
     "background": "Pausiert. Kehre zur Straße zurück und wähle „Verfolgung fortsetzen“.",
     "slow": "Die Bildausgabe wurde unterbrochen. Das Spiel ist pausiert. Beim Fortsetzen wird die Zeit deiner Abwesenheit nicht angerechnet.",
     "settings": "Rolle und neues Spiel",
-    "role": "Rolle wählen",
-    "difficulty": "Schwierigkeit des Gegners",
+    "role": "Rolle für eine neue Verfolgung",
+    "difficulty": "Gegnerstärke für eine neue Verfolgung",
     "difficulties": [
       "Entspannt",
       "Standard",
       "Anspruchsvoll"
     ],
-    "newRun": "Neues Spiel starten",
+    "newRun": "Neue Verfolgung mit diesen Einstellungen starten",
     "confirmNew": "Neues Spiel bestätigen",
     "resetNote": "Ein neues Spiel setzt die aktuelle Route und die Uhr zurück. Dein Strategieentwurf, der Verlauf und deine Code-Experimente bleiben erhalten.",
     "focus": "Szene vergrößern",
@@ -1950,5 +1950,43 @@
         "hint": "Verwende if obstacle < 4 then { ... } else { ... } für die beiden Fälle. Genau 4 ist nicht kleiner als 4. Immer 3 auszugeben, passt nicht zu jeder Situation."
       }
     }
+  },
+  "homeExperience": {
+    "demoTitle": "Bring den Computer dazu, eine Zahl anzuzeigen",
+    "demoIntro": "Ändere die 7 in eine Zahl deiner Wahl und führe die Anweisung aus.",
+    "number": "Wähle eine Zahl (0–99)",
+    "run": "Diese Anweisung ausführen",
+    "result": "Der Computer zeigt",
+    "ready": "Führe die Anweisung aus und sieh dir das Ergebnis an.",
+    "meaning": "Die Zahl ist der Wert, der angezeigt werden soll. .log() weist den Computer an, ihn anzuzeigen.",
+    "invalid": "Gib eine ganze Zahl von 0 bis 99 ein.",
+    "changed": "Du hast die Zahl geändert. Führe die Anweisung noch einmal aus.",
+    "routeTitle": "Vom ersten Ausführen bis zur eigenen Lösung.",
+    "routeIntro": "Du lernst gerade programmieren? Beginne mit kleinen praktischen Übungen. Du kannst schon programmieren? Prüfe dein Verständnis und verbinde dann mehrere Fähigkeiten in einer Aufgabe.",
+    "practiceTitle": "Was kann Code bewirken? Probiere es im Spiel aus.",
+    "practiceIntro": "Beobachte die Situation, schreibe eine Lösung und mache ihr Ergebnis zur nächsten Aktion. Du kannst zu jedem Spiel zurückkehren und weitermachen.",
+    "gameNotes": [
+      "Berechne Werte und sende Signale in der richtigen Reihenfolge, um drei Mechanismen zu öffnen.",
+      "Laufe durch Straßen, wähle Wege und springe über Hindernisse. Beeinflusse die Verfolgung mit einer Strategie.",
+      "Verarbeite wechselnde Fracht mit Bedingungen, Schleifen und Funktionen und lasse anschließend zwei Raumhäfen zusammenarbeiten."
+    ],
+    "allGames": "Alle Spiele entdecken",
+    "roadTitle": "Wisse bei jedem Schritt, was du tust.",
+    "roadSteps": [
+      [
+        "Verstehen",
+        "Betrachte Code, Eingaben und Ergebnisse zusammen und finde heraus, was passiert."
+      ],
+      [
+        "Ausprobieren",
+        "Ändere eine Sache und führe den Code erneut aus. Nutze das Ergebnis, um Fehler zu finden und zu beheben."
+      ],
+      [
+        "Selbst lösen",
+        "Schreibe ein eigenes Programm für neue Eingaben und prüfe, ob dein Lösungsweg weiterhin funktioniert."
+      ]
+    ],
+    "helpTitle": "Ein unbekannter Begriff?",
+    "help": "Entdecke Zusammenhänge auf der Begriffskarte oder vergleiche Tolang mit einer Sprache, die du bereits kennst."
   }
 }

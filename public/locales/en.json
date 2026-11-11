@@ -1227,20 +1227,20 @@
     "jump": "Jump",
     "sprint": "Hold to sprint",
     "controls": "Space to jump; hold Shift to sprint. Route choices apply when entering the next road section.",
-    "ready": "The streets are ready. Choose a role and start.",
+    "ready": "The streets are ready. Start now, or open Roles and new chase to choose a role and difficulty first.",
     "running": "Pursuit in progress",
     "paused": "Paused; the clock is stopped",
     "background": "Paused. Return to the street and choose Resume.",
     "slow": "The frame was interrupted, so play is paused. Resuming never adds time spent away.",
     "settings": "Role and new match",
-    "role": "Choose a role",
-    "difficulty": "Opponent difficulty",
+    "role": "Role for a new chase",
+    "difficulty": "Opponent difficulty for a new chase",
     "difficulties": [
       "Relaxed",
       "Standard",
       "Challenging"
     ],
-    "newRun": "Start a new match",
+    "newRun": "Start a new chase with these settings",
     "confirmNew": "Confirm new match",
     "resetNote": "A new match resets this route and clock, keeping your strategy draft, history and code experiments.",
     "focus": "Expand scene",
@@ -1962,5 +1962,43 @@
         "hint": "Use if obstacle < 4 then { ... } else { ... } for the two situations. Exactly 4 is not less than 4. Always outputting 3 cannot handle every situation."
       }
     }
+  },
+  "homeExperience": {
+    "demoTitle": "Make the computer show a number",
+    "demoIntro": "Change 7 to a number you like, then run it.",
+    "number": "Choose a number (0–99)",
+    "run": "Run this instruction",
+    "result": "The computer shows",
+    "ready": "Run the instruction to see what it displays.",
+    "meaning": "The number is the value to display. .log() tells the computer to show it.",
+    "invalid": "Enter a whole number from 0 to 99.",
+    "changed": "You changed the number. Run it again.",
+    "routeTitle": "From your first run to solving a problem yourself.",
+    "routeIntro": "New to programming? Start with small hands-on steps. Already code? Check your understanding, then combine your skills in a task.",
+    "practiceTitle": "What can code do? Try it in a game.",
+    "practiceIntro": "Read the scene, write a solution, and turn its result into the next action. You can return to each game and continue.",
+    "gameNotes": [
+      "Calculate and send signals in order to open three mechanisms.",
+      "Run through streets, choose routes and jump barriers. Use a strategy to change the chase.",
+      "Handle changing cargo with conditions, loops and functions, then coordinate two starports."
+    ],
+    "allGames": "Explore all games",
+    "roadTitle": "Know what you are doing at every step.",
+    "roadSteps": [
+      [
+        "Understand",
+        "See the code, inputs and results together, and work out what happens."
+      ],
+      [
+        "Experiment",
+        "Change one thing and run it again. Use the result to find and fix mistakes."
+      ],
+      [
+        "Solve it yourself",
+        "Write your own program for new inputs and check whether your approach still works."
+      ]
+    ],
+    "helpTitle": "An unfamiliar concept?",
+    "help": "Explore how ideas connect on the concept map, or compare Tolang with a language you already know."
   }
 }

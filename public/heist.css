@@ -9,3 +9,6 @@
 [dir=rtl] .heist-page .eyebrow{letter-spacing:0}
 .heist-entry{grid-column:1/-1;grid-template-columns:minmax(190px,.6fr) minmax(0,1.4fr)}.heist-card-art{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;min-height:230px;padding:22px;background:radial-gradient(ellipse at center,#5a719f29,transparent 72%);color:#9eb5da}.heist-card-art>span{font:12px var(--mono);letter-spacing:2px;color:#d5c18e}.arcade-game .heist-card-art>svg{width:190px;max-width:85%;height:145px}
 @media(max-width:560px){.heist-entry{grid-template-columns:1fr}.heist-card-art{min-height:190px}}
+.heist-action-key{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));list-style:none;padding:12px 0;margin:16px 0 20px;gap:8px 14px;border-block:1px solid #385071}
+.heist-action-key li{display:flex;gap:10px;align-items:baseline;font-size:14px;line-height:1.8;color:#c3d3eb;min-width:0}.heist-action-key bdi{font:13px var(--mono);color:#e6cf94;min-width:16px}
+@media(max-width:420px){.heist-action-key{grid-template-columns:1fr}}

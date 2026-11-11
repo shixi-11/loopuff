@@ -30,6 +30,8 @@ npm run build
 npm run dev
 ```
 
+Check formatting changes with `git diff --check`. There is no separate lint task.
+
 Optional accounts use an isolated Better Auth service on the owner's Mac mini. Games and learning progress remain local to the browser. See the [deployment and reuse plan](docs/mac-mini-account.md) for setup, validation and current limits.
 
 ## Language rules

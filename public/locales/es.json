@@ -1215,20 +1215,20 @@
     "jump": "Saltar",
     "sprint": "Mantén pulsado para esprintar",
     "controls": "Pulsa Espacio para saltar; mantén Shift para esprintar. La ruta elegida se aplica al entrar en el siguiente tramo de calle.",
-    "ready": "Las calles están listas. Elige un papel y empieza.",
+    "ready": "Las calles están listas. Empieza ahora o abre Roles y nueva persecución para elegir primero tu papel y la dificultad.",
     "running": "Persecución en curso",
     "paused": "En pausa; el reloj está detenido",
     "background": "En pausa. Vuelve a la calle y selecciona «Reanudar persecución».",
     "slow": "Se interrumpió la actualización de la imagen y el juego está en pausa. Al reanudar, nunca se suma el tiempo de ausencia.",
     "settings": "Papel y nueva partida",
-    "role": "Elegir papel",
-    "difficulty": "Dificultad del rival",
+    "role": "Rol para una nueva persecución",
+    "difficulty": "Dificultad del rival para una nueva persecución",
     "difficulties": [
       "Relajada",
       "Estándar",
       "Exigente"
     ],
-    "newRun": "Iniciar nueva partida",
+    "newRun": "Iniciar una nueva persecución con estos ajustes",
     "confirmNew": "Confirmar nueva partida",
     "resetNote": "Una nueva partida reinicia la ruta y el reloj actuales, pero conserva tu borrador de estrategia, el historial y los experimentos con código.",
     "focus": "Ampliar escena",
@@ -1950,5 +1950,43 @@
         "hint": "Usa if obstacle < 4 then { ... } else { ... } para distinguir los dos casos. Exactamente 4 no es menor que 4. Mostrar siempre 3 no sirve para todas las situaciones."
       }
     }
+  },
+  "homeExperience": {
+    "demoTitle": "Haz que el ordenador muestre un número",
+    "demoIntro": "Cambia el 7 por un número que te guste y ejecuta la instrucción.",
+    "number": "Elige un número (0–99)",
+    "run": "Ejecutar esta instrucción",
+    "result": "El ordenador muestra",
+    "ready": "Ejecuta la instrucción para ver qué muestra.",
+    "meaning": "El número es el valor que quieres mostrar. .log() le indica al ordenador que lo muestre.",
+    "invalid": "Introduce un número entero entre 0 y 99.",
+    "changed": "Has cambiado el número. Ejecuta la instrucción otra vez.",
+    "routeTitle": "De tu primera ejecución a resolver un problema por tu cuenta.",
+    "routeIntro": "¿Empiezas a programar? Comienza con ejercicios prácticos cortos. ¿Ya sabes programar? Comprueba lo que entiendes y combina tus conocimientos en una tarea.",
+    "practiceTitle": "¿Qué puede hacer el código? Pruébalo en un juego.",
+    "practiceIntro": "Observa la situación, escribe una solución y convierte su resultado en la siguiente acción. Puedes volver a cada juego y continuar.",
+    "gameNotes": [
+      "Calcula y envía señales en orden para abrir tres mecanismos.",
+      "Recorre calles, elige rutas y salta obstáculos. Usa una estrategia para cambiar el rumbo de la persecución.",
+      "Gestiona cargas variables con condiciones, bucles y funciones; después, coordina dos puertos espaciales."
+    ],
+    "allGames": "Explorar todos los juegos",
+    "roadTitle": "Entiende lo que haces en cada paso.",
+    "roadSteps": [
+      [
+        "Entender",
+        "Mira el código, los datos de entrada y los resultados juntos para entender qué ocurre."
+      ],
+      [
+        "Experimentar",
+        "Cambia una cosa y vuelve a ejecutar. Usa el resultado para encontrar y corregir errores."
+      ],
+      [
+        "Resolver por tu cuenta",
+        "Escribe tu propio programa para nuevos datos de entrada y comprueba si tu solución sigue funcionando."
+      ]
+    ],
+    "helpTitle": "¿Un concepto desconocido?",
+    "help": "Explora las conexiones en el mapa de conceptos o compara Tolang con un lenguaje que ya conozcas."
   }
 }
