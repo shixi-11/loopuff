@@ -1988,5 +1988,53 @@
     ],
     "helpTitle": "Gặp một khái niệm chưa quen?",
     "help": "Xem các khái niệm liên hệ với nhau trên bản đồ, hoặc so sánh Tolang với ngôn ngữ bạn đã biết."
+  },
+  "teaching": {
+    "title": "Từ một giá trị đến kết quả nhìn thấy được",
+    "intro": "Hãy thử cả hai chương trình. Trước mỗi lần chạy, hãy đoán xem chương trình có yêu cầu máy tính hiển thị gì không.",
+    "programTitle": "Chương trình là gì?",
+    "programText": "Chương trình là một tập hợp chỉ dẫn cho máy tính; ở đây ta viết bằng ngôn ngữ Tolang. Trang này chạy các chương trình ngắn. Sau khi đổi số hoặc chọn cách viết khác, hãy bấm chạy để thực hiện chương trình hiện tại. Chỉ sửa thì chưa chạy; trò chơi quyết định cách sử dụng kết quả của chương trình.",
+    "syntaxTitle": "Đọc chương trình này",
+    "valueLabel": "Số cần xử lý",
+    "valueText": "Số này là giá trị ta muốn xử lý. Viết riêng một số chưa phải là yêu cầu máy tính hiển thị nó.",
+    "dotLabel": ". · nối lại",
+    "dotText": "Dấu chấm nối giá trị bên trái với thao tác được đặt tên bên phải.",
+    "operationLabel": "log · ghi lại",
+    "operationText": "log là tên của thao tác ghi lại giá trị đứng trước nó. Trang này hiển thị các bản ghi đó trong vùng kết quả.",
+    "callLabel": "() · thực hiện thao tác",
+    "callText": "Cặp ngoặc gọi thao tác, tức là yêu cầu máy tính thực hiện nó. Lần gọi này không cần thêm thông tin nên bên trong ngoặc để trống.",
+    "runLabel": "Chạy chương trình này",
+    "bareLabel": "Chỉ viết số",
+    "outputLabel": "Vùng kết quả",
+    "noOutput": "Không có đầu ra: chương trình này không yêu cầu máy tính ghi lại giá trị nào.",
+    "ready": "Chọn chương trình, đoán kết quả rồi bấm chạy.",
+    "changed": "Mã đã thay đổi. Chạy lại để xem kết quả mới.",
+    "ran": "Máy tính đã thực hiện chương trình này. Hãy so sánh kết quả với dự đoán của bạn.",
+    "nextLabel": "Tiếp theo: tự viết một số khác",
+    "steps": {
+      "run": "Trong 7.log(), 7 là giá trị còn .log() yêu cầu máy tính ghi lại nó. Chạy chương trình sẽ hiển thị 7; hãy nghĩ xem cần đổi phần nào để hiển thị 9.",
+      "change": "Chỉ thay 7 bằng số được yêu cầu, giữ nguyên .log() rồi chạy lại. Kết quả mới đến từ chỉ dẫn mới; với mục tiêu tiếp theo, hãy chọn số cần viết trước.",
+      "repair": "7.log( thiếu dấu ngoặc đóng nên máy tính không thể đọc hết chỉ dẫn. Thêm ) để thành 7.log(), chạy lại rồi kiểm tra xem 7 có xuất hiện không.",
+      "calculate": "(2 + 3).log() cộng 2 với 3 trước rồi ghi lại 5. Mục tiêu là 11: hãy chọn hai số có tổng bằng 11, viết phép cộng rồi chạy để kiểm tra lựa chọn.",
+      "name": "let energy = 5 đặt tên energy cho giá trị 5; (energy + 2).log() lấy giá trị đó cộng 2 và hiển thị 7. Mục tiêu mới là 14: chọn giá trị của energy và số cần cộng, rồi kiểm tra xem phép tính có thực sự dùng tên đó không.",
+      "decide": "1.log() luôn ghi 1 nên không thể chọn hành động theo từng chướng ngại. Kiểm tra obstacle < 4: nếu đúng thì ghi 3 trong phần then, nếu sai thì ghi 1 trong phần else. Nghĩ xem trường hợp bằng 4 thuộc bên nào trước khi chạy các trường hợp khác nhau."
+    },
+    "lessons": {
+      "signal": "7 là một số; dấu chấm nối nó với log, còn () gọi thao tác ghi lại. Chạy 7.log() sẽ hiển thị 7 trong vùng kết quả; muốn ghi số khác, hãy đổi giá trị trước dấu chấm.",
+      "addition": "Cặp ngoặc quanh 2 + 3 gom phép tính thành một nhóm. Máy tính tính được 5 trước rồi .log() ghi lại kết quả đó; đổi một trong hai số sẽ đổi tổng.",
+      "names": "let n = 5 đặt tên n cho 5. Dòng tiếp theo lấy giá trị của n, cộng 2 rồi ghi lại 7; sửa định nghĩa ban đầu sẽ đổi giá trị được dùng trong phép tính phía sau.",
+      "leap": "(2 + 3) tính ra 5 và .log() ghi lại số đó. Trong nhiệm vụ này, trò chơi đọc bản ghi và cho máy bay tiến năm ô; bản thân log chỉ ghi lại giá trị.",
+      "comparison": "let fuel = 6 đặt tên fuel cho 6. fuel > 4 kiểm tra xem 6 có lớn hơn 4 không, nên .log() ghi true, nghĩa là đúng; nếu fuel bằng 3 thì ghi false, nghĩa là sai.",
+      "branch": "Dòng đầu đặt fuel bằng 6. if kiểm tra fuel > 4; nếu đúng thì thực hiện phần then để ghi 1. Nếu sai thì thực hiện phần else để ghi 2, mỗi lần chỉ chạy một nhánh.",
+      "repeat": "for lần lượt lấy 2, 4, 6 từ danh sách và gọi giá trị hiện tại là dock. Mỗi lượt, dock.log() trong ngoặc nhọn ghi giá trị đó, nên có ba kết quả riêng theo thứ tự 2, 4, 6.",
+      "counter": "tick bắt đầu bằng 1. Trước mỗi lượt, while kiểm tra tick < 4; nếu đúng thì ghi tick rồi tăng nó thêm 1. Chương trình ghi 1, 2, 3 và dừng khi tick đạt 4.",
+      "function": "sync fn định nghĩa phép tính dùng lại được tên combine, nhận hai số a và b; return gửi tổng về nơi gọi. combine(3, 4) truyền vào 3 và 4, đặt tên load cho kết quả 7; load.log() hiển thị nó.",
+      "reply": "fn định nghĩa boost với một giá trị đầu vào tên load. boost(5) truyền vào 5, rồi return ! gửi trả lời là 5 + 2. Câu trả lời được đặt tên result và result.log() hiển thị 7.",
+      "message": "let parcel khai báo một nơi nhận tin nhắn. parcel ! 7 gửi 7 đến đó, còn phần nhận đợi tin từ parcel và đặt tên value cho giá trị nhận được; value.log() hiển thị 7.",
+      "join": "west và east là hai nơi nhận tin, các phần chạy song song gửi 4 và 6. Phần nhận nối bằng & đợi đủ một tin từ mỗi bên, đặt tên chúng là a và b rồi ghi tổng 10.",
+      "coordination": "total định nghĩa cách cộng hai số trước. Các phần song song gửi 6 và 7; khi đủ hai tin, total(a, b) tính load bằng 13. Vì 13 > 12 đúng, nhánh được chọn cộng thêm 5 và ghi 18; nếu sai thì ghi nguyên load."
+    },
+    "workedTitle": "Đọc một ví dụ hoàn chỉnh trước",
+    "workedIntro": "Hãy bắt đầu bằng các chương trình hoàn chỉnh về hàm trả về giá trị, hàm gửi lời đáp, nhận một tin nhắn và đợi đủ hai tin nhắn. Đọc từng phần và cách chúng tạo ra kết quả hiển thị, rồi thử bài chẩn đoán với nhiều đầu vào khác nhau và các dự án kết hợp."
   }
 }

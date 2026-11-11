@@ -2000,5 +2000,53 @@
     ],
     "helpTitle": "An unfamiliar concept?",
     "help": "Explore how ideas connect on the concept map, or compare Tolang with a language you already know."
+  },
+  "teaching": {
+    "title": "From a value to a visible result",
+    "intro": "Try both programs. Before running each one, decide whether it asks the computer to display anything.",
+    "programTitle": "What is a program?",
+    "programText": "A program is a set of instructions; Tolang is the language used to write them here. This page runs short programs: change the number or choose another form, then press Run to execute the current program. Editing alone does not run it; a game decides how to use its results.",
+    "syntaxTitle": "Read this program",
+    "valueLabel": "The number to work with",
+    "valueText": "This number is the value we want to work with. Writing a number on its own does not ask the computer to display it.",
+    "dotLabel": ". · connect",
+    "dotText": "The dot connects the value on its left to the operation named on its right.",
+    "operationLabel": "log · record",
+    "operationText": "log names an operation that records the preceding value. This page shows those records in the result area.",
+    "callLabel": "() · carry it out",
+    "callText": "The parentheses call the operation: they tell the computer to carry it out. They are empty because this call needs no extra information inside them.",
+    "runLabel": "Run this program",
+    "bareLabel": "Write only the number",
+    "outputLabel": "Result area",
+    "noOutput": "No output: this program did not ask the computer to record a value.",
+    "ready": "Choose a program, predict its result, then run it.",
+    "changed": "The code has changed. Run it again to see its new result.",
+    "ran": "The computer has now carried out this program. Compare the result with your prediction.",
+    "nextLabel": "Next: write a different number",
+    "steps": {
+      "run": "In 7.log(), 7 is the value and .log() asks the computer to record it. Run the program to display 7; then consider which part you would change to display 9.",
+      "change": "Replace only 7 with the requested number and keep .log(). Run again: the result comes from your new instruction, so decide what number to write for the next target.",
+      "repair": "7.log( is missing its closing parenthesis, so the computer cannot complete the instruction. Add ) to make 7.log(), run again and check that 7 appears.",
+      "calculate": "(2 + 3).log() adds 2 and 3 before recording 5. Your target is 11: choose two numbers that add up to 11 and write the calculation, then run it to check your choice.",
+      "name": "let energy = 5 names the value 5 energy; (energy + 2).log() uses it to display 7. Your target is 14: choose a value for energy and a number to add, then check that the calculation really uses the name.",
+      "decide": "1.log() always records 1, so it cannot choose an action for different obstacles. Check obstacle < 4: record 3 in the then block when it is true, and 1 in the else block otherwise. Think about which side includes 4 before running the different cases."
+    },
+    "lessons": {
+      "signal": "7 is a number; the dot connects it to log, and () calls that operation. Running 7.log() records 7 in the result area; to record another number, change the value before the dot.",
+      "addition": "The parentheses around 2 + 3 group the calculation. The computer obtains 5, then .log() records that result; changing either number changes the sum.",
+      "names": "let n = 5 gives 5 the name n. The next line looks up n, adds 2, and records 7; changing the definition changes what that later calculation uses.",
+      "leap": "(2 + 3) produces 5, and .log() records it. In this mission, the game reads that record and moves the plane forward five spaces; log itself only records the value.",
+      "comparison": "let fuel = 6 gives 6 the name fuel. fuel > 4 asks whether 6 is greater than 4, so .log() records true; with fuel set to 3, it would record false.",
+      "branch": "The first line sets fuel to 6. if checks fuel > 4, then runs the block that records 1; otherwise else runs the block that records 2, so the two results are alternatives.",
+      "repeat": "for takes 2, then 4, then 6 from the list, naming the current value dock each time. The block records dock on every turn, producing three separate results in that order.",
+      "counter": "The counter tick starts at 1. while checks tick < 4 before each turn; the block records tick and increases it by 1, producing 1, 2, 3 before stopping at 4.",
+      "function": "sync fn defines combine as a reusable calculation with two inputs, a and b; return sends their sum back to its caller. combine(3, 4) supplies those inputs and gives 7 the name load; load.log() displays it.",
+      "reply": "fn defines boost with one input named load. boost(5) runs it with 5, and return ! replies with 5 + 2; the reply becomes result, which .log() displays as 7.",
+      "message": "let parcel introduces a place to send a message. parcel ! 7 sends 7, while the receiving part waits for parcel and names the received value value; value.log() displays 7.",
+      "join": "west and east are two message destinations; the parallel parts send 4 and 6. The receiving part joined by & waits for one value from each, names them a and b, then records their sum, 10.",
+      "coordination": "total first defines how to add two inputs. The parallel parts send 6 and 7; once both arrive, total(a, b) produces load = 13. Since 13 > 12 is true, the selected block adds 5 and records 18; otherwise it would record load unchanged."
+    },
+    "workedTitle": "Read a complete example first",
+    "workedIntro": "Start with complete programs showing a function returning a value, a function sending a reply, receiving one message, and waiting for two messages. Read how each part leads to the displayed result, then try the diagnostics with changing inputs and the combined projects."
   }
 }

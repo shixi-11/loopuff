@@ -1988,5 +1988,53 @@
     ],
     "helpTitle": "Ein unbekannter Begriff?",
     "help": "Entdecke Zusammenhänge auf der Begriffskarte oder vergleiche Tolang mit einer Sprache, die du bereits kennst."
+  },
+  "teaching": {
+    "title": "Vom Wert zum sichtbaren Ergebnis",
+    "intro": "Probiere beide Programme aus. Überlege vor jedem Start, ob das Programm den Computer auffordert, etwas anzuzeigen.",
+    "programTitle": "Was ist ein Programm?",
+    "programText": "Ein Programm besteht aus Anweisungen; Tolang ist die Sprache, in der wir sie hier schreiben. Diese Seite führt kurze Programme aus. Ändere die Zahl oder wähle eine andere Schreibweise und drücke dann auf Ausführen, um das aktuelle Programm zu starten. Änderungen allein starten es nicht; wie ein Spiel die Ergebnisse nutzt, bestimmt das Spiel.",
+    "syntaxTitle": "Dieses Programm verstehen",
+    "valueLabel": "Die Zahl, mit der wir arbeiten",
+    "valueText": "Diese Zahl ist der Wert, mit dem wir arbeiten möchten. Eine Zahl allein fordert den Computer noch nicht auf, sie anzuzeigen.",
+    "dotLabel": ". · verbinden",
+    "dotText": "Der Punkt verbindet den Wert links mit der rechts benannten Aktion.",
+    "operationLabel": "log · aufzeichnen",
+    "operationText": "log ist der Name einer Aktion, die den davorstehenden Wert aufzeichnet. Diese Seite zeigt die Aufzeichnungen im Ergebnisbereich an.",
+    "callLabel": "() · ausführen",
+    "callText": "Die Klammern rufen die Aktion auf: Sie weisen den Computer an, sie auszuführen. Sie sind leer, weil dieser Aufruf keine zusätzlichen Angaben benötigt.",
+    "runLabel": "Dieses Programm ausführen",
+    "bareLabel": "Nur die Zahl schreiben",
+    "outputLabel": "Ergebnisbereich",
+    "noOutput": "Keine Ausgabe: Dieses Programm fordert den Computer nicht auf, einen Wert aufzuzeichnen.",
+    "ready": "Wähle ein Programm, vermute das Ergebnis und führe es dann aus.",
+    "changed": "Der Code wurde geändert. Führe ihn erneut aus, um das neue Ergebnis zu sehen.",
+    "ran": "Der Computer hat dieses Programm ausgeführt. Vergleiche das Ergebnis mit deiner Vermutung.",
+    "nextLabel": "Weiter: selbst eine andere Zahl schreiben",
+    "steps": {
+      "run": "In 7.log() ist 7 der Wert; .log() fordert den Computer auf, ihn aufzuzeichnen. Beim Ausführen erscheint 7. Überlege, welchen Teil du ändern musst, damit 9 erscheint.",
+      "change": "Ersetze nur die 7 durch die geforderte Zahl und lasse .log() stehen. Führe das Programm erneut aus: Das neue Ergebnis entsteht aus der geänderten Anweisung. Überlege für das nächste Ziel zuerst, welche Zahl du brauchst.",
+      "repair": "Bei 7.log( fehlt die schließende Klammer, deshalb kann der Computer die Anweisung nicht vollständig lesen. Ergänze ) zu 7.log(), starte erneut und prüfe, ob 7 erscheint.",
+      "calculate": "(2 + 3).log() addiert zuerst 2 und 3 und zeichnet 5 auf. Dein Ziel ist 11: Wähle zwei Zahlen mit der Summe 11, schreibe die Rechnung und führe sie zur Kontrolle aus.",
+      "name": "let energy = 5 gibt dem Wert 5 den Namen energy. (energy + 2).log() verwendet ihn, addiert 2 und zeigt 7 an. Dein Ziel ist 14: Wähle einen Wert für energy und eine Zahl zum Addieren und prüfe, ob die Rechnung den Namen wirklich verwendet.",
+      "decide": "1.log() zeichnet immer 1 auf und kann daher keine Aktion passend zum Hindernis auswählen. Prüfe obstacle < 4: Bei wahr soll der then-Block 3 aufzeichnen, andernfalls der else-Block 1. Überlege vor dem Test verschiedener Fälle, welcher Zweig für genau 4 gilt."
+    },
+    "lessons": {
+      "signal": "7 ist eine Zahl, der Punkt verbindet sie mit log und () ruft diese Aktion auf. 7.log() zeichnet 7 im Ergebnisbereich auf. Ändere den Wert vor dem Punkt, um eine andere Zahl aufzuzeichnen.",
+      "addition": "Die Klammern um 2 + 3 fassen die Rechnung zusammen. Der Computer berechnet zuerst 5 und zeichnet dieses Ergebnis mit .log() auf. Änderst du eine der Zahlen, ändert sich auch die Summe.",
+      "names": "let n = 5 gibt 5 den Namen n. Die nächste Zeile verwendet den Wert von n, addiert 2 und zeichnet 7 auf. Eine Änderung der Definition verändert den Wert, den die spätere Rechnung verwendet.",
+      "leap": "(2 + 3) ergibt 5, und .log() zeichnet diesen Wert auf. In dieser Mission liest das Spiel die Aufzeichnung und bewegt das Flugzeug fünf Felder vorwärts. log selbst zeichnet lediglich einen Wert auf.",
+      "comparison": "let fuel = 6 gibt 6 den Namen fuel. fuel > 4 prüft, ob 6 größer als 4 ist; deshalb wird true, also wahr, aufgezeichnet. Mit fuel = 3 wäre das Ergebnis false, also falsch.",
+      "branch": "Die erste Zeile setzt fuel auf 6. if prüft fuel > 4 und führt bei wahr den then-Block aus, der 1 aufzeichnet. Andernfalls zeichnet der else-Block 2 auf; pro Durchlauf wird nur einer der beiden Zweige gewählt.",
+      "repeat": "for nimmt nacheinander 2, 4 und 6 aus der Liste und nennt den jeweiligen Wert dock. Bei jedem Durchlauf zeichnet dock.log() im Block diesen Wert auf. So entstehen die drei einzelnen Ergebnisse 2, 4 und 6 in dieser Reihenfolge.",
+      "counter": "tick beginnt bei 1. while prüft vor jedem Durchlauf tick < 4; solange das wahr ist, zeichnet der Block tick auf und erhöht es um 1. Es erscheinen 1, 2 und 3, dann endet die Wiederholung bei 4.",
+      "function": "sync fn definiert combine als wiederverwendbare Rechnung mit den beiden Eingaben a und b. return gibt ihre Summe an die aufrufende Stelle zurück. combine(3, 4) liefert 7, das den Namen load erhält; load.log() zeigt es an.",
+      "reply": "fn definiert boost mit einer Eingabe namens load. boost(5) übergibt 5, und return ! antwortet mit 5 + 2. Die Antwort erhält den Namen result; result.log() zeigt 7 an.",
+      "message": "let parcel legt einen Empfangsort für Nachrichten an. parcel ! 7 sendet 7 dorthin; der andere Teil wartet auf eine Nachricht von parcel und nennt ihren Wert value. value.log() zeigt 7 an.",
+      "join": "west und east sind zwei Nachrichtenziele; die parallel laufenden Teile senden 4 und 6. Der mit & verknüpfte Empfang wartet auf je einen Wert von beiden Seiten und nennt sie a und b. Anschließend wird ihre Summe 10 aufgezeichnet.",
+      "coordination": "total legt zuerst fest, wie zwei Zahlen addiert werden. Die parallelen Teile senden 6 und 7; sobald beide Nachrichten da sind, berechnet total(a, b) den Wert load = 13. Weil 13 > 12 wahr ist, addiert der gewählte Zweig 5 und zeichnet 18 auf; andernfalls würde load unverändert aufgezeichnet."
+    },
+    "workedTitle": "Zuerst ein vollständiges Beispiel lesen",
+    "workedIntro": "Beginne mit vollständigen Programmen: Eine Funktion gibt einen Wert zurück, eine andere sendet eine Antwort, eine Nachricht wird empfangen oder auf zwei Nachrichten gewartet. Lies, wie aus den einzelnen Teilen das angezeigte Ergebnis entsteht. Probiere danach die Diagnosen mit wechselnden Eingaben und die kombinierten Projekte aus."
   }
 }

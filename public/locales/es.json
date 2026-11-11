@@ -1988,5 +1988,53 @@
     ],
     "helpTitle": "¿Un concepto desconocido?",
     "help": "Explora las conexiones en el mapa de conceptos o compara Tolang con un lenguaje que ya conozcas."
+  },
+  "teaching": {
+    "title": "De un valor a un resultado visible",
+    "intro": "Prueba los dos programas. Antes de ejecutar cada uno, piensa si le pide al ordenador que muestre algo.",
+    "programTitle": "¿Qué es un programa?",
+    "programText": "Un programa es un conjunto de instrucciones; Tolang es el lenguaje con el que las escribimos aquí. Esta página ejecuta programas cortos. Después de cambiar el número o elegir otra forma de escribirlo, pulsa Ejecutar para que se realice el programa actual. Modificarlo por sí solo no lo ejecuta; cada juego decide cómo usar sus resultados.",
+    "syntaxTitle": "Entender este programa",
+    "valueLabel": "El número con el que trabajar",
+    "valueText": "Este número es el valor con el que queremos trabajar. Escribir un número por sí solo no pide al ordenador que lo muestre.",
+    "dotLabel": ". · conectar",
+    "dotText": "El punto conecta el valor de la izquierda con la operación cuyo nombre aparece a la derecha.",
+    "operationLabel": "log · registrar",
+    "operationText": "log es el nombre de una operación que registra el valor anterior. Esta página muestra esos registros en la zona de resultados.",
+    "callLabel": "() · realizar la operación",
+    "callText": "Los paréntesis llaman a la operación: indican al ordenador que la realice. Están vacíos porque esta llamada no necesita información adicional dentro.",
+    "runLabel": "Ejecutar este programa",
+    "bareLabel": "Escribir solo el número",
+    "outputLabel": "Zona de resultados",
+    "noOutput": "Sin salida: este programa no pide al ordenador que registre ningún valor.",
+    "ready": "Elige un programa, predice el resultado y ejecútalo.",
+    "changed": "El código ha cambiado. Vuelve a ejecutarlo para ver el nuevo resultado.",
+    "ran": "El ordenador ha ejecutado este programa. Compara el resultado con tu predicción.",
+    "nextLabel": "Siguiente: escribir otro número por tu cuenta",
+    "steps": {
+      "run": "En 7.log(), 7 es el valor y .log() pide al ordenador que lo registre. Al ejecutarlo aparece 7. Piensa qué parte tendrías que cambiar para mostrar 9.",
+      "change": "Sustituye solo el 7 por el número pedido y conserva .log(). Vuelve a ejecutar: el nuevo resultado procede de la instrucción modificada. Para el siguiente objetivo, piensa primero qué número necesitas.",
+      "repair": "A 7.log( le falta el paréntesis de cierre, por lo que el ordenador no puede leer la instrucción completa. Añade ) para formar 7.log(), vuelve a ejecutar y comprueba que aparezca 7.",
+      "calculate": "(2 + 3).log() suma primero 2 y 3 y registra 5. Tu objetivo es 11: elige dos números que sumen 11, escribe la operación y ejecútala para comprobar tu elección.",
+      "name": "let energy = 5 da el nombre energy al valor 5. (energy + 2).log() lo usa, suma 2 y muestra 7. Tu objetivo es 14: elige un valor para energy y un número que sumar, y comprueba que el cálculo use realmente ese nombre.",
+      "decide": "1.log() siempre registra 1, así que no puede elegir una acción según el obstáculo. Comprueba obstacle < 4: si es verdadero, registra 3 en el bloque then; si no, registra 1 en el bloque else. Antes de probar distintos casos, piensa en qué rama entra un obstáculo igual a 4."
+    },
+    "lessons": {
+      "signal": "7 es un número; el punto lo conecta con log y () llama a esa operación. Ejecutar 7.log() registra 7 en la zona de resultados. Para registrar otro número, cambia el valor anterior al punto.",
+      "addition": "Los paréntesis alrededor de 2 + 3 agrupan la suma. El ordenador obtiene primero 5 y después .log() registra ese resultado. Cambiar cualquiera de los números cambia la suma.",
+      "names": "let n = 5 da el nombre n al valor 5. La línea siguiente usa el valor de n, le suma 2 y registra 7. Si cambias la definición inicial, cambia el valor utilizado en el cálculo posterior.",
+      "leap": "(2 + 3) calcula 5 y .log() lo registra. En esta misión, el juego lee ese registro y hace avanzar el avión cinco casillas. La operación log en sí solo registra el valor.",
+      "comparison": "let fuel = 6 da el nombre fuel al valor 6. fuel > 4 comprueba si 6 es mayor que 4, por eso se registra true, que significa verdadero. Con fuel igual a 3, se registraría false, que significa falso.",
+      "branch": "La primera línea fija fuel en 6. if comprueba fuel > 4 y, si es verdadero, ejecuta el bloque then que registra 1. Si es falso, ejecuta el bloque else que registra 2; solo se elige una de las dos ramas.",
+      "repeat": "for toma 2, 4 y 6 de la lista en ese orden y llama dock al valor de cada turno. El bloque ejecuta dock.log() en cada turno. Así se registran tres resultados separados: 2, 4 y 6.",
+      "counter": "tick empieza en 1. Antes de cada vuelta, while comprueba tick < 4; si es verdadero, registra tick y lo aumenta en 1. Se registran 1, 2 y 3, y el proceso se detiene al llegar a 4.",
+      "function": "sync fn define combine como un cálculo reutilizable que recibe dos números, a y b. return devuelve la suma al lugar que lo llamó. combine(3, 4) devuelve 7, que recibe el nombre load; load.log() lo muestra.",
+      "reply": "fn define boost con un valor de entrada llamado load. boost(5) le entrega 5 y return ! responde con 5 + 2. La respuesta recibe el nombre result; result.log() muestra 7.",
+      "message": "let parcel declara un lugar donde recibir mensajes. parcel ! 7 envía 7 allí; la otra parte espera un mensaje de parcel y llama value al valor recibido. value.log() muestra 7.",
+      "join": "west y east son dos destinos de mensajes; las partes paralelas envían 4 y 6. La recepción unida por & espera un valor de cada lado y les da los nombres a y b. Después registra su suma, 10.",
+      "coordination": "total define primero cómo sumar dos números. Las partes paralelas envían 6 y 7; cuando llegan ambos mensajes, total(a, b) calcula load = 13. Como 13 > 12 es verdadero, la rama elegida suma 5 y registra 18; si fuera falso, registraría load sin cambiarlo."
+    },
+    "workedTitle": "Lee primero un ejemplo completo",
+    "workedIntro": "Empieza con programas completos que muestran una función que devuelve un valor, otra que envía una respuesta, la recepción de un mensaje y la espera de dos mensajes. Lee cómo cada parte produce el resultado mostrado. Después prueba los diagnósticos con distintas entradas y los proyectos que combinan estas ideas."
   }
 }
