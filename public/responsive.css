@@ -1,0 +1,48 @@
+/* Keep focused content clear of the desktop header. Compact screens scroll it away. */
+html{scroll-padding-block-start:112px}
+.masthead .brand{min-height:44px}
+.handheld-ab button{color:#fff0d0}
+.handheld-system button{background:#3d5b54;color:#edf2e1}
+
+/* Let larger text grow the hero while keeping the approved artwork intact. */
+@media(min-width:1101px){
+ body[data-phase=welcome] .universe[data-phase=welcome] .welcome{display:grid}
+ body[data-phase=welcome] .welcome .expedition-hero{grid-area:1/1;align-self:start}
+ body[data-phase=welcome] .welcome .home-intro{position:relative;grid-area:1/1;align-self:start}
+}
+@media(min-width:761px) and (min-height:760px){
+ .handheld-device{position:sticky;top:112px}
+}
+@media(min-width:1101px) and (min-height:760px) and (max-height:900px){
+ .handheld-device{max-width:min(100%,calc(133.333svh - 688px));margin-inline:auto}
+ .handheld-buttons{gap:10px}
+ .handheld-ab{gap:8px}
+ .handheld-ab button{width:44px;height:44px}
+}
+
+@media(max-width:1000px){
+ html{scroll-padding-block-start:16px}
+ .masthead,body[data-view=learning] .masthead{grid-template-rows:minmax(52px,auto) auto}
+ body[data-view=learning] .masthead{position:relative}
+ .masthead .page-navigation{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .handheld-dpad{grid-template-columns:repeat(3,44px);grid-template-rows:repeat(3,44px)}
+ .handheld-ab button{width:44px;height:44px}
+ .handheld-ab{gap:8px}
+ .handheld-buttons{gap:10px}
+ .handheld-device{top:16px}
+}
+@media(max-width:760px){
+ .masthead .page-navigation{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .page-trail a{min-width:44px;min-height:44px}
+ .learning-page :is(.guide-crosslink,.guide-map-link,.path-heading>a,.advanced-game-strategies a,.arcade-ranking>a,.text-button){min-width:44px;min-height:44px;display:inline-flex;align-items:center}
+ .learning-page .guide-map-link{margin-block:12px;padding-block:8px}
+}
+@media(min-width:1001px) and (max-width:1100px){
+ html{scroll-padding-block-start:16px}
+ body[data-view=learning] .masthead{position:relative}
+ .handheld-device{top:16px}
+}
+@media(max-height:600px){
+ html{scroll-padding-block-start:16px}
+ body[data-view=learning] .masthead{position:relative}
+}

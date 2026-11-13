@@ -21,7 +21,7 @@ const bundled=await build({entryPoints:[resolve(root,'src/app.js')],bundle:true,
 const script=bundled.outputFiles[0].text;
 const scriptName=`app-${createHash('sha256').update(script).digest('hex').slice(0,12)}.js`;
 await writeFile(resolve(out,'src',scriptName),script);
-const cssFiles=['theme.css','style.css','vault.css','ui.css','home.css','flight.css','chase.css','dispatch.css','saves.css','guide.css','pursuit.css','learning-map.css','diagnostic.css','program-scene.css','heist.css','pixel.css','arcade.css'];
+const cssFiles=['theme.css','style.css','vault.css','ui.css','home.css','flight.css','chase.css','dispatch.css','saves.css','guide.css','pursuit.css','learning-map.css','diagnostic.css','program-scene.css','heist.css','pixel.css','arcade.css','responsive.css'];
 const css=(await transform((await Promise.all(cssFiles.map(file=>readFile(resolve(out,file),'utf8')))).join('\n'),{loader:'css',minify:true})).code;
 const cssName=`style-${createHash('sha256').update(css).digest('hex').slice(0,12)}.css`;
 await writeFile(resolve(out,cssName),css);
