@@ -6,7 +6,7 @@ html{scroll-padding-block-start:112px}
 
 /* Let larger text grow the hero while keeping the approved artwork intact. */
 @media(min-width:1101px){
- body[data-phase=welcome] .universe[data-phase=welcome] .welcome{display:grid}
+ body[data-phase=welcome] .universe[data-phase=welcome] .welcome{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto;gap:0}
  body[data-phase=welcome] .welcome .expedition-hero{grid-area:1/1;align-self:start}
  body[data-phase=welcome] .welcome .home-intro{position:relative;grid-area:1/1;align-self:start}
 }
