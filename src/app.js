@@ -12,6 +12,8 @@ import {createArcadeClient} from './arcade-client.js';
 import {mountLeaderboard,mountRankedGame} from './arcade-ui.js';
 import {mountLessonReward} from './lesson-reward-ui.js';
 import {mountDistrict} from './district-ui.js';
+import {districtCatalog} from './district-catalog.js';
+import {renderLearningNavigation,mountLearningNavigation} from './learning-navigation.js';
 import {cartridgeArt} from './cartridge-art.js';
 import {loadPursuit} from './pursuit-session.js';
 import { mountVault, loadVault } from './vault-ui.js';
@@ -55,6 +57,7 @@ let saved={};try{saved=readSession(localStorage.getItem(storageKey));}catch{}
 const validLocale=id=>locales.some(([key])=>key===id);
 let lang=selectedLocale(location.href,saved.lang,navigator.languages||[navigator.language]);
 if(!validLocale(lang))lang='en';
+let learningNavigation=null;
 let programScene=null,jumpLab=null,vaultGame=null,chaseGame=null,pursuitGame=null,heistGame=null,dispatchGame=null,accountPage=null,savesPage=null,guidePage=null;
 const savesModel={},diagnosticModel={};
 const guideModel={selected:saved.state?.guideSelected,drafts:readGuideWork(saved.state?.guideWork)};
@@ -154,7 +157,9 @@ function applyStatic(){
   $('pause-button').innerHTML=`<span aria-hidden="true">Ⅱ</span> <span class="pause-word">${escape(ui('pause'))}</span>`;$('pause-button').setAttribute('aria-label',ui('pause'));document.querySelector('.header-controls').setAttribute('aria-label',ui('navigation'));
   const navigation=$('page-navigation');
   navigation.hidden=false;navigation.setAttribute('aria-label',ui('navigation'));
-  navigation.innerHTML=`<a data-action="home" href="${routeUrl(location.href,lang,'home').pathname}" ${state.phase==='welcome'?'aria-current="page"':''}>${escape(ui('navHome'))}</a><a data-action="open-play" href="${routeUrl(location.href,lang,'play').pathname}" ${!['welcome','guide','account','saves','leaderboard'].includes(state.phase)?'aria-current="page"':''}>${escape(messages.vault.arcade)}</a><a data-action="open-guide" aria-label="${escape(ui('navGuide'))}" href="${routeUrl(location.href,lang,'guide').pathname}" ${state.phase==='guide'?'aria-current="page"':''}><span class="nav-label-full">${escape(ui('navGuide'))}</span><span class="nav-label-short">${escape(ui('navGuideShort'))}</span></a><a data-action="open-leaderboard" href="${routeUrl(location.href,lang,'leaderboard').pathname}" ${state.phase==='leaderboard'?'aria-current="page"':''}>${escape(messages.leaderboard.nav)}</a>`;
+  learningNavigation?.dispose();
+  navigation.innerHTML=`<a data-action="home" href="${routeUrl(location.href,lang,'home').pathname}" ${state.phase==='welcome'?'aria-current="page"':''}>${escape(ui('navHome'))}</a><a data-action="open-play" href="${routeUrl(location.href,lang,'play').pathname}" ${!['welcome','guide','account','saves','leaderboard'].includes(state.phase)?'aria-current="page"':''}>${escape(messages.vault.arcade)}</a>${renderLearningNavigation({label:ui('navGuide'),shortLabel:ui('navGuideShort'),href:routeUrl(location.href,lang,'guide').pathname,active:state.phase==='guide',items:[['start',messages.learningPaths.beginnerTitle],['advance',messages.learningPaths.advancedTitle],['map',messages.learningMap.title],['compare',messages.learningMap.compare]].map(([view,label])=>({label,href:routeUrl(location.href,lang,view).pathname,action:'open-'+view,active:state.phase==='guide'&&guideView===view}))})}<a data-action="open-leaderboard" href="${routeUrl(location.href,lang,'leaderboard').pathname}" ${state.phase==='leaderboard'?'aria-current="page"':''}>${escape(messages.leaderboard.nav)}</a>`;
+  learningNavigation=mountLearningNavigation(navigation);
   $('universe').setAttribute('aria-label',ui('map'));document.querySelector('.coordinate').textContent='LOOPUFF / 01';
   document.querySelector('.welcome .eyebrow').textContent=ui('pilot');
   document.querySelector('.welcome h1').innerHTML=ui('hero').split(/\\n|\n/).map(line=>{const accent=ui('heroAccent'),at=line.indexOf(accent);return at<0?escape(line):escape(line.slice(0,at))+`<span class="hero-accent">${escape(accent)}</span>`+escape(line.slice(at+accent.length));}).join('<br>');
@@ -352,7 +357,7 @@ function renderDialog(){
    $('learning-content').innerHTML=`<nav class="page-trail"><a data-action="home" href="${routeUrl(location.href,lang,'home').pathname}">${escape(ui('navHome'))}</a><span aria-hidden="true">/</span><span>${escape(messages.vault.arcade)}</span></nav><section class="arcade-page"><span class="eyebrow">${escape(ui('name'))}</span><h1 id="learning-title">${escape(messages.district.title)}</h1><p class="levels-intro">${escape(messages.district.intro)}</p><div id="game-district"></div><section id="handheld-area" hidden><div id="ranked-game"></div><div id="handheld-machine"></div></section>${journeyPanel()}<details class="district-curriculum"><summary>${escape(messages.learningPaths.courseRoad)}</summary>${arcadeMissions()}</details></section>`;
    handheldGame=mountHandheld($('handheld-machine'),{text:messages.handheld,errors:messages.ui,model:handheldModel,onStep:(dt,actions)=>rankedGame?.step(dt,actions),onEnd:()=>rankedGame?.end(),onReset:()=>rankedGame?.reset(),onSelect:index=>{const url=new URL(location.href);url.searchParams.set('game',arcadeGameIds[index]);history.replaceState(null,'',url);}});
    rankedGame=mountRankedGame($('ranked-game'),{client:arcade,account,text:messages.leaderboard,model:arcadeModel,getGame:()=>arcadeGameIds[handheldModel.session.selected],getView:()=>handheldGame,onLogin:()=>move('account')});
-   const shops=['blocks','tanks','flight','start','snake','breakout','sokoban','map'].map(id=>({id,title:id==='start'?messages.learningPaths.beginnerTitle:id==='map'?messages.learningMap.title:messages.handheld.games[arcadeGameIds.indexOf(id)],era:['start','map'].includes(id)?'TOLANG':id==='snake'||id==='breakout'?'1970s':'1980s'}));
+   const shops=districtCatalog.map(shop=>({...shop,title:shop.id==='heist'?messages.heist.title:shop.id==='chase'?messages.pursuit.title:messages.handheld.games[arcadeGameIds.indexOf(shop.id)]}));
    districtGame=mountDistrict($('game-district'),{text:{...messages.district,title:messages.district.shops,intro:''},shops,model:districtModel,onEnter:enterDistrict});
    const initial=arcadeGameIds.indexOf(new URL(location.href).searchParams.get('game'));if(initial>=0)showHandheld(initial);
    return;

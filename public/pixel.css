@@ -60,6 +60,7 @@ body[data-phase=welcome] #how-button{font-size:12px;color:#9bb3a9;padding-top:5p
 .welcome-copy,.levels-intro,.guide-heading p,.path-heading p{word-break:normal;text-wrap:wrap}
 .pixel-district>header{display:none}
 .district-shops.sr-only:focus-within{position:static;width:auto;height:auto;margin:16px 0;padding:0;overflow:visible;clip-path:none;white-space:normal}
+.district-stage{position:relative;background:var(--ui-space);border:1px solid var(--ui-line);overflow:hidden}.district-stage .district-canvas{border:0;border-radius:0;box-shadow:none}.district-stage:not([data-ready=true]) .district-canvas{visibility:hidden}.district-loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;margin:0;color:var(--ui-muted);font:15px/1.8 var(--sans);text-align:center}.district-loading[hidden]{display:none}.district-loading::before{content:"";width:8px;height:8px;margin-inline-end:20px;background:var(--ui-gold);box-shadow:12px 0 var(--ui-line)}
 
 @font-face{font-family:LoopuffPixel;src:url('./assets/fonts/fusion-pixel-12px-proportional-latin.otf.woff2') format('woff2');font-display:swap}
 @font-face{font-family:LoopuffPixelSC;src:url('./assets/fonts/fusion-pixel-12px-proportional-zh_hans.otf.woff2') format('woff2');font-display:swap}

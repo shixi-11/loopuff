@@ -45,7 +45,11 @@ test('build emits localized entry points with canonical metadata',async()=>{
       const page=await readFile(new URL(`../dist/${locale}/${suffix}index.html`,import.meta.url),'utf8');
       assert.ok(page.includes(`https://shixilin.com/games/loopuff/${locale}/${suffix==='levels/'?'play/':suffix}`));
       const navigation=page.match(/<nav id="page-navigation"[^>]*>([\s\S]*?)<\/nav>/)[1];
-      assert.equal((navigation.match(/<a /g)||[]).length,4);assert.ok(navigation.includes(`href="./${locale}/leaderboard/"`));assert.ok(!navigation.includes('/levels/'));assert.ok(!navigation.includes('course-progress'));
+      const submenu=navigation.match(/id="learning-navigation-panel"[^>]*hidden[^>]*>([\s\S]*?)<\/div>/)?.[1];
+      assert.ok(submenu,'learning submenu starts collapsed');assert.equal((submenu.match(/<a /g)||[]).length,4);
+      assert.equal((navigation.match(/<a /g)||[]).length-4,4,'four main destinations remain');
+      for(const view of ['start','advance','map','compare'])assert.ok(submenu.includes(`href="./${locale}/guide/${view}/"`),'copyable submenu URL '+view);
+      assert.ok(navigation.includes(`href="./${locale}/leaderboard/"`));assert.ok(!navigation.includes('/levels/'));assert.ok(!navigation.includes('course-progress'));
       const base=page.match(/<base href="([^"]+)"/)[1];
       for(const prefix of ['', '/games/loopuff']){
         const resolved=new URL(base,`https://example.com${prefix}/${locale}/${suffix}`);

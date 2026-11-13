@@ -1453,7 +1453,7 @@
     }
   },
   "lessonScene": {
-    "title": "El programa en acción",
+    "title": "Cómo se ejecuta el programa",
     "run": "Ejecutar y explorar",
     "play": "Continuar la reproducción",
     "pause": "Pausar la reproducción",
@@ -1463,15 +1463,15 @@
     "end": "Ir al último paso",
     "step": "Registro de ejecución {number} / {total}",
     "scrub": "Elegir una posición de reproducción",
-    "ready": "Ejecuta el programa y sigue cómo cambian los valores.",
+    "ready": "Ejecuta el código y observa cómo cada paso lleva al resultado.",
     "locked": "Primero predice la salida y luego explora cómo llega a ella el programa.",
-    "processing": "Operación actual",
+    "processing": "Paso de código actual",
     "inputs": "Entradas y nombres",
     "messages": "Mensajes en los canales",
     "empty": "Aún no hay mensajes aquí",
     "emptyInputs": "Ejecuta el programa para ver los valores del paso actual.",
-    "output": "Señales ya enviadas",
-    "expected": "Señales objetivo",
+    "output": "Salida real",
+    "expected": "Salida esperada",
     "noOutput": "Sin salida",
     "notRun": "Aún no se ha ejecutado",
     "source": "Código de este paso",
@@ -1507,7 +1507,7 @@
       "join": "Recibir mensajes juntos",
       "wait": "Esperar mensajes",
       "received-names": "Nombrar los valores recibidos",
-      "log": "Enviar una señal"
+      "log": "Registrar la salida"
     }
   },
   "heist": {
@@ -2139,7 +2139,9 @@
   "district": {
     "title": "Barrio de juegos",
     "intro": "Ponte la capucha y pasea entre las tiendas. Elige una tienda y empieza a jugar.",
-    "move": "Hay una fila de tiendas arriba y otra abajo. Usa las flechas o WASD, o haz clic en la calle para moverte en las cuatro direcciones y rodear los obstáculos. Al moverte manualmente, tomas el control del paseo automático. Pulsa Enter cerca de una puerta o haz clic en una tienda para entrar directamente.",
+    "move": "Hay una fila de tiendas arriba y otra abajo. Usa las flechas o WASD, o haz clic en la calle para moverte en las cuatro direcciones y rodear los obstáculos. Después de moverte manualmente, el paseo automático continuará al cabo de un momento. Pulsa Enter cerca de una puerta o haz clic en una tienda para entrar directamente.",
+    "loading": "Abriendo el barrio…",
+    "unavailable": "La ilustración del barrio no está disponible temporalmente. Aun así, puedes elegir un juego.",
     "autoWalk": "Paseo automático",
     "manualWalk": "Detener el paseo",
     "enter": "Entrar al juego",

@@ -1453,7 +1453,7 @@
     }
   },
   "lessonScene": {
-    "title": "Theo dõi chương trình",
+    "title": "Chương trình thực thi như thế nào",
     "run": "Chạy và khám phá",
     "play": "Tiếp tục phát lại",
     "pause": "Tạm dừng phát lại",
@@ -1463,15 +1463,15 @@
     "end": "Đến bước cuối cùng",
     "step": "Bản ghi thực thi {number} / {total}",
     "scrub": "Chọn vị trí phát lại",
-    "ready": "Hãy chạy chương trình và theo dõi các giá trị thay đổi ra sao.",
+    "ready": "Hãy chạy mã và theo dõi cách mỗi bước tạo ra kết quả.",
     "locked": "Hãy dự đoán đầu ra trước, rồi khám phá cách chương trình đi đến kết quả đó.",
-    "processing": "Thao tác hiện tại",
+    "processing": "Bước mã hiện tại",
     "inputs": "Đầu vào và tên",
     "messages": "Tin nhắn trong các kênh",
     "empty": "Chưa có tin nhắn nào ở đây",
     "emptyInputs": "Hãy chạy chương trình để xem các giá trị ở bước hiện tại.",
-    "output": "Tín hiệu đã gửi",
-    "expected": "Tín hiệu mục tiêu",
+    "output": "Đầu ra thực tế",
+    "expected": "Đầu ra dự kiến",
     "noOutput": "Không có đầu ra",
     "notRun": "Chưa chạy",
     "source": "Mã của bước này",
@@ -1507,7 +1507,7 @@
       "join": "Nhận các tin nhắn cùng nhau",
       "wait": "Chờ tin nhắn",
       "received-names": "Đặt tên cho các giá trị nhận được",
-      "log": "Gửi một tín hiệu"
+      "log": "Ghi lại đầu ra"
     }
   },
   "heist": {
@@ -2139,7 +2139,9 @@
   "district": {
     "title": "Phố trò chơi",
     "intro": "Trùm mũ lên và dạo quanh các cửa tiệm. Chọn một tiệm để bắt đầu chơi.",
-    "move": "Các cửa tiệm nằm thành hai hàng phía trên và phía dưới. Dùng phím mũi tên, WASD hoặc nhấp vào mặt đường để đi theo bốn hướng và vòng qua chướng ngại vật. Thao tác thủ công sẽ thay thế việc đi tự động. Nhấn Enter khi ở gần cửa, hoặc nhấp vào tiệm để vào ngay.",
+    "move": "Các cửa tiệm nằm thành hai hàng phía trên và phía dưới. Dùng phím mũi tên, WASD hoặc nhấp vào mặt đường để đi theo bốn hướng và vòng qua chướng ngại vật. Sau khi thao tác thủ công, chờ một lúc thì việc đi tự động sẽ tiếp tục. Nhấn Enter khi ở gần cửa, hoặc nhấp vào tiệm để vào ngay.",
+    "loading": "Đang mở khu phố trò chơi…",
+    "unavailable": "Hình ảnh khu phố tạm thời chưa tải được. Bạn vẫn có thể chọn trò chơi.",
     "autoWalk": "Tự động đi dạo",
     "manualWalk": "Dừng đi dạo",
     "enter": "Vào trò chơi",

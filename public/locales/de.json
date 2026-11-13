@@ -1453,7 +1453,7 @@
     }
   },
   "lessonScene": {
-    "title": "Programm in Aktion",
+    "title": "So wird das Programm ausgeführt",
     "run": "Ausführen und erkunden",
     "play": "Wiedergabe fortsetzen",
     "pause": "Wiedergabe pausieren",
@@ -1463,15 +1463,15 @@
     "end": "Zum letzten Schritt",
     "step": "Ausführungseintrag {number} / {total}",
     "scrub": "Wiedergabeposition wählen",
-    "ready": "Programm ausführen und verfolgen, wie sich die Werte ändern.",
+    "ready": "Führe den Code aus und sieh dir an, wie jeder Schritt zum Ergebnis führt.",
     "locked": "Zuerst die Ausgabe vorhersagen, dann erkunden, wie das Programm dorthin gelangt.",
-    "processing": "Aktuelle Operation",
+    "processing": "Aktueller Codeschritt",
     "inputs": "Eingaben und Namen",
     "messages": "Nachrichten in Kanälen",
     "empty": "Hier sind noch keine Nachrichten",
     "emptyInputs": "Nach dem Ausführen erscheinen hier die Werte des aktuellen Schritts.",
-    "output": "Bereits gesendete Signale",
-    "expected": "Zielsignale",
+    "output": "Tatsächliche Ausgabe",
+    "expected": "Erwartete Ausgabe",
     "noOutput": "Keine Ausgabe",
     "notRun": "Noch nicht ausgeführt",
     "source": "Code für diesen Schritt",
@@ -1507,7 +1507,7 @@
       "join": "Nachrichten gemeinsam empfangen",
       "wait": "Auf Nachrichten warten",
       "received-names": "Empfangene Werte benennen",
-      "log": "Signal senden"
+      "log": "Ausgabe aufzeichnen"
     }
   },
   "heist": {
@@ -2139,7 +2139,9 @@
   "district": {
     "title": "Spieleviertel",
     "intro": "Zieh die Kapuze hoch und schlendere an den Läden entlang. Klicke auf einen Laden und spiel los.",
-    "move": "Die Läden stehen oben und unten entlang der Straße. Mit den Pfeiltasten, WASD oder einem Klick auf den Weg kannst du dich in alle vier Richtungen bewegen und Hindernisse umgehen. Sobald du selbst steuerst, endet das automatische Gehen. Drücke nahe einer Ladentür Enter oder klicke direkt auf einen Laden, um hineinzugehen.",
+    "move": "Die Läden stehen oben und unten entlang der Straße. Mit den Pfeiltasten, WASD oder einem Klick auf den Weg kannst du dich in alle vier Richtungen bewegen und Hindernisse umgehen. Nach manueller Steuerung setzt die automatische Erkundung nach einer kurzen Pause fort. Drücke nahe einer Ladentür Enter oder klicke direkt auf einen Laden, um hineinzugehen.",
+    "loading": "Spieleviertel wird geöffnet…",
+    "unavailable": "Das Bild des Viertels ist vorübergehend nicht verfügbar. Du kannst trotzdem ein Spiel wählen.",
     "autoWalk": "Automatisch erkunden",
     "manualWalk": "Erkundung stoppen",
     "enter": "Spiel betreten",

@@ -1453,7 +1453,7 @@
     }
   },
   "lessonScene": {
-    "title": "Program in action",
+    "title": "How the program runs",
     "run": "Run and explore",
     "play": "Continue replay",
     "pause": "Pause replay",
@@ -1463,15 +1463,15 @@
     "end": "Go to the last step",
     "step": "Execution record {number} / {total}",
     "scrub": "Choose a replay position",
-    "ready": "Run the program and follow how values change.",
+    "ready": "Run the code and see how each step produces the result.",
     "locked": "Predict the output first, then explore how the program gets there.",
-    "processing": "Current operation",
+    "processing": "Current code step",
     "inputs": "Inputs and names",
     "messages": "Messages in channels",
     "empty": "No messages here yet",
     "emptyInputs": "Run the program to see values from the current step.",
-    "output": "Signals already sent",
-    "expected": "Target signals",
+    "output": "Actual output",
+    "expected": "Expected output",
     "noOutput": "No output",
     "notRun": "Not run yet",
     "source": "Code for this step",
@@ -1507,7 +1507,7 @@
       "join": "Receive messages together",
       "wait": "Wait for messages",
       "received-names": "Name the received values",
-      "log": "Send a signal"
+      "log": "Record output"
     }
   },
   "heist": {
@@ -2139,7 +2139,9 @@
   "district": {
     "title": "Game District",
     "intro": "Choose a shop to play, or take a walk through the district.",
-    "move": "Move with the arrow keys or WASD, or click the street. Click a shop to enter, or press Enter near its door. Manual input stops roaming.",
+    "move": "Move with the arrow keys or WASD, or click the street. Click a shop to enter, or press Enter near its door. After manual input, roaming resumes after a short pause.",
+    "loading": "Loading the district…",
+    "unavailable": "The district artwork is unavailable. You can still choose a game.",
     "autoWalk": "Auto roam",
     "manualWalk": "Stop roaming",
     "enter": "Enter game",

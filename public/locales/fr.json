@@ -1453,7 +1453,7 @@
     }
   },
   "lessonScene": {
-    "title": "Le programme en action",
+    "title": "Comment le programme s’exécute",
     "run": "Exécuter et explorer",
     "play": "Poursuivre la relecture",
     "pause": "Mettre la relecture en pause",
@@ -1463,15 +1463,15 @@
     "end": "Aller à la dernière étape",
     "step": "Trace d'exécution {number} / {total}",
     "scrub": "Choisir une position de relecture",
-    "ready": "Exécutez le programme et suivez l'évolution des valeurs.",
+    "ready": "Exécutez le code et observez comment chaque étape mène au résultat.",
     "locked": "Prédisez d'abord la sortie, puis explorez comment le programme l'obtient.",
-    "processing": "Opération actuelle",
+    "processing": "Étape de code actuelle",
     "inputs": "Entrées et valeurs nommées",
     "messages": "Messages dans les canaux",
     "empty": "Aucun message ici pour le moment",
     "emptyInputs": "Exécutez le programme pour voir les valeurs de l'étape actuelle.",
-    "output": "Signaux déjà envoyés",
-    "expected": "Signaux cibles",
+    "output": "Sortie réelle",
+    "expected": "Sortie attendue",
     "noOutput": "Aucune sortie",
     "notRun": "Pas encore exécuté",
     "source": "Code de cette étape",
@@ -1507,7 +1507,7 @@
       "join": "Recevoir des messages conjointement",
       "wait": "Attendre des messages",
       "received-names": "Nommer les valeurs reçues",
-      "log": "Envoyer un signal"
+      "log": "Enregistrer la sortie"
     }
   },
   "heist": {
@@ -2139,7 +2139,9 @@
   "district": {
     "title": "Quartier des jeux",
     "intro": "Mettez votre capuche et flânez entre les boutiques. Choisissez une boutique et commencez à jouer.",
-    "move": "Les boutiques forment deux rangées, en haut et en bas. Utilisez les flèches ou WASD, ou cliquez sur la rue pour vous déplacer dans les quatre directions et contourner les obstacles. Une action manuelle reprend le contrôle de la promenade automatique. Appuyez sur Enter près d’une porte, ou cliquez sur une boutique pour entrer directement.",
+    "move": "Les boutiques forment deux rangées, en haut et en bas. Utilisez les flèches ou WASD, ou cliquez sur la rue pour vous déplacer dans les quatre directions et contourner les obstacles. Après une action manuelle, la promenade automatique reprendra au bout d’un moment. Appuyez sur Enter près d’une porte, ou cliquez sur une boutique pour entrer directement.",
+    "loading": "Ouverture du quartier…",
+    "unavailable": "L’illustration du quartier est temporairement indisponible. Vous pouvez tout de même choisir un jeu.",
     "autoWalk": "Promenade automatique",
     "manualWalk": "Arrêter la promenade",
     "enter": "Entrer dans le jeu",

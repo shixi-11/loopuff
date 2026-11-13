@@ -13,8 +13,9 @@ function mount(source,{locked=false}={}){
 test('scene replay changes the observed prefix without rerunning code; editing clears old output and source highlights',()=>{
  const m=mount(course.at(-1).source);try{
   m.page.run({end:true});const before=m.reads();assert.ok(m.root.querySelector('[data-scene-output]').innerHTML.includes('18'));assert.equal(m.root.querySelector('[data-scene-match]').textContent,catalog.lessonScene.matched);
+  assert.match(m.root.querySelector('[data-scene-current-source]').textContent,/\.log\(\)/);assert.equal(m.root.querySelector('[data-scene-current-code]').hidden,false);
   m.click({sceneAction:'start'});assert.ok(!m.root.querySelector('[data-scene-output]').innerHTML.includes('18'));m.click({sceneAction:'end'});assert.equal(m.reads(),before);
-  m.setSource('9.log()');m.page.reset();assert.equal(m.root.querySelector('[data-scene-source]').innerHTML,'9.log()');assert.ok(!m.root.querySelector('[data-scene-output]').innerHTML.includes('18'));assert.ok(!m.root.querySelector('[data-scene-source]').innerHTML.includes('<mark>'));
+  m.setSource('9.log()');m.page.reset();assert.equal(m.root.querySelector('[data-scene-source]').innerHTML,'9.log()');assert.ok(!m.root.querySelector('[data-scene-output]').innerHTML.includes('18'));assert.ok(!m.root.querySelector('[data-scene-source]').innerHTML.includes('<mark>'));assert.equal(m.root.querySelector('[data-scene-current-code]').hidden,true);
  }finally{m.restore();}
 });
 test('scene shows actual pending messages and errors instead of completing an ideal program',()=>{
