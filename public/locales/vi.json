@@ -2314,6 +2314,95 @@
       "Kết hợp vị trí thức ăn với cảnh báo nguy hiểm ở bốn hướng. Đổi hướng an toàn trước, rồi tìm cách làm rắn dài hơn.",
       "Dựa vào vị trí và vận tốc của bóng để di chuyển thanh đỡ. Đỡ bóng ổn định trước, rồi thử dự đoán điểm bóng rơi.",
       "Đọc địa hình các ô bên cạnh và sắp xếp thứ tự đẩy thùng. Dùng undo() để xem lại sai sót rồi cải thiện chiến lược."
-    ]
+    ],
+    "scaffold": {
+      "foundationTitle": "Trước khi viết dòng mã đầu tiên",
+      "foundationIntro": "Lập trình là biến một mục tiêu thành những chỉ dẫn chính xác mà máy tính có thể thực hiện. Mục tiêu đầu tiên ở đây rất đơn giản: hiển thị một con số. Bạn có thể bắt đầu ngay trên trang này, không cần cài đặt gì.",
+      "terms": [
+        {
+          "title": "Mã: những chỉ dẫn bạn viết",
+          "text": "Ngôn ngữ lập trình cung cấp một dạng viết cho những chỉ dẫn đó. Ngôn ngữ bạn sẽ dùng ở đây là Tolang. Trình soạn thảo bên dưới là nơi bạn viết mã."
+        },
+        {
+          "title": "Chạy: yêu cầu máy tính thực hiện",
+          "text": "Viết hoặc sửa mã chưa có nghĩa là chạy mã. Nhấn “{run}” để thực thi phiên bản trong trình soạn thảo. Thông báo sẽ chỉ ra đoạn mã mà máy tính không hiểu."
+        },
+        {
+          "title": "Kết quả: thứ chương trình tạo ra",
+          "text": "Kết quả xuất hiện bên cạnh mã, hoặc bên dưới trên màn hình nhỏ. Chương trình có thể hiển thị một con số hoặc thay đổi trò chơi. Chương trình chạy thành công vẫn có thể cho kết quả sai."
+        }
+      ],
+      "stages": [
+        "Đọc, chạy và sửa",
+        "Tính toán và đưa ra quyết định",
+        "Điều khiển trò chơi bằng Tolang"
+      ],
+      "workedTitle": "Đọc một ví dụ nhỏ",
+      "runExample": "Chạy ví dụ này",
+      "exampleOutput": "Kết quả thực tế của ví dụ",
+      "exampleNote": "Ví dụ có kết quả riêng. Mã và tiến độ bài tập của bạn không thay đổi.",
+      "practiceTitle": "Bây giờ thử một mục tiêu khác",
+      "prediction": "Trước khi chạy: dự đoán điều sẽ xảy ra",
+      "predictionLabel": "Dự đoán của bạn (không bắt buộc; không chấm điểm)",
+      "compare": "So sánh dự đoán với kết quả thực tế",
+      "reflectionTitle": "Điều cần quan sát trong kết quả",
+      "steps": {
+        "run": {
+          "read": "Trong 3.log(), 3 là giá trị cần hiển thị. Dấu chấm gắn thao tác log vào giá trị đó; () gọi thao tác ấy. Ở đây log có nghĩa là hiển thị một giá trị trong vùng kết quả. Chạy ví dụ này sẽ hiển thị 3.",
+          "predict": "Ví dụ dùng 3, nhưng trình soạn thảo của bạn có 7. Mã của bạn sẽ hiển thị con số nào?",
+          "reflect": "Đối chiếu giá trị trước .log() với kết quả thực tế. Bạn đã nối một chỉ dẫn được viết ra với hành động máy tính thực hiện."
+        },
+        "change": {
+          "read": "4.log() hiển thị 4. Đổi con số là đổi dữ liệu; giữ .log() là giữ nguyên thao tác hiển thị. Bạn không cần một lệnh mới cho từng con số.",
+          "predict": "Muốn hiển thị 9 thì cần đổi phần nào? Nếu sửa mã mà không chạy lại thì điều gì xảy ra?",
+          "reflect": "Sau khi sửa, hãy chạy lại. Kiểm tra kết quả thực tế có phải 9 không; kết quả trước đó chỉ thay đổi khi mã mới được chạy."
+        },
+        "repair": {
+          "read": "2.log() có một dấu ngoặc mở và một dấu ngoặc đóng. Dù bên trong không có gì, chúng vẫn phải đi thành cặp. Bài tập cố ý bỏ thiếu một dấu. Đây là lỗi cú pháp: dạng viết chưa hoàn chỉnh.",
+          "predict": "Hãy tìm ký hiệu còn thiếu trong trình soạn thảo. Thêm một con số khác có sửa được lỗi thiếu dấu ngoặc không?",
+          "reflect": "Trước hết sửa dấu ngoặc, sau đó kiểm tra giá trị. Mã máy tính đọc được và kết quả đáp ứng mục tiêu là hai điều cần kiểm tra riêng."
+        },
+        "calculate": {
+          "read": "Trong (2 + 3).log(), máy tính tính 2 + 3 trước. Dấu ngoặc nhóm phép tính đó, rồi .log() hiển thị kết quả 5. Đây là một biểu thức: đoạn mã tính ra một giá trị.",
+          "predict": "Chọn hai con số có tổng bằng 11. Khi .log() hiển thị tổng của chúng, kết quả phải là gì?",
+          "reflect": "Kiểm tra cả phép cộng lẫn kết quả. Hiển thị trực tiếp 11 cho ra đúng con số, nhưng bài này yêu cầu chương trình tự tính ra nó."
+        },
+        "name": {
+          "read": "let energy = 5; đặt tên energy cho giá trị 5. Dấu chấm phẩy ; tách chỉ dẫn này khỏi chỉ dẫn tiếp theo. Trong (energy + 2).log(), energy chỉ giá trị 5, nên chương trình tính và hiển thị 7. Một cái tên cho phép mã phía sau dùng giá trị đã tạo trước đó.",
+          "predict": "Chọn giá trị của energy và lượng cần cộng để kết quả là 14. Hai vị trí nào quyết định kết quả đó?",
+          "reflect": "Lần theo giá trị mà cái tên đại diện, rồi xem nó tham gia phép cộng thế nào. In một con số ở nơi khác không chứng minh phép tính thực sự dùng energy."
+        },
+        "score": {
+          "read": "score là đầu vào do bài tập cung cấp. > dùng để so sánh hai giá trị. if kiểm tra score > 9 có đúng không; nếu đúng thì chọn khối đầu trong dấu ngoặc nhọn sau then, nếu không thì else chọn khối còn lại. Chỉ khối được chọn mới hiển thị một giá trị.",
+          "predict": "Chương trình nên hiển thị gì khi điểm là 9 và 10? Cùng một đoạn mã phải xử lý được hai phía của ranh giới.",
+          "reflect": "Dùng bộ chọn đầu vào để kiểm tra từng kết quả thực tế. Ở 9 kết quả là 0; ở 10 là 1. Qua một đầu vào chưa đủ để chứng minh quy tắc đúng."
+        },
+        "select": {
+          "read": "choose(2) gọi hàm chọn trò chơi của máy chơi game cầm tay. Số 2 trong ngoặc là một đối số: thông tin truyền cho hàm. Nó chọn băng thứ hai, Tank Defense, nhưng chưa bắt đầu trò chơi.",
+          "predict": "Muốn chọn băng thứ ba thì cần đổi đối số nào? Trạng thái của nó nên là ready hay running?",
+          "reflect": "Kiểm tra cả trò chơi được chọn lẫn trạng thái. choose chọn băng; start bắt đầu một lượt chơi. Đây là các hàm của máy chơi game này, không phải thư viện chuẩn của Tolang."
+        },
+        "control": {
+          "read": "start() khởi động trò chơi xe tăng đã chuẩn bị, rồi right() di chuyển xe tăng sang phải. Các lệnh gọi này thực hiện hành động thay vì hiển thị con số. Thứ tự rất quan trọng: lệnh di chuyển trước khi trò chơi bắt đầu sẽ không có tác dụng.",
+          "predict": "Bạn sẽ thêm fire() ở đâu để xe tăng di chuyển trước phát bắn đầu tiên?",
+          "reflect": "So sánh vị trí xe tăng trước và sau khi chạy, rồi kiểm tra số lần bắn. Bài tập kiểm tra một chuyển động thực sự có xảy ra trước phát bắn thực sự đầu tiên hay không."
+        },
+        "repeat": {
+          "read": "[1, 2] là danh sách gồm hai giá trị. for n in [1, 2] chạy khối lệnh trong dấu ngoặc nhọn một lần cho mỗi giá trị; n là tên của giá trị hiện tại. Ở đây khối lệnh gọi right(), nên ví dụ di chuyển khối sang phải hai lần sau khi bắt đầu.",
+          "predict": "Cần bao nhiêu phần tử trong danh sách để tạo ra ba lần di chuyển? Chỉ dẫn nào nên chạy một lần trước vòng lặp?",
+          "reflect": "Kiểm tra cột bắt đầu và cột kết thúc. Vòng lặp phải tạo ra ba lần di chuyển; sao chép ba lệnh gọi không chứng minh bạn đã lặp bằng vòng lặp."
+        },
+        "finish": {
+          "read": "Bản xem trước này đã có một trò chơi đang chạy. pause() tạm dừng để có thể tiếp tục sau đó. finish() kết thúc lượt hiện tại. Tên hàm cho biết thao tác; trạng thái trò chơi cho thấy thao tác đó đã làm gì.",
+          "predict": "Sau pause(), trò chơi có thể tiếp tục không? Lệnh gọi nào sẽ đổi lượt đang chạy này thành ended?",
+          "reflect": "Đọc trạng thái bên cạnh trò chơi. Chỉ nhìn một hình ảnh đứng yên không đủ để phân biệt trò chơi đang tạm dừng hay đã kết thúc."
+        },
+        "strategy": {
+          "read": "x và targetX là các đầu vào từ trạng thái trò chơi hiện tại. Ví dụ nhỏ di chuyển sang phải khi x < targetX, nhưng gọi drop() để rơi trong mọi trường hợp khác, nên xử lý sai khi mục tiêu ở bên trái. Máy chơi game liên tục chạy chiến lược của bạn với đầu vào mới; mỗi lần chạy chọn một hành động tiếp theo.",
+          "predict": "Hãy liệt kê ba trường hợp: mục tiêu ở bên phải, mục tiêu ở bên trái và đã thẳng hàng. Mỗi trường hợp nên thực hiện hành động nào?",
+          "reflect": "Kiểm tra các tình huống bắt đầu khác nhau. Cùng một chiến lược phải di chuyển được theo cả hai hướng và chỉ rơi khi đã thẳng hàng. Bạn đã nối đầu vào, phán đoán và hành động thành một chương trình."
+        }
+      }
+    }
   }
 }

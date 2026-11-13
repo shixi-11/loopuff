@@ -2314,6 +2314,95 @@
       "Combine food position with the four danger indicators. Turn safely before trying to grow longer.",
       "Use the ball’s position and velocity to move the paddle. Catch reliably before predicting landing positions.",
       "Read neighbouring tiles and plan your pushes. Use undo() to inspect mistakes and improve the strategy."
-    ]
+    ],
+    "scaffold": {
+      "foundationTitle": "Before your first line of code",
+      "foundationIntro": "Programming means turning a goal into precise instructions a computer can carry out. Here, your first goal is simply to make a number appear. You can begin in this page, without installing anything.",
+      "terms": [
+        {
+          "title": "Code: the instructions you write",
+          "text": "A programming language gives those instructions a written form. Tolang is the language you will use here. The editor below is where you write its code."
+        },
+        {
+          "title": "Run: ask the computer to carry them out",
+          "text": "Writing or changing code does not run it. Press “{run}” to execute the version in your editor. A message will point out code the computer cannot understand."
+        },
+        {
+          "title": "Output: what the program produces",
+          "text": "The result appears beside your code, or below it on a small screen. A program may display a number or change a game. A program can run successfully and still produce the wrong result."
+        }
+      ],
+      "stages": [
+        "Read, run and repair",
+        "Calculate and make decisions",
+        "Control a game with Tolang"
+      ],
+      "workedTitle": "Read a small example",
+      "runExample": "Run this example",
+      "exampleOutput": "This example actually produced",
+      "exampleNote": "The example has its own result. Your code and exercise progress stay as they are.",
+      "practiceTitle": "Now try a different goal",
+      "prediction": "Before you run: predict what will happen",
+      "predictionLabel": "Your prediction (optional; not graded)",
+      "compare": "Compare your prediction with the actual result",
+      "reflectionTitle": "What to look for in your result",
+      "steps": {
+        "run": {
+          "read": "In 3.log(), 3 is the value to display. The dot attaches the operation log to that value; () calls it. Here log means displaying a value in the output area. Running this example displays 3.",
+          "predict": "The example uses 3, but your editor contains 7. Which number will your own code display?",
+          "reflect": "Match the value before .log() to the actual output. You have connected a written instruction to something the computer does."
+        },
+        "change": {
+          "read": "4.log() displays 4. Changing the number changes the data; keeping .log() keeps the same display operation. You do not need a new command for every number.",
+          "predict": "Which part needs to change to display 9? What happens if you edit the code without running it again?",
+          "reflect": "After editing, run again. Check the actual output for 9; the previous result does not change until the new code runs."
+        },
+        "repair": {
+          "read": "2.log() has an opening and a closing parenthesis. They belong together even when nothing goes between them. The exercise deliberately leaves one out. This is a syntax error: the written form is incomplete.",
+          "predict": "Find the missing symbol in your editor. Will adding a different number fix a missing parenthesis?",
+          "reflect": "First repair the parentheses, then check the value. Code the computer can read and output that meets a goal are two separate checks."
+        },
+        "calculate": {
+          "read": "In (2 + 3).log(), the computer first calculates 2 + 3. The parentheses group that calculation, then .log() displays its result, 5. This is an expression: code that works out a value.",
+          "predict": "Choose two numbers whose sum is 11. What should appear after .log() displays their sum?",
+          "reflect": "Check both the addition and its output. Displaying 11 directly gives the right number, but this exercise asks your program to calculate it."
+        },
+        "name": {
+          "read": "let energy = 5 gives the value 5 a name, energy. The semicolon separates that instruction from the next one. In (energy + 2).log(), energy refers to 5, so the program calculates and displays 7. A name lets later code use an earlier value.",
+          "predict": "Choose the value named energy and the amount to add so that the result is 14. Which two places control that result?",
+          "reflect": "Trace the named value into the addition. A number printed elsewhere would not show that your calculation actually used energy."
+        },
+        "score": {
+          "read": "score is an input supplied by this exercise. > compares two values. if checks whether score > 9 is true; then selects the first block in braces, otherwise else selects the other block. Only the selected block displays a value.",
+          "predict": "What should the program display at scores 9 and 10? The same code must handle both sides of the boundary.",
+          "reflect": "Use the input selector to inspect every actual result. At 9 the result is 0; at 10 it is 1. Passing one input is not enough to show the rule works."
+        },
+        "select": {
+          "read": "choose(2) calls the handheld's game-selection function. The 2 inside the parentheses is an argument: information passed to that function. It selects the second cartridge, Tank Defense, without starting a game.",
+          "predict": "To select the third cartridge, which argument needs changing? Should its state be ready or running?",
+          "reflect": "Check both the selected game and its state. choose selects a cartridge; start begins a round. These functions belong to this handheld, rather than Tolang's standard library."
+        },
+        "control": {
+          "read": "start() starts the prepared tank game, then right() moves the tank right. These calls perform actions rather than displaying numbers. Their order matters: a movement command before the game starts has no effect.",
+          "predict": "Where will you add fire() so that the tank moves before its first shot?",
+          "reflect": "Compare the tank's position before and after running, then check its shots. The exercise checks that a real movement happened before a real shot."
+        },
+        "repeat": {
+          "read": "[1, 2] is a list of two values. for n in [1, 2] runs the block in braces once for each value; n names the current value. Here the block calls right(), so this example moves the block right twice after starting.",
+          "predict": "How many list entries would produce three moves? Which instruction should run once, before the loop?",
+          "reflect": "Check the starting and final columns. The loop must produce the three moves; three copied calls do not demonstrate repetition through a loop."
+        },
+        "finish": {
+          "read": "This preview already has a running game. pause() suspends it so it can continue later. finish() ends the current round. A function's name identifies an operation; the resulting game state shows what that operation did.",
+          "predict": "After pause(), could play continue? Which call will change this running round to ended?",
+          "reflect": "Read the state beside the game. A frozen picture alone cannot distinguish a paused game from an ended one."
+        },
+        "strategy": {
+          "read": "x and targetX are inputs from the current game state. The small example moves right when x < targetX, but drops in every other case, so it mishandles a target to the left. The handheld repeatedly runs your strategy with fresh inputs; a single run chooses the next action.",
+          "predict": "List three cases: target to the right, target to the left, and already aligned. Which action belongs to each?",
+          "reflect": "Inspect the different starting cases. The same strategy must move in either direction and drop only when aligned. You have connected input, a decision and an action in one program."
+        }
+      }
+    }
   }
 }

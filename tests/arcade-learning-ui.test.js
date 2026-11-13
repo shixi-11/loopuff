@@ -9,8 +9,26 @@ function fixture(initialStep='run',save=()=>true){
  let serial=0;const queue=new Map(),context=new Proxy({},{get:(obj,key)=>obj[key]??(()=>{})});Object.assign(globalThis,{document:{hidden:false},matchMedia:()=>({matches:false}),requestAnimationFrame:callback=>{queue.set(++serial,callback);return serial;},cancelAnimationFrame:id=>queue.delete(id)});
  const nodes=new Map(),handlers={},root={innerHTML:'',addEventListener(k,v){handlers[k]=v;},removeEventListener(k){delete handlers[k];},querySelector(selector){if(!nodes.has(selector))nodes.set(selector,{innerHTML:'',textContent:'',hidden:false,disabled:false,dataset:{},value:'',options:selector==='#arcade-lesson-step'?arcadeLearningIds.map(value=>({value,textContent:''})):[],setAttribute(){},focus(){},scrollIntoView(){},getContext:()=>context});return nodes.get(selector);}};
  const model={drafts:{'start-decide':'1.log()'}},view=mountArcadeLearning(root,{text:catalog.arcadeLearning,pathText:catalog.learningPaths,games:catalog.handheld.games,states:catalog.handheld,errors:catalog.ui,model,initialStep,urls:{guide:'/guide',advance:'/advance',play:'/play'},onChange:save,reduced:{matches:true}});
- return {root,model,edit(value){handlers.input({target:{id:'arcade-lesson-editor',value}});},run(){handlers.submit({target:{id:'arcade-lesson-form'},preventDefault(){}});},select(value){handlers.change({target:{id:'arcade-lesson-step',value}});},close(){view.dispose();for(const[key,descriptor]of descriptors)if(descriptor)Object.defineProperty(globalThis,key,descriptor);else delete globalThis[key];}};
+ return {root,model,edit(value){handlers.input({target:{id:'arcade-lesson-editor',value}});},predict(value){handlers.input({target:{id:'arcade-lesson-prediction',value}});},click(action){handlers.click({target:{closest:()=>({dataset:{arcadeLesson:action}})}});},run(){handlers.submit({target:{id:'arcade-lesson-form'},preventDefault(){}});},select(value){handlers.change({target:{id:'arcade-lesson-step',value}});},close(){view.dispose();for(const[key,descriptor]of descriptors)if(descriptor)Object.defineProperty(globalThis,key,descriptor);else delete globalThis[key];}};
 }
+
+test('running a worked example produces real output without passing or replacing the learner draft',()=>{
+ let writes=0;const f=fixture('run',()=>{writes++;return true;});try{
+  f.edit('18.log()');const before=JSON.stringify(f.model.drafts),count=writes;
+  f.click('example');assert.match(f.root.querySelector('[data-learning-example-result]').innerHTML,/>3<\/output>/);
+  assert.equal(JSON.stringify(f.model.drafts),before);assert.equal(writes,count);
+  assert.equal(f.root.querySelector('[data-arcade-lesson-status]').dataset.passed,'false');
+  f.select('score');f.click('example');assert.match(f.root.querySelector('[data-learning-example-result]').innerHTML,/score = 9: 0\nscore = 10: 1/);
+  assert.equal(f.model.drafts['arcade-score-checked'],undefined);
+ }finally{f.close();}
+});
+
+test('a prediction is compared as learner text and never counted as evidence of mastery',async()=>{
+ const f=fixture();try{f.predict('<img src=x>');assert.equal(f.model.drafts['start-run-checked'],undefined);f.run();await f.model.arcadeSavePromise;
+  const reflection=f.root.querySelector('[data-learning-reflection]');assert.equal(reflection.hidden,false);assert.match(reflection.innerHTML,/&lt;img src=x&gt;/);
+  assert.equal(f.model.drafts['start-run-checked'],'7.log()');f.edit('8.log()');assert.equal(reflection.hidden,true);
+ }finally{f.close();}
+});
 test('pause and finish remain distinct visible states, with actual movement and shot feedback',async()=>{
  const f=fixture('finish');try{f.run();await f.model.arcadeSavePromise;const result=f.root.querySelector('[data-arcade-lesson-result]').innerHTML;assert.ok(result.includes(catalog.handheld.paused));assert.equal(f.root.querySelector('[data-arcade-lesson-status]').dataset.passed,'false');
   f.edit('finish()');f.run();await f.model.arcadeSavePromise;assert.equal(f.root.querySelector('[data-arcade-lesson-status]').dataset.passed,'true');
