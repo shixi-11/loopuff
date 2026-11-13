@@ -772,10 +772,10 @@
     "codeError": "Mã chưa chạy được. Hãy kiểm tra chương trình trước khi bay."
   },
   "vault": {
-    "arcade": "Khu trò chơi",
+    "arcade": "Phố trò chơi",
     "arcadeTitle": "Dùng mã lệnh, mở lối mới.",
     "arcadeIntro": "Quan sát cơ chế, thử ý tưởng và xem chương trình thay đổi thế giới trước mắt.",
-    "browse": "Khám phá trò chơi →",
+    "browse": "Vào phố trò chơi →",
     "eyebrow": "NGÂN HÀNG VŨ TRỤ / PHI VỤ KHO BÁU",
     "title": "Phi vụ kho báu",
     "intro": "Ba cơ chế, một lõi sao. Viết tín hiệu để mở đường vào kho của ngân hàng vũ trụ.",
@@ -2004,7 +2004,7 @@
   "teaching": {
     "title": "Từ một giá trị đến kết quả nhìn thấy được",
     "intro": "Hãy thử cả hai chương trình. Trước mỗi lần chạy, hãy đoán xem chương trình có yêu cầu máy tính hiển thị gì không.",
-    "programTitle": "Chương trình là gì?",
+    "programTitle": "Chọn chương trình",
     "programText": "Chương trình là một tập hợp chỉ dẫn cho máy tính; ở đây ta viết bằng ngôn ngữ Tolang. Trang này chạy các chương trình ngắn. Sau khi đổi số hoặc chọn cách viết khác, hãy bấm chạy để thực hiện chương trình hiện tại. Chỉ sửa thì chưa chạy; trò chơi quyết định cách sử dụng kết quả của chương trình.",
     "syntaxTitle": "Đọc chương trình này",
     "valueLabel": "Số cần xử lý",
@@ -2046,7 +2046,7 @@
       "join": "west và east là hai nơi nhận tin, các phần chạy song song gửi 4 và 6. Phần nhận nối bằng & đợi đủ một tin từ mỗi bên, đặt tên chúng là a và b rồi ghi tổng 10.",
       "coordination": "total định nghĩa cách cộng hai số trước. Các phần song song gửi 6 và 7; khi đủ hai tin, total(a, b) tính load bằng 13. Vì 13 > 12 đúng, nhánh được chọn cộng thêm 5 và ghi 18; nếu sai thì ghi nguyên load."
     },
-    "workedTitle": "Đọc một ví dụ hoàn chỉnh trước",
+    "workedTitle": "Ví dụ hoàn chỉnh",
     "workedIntro": "Hãy bắt đầu bằng các chương trình hoàn chỉnh về hàm trả về giá trị, hàm gửi lời đáp, nhận một tin nhắn và đợi đủ hai tin nhắn. Đọc từng phần và cách chúng tạo ra kết quả hiển thị, rồi thử bài chẩn đoán với nhiều đầu vào khác nhau và các dự án kết hợp."
   },
   "handheld": {
@@ -2110,11 +2110,11 @@
     ]
   },
   "district": {
-    "title": "Khu phố trò chơi lập trình",
+    "title": "Phố trò chơi",
     "intro": "Trùm mũ lên và dạo quanh các cửa tiệm. Chọn một tiệm để bắt đầu chơi.",
     "move": "Các cửa tiệm nằm thành hai hàng phía trên và phía dưới. Dùng phím mũi tên, WASD hoặc nhấp vào mặt đường để đi theo bốn hướng và vòng qua chướng ngại vật. Thao tác thủ công sẽ thay thế việc đi tự động. Nhấn Enter khi ở gần cửa, hoặc nhấp vào tiệm để vào ngay.",
-    "autoWalk": "Tự động dạo phố",
-    "manualWalk": "Tự điều khiển đi bộ",
+    "autoWalk": "Tự động đi dạo",
+    "manualWalk": "Dừng đi dạo",
     "enter": "Vào trò chơi",
     "near": "{name} · Nhấn Enter để chơi",
     "shops": "Các cửa tiệm trong khu phố"

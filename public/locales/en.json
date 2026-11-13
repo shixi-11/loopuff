@@ -772,10 +772,10 @@
     "codeError": "The code did not run. Check the program before taking off."
   },
   "vault": {
-    "arcade": "Play",
+    "arcade": "Game District",
     "arcadeTitle": "A little code. A new way through.",
     "arcadeIntro": "Read the scene, try an idea, and watch your program change the world.",
-    "browse": "Explore games →",
+    "browse": "Enter the game district →",
     "eyebrow": "STAR BANK / VAULT RUN",
     "title": "The Vault Run",
     "intro": "Three locks. One star core. Write the signals that open a path through the star bank.",
@@ -2004,7 +2004,7 @@
   "teaching": {
     "title": "From a value to a visible result",
     "intro": "Try both programs. Before running each one, decide whether it asks the computer to display anything.",
-    "programTitle": "What is a program?",
+    "programTitle": "Choose a program",
     "programText": "A program is a set of instructions; Tolang is the language used to write them here. This page runs short programs: change the number or choose another form, then press Run to execute the current program. Editing alone does not run it; a game decides how to use its results.",
     "syntaxTitle": "Read this program",
     "valueLabel": "The number to work with",
@@ -2046,7 +2046,7 @@
       "join": "west and east are two message destinations; the parallel parts send 4 and 6. The receiving part joined by & waits for one value from each, names them a and b, then records their sum, 10.",
       "coordination": "total first defines how to add two inputs. The parallel parts send 6 and 7; once both arrive, total(a, b) produces load = 13. Since 13 > 12 is true, the selected block adds 5 and records 18; otherwise it would record load unchanged."
     },
-    "workedTitle": "Read a complete example first",
+    "workedTitle": "Worked examples",
     "workedIntro": "Start with complete programs showing a function returning a value, a function sending a reply, receiving one message, and waiting for two messages. Read how each part leads to the displayed result, then try the diagnostics with changing inputs and the combined projects."
   },
   "handheld": {
@@ -2110,11 +2110,11 @@
     ]
   },
   "district": {
-    "title": "Code Arcade District",
+    "title": "Game District",
     "intro": "Pull up your hood and wander between the shops. Pick a shop and start playing.",
     "move": "Shops line the top and bottom of the street. Use the arrow keys or WASD, or click the pavement to walk around in any direction. Manual input takes over from automatic walking. Press Enter near a doorway, or click a shop to enter directly.",
-    "autoWalk": "Stroll automatically",
-    "manualWalk": "Walk manually",
+    "autoWalk": "Auto roam",
+    "manualWalk": "Stop roaming",
     "enter": "Enter game",
     "near": "{name} · Press Enter to play",
     "shops": "District shops"

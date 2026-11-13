@@ -772,10 +772,10 @@
     "codeError": "El código no se ejecutó. Revisa el programa antes de volar."
   },
   "vault": {
-    "arcade": "Zona de juegos",
+    "arcade": "Barrio de juegos",
     "arcadeTitle": "Abre nuevos caminos con código.",
     "arcadeIntro": "Observa el mecanismo, prueba una idea y mira cómo tu programa cambia el mundo del juego.",
-    "browse": "Explorar juegos →",
+    "browse": "Entrar al barrio de juegos →",
     "eyebrow": "BANCO ESTELAR / MISIÓN CÁMARA ACORAZADA",
     "title": "La cámara estelar",
     "intro": "Tres mecanismos. Un núcleo estelar. Escribe las señales que abren el camino por el banco estelar.",
@@ -2004,7 +2004,7 @@
   "teaching": {
     "title": "De un valor a un resultado visible",
     "intro": "Prueba los dos programas. Antes de ejecutar cada uno, piensa si le pide al ordenador que muestre algo.",
-    "programTitle": "¿Qué es un programa?",
+    "programTitle": "Elige un programa",
     "programText": "Un programa es un conjunto de instrucciones; Tolang es el lenguaje con el que las escribimos aquí. Esta página ejecuta programas cortos. Después de cambiar el número o elegir otra forma de escribirlo, pulsa Ejecutar para que se realice el programa actual. Modificarlo por sí solo no lo ejecuta; cada juego decide cómo usar sus resultados.",
     "syntaxTitle": "Entender este programa",
     "valueLabel": "El número con el que trabajar",
@@ -2046,7 +2046,7 @@
       "join": "west y east son dos destinos de mensajes; las partes paralelas envían 4 y 6. La recepción unida por & espera un valor de cada lado y les da los nombres a y b. Después registra su suma, 10.",
       "coordination": "total define primero cómo sumar dos números. Las partes paralelas envían 6 y 7; cuando llegan ambos mensajes, total(a, b) calcula load = 13. Como 13 > 12 es verdadero, la rama elegida suma 5 y registra 18; si fuera falso, registraría load sin cambiarlo."
     },
-    "workedTitle": "Lee primero un ejemplo completo",
+    "workedTitle": "Ejemplos completos",
     "workedIntro": "Empieza con programas completos que muestran una función que devuelve un valor, otra que envía una respuesta, la recepción de un mensaje y la espera de dos mensajes. Lee cómo cada parte produce el resultado mostrado. Después prueba los diagnósticos con distintas entradas y los proyectos que combinan estas ideas."
   },
   "handheld": {
@@ -2110,11 +2110,11 @@
     ]
   },
   "district": {
-    "title": "El barrio de los juegos de código",
+    "title": "Barrio de juegos",
     "intro": "Ponte la capucha y pasea entre las tiendas. Elige una tienda y empieza a jugar.",
     "move": "Hay una fila de tiendas arriba y otra abajo. Usa las flechas o WASD, o haz clic en la calle para moverte en las cuatro direcciones y rodear los obstáculos. Al moverte manualmente, tomas el control del paseo automático. Pulsa Enter cerca de una puerta o haz clic en una tienda para entrar directamente.",
-    "autoWalk": "Pasear automáticamente",
-    "manualWalk": "Caminar manualmente",
+    "autoWalk": "Paseo automático",
+    "manualWalk": "Detener el paseo",
     "enter": "Entrar al juego",
     "near": "{name} · Pulsa Enter para jugar",
     "shops": "Tiendas del barrio"

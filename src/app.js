@@ -150,7 +150,7 @@ function applyStatic(){
   $('universe').setAttribute('aria-label',ui('map'));document.querySelector('.coordinate').textContent='LOOPUFF / 01';
   document.querySelector('.welcome .eyebrow').textContent=ui('pilot');
   document.querySelector('.welcome h1').innerHTML=ui('hero').split(/\\n|\n/).map(line=>{const accent=ui('heroAccent'),at=line.indexOf(accent);return at<0?escape(line):escape(line.slice(0,at))+`<span class="hero-accent">${escape(accent)}</span>`+escape(line.slice(at+accent.length));}).join('<br>');
-  document.querySelector('.welcome-copy').textContent=ui('lead');
+  document.querySelector('.welcome-copy').innerHTML=escape(ui('lead')).replace(/自己的(?:程序|程式)/g,'<span class="text-phrase">$&</span>');
   $('start').textContent=ui(homeDestination(state,guideModel.drafts).resumed?'resume':'start');$('how-button').textContent=messages.learningPaths.advancedTitle+' ↗';
   $('play-button').textContent=messages.vault.browse;
   $('welcome-foot').innerHTML=`<span>${escape(ui('welcomeFoot'))}</span><span>${escape(ui('learningLoop'))}</span>`;

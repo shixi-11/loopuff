@@ -772,10 +772,10 @@
     "codeError": "Le code ne s’est pas exécuté. Vérifiez le programme avant de décoller."
   },
   "vault": {
-    "arcade": "Jouer",
+    "arcade": "Quartier des jeux",
     "arcadeTitle": "Un peu de code. Un nouveau passage.",
     "arcadeIntro": "Observez la scène, essayez une idée et regardez votre programme transformer le monde.",
-    "browse": "Explorer les jeux →",
+    "browse": "Entrer dans le quartier →",
     "eyebrow": "BANQUE STELLAIRE / OPÉRATION COFFRE",
     "title": "Opération coffre",
     "intro": "Trois verrous. Un cœur stellaire. Écrivez les signaux qui ouvriront un passage dans la banque stellaire.",
@@ -2004,7 +2004,7 @@
   "teaching": {
     "title": "D’une valeur à un résultat visible",
     "intro": "Essaie les deux programmes. Avant chaque exécution, détermine s’il demande à l’ordinateur d’afficher quelque chose.",
-    "programTitle": "Qu’est-ce qu’un programme ?",
+    "programTitle": "Choisir un programme",
     "programText": "Un programme est un ensemble d’instructions ; Tolang est le langage utilisé ici pour les écrire. Cette page exécute de courts programmes : change le nombre ou choisis une autre écriture, puis appuie sur Exécuter pour lancer le programme actuel. Modifier le code ne l’exécute pas ; c’est le jeu qui décide comment utiliser ses résultats.",
     "syntaxTitle": "Lis ce programme",
     "valueLabel": "Le nombre à utiliser",
@@ -2046,7 +2046,7 @@
       "join": "west et east sont deux destinations de messages ; les parties parallèles envoient 4 et 6. La réception reliée par & attend une valeur de chaque côté et leur donne les noms a et b. Elle enregistre ensuite leur somme, 10.",
       "coordination": "total définit d’abord comment additionner deux entrées. Les parties parallèles envoient 6 et 7 ; lorsque les deux messages arrivent, total(a, b) produit load = 13. Comme 13 > 12 est vrai, le bloc choisi ajoute 5 et enregistre 18 ; sinon, il enregistrerait load sans le modifier."
     },
-    "workedTitle": "Lis d’abord un exemple complet",
+    "workedTitle": "Exemples complets",
     "workedIntro": "Commence par des programmes complets montrant une fonction qui renvoie une valeur, une fonction qui envoie une réponse, la réception d’un message et l’attente de deux messages. Lis comment chaque partie mène au résultat affiché, puis essaie les diagnostics avec des entrées variables et les projets qui combinent ces notions."
   },
   "handheld": {
@@ -2110,11 +2110,11 @@
     ]
   },
   "district": {
-    "title": "Le quartier des jeux de code",
+    "title": "Quartier des jeux",
     "intro": "Mettez votre capuche et flânez entre les boutiques. Choisissez une boutique et commencez à jouer.",
     "move": "Les boutiques forment deux rangées, en haut et en bas. Utilisez les flèches ou WASD, ou cliquez sur la rue pour vous déplacer dans les quatre directions et contourner les obstacles. Une action manuelle reprend le contrôle de la promenade automatique. Appuyez sur Enter près d’une porte, ou cliquez sur une boutique pour entrer directement.",
-    "autoWalk": "Flâner automatiquement",
-    "manualWalk": "Marcher manuellement",
+    "autoWalk": "Promenade automatique",
+    "manualWalk": "Arrêter la promenade",
     "enter": "Entrer dans le jeu",
     "near": "{name} · Appuyez sur Enter pour jouer",
     "shops": "Boutiques du quartier"

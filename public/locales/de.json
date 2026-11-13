@@ -772,10 +772,10 @@
     "codeError": "Der Code lief nicht. Prüfe das Programm vor dem Flug."
   },
   "vault": {
-    "arcade": "Spielplatz",
+    "arcade": "Spieleviertel",
     "arcadeTitle": "Mit Code neue Wege öffnen.",
     "arcadeIntro": "Beobachte die Mechanik, probiere eine Idee aus und sieh, wie dein Programm die Spielwelt verändert.",
-    "browse": "Spiele entdecken →",
+    "browse": "Zum Spieleviertel →",
     "eyebrow": "STERNENBANK / TRESORMISSION",
     "title": "Die Tresormission",
     "intro": "Drei Mechanismen. Ein Sternenkern. Schreibe die Signale, die den Weg durch die Sternenbank öffnen.",
@@ -2004,7 +2004,7 @@
   "teaching": {
     "title": "Vom Wert zum sichtbaren Ergebnis",
     "intro": "Probiere beide Programme aus. Überlege vor jedem Start, ob das Programm den Computer auffordert, etwas anzuzeigen.",
-    "programTitle": "Was ist ein Programm?",
+    "programTitle": "Programm auswählen",
     "programText": "Ein Programm besteht aus Anweisungen; Tolang ist die Sprache, in der wir sie hier schreiben. Diese Seite führt kurze Programme aus. Ändere die Zahl oder wähle eine andere Schreibweise und drücke dann auf Ausführen, um das aktuelle Programm zu starten. Änderungen allein starten es nicht; wie ein Spiel die Ergebnisse nutzt, bestimmt das Spiel.",
     "syntaxTitle": "Dieses Programm verstehen",
     "valueLabel": "Die Zahl, mit der wir arbeiten",
@@ -2046,7 +2046,7 @@
       "join": "west und east sind zwei Nachrichtenziele; die parallel laufenden Teile senden 4 und 6. Der mit & verknüpfte Empfang wartet auf je einen Wert von beiden Seiten und nennt sie a und b. Anschließend wird ihre Summe 10 aufgezeichnet.",
       "coordination": "total legt zuerst fest, wie zwei Zahlen addiert werden. Die parallelen Teile senden 6 und 7; sobald beide Nachrichten da sind, berechnet total(a, b) den Wert load = 13. Weil 13 > 12 wahr ist, addiert der gewählte Zweig 5 und zeichnet 18 auf; andernfalls würde load unverändert aufgezeichnet."
     },
-    "workedTitle": "Zuerst ein vollständiges Beispiel lesen",
+    "workedTitle": "Vollständige Beispiele",
     "workedIntro": "Beginne mit vollständigen Programmen: Eine Funktion gibt einen Wert zurück, eine andere sendet eine Antwort, eine Nachricht wird empfangen oder auf zwei Nachrichten gewartet. Lies, wie aus den einzelnen Teilen das angezeigte Ergebnis entsteht. Probiere danach die Diagnosen mit wechselnden Eingaben und die kombinierten Projekte aus."
   },
   "handheld": {
@@ -2110,11 +2110,11 @@
     ]
   },
   "district": {
-    "title": "Das Code-Spieleviertel",
+    "title": "Spieleviertel",
     "intro": "Zieh die Kapuze hoch und schlendere an den Läden entlang. Klicke auf einen Laden und spiel los.",
     "move": "Die Läden stehen oben und unten entlang der Straße. Mit den Pfeiltasten, WASD oder einem Klick auf den Weg kannst du dich in alle vier Richtungen bewegen und Hindernisse umgehen. Sobald du selbst steuerst, endet das automatische Gehen. Drücke nahe einer Ladentür Enter oder klicke direkt auf einen Laden, um hineinzugehen.",
-    "autoWalk": "Automatisch schlendern",
-    "manualWalk": "Selbst gehen",
+    "autoWalk": "Automatisch erkunden",
+    "manualWalk": "Erkundung stoppen",
     "enter": "Spiel betreten",
     "near": "{name} · Zum Spielen Enter drücken",
     "shops": "Läden im Spieleviertel"
