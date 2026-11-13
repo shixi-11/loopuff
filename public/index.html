@@ -5,7 +5,7 @@
 <meta name="theme-color" content="#0d142b"><title>环灵 · 玩着学会编程</title>
 <base href="./">
 <link rel="preload" as="image" href="./assets/pixel-expedition.webp?v=1" fetchpriority="high">
-<link rel="icon" type="image/svg+xml" href="./assets/mark.svg?v=pixel-ring-1"><link rel="stylesheet" href="./style.css"><link rel="stylesheet" href="./vault.css"><link rel="stylesheet" href="./pixel.css"><script type="module" src="./src/app.js"></script>
+<link rel="stylesheet" href="./theme.css"><link rel="icon" type="image/svg+xml" href="./assets/mark.svg?v=pixel-ring-1"><link rel="stylesheet" href="./style.css"><link rel="stylesheet" href="./vault.css"><link rel="stylesheet" href="./pixel.css"><script type="module" src="./src/app.js"></script>
 </head>
 <body>
 <div class="shell">
@@ -20,10 +20,10 @@
 <canvas id="space" aria-hidden="true"></canvas><div class="scene-grain" aria-hidden="true"></div>
 <div class="coordinate" aria-hidden="true">ORBIT 01 <span>·</span> HELLO, UNIVERSE</div>
 <section id="welcome" class="welcome"><img class="expedition-hero" loading="lazy" src="./assets/pixel-expedition.webp?v=1" alt="" fetchpriority="high">
-<div class="home-intro"><div class="eyebrow"><i></i>零基础飞行员，准备出发</div>
+<div class="home-intro"><div class="eyebrow"><i></i>从零开始，写出自己的程序</div>
 <h1>敲下代码，<br>去更远的<span class="hero-accent">星球</span>。</h1>
 <p class="welcome-copy">读懂代码为什么这样写，再亲手改变结果。<br>从数字、名字和循环开始，逐步学会 Tolang。</p>
-<div class="welcome-actions"><button id="start" class="primary">开始第一航程 <span>↗</span></button><button id="play-button" class="text-button">去闯关 →</button><button id="how-button" class="text-button">怎么玩 →</button></div>
+<div class="welcome-actions"><button id="start" class="primary">开始第一航程 <span>↗</span></button><button id="play-button" class="text-button" hidden>去闯关 →</button><button id="how-button" class="text-button">怎么玩 →</button></div>
 </div>
 </section>
 <div id="home-flight-field" class="home-flight-field">
@@ -40,7 +40,7 @@
 <div class="typing-row"><label for="typing-field" class="input-label"><i></i>键盘已就位</label><textarea id="typing-field" aria-label="输入当前指令片段" rows="1" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="敲下目标片段…"></textarea><div class="next-key"><small>下一个按键</small><kbd id="next-key">7</kbd></div></div>
 <div class="cockpit-foot"><p id="typing-help" role="status" aria-live="polite">照着目标逐字敲，输对就会发射。</p><span id="combo-text">准备起飞</span></div>
 </section>
-<div class="home-console-bridge"><aside id="home-demo" class="home-demo"></aside><div id="home-handheld-teaser"></div></div>
+
 <div class="welcome-foot" id="welcome-foot"><span><i></i>不懂编程，也能开始</span><span>读懂并跟写 <b>→</b> 预测与理解 <b>→</b> 修改结果</span><span class="flight-number">FLIGHT SCHOOL / 001</span></div>
 <div id="home-content" class="home-content"></div>
 </main>

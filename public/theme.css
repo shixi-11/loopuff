@@ -1,0 +1,2 @@
+/* Shared deep-space interface palette. Game pieces retain their own identity colours. */
+:root{--ui-space:#08131b;--ui-deep:#0b1a21;--ui-panel:#12252b;--ui-panel-raised:#1c3438;--ui-line:#355154;--ui-line-active:#738f89;--ui-ink:#dce5df;--ui-muted:#9fb5b1;--ui-accent:#c4d1b8;--ui-gold:#cfad70;--ui-warning:#e3bb7c;--ui-positive:#98c99d;--ui-negative:#dfa69c}

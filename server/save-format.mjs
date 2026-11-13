@@ -25,7 +25,7 @@ const id=value=>{if(typeof value!=='string'||!/^[a-z][a-z0-9_-]{0,39}$/.test(val
 const dictionary=(value,check)=>{record(value,Object.keys(value||{}));if(Object.keys(value).length>128)fail();return Object.fromEntries(Object.entries(value).map(([key,item])=>[id(key),check(item)]));};
 const ids=value=>[...new Set(array(value,128,id))];
 const stages=value=>[...new Set(array(value,3,n=>integer(n,0,2)))];
-const phases=['welcome','levels','brief','typing','predict','output','explain','remix','rewrite','independent','result','complete','guide','pause','play','vault','chase','dispatch','heist','account','saves'];
+const phases=['welcome','levels','brief','typing','predict','output','explain','remix','rewrite','independent','result','complete','guide','pause','play','vault','chase','dispatch','heist','account','saves','leaderboard'];
 const workPhases=['brief','typing','predict','output','explain','remix','rewrite','independent','result','complete'];
 const workKeys=['phase','fragment','typed','draft','rewriteDraft','assessedSource','score','errors','keys'];
 function work(value){

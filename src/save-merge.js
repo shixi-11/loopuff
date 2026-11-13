@@ -1,7 +1,7 @@
 import {normalizeSave,SaveError,courseLessonIds} from '../server/save-format.mjs';
 import {course} from './course.js';
 import {lessonWork,rememberLesson} from './progress.js';
-import {guideStationIds,guideWorkIds,startStepIds,startWorkKey} from './guide-work.js';
+import {guideStationIds,guideWorkIds,startStepIds,startWorkKey,arcadeNewStepIds,arcadeWorkKey} from './guide-work.js';
 import {diagnosticIds} from '../server/diagnostic-format.mjs';
 
 const lessonIds=courseLessonIds,tasks=['branch','manifest','fuel','relay'];
@@ -79,6 +79,14 @@ function merge(local,incoming,choose){
     const x=pack(left.guideWork),y=pack(right.guideWork),hasX=Object.keys(x).length,hasY=Object.keys(y).length;
     const selected=hasX&&hasY?pick('course',id,'start',x,y):hasX?x:hasY?y:null;
     if(selected)for(const [kind,value]of Object.entries(selected))s.guideWork[startWorkKey(id,kind==='checked')]=value;
+   }
+   for(const id of arcadeNewStepIds){
+    // A check belongs to its draft. Never splice a checked result onto the
+    // other device's edited (or deliberately blank) program.
+    const pack=work=>Object.fromEntries([['draft',work?.[arcadeWorkKey(id)]],['checked',work?.[arcadeWorkKey(id,true)]]].filter(([,value])=>value!==undefined));
+    const x=pack(left.guideWork),y=pack(right.guideWork),hasX=Object.keys(x).length,hasY=Object.keys(y).length;
+    const selected=hasX&&hasY?pick('course',id,'arcade',x,y):hasX?x:hasY?y:null;
+    if(selected)for(const [kind,value]of Object.entries(selected))s.guideWork[arcadeWorkKey(id,kind==='checked')]=value;
    }
   }
   if(left.guideSelected||right.guideSelected)s.guideSelected=left.guideSelected||right.guideSelected;

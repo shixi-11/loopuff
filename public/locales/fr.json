@@ -5,8 +5,8 @@
     "pilot": "AUCUNE EXPÉRIENCE NÉCESSAIRE",
     "hero": "Écrivez du code.\nExplorez de nouvelles planètes.",
     "lead": "Partez de zéro. Comprenez le code, expérimentez et écrivez vos propres programmes en Tolang.",
-    "start": "Commencer le voyage ↗",
-    "resume": "Reprendre le voyage ↗",
+    "start": "Apprendre à programmer ↗",
+    "resume": "Reprendre mon apprentissage ↗",
     "guide": "Qu’est-ce que la programmation ?",
     "map": "Votre parcours",
     "language": "Langue",
@@ -840,11 +840,11 @@
   },
   "account": {
     "entry": "Connexion / Inscription",
-    "eyebrow": "PASSEPORT DE PILOTE",
+    "eyebrow": "COMPTE LOOPUFF",
     "loginTitle": "Heureux de vous revoir.",
-    "registerTitle": "Votre prochaine aventure vous attend.",
+    "registerTitle": "Créez votre compte Loopuff",
     "signed": "Mon compte",
-    "intro": "Connectez-vous avec votre adresse e-mail et votre mot de passe, ou créez un compte de pilote.",
+    "intro": "Enregistrez vos scores, gagnez des Pièces stellaires et sauvegardez ou restaurez manuellement votre progression.",
     "login": "Se connecter",
     "register": "S’inscrire",
     "email": "Adresse e-mail",
@@ -1307,10 +1307,10 @@
     "arrows": "Les liens indiquent un ordre d'apprentissage suggéré",
     "scroll": "Faites défiler la carte horizontalement. Toutes les notions sont accessibles ; vous n'avez pas à les débloquer dans l'ordre.",
     "lanes": [
-      "Envoyer un signal",
-      "Commander des actions",
-      "Organiser les programmes",
-      "Coordonner les messages"
+      "Valeurs et calculs",
+      "Conditions et boucles",
+      "Fonctions et réponses",
+      "Messages et coopération"
     ],
     "selected": "Votre notion choisie",
     "before": "Bases utiles",
@@ -1325,7 +1325,22 @@
     "run": "Exécuter l'exemple",
     "ready": "Exécutez ce programme pour voir ce qu'il produit réellement.",
     "error": "Le programme ne s'est pas terminé",
-    "noOutput": "Le programme s'est exécuté sans sortie."
+    "noOutput": "Le programme s'est exécuté sans sortie.",
+    "nodes": {
+      "signal": "Sortie et appels de méthodes",
+      "addition": "Entiers et calculs",
+      "names": "Noms et liaisons",
+      "leap": "Application : piloter des actions avec des nombres",
+      "comparison": "Comparaisons et booléens",
+      "branch": "Branches conditionnelles",
+      "repeat": "Parcourir une liste",
+      "counter": "Boucles conditionnelles",
+      "function": "Fonctions synchrones",
+      "reply": "Réponses et retours",
+      "message": "Envoi et réception",
+      "join": "Réception conjointe",
+      "coordination": "Application : combiner messages et fonctions"
+    }
   },
   "diagnostic": {
     "tag": "Essayez un programme avant de partir",
@@ -2058,17 +2073,20 @@
     "games": [
       "Blocs en chute",
       "Défense de chars",
-      "Patrouille stellaire"
+      "Patrouille stellaire",
+      "Serpent",
+      "Casse-briques",
+      "Pousse-caisses"
     ],
     "select": "Choisir une cartouche",
-    "first": "Exécutez les deux lignes ci-dessous : choose(1) sélectionne le jeu de blocs et start() lance la partie. Essayez ensuite d'ajouter une commande de déplacement.",
+    "first": "Choisissez une cartouche, puis exécutez start(). Ajoutez une commande d’action et observez ce qui change à l’écran.",
     "console": "Vos commandes Tolang",
     "run": "Exécuter ces instructions",
     "commands": "Que puis-je écrire ?",
     "commandNote": "Ces fonctions de jeu sont fournies par la console. Appelez-les avec Tolang ; l'écran exécute les instructions dans l'ordre.",
-    "chooseNote": "1 sélectionne les blocs, 2 les chars et 3 la patrouille stellaire. Choisir une cartouche prépare une nouvelle partie.",
+    "chooseNote": "choose(1) à choose(6) sélectionnent, dans l’ordre, les blocs en chute, la défense de chars, la patrouille stellaire, le serpent, le casse-briques et le pousse-caisses. Choisir une cartouche prépare une nouvelle partie.",
     "lifecycleNote": "Démarrer ou reprendre ; mettre en pause ; terminer la partie actuelle avant la fin. Démarrer après une partie terminée crée une nouvelle manche.",
-    "motionNote": "Utilisez les fonctions indiquées pour cette cartouche. Par exemple, left(); left(); effectue deux déplacements.",
+    "motionNote": "Utilisez les fonctions indiquées pour cette cartouche. Dans le casse-briques, fire() lance la balle. Dans le pousse-caisses, undo() annule un déplacement et restart() réinitialise le niveau actuel.",
     "applied": "Instructions reçues. Observez l'écran les exécuter dans l'ordre.",
     "none": "Le programme s'est exécuté sans envoyer d'instruction de jeu. Essayez start() ou une fonction de déplacement.",
     "invalid": "Ce programme n'a pas pu commander la console. Vérifiez le code et les fonctions disponibles pour cette cartouche, corrigez-le et relancez-le.",
@@ -2082,12 +2100,18 @@
     "inputNotes": [
       "x et y situent le cadre de 4 × 4 de la pièce actuelle ; targetX suggère une colonne pour sa rotation actuelle. danger est la hauteur de l'empilement, de 0 à 20. Le cadre peut dépasser du plateau si les cases situées à l'extérieur sont vides.",
       "x et y sont la position de votre char sur la grille. enemyX et enemyY situent un ennemi, ou valent -1 s'il n'y en a aucun. danger vaut 1 lorsqu'un projectile ennemi proche demande votre attention ; health est le nombre de vies restantes.",
-      "x et y sont la position de votre vaisseau en pixels. enemyX et enemyY situent un ennemi, ou valent -1 s'il n'y en a aucun. danger vaut 1 lorsqu'un projectile ennemi proche demande votre attention ; health est le nombre de vies restantes."
+      "x et y sont la position de votre vaisseau en pixels. enemyX et enemyY situent un ennemi, ou valent -1 s'il n'y en a aucun. danger vaut 1 lorsqu'un projectile ennemi proche demande votre attention ; health est le nombre de vies restantes.",
+      "headX et headY situent la tête sur la grille ; foodX et foodY situent la nourriture, ou valent -1 en son absence. direction vaut 1 pour gauche, 2 pour droite, 3 pour haut et 4 pour bas ; nextDirection est la direction du prochain déplacement. dangerLeft, dangerRight, dangerUp et dangerDown valent 1 en cas de collision ou de demi-tour interdit. length est la longueur, eaten la nourriture collectée, columns et rows les dimensions du plateau. ready vaut 1 après la pause initiale ; over et won indiquent la fin de partie et la victoire.",
+      "paddleX est le centre de la raquette en pixels et paddleHalf sa demi-largeur. ballX et ballY situent la balle en pixels ; ballVX et ballVY sont ses vitesses. attached vaut 1 quand la balle attend son lancement avec fire(). lives est le nombre de vies restantes, remaining celui des briques restantes et wave la vague actuelle.",
+      "playerX et playerY situent le personnage sur la grille. up, right, down et left décrivent les cases voisines : 0 sol, 1 mur ou extérieur, 2 cible, 3 caisse, 4 caisse sur une cible. level est le niveau actuel ; moves compte ses déplacements valides, pushes les poussées et boxesOnGoals les caisses sur des cibles."
     ],
     "help": [
       "← → déplacer · ↑ / A / Space tourner · B / X faire tomber · ↓ descendre. Remplissez une ligne pour l'effacer.",
       "Flèches pour déplacer · A / B / Space pour tirer. Protégez votre base, détruisez les murs de briques et repoussez les vagues ennemies.",
-      "Flèches pour déplacer · A / B / Space pour tirer. Évitez les projectiles et éliminez chaque formation."
+      "Flèches pour déplacer · A / B / Space pour tirer. Évitez les projectiles et éliminez chaque formation.",
+      "Les flèches changent la direction. La nourriture allonge et accélère le serpent. Évitez les murs et votre corps ; remplissez le plateau pour gagner.",
+      "← → déplacent la raquette ; fire() lance la balle. Gardez-la en jeu et cassez toutes les briques.",
+      "Les flèches déplacent le personnage et poussent les caisses. Placez chaque caisse sur une cible ; undo() annule un déplacement et restart() réinitialise le niveau actuel."
     ],
     "start": "Démarrer / reprendre",
     "pause": "Pause",
@@ -2106,7 +2130,10 @@
     "short": [
       "Complétez des lignes pour faire de la place à la prochaine pièce.",
       "Défendez la base et détruisez les murs de briques et les chars ennemis.",
-      "Évitez les tirs et éliminez les formations ennemies, vague après vague."
+      "Évitez les tirs et éliminez les formations ennemies, vague après vague.",
+      "Mangez pour grandir et gardez de la place pour tourner.",
+      "Renvoyez la balle avec la raquette et cassez toutes les briques.",
+      "Planifiez vos poussées pour placer chaque caisse sur une cible."
     ]
   },
   "district": {
@@ -2118,5 +2145,175 @@
     "enter": "Entrer dans le jeu",
     "near": "{name} · Appuyez sur Enter pour jouer",
     "shops": "Boutiques du quartier"
+  },
+  "leaderboard": {
+    "title": "Classement",
+    "intro": "Comparez les meilleurs scores séparément pour chaque jeu. Les pièces stellaires marquent des réussites uniques d’apprentissage et de jeu.",
+    "nav": "Classement",
+    "game": "Choisir un jeu",
+    "rank": "Rang",
+    "player": "Joueur",
+    "score": "Score",
+    "time": "Temps",
+    "empty": "Aucun score vérifié pour ce jeu pour le moment.",
+    "loading": "Chargement du classement…",
+    "error": "Le classement n’a pas pu être chargé.",
+    "retry": "Réessayer",
+    "login": "Connectez-vous pour enregistrer vos scores et vos pièces stellaires.",
+    "signIn": "Se connecter",
+    "profile": "Mon profil",
+    "nickname": "Pseudo",
+    "saveName": "Enregistrer le pseudo",
+    "coins": "Pièces stellaires",
+    "achievements": "Réussites",
+    "rulesTitle": "Règles des pièces stellaires",
+    "rules": [
+      "Gagnez 10 pièces stellaires lorsque vous réussissez pour la première fois chaque exercice d’apprentissage autonome.",
+      "Gagnez 5 pièces stellaires par jeu la première fois que vous obtenez un score valide et jouez au moins 10 secondes.",
+      "Gagnez 20 pièces stellaires pour votre première victoire dans chaque jeu. Répéter une réussite ne rapporte pas d’autres pièces."
+    ],
+    "verified": "Vérifié",
+    "startRanked": "Commencer et enregistrer le score",
+    "startGuest": "Jouer sans compte",
+    "recording": "Score en cours d’enregistrement",
+    "submitting": "Enregistrement du score…",
+    "submitted": "Score enregistré",
+    "practiceOnly": "Cette partie n’est liée à aucun compte. Vous pouvez continuer à jouer.",
+    "finishSubmit": "Terminer et enregistrer le score",
+    "invalid": "Le score n’a pas été validé. Votre précédent record est conservé.",
+    "nameSaved": "Pseudo enregistré",
+    "claimed": "Reçu",
+    "network": "Le réseau est indisponible. Vous pouvez continuer à jouer.",
+    "yourBest": "Votre meilleur score",
+    "publishNote": "Le classement affiche les pseudos, jamais les adresses e-mail.",
+    "noCoins": "Aucune pièce d’étoile pour le moment.",
+    "starting": "Préparation d’une partie avec enregistrement du score…",
+    "startError": "La partie avec enregistrement du score n’a pas pu démarrer. Réessayez.",
+    "recordLimit": "La limite d’enregistrement est dépassée. Vous pouvez continuer à jouer sans enregistrer le score.",
+    "recordInvalid": "Cet enregistrement n’est plus valide. Vous pouvez continuer à jouer sans enregistrer le score.",
+    "noSteps": "Vous n’avez pas encore joué cette partie. Aucun score n’est à enregistrer.",
+    "nicknameHint": "Utilisez 2 à 24 caractères : lettres, chiffres, espaces, tirets bas ou traits d’union.",
+    "claimReward": "Recevoir la récompense d’apprentissage",
+    "rewardSaving": "Enregistrement de la récompense d’apprentissage…",
+    "rewardError": "La récompense n’a pas encore été enregistrée. Réessayez. Votre progression d’apprentissage est conservée."
+  },
+  "arcadeLearning": {
+    "title": "De votre première instruction au contrôle d’un jeu",
+    "intro": "Faites d’abord afficher un nombre à l’ordinateur. Utilisez ensuite du code pour choisir et piloter un jeu sur la console portable. Exécutez chaque étape, observez le résultat et essayez vos propres modifications.",
+    "step": "Exercice actuel",
+    "goal": "Votre objectif",
+    "editor": "Votre code Tolang",
+    "run": "Exécuter et vérifier",
+    "hint": "Donnez-moi un indice",
+    "meaning": "Comment ce code fonctionne",
+    "reset": "Rétablir le code de départ de cette étape",
+    "confirmReset": "Confirmer le rétablissement",
+    "cancel": "Conserver mon code",
+    "output": "L’ordinateur affiche",
+    "game": "Jeu après l’exécution",
+    "before": "Avant l’exécution",
+    "after": "Après l’exécution",
+    "actual": "Résultat réel",
+    "expected": "Résultat attendu",
+    "replay": "Revoir l’exécution",
+    "case": "Essayer une autre entrée",
+    "passed": "Étape terminée. Comparez votre code au résultat, puis continuez.",
+    "needsWork": "L’objectif n’est pas encore atteint. Observez le résultat réel, modifiez un élément et réessayez.",
+    "next": "Étape suivante",
+    "saveError": "Vos modifications n’ont pas pu être enregistrées. Réessayez avant de continuer.",
+    "saving": "Enregistrement de votre travail…",
+    "continueCourse": "Continuer avec les fonctions et les messages",
+    "play": "Essayer librement la console portable",
+    "complete": "Vous avez utilisé du code pour exécuter, décider, choisir et piloter un jeu. Continuez à apprendre ou essayez votre propre programme sur la console portable.",
+    "practice": "Il s’agit d’un aperçu pour apprendre. Il ne modifie pas votre partie actuelle et n’envoie aucun score au classement.",
+    "input": "Entrée de cette exécution",
+    "state": "État du jeu",
+    "score": "Score",
+    "placed": "Pièces posées",
+    "shots": "Tirs effectués",
+    "position": "Position horizontale",
+    "ready": "Prêt",
+    "running": "En cours",
+    "ended": "Terminé",
+    "scope": "La console portable fournit les fonctions de sélection, de déplacement et de tir. Tolang exprime leur ordre, les conditions, les boucles et les calculs.",
+    "steps": {
+      "run": {
+        "title": "Faites afficher un nombre à l’ordinateur",
+        "goal": "Cliquez sur « Exécuter et vérifier » pour faire afficher 7 à l’ordinateur.",
+        "meaning": "7 est la valeur à afficher. .log() l’affiche dans la zone de sortie. Le code est un ensemble d’instructions exécutables.",
+        "hint": "Exécutez le 7.log() déjà présent et comparez-le au résultat."
+      },
+      "change": {
+        "title": "Changez le code, changez le résultat",
+        "goal": "Remplacez 7 par 9, puis exécutez le programme pour afficher 9.",
+        "meaning": "L’ordinateur utilise la valeur que vous écrivez. Après une modification, exécutez de nouveau le code pour obtenir le nouveau résultat.",
+        "hint": "Conservez .log() et remplacez seulement le nombre qui le précède par 9."
+      },
+      "repair": {
+        "title": "Comprenez et corrigez une petite erreur",
+        "goal": "Complétez l’instruction pour qu’elle affiche de nouveau 7.",
+        "meaning": "Les parenthèses et la ponctuation font partie du code. Sans parenthèse fermante, l’ordinateur ne peut pas exécuter cette instruction.",
+        "hint": "Vérifiez les deux parenthèses après .log et ajoutez la parenthèse fermante ) manquante."
+      },
+      "calculate": {
+        "title": "Laissez l’ordinateur calculer",
+        "goal": "Écrivez une addition qui calcule et affiche 11.",
+        "meaning": "L’addition entre parenthèses produit d’abord un résultat, puis .log() l’affiche. Le calcul doit réellement contribuer à produire 11.",
+        "hint": "Vous pouvez remplacer 2 + 3 par 4 + 7, ou choisir d’autres nombres dont la somme vaut 11."
+      },
+      "name": {
+        "title": "Donnez un nom à une valeur",
+        "goal": "Associez un nombre à un nom, puis utilisez ce nom dans une addition pour afficher 14.",
+        "meaning": "let associe un nom à une valeur. Utiliser ce nom ensuite permet de lire la valeur. Vous pouvez choisir le nom.",
+        "hint": "Par exemple, associez energy à 10, puis affichez le résultat de energy + 4."
+      },
+      "score": {
+        "title": "Prenez une décision selon le score",
+        "goal": "score est le score reçu en entrée. Affichez 1 à partir de 10 points, sinon 0.",
+        "meaning": "if choisit une branche selon une condition. Le même programme doit traiter 0, 9, 10, 12 et 20. Un score de 10 exactement atteint aussi l’objectif.",
+        "hint": "Testez score > 9. Affichez 1 dans then et, dans le cas contraire, 0 dans else."
+      },
+      "select": {
+        "title": "Choisissez un jeu avec du code",
+        "goal": "Sélectionnez avec du code la cartouche 3, « Patrouille stellaire », et laissez-la prête sans la démarrer.",
+        "meaning": "choose(3) sélectionne le troisième jeu de la console portable. Choisir un jeu et le démarrer sont deux actions distinctes. Vous décidez quand commencer.",
+        "hint": "Remplacez le nombre de choose(1) par 3. N’écrivez pas encore start()."
+      },
+      "control": {
+        "title": "Déplacez-vous, puis tirez",
+        "goal": "Démarrez le jeu de chars, déplacez-vous vers la droite, puis tirez.",
+        "meaning": "Le programme pilote le vrai jeu dans l’ordre de vos instructions. start() le démarre, right() déplace vers la droite et fire() tire.",
+        "hint": "Après start(), ajoutez d’abord right(), puis fire(). Séparez les instructions par des points-virgules ou des sauts de ligne."
+      },
+      "repeat": {
+        "title": "Répétez un déplacement avec une boucle",
+        "goal": "Démarrez le jeu de blocs et utilisez une boucle pour déplacer la pièce actuelle de trois cases vers la droite.",
+        "meaning": "Une boucle répète les actions entre ses accolades. Elle doit réellement provoquer les trois déplacements ; une boucle sans rapport ne compte pas.",
+        "hint": "Commencez par start(), puis essayez for n in [1, 2, 3] { right() }."
+      },
+      "finish": {
+        "title": "Terminez une partie avec du code",
+        "goal": "Le jeu est déjà en cours. Terminez cette partie avant sa fin avec du code.",
+        "meaning": "pause() met la partie en pause pour pouvoir la reprendre plus tard. finish() termine la partie actuelle.",
+        "hint": "Remplacez pause() par finish() et observez l’état du jeu."
+      },
+      "strategy": {
+        "title": "Écrivez une stratégie automatique pour les blocs",
+        "goal": "Déplacez la pièce vers targetX et faites-la tomber une fois alignée. La même stratégie doit gérer des cibles à gauche comme à droite.",
+        "meaning": "x est la position actuelle de la pièce et targetX la position conseillée. La console portable lit continuellement le nouvel état et exécute votre stratégie. Les conditions déterminent l’action suivante.",
+        "hint": "Utilisez right() si x est inférieur à targetX, left() s’il est supérieur et drop() s’ils sont égaux. Écrivez des conditions pour les trois cas."
+      }
+    },
+    "strategyTitle": "Transformez vos acquis en stratégie de jeu",
+    "strategyIntro": "Choisissez un jeu, lisez son état réel et laissez votre programme décider de l’action suivante à chaque fois. Atteignez d’abord un petit objectif clair, puis rendez votre stratégie plus fiable.",
+    "openStrategy": "Écrire une stratégie et jouer",
+    "strategyGoals": [
+      "Déplacez la pièce à l’aide de x et targetX, puis faites-la tomber une fois alignée. Continuez à poser des pièces avec différentes situations de départ.",
+      "Utilisez la position de l’ennemi et danger pour adapter les déplacements et les tirs tout en protégeant la base.",
+      "Lisez les positions des vaisseaux ennemis pour vous déplacer et tirer. Ajoutez ensuite des décisions pour éviter les projectiles.",
+      "Combinez la position de la nourriture avec les quatre indicateurs de danger. Assurez d’abord des changements de direction sans collision, puis cherchez à allonger le serpent.",
+      "Déplacez la raquette selon la position et la vitesse de la balle. Renvoyez-la d’abord de façon fiable, puis essayez de prévoir son point de chute.",
+      "Lisez le type des cases voisines et planifiez vos poussées. Utilisez undo() pour revoir les erreurs et améliorer la stratégie."
+    ]
   }
 }

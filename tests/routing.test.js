@@ -41,11 +41,11 @@ test('build emits localized entry points with canonical metadata',async()=>{
     const html=await readFile(new URL(`../dist/${locale}/index.html`,import.meta.url),'utf8');
     assert.ok(html.includes(`https://shixilin.com/games/loopuff/${locale}/`));
     assert.ok(!html.includes('?lang='));
-    for(const suffix of ['levels/','guide/','guide/start/','guide/advance/','guide/compare/','guide/map/','guide/check/','saves/','play/','play/vault/','play/chase/','play/dispatch/','play/heist/','learn/signal/','learn/names/result/']){
+    for(const suffix of ['levels/','guide/','guide/start/','guide/advance/','guide/compare/','guide/map/','guide/check/','saves/','leaderboard/','play/','play/vault/','play/chase/','play/dispatch/','play/heist/','learn/signal/','learn/names/result/']){
       const page=await readFile(new URL(`../dist/${locale}/${suffix}index.html`,import.meta.url),'utf8');
       assert.ok(page.includes(`https://shixilin.com/games/loopuff/${locale}/${suffix==='levels/'?'play/':suffix}`));
       const navigation=page.match(/<nav id="page-navigation"[^>]*>([\s\S]*?)<\/nav>/)[1];
-      assert.equal((navigation.match(/<a /g)||[]).length,3);assert.ok(!navigation.includes('/levels/'));assert.ok(!navigation.includes('course-progress'));
+      assert.equal((navigation.match(/<a /g)||[]).length,4);assert.ok(navigation.includes(`href="./${locale}/leaderboard/"`));assert.ok(!navigation.includes('/levels/'));assert.ok(!navigation.includes('course-progress'));
       const base=page.match(/<base href="([^"]+)"/)[1];
       for(const prefix of ['', '/games/loopuff']){
         const resolved=new URL(base,`https://example.com${prefix}/${locale}/${suffix}`);
@@ -55,6 +55,7 @@ test('build emits localized entry points with canonical metadata',async()=>{
       const initial=page.match(/<script id="initial-catalog" type="application\/json" data-locale="([^"]+)">([\s\S]*?)<\/script>/);
       assert.equal(initial[1],locale);
       const catalog=JSON.parse(initial[2]);
+      assert.ok(navigation.includes(catalog.leaderboard.title));
       assert.ok(page.includes(`<span id="brand-name">${catalog.ui.name}</span>`));
       assert.ok(page.includes(`value="${locale}" selected`));
     }

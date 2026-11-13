@@ -18,6 +18,7 @@ export function parseRoute(pathname){
   if(suffix.length===1)return {locale,view:'home'};
   if(suffix.length===2&&suffix[1]==='levels')return {locale,view:'levels'};
   if(suffix.length===2&&suffix[1]==='account')return {locale,view:'account'};
+  if(suffix.length===2&&suffix[1]==='leaderboard')return {locale,view:'leaderboard'};
   if(suffix.length===2&&suffix[1]==='saves')return {locale,view:'saves'};
   if(suffix.length===2&&suffix[1]==='guide')return {locale,view:'guide'};
   if(suffix.length===3&&suffix[1]==='guide'&&['start','advance'].includes(suffix[2]))return {locale,view:suffix[2]};
@@ -51,9 +52,9 @@ export function learningRouteUrl(input,locale,view='lesson',lessonId){
 }
 export function routeUrl(input,locale,view='home',lessonId){
   const id=localeId(locale);if(!id)throw Error('Unsupported language');
-  if(!['home','levels','guide','start','advance','compare','map','check','lesson','result','play','vault','chase','dispatch','heist','account','saves'].includes(view))throw Error('Unsupported page');
+  if(!['home','levels','guide','start','advance','compare','map','check','lesson','result','play','vault','chase','dispatch','heist','account','saves','leaderboard'].includes(view))throw Error('Unsupported page');
   if(['lesson','result'].includes(view)&&!course.some(lesson=>lesson.id===lessonId))throw Error('Unknown lesson');
-  const url=new URL(input),suffix=view==='heist'?'play/heist/':view==='check'?'guide/check/':view==='map'?'guide/map/':view==='compare'?'guide/compare/':view==='saves'?'saves/':view==='dispatch'?'play/dispatch/':view==='chase'?'play/chase/':view==='account'?'account/':view==='levels'?'levels/':view==='guide'?'guide/':view==='play'?'play/':view==='vault'?'play/vault/':['lesson','result'].includes(view)?`learn/${lessonId}/${view==='result'?'result/':''}`:'';
+  const url=new URL(input),suffix=view==='leaderboard'?'leaderboard/':view==='heist'?'play/heist/':view==='check'?'guide/check/':view==='map'?'guide/map/':view==='compare'?'guide/compare/':view==='saves'?'saves/':view==='dispatch'?'play/dispatch/':view==='chase'?'play/chase/':view==='account'?'account/':view==='levels'?'levels/':view==='guide'?'guide/':view==='play'?'play/':view==='vault'?'play/vault/':['lesson','result'].includes(view)?`learn/${lessonId}/${view==='result'?'result/':''}`:'';
   url.pathname=`${gamePrefix(url.pathname)}/${id}/${['start','advance'].includes(view)?`guide/${view}/`:suffix}`;
   url.searchParams.delete('lang');return url;
 }

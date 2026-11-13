@@ -11,7 +11,7 @@ test('real Tolang selects, starts, pauses and ends each cartridge with the right
 });
 test('the whole executed batch is checked before world mutation, including out-of-range choose and inactive-game commands',()=>{
  const s=newHandheld(),before=structuredClone(s);
- for(const source of ['choose(1001)','choose(0)','choose(4)','choose(3); start(); 9999.log()','choose(1); fire()','start(); missing()','while true {wait()}'])assert.throws(()=>compileHandheld(source,s));
+ for(const source of ['choose(1001)','choose(0)','choose(7)','choose(3); start(); 9999.log()','choose(1); fire()','start(); missing()','while true {wait()}'])assert.throws(()=>compileHandheld(source,s));
  assert.deepEqual(s,before);assert.throws(()=>applyHandheld(s,[1003,2001,9999]));assert.deepEqual(s,before);
 });
 test('loops retain repeated control calls and live observations are explicitly supplied only to strategies',()=>{
@@ -21,3 +21,5 @@ test('loops retain repeated control calls and live observations are explicitly s
  assert.throws(()=>compileHandheld('choose(3);start()',s,{strategy:true}));
  applyHandheld(s,[1003,2001]);assert.ok(compileHandheld(cartridges[2].strategy,s,{strategy:true}).commands.includes(5));
 });
+
+test('handheld syntax errors point into user code rather than the host helper prefix',()=>{const source='right(';assert.throws(()=>compileHandheld(source,newHandheld()),e=>e.code==='syntax'&&Number.isInteger(e.position)&&e.position>=0&&e.position<=source.length);});

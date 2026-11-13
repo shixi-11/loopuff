@@ -4,6 +4,8 @@ import {createMergePlan,resolveMerge} from './save-merge.js';
 import {createCloudProgress} from './cloud-progress.js';
 import {course} from './course.js';
 import {diagnosticIds,diagnosticPuzzle} from './diagnostic.js';
+import {arcadeLearningIds} from './arcade-learning.js';
+import {arcadeLearningProgress} from './arcade-learning-work.js';
 
 const html=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const code=source=>`<pre class="exercise-code" dir="ltr">${html(source)}</pre>`;
@@ -17,7 +19,7 @@ function download(value,filename){
  const url=URL.createObjectURL(new Blob([JSON.stringify(value,null,2)],{type:'application/json'}));
  const link=document.createElement('a');link.href=url;link.download=filename;document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
-export function mountSaves(root,{text:t,topics,lessons,phases,account,urls,locale,name,pursuitText,heistText,diagnosticText,rewriteText,pathText,model={}}){
+export function mountSaves(root,{text:t,topics,lessons,phases,account,urls,locale,name,pursuitText,heistText,diagnosticText,rewriteText,pathText,arcadeText,model={}}){
  let disposed=false,busy=false,local=null,localError=null,recovery=null,focusComparison=false;
  setSaveAccount(model,account.user?.id??null);
  const access=progressStorage(),cloud=createCloudProgress({url:location.href,getAccount:()=>account.user});
@@ -30,15 +32,17 @@ export function mountSaves(root,{text:t,topics,lessons,phases,account,urls,local
   const d=snapshot.data;
   return `<dl class="save-totals">${[
    ['course',`${d.course?.state?.completed?.length??0} / ${course.length}`],
+   ...(arcadeText&&d.course?[['arcade',`${arcadeLearningProgress(d.course.state?.guideWork||{}).length} / ${arcadeLearningIds.length}`]]:[]),
    ['vault',`${d.vault?.stamps.length??0} / 3`],
    ['chase',`${(d.chase?.work.police.cleared.length??0)+(d.chase?.work.thief.cleared.length??0)} / 6`],
    ['dispatch',`${d.dispatch?.stamps.length??0} / 4`],
    ['pursuit',d.pursuit?`${topics[d.pursuit.current.role]} · ${Math.floor(d.pursuit.current.activeMs/60000)}:${String(Math.floor(d.pursuit.current.activeMs/1000)%60).padStart(2,'0')}`:''],
    ['heist',d.heist?`${Math.floor(d.heist.current.activeMs/60000)}:${String(Math.floor(d.heist.current.activeMs/1000)%60).padStart(2,'0')} · #${d.heist.current.seed}`:'']
-  ].map(([domain,count])=>`<div><dt>${html(domainName(domain))}</dt><dd>${d[domain]===null?html(t.noProgress):`<bdi dir="ltr">${count}</bdi>${domain==='course'&&d.course?.state?.diagnostic?`<small>${html(t.diagnosticDrafts)}: <bdi dir="ltr">${diagnosticIds.filter(id=>d.course.state.diagnostic.drafts[id].trim()).length} / ${diagnosticIds.length}</bdi></small>`:''}`}</dd></div>`).join('')}</dl>`;
+  ].filter(([domain])=>['course','arcade'].includes(domain)||d[domain]!==null).map(([domain,count])=>`<div><dt>${html(domain==='arcade'?arcadeText.title:domainName(domain))}</dt><dd>${d[domain]===null?html(t.noProgress):`<bdi dir="ltr">${count}</bdi>${domain==='course'&&d.course?.state?.diagnostic?`<small>${html(t.diagnosticDrafts)}: <bdi dir="ltr">${diagnosticIds.filter(id=>d.course.state.diagnostic.drafts[id].trim()).length} / ${diagnosticIds.length}</bdi></small>`:''}`}</dd></div>`).join('')}</dl>`;
  }
  function diagnosticTask(value){return code(value.draft||t.emptyDraft)+`<p>${html(t.diagnosticHints)}: <bdi dir="ltr">${value.hint} / 2</bdi></p><p>${html(value.submitted===null?t.diagnosticPending:t.diagnosticSubmitted)}</p>`;}
  function previewValue(item,value){
+  if(item.kind==='arcade')return code(value.draft??t.emptyDraft)+`<p>${html(value.checked===undefined?t.diagnosticPending:t.diagnosticSubmitted)}</p>`+(value.checked!==undefined&&value.checked!==value.draft?code(value.checked):'');
   if(item.domain==='heist'){
    const s=value.current;return `<p>${html(t.currentRun)}: <bdi dir="ltr">${Math.floor(s.activeMs/60000)}:${String(Math.floor(s.activeMs/1000)%60).padStart(2,'0')} · #${s.seed}</bdi></p><p>${html(s.status==='finished'?heistText[s.outcome]:heistText.phases[!s.key?0:!s.door?1:!s.bag?2:3])} · ${html(heistText.history)}: <bdi dir="ltr">${value.history.length}</bdi></p><p>${html(heistText.positionNow)}: <bdi dir="ltr">${s.x/1000} m</bdi> · ${html(heistText.energy)}: <bdi dir="ltr">${Math.floor(s.energy/1000)}</bdi> · ${html(heistText.alarm)}: <bdi dir="ltr">${Math.floor(s.alarm/1000)}</bdi></p><h4>${html(heistText.editor)}</h4>${code(s.draft||t.emptyDraft)}${s.strategy!==s.draft?`<p>${html(heistText.notDeployed)}</p><h4>${html(heistText.deployed)}</h4>${code(s.strategy||t.emptyDraft)}`:''}`;
   }
@@ -61,6 +65,7 @@ export function mountSaves(root,{text:t,topics,lessons,phases,account,urls,local
   return code((typeof value==='string'?value:value.draft??value.checked)||t.emptyDraft);
  }
  function conflictTitle(item){
+  if(item.kind==='arcade')return (arcadeText?.title||pathText?.beginnerTitle||topics.course)+' · '+(arcadeText?.steps[item.item]?.title||item.item);
   if(item.kind==='start')return pathText.beginnerTitle+' · '+pathText.steps[item.item].title;
   if(item.kind==='diagnostic-run')return t.diagnosticTitle;
   if(item.kind==='diagnostic-task')return t.diagnosticTitle+' · '+diagnosticText.tasks[item.item].title;

@@ -1,19 +1,20 @@
 import {districtSize,districtBuildings,districtPosition,districtStep,districtCamera,districtPoint,districtShopAt,districtNear,districtPath} from './district.js';
-const backgroundUrl=new URL('../assets/pixel-district.webp',import.meta.url).href;
+const backgroundUrl=new URL('../assets/pixel-district.webp?v=eight-stores-20261113',import.meta.url).href;
+const signsUrl=new URL('../assets/pixel-game-signs.webp',import.meta.url).href;
 const esc=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const keyDirection={ArrowLeft:[-1,0],a:[-1,0],ArrowRight:[1,0],d:[1,0],ArrowUp:[0,-1],w:[0,-1],ArrowDown:[0,1],s:[0,1]};
-const palettes=['#e2ba73','#8ed4b1','#8db8e0','#bc9cdb','#d8b484','#82bfc0','#d49699','#a5bc80'];
+const palettes=['#e2ba73','#8ed4b1','#8db8e0','#bc9cdb','#8ed4b1','#e2ba73','#bc9cdb','#c9d88b'];
 function icon(ctx,index,x,y){
  ctx.save();ctx.translate(x,y);ctx.fillStyle=palettes[index];
  const pixel=(a,b,w=1,h=1)=>ctx.fillRect(a*4,b*4,w*4,h*4);
- if(index===0){pixel(-3,-2,2,2);pixel(-1,-2,2,2);pixel(-1,0,2,2);pixel(1,0,2,2);}
- else if(index===1){pixel(-4,-2,2,5);pixel(2,-2,2,5);pixel(-2,-1,4,3);pixel(-1,-4,2,4);}
+ if(index===0){for(const [a,b]of [[-4,0],[-2,0],[-2,-2],[1,0],[1,2],[3,2]])pixel(a,b,1.5,1.5);}
+ else if(index===1){pixel(-4,-1,8,3);pixel(-2,-3,4,2);pixel(1,-3,4,1);pixel(-3,2,2,1);pixel(2,2,2,1);}
  else if(index===2){pixel(-1,-4,2,8);pixel(-4,0,8,2);pixel(-2,3,4,1);}
- else if(index===3){pixel(-4,-3,8,6);ctx.fillStyle='#182532';pixel(-2,-1,4,2);ctx.fillStyle=palettes[index];pixel(0,-2,1,4);}
- else if(index===4){pixel(-4,-1,8,3);pixel(-2,-3,4,2);pixel(-3,2,2,1);pixel(2,2,2,1);}
- else if(index===5){pixel(-4,-3,3,3);pixel(1,0,3,3);pixel(-1,-1,3,1);pixel(0,0,1,2);}
- else if(index===6){pixel(-3,-2,6,5);pixel(-2,-4,4,2);ctx.fillStyle='#182532';pixel(-1,-1,2,2);}
- else{pixel(-4,2,3,1);pixel(1,-1,3,1);pixel(-1,-4,2,2);pixel(-2,-2,4,1);}
+ else if(index===3){pixel(-4,-3,8,6);ctx.fillStyle='#182532';pixel(-3,-2,6,4);ctx.fillStyle=palettes[index];pixel(-2,-1);pixel(-1,0);pixel(-2,1);pixel(1,1,2,1);}
+ else if(index===4){for(const [a,b]of [[-4,1],[-2,1],[0,1],[0,-1],[0,-3],[2,-3]])pixel(a,b,2,2);ctx.fillStyle='#182532';pixel(3,-3);}
+ else if(index===5){for(let row=0;row<3;row++)for(let col=0;col<4;col++)pixel(-4+col*2,-4+row*1.5,1.5,1);pixel(-2,3,4,1);pixel(0,1);}
+ else if(index===6){pixel(-3,-3,6,6);ctx.fillStyle='#182532';pixel(-2,-2,4,4);ctx.fillStyle=palettes[index];for(let i=-2;i<=1;i++)pixel(i,i);}
+ else if(index===7){pixel(-4,-3,8,6);ctx.fillStyle='#182532';pixel(-3,-2,6,4);ctx.fillStyle=palettes[index];pixel(-2,0,4,1);pixel(-2,-2,1,4);pixel(1,-2,1,4);pixel(-3,-1,2,2);pixel(2,1,2,2);}
  ctx.restore();
 }
 // Whole integer pixels: hood, face, both hands, torso, legs and feet.
@@ -31,32 +32,52 @@ function hacker(ctx,model,moving){
 function fallback(ctx){
  ctx.fillStyle='#233745';ctx.fillRect(0,0,1920,1280);ctx.fillStyle='#344a55';
  for(let x=0;x<1920;x+=80)for(let y=0;y<1280;y+=80)ctx.fillRect(x,y,76,76);
- for(let i=0;i<8;i++){const b=districtBuildings[i];ctx.fillStyle='#101c2b';ctx.fillRect(b.x+14,b.y+14,b.w,b.h);ctx.fillStyle=i%2?'#293447':'#263e4b';ctx.fillRect(b.x,b.y,b.w,b.h);ctx.fillStyle='#101d2b';ctx.fillRect(b.x+20,b.y+114,b.w-40,136);ctx.fillStyle='#4a616a';ctx.fillRect(b.x-8,b.y+b.h-8,b.w+16,8);ctx.fillStyle=palettes[i];ctx.fillRect(b.x,b.y,b.w,12);for(let j=0;j<5;j++)ctx.fillRect(b.x+28+j*56,b.y+44,24,28);}
+ for(let i=0;i<districtBuildings.length;i++){const b=districtBuildings[i];ctx.fillStyle='#101c2b';ctx.fillRect(b.x+14,b.y+14,b.w,b.h);ctx.fillStyle=i%2?'#293447':'#263e4b';ctx.fillRect(b.x,b.y,b.w,b.h);ctx.fillStyle='#101d2b';ctx.fillRect(b.x+20,b.y+114,b.w-40,136);ctx.fillStyle='#4a616a';ctx.fillRect(b.x-8,b.y+b.h-8,b.w+16,8);ctx.fillStyle=palettes[i];ctx.fillRect(b.x,b.y,b.w,12);for(let j=0;j<5;j++)ctx.fillRect(b.x+28+j*56,b.y+44,24,28);}
  ctx.fillStyle='#788681';for(let x=80;x<1920;x+=120){ctx.fillRect(x,580,48,4);ctx.fillRect(x,1140,48,4);}
 }
 export function mountDistrict(root,{text:t,shops,model={},onEnter}){
- const entries=shops.slice(0,8),doc=root.ownerDocument||document,win=doc.defaultView||window;
+ const entries=shops.slice(0,districtBuildings.length),doc=root.ownerDocument||document,win=doc.defaultView||window;
  Object.assign(model,districtPosition(model));model.facing=model.facing===-1?-1:1;model.walk=Number.isFinite(model.walk)?model.walk:0;model.roaming=model.roaming!==false;
  root.innerHTML=`<section class="pixel-district"><header><h2>${esc(t.title)}</h2><p>${esc(t.intro)}</p></header><canvas class="district-canvas" tabindex="0" role="img" aria-label="${esc(t.move+' '+t.enter)}" style="display:block;width:100%;touch-action:pan-y;outline-offset:4px"></canvas><p class="district-instructions">${esc(t.move)}</p><button type="button" class="district-roam" data-district-roam aria-pressed="${model.roaming}">${esc(model.roaming?t.manualWalk:t.autoWalk)}</button><p class="district-near" role="status" aria-live="polite"></p><nav class="district-shops sr-only" aria-label="${esc(t.shops)}">${entries.map((shop,index)=>`<button type="button" data-district-shop="${index}">${esc(shop.title)}</button>`).join('')}</nav></section>`;
  const canvas=root.querySelector('canvas'),ctx=canvas.getContext('2d'),status=root.querySelector('.district-near'),roamButton=root.querySelector('[data-district-roam]');
- let disposed=false,visible=true,raf=null,last=null,keys=new Set(),route=[],camera={x:0,y:0},viewport={width:1920,height:1280},scale=1,pixelRatio=1,near=-2,image=null,imageReady=false,observer=null,intersection=null,roamIndex=0;
- const stops=[0,4,1,5,2,6,3,7].map(i=>({x:districtBuildings[i].doorX,y:districtBuildings[i].doorY+40})).concat([{x:480,y:560},{x:960,y:1100},{x:1440,y:560}]);
+ let disposed=false,visible=true,raf=null,last=null,keys=new Set(),route=[],camera={x:0,y:0},viewport={width:1920,height:1280},scale=1,pixelRatio=1,near=-2,image=null,imageReady=false,signImage=null,signReady=false,observer=null,intersection=null,roamIndex=0;
+ const stops=[0,4,1,5,2,6,3,7].map(i=>({x:districtBuildings[i].doorX,y:districtBuildings[i].doorY+40}));
  function roaming(value){model.roaming=value;route=[];keys.clear();roamButton.textContent=value?t.manualWalk:t.autoWalk;roamButton.setAttribute('aria-pressed',String(value));}
  function enter(index){if(!disposed&&entries[index])onEnter(entries[index].id);}
  function draw(){
   if(disposed||!visible||!ctx)return;
   ctx.setTransform(pixelRatio,0,0,pixelRatio,0,0);ctx.clearRect(0,0,canvas.width/pixelRatio,canvas.height/pixelRatio);ctx.scale(scale,scale);ctx.translate(-camera.x,-camera.y);ctx.imageSmoothingEnabled=false;
   if(imageReady)ctx.drawImage(image,0,0,1920,1280);else fallback(ctx);
+  // Reuse the approved generated sign art as UI textures. The confirmed
+  // eight-store buildings, roads, lighting and background stay untouched.
+  if(imageReady){
+   for(const [index,dx,dy]of [[4,180,632],[5,520,632]]){
+    const x=dx*1.25,y=dy*1.25,w=155*1.25,h=80*1.25;ctx.fillStyle='#123039';ctx.fillRect(x,y,w,h);
+    if(signReady){const source=index===4?[222,244,180,92]:[688,244,160,92];ctx.drawImage(signImage,...source,x,y,w,h);}
+   }
+   ctx.drawImage(image,520,632,155,80,862*1.25,632*1.25,155*1.25,80*1.25);
+  }
   const current=districtNear(model,entries.length);
   for(let i=0;i<entries.length;i++){
    const b=districtBuildings[i],x=b.doorX,y=b.doorY;
    // Keep every approved coloured shop sign and doorway intact when art loads.
    if(!imageReady){icon(ctx,i,x,b.y+66);ctx.fillStyle='#101c2a';ctx.fillRect(x-23,y-60,46,60);ctx.fillStyle=palettes[i];ctx.fillRect(x-25,y-64,50,4);ctx.fillRect(x-27,y-64,4,64);ctx.fillRect(x+23,y-64,4,64);}
-   ctx.fillStyle='#0c1d2bdc';ctx.fillRect(x-145,y+24,290,entries[i].era?72:48);ctx.fillStyle=palettes[i];ctx.font='bold 22px system-ui, sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.direction=doc.documentElement?.dir==='rtl'?'rtl':'ltr';ctx.fillText(entries[i].title,x,y+48,274);
-   if(entries[i].era){ctx.font='14px system-ui, sans-serif';ctx.fillStyle='#d3d9d8';ctx.fillText(entries[i].era,x,y+78,274);}
    if(current===i){ctx.fillStyle='#ead39c';ctx.fillRect(x-22,y+12,44,4);ctx.fillRect(x-14,y+18,28,4);}
   }
   hacker(ctx,model,keys.size>0||route.length>0);
+  // Labels are interface text, not map pixels: keep readable CSS sizes while
+  // the world zooms, and align to full pixels to preserve every glyph stroke.
+  ctx.setTransform(pixelRatio,0,0,pixelRatio,0,0);ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.direction=doc.documentElement?.dir==='rtl'?'rtl':'ltr';
+  const viewW=canvas.width/pixelRatio,viewH=canvas.height/pixelRatio,display=win.getComputedStyle?.(root).getPropertyValue('--display').trim()||'system-ui';
+  for(let i=0;i<entries.length;i++){
+   const b=districtBuildings[i],sx=(b.doorX-camera.x)*scale,doorY=(b.doorY-camera.y)*scale;
+   if(sx<0||sx>viewW||doorY<0||doorY>viewH)continue;
+   const width=Math.min(viewW-16,Math.max(176,b.w*scale-24)),x=Math.round(Math.max(width/2+8,Math.min(viewW-width/2-8,sx))),height=entries[i].era?54:32,y=Math.round(Math.min(viewH-height-4,doorY+8));
+   ctx.fillStyle='#0b1a21ed';ctx.fillRect(Math.round(x-width/2),y,Math.round(width),height);ctx.fillStyle=palettes[i];ctx.font='18px '+display;
+   const measured=ctx.measureText(entries[i].title)?.width;if(measured>width-16){ctx.font='16px '+display;if(ctx.measureText(entries[i].title)?.width>width-16)ctx.font='14px '+display;}
+   ctx.fillText(entries[i].title,x,y+22);
+   if(entries[i].era){ctx.font='14px system-ui, sans-serif';ctx.fillStyle='#c7d7cf';ctx.fillText(entries[i].era,x,y+43);}
+  }
   if(current!==near){near=current;status.textContent=near>=0?t.near.replace('{name}',entries[near].title):'';}
  }
  function resize(){
@@ -98,13 +119,15 @@ export function mountDistrict(root,{text:t,shops,model={},onEnter}){
  }
  function loaded(){if(disposed)return;imageReady=image.naturalWidth>0;draw();}
  function failed(){imageReady=false;if(!disposed)draw();}
+ function signsLoaded(){if(disposed)return;signReady=signImage.naturalWidth>0;draw();}
+ function signsFailed(){signReady=false;if(!disposed)draw();}
  root.addEventListener('keydown',keydown);root.addEventListener('click',click);canvas.addEventListener('pointerdown',pointer);canvas.addEventListener('blur',clear);doc.addEventListener('keyup',keyup);doc.addEventListener('visibilitychange',visibility);win.addEventListener('blur',clear);
  if(win.ResizeObserver){observer=new win.ResizeObserver(resize);observer.observe(root);}else win.addEventListener('resize',resize);
  if(win.IntersectionObserver){intersection=new win.IntersectionObserver(intersectionChanged);intersection.observe(canvas);}
- if(win.Image){image=new win.Image();image.addEventListener('load',loaded);image.addEventListener('error',failed);image.src=backgroundUrl;}
- resize();schedule();
+ if(win.Image){image=new win.Image();image.addEventListener('load',loaded);image.addEventListener('error',failed);image.src=backgroundUrl;signImage=new win.Image();signImage.addEventListener('load',signsLoaded);signImage.addEventListener('error',signsFailed);signImage.src=signsUrl;}
+ resize();schedule();doc.fonts?.ready.then(()=>{if(!disposed)draw();});
  return {dispose(){
   if(disposed)return;disposed=true;if(raf!==null)win.cancelAnimationFrame(raf);raf=null;clear();observer?.disconnect();intersection?.disconnect();
-  root.removeEventListener('keydown',keydown);root.removeEventListener('click',click);canvas.removeEventListener('pointerdown',pointer);canvas.removeEventListener('blur',clear);doc.removeEventListener('keyup',keyup);doc.removeEventListener('visibilitychange',visibility);win.removeEventListener('blur',clear);if(!observer)win.removeEventListener('resize',resize);image?.removeEventListener('load',loaded);image?.removeEventListener('error',failed);
+  root.removeEventListener('keydown',keydown);root.removeEventListener('click',click);canvas.removeEventListener('pointerdown',pointer);canvas.removeEventListener('blur',clear);doc.removeEventListener('keyup',keyup);doc.removeEventListener('visibilitychange',visibility);win.removeEventListener('blur',clear);if(!observer)win.removeEventListener('resize',resize);image?.removeEventListener('load',loaded);image?.removeEventListener('error',failed);signImage?.removeEventListener('load',signsLoaded);signImage?.removeEventListener('error',signsFailed);
  }};
 }

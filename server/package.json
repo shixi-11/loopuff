@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node account-service.mjs",
-    "test": "node --test account-service.test.mjs progress-service.test.mjs"
+    "test": "node --test account-service.test.mjs progress-service.test.mjs arcade-store.test.mjs arcade-service.test.mjs"
   },
   "dependencies": {
     "better-auth": "1.7.12"

@@ -8,7 +8,7 @@ export function homeDestination(state,work){
  if(lessonWork(state,current)||completed.length||startProgress(work).length===6){
   return {view:'lesson',lessonId:lessonWork(state,current)?current:(course.find(item=>!completed.includes(item.id))||course.at(-1)).id,resumed:true};
  }
- return {view:'start',resumed:Object.keys(work).some(key=>key.startsWith('start-'))};
+ return {view:'start',resumed:Object.keys(work).some(key=>key.startsWith('start-')||key.startsWith('arcade-'))};
 }
 export function inspectHomeSignal(value){
  if(!/^\d{1,2}$/.test(value))return {ok:false};

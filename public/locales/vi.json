@@ -5,8 +5,8 @@
     "pilot": "BẮT ĐẦU TỪ CON SỐ KHÔNG",
     "hero": "Viết mã,\nđến những hành tinh xa hơn.",
     "lead": "Bắt đầu từ con số không. Hiểu mã, thử nghiệm và tự viết chương trình bằng Tolang.",
-    "start": "Bắt đầu hành trình ↗",
-    "resume": "Tiếp tục hành trình ↗",
+    "start": "Bắt đầu học lập trình ↗",
+    "resume": "Tiếp tục học ↗",
     "guide": "Lập trình là gì?",
     "map": "Hành trình",
     "language": "Ngôn ngữ",
@@ -840,11 +840,11 @@
   },
   "account": {
     "entry": "Đăng nhập / Đăng ký",
-    "eyebrow": "THẺ PHI CÔNG",
+    "eyebrow": "TÀI KHOẢN LOOPUFF",
     "loginTitle": "Chào mừng trở lại.",
-    "registerTitle": "Sẵn sàng cho hành trình mới.",
+    "registerTitle": "Tạo tài khoản Loopuff",
     "signed": "Tài khoản",
-    "intro": "Đăng nhập bằng email và mật khẩu, hoặc tạo tài khoản phi công.",
+    "intro": "Lưu điểm trò chơi, nhận Xu Sao và tự sao lưu hoặc khôi phục tiến độ học.",
     "login": "Đăng nhập",
     "register": "Đăng ký",
     "email": "Địa chỉ email",
@@ -1307,10 +1307,10 @@
     "arrows": "Các đường nối thể hiện thứ tự học gợi ý",
     "scroll": "Cuộn ngang để xem bản đồ. Bạn có thể mở mọi khái niệm mà không cần mở khóa theo thứ tự.",
     "lanes": [
-      "Gửi tín hiệu",
-      "Điều khiển hành động",
-      "Tổ chức chương trình",
-      "Phối hợp thông điệp"
+      "Giá trị và phép tính",
+      "Điều kiện và vòng lặp",
+      "Hàm và phản hồi",
+      "Thông điệp và phối hợp"
     ],
     "selected": "Khái niệm đang xem",
     "before": "Kiến thức nền tảng hữu ích",
@@ -1325,7 +1325,22 @@
     "run": "Chạy ví dụ",
     "ready": "Chạy chương trình này để xem kết quả đầu ra thực tế.",
     "error": "Chương trình chưa chạy xong",
-    "noOutput": "Chương trình đã chạy nhưng không có đầu ra."
+    "noOutput": "Chương trình đã chạy nhưng không có đầu ra.",
+    "nodes": {
+      "signal": "Xuất kết quả và gọi phương thức",
+      "addition": "Số nguyên và phép tính",
+      "names": "Tên và liên kết",
+      "leap": "Áp dụng: điều khiển hành động bằng số",
+      "comparison": "So sánh và giá trị luận lý",
+      "branch": "Rẽ nhánh có điều kiện",
+      "repeat": "Duyệt danh sách",
+      "counter": "Vòng lặp có điều kiện",
+      "function": "Hàm đồng bộ",
+      "reply": "Phản hồi và giá trị trả về",
+      "message": "Gửi và nhận",
+      "join": "Nhận kết hợp",
+      "coordination": "Áp dụng: kết hợp thông điệp và hàm"
+    }
   },
   "diagnostic": {
     "tag": "Thử viết một chương trình trước khi khởi hành",
@@ -2058,17 +2073,20 @@
     "games": [
       "Xếp khối",
       "Phòng thủ xe tăng",
-      "Tuần tra vũ trụ"
+      "Tuần tra vũ trụ",
+      "Rắn săn mồi",
+      "Phá gạch",
+      "Đẩy thùng"
     ],
     "select": "Chọn băng game",
-    "first": "Chạy hai dòng bên dưới: choose(1) chọn trò xếp khối, còn start() bắt đầu chơi. Sau đó thử thêm một lệnh di chuyển.",
+    "first": "Chọn băng game rồi chạy start(). Thêm một lệnh hành động và xem màn hình thay đổi ra sao.",
     "console": "Lệnh điều khiển Tolang của bạn",
     "run": "Chạy các lệnh này",
     "commands": "Tôi có thể viết gì?",
     "commandNote": "Các hàm trò chơi này do máy chơi game cung cấp. Gọi chúng bằng Tolang; màn hình sẽ thực hiện các lệnh theo thứ tự.",
-    "chooseNote": "1 chọn xếp khối, 2 chọn xe tăng, 3 chọn tuần tra vũ trụ. Chọn băng game sẽ chuẩn bị một ván mới.",
+    "chooseNote": "choose(1) đến choose(6) lần lượt chọn xếp khối, phòng thủ xe tăng, tuần tra vũ trụ, rắn săn mồi, phá gạch và đẩy thùng. Chọn băng game sẽ chuẩn bị một ván mới.",
     "lifecycleNote": "Bắt đầu hoặc tiếp tục; tạm dừng; kết thúc sớm ván hiện tại. Bắt đầu sau khi ván đã kết thúc sẽ tạo ván mới.",
-    "motionNote": "Dùng các hàm được liệt kê cho băng game này. Ví dụ, left(); left(); di chuyển hai lần.",
+    "motionNote": "Dùng các hàm được liệt kê cho băng game này. Trong phá gạch, fire() phóng bóng. Trong đẩy thùng, undo() hoàn tác một bước và restart() bắt đầu lại màn hiện tại.",
     "applied": "Đã nhận lệnh. Hãy xem màn hình thực hiện lần lượt.",
     "none": "Chương trình đã chạy nhưng không gửi lệnh trò chơi. Thử start() hoặc một hàm di chuyển.",
     "invalid": "Chương trình này chưa điều khiển được máy chơi game. Kiểm tra mã và các hàm có sẵn cho băng game này, sửa rồi chạy lại.",
@@ -2082,12 +2100,18 @@
     "inputNotes": [
       "x và y xác định vị trí khung 4 × 4 của khối hiện tại; targetX gợi ý cột cho hướng xoay hiện tại. danger là chiều cao chồng khối, từ 0 đến 20. Khung có thể vượt ra ngoài bảng nếu những ô nằm ngoài đều trống.",
       "x và y là vị trí xe tăng của bạn trên lưới. enemyX và enemyY xác định vị trí một kẻ địch, hoặc bằng -1 nếu không có. danger bằng 1 khi có đạn địch ở gần cần chú ý; health là số mạng còn lại.",
-      "x và y là vị trí phi thuyền của bạn theo pixel. enemyX và enemyY xác định vị trí một kẻ địch, hoặc bằng -1 nếu không có. danger bằng 1 khi có đạn địch ở gần cần chú ý; health là số mạng còn lại."
+      "x và y là vị trí phi thuyền của bạn theo pixel. enemyX và enemyY xác định vị trí một kẻ địch, hoặc bằng -1 nếu không có. danger bằng 1 khi có đạn địch ở gần cần chú ý; health là số mạng còn lại.",
+      "headX và headY là tọa độ đầu rắn trên lưới; foodX và foodY là tọa độ mồi, bằng -1 khi không có. direction là 1 trái, 2 phải, 3 lên, 4 xuống; nextDirection là hướng di chuyển tiếp theo. dangerLeft, dangerRight, dangerUp và dangerDown bằng 1 nếu hướng đó gây va chạm hoặc quay ngược bị cấm. length là độ dài, eaten là số mồi đã ăn, columns và rows là kích thước bảng. ready bằng 1 sau thời gian chuẩn bị; over và won cho biết ván đã kết thúc và đã thắng.",
+      "paddleX là tọa độ tâm thanh đỡ theo pixel, paddleHalf là nửa chiều rộng. ballX và ballY là tọa độ bóng theo pixel; ballVX và ballVY là vận tốc. attached bằng 1 khi bóng chờ phóng bằng fire(). lives là số mạng còn lại, remaining là số gạch còn lại, wave là đợt hiện tại.",
+      "playerX và playerY là tọa độ nhân vật trên lưới. up, right, down và left mô tả các ô bên cạnh: 0 sàn, 1 tường hoặc ngoài bảng, 2 đích, 3 thùng, 4 thùng trên đích. level là màn hiện tại; moves đếm bước di chuyển hợp lệ trong màn, pushes đếm lần đẩy, boxesOnGoals đếm thùng trên đích."
     ],
     "help": [
       "← → di chuyển · ↑ / A / Space xoay · B / X thả xuống ngay · ↓ hạ xuống. Lấp đầy một hàng để xóa hàng đó.",
       "Phím mũi tên để di chuyển · A / B / Space để bắn. Bảo vệ căn cứ, phá tường gạch và đánh bại từng đợt địch.",
-      "Phím mũi tên để di chuyển · A / B / Space để bắn. Né đạn và tiêu diệt từng đội hình."
+      "Phím mũi tên để di chuyển · A / B / Space để bắn. Né đạn và tiêu diệt từng đội hình.",
+      "Phím mũi tên để đổi hướng. Ăn mồi làm rắn dài hơn và nhanh hơn. Tránh tường và thân rắn; lấp đầy bảng để thắng.",
+      "← → di chuyển thanh đỡ; fire() phóng bóng. Giữ bóng trong sân và phá hết gạch.",
+      "Phím mũi tên để di chuyển và đẩy thùng. Đẩy mọi thùng vào ô đích; undo() hoàn tác một bước, restart() bắt đầu lại màn hiện tại."
     ],
     "start": "Bắt đầu / tiếp tục",
     "pause": "Tạm dừng",
@@ -2106,7 +2130,10 @@
     "short": [
       "Lấp đầy từng hàng để chừa chỗ cho khối tiếp theo.",
       "Bảo vệ căn cứ, phá tường gạch và tiêu diệt xe tăng địch.",
-      "Né đạn và tiêu diệt từng đợt máy bay địch."
+      "Né đạn và tiêu diệt từng đợt máy bay địch.",
+      "Ăn mồi để lớn lên và chừa chỗ cho lần rẽ tiếp theo.",
+      "Dùng thanh đỡ hứng bóng và phá hết gạch.",
+      "Sắp xếp các lượt đẩy để đưa mọi thùng vào ô đích."
     ]
   },
   "district": {
@@ -2118,5 +2145,175 @@
     "enter": "Vào trò chơi",
     "near": "{name} · Nhấn Enter để chơi",
     "shops": "Các cửa tiệm trong khu phố"
+  },
+  "leaderboard": {
+    "title": "Bảng xếp hạng",
+    "intro": "So sánh thành tích tốt nhất riêng cho từng trò chơi. Xu sao ghi nhận các thành tích học tập và chơi game chỉ được thưởng một lần.",
+    "nav": "Bảng xếp hạng",
+    "game": "Chọn trò chơi",
+    "rank": "Hạng",
+    "player": "Người chơi",
+    "score": "Điểm",
+    "time": "Thời gian",
+    "empty": "Trò chơi này chưa có điểm đã xác minh.",
+    "loading": "Đang tải bảng xếp hạng…",
+    "error": "Không tải được bảng xếp hạng.",
+    "retry": "Thử lại",
+    "login": "Đăng nhập để lưu điểm và xu sao.",
+    "signIn": "Đăng nhập",
+    "profile": "Hồ sơ của tôi",
+    "nickname": "Biệt danh",
+    "saveName": "Lưu biệt danh",
+    "coins": "Xu sao",
+    "achievements": "Thành tích",
+    "rulesTitle": "Quy tắc xu sao",
+    "rules": [
+      "Nhận 10 xu sao khi lần đầu vượt qua mỗi nhiệm vụ học tập độc lập.",
+      "Nhận 5 xu sao cho mỗi trò chơi khi lần đầu đạt điểm hợp lệ và chơi ít nhất 10 giây.",
+      "Nhận 20 xu sao cho chiến thắng đầu tiên trong mỗi trò chơi. Hoàn thành lại không nhận thêm xu."
+    ],
+    "verified": "Đã xác minh",
+    "startRanked": "Bắt đầu và ghi điểm",
+    "startGuest": "Chơi thử không cần tài khoản",
+    "recording": "Đang ghi điểm ván chơi",
+    "submitting": "Đang lưu điểm…",
+    "submitted": "Đã lưu điểm",
+    "practiceOnly": "Ván này chưa liên kết với tài khoản. Bạn vẫn có thể chơi tiếp.",
+    "finishSubmit": "Kết thúc và lưu điểm",
+    "invalid": "Điểm không vượt qua xác minh. Kỷ lục cũ được giữ nguyên.",
+    "nameSaved": "Đã lưu biệt danh",
+    "claimed": "Đã nhận",
+    "network": "Mạng hiện không khả dụng. Bạn vẫn có thể chơi tiếp.",
+    "yourBest": "Thành tích tốt nhất của bạn",
+    "publishNote": "Bảng xếp hạng hiển thị biệt danh, không công khai email.",
+    "noCoins": "Chưa có xu sao.",
+    "starting": "Đang chuẩn bị ván chơi có ghi điểm…",
+    "startError": "Không thể bắt đầu ván chơi có ghi điểm. Vui lòng thử lại.",
+    "recordLimit": "Ván này đã vượt giới hạn ghi nhận. Bạn có thể chơi tiếp mà không ghi điểm.",
+    "recordInvalid": "Bản ghi này không còn hợp lệ. Bạn có thể chơi tiếp mà không ghi điểm.",
+    "noSteps": "Bạn chưa chơi ván này. Chưa có điểm để lưu.",
+    "nicknameHint": "Dùng 2–24 ký tự: chữ cái, chữ số, khoảng trắng, dấu gạch dưới hoặc dấu gạch nối.",
+    "claimReward": "Nhận phần thưởng học tập",
+    "rewardSaving": "Đang lưu phần thưởng học tập…",
+    "rewardError": "Phần thưởng chưa được lưu. Vui lòng thử lại. Tiến độ học tập không bị ảnh hưởng."
+  },
+  "arcadeLearning": {
+    "title": "Từ lệnh đầu tiên đến điều khiển trò chơi bằng mã",
+    "intro": "Cho máy tính hiển thị một số, rồi dùng mã để chọn và điều khiển trò chơi trên máy cầm tay. Chạy từng bước, xem kết quả và thử cách viết của riêng bạn.",
+    "step": "Bài tập hiện tại",
+    "goal": "Mục tiêu của bước này",
+    "editor": "Mã Tolang của bạn",
+    "run": "Chạy và kiểm tra",
+    "hint": "Cho tôi một gợi ý",
+    "meaning": "Đoạn mã này hoạt động thế nào",
+    "reset": "Khôi phục mã ban đầu của bước này",
+    "confirmReset": "Xác nhận khôi phục",
+    "cancel": "Giữ mã của tôi",
+    "output": "Máy tính hiển thị",
+    "game": "Trò chơi sau khi chạy",
+    "before": "Trước khi chạy",
+    "after": "Sau khi chạy",
+    "actual": "Kết quả thực tế",
+    "expected": "Kết quả cần đạt",
+    "replay": "Xem lại quá trình chạy",
+    "case": "Thử đầu vào khác",
+    "passed": "Đã hoàn thành bước này. Đối chiếu mã với kết quả rồi tiếp tục.",
+    "needsWork": "Chưa đạt mục tiêu. Xem kết quả thực tế, sửa một chỗ rồi thử lại.",
+    "next": "Bước tiếp theo",
+    "saveError": "Chưa lưu được thay đổi của bạn. Hãy thử lưu lại trước khi tiếp tục.",
+    "saving": "Đang lưu bài làm…",
+    "continueCourse": "Học tiếp về hàm và thông điệp",
+    "play": "Tự do thử trên máy chơi game",
+    "complete": "Bạn đã dùng mã để chạy, đưa ra quyết định, chọn và điều khiển trò chơi. Hãy học tiếp hoặc thử viết chương trình riêng trên máy chơi game.",
+    "practice": "Đây là phần chạy thử để học. Nó không thay đổi ván bạn đang chơi và không gửi điểm lên bảng xếp hạng.",
+    "input": "Đầu vào lần này",
+    "state": "Trạng thái trò chơi",
+    "score": "Điểm",
+    "placed": "Số khối đã đặt",
+    "shots": "Số lần bắn",
+    "position": "Vị trí ngang",
+    "ready": "Sẵn sàng",
+    "running": "Đang chơi",
+    "ended": "Đã kết thúc",
+    "scope": "Máy chơi game cung cấp các hàm chọn trò chơi, di chuyển và bắn. Tolang diễn đạt thứ tự, điều kiện, vòng lặp và phép tính.",
+    "steps": {
+      "run": {
+        "title": "Cho máy tính hiển thị một số",
+        "goal": "Nhấn “Chạy và kiểm tra” để máy tính hiển thị 7.",
+        "meaning": "7 là số cần hiển thị. .log() đưa số đó vào vùng kết quả. Mã là tập hợp các lệnh máy tính có thể thực hiện.",
+        "hint": "Chạy lệnh 7.log() có sẵn rồi đối chiếu với kết quả bên phải."
+      },
+      "change": {
+        "title": "Đổi lệnh, đổi kết quả",
+        "goal": "Đổi 7 thành 9 rồi chạy lại để máy tính hiển thị 9.",
+        "meaning": "Máy tính thực hiện theo giá trị bạn viết. Sau khi sửa mã, bạn cần chạy lại để có kết quả mới.",
+        "hint": "Giữ .log() và chỉ đổi số đứng trước nó thành 9."
+      },
+      "repair": {
+        "title": "Đọc và sửa một lỗi nhỏ",
+        "goal": "Bổ sung phần còn thiếu để lệnh lại hiển thị 7.",
+        "meaning": "Dấu ngoặc và dấu câu cũng là một phần của mã. Thiếu một dấu ngoặc đóng sẽ khiến lệnh này không chạy được.",
+        "hint": "Kiểm tra cặp ngoặc sau .log và thêm dấu ) còn thiếu."
+      },
+      "calculate": {
+        "title": "Để máy tính làm phép tính",
+        "goal": "Viết một phép cộng để máy tính tính ra và hiển thị 11.",
+        "meaning": "Phép cộng trong ngoặc tạo ra kết quả, rồi .log() hiển thị kết quả đó. Phép tính phải thực sự tạo ra số 11.",
+        "hint": "Bạn có thể đổi 2 + 3 thành 4 + 7 hoặc chọn một cặp số khác có tổng bằng 11."
+      },
+      "name": {
+        "title": "Đặt tên cho một giá trị",
+        "goal": "Gắn một số với một tên, rồi dùng tên đó trong phép cộng để hiển thị 14.",
+        "meaning": "let gắn một tên với một giá trị. Khi dùng tên đó về sau, bạn đọc được giá trị ấy. Bạn có thể tự chọn tên.",
+        "hint": "Ví dụ, cho energy giữ giá trị 10 rồi hiển thị kết quả của energy + 4."
+      },
+      "score": {
+        "title": "Đưa ra quyết định theo điểm số",
+        "goal": "score là điểm đầu vào lần này. Hiển thị 1 nếu điểm từ 10 trở lên, nếu không thì hiển thị 0.",
+        "meaning": "if chọn một nhánh dựa trên điều kiện. Cùng một chương trình phải xử lý được 0, 9, 10, 12 và 20. Đúng 10 điểm cũng đạt mục tiêu.",
+        "hint": "Kiểm tra score > 9. Hiển thị 1 trong then khi điều kiện đúng, nếu không thì hiển thị 0 trong else."
+      },
+      "select": {
+        "title": "Dùng mã chọn trò chơi",
+        "goal": "Dùng mã chọn băng số 3, “Tuần tra vũ trụ”, và giữ trò chơi ở trạng thái sẵn sàng.",
+        "meaning": "choose(3) chọn trò chơi thứ 3 trên máy. Chọn và bắt đầu là hai việc riêng; bạn có thể chọn trước rồi quyết định lúc bắt đầu.",
+        "hint": "Đổi số trong choose(1) thành 3. Chưa viết start() ở bước này."
+      },
+      "control": {
+        "title": "Di chuyển rồi bắn theo thứ tự",
+        "goal": "Bắt đầu trò chơi xe tăng, di chuyển sang phải rồi bắn.",
+        "meaning": "Chương trình điều khiển trò chơi thật theo thứ tự lệnh. start() bắt đầu, right() di chuyển sang phải và fire() bắn.",
+        "hint": "Sau start(), lần lượt thêm right() rồi fire(), ngăn cách bằng dấu chấm phẩy hoặc xuống dòng."
+      },
+      "repeat": {
+        "title": "Lặp lại việc di chuyển bằng vòng lặp",
+        "goal": "Bắt đầu trò chơi xếp khối và dùng vòng lặp để đưa khối hiện tại sang phải 3 ô.",
+        "meaning": "Vòng lặp thực hiện lại các hành động trong cặp ngoặc nhọn. Vòng lặp phải thực sự tạo ra cả ba lần di chuyển; viết một vòng lặp không liên quan sẽ không đạt yêu cầu.",
+        "hint": "Bắt đầu trò chơi bằng start(), rồi thử for n in [1, 2, 3] { right() }."
+      },
+      "finish": {
+        "title": "Dùng mã kết thúc ván chơi",
+        "goal": "Trò chơi đang chạy. Dùng mã kết thúc ván này sớm.",
+        "meaning": "pause() chỉ tạm dừng để bạn có thể chơi tiếp. finish() kết thúc ván hiện tại.",
+        "hint": "Đổi pause() thành finish() và quan sát trạng thái trò chơi."
+      },
+      "strategy": {
+        "title": "Viết chiến lược tự động thả khối",
+        "goal": "Đưa khối về phía targetX rồi thả khi đã thẳng hàng. Cùng một chiến lược phải xử lý được mục tiêu ở cả bên trái lẫn bên phải.",
+        "meaning": "x là vị trí hiện tại của khối; targetX là vị trí được đề xuất lúc này. Máy chơi game liên tục đọc trạng thái mới và chạy chiến lược; điều kiện quyết định hành động tiếp theo.",
+        "hint": "Dùng right() khi x nhỏ hơn targetX, left() khi lớn hơn và drop() khi bằng nhau. Viết cả ba trường hợp bằng các nhánh điều kiện."
+      }
+    },
+    "strategyTitle": "Biến hiểu biết thành chiến lược chơi",
+    "strategyIntro": "Chọn một trò chơi, đọc trạng thái thực tế và để chương trình liên tục quyết định bước tiếp theo. Hoàn thành một mục tiêu nhỏ, rõ ràng trước, rồi cải thiện độ ổn định.",
+    "openStrategy": "Viết chiến lược và chơi thử",
+    "strategyGoals": [
+      "Dựa vào x và targetX để di chuyển, rồi thả khối khi đã thẳng hàng. Tiếp tục đặt khối qua các cách mở đầu khác nhau.",
+      "Dựa vào vị trí địch và danger để điều chỉnh di chuyển và bắn, bảo vệ căn cứ.",
+      "Đọc vị trí máy bay địch để di chuyển và bắn, rồi thêm điều kiện tránh đạn.",
+      "Kết hợp vị trí thức ăn với cảnh báo nguy hiểm ở bốn hướng. Đổi hướng an toàn trước, rồi tìm cách làm rắn dài hơn.",
+      "Dựa vào vị trí và vận tốc của bóng để di chuyển thanh đỡ. Đỡ bóng ổn định trước, rồi thử dự đoán điểm bóng rơi.",
+      "Đọc địa hình các ô bên cạnh và sắp xếp thứ tự đẩy thùng. Dùng undo() để xem lại sai sót rồi cải thiện chiến lược."
+    ]
   }
 }

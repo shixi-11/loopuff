@@ -8,6 +8,8 @@ import { betterAuth } from 'better-auth';
 import { getMigrations } from 'better-auth/db/migration';
 import {createProgressStore} from './progress-store.mjs';
 import {saveLimit,SaveError} from './save-format.mjs';
+import {createArcadeStore} from './arcade-store.mjs';
+import {createArcadeService,arcadePaths,arcadeBodyBytes} from './arcade-service.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const cookiePrefix = 'loopuff';
@@ -28,6 +30,8 @@ const allowedOrigins = [
   'https://loopuff.vercel.app',
   'http://localhost:8773',
   'http://127.0.0.1:8773',
+  'http://localhost:8775',
+  'http://127.0.0.1:8775',
 ];
 
 function failure(status, code) {
@@ -197,7 +201,7 @@ export async function createAccountService({ databasePath, secret, baseURL, fetc
     logger: { disabled: true },
   });
 
-  let progress;
+  let progress,arcadeStore;
   try {
     const migrations = await getMigrations(auth.options);
     await migrations.runMigrations();
@@ -209,6 +213,7 @@ export async function createAccountService({ databasePath, secret, baseURL, fetc
       PRIMARY KEY (bucket, key_hash)
     )`);
     progress=createProgressStore(db);
+    arcadeStore=createArcadeStore(db);
   } catch {
     db.close();
     throw failure(500, 'DATABASE_INIT_FAILED');
@@ -244,6 +249,12 @@ export async function createAccountService({ databasePath, secret, baseURL, fetc
   }
 
   const origins = originSet(resolvedBase.origin);
+  const handleArcade=createArcadeService({store:arcadeStore,origins,limiter,address:requestAddress,readJSON:parseLimitedJSON,respond:json,
+    session:async request=>{
+      const result=await auth.api.getSession({headers:request.headers,returnHeaders:true});
+      const session=result&&typeof result==='object'&&'response' in result?result.response:result;
+      return {userId:cleanUser(session?.user)?.id||null,cookies:setCookiesFrom(result?.headers)};
+    }});
   async function handleProgress(request){
     if(!['GET','POST'].includes(request.method))return json(405,{error:{code:'METHOD_NOT_ALLOWED'}});
     const origin=request.headers.get('origin');
@@ -270,6 +281,7 @@ export async function createAccountService({ databasePath, secret, baseURL, fetc
   const handler = async request => {
     if (!(request instanceof Request)) return json(400, { error: { code: 'INVALID_REQUEST' } });
     const url = new URL(request.url);
+    if(arcadePaths.has(url.pathname))return handleArcade(request);
     if(progressPaths.has(url.pathname))return handleProgress(request);
     if (request.method === 'GET' && ['/healthz', '/loopuff/healthz'].includes(url.pathname)) return json(200, { ok: true });
     if (request.method === 'GET' && ['/api/account', '/loopuff/api/account'].includes(url.pathname)) {
@@ -325,7 +337,7 @@ function nodeRequestToWeb(request) {
     else if (value !== undefined) headers.set(key, value);
   }
   const url = new URL(request.url || '/', 'http://127.0.0.1:8793');
-  const bodyLimit=progressPaths.has(url.pathname)?progressBodyBytes:maxBodyBytes;
+  const bodyLimit=arcadePaths.has(url.pathname)?arcadeBodyBytes:progressPaths.has(url.pathname)?progressBodyBytes:maxBodyBytes;
   if (request.method === 'GET' || request.method === 'HEAD') return new Request(url, { method: request.method, headers });
   return (async () => {
     const chunks = [];

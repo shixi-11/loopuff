@@ -70,11 +70,11 @@ test('invalid or oversized progress cannot replace an existing snapshot',async t
  const final=await (await request(service,'GET',null,a.cookies)).json();assert.equal(final.revision,1);assert.deepEqual(final.snapshot,emptySave());
 });
 test('saved progress and the same account session survive service restart',async t=>{
- const folder=await mkdtemp(join(tmpdir(),'loopuff-progress-'));t.after(()=>rm(folder,{recursive:true,force:true}));
+ const folder=await mkdtemp(join(tmpdir(),'loopuff-progress-'));
  const databasePath=join(folder,'accounts.sqlite');let service=await createAccountService({databasePath,baseURL,secret});
  const a=await account(service,'progress-persist'),snapshot=emptySave();snapshot.data.course={state:{completed:['signal']}};
  await request(service,'POST',{expectedAccountId:a.id,expectedRevision:0,snapshot},a.cookies);service.close();
- service=await createAccountService({databasePath,baseURL,secret});t.after(()=>service.close());
+ service=await createAccountService({databasePath,baseURL,secret});t.after(async()=>{service.close();await rm(folder,{recursive:true,force:true});});
  const response=await request(service,'GET',null,a.cookies);assert.equal(response.status,200);const result=await response.json();assert.equal(result.revision,1);assert.deepEqual(result.snapshot,snapshot);
 });
 

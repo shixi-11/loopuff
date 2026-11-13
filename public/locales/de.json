@@ -5,8 +5,8 @@
     "pilot": "KEINE VORKENNTNISSE NÖTIG",
     "hero": "Schreib Code.\nEntdecke ferne Planeten.",
     "lead": "Starte ohne Vorkenntnisse. Verstehe Code, experimentiere und schreibe eigene Programme in Tolang.",
-    "start": "Reise beginnen ↗",
-    "resume": "Reise fortsetzen ↗",
+    "start": "Programmieren lernen ↗",
+    "resume": "Weiterlernen ↗",
     "guide": "Was ist Programmieren?",
     "map": "Reiseroute",
     "language": "Sprache",
@@ -925,11 +925,11 @@
   },
   "account": {
     "entry": "Anmelden / Registrieren",
-    "eyebrow": "PILOTENPASS",
+    "eyebrow": "LOOPUFF-KONTO",
     "loginTitle": "Willkommen zurück.",
-    "registerTitle": "Dein nächstes Abenteuer wartet.",
+    "registerTitle": "Erstelle dein Loopuff-Konto",
     "signed": "Mein Konto",
-    "intro": "Melde dich mit E-Mail und Passwort an oder erstelle ein Pilotenkonto.",
+    "intro": "Speichere Spielstände in der Rangliste, sammle Sternmünzen und sichere oder übertrage deinen Lernfortschritt manuell.",
     "login": "Anmelden",
     "register": "Registrieren",
     "email": "E-Mail-Adresse",
@@ -1307,10 +1307,10 @@
     "arrows": "Verbindungen zeigen eine empfohlene Lernreihenfolge",
     "scroll": "Scrolle seitlich durch die Karte. Alle Konzepte sind frei zugänglich; du musst sie nicht der Reihe nach freischalten.",
     "lanes": [
-      "Ein Signal senden",
-      "Aktionen steuern",
-      "Programme strukturieren",
-      "Nachrichten koordinieren"
+      "Werte und Berechnungen",
+      "Bedingungen und Schleifen",
+      "Funktionen und Antworten",
+      "Nachrichten und Zusammenarbeit"
     ],
     "selected": "Dein Schwerpunkt",
     "before": "Hilfreiche Grundlagen",
@@ -1325,7 +1325,22 @@
     "run": "Beispiel ausführen",
     "ready": "Führe dieses Programm aus, um zu sehen, was es tatsächlich ausgibt.",
     "error": "Das Programm wurde nicht zu Ende ausgeführt",
-    "noOutput": "Das Programm wurde ohne Ausgabe ausgeführt."
+    "noOutput": "Das Programm wurde ohne Ausgabe ausgeführt.",
+    "nodes": {
+      "signal": "Ausgabe und Methodenaufrufe",
+      "addition": "Ganzzahlen und Berechnungen",
+      "names": "Namen und Bindungen",
+      "leap": "Anwendung: Aktionen mit Zahlen steuern",
+      "comparison": "Vergleiche und boolesche Werte",
+      "branch": "Bedingte Verzweigungen",
+      "repeat": "Eine Liste durchlaufen",
+      "counter": "Bedingte Schleifen",
+      "function": "Synchrone Funktionen",
+      "reply": "Antworten und Rückgaben",
+      "message": "Senden und Empfangen",
+      "join": "Gemeinsamer Empfang",
+      "coordination": "Anwendung: Nachrichten und Funktionen kombinieren"
+    }
   },
   "diagnostic": {
     "tag": "Probiere vor dem Start ein Programm aus",
@@ -2058,17 +2073,20 @@
     "games": [
       "Fallende Blöcke",
       "Panzerverteidigung",
-      "Sternenpatrouille"
+      "Sternenpatrouille",
+      "Schlange",
+      "Steinebrecher",
+      "Kisten schieben"
     ],
     "select": "Spielmodul wählen",
-    "first": "Führe die beiden Zeilen unten aus: choose(1) wählt das Blockspiel, start() startet es. Ergänze dann einen Bewegungsbefehl.",
+    "first": "Wähle ein Spielmodul und führe start() aus. Ergänze einen Aktionsbefehl und beobachte die Veränderung auf dem Bildschirm.",
     "console": "Deine Tolang-Steuerung",
     "run": "Diese Anweisungen ausführen",
     "commands": "Was kann ich schreiben?",
     "commandNote": "Diese Spielfunktionen stellt der Handheld bereit. Rufe sie mit Tolang auf; der Bildschirm führt die Anweisungen der Reihe nach aus.",
-    "chooseNote": "1 wählt Blöcke, 2 Panzer, 3 Sternenpatrouille. Die Auswahl eines Spielmoduls bereitet ein neues Spiel vor.",
+    "chooseNote": "choose(1) bis choose(6) wählen der Reihe nach fallende Blöcke, Panzerverteidigung, Sternenpatrouille, Schlange, Steinebrecher und Kistenschieben. Die Auswahl bereitet ein neues Spiel vor.",
     "lifecycleNote": "Starten oder fortsetzen; pausieren; das aktuelle Spiel vorzeitig beenden. Nach einem beendeten Spiel beginnt beim Starten eine neue Runde.",
-    "motionNote": "Verwende die hier gezeigten Funktionen für dieses Spielmodul. Zum Beispiel führt left(); left(); zwei Bewegungen aus.",
+    "motionNote": "Verwende die für dieses Spielmodul aufgeführten Funktionen. Beim Steinebrecher startet fire() den Ball. Beim Kistenschieben nimmt undo() einen Zug zurück; restart() setzt das aktuelle Rätsel zurück.",
     "applied": "Anweisungen empfangen. Sieh zu, wie sie auf dem Bildschirm der Reihe nach ausgeführt werden.",
     "none": "Das Programm lief, hat aber keine Spielanweisung gesendet. Versuche start() oder eine Bewegungsfunktion.",
     "invalid": "Dieses Programm konnte den Handheld nicht steuern. Prüfe den Code und die verfügbaren Funktionen dieses Spielmoduls, korrigiere ihn und führe ihn erneut aus.",
@@ -2082,12 +2100,18 @@
     "inputNotes": [
       "x und y geben die Position des 4 × 4 großen Rahmens des aktuellen Steins an; targetX schlägt eine Spalte für seine aktuelle Drehung vor. danger ist die Stapelhöhe von 0 bis 20. Der Rahmen darf über das Spielfeld hinausragen, wenn außerhalb nur leere Felder liegen.",
       "x und y sind die Rasterposition deines Panzers. enemyX und enemyY geben die Position eines Gegners an oder sind -1, wenn keiner vorhanden ist. danger ist 1, wenn ein nahes feindliches Geschoss Aufmerksamkeit erfordert; health sind deine verbleibenden Leben.",
-      "x und y sind die Pixelposition deines Schiffs. enemyX und enemyY geben die Position eines Gegners an oder sind -1, wenn keiner vorhanden ist. danger ist 1, wenn ein nahes feindliches Geschoss Aufmerksamkeit erfordert; health sind deine verbleibenden Leben."
+      "x und y sind die Pixelposition deines Schiffs. enemyX und enemyY geben die Position eines Gegners an oder sind -1, wenn keiner vorhanden ist. danger ist 1, wenn ein nahes feindliches Geschoss Aufmerksamkeit erfordert; health sind deine verbleibenden Leben.",
+      "headX und headY sind die Rasterposition des Kopfes; foodX und foodY geben die Futterposition an oder sind -1, wenn kein Futter vorhanden ist. direction bedeutet 1 links, 2 rechts, 3 oben, 4 unten; nextDirection ist die Richtung des nächsten Schritts. dangerLeft, dangerRight, dangerUp und dangerDown sind bei einer Kollision oder verbotenen Umkehr 1. length ist die Körperlänge, eaten die Anzahl gefressener Futterstücke, columns und rows die Spielfeldmaße. ready ist nach der Startpause 1; over und won zeigen Spielende und Sieg an.",
+      "paddleX ist die Schlägermitte in Pixeln, paddleHalf die halbe Breite. ballX und ballY geben die Ballposition in Pixeln an; ballVX und ballVY seine Geschwindigkeiten. attached ist 1, wenn der Ball auf den Start mit fire() wartet. lives sind verbleibende Leben, remaining verbleibende Steine und wave die aktuelle Welle.",
+      "playerX und playerY sind die Rasterposition der Figur. up, right, down und left beschreiben Nachbarfelder: 0 Boden, 1 Wand oder außerhalb, 2 Ziel, 3 Kiste, 4 Kiste auf einem Ziel. level ist das aktuelle Rätsel; moves zählt erfolgreiche Züge darin, pushes die Schübe und boxesOnGoals die Kisten auf Zielen."
     ],
     "help": [
       "← → bewegen · ↑ / A / Space drehen · B / X sofort fallen lassen · ↓ absenken. Fülle eine Reihe, um sie zu entfernen.",
       "Pfeiltasten bewegen · A / B / Space feuern. Schütze deine Basis, zerstöre Ziegelmauern und besiege die Gegnerwellen.",
-      "Pfeiltasten bewegen · A / B / Space feuern. Weiche anfliegenden Geschossen aus und besiege jede Formation."
+      "Pfeiltasten bewegen · A / B / Space feuern. Weiche anfliegenden Geschossen aus und besiege jede Formation.",
+      "Pfeiltasten ändern die Richtung. Futter macht die Schlange länger und schneller. Meide Wände und den eigenen Körper; fülle das Spielfeld, um zu gewinnen.",
+      "← → bewegen den Schläger; fire() startet den Ball. Halte den Ball im Spiel und räume alle Steine ab.",
+      "Pfeiltasten bewegen die Figur und schieben Kisten. Schiebe jede Kiste auf ein Ziel; undo() nimmt einen Zug zurück, restart() setzt das aktuelle Rätsel zurück."
     ],
     "start": "Starten / fortsetzen",
     "pause": "Pause",
@@ -2106,7 +2130,10 @@
     "short": [
       "Fülle ganze Reihen, um Platz für den nächsten Stein zu schaffen.",
       "Verteidige die Basis und zerstöre Ziegelmauern und feindliche Panzer.",
-      "Weiche dem Beschuss aus und besiege eine Welle feindlicher Flugzeuge nach der anderen."
+      "Weiche dem Beschuss aus und besiege eine Welle feindlicher Flugzeuge nach der anderen.",
+      "Sammle Futter und lass Platz für die nächste Kurve.",
+      "Fange den Ball mit dem Schläger und räume alle Steine ab.",
+      "Plane deine Schübe, damit jede Kiste ein Ziel erreicht."
     ]
   },
   "district": {
@@ -2118,5 +2145,175 @@
     "enter": "Spiel betreten",
     "near": "{name} · Zum Spielen Enter drücken",
     "shops": "Läden im Spieleviertel"
+  },
+  "leaderboard": {
+    "title": "Bestenliste",
+    "intro": "Vergleiche persönliche Bestleistungen für jedes Spiel getrennt. Sternmünzen halten einmalige Lern- und Spielerfolge fest.",
+    "nav": "Bestenliste",
+    "game": "Spiel wählen",
+    "rank": "Platz",
+    "player": "Spieler",
+    "score": "Punkte",
+    "time": "Zeit",
+    "empty": "Für dieses Spiel gibt es noch keine geprüften Ergebnisse.",
+    "loading": "Bestenliste wird geladen…",
+    "error": "Die Bestenliste konnte nicht geladen werden.",
+    "retry": "Erneut versuchen",
+    "login": "Melde dich an, um Punkte und Sternmünzen zu speichern.",
+    "signIn": "Anmelden",
+    "profile": "Mein Profil",
+    "nickname": "Spitzname",
+    "saveName": "Spitznamen speichern",
+    "coins": "Sternmünzen",
+    "achievements": "Erfolge",
+    "rulesTitle": "Regeln für Sternmünzen",
+    "rules": [
+      "Für das erstmalige Bestehen jeder eigenständigen Lernaufgabe erhältst du 10 Sternmünzen.",
+      "Pro Spiel erhältst du einmalig 5 Sternmünzen, wenn du gültige Punkte erzielst und mindestens 10 Sekunden spielst.",
+      "Für den ersten Sieg in jedem Spiel erhältst du 20 Sternmünzen. Wiederholte Erfolge bringen keine weiteren Münzen."
+    ],
+    "verified": "Geprüft",
+    "startRanked": "Starten und Punkte aufzeichnen",
+    "startGuest": "Als Gast spielen",
+    "recording": "Punkte werden aufgezeichnet",
+    "submitting": "Punkte werden gespeichert…",
+    "submitted": "Punkte gespeichert",
+    "practiceOnly": "Dieses Spiel ist mit keinem Konto verknüpft. Du kannst weiterspielen.",
+    "finishSubmit": "Beenden und Punkte speichern",
+    "invalid": "Die Punkte konnten nicht bestätigt werden. Dein bisheriger Rekord bleibt bestehen.",
+    "nameSaved": "Spitzname gespeichert",
+    "claimed": "Erhalten",
+    "network": "Das Netzwerk ist nicht verfügbar. Du kannst weiterspielen.",
+    "yourBest": "Deine Bestleistung",
+    "publishNote": "Die Bestenliste zeigt Spitznamen und keine E-Mail-Adressen.",
+    "noCoins": "Noch keine Sternmünzen.",
+    "starting": "Spiel mit Punkteaufzeichnung wird vorbereitet…",
+    "startError": "Das Spiel mit Punkteaufzeichnung konnte nicht gestartet werden. Bitte versuche es erneut.",
+    "recordLimit": "Die Aufzeichnungsdauer wurde überschritten. Du kannst ohne Aufzeichnung weiterspielen.",
+    "recordInvalid": "Diese Aufzeichnung ist nicht mehr gültig. Du kannst ohne Aufzeichnung weiterspielen.",
+    "noSteps": "Du hast noch nicht gespielt. Es gibt keine Punkte zu speichern.",
+    "nicknameHint": "Verwende 2–24 Zeichen: Buchstaben, Zahlen, Leerzeichen, Unterstriche oder Bindestriche.",
+    "claimReward": "Lernbelohnung abholen",
+    "rewardSaving": "Lernbelohnung wird gespeichert…",
+    "rewardError": "Die Belohnung wurde noch nicht gespeichert. Bitte versuche es erneut. Dein Lernfortschritt bleibt erhalten."
+  },
+  "arcadeLearning": {
+    "title": "Von der ersten Anweisung zum Spiel mit Code",
+    "intro": "Lass den Computer zuerst eine Zahl anzeigen. Wähle und steuere dann ein Spiel auf der Handheld-Konsole mit Code. Führe jeden Schritt aus, sieh dir das Ergebnis an und probiere eigene Änderungen.",
+    "step": "Aktuelle Übung",
+    "goal": "Dein Ziel",
+    "editor": "Dein Tolang-Code",
+    "run": "Ausführen und prüfen",
+    "hint": "Gib mir einen Tipp",
+    "meaning": "So funktioniert dieser Code",
+    "reset": "Startcode dieses Schritts wiederherstellen",
+    "confirmReset": "Wiederherstellung bestätigen",
+    "cancel": "Meinen Code behalten",
+    "output": "Der Computer zeigt an",
+    "game": "Spiel nach der Ausführung",
+    "before": "Vor der Ausführung",
+    "after": "Nach der Ausführung",
+    "actual": "Tatsächliches Ergebnis",
+    "expected": "Zielergebnis",
+    "replay": "Ausführung erneut ansehen",
+    "case": "Andere Eingabe ausprobieren",
+    "passed": "Schritt geschafft. Vergleiche deinen Code mit dem Ergebnis und mache dann weiter.",
+    "needsWork": "Das Ziel ist noch nicht erreicht. Sieh dir das tatsächliche Ergebnis an, ändere eine Sache und versuche es erneut.",
+    "next": "Nächster Schritt",
+    "saveError": "Deine Änderungen konnten nicht gespeichert werden. Versuche es vor dem Fortfahren erneut.",
+    "saving": "Übung wird gespeichert…",
+    "continueCourse": "Weiter mit Funktionen und Nachrichten",
+    "play": "Auf der Handheld-Konsole frei ausprobieren",
+    "complete": "Du hast mit Code ein Spiel ausgeführt, Entscheidungen getroffen, ein Spiel ausgewählt und gesteuert. Lerne weiter oder probiere dein eigenes Programm auf der Handheld-Konsole aus.",
+    "practice": "Dies ist eine Lernvorschau. Sie verändert dein laufendes Spiel nicht und trägt keine Punkte in die Bestenliste ein.",
+    "input": "Eingabe für diesen Durchlauf",
+    "state": "Spielzustand",
+    "score": "Punkte",
+    "placed": "Abgelegte Steine",
+    "shots": "Abgegebene Schüsse",
+    "position": "Horizontale Position",
+    "ready": "Bereit",
+    "running": "Spiel läuft",
+    "ended": "Beendet",
+    "scope": "Die Handheld-Konsole stellt Funktionen zum Auswählen, Bewegen und Feuern bereit. Tolang beschreibt ihre Reihenfolge sowie Bedingungen, Schleifen und Berechnungen.",
+    "steps": {
+      "run": {
+        "title": "Eine Zahl anzeigen lassen",
+        "goal": "Klicke auf „Ausführen und prüfen“, damit der Computer 7 anzeigt.",
+        "meaning": "7 ist der Wert, der angezeigt werden soll. .log() zeigt ihn im Ausgabebereich an. Code besteht aus ausführbaren Anweisungen.",
+        "hint": "Führe das vorhandene 7.log() aus und vergleiche es mit dem Ergebnis."
+      },
+      "change": {
+        "title": "Anderer Code, anderes Ergebnis",
+        "goal": "Ändere 7 in 9 und führe das Programm aus, damit es 9 anzeigt.",
+        "meaning": "Der Computer verwendet den Wert, den du schreibst. Nach einer Änderung musst du den Code erneut ausführen, um das neue Ergebnis zu sehen.",
+        "hint": "Behalte .log() bei und ändere nur die Zahl davor in 9."
+      },
+      "repair": {
+        "title": "Einen kleinen Fehler verstehen und beheben",
+        "goal": "Vervollständige die Anweisung, damit sie wieder 7 anzeigt.",
+        "meaning": "Klammern und Satzzeichen gehören zum Code. Fehlt eine schließende Klammer, kann der Computer diese Anweisung nicht ausführen.",
+        "hint": "Prüfe die beiden Klammern nach .log und ergänze die fehlende schließende Klammer )."
+      },
+      "calculate": {
+        "title": "Den Computer rechnen lassen",
+        "goal": "Schreibe eine Addition, die 11 berechnet und anzeigt.",
+        "meaning": "Die Addition in den Klammern liefert zuerst ein Ergebnis. .log() zeigt es dann an. Die Berechnung muss tatsächlich zur 11 führen.",
+        "hint": "Ändere zum Beispiel 2 + 3 in 4 + 7. Du kannst auch andere Zahlen wählen, deren Summe 11 ergibt."
+      },
+      "name": {
+        "title": "Einem Wert einen Namen geben",
+        "goal": "Binde eine Zahl an einen Namen und verwende diesen Namen in einer Addition, die 14 anzeigt.",
+        "meaning": "let bindet einen Namen an einen Wert. Verwendest du den Namen später, liest du damit den Wert. Den Namen kannst du selbst wählen.",
+        "hint": "Binde zum Beispiel energy an 10 und zeige dann das Ergebnis von energy + 4 an."
+      },
+      "score": {
+        "title": "Anhand der Punkte entscheiden",
+        "goal": "score ist die eingegebene Punktzahl. Zeige ab 10 Punkten 1 an, sonst 0.",
+        "meaning": "if wählt anhand einer Bedingung einen Zweig. Dasselbe Programm muss 0, 9, 10, 12 und 20 verarbeiten. Genau 10 Punkte erfüllen das Ziel ebenfalls.",
+        "hint": "Prüfe score > 9. Zeige im Zweig then die 1 an, sonst im Zweig else die 0."
+      },
+      "select": {
+        "title": "Ein Spiel mit Code auswählen",
+        "goal": "Wähle mit Code Spielmodul 3 „Sternenpatrouille“ und lass es zunächst im Zustand „Bereit“.",
+        "meaning": "choose(3) wählt das dritte Spiel der Handheld-Konsole. Ein Spiel auszuwählen und es zu starten sind zwei verschiedene Aktionen. Du entscheidest, wann es losgeht.",
+        "hint": "Ändere die Nummer in choose(1) in 3. Schreibe noch kein start()."
+      },
+      "control": {
+        "title": "Nacheinander bewegen und feuern",
+        "goal": "Starte das Panzerspiel, bewege dich nach rechts und feuere danach.",
+        "meaning": "Das Programm steuert das echte Spiel in der Reihenfolge deiner Anweisungen. start() startet es, right() bewegt nach rechts und fire() feuert.",
+        "hint": "Schreibe nach start() zuerst right() und dann fire(). Trenne die Anweisungen durch Semikolons oder Zeilenumbrüche."
+      },
+      "repeat": {
+        "title": "Bewegungen mit einer Schleife wiederholen",
+        "goal": "Starte das Blockspiel und bewege den aktuellen Stein mit einer Schleife drei Felder nach rechts.",
+        "meaning": "Eine Schleife wiederholt die Aktionen zwischen ihren geschweiften Klammern. Hier muss sie tatsächlich alle drei Bewegungen auslösen. Eine unbeteiligte Schleife zählt nicht.",
+        "hint": "Starte zuerst mit start() und probiere dann for n in [1, 2, 3] { right() }."
+      },
+      "finish": {
+        "title": "Ein Spiel mit Code beenden",
+        "goal": "Das Spiel läuft bereits. Beende diese Partie vorzeitig mit Code.",
+        "meaning": "pause() unterbricht die Partie, damit du später weiterspielen kannst. finish() beendet die aktuelle Partie.",
+        "hint": "Ersetze pause() durch finish() und beobachte den Spielzustand."
+      },
+      "strategy": {
+        "title": "Eine Strategie zum automatischen Ablegen schreiben",
+        "goal": "Bewege den Stein zu targetX und lass ihn erst fallen, wenn er ausgerichtet ist. Dieselbe Strategie muss Ziele links und rechts erreichen.",
+        "meaning": "x ist die aktuelle Position des Steins, targetX die vorgeschlagene Position. Die Handheld-Konsole liest fortlaufend den neuen Zustand und führt deine Strategie aus. Bedingungen bestimmen die nächste Aktion.",
+        "hint": "Ist x kleiner als targetX, verwende right(); ist es größer, left(); sind beide gleich, drop(). Schreibe für alle drei Fälle passende Bedingungen."
+      }
+    },
+    "strategyTitle": "Vom Verständnis zur Spielstrategie",
+    "strategyIntro": "Wähle ein Spiel, lies seinen tatsächlichen Zustand und lass dein Programm immer wieder die nächste Aktion bestimmen. Erreiche zuerst ein klares, kleines Ziel und mache deine Strategie dann verlässlicher.",
+    "openStrategy": "Strategie schreiben und spielen",
+    "strategyGoals": [
+      "Bewege den Stein mithilfe von x und targetX und lass ihn erst fallen, wenn er ausgerichtet ist. Platziere auch bei unterschiedlichen Spielstarts fortlaufend weitere Steine.",
+      "Nutze die Gegnerposition und danger, um Bewegung und Feuer anzupassen und die Basis zu schützen.",
+      "Lies die Positionen der feindlichen Flugzeuge aus, um dich zu bewegen und zu feuern. Ergänze dann Entscheidungen zum Ausweichen vor Geschossen.",
+      "Verbinde die Futterposition mit den vier Gefahrenanzeigen. Sorge zuerst für sichere Richtungswechsel und lass die Schlange dann weiter wachsen.",
+      "Bewege den Schläger anhand der Position und Geschwindigkeit des Balls. Fange ihn zuerst zuverlässig auf und versuche danach, seinen Auftreffpunkt vorherzusagen.",
+      "Lies die Beschaffenheit der Nachbarfelder aus und plane deine Schübe. Nutze undo(), um Fehler nachzuvollziehen und deine Strategie zu verbessern."
+    ]
   }
 }

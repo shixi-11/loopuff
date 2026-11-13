@@ -10,7 +10,7 @@
 }
 .chase-heading p {
   max-width: 65ch;
-  color: #adb9d2;
+  color: var(--ui-muted);
 }
 .chase-roles {
   display: flex;
@@ -23,9 +23,9 @@
   gap: 14px;
   min-width: 145px;
   padding: 8px 18px;
-  border: 1px solid #3c4d70;
-  background: #18243d;
-  color: #eef1fa;
+  border: 1px solid var(--ui-line);
+  background: var(--ui-panel);
+  color: var(--ui-ink);
   border-radius: 12px;
   text-align: start;
 }
@@ -41,19 +41,19 @@
 .chase-roles small {
   display: block;
   margin-top: 8px;
-  color: #adb9d2;
+  color: var(--ui-muted);
   font-weight: 400;
 }
 .chase-roles [aria-pressed=true] {
-  border-color: #c2d1fa;
-  background: #28385b;
+  border-color: var(--ui-ink);
+  background: var(--ui-panel-raised);
 }
 .chase-theatre {
-  border: 1px solid #405476;
+  border: 1px solid var(--ui-line);
   border-radius: 18px;
   overflow: hidden;
-  background: #101a2e;
-  box-shadow: 0 16px 55px #03081844;
+  background: var(--ui-deep);
+  box-shadow: 0 16px 55px color-mix(in srgb,var(--ui-space) 27%,transparent);
 }
 .chase-theatre > header {
   display: flex;
@@ -61,7 +61,7 @@
   justify-content: space-between;
   gap: 16px;
   padding: 16px 22px;
-  border-bottom: 1px solid #3a4b6a;
+  border-bottom: 1px solid var(--ui-line);
 }
 .chase-theatre h2 {
   font-size: 20px;
@@ -79,7 +79,7 @@
   gap: 8px;
 }
 .chase-legend dt {
-  color: #acbdd7;
+  color: var(--ui-muted);
 }
 .chase-legend dd {
   margin: 0;
@@ -88,7 +88,7 @@
 .chase-scene {
   position: relative;
   width: 100%;
-  background: #172642;
+  background: var(--ui-panel);
   outline-offset: -4px;
 }
 .chase-scene canvas {
@@ -101,8 +101,8 @@
   display: grid;
   place-items: center;
   margin: 0;
-  background: #101a2eee;
-  color: #dae3f3;
+  background: color-mix(in srgb,var(--ui-deep) 93%,transparent);
+  color: var(--ui-ink);
   padding: 24px;
   text-align: center;
 }
@@ -133,9 +133,9 @@
   align-items: center;
   gap: 8px;
   padding: 8px 12px;
-  border: 1px solid #547099;
-  background: #253753;
-  color: #e9edf5;
+  border: 1px solid var(--ui-line-active);
+  background: var(--ui-panel-raised);
+  color: var(--ui-ink);
   border-radius: 7px;
 }
 .chase-moves button:disabled {
@@ -147,14 +147,14 @@
   place-items: center;
   min-width: 21px;
   height: 23px;
-  border: 1px solid #93add2;
+  border: 1px solid var(--ui-muted);
   color: #f5d38d;
   border-radius: 4px;
   font: 700 12px ui-monospace, monospace;
 }
 .chase-controls-note {
   margin: 12px 22px;
-  color: #aebfd7;
+  color: var(--ui-muted);
   font-size: 13px;
   line-height: 1.7;
 }
@@ -176,8 +176,8 @@
 .chase-console,
 .chase-debrief {
   min-width: 0;
-  border: 1px solid #344263;
-  background: #141f38;
+  border: 1px solid var(--ui-panel-raised);
+  background: var(--ui-panel);
   border-radius: 18px;
   padding: 24px;
 }
@@ -197,10 +197,10 @@
 }
 .chase-console form > p,
 .chase-console small {
-  color: #adb9d2;
+  color: var(--ui-muted);
 }
 .chase-feedback {
-  border-inline-start: 2px solid #748bba;
+  border-inline-start: 2px solid var(--ui-line-active);
   padding-inline-start: 15px;
   overflow-wrap: anywhere;
   min-height: 84px;
@@ -215,7 +215,7 @@
   color: #edc88f;
 }
 .chase-feedback p {
-  color: #adb9d2;
+  color: var(--ui-muted);
 }
 .chase-page [data-chase-save] {
   color: #edc88f;
@@ -223,22 +223,22 @@
 .chase-trace {
   margin: 0 22px 20px;
   padding: 16px;
-  border: 1px solid #405476;
+  border: 1px solid var(--ui-line);
   border-radius: 10px;
-  background: #141f38;
+  background: var(--ui-panel);
 }
 .chase-trace[hidden] {
   display: none;
 }
 .chase-trace summary {
   cursor: pointer;
-  color: #e9edf5;
+  color: var(--ui-ink);
   font-weight: 650;
 }
 .chase-trace p,
 .chase-trace dt,
 .chase-trace small {
-  color: #adb9d2;
+  color: var(--ui-muted);
 }
 .chase-trace .dialog-actions {
   flex-wrap: wrap;
@@ -253,10 +253,10 @@
 }
 .chase-trace-list li {
   padding-block: 14px;
-  border-top: 1px solid #344263;
+  border-top: 1px solid var(--ui-panel-raised);
 }
 .chase-trace-list li[aria-current=step] > strong {
-  color: #c2d1fa;
+  color: var(--ui-ink);
 }
 .chase-trace-list dl {
   display: grid;
@@ -286,7 +286,7 @@
   height: 220px;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(#0b162733, #0b162711), url(./assets/chase-street.webp) center/cover;
+  background: linear-gradient(color-mix(in srgb,var(--ui-deep) 20%,transparent), color-mix(in srgb,var(--ui-deep) 7%,transparent)), url(./assets/chase-street.webp) center/cover;
 }
 .chase-card-art img {
   position: absolute;
@@ -294,7 +294,7 @@
   width: auto;
   bottom: 9%;
   object-fit: contain;
-  filter: drop-shadow(0 6px 4px #040b1344);
+  filter: drop-shadow(0 6px 4px color-mix(in srgb,var(--ui-space) 27%,transparent));
 }
 .chase-card-art img:first-child {
   left: 23%;

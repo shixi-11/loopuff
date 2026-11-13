@@ -8,17 +8,17 @@ Read code, predict its result, change it, and solve new problems without a templ
 
 [shixilin.com/games/loopuff](https://shixilin.com/games/loopuff/en/)
 
-[The Vault Run](https://shixilin.com/games/loopuff/en/play/vault/) adds three connected puzzles. Use numeric output to release locks, try variables and send signals in order. Fresh clues, saved drafts and three collectible stamps support another run.
+[Arcade district](https://shixilin.com/games/loopuff/en/play/) · [First steps](https://shixilin.com/games/loopuff/en/guide/start/) · [Advanced path](https://shixilin.com/games/loopuff/en/guide/advance/) · [Leaderboards](https://shixilin.com/games/loopuff/en/leaderboard/)
 
-[Starport Dispatch](https://shixilin.com/games/loopuff/en/play/dispatch/): Route cargo with conditions, loops, functions and cooperating messages. New rounds bring new dispatch data.
+Explore two rows of four shops: six games and two learning entrances. Play falling blocks, tank defence, a vertical shooter, Snake, brick breaking and box pushing. Use buttons to learn the controls, then call the handheld's functions from Tolang. Signed-in players can start a recorded run, save a verified score and earn one-time Star Coin achievements. Learning rewards are checked by the server; progress backups remain an explicit user action.
 
-[Bank infiltration](https://shixilin.com/games/loopuff/en/play/heist/): Write a strategy that reads the patrol and brings the case out. Every decision changes a continuous run.
+The beginner path has eleven runnable exercises: display a number, change it, repair an error, calculate, bind a name, check a score, choose a cartridge, move and fire in order, repeat a move, end a game and write an automatic block-placement strategy. The advanced path combines nine multi-input diagnostics, function and message examples, and strategy goals for all six games. Existing drafts and earlier exercises remain accessible.
 
 ## Current code
 
 Thirteen missions cover programming foundations, Tolang conditions, loops, functions and replies, then messages and joint receives. Each mission includes prediction, explanation, modification and an independent task; the original four also retain their flight exercises. The course and interface support 12 languages, in the same order as shixilin.com. Programs run locally in a bounded teaching interpreter, not the full Tolang compiler or TVM. Independent tasks check actual output and the requested concepts that contribute to it; typing speed does not affect grades.
 
-The playground includes a programmable pixel handheld with falling blocks, tank defence and a vertical shooter. Run `choose(1); start();` to select and start a cartridge; `pause()` and `finish()` control its lifecycle. The main console sends ordered commands. Automatic strategies alone receive a fresh game-state snapshot every 250 ms. These functions belong to the handheld host, rather than the Tolang standard library. The three new games keep their current round in this page session; course progress and existing game saves retain their established storage.
+The playground includes a programmable pixel handheld with falling blocks, tank defence, a vertical shooter, Snake, brick breaking and box pushing. Run `choose(1); start();` to select and start a cartridge; `pause()` and `finish()` control its lifecycle. The main console sends ordered commands. Automatic strategies alone receive a fresh game-state snapshot every 250 ms. These functions belong to the handheld host, rather than the Tolang standard library. The six games keep their current round in this page session; course progress and existing game saves retain their established storage.
 
 Independent challenges include a 100-point code assessment with execution, output and requirement feedback. Revise and resubmit; typing speed and matching an example do not affect the grade.
 

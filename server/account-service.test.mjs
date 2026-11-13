@@ -9,10 +9,12 @@ const secret = 'test-only-loopuff-auth-secret-0123456789abcdef';
 const baseURL = 'http://127.0.0.1:8773';
 const origin = 'http://localhost:8773';
 const credentials = { email: 'Pilot@example.com', password: 'Loopuff-test-password-2026' };
+const testServices = new WeakMap();
 
 async function makeService(t, databasePath, options = {}) {
   const service = await createAccountService({ databasePath, secret, baseURL, ...options });
-  t.after(() => service.close());
+  const services=testServices.get(t)||[];
+  services.push(service);testServices.set(t,services);
   return service;
 }
 
@@ -30,7 +32,10 @@ function cookiesFrom(response) {
 
 async function tempDatabase(t) {
   const directory = await mkdtemp(join(tmpdir(), 'loopuff-account-'));
-  t.after(() => rm(directory, { recursive: true, force: true }));
+  t.after(async () => {
+    for(const service of testServices.get(t)||[])service.close();
+    await rm(directory, { recursive: true, force: true });
+  });
   return join(directory, 'accounts.sqlite');
 }
 

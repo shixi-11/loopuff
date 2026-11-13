@@ -5,8 +5,8 @@
     "pilot": "NO NECESITAS EXPERIENCIA",
     "hero": "Escribe código.\nLlega a nuevos planetas.",
     "lead": "Empieza desde cero. Comprende el código, experimenta y escribe tus propios programas en Tolang.",
-    "start": "Comenzar el viaje ↗",
-    "resume": "Continuar el viaje ↗",
+    "start": "Aprender a programar ↗",
+    "resume": "Seguir aprendiendo ↗",
     "guide": "¿Qué es programar?",
     "map": "Tu ruta",
     "language": "Idioma",
@@ -925,11 +925,11 @@
   },
   "account": {
     "entry": "Entrar / Registrarse",
-    "eyebrow": "PASE DE PILOTO",
+    "eyebrow": "CUENTA DE LOOPUFF",
     "loginTitle": "Te damos la bienvenida de nuevo.",
-    "registerTitle": "Tu próxima aventura te espera.",
+    "registerTitle": "Crea tu cuenta de Loopuff",
     "signed": "Mi cuenta",
-    "intro": "Entra con tu correo y contraseña o crea una cuenta de piloto.",
+    "intro": "Guarda tus puntuaciones, consigue Monedas estelares y haz copias de seguridad de tu progreso para restaurarlas cuando quieras.",
     "login": "Entrar",
     "register": "Registrarse",
     "email": "Correo electrónico",
@@ -1307,10 +1307,10 @@
     "arrows": "Las conexiones muestran un orden de aprendizaje sugerido",
     "scroll": "Desplázate horizontalmente por el mapa. Todos los conceptos están disponibles; no tienes que desbloquearlos en orden.",
     "lanes": [
-      "Enviar una señal",
-      "Controlar acciones",
-      "Organizar programas",
-      "Coordinar mensajes"
+      "Valores y cálculos",
+      "Condiciones y bucles",
+      "Funciones y respuestas",
+      "Mensajes y colaboración"
     ],
     "selected": "Tu foco de atención",
     "before": "Fundamentos útiles",
@@ -1325,7 +1325,22 @@
     "run": "Ejecutar ejemplo",
     "ready": "Ejecuta este programa para ver qué salida produce realmente.",
     "error": "El programa no terminó de ejecutarse",
-    "noOutput": "El programa se ejecutó sin producir ninguna salida."
+    "noOutput": "El programa se ejecutó sin producir ninguna salida.",
+    "nodes": {
+      "signal": "Salida y llamadas a métodos",
+      "addition": "Enteros y cálculos",
+      "names": "Nombres y vinculaciones",
+      "leap": "Aplicación: controlar acciones con números",
+      "comparison": "Comparaciones y booleanos",
+      "branch": "Ramas condicionales",
+      "repeat": "Recorrer una lista",
+      "counter": "Bucles condicionales",
+      "function": "Funciones síncronas",
+      "reply": "Respuestas y retornos",
+      "message": "Envío y recepción",
+      "join": "Recepción conjunta",
+      "coordination": "Aplicación: combinar mensajes y funciones"
+    }
   },
   "diagnostic": {
     "tag": "Prueba un programa antes de empezar",
@@ -2058,17 +2073,20 @@
     "games": [
       "Bloques en caída",
       "Defensa de tanques",
-      "Patrulla estelar"
+      "Patrulla estelar",
+      "Serpiente",
+      "Rompebloques",
+      "Empuja cajas"
     ],
     "select": "Elegir un cartucho",
-    "first": "Ejecuta las dos líneas de abajo: choose(1) selecciona el juego de bloques y start() inicia la partida. Después, prueba a añadir una orden de movimiento.",
+    "first": "Elige un cartucho y ejecuta start(). Añade una orden de acción y observa qué cambia en la pantalla.",
     "console": "Tus controles en Tolang",
     "run": "Ejecutar estas instrucciones",
     "commands": "¿Qué puedo escribir?",
     "commandNote": "La consola proporciona estas funciones de juego. Llámalas con Tolang; la pantalla ejecutará las instrucciones en orden.",
-    "chooseNote": "1 selecciona bloques, 2 tanques y 3 patrulla estelar. Elegir un cartucho prepara una partida nueva.",
+    "chooseNote": "choose(1) a choose(6) seleccionan, en orden, bloques en caída, defensa de tanques, patrulla estelar, serpiente, rompebloques y empuja cajas. Elegir un cartucho prepara una partida nueva.",
     "lifecycleNote": "Iniciar o reanudar; pausar; terminar la partida actual antes de tiempo. Iniciar tras una partida terminada crea una ronda nueva.",
-    "motionNote": "Usa las funciones que se muestran para este cartucho. Por ejemplo, left(); left(); realiza dos movimientos.",
+    "motionNote": "Usa las funciones indicadas para este cartucho. En rompebloques, fire() lanza la pelota. En empuja cajas, undo() deshace un movimiento y restart() reinicia el puzle actual.",
     "applied": "Instrucciones recibidas. Observa cómo la pantalla las ejecuta en orden.",
     "none": "El programa se ejecutó sin enviar instrucciones de juego. Prueba start() o una función de movimiento.",
     "invalid": "Este programa no pudo controlar la consola. Revisa el código y las funciones disponibles para este cartucho; corrígelo y vuelve a ejecutarlo.",
@@ -2082,12 +2100,18 @@
     "inputNotes": [
       "x e y indican la posición del marco de 4 × 4 de la pieza actual; targetX sugiere una columna para su rotación actual. danger es la altura de la pila, de 0 a 20. El marco puede sobresalir del tablero si las celdas que quedan fuera están vacías.",
       "x e y son la posición de tu tanque en la cuadrícula. enemyX y enemyY indican la posición de un enemigo, o valen -1 si no hay ninguno. danger vale 1 cuando una bala enemiga cercana requiere atención; health son las vidas restantes.",
-      "x e y son la posición de tu nave en píxeles. enemyX y enemyY indican la posición de un enemigo, o valen -1 si no hay ninguno. danger vale 1 cuando una bala enemiga cercana requiere atención; health son las vidas restantes."
+      "x e y son la posición de tu nave en píxeles. enemyX y enemyY indican la posición de un enemigo, o valen -1 si no hay ninguno. danger vale 1 cuando una bala enemiga cercana requiere atención; health son las vidas restantes.",
+      "headX y headY sitúan la cabeza en la cuadrícula; foodX y foodY sitúan la comida, o valen -1 si no hay. direction indica 1 izquierda, 2 derecha, 3 arriba o 4 abajo; nextDirection es la dirección del siguiente movimiento. dangerLeft, dangerRight, dangerUp y dangerDown valen 1 si habría una colisión o un giro inverso prohibido. length es la longitud, eaten la comida recogida, y columns y rows las dimensiones del tablero. ready vale 1 al terminar la pausa inicial; over y won indican fin de partida y victoria.",
+      "paddleX es el centro de la paleta en píxeles y paddleHalf es la mitad de su ancho. ballX y ballY sitúan la pelota en píxeles; ballVX y ballVY son sus velocidades. attached vale 1 cuando la pelota espera el lanzamiento con fire(). lives son las vidas restantes, remaining los bloques restantes y wave la oleada actual.",
+      "playerX y playerY sitúan al personaje en la cuadrícula. up, right, down y left describen las casillas vecinas: 0 suelo, 1 pared o exterior, 2 meta, 3 caja, 4 caja en una meta. level es el puzle actual; moves cuenta sus movimientos válidos, pushes los empujes y boxesOnGoals las cajas en metas."
     ],
     "help": [
       "← → mover · ↑ / A / Space girar · B / X dejar caer · ↓ bajar. Completa una fila para eliminarla.",
       "Flechas para mover · A / B / Space para disparar. Protege tu base, rompe los muros de ladrillo y derrota las oleadas enemigas.",
-      "Flechas para mover · A / B / Space para disparar. Esquiva los proyectiles y elimina cada formación."
+      "Flechas para mover · A / B / Space para disparar. Esquiva los proyectiles y elimina cada formación.",
+      "Las flechas cambian la dirección. La comida alarga y acelera la serpiente. Evita las paredes y tu cuerpo; llena el tablero para ganar.",
+      "← → mueven la paleta; fire() lanza la pelota. Mantenla en juego y elimina todos los bloques.",
+      "Las flechas mueven al personaje y empujan cajas. Lleva cada caja a una meta; undo() deshace un movimiento y restart() reinicia el puzle actual."
     ],
     "start": "Iniciar / reanudar",
     "pause": "Pausar",
@@ -2106,7 +2130,10 @@
     "short": [
       "Completa filas para dejar espacio a la siguiente pieza.",
       "Defiende la base y destruye muros de ladrillo y tanques enemigos.",
-      "Esquiva los disparos y elimina oleadas de formaciones aéreas enemigas."
+      "Esquiva los disparos y elimina oleadas de formaciones aéreas enemigas.",
+      "Come para crecer y deja espacio para el siguiente giro.",
+      "Devuelve la pelota con la paleta y elimina todos los bloques.",
+      "Planifica los empujes para llevar cada caja a una meta."
     ]
   },
   "district": {
@@ -2118,5 +2145,175 @@
     "enter": "Entrar al juego",
     "near": "{name} · Pulsa Enter para jugar",
     "shops": "Tiendas del barrio"
+  },
+  "leaderboard": {
+    "title": "Clasificación",
+    "intro": "Compara los mejores resultados de cada juego por separado. Las monedas estelares registran logros únicos de aprendizaje y juego.",
+    "nav": "Clasificación",
+    "game": "Elegir juego",
+    "rank": "Puesto",
+    "player": "Jugador",
+    "score": "Puntuación",
+    "time": "Tiempo",
+    "empty": "Todavía no hay puntuaciones verificadas para este juego.",
+    "loading": "Cargando clasificación…",
+    "error": "No se ha podido cargar la clasificación.",
+    "retry": "Reintentar",
+    "login": "Inicia sesión para guardar puntuaciones y monedas estelares.",
+    "signIn": "Iniciar sesión",
+    "profile": "Mi perfil",
+    "nickname": "Apodo",
+    "saveName": "Guardar apodo",
+    "coins": "Monedas estelares",
+    "achievements": "Logros",
+    "rulesTitle": "Reglas de las monedas estelares",
+    "rules": [
+      "Gana 10 monedas estelares la primera vez que superes cada tarea de aprendizaje independiente.",
+      "Gana 5 monedas estelares por juego la primera vez que obtengas una puntuación válida y juegues durante al menos 10 segundos.",
+      "Gana 20 monedas estelares por tu primera victoria en cada juego. Repetir un logro no otorga más monedas."
+    ],
+    "verified": "Verificada",
+    "startRanked": "Empezar y registrar puntuación",
+    "startGuest": "Jugar como invitado",
+    "recording": "Registrando puntuación",
+    "submitting": "Guardando puntuación…",
+    "submitted": "Puntuación guardada",
+    "practiceOnly": "Esta partida no está vinculada a una cuenta. Puedes seguir jugando.",
+    "finishSubmit": "Terminar y guardar puntuación",
+    "invalid": "La puntuación no ha superado la verificación. Se conserva tu récord anterior.",
+    "nameSaved": "Apodo guardado",
+    "claimed": "Recibido",
+    "network": "La red no está disponible. Puedes seguir jugando.",
+    "yourBest": "Tu mejor puntuación",
+    "publishNote": "La clasificación muestra apodos, nunca direcciones de correo.",
+    "noCoins": "Aún no tienes monedas estelares.",
+    "starting": "Preparando una partida con registro…",
+    "startError": "No se ha podido iniciar una partida con registro. Vuelve a intentarlo.",
+    "recordLimit": "La partida ha superado el límite de registro. Puedes seguir jugando sin registrar la puntuación.",
+    "recordInvalid": "Este registro ya no es válido. Puedes seguir jugando sin registrar la puntuación.",
+    "noSteps": "Todavía no has jugado esta partida. No hay puntuación que guardar.",
+    "nicknameHint": "Usa entre 2 y 24 caracteres: letras, números, espacios, guiones bajos o guiones.",
+    "claimReward": "Recibir recompensa de aprendizaje",
+    "rewardSaving": "Guardando recompensa de aprendizaje…",
+    "rewardError": "La recompensa aún no se ha guardado. Vuelve a intentarlo. Tu progreso de aprendizaje no se ve afectado."
+  },
+  "arcadeLearning": {
+    "title": "De tu primera instrucción a controlar un juego",
+    "intro": "Primero haz que el ordenador muestre un número. Después, usa código para elegir y controlar un juego en la consola portátil. Ejecuta cada paso, observa el resultado y prueba tus propios cambios.",
+    "step": "Ejercicio actual",
+    "goal": "Tu objetivo",
+    "editor": "Tu código Tolang",
+    "run": "Ejecutar y comprobar",
+    "hint": "Dame una pista",
+    "meaning": "Cómo funciona este código",
+    "reset": "Restaurar el código inicial de este paso",
+    "confirmReset": "Confirmar restauración",
+    "cancel": "Conservar mi código",
+    "output": "El ordenador muestra",
+    "game": "Juego después de ejecutar",
+    "before": "Antes de ejecutar",
+    "after": "Después de ejecutar",
+    "actual": "Resultado real",
+    "expected": "Resultado objetivo",
+    "replay": "Volver a ver la ejecución",
+    "case": "Probar otra entrada",
+    "passed": "Paso completado. Compara tu código con el resultado y continúa.",
+    "needsWork": "Todavía no se ha alcanzado el objetivo. Observa el resultado real, cambia una cosa y vuelve a intentarlo.",
+    "next": "Siguiente paso",
+    "saveError": "No se han podido guardar tus cambios. Vuelve a intentarlo antes de continuar.",
+    "saving": "Guardando tu trabajo…",
+    "continueCourse": "Continuar con funciones y mensajes",
+    "play": "Probar libremente en la consola portátil",
+    "complete": "Has usado código para ejecutar, decidir, elegir y controlar un juego. Sigue aprendiendo o prueba tu propio programa en la consola portátil.",
+    "practice": "Esta es una vista previa de aprendizaje. No modifica tu partida actual ni envía puntuaciones a la clasificación.",
+    "input": "Entrada de esta ejecución",
+    "state": "Estado del juego",
+    "score": "Puntuación",
+    "placed": "Piezas colocadas",
+    "shots": "Disparos realizados",
+    "position": "Posición horizontal",
+    "ready": "Listo",
+    "running": "En curso",
+    "ended": "Finalizado",
+    "scope": "La consola portátil proporciona funciones para elegir juegos, moverse y disparar. Tolang expresa su orden, las condiciones, los bucles y los cálculos.",
+    "steps": {
+      "run": {
+        "title": "Haz que el ordenador muestre un número",
+        "goal": "Pulsa «Ejecutar y comprobar» para que el ordenador muestre 7.",
+        "meaning": "7 es el valor que se mostrará. .log() lo muestra en la zona de salida. El código es un conjunto de instrucciones que se pueden ejecutar.",
+        "hint": "Ejecuta el 7.log() que ya está escrito y compáralo con el resultado."
+      },
+      "change": {
+        "title": "Cambia el código y cambia el resultado",
+        "goal": "Cambia 7 por 9 y ejecuta el programa para mostrar 9.",
+        "meaning": "El ordenador usa el valor que escribes. Después de editar el código, debes ejecutarlo otra vez para obtener el nuevo resultado.",
+        "hint": "Conserva .log() y cambia solo el número que aparece delante por 9."
+      },
+      "repair": {
+        "title": "Entiende y corrige un pequeño error",
+        "goal": "Completa la instrucción para que vuelva a mostrar 7.",
+        "meaning": "Los paréntesis y los signos también forman parte del código. Si falta un paréntesis de cierre, el ordenador no puede ejecutar esta instrucción.",
+        "hint": "Comprueba los dos paréntesis después de .log y añade el paréntesis ) que falta."
+      },
+      "calculate": {
+        "title": "Deja que el ordenador calcule",
+        "goal": "Escribe una suma que calcule y muestre 11.",
+        "meaning": "La suma entre paréntesis produce primero un resultado y .log() lo muestra. El cálculo debe contribuir de verdad a obtener 11.",
+        "hint": "Puedes cambiar 2 + 3 por 4 + 7 o elegir otros números cuya suma sea 11."
+      },
+      "name": {
+        "title": "Da un nombre a un valor",
+        "goal": "Asocia un número a un nombre y usa ese nombre en una suma para mostrar 14.",
+        "meaning": "let asocia un nombre a un valor. Si usas ese nombre después, lees el valor. Puedes elegir el nombre.",
+        "hint": "Por ejemplo, asocia energy a 10 y muestra el resultado de energy + 4."
+      },
+      "score": {
+        "title": "Decide según la puntuación",
+        "goal": "score es la puntuación de entrada. Muestra 1 si alcanza 10 puntos; si no, muestra 0.",
+        "meaning": "if elige una rama según una condición. El mismo programa debe funcionar con 0, 9, 10, 12 y 20. Exactamente 10 puntos también cumplen el objetivo.",
+        "hint": "Comprueba score > 9. Muestra 1 en then y, en caso contrario, 0 en else."
+      },
+      "select": {
+        "title": "Elige un juego con código",
+        "goal": "Selecciona con código el cartucho 3, «Patrulla estelar», y déjalo listo sin iniciarlo.",
+        "meaning": "choose(3) elige el tercer juego de la consola portátil. Elegir un juego e iniciarlo son acciones distintas: tú decides cuándo empezar.",
+        "hint": "Cambia el número de choose(1) por 3. Todavía no escribas start()."
+      },
+      "control": {
+        "title": "Muévete y dispara en orden",
+        "goal": "Inicia el juego de tanques, muévete a la derecha y después dispara.",
+        "meaning": "El programa controla el juego real siguiendo el orden de las instrucciones. start() lo inicia, right() mueve a la derecha y fire() dispara.",
+        "hint": "Después de start(), añade primero right() y luego fire(). Separa las instrucciones con punto y coma o saltos de línea."
+      },
+      "repeat": {
+        "title": "Repite movimientos con un bucle",
+        "goal": "Inicia el juego de bloques y usa un bucle para mover la pieza actual tres casillas a la derecha.",
+        "meaning": "Un bucle repite las acciones entre sus llaves. Debe producir de verdad los tres movimientos; un bucle que no intervenga en ellos no cuenta.",
+        "hint": "Empieza con start() y prueba for n in [1, 2, 3] { right() }."
+      },
+      "finish": {
+        "title": "Termina una partida con código",
+        "goal": "El juego ya está en marcha. Termina esta partida antes de tiempo con código.",
+        "meaning": "pause() pausa la partida para poder continuar después. finish() termina la partida actual.",
+        "hint": "Cambia pause() por finish() y observa el estado del juego."
+      },
+      "strategy": {
+        "title": "Escribe una estrategia automática para los bloques",
+        "goal": "Mueve la pieza hacia targetX y déjala caer cuando esté alineada. La misma estrategia debe funcionar con objetivos a la izquierda y a la derecha.",
+        "meaning": "x es la posición actual de la pieza y targetX la posición sugerida. La consola portátil lee el estado actualizado y ejecuta tu estrategia continuamente. Las condiciones deciden la siguiente acción.",
+        "hint": "Usa right() si x es menor que targetX, left() si es mayor y drop() si son iguales. Expresa los tres casos con condiciones."
+      }
+    },
+    "strategyTitle": "Convierte lo aprendido en una estrategia de juego",
+    "strategyIntro": "Elige un juego, lee su estado real y deja que tu programa decida el siguiente paso una y otra vez. Alcanza primero un objetivo pequeño y claro, y después mejora la constancia.",
+    "openStrategy": "Escribir una estrategia y jugar",
+    "strategyGoals": [
+      "Mueve la pieza según x y targetX y déjala caer cuando esté alineada. Sigue colocando piezas con distintos inicios de partida.",
+      "Usa la posición del enemigo y danger para ajustar el movimiento y los disparos mientras proteges la base.",
+      "Lee las posiciones de las naves enemigas para moverte y disparar. Después, añade decisiones para esquivar los proyectiles.",
+      "Combina la posición de la comida con los cuatro indicadores de peligro. Asegura primero los giros y luego intenta alargar la serpiente.",
+      "Mueve la paleta según la posición y la velocidad de la pelota. Devuélvela primero de forma constante y después intenta predecir dónde caerá.",
+      "Lee el tipo de las casillas vecinas y planifica los empujes. Usa undo() para revisar los errores y mejorar la estrategia."
+    ]
   }
 }

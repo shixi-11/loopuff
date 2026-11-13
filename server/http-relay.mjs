@@ -1,4 +1,4 @@
-const allowed=new Set(['https://shixilin.com','https://www.shixilin.com','https://loopuff.vercel.app','http://127.0.0.1:8773','http://localhost:8773']);
+const allowed=new Set(['https://shixilin.com','https://www.shixilin.com','https://loopuff.vercel.app','http://127.0.0.1:8773','http://localhost:8773','http://127.0.0.1:8775','http://localhost:8775']);
 export function createLoopuffRelay({target,bodyLimit,filter,unavailable,fetchImpl=fetch,checkGetOrigin=false}){
  return async(req,res)=>{
   res.setHeader('Cache-Control','private, no-store');res.setHeader('Vary','Cookie, Origin');

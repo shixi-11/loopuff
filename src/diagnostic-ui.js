@@ -14,7 +14,7 @@ const outlines={
  message:'?(value <- mailbox) {\n  (___ + 1).log()\n}',join:'?(a <- west & b <- east) {\n  (___ + ___).log()\n}',
  coordination:'sync fn total(a, b) { return ___ };\n?(a <- west & b <- east) {\n  let load = total(___, ___);\n  if load > ___ then {\n    (load + ___).log()\n  } else { load.log() }\n}'
 };
-export function mountDiagnostic(root,{text:t,feedbackText:f,applicationText,applicationTitles,ui,errors,concepts,statuses,lessons,initial,model,urls,onChange=()=>true,onSelect=()=>{},reduced={matches:false}}){
+export function mountDiagnostic(root,{text:t,feedbackText:f,applicationText,applicationTitles,ui,errors,concepts,statuses,lessons,initial,model,urls,onChange=()=>true,onPassed=()=>{},onSelect=()=>{},reduced={matches:false}}){
  let disposed=false,timer=null,busy=null,caseIndex=0,outputIndex=0,resetArmed=false,saveSerial=0,saveFailed=false;
  if(!model.initialized||model.state!==initial){
   model.initialized=true;model.reports={};model.bad=false;
@@ -115,7 +115,7 @@ export function mountDiagnostic(root,{text:t,feedbackText:f,applicationText,appl
   if(!event.target.matches('[data-diagnostic-form]'))return;event.preventDefault();cancel();const snapshot=state(),area=id(),source=root.querySelector('#diagnostic-editor').value;
   editDiagnostic(snapshot,area,source);delete model.reports[area];busy=area;paint();
   timer=setTimeout(()=>{timer=null;if(disposed||snapshot!==state()||snapshot.drafts[area]!==source)return;const report=submitDiagnostic(snapshot,area,source);model.reports[area]={seed:snapshot.seed,source,report};busy=null;
-   const firstFailure=report.cases.findIndex(item=>!item.ok);caseIndex=Math.max(0,firstFailure);model.caseSelection[area]=caseIndex;if(report.ok)model.hintsOpen[area]=false;outputIndex=0;persist();paint();reviewSaved();
+   const firstFailure=report.cases.findIndex(item=>!item.ok);caseIndex=Math.max(0,firstFailure);model.caseSelection[area]=caseIndex;if(report.ok){model.hintsOpen[area]=false;onPassed(area,source);}outputIndex=0;persist();paint();reviewSaved();
    if(matchMedia('(max-width:700px)').matches)root.querySelector('[data-diagnostic-result]').scrollIntoView({block:'center',behavior:reduced.matches?'instant':'smooth'});
   },0);
  }
