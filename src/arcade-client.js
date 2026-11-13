@@ -26,7 +26,7 @@ function replayValid(steps) {
 
 /** Cookie-only API client. No identities or scores are inferred or awarded locally. */
 export function createArcadeClient({url, fetchImpl = globalThis.fetch, onChange = () => {}}) {
-  const endpoint = new URL(`${gamePrefix(new URL(url).pathname)}/api/arcade`, url);
+  const endpoint = new URL(`${gamePrefix(new URL(url).pathname)}/api/arcade/`, url);
   const listeners = new Set(), runs = new Map(), finishes = new Map(), controllers = new Set();
   let serial = 0, profileSerial = 0, identity = 0, nicknameVersion = 0;
   const client = {profile: null};

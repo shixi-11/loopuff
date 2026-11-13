@@ -8,12 +8,12 @@ const run = {runId: 'run-1', game: 'snake', seed: 4294967295, expiresAt: 1800000
 const receipt = {...run, score: 10, durationMs: 10000, won: false, awarded: 5, profile: profile('Pilot')};
 const deferred = () => { let resolve, reject; const promise = new Promise((a, b) => { resolve = a; reject = b; }); return {promise, resolve, reject}; };
 
-test('endpoint retains the official prefix, bare localhost, cookies and explicit game', async () => {
+test('canonical endpoint retains the official prefix without a prefix-dropping slash redirect', async () => {
   for (const base of ['http://localhost:3000/en/play/', 'https://example.com/games/loopuff/zh/play/']) {
     let called;
     const client = createArcadeClient({url: base, fetchImpl: async (url, options) => { called = {url, options}; return Response.json(board()); }});
     await client.getLeaderboard('snake');
-    assert.equal(called.url.pathname, base.includes('/games/') ? '/games/loopuff/api/arcade' : '/api/arcade');
+    assert.equal(called.url.pathname, base.includes('/games/') ? '/games/loopuff/api/arcade/' : '/api/arcade/');
     assert.equal(called.url.searchParams.get('game'), 'snake'); assert.equal(called.options.credentials, 'same-origin');
     assert.equal(called.options.method, 'GET');
   }
